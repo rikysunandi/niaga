@@ -42,9 +42,9 @@ $akurasi = 0;
 $foto = $decode['data']['foto'];
 $nama_foto = $decode['data']['nama_foto'];
 
-define("PATH_UPLOAD_PHOTOS_INTIMASI", "../../bo/assets/uploads/photos/intimasi/");
-$path = PATH_UPLOAD_PHOTOS_INTIMASI.$blth."/".$area."/".$nama_foto;
-$dir = PATH_UPLOAD_PHOTOS_INTIMASI.$blth."/".$area."/";
+//define("PATH_UPLOAD_PHOTOS_INTIMASI", "../../bo/assets/uploads/photos/intimasi/");
+$path = "../../bo/assets/uploads/photos/intimasi/".$blth."/".$area."/".$nama_foto;
+$dir = "../../bo/assets/uploads/photos/intimasi/".$blth."/".$area."/";
 
 if(!file_exists($path)){
     if(!file_exists($dir)){ mkdir($dir, 0777, true); }
