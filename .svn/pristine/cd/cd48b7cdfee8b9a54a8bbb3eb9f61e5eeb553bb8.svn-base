@@ -1,0 +1,42 @@
+<?php
+
+require_once '../../config/database.php';
+ 
+if (!empty($_FILES)) {
+     
+    $tempFile = $_FILES['file']['tmp_name'];       
+    $fp = fopen($tempFile, 'rb');
+	$file_content = fread($fp, filesize($tempFile));
+	fclose($fp);          
+      
+    $ext = pathinfo($_FILES['file']['name'], PATHINFO_EXTENSION);  
+    $file_name = 'data_pelunasan_'.date('Ymdhis').'.'.$ext;
+
+    $tsql_callSP = "{call SP_UPLOAD_FILES(?,?)}";
+
+    $params = array(
+        array($file_name, SQLSRV_PARAM_IN),
+        array($file_content, SQLSRV_PARAM_IN)
+    );
+
+    /* Execute the query. */
+    $stmt = sqlsrv_query( $conn, $tsql_callSP, $params);
+    if( $stmt === false )
+    {
+        echo "Error in executing statement 3.\n";
+        die( print_r( sqlsrv_errors(), true));
+    }
+
+    /*Free the statement and connection resources. */
+    sqlsrv_free_stmt($stmt);
+    sqlsrv_close($conn);
+    
+    $response['success'] = true;  
+
+}else{
+    $response['success'] = false;  
+}
+
+echo json_encode($response);
+
+?>      

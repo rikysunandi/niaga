@@ -1,0 +1,237 @@
+$(document).ready(function () {
+
+    "use strict";
+
+    const queryString = window.location.search;
+    const urlParams = new URLSearchParams(queryString);
+    
+
+
+    //$.blockUI({ message: '<h1 class="p-3">Mengambil data...</h1>' }); 
+    var table_detail = $('#tbl_detail_blm_upload_pelunasan')
+      .on('preXhr.dt', function ( e, settings, data ) {
+        console.log('preXhr!');
+        $('div.content-body').block({ message: 'Mengambil data...' });
+      })
+      .on('xhr.dt', function ( e, settings, data ) {
+        console.log('xhr!');
+        $('div.content-body').unblock();
+      })
+      .DataTable( {
+        "processing": true,
+        "serverSide": true,
+        "deferLoading": 0,
+        "ajax": {
+            "url": '#',
+            "type": "POST",
+            "timeout": 60000
+        },
+        //responsive: true,
+        columns: [
+          {
+            data: "UNITUP",
+            visible: true
+          },
+          {
+            data: "IDPEL",
+            visible: true
+          },
+          {
+            data: "NAMA",
+            visible: true
+          },
+          {
+            data: "KOGOL",
+            visible: true
+          },
+          {
+            data: "TARIP",
+            visible: true
+          },
+          {
+            data: "DAYA",
+            type: 'number',
+            visible: true,
+            "sClass" : "text-right" , render: $.fn.dataTable.render.number(",", ".", 0, '')
+          },
+          {
+            data: "PEMKWH",
+            type: 'number',
+            visible: true,
+            "sClass" : "text-right" , render: $.fn.dataTable.render.number(",", ".", 0, '')
+          },
+          {
+            data: "RPPTL",
+            type: 'number',
+            visible: true,
+            "sClass" : "text-right" , render: $.fn.dataTable.render.number(",", ".", 0, '')
+          },
+        ],
+        dom:
+           // "<'row'<'col-sm-12 col-md-9 mb-2'B>>" +
+            "<'row'<'col-sm-12 col-md-6 mb-2'B><'col-sm-12 col-md-2 mb-2'l><'col-sm-12 col-md-4'f>>" +
+            "<'row'<'col-sm-12 mb-2'tr>>" +
+            "<'row'<'col-sm-12 col-md-5 mb-2'i><'col-sm-12 col-md-7'p>>",
+        buttons: [
+            { extend: 'csvHtml5', 
+              text: '<i class="fa fa-file-text-o"></i>&nbsp;&nbsp;CSV', 
+              titleAttr: 'Download ke CSV',
+              footer: true
+            },
+            { extend: 'excelHtml5', 
+              text: '<i class="fa fa-file-excel-o"></i>&nbsp;&nbsp;Excel', 
+              titleAttr: 'Download ke Excel',
+              footer: true
+            },
+        ],
+        "scrollY": 380,
+        "scrollX": true,
+        "paging": true,
+        lengthMenu: [[25, 100, -1], [25, 100, "All"]],
+        pageLength: 25,
+        "order": [[1, 'asc']],
+    });
+
+    //$.blockUI({ message: '<h1 class="p-3">Mengambil data...</h1>' }); 
+    var table = $('#tbl_blm_upload_pelunasan')
+      .on('preXhr.dt', function ( e, settings, data ) {
+        console.log('preXhr!');
+        $('div.content-body').block({ message: 'Mengambil data...' });
+      })
+      .on('xhr.dt', function ( e, settings, data ) {
+        console.log('xhr!');
+        $('div.content-body').unblock();
+      })
+      .DataTable( {
+        "processing": true,
+        "serverSide": true,
+        "deferLoading": 0,
+        "ajax": {
+            "url": '../controller/pelunasan/getBlmUploadPelunasan.php',
+            "type": "POST",
+            "timeout": 60000
+        },
+        //responsive: true,
+        columns: [
+          {
+            data: "UNITAP",
+            visible: true
+          },
+          {
+            data: "UP3",
+            visible: false
+          },
+          {
+            data: "UNITUP",
+            visible: true
+          },
+          {
+            data: "ULP",
+            visible: true
+          },
+          {
+            data: "JML_PLG",
+            type: 'number',
+            visible: true,
+            "sClass" : "text-right" , render: $.fn.dataTable.render.number(",", ".", 0, '')
+          },
+          {
+            data: "JML_PLG_LUNAS",
+            type: 'number',
+            visible: true,
+            "sClass" : "text-right" , render: $.fn.dataTable.render.number(",", ".", 0, '')
+          },
+          {
+            data: "JML_PLG_BLM_LUNAS",
+            type: 'number',
+            visible: true,
+            "sClass" : "text-right" , 
+            render: function ( data, type, row ) {
+              console.log(row);
+              return '<a href="#" class="link-detail label label-warning" data-unitupi="'+row.UNITUPI+'" data-unitap="'+row.UNITAP+'" data-unitup="'+row.UNITUP+'" data-blth="'+row.BLTH+'">'+$.fn.dataTable.render.number(",", ".", 0, '').display(data)+'</a>';
+            },
+          },
+          {
+            data: "TGL",
+            visible: true
+          },
+          {
+            data: "BLTH",
+            visible: false
+          },
+          {
+            data: "UNITUPI",
+            visible: false
+          },
+        ],
+        dom:
+           // "<'row'<'col-sm-12 col-md-9 mb-2'B>>" +
+            "<'row'<'col-sm-12 col-md-6 mb-2'B><'col-sm-12 col-md-2 mb-2'l><'col-sm-12 col-md-4'f>>" +
+            "<'row'<'col-sm-12 mb-2'tr>>" +
+            "<'row'<'col-sm-12 col-md-5 mb-2'i><'col-sm-12 col-md-7'p>>",
+        buttons: [
+            { extend: 'colvis', text: 'Columns' },
+            { extend: 'csvHtml5', 
+              text: '<i class="fa fa-file-text-o"></i>&nbsp;&nbsp;CSV', 
+              titleAttr: 'Download ke CSV',
+              footer: true
+            },
+            { extend: 'excelHtml5', 
+              text: '<i class="fa fa-file-excel-o"></i>&nbsp;&nbsp;Excel', 
+              titleAttr: 'Download ke Excel',
+              footer: true
+            },
+            { extend: 'pdfHtml5', 
+              text: '<i class="fa fa-file-pdf-o"></i>&nbsp;&nbsp;PDF', 
+              titleAttr: 'Download ke PDF',
+              footer: true
+            },
+        ],
+        "scrollY": 520,
+        "scrollX": true,
+        "paging": false,
+        lengthMenu: [[25, 100, -1], [25, 100, "All"]],
+        pageLength: 100,
+        "order": [[0, 'asc'],[2, 'asc']],
+        footerCallback: function ( row, data, start, end, display ) {
+          var api = this.api();
+          //console.log('footerCallback', api);
+          var nb_cols = api.columns().nodes().length;
+          var j = 4;
+          while(j < nb_cols){
+            var pageTotal = api
+                  .column( j, { page: 'current'} )
+                  .data()
+                  .reduce( function (a, b) {
+                      return Number(a) + Number(b);
+                  }, 0 );
+            // Update footer
+            $( api.column( j ).footer() ).html($.fn.dataTable.render.number(".", ",", 0, '').display(pageTotal));
+            j++;
+          } 
+        }
+    });
+
+
+    $( 'body' ).on( 'click', '#btn_cari', function(btn) {
+        console.log('Klikk');
+        table.ajax.url( '../controller/pelunasan/getBlmUploadPelunasan.php?unitupi='+$('#sel_unitupi').val()+'&unitap='+$('#sel_unitap').val()+'&unitup='+$('#sel_unitup').val()+'&blth='+$('#sel_blth').val() ).load();
+    });
+
+    $( 'body' ).on( 'click', '.link-detail', function(link) {
+        console.log(link);
+        console.log($(this));
+
+        // table_detail
+        //   .clear()
+        //   .draw();
+        table_detail.ajax.url( '../controller/pelunasan/getDetailBlmUploadPelunasan.php?unitupi='+$(this).data('unitupi')+'&unitap='+$(this).data('unitap')+'&unitup='+$(this).data('unitup')+'&blth='+$(this).data('blth') ).load();
+
+        $([document.documentElement, document.body]).animate({
+            scrollTop: $("#tbl_detail_blm_upload_pelunasan").offset().top
+        }, 2000);
+
+    });
+
+
+});

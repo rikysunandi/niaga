@@ -1,0 +1,47 @@
+<?php
+
+ini_set('memory_limit', '512M');
+ini_set('upload_max_filesize', '50M');
+ini_set('post_max_size', '50M');
+
+require_once '../../../config/database.php';
+ 
+$response['dbg'] = '-1';
+if (!empty($_FILES)) {
+
+    $file_name = 'pemeriksaan_lpb_'.date('Ymdhis').'.zip';
+    $ext = pathinfo($_FILES['file']['name'], PATHINFO_EXTENSION);  
+    $tempFile = $_FILES['file']['tmp_name'];    
+
+    $response['dbg'] = '1';
+    if(strtolower($ext) == 'zip'){
+        $zip = new ZipArchive;
+        $res = $zip->open($tempFile);
+        $response['dbg'] = '2';
+        if ($res === TRUE) {
+          $uploads_dir = '../../../assets/uploads/pemeriksaan_lpb/upload-'.date('Y-m-d');
+          if(!file_exists($uploads_dir)) mkdir($uploads_dir);
+          $zip->extractTo($uploads_dir, $file_name);
+          $zip->close();
+          $tempFile = $uploads_dir.$file_name;
+
+          $response['success'] = true;  
+        } else {
+            $response['success'] = false;  
+            $response['msg'] = "Gagal export Zip";  
+        }
+
+    }else {
+        $response['success'] = false;  
+        $response['msg'] = "File yang diupload harus Zip";  
+    }
+    $response['dbg'] = '12';
+
+
+}else{
+    $response['success'] = false;  
+}
+
+echo json_encode($response);
+
+?>      

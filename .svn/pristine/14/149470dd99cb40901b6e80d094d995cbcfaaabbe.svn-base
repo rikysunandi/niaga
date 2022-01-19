@@ -1,0 +1,120 @@
+$(document).ready(function () {
+
+    "use strict";
+
+    const queryString = window.location.search;
+    const urlParams = new URLSearchParams(queryString);
+    
+    console.log('urlParams jenis_transaksi',urlParams.get('jenis_transaksi'));
+
+
+    //$.blockUI({ message: '<h1 class="p-3">Mengambil data...</h1>' }); 
+    var table = $('#tbl_potensi').DataTable( {
+        "processing": true,
+        "serverSide": true,
+        "deferLoading": 0,
+        "ajax": {
+            "url": '../controller/pemasaran/getDataPotensi.php',
+            "type": "POST",
+            "timeout": 60000
+        },
+        //responsive: true,
+        columns: [
+          {
+            data: "UNITAP",
+            visible: true
+          },
+          {
+            data: "UNITUP",
+            visible: true
+          },
+          {
+            data: "NOAGENDA",
+            visible: true
+          },
+          {
+            data: "TGLMOHON",
+            render: function ( data, type, row ) {
+                    return data.substring(0,10);
+                },
+          },
+          {
+            data: "JENIS_TRANSAKSI",
+          },
+          {
+            data: "TARIF_LAMA",
+          },
+          {
+            data: "DAYA_LAMA",
+            type: 'number',
+            "sClass" : "text-right" , render: $.fn.dataTable.render.number(".", ",", 0, '')
+          },
+          {
+            data: "TARIF",
+          },
+          {
+            data: "DAYA",
+            type: 'number',
+            "sClass" : "text-right" , render: $.fn.dataTable.render.number(".", ",", 0, '')
+          },
+          {
+            data: "RPBP",
+            type: 'number',
+            "sClass" : "text-right" , render: $.fn.dataTable.render.number(".", ",", 0, '')
+          },
+          {
+            data: "RAB_TOTAL",
+            type: 'number',
+            "sClass" : "text-right" ,render: $.fn.dataTable.render.number(".", ",", 0, '')
+          },
+          {
+            data: "STATUS_PROSES",
+            render: function ( data, type, row ) {
+                    if(data == 'BP > RAB')
+                        return '<span class="label label-success">'+data+'</span>';
+                    else if(data == 'BP < RAB')
+                        return '<span class="label label-warning">'+data+'</span>';
+                },
+          },
+          {
+            data: "STATUSPERMOHONAN",
+            visible: true
+          },
+        ],
+        dom:
+           // "<'row'<'col-sm-12 col-md-9 mb-2'B>>" +
+            "<'row'<'col-sm-12 col-md-6 mb-2'B><'col-sm-12 col-md-2 mb-2'l><'col-sm-12 col-md-4'f>>" +
+            "<'row'<'col-sm-12 mb-2'tr>>" +
+            "<'row'<'col-sm-12 col-md-5 mb-2'i><'col-sm-12 col-md-7'p>>",
+        buttons: [
+           // { extend: 'copyHtml5', text: '<i class="fa fa-clone"></i>&nbsp;&nbsp;Copy', footer: true },
+            { extend: 'excelHtml5', text: '<i class="fa fa-file-excel-o"></i>&nbsp;&nbsp;Excel', footer: true },
+            { extend: 'csvHtml5', text: '<i class="fa fa-file-text-o"></i>&nbsp;&nbsp;CSV', footer: true },
+            { extend: 'colvis', text: 'Columns' }
+        ],
+        "scrollY": 520,
+        "scrollX": true,
+        "paging": true,
+        lengthMenu: [[25, 100, -1], [25, 100, "All"]],
+        pageLength: 25,
+        "order": [[1, 'asc']],
+    });
+
+    $( 'body' ).on( 'click', '#btn_cari', function(btn) {
+        console.log('Klikk');
+        table.ajax.url( '../controller/pemasaran/getDataPotensi.php?unitupi='+$('#sel_unitupi').val()+'&unitap='+$('#sel_unitap').val()+'&unitup='+$('#sel_unitup').val()+'&klp_plg='+$('#sel_klp_plg').val()+'&jenis_transaksi='+$('#sel_jenis_transaksi').val() ).load();
+    });
+    
+    if(urlParams.has('unitap')){
+
+      // $('#sel_unitupi').val(urlParams.get('unitupi'));
+      // $('#sel_unitap').val(urlParams.get('unitap'));
+      $('#sel_klp_plg').selectpicker('val', urlParams.get('klp_plg'));
+      $('#sel_jenis_transaksi').selectpicker('val', urlParams.get('jenis_transaksi'));
+
+      //$('.selectpicker').selectpicker('refresh');
+      setTimeout(function(){ $('#btn_cari').trigger('click'); }, 2000);
+      
+    }
+
+});

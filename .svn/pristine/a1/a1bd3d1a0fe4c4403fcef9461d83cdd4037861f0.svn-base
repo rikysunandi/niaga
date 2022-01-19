@@ -1,0 +1,44 @@
+<?php
+
+function listFolderFiles($dir){
+    $ffs = scandir($dir);
+
+    unset($ffs[array_search('.', $ffs, true)]);
+    unset($ffs[array_search('..', $ffs, true)]);
+
+    // prevent empty ordered elements
+    if (count($ffs) < 1)
+        return;
+
+    echo '<ol>';
+    foreach($ffs as $ff){
+        echo '<li>'.$ff;
+        if(is_dir($dir.'/'.$ff)) listFolderFiles($dir.'/'.$ff);
+        echo '</li>';
+    }
+    echo '</ol>';
+}
+
+listFolderFiles('D:\_FTP\uploads');
+
+echo '<hr/>';
+
+function getDirContents($dir, &$results = array()) {
+    $files = scandir($dir);
+
+    foreach ($files as $key => $value) {
+        $path = realpath($dir . DIRECTORY_SEPARATOR . $value);
+        if (!is_dir($path)) {
+            $results[] = $path;
+        } else if ($value != "." && $value != "..") {
+            getDirContents($path, $results);
+            $results[] = $path;
+        }
+    }
+
+    return $results;
+}
+
+var_dump(getDirContents('D:\_FTP\uploads'));
+
+?>

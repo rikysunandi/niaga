@@ -1,0 +1,91 @@
+<?php
+
+
+ini_set('upload_max_filesize', '30M');
+ini_set('post_max_size', '30M');
+ini_set('max_execution_time', 0);
+ini_set('memory_limit',-1);
+ini_set('sqlsrv.timeout', 10000000);
+ini_set('sqlsrv.connect_timeout', 10000000);
+
+require_once '../../../config/database.php';
+require_once '../../../config/ftp.php';
+
+set_include_path(__DIR__.'../../../libs/PhpSpreadsheet/src/PhpSpreadsheet');
+
+spl_autoload_register(function ($class_name) {
+
+    $file_name = get_include_path()."/".$class_name . '.php';
+    $file_name = str_replace("\\", "/", $file_name);
+    if (file_exists($file_name)) {
+        echo "Trying to include ".$file_name;
+        require_once($file_name);
+    } else {
+        echo "file not found";
+    }
+});
+
+use PhpOffice\PhpSpreadsheet\IOFactory;
+
+
+$user = 'SYSTEM';
+
+$ext = pathinfo($_FILES['file']['name'], PATHINFO_EXTENSION);
+
+if ( 0 < $_FILES['file']['error'] ) {
+	$response['success'] = false;
+	$response['msg'] = $_FILES['file']['error'];
+}else if ( $ext <> 'xls' ) {
+	$response['success'] = false;
+	$response['msg'] = 'Silahkan upload File Excel (.xlsx), file anda berekstensi '.$ext.' '.$_FILES['file']['tmp_name'].' UP:'.$unitup;
+}
+else {
+    //move_uploaded_file($_FILES['file']['tmp_name'], '../../../assets/uploads/' . 'LUNAS_'.$unitup.'_'.date('Ymdhis').'.xls');
+
+	$spreadsheet = IOFactory::load($_FILES['file']['tmp_name']);
+
+	if($spreadsheet->getActiveSheet()->getCell('A1')->getValue()=='TglTransaksi'){
+
+
+		$filename = date('mdHi').preg_replace("/[^a-zA-Z0-9]+/", "", $_FILES['file']['name']).bin2hex( random_bytes(12) ).'.xls';
+		// upload file
+		if (ftp_put($ftp_conn, '/uploads/'.$filename, $_FILES['file']['tmp_name'])){
+
+			$response['success'] = true;
+			$response['msg'] = 'Upload pelunasan berhasil';
+			$response['filename'] = $filename;
+
+			// $params = array(
+			//         array($user, SQLSRV_PARAM_IN),
+			//         array($filename, SQLSRV_PARAM_IN),
+			//     );
+
+			// $sql = "EXEC sp_Upload_Pelunasan @UserID = ?, @Filename = ? ";
+			// $stmt = sqlsrv_prepare($conn, $sql, $params);
+
+			// //sqlsrv_execute($stmt);
+			// if(!sqlsrv_execute($stmt)){
+			// 	$response['success'] = false;
+			// 	$response['msg'] = 'Upload pelunasan gagal';
+			// }else{
+			// 	$response['success'] = true;
+			// 	$response['msg'] = 'Upload pelunasan berhasil';
+			// 	$response['filename'] = $filename;
+			// }
+		}
+		else{
+			$response['success'] = false;
+			$response['msg'] = 'Upload pelunasan gagal';
+		 }
+
+		// close connection
+		ftp_close($ftp_conn);
+	}else{
+		$response['success'] = false;
+		$response['msg'] = 'Format File yang diupload tidak dikenali, pastikan download xls (DATA ONLY)';
+	}
+}
+
+
+echo json_encode($response);
+?>

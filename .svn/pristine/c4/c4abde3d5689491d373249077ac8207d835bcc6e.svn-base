@@ -1,0 +1,42 @@
+<?php
+
+ini_set('upload_max_filesize', '30M');
+ini_set('post_max_size', '30M');
+ini_set('max_execution_time', 0);
+ini_set('memory_limit',-1);
+ini_set('sqlsrv.timeout', 10000000);
+ini_set('sqlsrv.connect_timeout', 10000000);
+
+require_once '../../../config/database.php';
+require_once '../../../config/ftp.php';
+
+// $unitupi = $_POST['unitupi'];
+// $unitap = $_POST['unitap'];
+/*
+$filename = $_POST['filename'];
+$user = 'SYSTEM';
+
+$params = array(
+        array($user, SQLSRV_PARAM_IN),
+        array($filename, SQLSRV_PARAM_IN),
+    );
+
+$sql = "EXEC sp_Upload_Pelunasan @UserID = ?, @Filename = ? ";
+$stmt = sqlsrv_prepare($conn, $sql, $params);
+
+//sqlsrv_execute($stmt);
+if(!sqlsrv_execute($stmt)){
+	$response['success'] = false;
+	$response['msg'] = 'Upload pelunasan gagal';
+}else{
+	$response['success'] = true;
+	$response['msg'] = 'Upload pelunasan berhasil';
+}
+*/
+
+$response['success'] = true;
+$response['msg'] = 'Upload pelunasan berhasil';
+
+
+echo json_encode($response);
+?>

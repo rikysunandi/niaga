@@ -1,0 +1,209 @@
+$(document).ready(function () {
+
+    "use strict";
+
+    //$.blockUI({ message: '<h1 class="p-3">Mengambil data...</h1>' }); 
+    var table = $('#tbl_skai_evaluasi').DataTable( {
+        "processing": true,
+        "serverSide": true,
+        "ajax": {
+            "url": '../controller/getSKAIEvaluasi.php',
+            "type": "POST",
+            "timeout": 200000
+        },
+        columns: [
+          {
+            data: "CALON_KONSUMEN",
+            readonly: true,
+          },
+          {
+            data: "DAYA_BARU",
+            type: 'number',
+            "sClass" : "text-right" , render: $.fn.dataTable.render.number(".", ",", 0, '')
+          },
+          {
+            data: "RP_BP",
+            type: 'number',
+            "sClass" : "text-right" , render: $.fn.dataTable.render.number(".", ",", 0, '')
+          },
+          {
+            data: "RP_RAB",
+            type: 'number',
+            "sClass" : "text-right" , render: $.fn.dataTable.render.number(".", ",", 0, '')
+          },
+          {
+            data: "RWACC",
+            type: 'string',
+            "sClass" : "text-right" , render: function(data){return '-15%'}
+          },
+          {
+            data: "IRR",
+            type: 'string',
+            "sClass" : "text-right" , render: function(data){return '10%'}
+          },
+          {
+            data: "NPV",
+            type: 'number',
+            "sClass" : "text-right" , render: $.fn.dataTable.render.number(".", ",", 0, '')
+          },
+          {
+            data: "PBP",
+          },
+          {
+            data: "KETERANGAN",
+          },
+        ],
+        lengthMenu: [[25, 100, -1], [25, 100, "All"]],
+        pageLength: -1,
+        "paging": false,
+        select: true,
+        dom:
+            "<'row'<'col-sm-12 col-md-6'B><'col-sm-12 col-md-6'f>>" +
+            "<'row'<'col-sm-12'tr>>" +
+            "<'row'<'col-sm-12 col-md-5'i><'col-sm-12 col-md-7'p>>",
+        //lengthChange: false,
+        buttons: [
+            { extend: 'copyHtml5', text: '<i class="fa fa-file-o"></i>&nbsp;&nbsp;Copy', footer: true },
+            { extend: 'excelHtml5', text: '<i class="fa fa-file-excel-o"></i>&nbsp;&nbsp;Excel', footer: true },
+            { extend: 'csvHtml5', text: '<i class="fa fa-file-text-o"></i>&nbsp;&nbsp;CSV', footer: true },
+            { 
+                extend: 'pdfHtml5', 
+                text: '<i class="fa fa-file-pdf-o"></i>&nbsp;&nbsp;PDF', 
+                footer: true, 
+                orientation: 'landscape',
+                pageSize: 'A4',
+                customize: function ( doc ) {
+
+                    console.log('doc', doc);
+                    var pejabat = 'AGUNG NUGRAHA';
+                    var timestamp = new Date().getUTCMilliseconds();
+                    var kode_dokumen = 'FORM-1B-'+timestamp+Math.random().toString(36).substr(2, 5).toUpperCase();
+
+                    doc.content.splice(0,1);
+
+                    doc.watermark = { text: kode_dokumen, color: 'grey', opacity: 0.1, fontSize: 72 };
+                    doc.defaultStyle.fontSize = 7;
+                    doc.styles.tableHeader.fontSize = 7;
+                    doc.styles.tableFooter.fontSize = 7;
+                    doc.content.unshift({
+                        alignment: 'center',
+                        fontSize: 11,
+                        text: [
+                            'FORMULIR 1.B\n',
+                            'LAMPIRAN USULAN SKAI KHUSUS PENYAMBUNGAN KONSUMEN\n',
+                            'KONSUMEN BP < INVESTASI\n',
+                            'UID JAWA BARAT'
+                        ],
+                        margin: [0, 10, 0, 20]
+                    });
+
+                    doc.content[1].table.widths = [ '30%', '10%', '10%', '10%', '5%', '5%', '10%', '15%', '5%' ];
+                    doc.content[1].table.headerRows = 1;
+
+                    $.each(doc.content[1].table.body, function(i, obj){
+                        if(i==0){
+                            obj[0].alignment = 'center';
+                            obj[1].alignment = 'center';
+                            obj[2].alignment = 'center';
+                            obj[3].alignment = 'center';
+                            obj[4].alignment = 'center';
+                            obj[5].alignment = 'center';
+                            obj[6].alignment = 'center';
+                            obj[7].alignment = 'center';
+                            obj[8].alignment = 'center';
+
+                            obj[0].margin = [4, 4, 4, 4];
+                            obj[1].margin = [4, 4, 4, 4];
+                            obj[2].margin = [4, 4, 4, 4];
+                            obj[3].margin = [4, 4, 4, 4];
+                            obj[4].margin = [4, 4, 4, 4];
+                            obj[5].margin = [4, 4, 4, 4];
+                            obj[6].margin = [4, 4, 4, 4];
+                            obj[7].margin = [4, 4, 4, 4];
+                            obj[8].margin = [4, 4, 4, 4];
+                        }else{
+                            obj[0].alignment = 'left';
+                            obj[1].alignment = 'right';
+                            obj[2].alignment = 'right';
+                            obj[3].alignment = 'right';
+                            obj[4].alignment = 'right';
+                            obj[5].alignment = 'right';
+                            obj[6].alignment = 'right';
+                            obj[7].alignment = 'center';
+                            obj[8].alignment = 'center';
+
+                            obj[0].margin = [4, 2, 4, 2];
+                            obj[1].margin = [4, 2, 4, 2];
+                            obj[2].margin = [4, 2, 4, 2];
+                            obj[3].margin = [4, 2, 4, 2];
+                            obj[4].margin = [4, 2, 4, 2];
+                            obj[5].margin = [4, 2, 4, 2];
+                            obj[6].margin = [4, 2, 4, 2];
+                            obj[7].margin = [4, 2, 4, 2];
+                            obj[8].margin = [4, 2, 4, 2];
+                        }
+                    });
+
+                    doc.content.push({
+                        alignment: 'justify',
+                        fontSize: 7,
+                        columns: [
+                            '\n\n',
+                            '',
+                            fontSize: 7,
+                            [
+                                '\n\n',
+                                {
+                                    alignment: 'center',
+                                    fontSize: 7,
+                                    text: 'Bandung, 17 Agustus 2020\n'
+                                },
+                                {
+                                    alignment: 'center',
+                                    bold: true,
+                                    fontSize: 7,
+                                    text: 'GENERAL MANAGER\n\n\n\n\n\n'
+                                },
+                                {
+                                    alignment: 'center',
+                                    fontSize: 7,
+                                    text: pejabat
+                                },
+                                
+                            ]
+                        ]
+                    });
+
+                }
+            },
+            
+            //{ extend: 'colvis', text: 'Columns' }
+        ],
+        "scrollY": 580,
+        "scrollX": true,
+        "order": [[0, 'asc']],
+        footerCallback: function ( row, data, start, end, display ) {
+          var api = this.api();
+          //console.log('footerCallback', api);
+          var nb_cols = api.columns().nodes().length;
+          var j = 1;
+          while(j < 4){
+            var pageTotal = api
+                  .column( j, { page: 'current'} )
+                  .data()
+                  .reduce( function (a, b) {
+                      return Number(a) + Number(b);
+                  }, 0 );
+            // Update footer
+            $( api.column( j ).footer() ).html( $.fn.dataTable.render.number('.', ',', 0, '').display( pageTotal ));
+            j++;
+          } 
+        }
+    });
+
+    $('#btn_cari').click(function(btn){
+        console.log('Klikk');
+        table.ajax.url( '../controller/getSKAIEvaluasi.php?unitupi='+$('#sel_unitupi').val()+'&unitap='+$('#sel_unitap').val()+'&unitup='+$('#sel_unitup').val() ).load();
+    });
+
+});

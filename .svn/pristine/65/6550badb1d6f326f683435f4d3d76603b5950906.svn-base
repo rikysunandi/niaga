@@ -1,0 +1,45 @@
+<?php
+require_once '../../bo/config/config.php';
+require_once '../../bo/config/database.php';
+require_once '../../bo/config/router.php';
+
+$data = file_get_contents("php://input");
+$decode = json_decode($data,true);
+ 
+date_default_timezone_set("Asia/Jakarta");
+
+$area = $decode['data']['area'];
+$foto = $decode['data']['foto'];
+$idpel = $decode['data']['idpel'];
+$blth = date("mY");
+$fileName = $idpel."-".$blth.".jpeg";
+
+
+$path = PATH_UPLOAD_PHOTOS_INTIMASI.$blth."/".$area."/".$idpel."-".$blth.".jpeg";
+$dir = PATH_UPLOAD_PHOTOS_INTIMASI.$blth."/".$area."/";
+if(!file_exists($path)){
+    if(!file_exists($dir)){ mkdir($dir, 0777, true); }
+    //$fotoGet = $foto;
+    $bin =base64_decode("iVBORw0KGgoAAAANSUhEUgAAABwAAAASCAMAAAB/2U7WAAAABl'
+       . 'BMVEUAAAD///+l2Z/dAAAASUlEQVR4XqWQUQoAIAxC2/0vXZDr'
+       . 'EX4IJTRkb7lobNUStXsB0jIXIAMSsQnWlsV+wULF4Avk9fLq2r'
+       . '8a5HSE35Q3eO2XP1A1wQkZSgETvDtKdQAAAABJRU5ErkJggg==");
+    $im = imageCreateFromString($bin);
+    if (!$im) {
+        $response['success'] = false;
+        $response['msg'] = 'Gagal menyimpan Foto';
+    }else{
+        $img_file = $path;
+        imagepng($im, $img_file, 0);
+        $response['success'] = true;
+        $response['msg'] = 'Berhasil menyimpan Foto';
+    }
+}else {
+    $response['success'] = false;
+    $response['msg'] = 'Foto sudah ada di Server';
+}
+
+
+echo json_encode($response);
+?>
+

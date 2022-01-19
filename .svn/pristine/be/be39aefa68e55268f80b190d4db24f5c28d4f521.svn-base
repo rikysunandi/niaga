@@ -1,0 +1,293 @@
+$(document).ready(function () {
+
+    "use strict";
+
+    const queryString = window.location.search;
+    const urlParams = new URLSearchParams(queryString);
+   
+
+    //$.blockUI({ message: '<h1 class="p-3">Mengambil data...</h1>' }); 
+    var table = $('#tbl_rekap_pemutusan_ulp')
+      .on('preXhr.dt', function ( e, settings, data ) {
+        console.log('preXhr!');
+        $('div.content-body').block({ message: 'Mengambil data...' });
+      })
+      .on('xhr.dt', function ( e, settings, data ) {
+        console.log('xhr!');
+        $('div.content-body').unblock();
+      })
+      .DataTable( {
+        "processing": true,
+        "serverSide": true,
+        "deferLoading": 0,
+        "ajax": {
+            "url": '../controller/pemutusan/getRekapPemutusanULP.php',
+            "type": "POST",
+            "timeout": 60000
+        },
+        //responsive: true,
+        columns: [
+          {
+            data: "UNITAP",
+            visible: true
+          },
+          {
+            data: "UNITUP",
+            visible: true
+          },
+          {
+            data: "ULP",
+            visible: true
+          },
+          {
+            data: "JML_PLG_21",
+            type: 'number',
+            visible: true,
+            "sClass" : "text-right" , render: $.fn.dataTable.render.number(".", ",", 0, '')
+          },
+          {
+            data: "JML_PLG_22",
+            type: 'number',
+            visible: true,
+            "sClass" : "text-right" , render: $.fn.dataTable.render.number(".", ",", 0, '')
+          },
+          {
+            data: "JML_PLG_23",
+            type: 'number',
+            visible: true,
+            "sClass" : "text-right" , render: $.fn.dataTable.render.number(".", ",", 0, '')
+          },
+          {
+            data: "JML_PLG_24",
+            type: 'number',
+            visible: true,
+            "sClass" : "text-right" , render: $.fn.dataTable.render.number(".", ",", 0, '')
+          },
+          {
+            data: "JML_PLG_25",
+            type: 'number',
+            visible: true,
+            "sClass" : "text-right" , render: $.fn.dataTable.render.number(".", ",", 0, '')
+          },
+          {
+            data: "JML_PLG_26",
+            type: 'number',
+            visible: true,
+            "sClass" : "text-right" , render: $.fn.dataTable.render.number(".", ",", 0, '')
+          },
+          {
+            data: "JML_PLG_27",
+            type: 'number',
+            visible: true,
+            "sClass" : "text-right" , render: $.fn.dataTable.render.number(".", ",", 0, '')
+          },
+          {
+            data: "JML_PLG_28",
+            type: 'number',
+            visible: true,
+            "sClass" : "text-right" , render: $.fn.dataTable.render.number(".", ",", 0, '')
+          },
+          {
+            data: "JML_PLG_29",
+            type: 'number',
+            visible: true,
+            "sClass" : "text-right" , render: $.fn.dataTable.render.number(".", ",", 0, '')
+          },
+          {
+            data: "JML_PLG_30",
+            type: 'number',
+            visible: true,
+            "sClass" : "text-right" , render: $.fn.dataTable.render.number(".", ",", 0, '')
+          },
+          {
+            data: "JML_PLG_31",
+            type: 'number',
+            visible: true,
+            "sClass" : "text-right" , render: $.fn.dataTable.render.number(".", ",", 0, '')
+          },
+          {
+            data: "JML_PLG",
+            type: 'number',
+            visible: true,
+            "sClass" : "text-right" , render: $.fn.dataTable.render.number(".", ",", 0, '')
+          },
+        ],
+        dom:
+           // "<'row'<'col-sm-12 col-md-9 mb-2'B>>" +
+            "<'row'<'col-sm-12 col-md-6 mb-2'B><'col-sm-12 col-md-2 mb-2'l><'col-sm-12 col-md-4'f>>" +
+            "<'row'<'col-sm-12 mb-2'tr>>" +
+            "<'row'<'col-sm-12 col-md-5 mb-2'i><'col-sm-12 col-md-7'p>>",
+        buttons: [
+            { extend: 'colvis', text: 'Columns' },
+            { extend: 'csvHtml5', 
+              text: '<i class="fa fa-file-text-o"></i>&nbsp;&nbsp;CSV', 
+              titleAttr: 'Download ke CSV',
+              footer: true
+            },
+            { extend: 'excelHtml5', 
+              text: '<i class="fa fa-file-excel-o"></i>&nbsp;&nbsp;Excel', 
+              titleAttr: 'Download ke Excel',
+              footer: true
+            },
+            { extend: 'pdfHtml5', 
+              text: '<i class="fa fa-file-pdf-o"></i>&nbsp;&nbsp;PDF', 
+              titleAttr: 'Download ke PDF',
+              footer: true
+            },
+        ],
+        "scrollY": 370,
+        "scrollX": true,
+        "paging": false,
+        lengthMenu: [[25, 100, -1], [25, 100, "All"]],
+        pageLength: 100,
+        "order": [[0, 'asc'],[1, 'asc']],
+        // fixedColumns:   {
+        //     leftColumns: 3
+        // },
+        
+        rowGroup: {
+            startRender: null,
+            endRender: function ( rows, group ) {
+
+                var SUM_JML_PLG_21 = rows
+                    .data()
+                    .pluck('JML_PLG_21')
+                    .reduce( function (a, b) {
+                        return a + b*1;
+                    }, 0);
+                SUM_JML_PLG_21 = $.fn.dataTable.render.number('.', ',', 0, '').display( SUM_JML_PLG_21 );
+
+                var SUM_JML_PLG_22 = rows
+                    .data()
+                    .pluck('JML_PLG_22')
+                    .reduce( function (a, b) {
+                        return a + b*1;
+                    }, 0);
+                SUM_JML_PLG_22 = $.fn.dataTable.render.number('.', ',', 0, '').display( SUM_JML_PLG_22 );
+
+                var SUM_JML_PLG_23 = rows
+                    .data()
+                    .pluck('JML_PLG_23')
+                    .reduce( function (a, b) {
+                        return a + b*1;
+                    }, 0);
+                SUM_JML_PLG_23 = $.fn.dataTable.render.number('.', ',', 0, '').display( SUM_JML_PLG_23 );
+
+                var SUM_JML_PLG_24 = rows
+                    .data()
+                    .pluck('JML_PLG_24')
+                    .reduce( function (a, b) {
+                        return a + b*1;
+                    }, 0);
+                SUM_JML_PLG_24 = $.fn.dataTable.render.number('.', ',', 0, '').display( SUM_JML_PLG_24 );
+
+                var SUM_JML_PLG_25 = rows
+                    .data()
+                    .pluck('JML_PLG_25')
+                    .reduce( function (a, b) {
+                        return a + b*1;
+                    }, 0);
+                SUM_JML_PLG_25 = $.fn.dataTable.render.number('.', ',', 0, '').display( SUM_JML_PLG_25 );
+
+                var SUM_JML_PLG_26 = rows
+                    .data()
+                    .pluck('JML_PLG_26')
+                    .reduce( function (a, b) {
+                        return a + b*1;
+                    }, 0);
+                SUM_JML_PLG_26 = $.fn.dataTable.render.number('.', ',', 0, '').display( SUM_JML_PLG_26 );
+
+                var SUM_JML_PLG_27 = rows
+                    .data()
+                    .pluck('JML_PLG_27')
+                    .reduce( function (a, b) {
+                        return a + b*1;
+                    }, 0);
+                SUM_JML_PLG_27 = $.fn.dataTable.render.number('.', ',', 0, '').display( SUM_JML_PLG_27 );
+
+                var SUM_JML_PLG_28 = rows
+                    .data()
+                    .pluck('JML_PLG_28')
+                    .reduce( function (a, b) {
+                        return a + b*1;
+                    }, 0);
+                SUM_JML_PLG_28 = $.fn.dataTable.render.number('.', ',', 0, '').display( SUM_JML_PLG_28 );
+
+                var SUM_JML_PLG_29 = rows
+                    .data()
+                    .pluck('JML_PLG_29')
+                    .reduce( function (a, b) {
+                        return a + b*1;
+                    }, 0);
+                SUM_JML_PLG_29 = $.fn.dataTable.render.number('.', ',', 0, '').display( SUM_JML_PLG_29 );
+
+                var SUM_JML_PLG_30 = rows
+                    .data()
+                    .pluck('JML_PLG_30')
+                    .reduce( function (a, b) {
+                        return a + b*1;
+                    }, 0);
+                SUM_JML_PLG_30 = $.fn.dataTable.render.number('.', ',', 0, '').display( SUM_JML_PLG_30 );
+
+                var SUM_JML_PLG_31 = rows
+                    .data()
+                    .pluck('JML_PLG_31')
+                    .reduce( function (a, b) {
+                        return a + b*1;
+                    }, 0);
+                SUM_JML_PLG_31 = $.fn.dataTable.render.number('.', ',', 0, '').display( SUM_JML_PLG_31 );
+
+                var SUM_JML_PLG = rows
+                    .data()
+                    .pluck('JML_PLG')
+                    .reduce( function (a, b) {
+                        return a + b*1;
+                    }, 0);
+                SUM_JML_PLG = $.fn.dataTable.render.number('.', ',', 0, '').display( SUM_JML_PLG );
+
+                if( !( group == 'T' || group == 'C' || group == 'L' ))
+                return $('<tr/>')
+                    .append( '<td colspan="3">Jumlah '+group+'</td>' )
+                    .append( '<td class="text-right">'+SUM_JML_PLG_21+'</td>' )
+                    .append( '<td class="text-right">'+SUM_JML_PLG_22+'</td>' )
+                    .append( '<td class="text-right">'+SUM_JML_PLG_23+'</td>' )
+                    .append( '<td class="text-right">'+SUM_JML_PLG_24+'</td>' )
+                    .append( '<td class="text-right">'+SUM_JML_PLG_25+'</td>' )
+                    .append( '<td class="text-right">'+SUM_JML_PLG_26+'</td>' )
+                    .append( '<td class="text-right">'+SUM_JML_PLG_27+'</td>' )
+                    .append( '<td class="text-right">'+SUM_JML_PLG_28+'</td>' )
+                    .append( '<td class="text-right">'+SUM_JML_PLG_29+'</td>' )
+                    .append( '<td class="text-right">'+SUM_JML_PLG_30+'</td>' )
+                    .append( '<td class="text-right">'+SUM_JML_PLG_31+'</td>' )
+                    .append( '<td class="text-right">'+SUM_JML_PLG+'</td>' );
+            },
+            dataSrc: 'UNITAP'
+
+        },
+        footerCallback: function ( row, data, start, end, display ) {
+          var api = this.api();
+          //console.log('footerCallback', api);
+          var nb_cols = api.columns().nodes().length;
+          var j = 3;
+          while(j < nb_cols){
+            var pageTotal = api
+                  .column( j, { page: 'current'} )
+                  .data()
+                  .reduce( function (a, b) {
+                      return Number(a) + Number(b);
+                  }, 0 );
+            // Update footer
+            $( api.column( j ).footer() ).html($.fn.dataTable.render.number(".", ",", 0, '').display(pageTotal));
+            j++;
+          } 
+        }
+    });
+
+
+    $( 'body' ).on( 'click', '#btn_cari', function(btn) {
+        console.log('Klikk');
+        table.ajax.url( '../controller/pemutusan/getRekapPemutusanULP.php?unitupi='+$('#sel_unitupi').val()+'&unitap='+$('#sel_unitap').val()+'&unitup='+$('#sel_unitup').val()+'&blth='+$('#sel_blth').val() ).load();
+    });
+
+
+});

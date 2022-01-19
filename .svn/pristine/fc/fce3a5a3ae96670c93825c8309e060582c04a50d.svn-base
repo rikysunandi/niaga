@@ -1,0 +1,82 @@
+<?php
+
+ini_set('memory_limit', '512M');
+ini_set('upload_max_filesize', '50M');
+ini_set('post_max_size', '50M');
+
+require_once '../../../config/database.php';
+
+$response['dbg-1'] = '-1';
+if (!empty($_FILES)) {
+
+  if($_FILES['file']['size'] <= 50000000){
+    //$file_name = 'pemeriksaan_lpb_'.date('Ymdhis').'.zip';
+    $ext = pathinfo($_FILES['file']['name'], PATHINFO_EXTENSION);
+    $tempFile = $_FILES['file']['tmp_name'];
+    $file_name = $_FILES['file']['name'];
+
+    $response['dbg1'] = '1';
+    if(strtolower($ext) == 'zip'){
+        $zip = new ZipArchive;
+        $res = $zip->open($tempFile);
+        $response['dbg2'] = '2';
+        if ($res === TRUE) {
+          $uploads_dir = '../../../assets/uploads/upload-'.date('Ymdhis');
+          if(!file_exists($uploads_dir)) mkdir($uploads_dir);
+          $zip->renameIndex(0, trim($zip->getNameIndex(0)));
+          $zip->close();
+
+          $zip2 = new ZipArchive;
+          $res = $zip2->open($tempFile);
+          if ($res === TRUE) {
+            $filename = $zip2->getNameIndex(0);
+            $zip2->extractTo($uploads_dir);
+            $zip2->close();
+          }
+          //$tempFile = $uploads_dir.$file_name;
+
+          $response['success'] = true;
+          $response['filepath'] = dirname($uploads_dir.'/'.$filename);
+          $response['filename'] = $file_name;
+
+          $fp = file(dirname($uploads_dir.'/'.$filename).'/data.csv', FILE_SKIP_EMPTY_LINES);
+          $response['count'] = count($fp)-1;
+
+          $file = fopen(dirname($uploads_dir.'/'.$filename).'/data.csv', 'r');
+          $columns = fgetcsv($file);
+          $data = fgetcsv($file);
+          $response['next_rec'] = (object) array_combine( $columns, $data );
+          $response['next_idx'] = 1;
+          fclose($file);
+
+        } else {
+            $response['success'] = false;
+            $response['error'] = "Gagal export Zip";
+        }
+
+    }else {
+        $response['success'] = false;
+        $response['error'] = "File yang diupload harus Zip";
+    }
+    $response['dbg12'] = '12';
+  }else{
+      $response['success'] = false;
+      $response['error'] = "Ukuran maksimal File yang dapat diupload 50M";
+  }
+
+
+}else{
+    $response['success'] = false;
+}
+
+if( isset($response['error']) ){
+    http_response_code (401);
+}
+else{
+    http_response_code (200);
+}
+
+header( 'Content-Type: application/json; charset=utf-8' );
+echo json_encode($response);
+
+?>

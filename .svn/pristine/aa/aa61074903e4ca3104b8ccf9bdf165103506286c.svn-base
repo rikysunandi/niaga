@@ -1,0 +1,1278 @@
+$(function() {
+    "use strict";
+
+    var chart_dapot_daya, chart_dapot_daya_unit, chart_dapot_bp, chart_dapot_bp_unit, 
+        chart_dapot_rab, chart_dapot_rab_unit, chart_cluster, chart_cluster_unit, chart_jenis, chart_jenis_unit, 
+        chart_tmp, chart_tmp_unit, chart_alasan, chart_alasan_unit;
+
+
+    $('#sel_unit').selectpicker('val', '00');
+
+
+    $('div#percepatan_non_kogol_1').block({ message: 'Mengambil data...' });
+    $.getJSON('../controller/getDashboardPercepatanUnit.php?kogol=X&pic=X&blth=202109', function(data){
+
+        const colours = data.percepatan.map((value) => value < 0 ? "#EC5B43" : "#135470");
+
+        var ctx = document.getElementById("chart_percepatan_non_kogol_1");
+        ctx.height = 220;
+        chart_alasan_unit = new Chart(ctx, {
+            type: 'bar',
+            data: {
+                labels: data.singkatan,
+                datasets: [
+                    {
+                        label: "PERCEPATAN",
+                        type: "bar",
+                        backgroundColor: colours,
+                        backgroundColorHover: colours,
+                        data: data.percepatan,
+                    },
+                ]
+            },
+            options: {
+                responsive: true, 
+                maintainAspectRatio: false, 
+                barRadius: 2,
+                title: {
+                    display: false,
+                    text: 'Rekap Percepatan'
+                },
+                tooltips: {
+                   mode: 'label',
+                   enabled: false,
+                   
+                },
+                legend: {
+                    position: 'bottom',
+                    display: false,
+                    labels: {
+                        fontSize: 10,
+                    },
+                },
+                plugins: {
+                    labels: []
+                },
+                layout: {
+                  padding: {
+                    left: 0,
+                    right: 0,
+                    top: 20,
+                    bottom: 0
+                  }
+                },
+                scales: {
+                    yAxes: [{
+                        display: false,
+                        stacked: true,
+                        gridLines: {
+                            display: false,
+                            drawBorder: false
+                        },
+                        ticks: {
+                            beginAtZero: true
+                        }
+                    }],
+                    xAxes: [{
+                        stacked: true,
+                        gridLines: {
+                            display: false,
+                            drawBorder: false
+                        },
+                    }]
+                },
+                "animation": {
+                    "duration": 1,
+                    "onComplete": function() {
+                        var chartInstance = this.chart,
+                          ctx = chartInstance.ctx;
+         
+                        ctx.font = Chart.helpers.fontString(Chart.defaults.global.defaultFontSize, Chart.defaults.global.defaultFontStyle, Chart.defaults.global.defaultFontFamily);
+                        ctx.textAlign = 'center';
+                        ctx.textBaseline = 'bottom';
+         
+                        this.data.datasets.forEach(function(dataset, i) {
+                          var meta = chartInstance.controller.getDatasetMeta(i);
+                          meta.data.forEach(function(bar, index) {
+                            var data = dataset.data[index];
+                            ctx.fillText(data, bar._model.x, bar._model.y - 5);
+                          });
+                        });
+                      }
+                    },
+            }
+        });
+
+        $('div#percepatan_non_kogol_1').unblock();
+
+    });
+
+
+
+    $('div#percepatan_kogol_0').block({ message: 'Mengambil data...' });
+    $.getJSON('../controller/getDashboardPercepatanUnit.php?kogol=0&pic=X&blth=202109', function(data){
+
+        const colours = data.percepatan.map((value) => value < 0 ? "#EC5B43" : "#135470");
+
+        var ctx = document.getElementById("chart_percepatan_kogol_0");
+        ctx.height = 220;
+        chart_alasan_unit = new Chart(ctx, {
+            type: 'bar',
+            data: {
+                labels: data.singkatan,
+                datasets: [
+                    {
+                        label: "PERCEPATAN",
+                        type: "bar",
+                        backgroundColor: colours,
+                        backgroundColorHover: colours,
+                        data: data.percepatan,
+                    },
+                ]
+            },
+            options: {
+                responsive: true, 
+                maintainAspectRatio: false, 
+                barRadius: 2,
+                title: {
+                    display: false,
+                    text: 'Rekap Percepatan'
+                },
+                tooltips: {
+                   mode: 'label',
+                   enabled: false,
+                   
+                },
+                legend: {
+                    position: 'bottom',
+                    display: false,
+                    labels: {
+                        fontSize: 10,
+                    },
+                },
+                plugins: {
+                    labels: []
+                },
+                layout: {
+                  padding: {
+                    left: 0,
+                    right: 0,
+                    top: 20,
+                    bottom: 0
+                  }
+                },
+                scales: {
+                    yAxes: [{
+                        display: false,
+                        stacked: true,
+                        gridLines: {
+                            display: false,
+                            drawBorder: false
+                        },
+                        ticks: {
+                            beginAtZero: true
+                        }
+                    }],
+                    xAxes: [{
+                        offset: true,
+                        stacked: true,
+                        gridLines: {
+                            display: false,
+                            drawBorder: false
+                        },
+                    }]
+                },
+                "animation": {
+                    "duration": 1,
+                    "onComplete": function() {
+                        var chartInstance = this.chart,
+                          ctx = chartInstance.ctx;
+         
+                        ctx.font = Chart.helpers.fontString(Chart.defaults.global.defaultFontSize, Chart.defaults.global.defaultFontStyle, Chart.defaults.global.defaultFontFamily);
+                        ctx.textAlign = 'center';
+                        ctx.textBaseline = 'bottom';
+         
+                        this.data.datasets.forEach(function(dataset, i) {
+                          var meta = chartInstance.controller.getDatasetMeta(i);
+                          meta.data.forEach(function(bar, index) {
+                            var data = dataset.data[index];
+                            ctx.fillText(data, bar._model.x, bar._model.y - 5);
+                          });
+                        });
+                      }
+                    },
+            }
+        });
+
+        $('div#percepatan_kogol_0').unblock();
+
+    });
+
+    $('div#percepatan_kogol_2').block({ message: 'Mengambil data...' });
+    $.getJSON('../controller/getDashboardPercepatanUnit.php?kogol=2&pic=X&blth=202109', function(data){
+
+        const colours = data.percepatan.map((value) => value < 0 ? "#EC5B43" : "#135470");
+
+        var ctx = document.getElementById("chart_percepatan_kogol_2");
+        ctx.height = 220;
+        chart_alasan_unit = new Chart(ctx, {
+            type: 'bar',
+            data: {
+                labels: data.singkatan,
+                datasets: [
+                    {
+                        label: "PERCEPATAN",
+                        type: "bar",
+                        backgroundColor: colours,
+                        backgroundColorHover: colours,
+                        data: data.percepatan,
+                    },
+                ]
+            },
+            options: {
+                responsive: true, 
+                maintainAspectRatio: false, 
+                barRadius: 2,
+                title: {
+                    display: false,
+                    text: 'Rekap Percepatan'
+                },
+                tooltips: {
+                   mode: 'label',
+                   enabled: false,
+                   
+                },
+                legend: {
+                    position: 'bottom',
+                    display: false,
+                    labels: {
+                        fontSize: 10,
+                    },
+                },
+                layout: {
+                  padding: {
+                    left: 0,
+                    right: 0,
+                    top: 20,
+                    bottom: 0
+                  }
+                },
+                plugins: {
+                    labels: []
+                },
+                scales: {
+                    yAxes: [{
+                        display: false,
+                        stacked: true,
+                        gridLines: {
+                            display: false,
+                            drawBorder: false
+                        },
+                        ticks: {
+                            beginAtZero: true
+                        }
+                    }],
+                    xAxes: [{
+                        stacked: true,
+                        gridLines: {
+                            display: false,
+                            drawBorder: false
+                        },
+                    }]
+                },
+                "animation": {
+                    "duration": 1,
+                    "onComplete": function() {
+                        var chartInstance = this.chart,
+                          ctx = chartInstance.ctx;
+         
+                        ctx.font = Chart.helpers.fontString(Chart.defaults.global.defaultFontSize, Chart.defaults.global.defaultFontStyle, Chart.defaults.global.defaultFontFamily);
+                        ctx.textAlign = 'center';
+                        ctx.textBaseline = 'bottom';
+         
+                        this.data.datasets.forEach(function(dataset, i) {
+                          var meta = chartInstance.controller.getDatasetMeta(i);
+                          meta.data.forEach(function(bar, index) {
+                            var data = dataset.data[index];
+                            ctx.fillText(data, bar._model.x, bar._model.y - 5);
+                          });
+                        });
+                      }
+                    },
+            }
+        });
+
+        $('div#percepatan_kogol_2').unblock();
+
+    });
+
+    $('div#percepatan_kogol_3').block({ message: 'Mengambil data...' });
+    $.getJSON('../controller/getDashboardPercepatanUnit.php?kogol=3&pic=X&blth=202109', function(data){
+
+        const colours = data.percepatan.map((value) => value < 0 ? "#EC5B43" : "#135470");
+
+        var ctx = document.getElementById("chart_percepatan_kogol_3");
+        ctx.height = 220;
+        chart_alasan_unit = new Chart(ctx, {
+            type: 'bar',
+            data: {
+                labels: data.singkatan,
+                datasets: [
+                    {
+                        label: "PERCEPATAN",
+                        type: "bar",
+                        backgroundColor: colours,
+                        backgroundColorHover: colours,
+                        data: data.percepatan,
+                    },
+                ]
+            },
+            options: {
+                responsive: true, 
+                maintainAspectRatio: false, 
+                barRadius: 2,
+                title: {
+                    display: false,
+                    text: 'Rekap Percepatan'
+                },
+                tooltips: {
+                   mode: 'label',
+                   enabled: false,
+                   
+                },
+                legend: {
+                    position: 'bottom',
+                    display: false,
+                    labels: {
+                        fontSize: 10,
+                    },
+                },
+                layout: {
+                  padding: {
+                    left: 0,
+                    right: 0,
+                    top: 20,
+                    bottom: 0
+                  }
+                },
+                plugins: {
+                    labels: []
+                },
+                scales: {
+                    yAxes: [{
+                        display: false,
+                        stacked: true,
+                        gridLines: {
+                            display: false,
+                            drawBorder: false
+                        },
+                        ticks: {
+                            beginAtZero: true
+                        }
+                    }],
+                    xAxes: [{
+                        stacked: true,
+                        gridLines: {
+                            display: false,
+                            drawBorder: false
+                        },
+                    }]
+                },
+                "animation": {
+                    "duration": 1,
+                    "onComplete": function() {
+                        var chartInstance = this.chart,
+                          ctx = chartInstance.ctx;
+         
+                        ctx.font = Chart.helpers.fontString(Chart.defaults.global.defaultFontSize, Chart.defaults.global.defaultFontStyle, Chart.defaults.global.defaultFontFamily);
+                        ctx.textAlign = 'center';
+                        ctx.textBaseline = 'bottom';
+         
+                        this.data.datasets.forEach(function(dataset, i) {
+                          var meta = chartInstance.controller.getDatasetMeta(i);
+                          meta.data.forEach(function(bar, index) {
+                            var data = dataset.data[index];
+                            ctx.fillText(data, bar._model.x, bar._model.y - 5);
+                          });
+                        });
+                      }
+                    },
+            }
+        });
+
+        $('div#percepatan_kogol_3').unblock();
+
+    });
+
+    $('div#percepatan_kogol_4').block({ message: 'Mengambil data...' });
+    $.getJSON('../controller/getDashboardPercepatanUnit.php?kogol=4&pic=X&blth=202109', function(data){
+
+        const colours = data.percepatan.map((value) => value < 0 ? "#EC5B43" : "#135470");
+
+        var ctx = document.getElementById("chart_percepatan_kogol_4");
+        ctx.height = 220;
+        chart_alasan_unit = new Chart(ctx, {
+            type: 'bar',
+            data: {
+                labels: data.singkatan,
+                datasets: [
+                    {
+                        label: "PERCEPATAN",
+                        type: "bar",
+                        backgroundColor: colours,
+                        backgroundColorHover: colours,
+                        data: data.percepatan,
+                    },
+                ]
+            },
+            options: {
+                responsive: true, 
+                maintainAspectRatio: false, 
+                barRadius: 2,
+                title: {
+                    display: false,
+                    text: 'Rekap Percepatan'
+                },
+                tooltips: {
+                   mode: 'label',
+                   enabled: false,
+                   
+                },
+                legend: {
+                    position: 'bottom',
+                    display: false,
+                    labels: {
+                        fontSize: 10,
+                    },
+                },
+                plugins: {
+                    labels: []
+                },
+                layout: {
+                  padding: {
+                    left: 0,
+                    right: 0,
+                    top: 20,
+                    bottom: 0
+                  }
+                },
+                scales: {
+                    yAxes: [{
+                        display: false,
+                        stacked: true,
+                        gridLines: {
+                            display: false,
+                            drawBorder: false
+                        },
+                        ticks: {
+                            beginAtZero: true
+                        }
+                    }],
+                    xAxes: [{
+                        stacked: true,
+                        gridLines: {
+                            display: false,
+                            drawBorder: false
+                        },
+                    }]
+                },
+                "animation": {
+                    "duration": 1,
+                    "onComplete": function() {
+                        var chartInstance = this.chart,
+                          ctx = chartInstance.ctx;
+         
+                        ctx.font = Chart.helpers.fontString(Chart.defaults.global.defaultFontSize, Chart.defaults.global.defaultFontStyle, Chart.defaults.global.defaultFontFamily);
+                        ctx.textAlign = 'center';
+                        ctx.textBaseline = 'bottom';
+         
+                        this.data.datasets.forEach(function(dataset, i) {
+                          var meta = chartInstance.controller.getDatasetMeta(i);
+                          meta.data.forEach(function(bar, index) {
+                            var data = dataset.data[index];
+                            ctx.fillText(data, bar._model.x, bar._model.y - 5);
+                          });
+                        });
+                      }
+                    },
+            }
+        });
+
+        $('div#percepatan_kogol_4').unblock();
+
+    });
+
+    $('div#percepatan_mup3').block({ message: 'Mengambil data...' });
+    $.getJSON('../controller/getDashboardPercepatanUnit.php?kogol=X&pic=MUP3&blth=202109', function(data){
+
+        const colours = data.percepatan.map((value) => value < 0 ? "#EC5B43" : "#135470");
+
+        var ctx = document.getElementById("chart_percepatan_mup3");
+        ctx.height = 220;
+        chart_alasan_unit = new Chart(ctx, {
+            type: 'bar',
+            data: {
+                labels: data.singkatan,
+                datasets: [
+                    {
+                        label: "PERCEPATAN",
+                        type: "bar",
+                        backgroundColor: colours,
+                        backgroundColorHover: colours,
+                        data: data.percepatan,
+                    },
+                ]
+            },
+            options: {
+                responsive: true, 
+                maintainAspectRatio: false, 
+                barRadius: 2,
+                title: {
+                    display: false,
+                    text: 'Rekap Percepatan'
+                },
+                tooltips: {
+                   mode: 'label',
+                   enabled: false,
+                   
+                },
+                legend: {
+                    position: 'bottom',
+                    display: false,
+                    labels: {
+                        fontSize: 10,
+                    },
+                },
+                plugins: {
+                    labels: []
+                },
+                layout: {
+                  padding: {
+                    left: 0,
+                    right: 0,
+                    top: 20,
+                    bottom: 0
+                  }
+                },
+                scales: {
+                    yAxes: [{
+                        display: false,
+                        stacked: true,
+                        gridLines: {
+                            display: false,
+                            drawBorder: false
+                        },
+                        ticks: {
+                            beginAtZero: true
+                        }
+                    }],
+                    xAxes: [{
+                        stacked: true,
+                        gridLines: {
+                            display: false,
+                            drawBorder: false
+                        },
+                    }]
+                },
+                "animation": {
+                    "duration": 1,
+                    "onComplete": function() {
+                        var chartInstance = this.chart,
+                          ctx = chartInstance.ctx;
+         
+                        ctx.font = Chart.helpers.fontString(Chart.defaults.global.defaultFontSize, Chart.defaults.global.defaultFontStyle, Chart.defaults.global.defaultFontFamily);
+                        ctx.textAlign = 'center';
+                        ctx.textBaseline = 'bottom';
+         
+                        this.data.datasets.forEach(function(dataset, i) {
+                          var meta = chartInstance.controller.getDatasetMeta(i);
+                          meta.data.forEach(function(bar, index) {
+                            var data = dataset.data[index];
+                            ctx.fillText(data, bar._model.x, bar._model.y - 5);
+                          });
+                        });
+                      }
+                    },
+            }
+        });
+
+        $('div#percepatan_mup3').unblock();
+
+    });
+
+    $('div#percepatan_mbsar').block({ message: 'Mengambil data...' });
+    $.getJSON('../controller/getDashboardPercepatanUnit.php?kogol=X&pic=MBSAR&blth=202109', function(data){
+
+        const colours = data.percepatan.map((value) => value < 0 ? "#EC5B43" : "#135470");
+
+        var ctx = document.getElementById("chart_percepatan_mbsar");
+        ctx.height = 220;
+        chart_alasan_unit = new Chart(ctx, {
+            type: 'bar',
+            data: {
+                labels: data.singkatan,
+                datasets: [
+                    {
+                        label: "PERCEPATAN",
+                        type: "bar",
+                        backgroundColor: colours,
+                        backgroundColorHover: colours,
+                        data: data.percepatan,
+                    },
+                ]
+            },
+            options: {
+                responsive: true, 
+                maintainAspectRatio: false, 
+                barRadius: 2,
+                title: {
+                    display: false,
+                    text: 'Rekap Percepatan'
+                },
+                tooltips: {
+                   mode: 'label',
+                   enabled: false,
+                   
+                },
+                legend: {
+                    position: 'bottom',
+                    display: false,
+                    labels: {
+                        fontSize: 10,
+                    },
+                },
+                plugins: {
+                    labels: []
+                },
+                layout: {
+                  padding: {
+                    left: 0,
+                    right: 0,
+                    top: 20,
+                    bottom: 0
+                  }
+                },
+                scales: {
+                    yAxes: [{
+                        display: false,
+                        stacked: true,
+                        gridLines: {
+                            display: false,
+                            drawBorder: false
+                        },
+                        ticks: {
+                            beginAtZero: true
+                        }
+                    }],
+                    xAxes: [{
+                        stacked: true,
+                        gridLines: {
+                            display: false,
+                            drawBorder: false
+                        },
+                    }]
+                },
+                "animation": {
+                    "duration": 1,
+                    "onComplete": function() {
+                        var chartInstance = this.chart,
+                          ctx = chartInstance.ctx;
+         
+                        ctx.font = Chart.helpers.fontString(Chart.defaults.global.defaultFontSize, Chart.defaults.global.defaultFontStyle, Chart.defaults.global.defaultFontFamily);
+                        ctx.textAlign = 'center';
+                        ctx.textBaseline = 'bottom';
+         
+                        this.data.datasets.forEach(function(dataset, i) {
+                          var meta = chartInstance.controller.getDatasetMeta(i);
+                          meta.data.forEach(function(bar, index) {
+                            var data = dataset.data[index];
+                            ctx.fillText(data, bar._model.x, bar._model.y - 5);
+                          });
+                        });
+                      }
+                    },
+            }
+        });
+
+        $('div#percepatan_mbsar').unblock();
+
+    });
+
+    $('div#percepatan_mulp').block({ message: 'Mengambil data...' });
+    $.getJSON('../controller/getDashboardPercepatanUnit.php?kogol=X&pic=MULP&blth=202109', function(data){
+
+        const colours = data.percepatan.map((value) => value < 0 ? "#EC5B43" : "#135470");
+
+        var ctx = document.getElementById("chart_percepatan_mulp");
+        ctx.height = 220;
+        chart_alasan_unit = new Chart(ctx, {
+            type: 'bar',
+            data: {
+                labels: data.singkatan,
+                datasets: [
+                    {
+                        label: "PERCEPATAN",
+                        type: "bar",
+                        backgroundColor: colours,
+                        backgroundColorHover: colours,
+                        data: data.percepatan,
+                    },
+                ]
+            },
+            options: {
+                responsive: true, 
+                maintainAspectRatio: false, 
+                barRadius: 2,
+                title: {
+                    display: false,
+                    text: 'Rekap Percepatan'
+                },
+                tooltips: {
+                   mode: 'label',
+                   enabled: false,
+                   
+                },
+                legend: {
+                    position: 'bottom',
+                    display: false,
+                    labels: {
+                        fontSize: 10,
+                    },
+                },
+                plugins: {
+                    labels: []
+                },
+                layout: {
+                  padding: {
+                    left: 0,
+                    right: 0,
+                    top: 20,
+                    bottom: 0
+                  }
+                },
+                scales: {
+                    yAxes: [{
+                        display: false,
+                        stacked: true,
+                        gridLines: {
+                            display: false,
+                            drawBorder: false
+                        },
+                        ticks: {
+                            beginAtZero: true
+                        }
+                    }],
+                    xAxes: [{
+                        stacked: true,
+                        gridLines: {
+                            display: false,
+                            drawBorder: false
+                        },
+                    }]
+                },
+                "animation": {
+                    "duration": 1,
+                    "onComplete": function() {
+                        var chartInstance = this.chart,
+                          ctx = chartInstance.ctx;
+         
+                        ctx.font = Chart.helpers.fontString(Chart.defaults.global.defaultFontSize, Chart.defaults.global.defaultFontStyle, Chart.defaults.global.defaultFontFamily);
+                        ctx.textAlign = 'center';
+                        ctx.textBaseline = 'bottom';
+         
+                        this.data.datasets.forEach(function(dataset, i) {
+                          var meta = chartInstance.controller.getDatasetMeta(i);
+                          meta.data.forEach(function(bar, index) {
+                            var data = dataset.data[index];
+                            ctx.fillText(data, bar._model.x, bar._model.y - 5);
+                          });
+                        });
+                      }
+                    },
+            }
+        });
+
+        $('div#percepatan_mulp').unblock();
+
+    });
+
+    $('div#percepatan_biller').block({ message: 'Mengambil data...' });
+    $.getJSON('../controller/getDashboardPercepatanUnit.php?kogol=X&pic=BILLER&blth=202109', function(data){
+
+        const colours = data.percepatan.map((value) => value < 0 ? "#EC5B43" : "#135470");
+
+        var ctx = document.getElementById("chart_percepatan_biller");
+        ctx.height = 220;
+        chart_alasan_unit = new Chart(ctx, {
+            type: 'bar',
+            data: {
+                labels: data.singkatan,
+                datasets: [
+                    {
+                        label: "PERCEPATAN",
+                        type: "bar",
+                        backgroundColor: colours,
+                        backgroundColorHover: colours,
+                        data: data.percepatan,
+                    },
+                ]
+            },
+            options: {
+                responsive: true, 
+                maintainAspectRatio: false, 
+                barRadius: 2,
+                title: {
+                    display: false,
+                    text: 'Rekap Percepatan'
+                },
+                tooltips: {
+                   mode: 'label',
+                   enabled: false,
+                   
+                },
+                legend: {
+                    position: 'bottom',
+                    display: false,
+                    labels: {
+                        fontSize: 10,
+                    },
+                },
+                plugins: {
+                    labels: []
+                },
+                layout: {
+                  padding: {
+                    left: 0,
+                    right: 0,
+                    top: 20,
+                    bottom: 0
+                  }
+                },
+                scales: {
+                    yAxes: [{
+                        display: false,
+                        stacked: true,
+                        gridLines: {
+                            display: false,
+                            drawBorder: false
+                        },
+                        ticks: {
+                            beginAtZero: true
+                        }
+                    }],
+                    xAxes: [{
+                        stacked: true,
+                        gridLines: {
+                            display: false,
+                            drawBorder: false
+                        },
+                    }]
+                },
+                "animation": {
+                    "duration": 1,
+                    "onComplete": function() {
+                        var chartInstance = this.chart,
+                          ctx = chartInstance.ctx;
+         
+                        ctx.font = Chart.helpers.fontString(Chart.defaults.global.defaultFontSize, Chart.defaults.global.defaultFontStyle, Chart.defaults.global.defaultFontFamily);
+                        ctx.textAlign = 'center';
+                        ctx.textBaseline = 'bottom';
+         
+                        this.data.datasets.forEach(function(dataset, i) {
+                          var meta = chartInstance.controller.getDatasetMeta(i);
+                          meta.data.forEach(function(bar, index) {
+                            var data = dataset.data[index];
+                            ctx.fillText(data, bar._model.x, bar._model.y - 5);
+                          });
+                        });
+                      }
+                    },
+            }
+        });
+
+        $('div#percepatan_biller').unblock();
+
+    });
+
+
+    $('#sel_unit').change(function(){
+        var unitap=this.value;
+
+
+        $('div#pasang_baru').block({ message: 'Mengambil data...' });
+        $.getJSON('../controller/getDashboardPotensiJenisTransaksi.php?jenis_transaksi=pasang baru&unitap='+unitap, function(data){
+            $('#dapot_jenis_transaksi #pasang_baru #jml_agenda').html(data.jml_agenda);
+            $('#dapot_jenis_transaksi #pasang_baru #jml_daya').html(data.jml_daya);
+            $('#dapot_jenis_transaksi #pasang_baru #jml_rpbp').html(data.jml_rpbp);
+            $('#dapot_jenis_transaksi #pasang_baru #jml_rprab').html(data.jml_rprab);
+            $('div#pasang_baru').unblock();
+        });
+        $('div#perubahan_daya').block({ message: 'Mengambil data...' });
+        $.getJSON('../controller/getDashboardPotensiJenisTransaksi.php?jenis_transaksi=perubahan daya&unitap='+unitap, function(data){
+            $('#dapot_jenis_transaksi #perubahan_daya #jml_agenda').html(data.jml_agenda);
+            $('#dapot_jenis_transaksi #perubahan_daya #jml_daya').html(data.jml_daya);
+            $('#dapot_jenis_transaksi #perubahan_daya #jml_rpbp').html(data.jml_rpbp);
+            $('#dapot_jenis_transaksi #perubahan_daya #jml_rprab').html(data.jml_rprab);
+            $('div#perubahan_daya').unblock();
+        });
+        $('div#sambung_kembali').block({ message: 'Mengambil data...' });
+        $.getJSON('../controller/getDashboardPotensiJenisTransaksi.php?jenis_transaksi=sambung kembali&unitap='+unitap, function(data){
+            $('#dapot_jenis_transaksi #sambung_kembali #jml_agenda').html(data.jml_agenda);
+            $('#dapot_jenis_transaksi #sambung_kembali #jml_daya').html(data.jml_daya);
+            $('#dapot_jenis_transaksi #sambung_kembali #jml_rpbp').html(data.jml_rpbp);
+            $('#dapot_jenis_transaksi #sambung_kembali #jml_rprab').html(data.jml_rprab);
+            $('div#sambung_kembali').unblock();
+        });
+
+        $('div#non_ge').block({ message: 'Mengambil data...' });
+        $.getJSON('../controller/getDashboardPotensi.php?klp_plg=NON_GE&unitap='+unitap, function(data){
+            $('#dapot #non_ge #jml_agenda').html(data.jml_agenda);
+            $('#dapot #non_ge #jml_daya').html(data.jml_daya);
+            $('#dapot #non_ge #jml_rpbp').html(data.jml_rpbp);
+            $('#dapot #non_ge #jml_rprab').html(data.jml_rprab);
+            $('div#non_ge').unblock();
+        });
+        $('div#ge').block({ message: 'Mengambil data...' });
+        $.getJSON('../controller/getDashboardPotensi.php?klp_plg=GE&unitap='+unitap, function(data){
+            $('#dapot #ge #jml_agenda').html(data.jml_agenda);
+            $('#dapot #ge #jml_daya').html(data.jml_daya);
+            $('#dapot #ge #jml_rpbp').html(data.jml_rpbp);
+            $('#dapot #ge #jml_rprab').html(data.jml_rprab);
+            $('div#ge').unblock();
+        });
+        $('div#tm').block({ message: 'Mengambil data...' });
+        $.getJSON('../controller/getDashboardPotensi.php?klp_plg=TM&unitap='+unitap, function(data){
+            $('#dapot #tm #jml_agenda').html(data.jml_agenda);
+            $('#dapot #tm #jml_daya').html(data.jml_daya);
+            $('#dapot #tm #jml_rpbp').html(data.jml_rpbp);
+            $('#dapot #tm #jml_rprab').html(data.jml_rprab);
+            $('div#tm').unblock();
+        });
+
+        $('div#dapot_daya').block({ message: 'Mengambil data...' });
+        $.getJSON('../controller/getDashboardPotensiDaya.php?unitap='+unitap, function(data){
+            
+            chart_dapot_daya.data.datasets[0].data = data.jml_daya;
+            chart_dapot_daya.data.labels = data.klp_plg;
+            chart_dapot_daya.update();
+            $('div#dapot_daya').unblock();
+
+        });
+
+        $('div#dapot_daya_unit').block({ message: 'Mengambil data...' });
+        $.getJSON('../controller/getDashboardPotensiDayaUnit.php?unitap='+unitap, function(data){
+            
+            chart_dapot_daya_unit.data.datasets[0].data = data.jml_daya_non_ge;
+            chart_dapot_daya_unit.data.datasets[1].data = data.jml_daya_ge;
+            chart_dapot_daya_unit.data.datasets[2].data = data.jml_daya_tm;
+            chart_dapot_daya_unit.data.labels = data.singkatan;
+            chart_dapot_daya_unit.update();
+            $('div#dapot_daya_unit').unblock();
+
+        });
+
+        $('div#dapot_bp').block({ message: 'Mengambil data...' });
+        $.getJSON('../controller/getDashboardPotensiBP.php?unitap='+unitap, function(data){
+            
+            chart_dapot_bp.data.datasets[0].data = data.jml_rpbp;
+            chart_dapot_bp.data.labels = data.klp_plg;
+            chart_dapot_bp.update();
+            $('div#dapot_bp').unblock();
+
+        });
+
+        $('div#dapot_bp_unit').block({ message: 'Mengambil data...' });
+        $.getJSON('../controller/getDashboardPotensiBPUnit.php?unitap='+unitap, function(data){
+
+            chart_dapot_bp_unit.data.datasets[0].data = data.jml_rpbp_non_ge;
+            chart_dapot_bp_unit.data.datasets[1].data = data.jml_rpbp_ge;
+            chart_dapot_bp_unit.data.datasets[2].data = data.jml_rpbp_tm;
+            chart_dapot_bp_unit.data.labels = data.singkatan;
+            chart_dapot_bp_unit.update();
+            $('div#dapot_bp_unit').unblock();
+
+        });
+
+        $('div#dapot_rab').block({ message: 'Mengambil data...' });
+        $.getJSON('../controller/getDashboardPotensiRAB.php?unitap='+unitap, function(data){
+            
+            chart_dapot_rab.data.datasets[0].data = data.jml_rprab;
+            chart_dapot_rab.data.labels = data.klp_plg;
+            chart_dapot_rab.update();
+            $('div#dapot_rab').unblock();
+
+        });
+
+        $('div#dapot_rab_unit').block({ message: 'Mengambil data...' });
+        $.getJSON('../controller/getDashboardPotensiRABUnit.php?unitap='+unitap, function(data){
+
+            chart_dapot_rab_unit.data.datasets[0].data = data.jml_rprab_non_ge;
+            chart_dapot_rab_unit.data.datasets[1].data = data.jml_rprab_ge;
+            chart_dapot_rab_unit.data.datasets[2].data = data.jml_rprab_tm;
+            chart_dapot_rab_unit.data.labels = data.singkatan;
+            chart_dapot_rab_unit.update();
+            $('div#dapot_rab_unit').unblock();
+
+        });
+
+        $('div#overview_daftung .card').block({ message: 'Mengambil data...' });
+        $.getJSON('../controller/getDashboardPermohonan.php?unitap='+unitap, function(data){
+            $('#total_agenda').html(data.total_agenda);
+            $('#total_agenda_rab').html(data.total_agenda_rab);
+            $('#total_agenda_non_rab').html(data.total_agenda_non_rab);
+            $('#total_proses').html(data.total_proses);
+            $('#total_evaluasi').html(data.total_evaluasi);
+            $('#total_klasifikasi_rab_1').html(data.total_klasifikasi_rab_1);
+            $('#total_klasifikasi_rab_2').html(data.total_klasifikasi_rab_2);
+            $('#total_klasifikasi_rab_3').html(data.total_klasifikasi_rab_3);
+            $('#total_klasifikasi_rab_4').html(data.total_klasifikasi_rab_4);
+            $('#total_klasifikasi_rab_5').html(data.total_klasifikasi_rab_5);
+            $('#total_klasifikasi_rab_6').html(data.total_klasifikasi_rab_6);
+            $('#jam_upload_daftung').html('Jam upload: '+data.jam_upload_daftung);
+            $('div#overview_daftung .card').unblock();
+
+        });
+
+        $('div#card_permohonan_cluster').block({ message: 'Mengambil data...' });
+        $.getJSON('../controller/getDashboardPermohonanCluster.php?unitap='+unitap, function(data){
+
+            chart_cluster.data.datasets[0].data = data.rupiah;
+            chart_cluster.data.labels = data.jenis_rupiah;
+            chart_cluster.update();
+            $('div#card_permohonan_cluster').unblock();
+
+        });
+
+        $('div#card_permohonan_cluster_unit').block({ message: 'Mengambil data...' });
+        $.getJSON('../controller/getDashboardPermohonanClusterUnit.php?unitap='+unitap, function(data){
+
+            chart_cluster_unit.data.datasets[0].data = data.rp_bp;
+            chart_cluster_unit.data.datasets[1].data = data.kurang_bp;
+            chart_cluster_unit.data.datasets[2].data = data.lebih_bp;
+            chart_cluster_unit.data.labels = data.singkatan;
+            chart_cluster_unit.update();
+            $('div#card_permohonan_cluster_unit').unblock();
+
+        });
+
+        $('div#card_permohonan_jenis').block({ message: 'Mengambil data...' });
+        $.getJSON('../controller/getDashboardPermohonanJenis.php?unitap='+unitap, function(data){
+
+            chart_jenis.data.datasets[0].data = data.jml_permohonan;
+            chart_jenis.data.labels = data.ket_transaksi;
+            chart_jenis.update();
+            $('div#card_permohonan_jenis').unblock();
+
+        });
+
+        $('div#card_permohonan_jenis_unit').block({ message: 'Mengambil data...' });
+        $.getJSON('../controller/getDashboardPermohonanJenisUnit.php?unitap='+unitap, function(data){
+
+            chart_jenis_unit.data.datasets[0].data = data.jml_agenda_jenis_lain;
+            chart_jenis_unit.data.datasets[1].data = data.jml_agenda_jenis_migrasi_lpb;
+            chart_jenis_unit.data.datasets[2].data = data.jml_agenda_jenis_pasang_baru;
+            chart_jenis_unit.data.datasets[3].data = data.jml_agenda_jenis_tambah_daya;
+            chart_jenis_unit.data.labels = data.singkatan;
+            chart_jenis_unit.update();
+            $('div#card_permohonan_jenis_unit').unblock();
+
+        });
+
+        $('div#card_permohonan_tmp').block({ message: 'Mengambil data...' });
+        $.getJSON('../controller/getDashboardPermohonanTMP.php?unitap='+unitap, function(data){
+
+            chart_tmp.data.datasets[0].data = data.jml_permohonan;
+            chart_tmp.data.labels = data.status_tmp;
+            chart_tmp.update();
+            $('div#card_permohonan_tmp').unblock();
+
+        });
+
+        $('div#card_permohonan_tmp_unit').block({ message: 'Mengambil data...' });
+        $.getJSON('../controller/getDashboardPermohonanTMPUnit.php?unitap='+unitap, function(data){
+
+            chart_tmp_unit.data.datasets[0].data = data.jml_agenda_melebihi_tmp;
+            chart_tmp_unit.data.datasets[1].data = data.jml_agenda_mendekati_tmp;
+            chart_tmp_unit.data.datasets[2].data = data.jml_agenda_dalam_tmp;
+            chart_tmp_unit.data.labels = data.singkatan;
+            chart_tmp_unit.update();
+            $('div#card_permohonan_tmp_unit').unblock();
+
+        });
+
+        $('div#card_permohonan_alasan_kriteria').block({ message: 'Mengambil data...' });
+        $.getJSON('../controller/getDashboardPermohonanAlasan.php?unitap='+unitap, function(data){
+
+            chart_alasan.data.datasets[0].data = data.jml_permohonan;
+            chart_alasan.data.labels = data.alasan_kriteria_tmp;
+            chart_alasan.update();
+            $('div#card_permohonan_alasan_kriteria').unblock();
+
+        });
+
+        $('div#card_permohonan_alasan_kriteria_unit').block({ message: 'Mengambil data...' });
+        $.getJSON('../controller/getDashboardPermohonanAlasanUnit.php?unitap='+unitap, function(data){
+
+            chart_alasan_unit.data.datasets[0].data = data.jml_agenda_alasan_lain;
+            chart_alasan_unit.data.datasets[1].data = data.jml_agenda_alasan_perluasan_jtm;
+            chart_alasan_unit.data.datasets[2].data = data.jml_agenda_alasan_perluasan_jtr;
+            chart_alasan_unit.data.datasets[3].data = data.jml_agenda_alasan_tanpa_perluasan;
+            chart_alasan_unit.data.labels = data.singkatan;
+            chart_alasan_unit.update();
+            $('div#card_permohonan_alasan_kriteria_unit').unblock();
+
+        });
+
+        $('div#card_oldest_agenda_non_ge table tbody').empty();
+        $('div#card_oldest_agenda_non_ge').block({ message: 'Mengambil data...' });
+        $.getJSON('../controller/getDashboardPermohonanTerlama.php?klp_plg=NON_GE&unitap='+unitap, function(data){
+
+            var tr = '';
+            $.each(data.rows, function(k,v){
+                tr += '<tr data-noagenda="'+v.noagenda+'" >';
+                tr += '<td>'+v.noagenda+'</td>';
+                tr += '<td>'+v.tglmohon+'</td>';
+                tr += '<td>'+v.jenis_transaksi+'</td>';
+                // tr += '<td>'+v.tarif_daya_lama+'</td>';
+                tr += '<td>'+v.tarif_daya_baru+'</td>';
+                // tr += '<td>'+v.alasan_kriteria_tmp+'</td>';
+                // tr += '<td>'+v.rp_bp+'</td>';
+                // tr += '<td>'+v.rp_rab+'</td>';
+                // tr += '<td><span class="label '+v.label_status+'">'+v.status+'</span></td>';
+                tr += '</tr>';
+            });
+            $('div#card_oldest_agenda_non_ge table tbody').append(tr);
+            $('div#card_oldest_agenda_non_ge').unblock();
+        });
+
+        $('div#card_oldest_agenda_ge table tbody').empty();
+        $('div#card_oldest_agenda_ge').block({ message: 'Mengambil data...' });
+        $.getJSON('../controller/getDashboardPermohonanTerlama.php?klp_plg=GE&unitap='+unitap, function(data){
+
+            var tr = '';
+            $.each(data.rows, function(k,v){
+                tr += '<tr data-noagenda="'+v.noagenda+'" >';
+                tr += '<td>'+v.noagenda+'</td>';
+                tr += '<td>'+v.tglmohon+'</td>';
+                tr += '<td>'+v.jenis_transaksi+'</td>';
+                // tr += '<td>'+v.tarif_daya_lama+'</td>';
+                tr += '<td>'+v.tarif_daya_baru+'</td>';
+                // tr += '<td>'+v.alasan_kriteria_tmp+'</td>';
+                // tr += '<td>'+v.rp_bp+'</td>';
+                // tr += '<td>'+v.rp_rab+'</td>';
+                // tr += '<td><span class="label '+v.label_status+'">'+v.status+'</span></td>';
+                tr += '</tr>';
+            });
+            $('div#card_oldest_agenda_ge table tbody').append(tr);
+            $('div#card_oldest_agenda_ge').unblock();
+        });
+
+        $('div#card_oldest_agenda_tm table tbody').empty();
+        $('div#card_oldest_agenda_tm').block({ message: 'Mengambil data...' });
+        $.getJSON('../controller/getDashboardPermohonanTerlama.php?klp_plg=TM&unitap='+unitap, function(data){
+
+            var tr = '';
+            $.each(data.rows, function(k,v){
+                tr += '<tr data-noagenda="'+v.noagenda+'" >';
+                tr += '<td>'+v.noagenda+'</td>';
+                tr += '<td>'+v.tglmohon+'</td>';
+                tr += '<td>'+v.jenis_transaksi+'</td>';
+                // tr += '<td>'+v.tarif_daya_lama+'</td>';
+                tr += '<td>'+v.tarif_daya_baru+'</td>';
+                // tr += '<td>'+v.alasan_kriteria_tmp+'</td>';
+                // tr += '<td>'+v.rp_bp+'</td>';
+                // tr += '<td>'+v.rp_rab+'</td>';
+                // tr += '<td><span class="label '+v.label_status+'">'+v.status+'</span></td>';
+                tr += '</tr>';
+            });
+            $('div#card_oldest_agenda_tm table tbody').append(tr);
+            $('div#card_oldest_agenda_tm').unblock();
+        });
+
+
+        // // Update Bar Chart per Unit
+        // $('div#card_permohonan').block({ message: 'Mengambil data...' });
+        // $('div#card_permohonan_tmp').block({ message: 'Mengambil data...' });
+        // $('div#card_permohonan_status_proses').block({ message: 'Mengambil data...' });
+        // $('div#card_permohonan_alasan').block({ message: 'Mengambil data...' });
+        // $('div#card_permohonan_jenis').block({ message: 'Mengambil data...' });
+        // $('div#card_latest_agenda').block({ message: 'Mengambil data...' });
+        // $('div#card_latest_agenda table tbody').empty();
+
+        // $.getJSON('../controller/getDashboardPermohonan.php?unitap='+unitap, function(data){
+        //     $('div#card_permohonan').unblock();
+        //     $('#total_agenda').html(data.total_agenda);
+        //     $('#total_agenda_rab').html(data.total_agenda_rab);
+        //     $('#total_proses').html(data.total_proses);
+        //     $('#total_evaluasi').html(data.total_evaluasi);
+        //     $('#total_klasifikasi_rab_1').html(data.total_klasifikasi_rab_1);
+        //     $('#total_klasifikasi_rab_2').html(data.total_klasifikasi_rab_2);
+        //     $('#total_klasifikasi_rab_3').html(data.total_klasifikasi_rab_3);
+        //     $('#total_klasifikasi_rab_4').html(data.total_klasifikasi_rab_4);
+        //     $('#total_klasifikasi_rab_5').html(data.total_klasifikasi_rab_5);
+        //     $('#total_klasifikasi_rab_6').html(data.total_klasifikasi_rab_6);
+        //     chart_jenis_unit.data.labels = data.singkatan;
+        //     chart_jenis_unit.data.datasets[0].data = data.jml_klasifikasi_rab_1;
+        //     chart_jenis_unit.data.datasets[1].data = data.jml_klasifikasi_rab_2;
+        //     chart_jenis_unit.data.datasets[2].data = data.jml_klasifikasi_rab_3;
+        //     chart_jenis_unit.data.datasets[3].data = data.jml_klasifikasi_rab_4;
+        //     chart_jenis_unit.data.datasets[4].data = data.jml_klasifikasi_rab_5;
+        //     chart_jenis_unit.data.datasets[5].data = data.jml_klasifikasi_rab_6;
+        //     chart_jenis_unit.data.datasets[6].data = data.jml_klasifikasi_rab_7;
+        //     chart_jenis_unit.data.datasets[7].data = data.jml_agenda_dalam_tmp;
+        //     chart_jenis_unit.data.datasets[8].data = data.jml_agenda_mendekati_tmp;
+        //     chart_jenis_unit.data.datasets[9].data = data.jml_agenda_melebihi_tmp;
+        //     chart_jenis_unit.update();
+
+        //     $.getJSON('../controller/getDashboardPermohonanTMP.php?unitap='+unitap, function(data){
+        //         $('div#card_permohonan_tmp').unblock();
+        //         chart_tmp.data.datasets[0].data = data.jml_permohonan;
+        //         chart_tmp.data.labels = data.status_tmp;
+        //         chart_tmp.update();
+
+        //         $.getJSON('../controller/getDashboardPermohonanStatusProses.php?unitap='+unitap, function(data){
+        //             $('div#card_permohonan_status_proses').unblock();
+        //             chart_status_proses.data.datasets[0].data = data.jml_permohonan;
+        //             chart_status_proses.data.labels = data.status_proses;
+        //             chart_status_proses.update();
+
+        //             $.getJSON('../controller/getDashboardPermohonanAlasan.php?unitap='+unitap, function(data){
+        //                 $('div#card_permohonan_alasan').unblock();
+        //                 chart_alasan.data.datasets[0].data = data.jml_permohonan;
+        //                 chart_alasan.data.labels = data.alasan_kriteria_tmp;
+        //                 chart_alasan.update();
+
+        //                 $.getJSON('../controller/getDashboardPermohonanJenis.php?unitap='+unitap, function(data){
+        //                     $('div#card_permohonan_jenis').unblock();
+        //                     chart_jenis.data.datasets[0].data = data.jml_permohonan;
+        //                     chart_jenis.data.labels = data.ket_transaksi;
+        //                     chart_jenis.update();
+
+        //                     $.getJSON('../controller/getDashboardPermohonanTerlama.php?unitap='+unitap, function(data){
+        //                         var tr = '';
+        //                         $.each(data.rows, function(k,v){
+        //                             tr += '<tr>';
+        //                             tr += '<td>'+v.noagenda+'</td>';
+        //                             tr += '<td>'+v.tglmohon+'</td>';
+        //                             tr += '<td>'+v.jenis_transaksi+'</td>';
+        //                             tr += '<td>'+v.tarif_daya_lama+'</td>';
+        //                             tr += '<td>'+v.tarif_daya_baru+'</td>';
+        //                             // tr += '<td>'+v.alasan_kriteria_tmp+'</td>';
+        //                             tr += '<td>'+v.rp_bp+'</td>';
+        //                             tr += '<td>'+v.rp_rab+'</td>';
+        //                             tr += '<td><span class="label '+v.label_status+'">'+v.status+'</span></td>';
+        //                             tr += '</tr>';
+        //                         });
+        //                         $('div#card_latest_agenda table tbody').append(tr);
+        //                         $('div#card_latest_agenda').unblock();
+        //                     });
+        //                 });
+        //             });
+        //         });
+        //     });
+        // });
+    });
+
+
+
+});

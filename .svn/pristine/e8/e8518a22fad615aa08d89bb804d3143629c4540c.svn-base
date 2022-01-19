@@ -1,0 +1,75 @@
+$(document).ready(function () {
+
+    "use strict";
+
+    const queryString = window.location.search;
+    const urlParams = new URLSearchParams(queryString);
+    
+
+    //$.blockUI({ message: '<h1 class="p-3">Mengambil data...</h1>' }); 
+    var table = $('#tbl_blm_upload_pelunasan')
+      .on('preXhr.dt', function ( e, settings, data ) {
+        console.log('preXhr!');
+        $('div.content-body').block({ message: 'Mengambil data...' });
+      })
+      .on('xhr.dt', function ( e, settings, data ) {
+        console.log('xhr!');
+        $('div.content-body').unblock();
+      })
+      .DataTable( {
+        "processing": true,
+        "serverSide": true,
+        "deferLoading": 1000,
+        "ajax": {
+            "url": '../controller/pelunasan/getBlmUploadPelunasan.php',
+            "type": "POST",
+            "timeout": 60000
+        },
+        //responsive: true,
+        columns: [
+          {
+            data: "UNITAP",
+            visible: true
+          },
+          {
+            data: "UP3",
+            visible: true
+          },
+          {
+            data: "UNITUP",
+            visible: true
+          },
+          {
+            data: "ULP",
+            visible: true
+          },
+          {
+            data: "TGL",
+            visible: true
+          },
+        ],
+        dom:
+           // "<'row'<'col-sm-12 col-md-9 mb-2'B>>" +
+            "<'row'<'col-sm-12 col-md-6 mb-2'B><'col-sm-12 col-md-2 mb-2'l><'col-sm-12 col-md-4'f>>" +
+            "<'row'<'col-sm-12 mb-2'tr>>" +
+            "<'row'<'col-sm-12 col-md-5 mb-2'i><'col-sm-12 col-md-7'p>>",
+        buttons: [
+            { extend: 'colvis', text: 'Columns' }
+        ],
+        "scrollY": 520,
+        "scrollX": true,
+        "paging": true,
+        lengthMenu: [[25, 100, -1], [25, 100, "All"]],
+        pageLength: 100,
+        "order": [[0, 'asc'],[2, 'asc']],
+    });
+
+
+    $( 'body' ).on( 'click', '#btn_cari', function(btn) {
+        console.log('Klikk');
+        table.ajax.url( '../controller/pelunasan/getBlmUploadPelunasan.php?unitupi='+$('#sel_unitupi').val()+'&unitap='+$('#sel_unitap').val()+'&unitup='+$('#sel_unitup').val()+'&blth='+$('#sel_blth').val() ).load();
+    });
+
+
+
+});

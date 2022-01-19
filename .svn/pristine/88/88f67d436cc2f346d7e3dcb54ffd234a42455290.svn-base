@@ -1,0 +1,41 @@
+<?php
+
+require_once '../../config/config.php';
+require_once '../../config/database.php';
+
+
+$response = array();
+
+$stmt = sqlsrv_query($conn, "select * from vw_rekap_daftung_ap order by AP");
+if($stmt){
+	$i=0;
+	$response['total_permohonan'] = 0;
+	$response['total_proses'] = 0;
+	$response['total_evaluasi'] = 0;
+	while( $row = sqlsrv_fetch_array( $stmt, SQLSRV_FETCH_ASSOC) ) {
+		$response['ap'][$i] = $row['AP']; 
+		$response['jml_proses'][$i] = intval($row['JML_PROSES']); 
+		$response['jml_evaluasi'][$i] = intval($row['JML_EVALUASI']); 
+		$response['total_permohonan'] += intval($row['JML_PROSES'])+intval($row['JML_EVALUASI']); 
+		$response['total_proses'] += intval($row['JML_PROSES']); 
+		$response['total_evaluasi'] += intval($row['JML_EVALUASI']); 
+
+		$i++;
+	}
+
+	$response['total_permohonan'] = number_format($response['total_permohonan']);
+	$response['total_proses'] = number_format($response['total_proses']);
+	$response['total_evaluasi'] = number_format($response['total_evaluasi']);
+	$response['success'] = true;
+	sqlsrv_free_stmt($stmt);
+
+
+}else{
+	$response['success'] = false;
+	$response['msg'] = 'Gagal melakukan Query ke Database';
+}
+
+
+echo json_encode($response);
+
+?>

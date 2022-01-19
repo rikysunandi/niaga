@@ -1,0 +1,311 @@
+
+        <div class="nk-sidebar">           
+            <div class="nk-nav-scroll">
+                <ul class="metismenu" id="menu">
+                    <li class="nav-label">Dashboard</li>
+                    <li class="mega-menu mega-menu-lg">
+                        <a class="has-arrow" href="javascript:void()" aria-expanded="false">
+                            <i class="mdi mdi-chart-bar"></i><span class="nav-text">Dashboard</span>
+                        </a>
+                        <ul aria-expanded="false">
+                            <li><a href="index.php">Pemasaran</a></li>
+                            <li><a href="index-mekaga.php">Mekanisme Niaga</a></li>
+                            <li><a href="index-admaga.php">Administrasi Niaga</a></li>
+                        </ul>
+                    </li>
+                    <li class="nav-label">MEKAGA & REVASS</li>
+                    <li><a class="has-arrow" href="javascript:void()" aria-expanded="false"><i class="mdi mdi-file-document-box"></i> <span class="nav-text">Pemeriksaan LPB</span></a>
+                        <ul aria-expanded="false">
+                            <li><a href="upload-dil.php">Upload DIL</a>
+                            </li>
+                            <li><a href="mon-pelanggan-belum-diperiksa.php">Download DIL Belum Tagging Priangan</a>
+                            </li>
+                            <li><a href="mon-pelanggan-subsidi.php">Download DIL Subsidi</a>
+                            </li>
+                            <li><a href="mon-upload-pemeriksaan-lpb-ftp.php">Monitoring Upload FTP</a>
+                            </li>
+                            <li><a href="info-pemeriksaan-lpb.php">Info Pemeriksaan LPB</a>
+                            </li>
+                            <li><a href="mon-pemeriksaan-lpb.php">Monitoring Pemeriksaan LPB</a>
+                            </li>
+                            <li><a href="mon-missing-dil.php">Data Tidak Ditemukan Pada DIL</a>
+                            </li>
+                            <li><a href="rekap-pemeriksaan-lpb.php">Rekap per Tanggal Upload</a>
+                            </li>
+                            <li><a href="rekap-pemeriksaan-lpb-all.php">Rekap Pemeriksaan LPB</a>
+                            </li>
+                            <li><a href="pembentukan-rpp.php">Peta Pembentukan RPP</a>
+                            </li>
+                            <li><a href="rpp-per-gardu.php">RPP per Gardu</a>
+                            </li>
+                        </ul>
+                    </li><li><a class="has-arrow" href="javascript:void()" aria-expanded="false"><i class="mdi mdi-file-document-box"></i> <span class="nav-text">Pendukung Baca Meter</span></a>
+                        <ul aria-expanded="false">
+                            <li><a href="verifikasi-foto-cater.php">Sampling Foto Baca Meter</a>
+                            </li>
+                        </ul>
+                    </li>
+                    <li class="nav-label">Pemasaran</li>
+                     <li><a class="has-arrow" href="javascript:void()" aria-expanded="false"><i class="mdi mdi-cloud-upload"></i> <span class="nav-text">Update Data</span></a>
+                        <ul aria-expanded="false">
+                            <li><a href="update-dapot.php">Update Daftar Potensi</a>
+                            </li>
+                            <li><a href="update-daftung.php">Update Daftar Tunggu</a>
+                            </li>
+                        </ul>
+                    </li>
+                    <li><a class="has-arrow" href="javascript:void()" aria-expanded="false"><i class="mdi mdi-tag-multiple"></i> <span class="nav-text">Monitoring Agenda</span></a>
+                        <ul aria-expanded="false">
+                            <li><a href="info-agenda.php">Info Agenda</a>
+                            </li>
+                            <li><a href="input-rab.php">Update RAB</a>
+                            </li>
+                            <li><a href="update-kondisi.php">Update Kondisi Daftung</a>
+                            </li>
+                            <li><a href="mon-potensi.php">Monitoring Potensi</a>
+                            <li><a href="mon-usulan-skai.php">Monitoring Usulan Investasi</a>
+                            <li><a href="mon-rab-perluasan.php">Daftar RAB Perluasan</a>
+                            </li>
+                            <li><a href="mon-agenda-evaluasi.php">Monitoring Agenda (RP BP < RP RAB)</a>
+                            </li>
+                            <li><a href="acuan-material.php">Acuan Perhitungan Material</a>
+                            </li>
+                            <li><a href="acuan-jasa.php">Acuan Perhitungan Jasa</a>
+                            </li>
+                        </ul>
+                    </li>
+                    <li><a class="has-arrow" href="javascript:void()" aria-expanded="false"><i class="mdi mdi-forklift"></i> <span class="nav-text">Data Material</span></a>
+                        <ul aria-expanded="false">
+                            <li><a href="mon-kebutuhan-material.php">Monitoring Kebutuhan Material</a>
+                            </li>
+                            <li><a href="rekap-kebutuhan-material.php">Rekap Kebutuhan Material</a>
+                            </li>
+                            <li><a href="rekap-stok-spb-material.php">Rekap Stok Material</a>
+                            </li>
+                            <li><a href="rekap-kekurangan-material.php">Rekap Kekurangan Material</a>
+                            </li>
+                        </ul>
+                    </li>
+                    <li><a class="has-arrow" href="javascript:void()" aria-expanded="false"><i class="mdi mdi-hexagon-multiple"></i> <span class="nav-text">Laporan</span></a>
+                        <ul aria-expanded="false">
+                            <li><a href="rekap-agenda-ap.php">Rekap Agenda</a>
+                            </li>
+                            <li><a href="rekap-tmp-ap.php">Rekap Status TMP</a>
+                            </li>
+                            <li><a href="rekap-usulan-skai.php">Usulan SKAI Khusus (FORM 1.A)</a>
+                            </li>
+                            <li><a href="detail-usulan-skai-evaluasi.php">Agenda BP < Investasi (FORM 1.B)</a>
+                            </li>
+                            <li><a href="rekap-realisasi-skai.php">Realisasi SKAI Khusus (FORM 8)</a>
+                            </li>
+                        </ul>
+                    </li>
+                    <!-- <li><a class="has-arrow" href="javascript:void()" aria-expanded="false"><i class="mdi mdi-application"></i><span class="nav-text">Apps</span> <span class="badge badge-info nav-badge">05</span></a>
+                        <ul aria-expanded="false">
+                            <li><a href="app-profile.html">Profile</a>
+                            </li>
+                            <li><a href="app-chat.html">Chat</a>
+                            </li>
+                            <li><a href="app-calender-event.html">Calendar</a>
+                            </li>
+                        </ul>
+                    </li> -->
+                    
+                    <li class="nav-label">ADM NIAGA</li>
+                    <li><a class="has-arrow" href="javascript:void()" aria-expanded="false"><i class="mdi mdi-tag-multiple"></i> <span class="nav-text">TS P2TL</span></a>
+                        <ul aria-expanded="false">
+                            <li><a href="index-admaga.php">Dashboard TS P2TL LPB</a>
+                            </li>
+                            <li><a href="ts-p2tl-paska.php">Dashboard TS P2TL Paskabayar</a>
+                            </li>
+                            <li><a href="mon-ts-p2tl.php">Data TS P2TL</a>
+                            </li>
+                            <!-- <li><a href="mon-ts-p2tl-idpel.php">TS P2TL per Pelanggan</a>
+                            </li>
+                            <li><a href="rekap-kesesuaian-ts-p2tl.php">Rekap Kesesuaian TS P2TL</a>
+                            </li>
+                            <li><a href="mon-rupiah-ts-p2tl.php">Monitoring Rupiah TS</a>
+                            </li>
+                            <li><a href="mon-blocking-token.php">Monitoring Blocking Token</a>
+                            </li>
+                            <li><a href="rekap-ts-p2tl.php">Rekap Saldo TS P2TL</a>
+                            </li> -->
+                        </ul>
+                    </li>
+                    <li class="mega-menu mega-menu-md"><a class="has-arrow" href="javascript:void()" aria-expanded="false"><i class="mdi mdi-television-guide"></i><span class="nav-text">Pelunasan </span> </a>
+                        <ul aria-expanded="false">
+                            <li><a href="mon-saldo.php">Monitoring Saldo</a>
+                            </li>
+                            <li><a href="pengajuan-flagging.php">Pengajuan Flagging</a>
+                            </li>
+                            <li><a href="input-va.php">Input Virtual Account</a>
+                            </li>
+                            <li><a href="ui-button.html">Button</a>
+                            </li>
+                            <li><a href="ui-modal.html">Modal</a>
+                            </li>
+                            <li><a href="ui-button-group.html">Button Group</a>
+                            </li>
+                            <li><a href="ui-list-group.html">List Group</a>
+                            </li>
+                            <li><a href="ui-media-object.html">Media Object</a>
+                            </li>
+                            <li><a href="ui-cards.html">Cards</a>
+                            </li>
+                            <li><a href="ui-carousel.html">Carousel</a>
+                            </li>
+                            <li><a href="ui-dropdown.html">Dropdown</a>
+                            </li>
+                            <li><a href="ui-popover.html">Popover</a>
+                            </li>
+                            <li><a href="ui-progressbar.html">Progressbar</a>
+                            </li>
+                            <li><a href="ui-tab.html">Tab</a>
+                            </li>
+                            <li><a href="ui-typography.html">Typography</a>
+                            </li>
+                            <li><a href="ui-pagination.html">Pagination</a>
+                            </li>
+                            <li><a href="./ui-user-card.html">User Cards</a>
+                            </li>
+                            <li><a href="./ui-ribbon.html">Ribbon</a>
+                            </li>
+                            <li><a href="./ui-grid.html">Grid</a>
+                            </li>
+                        </ul>
+                    </li>
+                    <li class="mega-menu mega-menu-xl"><a class="has-arrow" href="javascript:void()" aria-expanded="false"><i class="mdi mdi-collage"></i><span class="nav-text">Pelunasan</span> <span class="badge bg-lgreen text-white nav-badge">39</span></a>
+                        <ul aria-expanded="false">
+                            <li><a href="update-pelunasan.php">Update Pelunasan</a>
+                            </li>
+                            <li><a href="./uc-bs-notify.html">BS Notify</a>
+                            </li>
+                            <li><a href="./uc-clipboard.html">Clipboard</a>
+                            </li>
+                            <!-- <li><a href="./uc-counterup.html">Counter Up</a>
+                            </li> -->
+                            <!-- <li><a href="./uc-dragula.html">Dragula</a>
+                            </li> -->
+                            <li><a href="uc-calender-date.html">Date</a>
+                            </li>
+                            <li><a href="uc-map-datamap.html">Data Map</a>
+                            </li>
+                            <li><a href="uc-map-jvectormap.html">Vector Map</a>
+                            </li>
+                            <!-- <li><a href="./uc-map-gmap.html">Gmap</a>
+                            </li> -->
+                            <!-- <li><a href="./uc-duallist-box.html">Duallist Box</a>
+                            </li> -->
+                            <!-- <li><a href="./uc-filterizer.html">Filterizer</a>
+                            </li> -->
+                            <!-- <li><a href="./uc-idle-timer.html">Idle Timer</a>
+                            </li> -->
+                            <!-- <li><a href="./uc-ion-range.html">Ion Range</a>
+                            </li> -->
+                            <!-- <li><a href="./uc-jstree.html">JS Tree</a>
+                            </li> -->
+                            <!-- <li><a href="./uc-ladda.html">Ladda</a>
+                            </li> -->
+                            <!-- <li><a href="./uc-multiselect-splitter.html">Multiselect Splitter</a>
+                            </li> -->
+                            <li><a href="./uc-bs-multiselect.html">BS Multiselect</a>
+                            </li>
+                            <li><a href="./uc-bootstrap-select.html">Bootstrap select</a>
+                            </li>
+                            <!-- <li><a href="./uc-vegas.html">Vegas</a>
+                            </li> -->
+                            <!-- <li><a href="./uc-weather.html">Weather</a>
+                            </li> -->
+                            <!-- <li><a href="./uc-listjs.html">ListJS</a>
+                            </li> -->
+                            <!-- <li><a href="./uc-lobbybox.html">Lobby Box</a>
+                            </li> -->
+                            <!-- <li><a href="./uc-lobbylist.html">Lobby List</a>
+                            </li> -->
+                            <!-- <li><a href="./uc-magnific-popup.html">Magnific Popup</a>
+                            </li> -->
+                            <li><a href="./uc-nestedable.html">Nestedable</a>
+                            </li>
+                            <li><a href="./uc-noui-slider.html">Noui Slider</a>
+                            </li>
+                            <!-- <li><a href="./uc-numeral.html">Numeral</a>
+                            </li> -->
+                            <!-- <li><a href="./uc-parallax.html">Parallax</a>
+                            </li> -->
+                            <!-- <li><a href="./uc-pnotify.html">Pnotify</a>
+                            </li> -->
+                            <!-- <li><a href="./uc-prism.html">Prism</a>
+                            </li> -->
+                            <!-- <li><a href="./uc-progressbar.html">Progressbar</a>
+                            </li> -->
+                            <!-- <li><a href="./uc-pwstrange.html">Pwstrange</a>
+                            </li> -->
+                            <!-- <li><a href="./uc-raty.html">Raty</a>
+                            </li> -->
+                            <!-- <li><a href="./uc-repeater.html">Repeater</a>
+                            </li> -->
+                            <!-- <li><a href="./uc-scrollbar.html">Scrollbar</a>
+                            </li> -->
+                            <!-- <li><a href="./uc-spinkit.html">Spinkit</a>
+                            </li> -->
+                            <li><a href="./uc-sweetalert.html">Sweet Alert</a>
+                            </li>
+                            <!-- <li><a href="./uc-taggingjs.html">TaggingJS</a>
+                            </li> -->
+                            <li><a href="./uc-ticker.html">Ticker</a>
+                            </li>
+                            <li><a href="./uc-toastr.html">Toastr</a>
+                            </li>
+                            <!-- <li><a href="./uc-tour.html">Tour</a>
+                            </li> -->
+                            <!-- <li><a href="./uc-typedjs.html">TypedJS</a>
+                            </li> -->
+                            <!-- <li><a href="./uc-alertifyjs.html">Alertify</a>
+                            </li> -->
+                            <!-- <li><a href="./uc-autosize.html">Autosize</a>
+                            </li> -->
+                            <!-- <li><a href="./uc-ti-ta-toggle.html">Ti-Ta Toggle</a>
+                            </li> -->
+                            <!-- <li><a href="./uc-datepaginator.html">Datepaginator</a>
+                            </li> -->
+                            <!-- <li><a href="./uc-datepaginator.html">Datepaginator</a>
+                            </li> -->
+                            <!-- <li><a href="./uc-cleavejs.html">CleaveJS</a>
+                            </li> -->
+                            <!-- <li><a href="./uc-jquery-multiselect.html">JQ Multiselect</a>
+                            </li> -->
+                            <!-- <li><a href="./uc-datedropper.html">Date Dropper</a>
+                            </li> -->
+                            <!-- <li><a href="./uc-tagglejs.html">TaggleJS</a>
+                            </li> -->
+                            <!-- <li><a href="./uc-fancy-input.html">Fancy Input</a>
+                            </li> -->
+                            <!-- <li><a href="./uc-fortjs.html">FortJS</a>
+                            </li> -->
+                            <!-- <li><a href="./uc-staribility.html">Staribility</a>
+                            </li> -->
+                            <!-- <li><a href="./uc-chosen.html">Chosen</a>
+                            </li> -->
+                            <!-- <li><a href="./uc-noty.html">Noty</a>
+                            </li> -->
+                            <!-- <li><a href="./uc-notie.html">Notie</a>
+                            </li> -->
+                            <!-- <li><a href="./uc-spectrum.html">Spectrum</a>
+                            </li> -->
+                            <!-- <li><a href="./uc-tooltipstar.html">Tooltipstart</a>
+                            </li> -->
+                            <!-- <li><a href="./uc-izimodal.html">Izi Modal</a>
+                            </li> -->
+                            <!-- <li><a href="./uc-atjs.html">AtJS</a>
+                            </li> -->
+                            <!-- <li><a href="./uc-tipyjs.html">TipyJS</a>
+                            </li> -->
+                        </ul>
+                    </li>
+
+                </ul>
+            </div>
+        </div>
+        <!--**********************************
+            Sidebar end
+        ***********************************

@@ -1,0 +1,63 @@
+<?php
+
+require_once '../../config/config.php';
+require_once '../../config/database.php';
+
+
+$unitupi = $_GET['unitupi'];
+$unitap = $_GET['unitap'];
+$unitup = $_GET['unitup'];
+$klp_plg = $_GET['klp_plg'];
+$user = 'SYSTEM';
+
+$params = array(
+        array($user, SQLSRV_PARAM_IN),
+        array($unitupi, SQLSRV_PARAM_IN),
+        array($unitap, SQLSRV_PARAM_IN),
+        array($unitup, SQLSRV_PARAM_IN),
+    );
+
+$sql = "EXEC sp_vw_Create_Daftung_Unit @UserID = ?, @Unitupi = ?, @Unitap = ?, @Unitup = ? ";
+$stmt = sqlsrv_prepare($conn, $sql, $params);
+
+//sqlsrv_execute($stmt);
+if(!sqlsrv_execute($stmt)){
+    die(print_r( sqlsrv_errors(), true));
+}
+
+$response = array();
+
+$stmt = sqlsrv_query($conn, "select TOP 10 a.*, '<strong>'+NAMA+'</strong> MENGAJUKAN '+JENIS_TRANSAKSI+' KE '+TARIF_BARU+'/'+CONVERT(VARCHAR,DAYA_BARU)+' VA dengan membayar BP sebesar Rp.'+CONVERT(VARCHAR,RP_BP) as KETERANGAN from vw_Create_Daftung_Unit a WHERE ( ALASAN_KRITERIA_TMP IN ('TANPA PERLUASAN', 'PERLU PERLUASAN JTR','PERLU PEMBANGUNAN JTM S.D 3 GAWANG & TRAFO DISTRIBUSI') OR (SEGMEN_TEGANGAN<>'TR') ) AND KLP_PLG='$klp_plg'  order by TGLMOHON ASC");
+if($stmt){
+	$i=0;
+	while( $row = sqlsrv_fetch_array( $stmt, SQLSRV_FETCH_ASSOC) ) {
+		$response['rows'][$i]['noagenda'] = $row['NOAGENDA_INDIVIDU']; 
+		$response['rows'][$i]['nama'] = $row['NAMA']; 
+		$response['rows'][$i]['keterangan'] = $row['KETERANGAN']; 
+		$response['rows'][$i]['tglmohon'] = date_format($row['TGLMOHON'],"d/m/Y"); 
+		$response['rows'][$i]['idpel'] = $row['IDPEL']; 
+		$response['rows'][$i]['jenis_transaksi'] = $row['JENIS_TRANSAKSI']; 
+		$response['rows'][$i]['alasan_kriteria_tmp'] = $row['ALASAN_KRITERIA_TMP']; 
+		$response['rows'][$i]['tarif_daya_lama'] = ($row['TARIF_LAMA']=='')? '':$row['TARIF_LAMA'].'/'.number_format($row['DAYA_LAMA']).' VA'; 
+		$response['rows'][$i]['tarif_daya_baru'] = $row['TARIF_BARU'].'/'.number_format($row['DAYA_BARU']).' VA'; 
+		$response['rows'][$i]['rp_bp'] = number_format($row['RP_BP']); 
+		$response['rows'][$i]['rp_rab'] = number_format($row['RP_RAB']); 
+		$response['rows'][$i]['status'] = $row['STATUS_PROSES']; 
+		$response['rows'][$i]['label_status'] = ($row['STATUS_PROSES']=='PROSES')? 'badge-success':'badge-warning'; 
+
+		$i++;
+	}
+
+	$response['success'] = true;
+	sqlsrv_free_stmt($stmt);
+
+
+}else{
+	$response['success'] = false;
+	$response['msg'] = 'Gagal melakukan Query ke Database';
+}
+
+
+echo json_encode($response);
+
+?>

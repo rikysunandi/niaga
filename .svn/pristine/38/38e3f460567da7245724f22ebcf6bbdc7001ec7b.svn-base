@@ -1,0 +1,50 @@
+<?php
+
+require_once '../../config/config.php';
+require_once '../../config/database.php';
+
+
+$response = array();
+
+$stmt = sqlsrv_query($conn, "select * from vw_rekap_daftung_ap order by JML_AGENDA DESC");
+if($stmt){
+	$i=0;
+	$response['total_agenda'] = 0;
+	$response['total_agenda_rab'] = 0;
+	$response['total_proses'] = 0;
+	$response['total_evaluasi'] = 0;
+	while( $row = sqlsrv_fetch_array( $stmt, SQLSRV_FETCH_ASSOC) ) {
+		$response['ap'][$i] = $row['AP']; 
+		$response['jml_agenda'][$i] = intval($row['JML_AGENDA']); 
+		$response['jml_agenda_rab'][$i] = intval($row['JML_AGENDA_RAB']); 
+		$response['jml_agenda_non_rab'][$i] = intval($row['JML_AGENDA_NON_RAB']); 
+		$response['jml_proses'][$i] = intval($row['JML_PROSES']); 
+		$response['jml_evaluasi'][$i] = intval($row['JML_EVALUASI']); 
+		$response['total_agenda'] += intval($row['JML_AGENDA']); 
+		$response['total_agenda_rab'] += intval($row['JML_AGENDA_RAB']); 
+		$response['total_proses'] += intval($row['JML_PROSES']); 
+		$response['total_evaluasi'] += intval($row['JML_EVALUASI']); 
+		$response['jml_agenda_dalam_tmp'][$i] = intval($row['JML_AGENDA_DALAM_TMP']); 
+		$response['jml_agenda_mendekati_tmp'][$i] = intval($row['JML_AGENDA_MENDEKATI_TMP']); 
+		$response['jml_agenda_melebihi_tmp'][$i] = intval($row['JML_AGENDA_MELEBIHI_TMP']); 
+
+		$i++;
+	}
+
+	$response['total_agenda'] = number_format($response['total_agenda']);
+	$response['total_agenda_rab'] = number_format($response['total_agenda_rab']);
+	$response['total_proses'] = number_format($response['total_proses']);
+	$response['total_evaluasi'] = number_format($response['total_evaluasi']);
+	$response['success'] = true;
+	sqlsrv_free_stmt($stmt);
+
+
+}else{
+	$response['success'] = false;
+	$response['msg'] = 'Gagal melakukan Query ke Database';
+}
+
+
+echo json_encode($response);
+
+?>

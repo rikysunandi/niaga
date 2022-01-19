@@ -1,0 +1,160 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="utf-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width,initial-scale=1">
+    <title>Backoffice Niaga</title>
+    <!-- Favicon icon -->
+    <link rel="icon" type="image/png" sizes="16x16" href="../../assets/images/favicon.png">
+    <!-- <link href="../../assets/plugins/dropzone/css/dropzone.min.css" rel="stylesheet"> -->
+    <link rel="stylesheet" href="../../assets/plugins/dropify/dist/css/dropify.min.css">
+    <link href="../../assets/plugins/dropzone/css/dropzone.min.css" rel="stylesheet">
+
+    <link href="../css/style.css?time=<?php echo time() ?>" rel="stylesheet">
+    <link href="../css/custom.css?time=<?php echo time() ?>" rel="stylesheet">
+    
+</head>
+
+<body>
+    
+    <?php include 'parts/preloader.php'; ?>
+    
+    <!--**********************************
+        Main wrapper start
+    ***********************************-->
+    <div id="main-wrapper">
+
+        <?php include 'parts/header.php'; ?>
+        <?php include 'parts/sidebar.php'; ?>
+
+        <!--**********************************
+            Content body start
+        ***********************************-->
+        <div class="content-body">
+            <div class="container-fluid">
+                <div class="row page-titles">
+                    <div class="col p-md-0">
+                        <h4>Update Pelunasan AP2T</h4>
+                    </div>
+                    <div class="col p-md-0">
+                        <ol class="breadcrumb">
+                            <li class="breadcrumb-item"><a href="javascript:void(0)">Update Data</a>
+                            </li>
+                            <li class="breadcrumb-item active">Update Pelunasan AP2T</li>
+                        </ol>
+                    </div>
+                </div>
+                <!-- row -->
+                <div class="row">
+                    <div class="col-12">
+                        <div class="card">
+                            <div class="card-body">
+                                <h4 class="card-title mb-4">Upload data</h4>
+                                <div class="basic-form">
+                                    <form action="#" style="display:none;">
+                                        <div class="form-row mb-2">
+                                            <div class="form-group mb-2 mr-4">
+                                                <select id="sel_unitupi" class="selectpicker show-tick" data-size="5" >
+                                                    <option disabled>Pilih Unit Induk</option>
+                                                </select>
+                                            </div>
+                                            <div class="form-group mb-2 mr-4">
+                                                <select id="sel_unitap" class="selectpicker show-tick" data-size="5" >
+                                                    <option disabled>Pilih UP3</option>
+                                                </select>
+                                            </div>
+                                            <div class="form-group mb-2 mr-4">
+                                                <select id="sel_unitup" class="selectpicker show-tick" data-size="5" >
+                                                    <option disabled>Pilih ULP</option>
+                                                </select>
+                                            </div>
+                                        </div>
+                                        <p class="mb-2">Upload file XLS (tanpa diedit) hasil Download dari AP2T dengan <code> ukuran maksimal 20Mb</code>  </p>
+                                        <input id="file_pelunasan" type="file" class="dropify" data-max-file-size="20M" data-allowed-file-extensions='["xls"]' multiple/>
+                                        <!-- <form hidden id="file-daftung" action="../controller/pemasaran/fileUploadDaftung.php" class="dropzone mb-4">
+                                            <div class="fallback">
+                                                <input name="file" type="file">
+                                            </div>
+                                        </form> -->
+                                    </form>
+
+                                    <p class="mb-2">Upload file XLS (tanpa diedit) hasil Download dari AP2T dengan <code> ukuran maksimal 20Mb</code>  
+                                    </p>
+                                    <p>Langkah-langkah:
+                                        <ul>
+                                            <li>1. Browse/Drag satu atau beberapa File Pelunasan ke Panel di bawah ini (maks 10 File)</li>
+                                            <li>2. Klik tombol Upload, tunggu sampai File berhasil diupload ke Server</li>
+                                            <li>3. Silahkan tunggu Progress Update Data Pelunasan ke Database selesai (progress bar berwarna <span class="text-success">hijau</span>)</li>
+                                            <li>4. Pemantauan tanggal pelunasan yang belum diupload dapat dilakukan <a href="mon-blm-upload-pelunasan.php" class="badge badge-primary" target="_blank">di sini</a>, sementara Proses Update Rekap pelunasan dilakukan secara berkala setiap 20 menit</li>
+                                        </ul>
+                                    </p>
+
+                                    <form action="../controller/pelunasan/uploadFilePelunasan.php" id="upload-pelunasan" class="dropzone mt-4">
+                                        <div class="fallback">
+                                            <input name="file" type="file" multiple="multiple">
+                                        </div>
+                                    </form>
+                                    <div id="result" class="mt-2"></div>
+                                </div>
+                            </div>
+                            <div class="card-footer">
+                                <div class="text-right">
+                                    <button disabled="disabled" id="btn_upload" type="button" class="btn btn-sm btn-primary waves-effect waves-light mt-2">Upload <span class="btn-icon-right"><i
+                                    class="fa fa-upload"></i></span></button>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                <div class="row progress-upload d-none">
+                    <div class="col-12">
+                        <div id="proses" class="card">
+                            <div class="card-body">
+                                <div class="d-flex justify-content-between progress-label mb-2">
+                                    <span class="msg">Mengupdate Pelunasan dari File </span>
+                                </div>
+                                <div class="progress progress--medium">
+                                  <div class="progress-bar progress-bar-striped progress-bar-animated bg-warning" role="progressbar" aria-valuenow="75" aria-valuemin="0" aria-valuemax="100" style="width: 100%"></div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+
+            </div>
+            <!-- #/ container -->
+        </div>
+                
+        <!--**********************************
+            Content body end
+        ***********************************-->
+        
+        
+
+    </div>
+    <!--**********************************
+        Main wrapper end
+    ***********************************-->
+
+    <?php include 'parts/footer.php'; ?>
+
+    <!--**********************************
+        Scripts
+    ***********************************-->
+    <script src="../../assets/plugins/common/common.min.js"></script>
+    <script src="../js/custom.min.js"></script>
+    <script src="../js/settings.js"></script>
+    <script src="../js/gleek.js"></script>
+    <script src="../../assets/plugins/block-ui/jquery.blockUI.js"></script>
+    <script src="../../assets/plugins/moment/moment.min.js"></script>
+
+    <!-- <script src="../../assets/plugins/dropzone/js/dropzone.min.js"></script> -->
+    <script src="../../assets/plugins/dropify/dist/js/dropify.min.js"></script>
+    <script src="../../assets/plugins/dropzone/js/dropzone.min.js"></script>
+
+    <script src="../js/pages/apps.js"></script>
+    <script src="../js/pages/update-pelunasan.js?time=<?php echo time() ?>"></script>
+</body>
+</html>

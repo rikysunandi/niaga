@@ -1,0 +1,77 @@
+<?php
+
+set_time_limit(-1);
+ini_set('display_errors', 1);
+ini_set('display_startup_errors', 1);
+error_reporting(E_ALL);
+ 
+/*
+ * DataTables example server-side processing script.
+ *
+ * Please note that this script is intentionally extremely simple to show how
+ * server-side processing can be implemented, and probably shouldn't be used as
+ * the basis for a large complex system. It is suitable for simple use cases as
+ * for learning.
+ *
+ * See http://datatables.net/usage/server-side for full details on the server-
+ * side processing requirements of DataTables.
+ *
+ * @license MIT - http://datatables.net/license_mit
+ */
+ 
+/* * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * *
+ * Easy set variables
+ */
+ 
+// DB table to use
+$table = 'NIAGA.dbo.vw_rekap_daftung_overview_ap';
+ 
+// Table's primary key
+$primaryKey = 'UNITAP';
+ 
+// Array of database columns which should be read and sent back to DataTables.
+// The `db` parameter represents the column name in the database, while the `dt`
+// parameter represents the DataTables column identifier. In this case simple
+// indexes
+$columns = array(
+    array( 'db' => 'UNITAP', 'dt' => 'UNITAP' ),
+    array( 'db' => 'NAMA_AP', 'dt' => 'NAMA_AP' ),
+    array( 'db' => 'JML_AGENDA', 'dt' => 'JML_AGENDA' ),
+    array( 'db' => 'JML_AGENDA_INDIVIDU', 'dt' => 'JML_AGENDA_INDIVIDU' ),
+    array( 'db' => 'JML_AGENDA_KOLEKTIF', 'dt' => 'JML_AGENDA_KOLEKTIF' ),
+    array( 'db' => 'JML_AGENDA_TR', 'dt' => 'JML_AGENDA_TR' ),
+    array( 'db' => 'JML_AGENDA_TM', 'dt' => 'JML_AGENDA_TM' ),
+    array( 'db' => 'JML_AGENDA_TT', 'dt' => 'JML_AGENDA_TT' ),
+    array( 'db' => 'JML_AGENDA_PASANG_BARU', 'dt' => 'JML_AGENDA_PASANG_BARU' ),
+    array( 'db' => 'JML_AGENDA_TAMBAH_DAYA', 'dt' => 'JML_AGENDA_TAMBAH_DAYA' ),
+    array( 'db' => 'JML_AGENDA_TURUN_DAYA', 'dt' => 'JML_AGENDA_TURUN_DAYA' ),
+    array( 'db' => 'JML_AGENDA_UBAH_TARIF', 'dt' => 'JML_AGENDA_UBAH_TARIF' ),
+    array( 'db' => 'JML_AGENDA_MIGRASI_KE_PRABAYAR', 'dt' => 'JML_AGENDA_MIGRASI_KE_PRABAYAR' ),
+    array( 'db' => 'JML_AGENDA_MIGRASI_KE_PASCABAYAR', 'dt' => 'JML_AGENDA_MIGRASI_KE_PASCABAYAR' ),
+    array( 'db' => 'JML_AGENDA_SAMBUNG_KEMBALI', 'dt' => 'JML_AGENDA_SAMBUNG_KEMBALI' ),
+    array( 'db' => 'LT_900_TANPA_PERLUASAN_JML_PLG', 'dt' => 'LT_900_TANPA_PERLUASAN_JML_PLG' ),
+    array( 'db' => 'INDIVIDU_JML_PLG', 'dt' => 'INDIVIDU_JML_PLG' ),
+    array( 'db' => 'KOLEKTIF_JML_PLG', 'dt' => 'KOLEKTIF_JML_PLG' ),
+    array( 'db' => 'AGENDA_EVALUASI_JML_PLG', 'dt' => 'AGENDA_EVALUASI_JML_PLG' ),
+    array( 'db' => 'JML_AGENDA_RAB', 'dt' => 'JML_AGENDA_RAB' ),
+);
+ 
+// SQL server connection information
+$sql_details = array(
+    'user' => 'sa',
+    'pass' => 'sqlsvr1q2w3e',
+    'db'   => 'NIAGA',
+    'host' => '10.2.1.103'
+);
+ 
+ 
+/* * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * *
+ * If you just want to use the basic configuration for DataTables with PHP
+ * server-side, there is no need to edit below this line.
+ */
+ 
+require( 'ssp.class.php' );
+ 
+echo json_encode(
+    SSP::simple( $_POST, $sql_details, $table, $primaryKey, $columns )
+);

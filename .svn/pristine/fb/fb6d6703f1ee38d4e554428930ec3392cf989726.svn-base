@@ -1,0 +1,126 @@
+(function($) {
+    "use strict"
+
+    console.log($('.card'));
+
+ //    $("#sel_unitupi").selectpicker({
+	//     style: "btn-default btn-sm"
+	// });
+
+ //    $("#sel_unitap").selectpicker({
+	//     style: "btn-default btn-sm"
+	// });
+	
+ //    $("#sel_unitup").selectpicker({
+	//     style: "btn-default btn-sm"
+	// });
+
+    var getUrlParameter = function getUrlParameter(sParam) {
+        var sPageURL = window.location.search.substring(1),
+            sURLVariables = sPageURL.split('&'),
+            sParameterName,
+            i;
+
+        for (i = 0; i < sURLVariables.length; i++) {
+            sParameterName = sURLVariables[i].split('=');
+
+            if (sParameterName[0] === sParam) {
+                return typeof sParameterName[1] === undefined ? true : decodeURIComponent(sParameterName[1]);
+            }
+        }
+        return false;
+    };
+
+    var unitupi = getUrlParameter('unitupi'),
+        unitap = getUrlParameter('unitap'),
+        unitup = getUrlParameter('unitup');
+	
+    $.getJSON('../controller/referensi/getUnitupi.php', function(data){
+    	
+	    $('#sel_unitupi').empty();
+	    $('#sel_unitap').empty();
+	    $('#sel_unitup').empty();
+
+    	$.each(data.rows,function(i,v){
+        	$('#sel_unitupi').append('<option value="'+v.kode+'">'+v.nama+'</option>');
+    	});
+
+    	if($('#sel_unitupi').data('inc-semua')!='T')
+			$('#sel_unitupi').append('<option value="00" selected>SEMUA UNIT</option>');
+		else
+			$('#sel_unitupi').selectpicker('val', $('#sel_unitupi').val());
+    	if($('#sel_unitap').data('inc-semua')!='T')
+			$('#sel_unitap').append('<option value="00">SEMUA UNIT</option>');
+    	if($('#sel_unitup').data('inc-semua')!='T')
+			$('#sel_unitup').append('<option value="00">SEMUA UNIT</option>');
+
+		$('#sel_unitupi').selectpicker('refresh');
+		$('#sel_unitap').selectpicker('refresh');
+		$('#sel_unitup').selectpicker('refresh');
+
+     	console.log('unit: '+unitupi+' - '+unitap+' - '+unitup);
+		if(unitupi.length>0)
+			$('#sel_unitupi').selectpicker('val', unitupi);
+    });
+
+    $('#sel_unitupi').change(function(){
+
+	    $('#sel_unitap').empty();
+	    $('#sel_unitup').empty();
+
+	    $.getJSON('../controller/referensi/getUnitap.php?unitupi='+$('#sel_unitupi').val(), function(data){
+	    	$.each(data.rows,function(i,v){
+	        	$('#sel_unitap').append('<option value="'+v.kode+'">'+v.nama+'</option>');
+	    	});
+	    	if($('#sel_unitap').data('inc-semua')!='T')
+				$('#sel_unitap').append('<option value="00">SEMUA UNIT</option>');
+	    	if($('#sel_unitup').data('inc-semua')!='T')
+				$('#sel_unitup').append('<option value="00">SEMUA UNIT</option>');
+
+			$('#sel_unitap').selectpicker('refresh');
+			$('#sel_unitup').selectpicker('refresh');
+			
+			console.log('unitap', unitap);
+			if(unitap.length>0)
+				$('#sel_unitap').selectpicker('val', unitap);
+	    });
+
+    });
+
+    $('#sel_unitap').change(function(){
+
+	    $('#sel_unitup').empty();
+
+	    $.getJSON('../controller/referensi/getUnitup.php?unitap='+$('#sel_unitap').val(), function(data){
+	    	$.each(data.rows,function(i,v){
+
+	        	$('#sel_unitup').append('<option value="'+v.kode+'">'+v.nama+'</option>');
+	    	});
+	    	if($('#sel_unitup').data('inc-semua')!='T')
+				$('#sel_unitup').append('<option value="00">SEMUA UNIT</option>');
+
+			$('#sel_unitup').selectpicker('refresh');
+			
+			console.log('unitup', unitup);
+			if(unitup.length>0)
+				$('#sel_unitup').selectpicker('val', unitup);
+	    });
+
+    });
+
+
+	function isNumberKey(evt){
+		var charCode = (evt.which) ? evt.which : event.keyCode
+		if (charCode > 31 && (charCode < 48 || charCode > 57))
+		    return false;
+		return true;
+	}
+
+    $('.shouldNumber').on('keypress', function() {
+        return isNumberKey(event)
+    });
+
+
+
+
+})(jQuery);

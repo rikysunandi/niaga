@@ -1,0 +1,45 @@
+<?php
+
+ini_set('max_execution_time', 0);
+ini_set('memory_limit',-1);
+ini_set('sqlsrv.timeout', 10000000);
+ini_set('sqlsrv.connect_timeout', 10000000);
+ini_set('date.timezone', 'Asia/Jakarta');
+
+require __DIR__ . '/../config/database.php';
+require __DIR__ . '/../config/router.php';
+
+$PATH_UPLOAD_PHOTOS_PEMERIKSAAN_LPB_RUMAH = PATH_UPLOAD_PHOTOS."pemeriksaan_lpb/_RUMAH/";
+
+
+$sql = `SELECT b.UNITAP, b.UNITUP, b.FOTO FROM STIMULUS a INNER JOIN 
+        (
+          SELECT * FROM m_pemeriksaan_lpb 
+          WHERE peruntukan='SURVEY_SUBSIDI' AND LEN(FOTO)>8 AND LEN(LATITUDE)>5 AND LEN(LONGITUDE)>5
+        ) b ON a.IDPEL=b.IDPEL`;
+ if(($result = sqlsrv_query($conn, $sql)) !== false){
+  $i=0;
+  ob_start();
+  while( $row = sqlsrv_fetch_array( $result, SQLSRV_FETCH_ASSOC) ) {
+
+    if($i%100 == 1){
+      ob_end_clean();
+      ob_start();
+    }
+
+    $source = PATH_UPLOAD_PHOTOS."pemeriksaan_lpb/".$row['FOTO'];
+    $newfolder = PATH_UPLOAD_PHOTOS.'/'.$row['UNITAP'].'/'.$row['UNITUP'].'/'; 
+    if(!file_exists($newfolder)) mkdir($newfolder);
+    echo $i++.". COPY ".$source." KE ".$newfolder.basename($source)."...<br/>";
+    copy($source, $newfolder.basename($source));
+
+  }
+
+  sqlsrv_free_stmt($result);
+
+
+}else{
+  echo 'Gagal melakukan Query ke Database';
+}
+
+?>

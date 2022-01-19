@@ -1,0 +1,46 @@
+$(document).ready(function () {
+
+    "use strict";
+
+    //$.blockUI({ message: '<h1 class="p-3">Mengambil data...</h1>' }); 
+    $('#tbl_saldo_up3').DataTable( {
+        // "Processing": true,
+        // "serverSide": true,
+        "ajax": {
+            "url": '../controller/getRekapUsulanSKAI.php',
+            "type": "GET",
+            "timeout": 200000
+        },
+        //"deferRender": true,
+        lengthMenu: [[50, 100, -1], [50, 100, "All"]],
+        pageLength: 50,
+        dom: 'Brti',
+        buttons: [
+            'csv', 'excel'
+        ],
+        "paging": false,
+        "scrollY": 500,
+        "scrollX": true,
+        // initComplete: function () {
+        //     this.api().columns().every( function () {
+        //         var column = this;
+        //         var select = $('<select><option value=""></option></select>')
+        //             .appendTo( $(column.footer()).empty() )
+        //             .on( 'change', function () {
+        //                 var val = $.fn.dataTable.util.escapeRegex(
+        //                     $(this).val()
+        //                 );
+ 
+        //                 column
+        //                     .search( val ? '^'+val+'$' : '', true, false )
+        //                     .draw();
+        //             } );
+ 
+        //         column.data().unique().sort().each( function ( d, j ) {
+        //             select.append( '<option value="'+d+'">'+d+'</option>' )
+        //         } );
+        //     } );
+        // }
+    });
+
+});

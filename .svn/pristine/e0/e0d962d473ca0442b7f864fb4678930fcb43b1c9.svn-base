@@ -1,0 +1,176 @@
+$(document).ready(function () {
+
+    "use strict";
+
+    //$.blockUI({ message: '<h1 class="p-3">Mengambil data...</h1>' }); 
+    var table = $('#tbl_mon_ts_p2tl').DataTable( {
+        "processing": true,
+        "serverSide": true,
+        "ajax": {
+            "url": '../controller/ts_p2tl/getDataTSP2TL.php?unitupi='+$('#sel_unitupi').val()+'&unitap='+$('#sel_unitap').val()+'&unitup='+$('#sel_unitup').val()+'&kesesuaian='+$('#sel_kesesuaian').val()+'&jenis_plg='+$('#sel_jenis_plg').val()+'&sisa_saldo='+$('#sel_sisa_saldo').val(),
+            "type": "POST",
+            "timeout": 360000
+        },
+        deferRender: true,
+        deferLoading: 25,
+        //responsive: true,
+        columns: [
+          {
+            data: "NAMA_UP",
+          },
+          {
+            data: "NOAGENDA",
+          },
+          {
+            data: "IDPEL",
+          },
+          {
+            data: "NAMA",
+            visible: false,
+          },
+          {
+            data: "TARIF_AKHIR",
+          },
+          {
+            data: "DAYA_AKHIR",
+            type: 'number',
+            "sClass" : "text-right" , render: $.fn.dataTable.render.number(",", ".", 0, '')
+          },
+          {
+            data: "BL_ANG_AW",
+            visible: false
+          },
+          {
+            data: "BL_ANG_AK",
+            visible: false
+          },
+          {
+            data: "RP_TS",
+            type: 'number', 
+            "sClass" : "text-right" , render: $.fn.dataTable.render.number(",", ".", 0, '')
+          },
+          {
+            data: "PENGURANGAN_RPTS",
+            type: 'number', 
+            "sClass" : "text-right" , render: $.fn.dataTable.render.number(",", ".", 0, '')
+          },
+          {
+            data: "JML_ANG_AKHIR",
+            type: 'number', 
+            "sClass" : "text-right" , render: $.fn.dataTable.render.number(",", ".", 0, '')
+          },
+          {
+            data: "RPTS_AKHIR",
+            type: 'number', 
+            "sClass" : "text-right" , render: $.fn.dataTable.render.number(",", ".", 0, '')
+          },
+          {
+            data: "BA_SESUAI",
+            render: function ( data, type, row ) {
+
+              if(data=='Y'){
+                return '<a href="#" title="SESUAI" class="text-success"><i class="fa fa-check-circle-o" aria-hidden="true"></i></a>';
+              }else{
+                return '<a href="#" title="TIDAK SESUAI" class="text-danger"><i class="fa fa-times-circle-o" aria-hidden="true"></i></a>';
+              }
+
+            },
+          },
+          {
+            data: "TS_SESUAI",
+            render: function ( data, type, row ) {
+
+              if(data=='Y'){
+                return '<a href="#" title="SESUAI" class="text-success"><i class="fa fa-check-circle-o" aria-hidden="true"></i></a>';
+              }else{
+                return '<a href="#" title="TIDAK SESUAI" class="text-danger"><i class="fa fa-times-circle-o" aria-hidden="true"></i></a>';
+              }
+
+            },
+          },
+          {
+            data: "SPH_SESUAI",
+            render: function ( data, type, row ) {
+
+              if(data=='Y'){
+                return '<a href="#" title="SESUAI" class="text-success"><i class="fa fa-check-circle-o" aria-hidden="true"></i></a>';
+              }else{
+                return '<a href="#" title="TIDAK SESUAI" class="text-danger"><i class="fa fa-times-circle-o" aria-hidden="true"></i></a>';
+              }
+
+            },
+          },
+          {
+            data: "SUB_SESUAI",
+            render: function ( data, type, row ) {
+
+              if(data=='Y'){
+                return '<a href="#" title="SESUAI" class="text-success"><i class="fa fa-check-circle-o" aria-hidden="true"></i></a>';
+              }else{
+                return '<a href="#" title="TIDAK SESUAI" class="text-danger"><i class="fa fa-times-circle-o" aria-hidden="true"></i></a>';
+              }
+
+            },
+          },
+          {
+            data: "CEKLOK_SESUAI",
+            render: function ( data, type, row ) {
+
+              if(data=='Y'){
+                return '<a href="#" title="SESUAI" class="text-success"><i class="fa fa-check-circle-o" aria-hidden="true"></i></a>';
+              }else{
+                return '<a href="#" title="TIDAK SESUAI" class="text-danger"><i class="fa fa-times-circle-o" aria-hidden="true"></i></a>';
+              }
+
+            },
+          },
+          {
+            data: "TOTAL_SESUAI",
+            render: function ( data, type, row ) {
+
+              if(data=='Y'){
+                return '<a href="#" title="SESUAI" class="text-success"><i class="fa fa-check-circle-o" aria-hidden="true"></i></a>';
+              }else{
+                return '<a href="#" title="TIDAK SESUAI" class="text-danger"><i class="fa fa-times-circle-o" aria-hidden="true"></i></a>';
+              }
+
+            },
+          },
+          {
+            data: "TGL_BLOCKING_TERAKHIR",
+          },
+          {
+            data: "LATITUDE",
+          },
+          {
+            data: "LONGITUDE",
+          },
+        ],
+        dom:
+           // "<'row'<'col-sm-12 col-md-9 mb-2'B>>" +
+            "<'row'<'col-sm-12 col-md-6 mb-2'B><'col-sm-12 col-md-2 mb-2'l><'col-sm-12 col-md-4'f>>" +
+            "<'row'<'col-sm-12 mb-2'tr>>" +
+            "<'row'<'col-sm-12 col-md-5 mb-2'i><'col-sm-12 col-md-7'p>>",
+        lengthMenu: [[25, 100, -1], [25, 100, "All"]],
+        lengthChange: true,
+        buttons: [
+            { extend: 'copyHtml5', text: '<i class="fa fa-clone"></i>&nbsp;&nbsp;Copy', footer: true },
+            { extend: 'excelHtml5', text: '<i class="fa fa-file-excel-o"></i>&nbsp;&nbsp;Excel', footer: true },
+            { extend: 'csvHtml5', text: '<i class="fa fa-file-text-o"></i>&nbsp;&nbsp;CSV', footer: true },
+            { extend: 'colvis', text: 'Columns' }
+        ],
+        "scrollY": 520,
+        "scrollX": true,
+        "paging": true,
+        pageLength: 25,
+        "order": [[1, 'asc']],
+    });
+
+
+
+    $('#btn_cari').click(function(btn){
+        console.log('Klikk');
+        table.ajax.url( '../controller/ts_p2tl/getDataTSP2TL.php?unitupi='+$('#sel_unitupi').val()+'&unitap='+$('#sel_unitap').val()+'&unitup='+$('#sel_unitup').val()+'&kesesuaian='+$('#sel_kesesuaian').val()+'&jenis_plg='+$('#sel_jenis_plg').val()+'&sisa_saldo='+$('#sel_sisa_saldo').val()+'&kelancaran='+$('#sel_kelancaran').val()+'&dlpd_6='+$('#sel_dlpd_6').val()+'&blocking_token='+$('#sel_blocking_token').val()+'&koordinat='+$('#sel_koordinat').val() ).load();
+    });
+
+});

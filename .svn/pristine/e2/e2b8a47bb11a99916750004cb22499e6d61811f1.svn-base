@@ -1,0 +1,92 @@
+<?php
+
+set_time_limit(-1);
+require_once '../../../config/config.php';
+require_once '../../../config/database.php';
+
+$unitupi = $_REQUEST['unitupi'];
+$unitap = $_REQUEST['unitap'];
+$unitup = $_REQUEST['unitup'];
+$blth = $_REQUEST['blth'];
+$user = 'SYSTEM';
+
+$params = array(
+        array($user, SQLSRV_PARAM_IN),
+        array($unitupi, SQLSRV_PARAM_IN),
+        array($unitap, SQLSRV_PARAM_IN),
+        array($unitup, SQLSRV_PARAM_IN),
+        array($blth, SQLSRV_PARAM_IN),
+    );
+
+$sql = "EXEC sp_vw_Create_Pelunasan_Pola_Bayar @UserID = ?, @Unitupi = ?, @Unitap = ?, @Unitup = ?, @BLTH = ? ";
+$stmt = sqlsrv_prepare($conn, $sql, $params);
+
+//sqlsrv_execute($stmt);
+if(!sqlsrv_execute($stmt)){
+    die(print_r( sqlsrv_errors(), true));
+}
+
+$response = array();
+
+// $stmt = sqlsrv_query($conn, "select * from vw_Create_Percepatan_Unit order by PERCEPATAN DESC");
+if($stmt){
+    $i=0;
+    $response['total_plg']=0;
+    $awal_lancar;
+    $awal_baru;
+    $awal_irisan;
+    $akum_lancar=0;
+    $akum_baru=0;
+    $akum_irisan=0;
+    $saldo_lancar=0;
+    $saldo_baru=0;
+    $saldo_irisan=0;
+    while( $row = sqlsrv_fetch_array( $stmt, SQLSRV_FETCH_ASSOC) ) {
+
+        if($i==0){
+            $awal_lancar = $row['TARGET_LANCAR'];
+            $awal_baru = $row['TARGET_BARU'];
+            $awal_irisan = $row['TARGET_IRISAN'];
+        }
+
+        $akum_lancar += ($row['JML_LANCAR'])?$row['JML_LANCAR']:0;
+        $akum_baru += ($row['JML_BARU'])?$row['JML_BARU']:0;
+        $akum_irisan += ($row['JML_IRISAN'])?$row['JML_IRISAN']:0;
+
+        
+        $saldo_lancar = $awal_lancar - $akum_lancar ;
+        $saldo_baru = $awal_baru - $akum_baru ;
+        $saldo_irisan = $awal_irisan - $akum_irisan ;
+        
+        $response['awal_baru'][$i] = $awal_baru;
+        $response['tanggal'][$i] = str_replace('99', 'N+', $row['TANGGAL']); 
+        $response['target_lancar'][$i] = $row['TARGET_LANCAR'];
+        $response['target_baru'][$i] = $row['TARGET_BARU'];
+        $response['target_irisan'][$i] = $row['TARGET_IRISAN'];
+        $response['jml_lancar'][$i] = ($row['JML_LANCAR'])? $saldo_lancar: NULL;
+        $response['jml_baru'][$i] = ($row['JML_BARU'])? $saldo_baru: NULL;
+        $response['jml_irisan'][$i] = ($row['JML_IRISAN'])? $saldo_irisan: NULL;
+
+        //$response['jml_irisan'][$i] = ($row['JML_IRISAN'] || $row['TANGGAL']<=date('d'))? $saldo_irisan: NULL;
+        // $response['jml_lancar'][$i] = $row['JML_LANCAR'];
+        // $response['jml_baru'][$i] = $row['JML_BARU'];
+        // $response['jml_irisan'][$i] = $row['JML_IRISAN'];
+
+
+        $i++;
+    }
+
+    $response['blth'] = $blth;
+    $response['success'] = true;
+    sqlsrv_free_stmt($stmt);
+
+
+}else{
+    $response['success'] = false;
+    $response['msg'] = 'Gagal melakukan Query ke Database';
+}
+
+
+echo json_encode($response);
+
+?>

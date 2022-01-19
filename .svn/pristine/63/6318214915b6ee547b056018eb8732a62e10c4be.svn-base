@@ -1,0 +1,136 @@
+$(document).ready(function () {
+
+    "use strict";
+
+    //$.blockUI({ message: '<h1 class="p-3">Mengambil data...</h1>' }); 
+    var table = $('#tbl_mon_pemeriksaan_lpb').DataTable( {
+        "processing": true,
+        "serverSide": true,
+        "ajax": {
+            "url": '../controller/pemeriksaan_lpb/getDataPemeriksaanLPB.php',
+            "type": "POST",
+            "timeout": 360000
+        },
+        //responsive: true,
+        columns: [
+          {
+            data: "UNITAP",
+            visible: false
+          },
+          {
+            data: "UNITUP",
+          },
+          {
+            data: "IDPEL",
+            // render: function ( data, type, row ) {
+            //     return '<a href="info-agenda.php?noagenda='+data+'" target="_blank">'+data+'</a>';
+            // }
+          },
+          {
+            data: "TGL_PEMERIKSAAN",
+            render: function ( data, type, row ) {
+                    return data.substring(0,10);
+                },
+          },
+          {
+            data: "NAMA",
+            // render: function ( data, type, row ) {
+            //         if(data == 'DALAM TMP')
+            //             return '<span class="label label-success">'+data+'</span>';
+            //         else if(data == 'MENDEKATI TMP')
+            //             return '<span class="label label-warning">'+data+'</span>';
+            //         else if(data == 'MELEBIHI TMP')
+            //             return '<span class="label label-danger">'+data+'</span>';
+            //     },
+          },
+          {
+            data: "TARIF",
+          },
+          {
+            data: "DAYA",
+            type: 'number',
+            "sClass" : "text-right" , render: $.fn.dataTable.render.number(",", ".", 0, '')
+          },
+          { data: "PERUNTUKAN", visible: false},
+          {
+            data: "SISA_KWH",
+            type: 'number', 
+            visible: false,
+            "sClass" : "text-right" , render: $.fn.dataTable.render.number(",", ".", 0, '')
+          },
+          // {
+          //   data: "STATUS_PROSES",
+          //   render: function ( data, type, row ) {
+          //           if(data == 'PROSES')
+          //               return '<span class="label label-success">'+data+'</span>';
+          //           else if(data == 'EVALUASI')
+          //               return '<span class="label label-warning">'+data+'</span>';
+          //           else if(data == 'NON RAB')
+          //               return '<span class="label label-dark">'+data+'</span>';
+          //       },
+          // },
+          {
+            data: "LATITUDE",
+          },
+          {
+            data: "LONGITUDE",
+          },
+          {
+            data: "AKURASI_KOORDINAT",
+          },
+          {
+            data: "USER_INPUT",
+          },
+          {
+            data: "FOTOPATH",
+            sortable: false,
+            render: function ( data, type, row ) {
+                  console.log(data);
+                  //532710010845_2020-09-01.jpg
+                  if(!data && data == null)
+                    return '<a href="#" class="btn btn-sm btn-primary disabled" title="TIDAK ADA FOTO"><i class="fa fa-picture-o" aria-hidden="true"></i></a>';
+                  else
+                    return '<a href="#" class="btn btn-sm btn-primary foto" title="FOTO" data-foto="'+data+'"><i class="fa fa-picture-o" aria-hidden="true"></i></a>';
+              },
+          },
+        ],
+        dom:
+           // "<'row'<'col-sm-12 col-md-9 mb-2'B>>" +
+            "<'row'<'col-sm-12 col-md-6 mb-2'B><'col-sm-12 col-md-2 mb-2'l><'col-sm-12 col-md-4'f>>" +
+            "<'row'<'col-sm-12 mb-2'tr>>" +
+            "<'row'<'col-sm-12 col-md-5 mb-2'i><'col-sm-12 col-md-7'p>>",
+        lengthChange: true,
+        buttons: [
+            //{ extend: 'copyHtml5', text: '<i class="fa fa-clone"></i>&nbsp;&nbsp;Copy', footer: true },
+            { extend: 'excelHtml5', text: '<i class="fa fa-file-excel-o"></i>&nbsp;&nbsp;Excel', footer: true, },
+            // {
+            //   text: '<i class="fa fa-file-excel-o"></i>&nbsp;&nbsp;Excel (All Rows)',
+            //   action: function ( e, dt, node, config ) {
+            //       dt.ajax.reload();
+            //   }
+            // },
+            { extend: 'csvHtml5', text: '<i class="fa fa-file-text-o"></i>&nbsp;&nbsp;CSV', footer: true },
+            { extend: 'colvis', text: 'Columns' }
+        ],
+        "scrollY": 520,
+        "scrollX": true,
+        "paging": true,
+        lengthMenu: [[25, 100, -1], [25, 100, "All"]],
+        pageLength: 25,
+        "order": [[3, 'desc'],[0, 'asc'],[1, 'asc'],],
+    });
+
+
+    $('#tbl_mon_pemeriksaan_lpb').on('click', 'td a.foto', function (e) {
+        e.preventDefault();    
+        var foto = $(this).data('foto');
+        $('#img_foto').attr('src', foto);
+        $("#modal_foto").modal('show');
+      });
+
+    $('#btn_cari').click(function(btn){
+        console.log('Klikk');
+        table.ajax.url( '../controller/pemeriksaan_lpb/getDataPemeriksaanLPB.php?unitupi='+$('#sel_unitupi').val()+'&unitap='+$('#sel_unitap').val()+'&unitup='+$('#sel_unitup').val() ).load();
+    });
+
+});

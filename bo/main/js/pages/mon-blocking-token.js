@@ -1,0 +1,90 @@
+$(document).ready(function () {
+
+    "use strict";
+
+    //$.blockUI({ message: '<h1 class="p-3">Mengambil data...</h1>' }); 
+    var table = $('#tbl_mon_blocking_token').DataTable( {
+        "processing": true,
+        "serverSide": true,
+        "ajax": {
+            "url": '../controller/ts_p2tl/getDataBlockingToken.php?unitupi='+$('#sel_unitupi').val()+'&unitap='+$('#sel_unitap').val()+'&unitup='+$('#sel_unitup').val()+'&kesesuaian='+$('#sel_kesesuaian').val()+'&status_blocking='+$('#sel_status_blocking').val()+'&sisa_saldo='+$('#sel_sisa_saldo').val(),
+            "type": "POST",
+            "timeout": 360000
+        },
+        "deferLoading": 25,
+        "deferRender": true,
+        //responsive: true,
+        columns: [
+          {
+            data: "UNITUP",
+          },
+          {
+            data: "IDPEL",
+          },
+          {
+            data: "TARIF_AKHIR",
+          },
+          {
+            data: "DAYA_AKHIR",
+            type: 'number', 
+            "sClass" : "text-right" , render: $.fn.dataTable.render.number(",", ".", 0, '')
+          },
+          {
+            data: "JML_AGENDA",
+            type: 'number', 
+            "sClass" : "text-right" , render: $.fn.dataTable.render.number(",", ".", 0, '')
+          },
+          {
+            data: "TOTAL_SESUAI",
+            type: 'number', 
+            "sClass" : "text-right" , render: $.fn.dataTable.render.number(",", ".", 0, '')
+          },
+          {
+            data: "RP_TS",
+            type: 'number', 
+            "sClass" : "text-right" , render: $.fn.dataTable.render.number(",", ".", 0, '')
+          },
+          {
+            data: "PENGURANGAN_RPTS",
+            type: 'number', 
+            "sClass" : "text-right" , render: $.fn.dataTable.render.number(",", ".", 0, '')
+          },
+          {
+            data: "RPTS_AKHIR",
+            type: 'number', 
+            "sClass" : "text-right" , render: $.fn.dataTable.render.number(",", ".", 0, '')
+          },
+          {
+            data: "BLTH_ANGS_MIN",
+          },
+          {
+            data: "TGL_BLOCKING_TERAKHIR",
+          },
+        ],
+        dom:
+            "<'row'<'col-sm-12 col-md-6'B><'col-sm-12 col-md-6'f>>" +
+            "<'row'<'col-sm-12'tr>>" +
+            "<'row'<'col-sm-12 col-md-5'i><'col-sm-12 col-md-7'p>>",
+        lengthChange: false,
+        buttons: [
+            { extend: 'copyHtml5', text: '<i class="fa fa-clone"></i>&nbsp;&nbsp;Copy', footer: true },
+            { extend: 'excelHtml5', text: '<i class="fa fa-file-excel-o"></i>&nbsp;&nbsp;Excel', footer: true },
+            { extend: 'csvHtml5', text: '<i class="fa fa-file-text-o"></i>&nbsp;&nbsp;CSV', footer: true },
+            { extend: 'colvis', text: 'Columns' }
+        ],
+        "scrollY": 520,
+        "scrollX": true,
+        "paging": true,
+        lengthMenu: [[25, 100, -1], [25, 100, "All"]],
+        pageLength: 25,
+        "order": [[1, 'asc']],
+    });
+
+
+
+    $('#btn_cari').click(function(btn){
+        console.log('Klikk');
+        table.ajax.url( '../controller/ts_p2tl/getDataBlockingToken.php?unitupi='+$('#sel_unitupi').val()+'&unitap='+$('#sel_unitap').val()+'&unitup='+$('#sel_unitup').val()+'&kesesuaian='+$('#sel_kesesuaian').val()+'&status_blocking='+$('#sel_status_blocking').val()+'&sisa_saldo='+$('#sel_sisa_saldo').val() ).load();
+    });
+
+});

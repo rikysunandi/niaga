@@ -1,0 +1,556 @@
+
+
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="utf-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width,initial-scale=1">
+    <title>Backoffice Niaga</title>
+    <!-- Favicon icon -->
+    <link rel="icon" type="image/png" sizes="16x16" href="../../assets/images/favicon.png">
+    <link href="../css/style.css?time=<?php echo time() ?>" rel="stylesheet">
+    <link href="../css/custom.css?time=<?php echo time() ?>" rel="stylesheet">
+    
+    <style type="text/css">
+        .chart-card{
+            min-height: 24rem;
+        }
+
+        #rbm_lancar tbody tr{
+            cursor: pointer;
+        }
+        #rbm_irisan tbody tr{
+            cursor: pointer;
+        }
+        #rbm_lancar tbody tr:hover {
+          box-shadow: 0 6px 6px 0 #74BCC7;
+          transform: translateY(-2px);
+        }
+        #rbm_irisan tbody tr:hover {
+          box-shadow: 0 6px 6px 0 #EC5B43;
+          transform: translateY(-2px);
+        }
+
+
+        #overview_daftung .card{
+            cursor: pointer;
+        }
+
+        #overview_daftung .card:hover {
+          box-shadow: 0 12px 12px 0 rgba(0, 0, 0,.24);
+          transform: translateY(-4px);
+        }
+
+        #agenda_terlama .card tr{
+            cursor: pointer;
+        }
+
+        #agenda_terlama .card tr:hover {
+          box-shadow: 0 12px 12px 0 rgba(0, 0, 0,.24);
+          transform: translateY(-4px);
+        }
+
+
+    </style>
+</head>
+
+<body>
+    
+    <?php include 'parts/preloader.php'; ?>
+    
+    <!--**********************************
+        Main wrapper start
+    ***********************************-->
+    <div id="main-wrapper">
+
+        <?php include 'parts/header.php'; ?>
+        <?php include 'parts/sidebar.php'; ?>
+
+        <!--**********************************
+            Content body start
+        ***********************************-->
+        <div class="content-body">
+            <div class="container-fluid">
+                <div class="row page-titles">
+                    <div class="col p-md-0">
+                        <h4>Peta Pola Bayar</h4>
+                    </div>
+                    <div class="table-action float-right">
+                        <form action="#">
+                            <div class="form-row">
+                                <div class="form-group mb-0 mr-2">
+                                    <select id="sel_unit" class="selectpicker select-sm show-tick" data-size="5" data-width="fit">
+                                        <option value="X" selected="selected">UID JABAR</option>
+                                        <option data-divider="true"></option>
+                                        <option value="53BDG">UP3 BANDUNG</option>
+                                        <option value="53BKS">UP3 BEKASI</option>
+                                        <option value="53BGR">UP3 BOGOR</option>
+                                        <option value='53CJR'>UP3 CIANJUR</option>
+                                        <option value='53CKG'>UP3 CIKARANG</option>
+                                        <option value='53CMI'>UP3 CIMAHI</option>
+                                        <option value='53CRB'>UP3 CIREBON</option>
+                                        <option value='53DPK'>UP3 DEPOK</option>
+                                        <option value='53GRT'>UP3 GARUT</option>
+                                        <option value='53GPI'>UP3 GUNUNG PUTRI</option>
+                                        <option value='53IDM'>UP3 INDRAMAYU</option>
+                                        <option value='53KRG'>UP3 KARAWANG</option>
+                                        <option value='53MJA'>UP3 MAJALAYA</option>
+                                        <option value='53PWK'>UP3 PURWAKARTA</option>
+                                        <option value='53SKI'>UP3 SUKABUMI</option>
+                                        <option value='53SMD'>UP3 SUMEDANG</option>
+                                        <option value='53TSK'>UP3 TASIKMALAYA</option>
+                                    </select>
+                                </div>
+                                <div class="form-group mb-0 mr-2">
+                                    <select id="sel_blth" class="selectpicker select-sm show-tick" data-size="5" data-width="fit">
+                                        <option value="<?php echo date('Ym', strtotime("-10 days")) ?>" selected="selected"><?php echo date('Ym', strtotime("-10 days")) ?></option>
+                                        <option data-divider="true"></option>
+                                        <option value='<?php echo date('Ym', strtotime("-40 days")) ?>'><?php echo date('Ym', strtotime("-40 days")) ?></option>
+                                        <option value='<?php echo date('Ym', strtotime("-70 days")) ?>'><?php echo date('Ym', strtotime("-70 days")) ?></option>
+                                    </select>
+                                </div>
+                                <div class="form-group mb-0 clearfix">
+                                    <button type="button" id="btn_go" class="btn btn-ft rounded-0 btn-outline-primary"><i class="fa fa-check" aria-hidden="true"></i></button>
+                                </div>
+                            </div>
+                        </form>
+                    </div>
+                </div>
+                <!-- <div class="row">
+                    <div class="col-sm-12 col-lg-12 mb-2 mt-0">
+                        <div class="table-action float-right">
+                            <form action="#">
+                                <div class="form-row">
+                                    <div class="form-group mb-0">
+                                        <select class="selectpicker show-tick" data-width="auto">
+                                            <option selected="selected">UID JABAR</option>
+                                            <option value="53BDG">UP3 BANDUNG</option>
+                                            <option value="53BKS">UP3 BEKASI</option>
+                                            <option value="53BGR">UP3 BOGOR</option>
+                                        </select>
+                                    </div>
+                                </div>
+                            </form>
+                        </div>
+                    </div>
+                </div> -->
+                <div class="row mt-0 mb-2">
+                    <div class="col-12 text-right mb-2">
+                        Tanggal Data: <span id="tgl_data" class="text-primary">30/09/2021</span>
+                    </div>
+                </div>
+
+                <div class="row">
+                    <div class="col-6">
+                        <div id="trend_percepatan" class="card">
+                            <div class="card-body stat-widget-four" style="background-color: #135470;">
+                                <div class="media">
+                                    <span class="mr-3">
+                                        <i class="fa fa-rocket fa-lg text-white"></i>
+                                    </span>
+                                    <div class="media-body">
+                                        <h4 class="mb-3 text-white">TREND PERCEPATAN (KOGOL)</h4>
+                                    </div>
+                                </div>
+                            </div>
+                            <div class="mb-2">
+                                <div class="chart-card">
+                                    <canvas id="chart_trend_percepatan"></canvas>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="col-6">
+                        <div id="trend_percepatan_pic" class="card">
+                            <div class="card-body stat-widget-four" style="background-color: #135470;">
+                                <div class="media">
+                                    <span class="mr-3">
+                                        <i class="fa fa-rocket fa-lg text-white"></i>
+                                    </span>
+                                    <div class="media-body">
+                                        <h4 class="mb-3 text-white">TREND PERCEPATAN (PIC)</h4>
+                                    </div>
+                                </div>
+                            </div>
+                            <div class="mb-2">
+                                <div class="chart-card">
+                                    <canvas id="chart_trend_percepatan_pic"></canvas>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+<!-- 
+                <div class="row">
+                    <div class="col-12">
+                        <div class="card bg-primary">
+                            <div class="text-left p-2">
+                                <h4 class="text-white">Kelompok Berdasarkan Kogol</h4>
+                            </div>
+                        </div>
+                    </div>
+                </div> -->
+
+                <div class="row">
+                    <div class="col-6">
+                        <div id="percepatan_rata" class="card">
+                            <div class="card-body stat-widget-four" style="background-color: #135470;">
+                                <div class="media">
+                                    <span class="mr-3">
+                                        <i class="fa fa-rocket fa-lg text-white"></i>
+                                    </span>
+                                    <div class="media-body">
+                                        <h4 class="mb-3 text-white">PERCEPATAN RATA-RATA</h4>
+                                    </div>
+                                </div>
+                            </div>
+                            <div class="mb-2">
+                                <div class="chart-card">
+                                    <canvas id="chart_percepatan_rata"></canvas>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="col-6">
+                        <div id="percepatan_non_kogol_1" class="card">
+                            <div class="card-body stat-widget-four" style="background-color: #135470;">
+                                <div class="media">
+                                    <span class="mr-3">
+                                        <i class="fa fa-rocket fa-lg text-white"></i>
+                                    </span>
+                                    <div class="media-body">
+                                        <h4 class="mb-3 text-white">PERCEPATAN NON KOGOL 1</h4>
+                                    </div>
+                                </div>
+                            </div>
+                            <div class="mb-2">
+                                <div class="chart-card">
+                                    <canvas id="chart_percepatan_non_kogol_1"></canvas>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+
+                <div class="row">
+                    <div class="col-6">
+                        <div id="percepatan_kogol_0" class="card">
+                            <div class="card-body stat-widget-four" style="background-color: #005e77;">
+                                <div class="media">
+                                    <span class="mr-3">
+                                        <i class="fa fa-rocket fa-lg text-white"></i>
+                                    </span>
+                                    <div class="media-body">
+                                        <h4 class="mb-3 text-white">PERCEPATAN KOGOL 0</h4>
+                                    </div>
+                                    <!-- <div class="media-body text-right">
+                                        <h4 class="text-white mb-3 avg">XX HARI</h4>
+                                    </div> -->
+                                </div>
+                            </div>
+                            <div class="mb-2">
+                                <div class="chart-card">                                    
+                                    <canvas id="chart_percepatan_kogol_0"></canvas>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="col-6">
+                        <div id="percepatan_kogol_2" class="card">
+                            <div class="card-body stat-widget-four" style="background-color: #00697d;">
+                                <div class="media">
+                                    <span class="mr-3">
+                                        <i class="fa fa-rocket fa-lg text-white"></i>
+                                    </span>
+                                    <div class="media-body">
+                                        <h4 class="mb-3 text-white">PERCEPATAN KOGOL 2</h4>
+                                    </div>
+                                    <!-- <div class="media-body text-right">
+                                        <h4 class="text-white mb-3 avg">XX HARI</h4>
+                                    </div> -->
+                                </div>
+                            </div>
+                            <div class="mb-2">
+                                <div class="chart-card">                                    
+                                    <canvas id="chart_percepatan_kogol_2"></canvas>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                <div class="row">
+                    <div class="col-6">
+                        <div id="percepatan_kogol_3" class="card">
+                            <div class="card-body stat-widget-four" style="background-color: #007380;">
+                                <div class="media">
+                                    <span class="mr-3">
+                                        <i class="fa fa-rocket fa-lg text-white"></i>
+                                    </span>
+                                    <div class="media-body">
+                                        <h4 class="mb-3 text-white">PERCEPATAN KOGOL 3</h4>
+                                    </div>
+                                    <!-- <div class="media-body text-right">
+                                        <h4 class="text-white mb-3 avg">XX HARI</h4>
+                                    </div> -->
+                                </div>
+                            </div>
+                            <div class="mb-2">
+                                <div class="chart-card">                                    
+                                    <canvas id="chart_percepatan_kogol_3"></canvas>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="col-6">
+                        <div id="percepatan_kogol_4" class="card">
+                            <div class="card-body stat-widget-four" style="background-color: #007d80;">
+                                <div class="media">
+                                    <span class="mr-3">
+                                        <i class="fa fa-rocket fa-lg text-white"></i>
+                                    </span>
+                                    <div class="media-body">
+                                        <h4 class="mb-3 text-white">PERCEPATAN KOGOL 4</h4>
+                                    </div>
+                                    <!-- <div class="media-body text-right">
+                                        <h4 class="text-white mb-3 avg">XX HARI</h4>
+                                    </div> -->
+                                </div>
+                            </div>
+                            <div class="mb-2">
+                                <div class="chart-card">                                    
+                                    <canvas id="chart_percepatan_kogol_4"></canvas>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+
+                <div class="row">
+                    <div class="col-6">
+                        <div id="percepatan_mup3" class="card">
+                            <div class="card-body stat-widget-four" style="background-color: #318f61;">
+                                <div class="media">
+                                    <span class="mr-3">
+                                        <i class="fa fa-rocket fa-lg text-white"></i>
+                                    </span>
+                                    <div class="media-body">
+                                        <h4 class="mb-3 text-white">PERCEPATAN (MUP3)</h4>
+                                    </div>
+                                    <!-- <div class="media-body text-right">
+                                        <h4 class="text-white mb-3 avg">XX HARI</h4>
+                                    </div> -->
+                                </div>
+                            </div>
+                            <div class="mb-2">
+                                <div class="chart-card">                                    
+                                    <canvas id="chart_percepatan_mup3"></canvas>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="col-6">
+                        <div id="percepatan_mbsar" class="card">
+                            <div class="card-body stat-widget-four" style="background-color: #30956f;">
+                                <div class="media">
+                                    <span class="mr-3">
+                                        <i class="fa fa-rocket fa-lg text-white"></i>
+                                    </span>
+                                    <div class="media-body">
+                                        <h4 class="mb-3 text-white">PERCEPATAN (MB)-SAR</h4>
+                                    </div>
+                                    <!-- <div class="media-body text-right">
+                                        <h4 class="text-white mb-3 avg">XX HARI</h4>
+                                    </div> -->
+                                </div>
+                            </div>
+                            <div class="mb-2">
+                                <div class="chart-card">                                    
+                                    <canvas id="chart_percepatan_mbsar"></canvas>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                <div class="row">
+                    <div class="col-6">
+                        <div id="percepatan_mulp" class="card">
+                            <div class="card-body stat-widget-four" style="background-color: #309a7c;">
+                                <div class="media">
+                                    <span class="mr-3">
+                                        <i class="fa fa-rocket fa-lg text-white"></i>
+                                    </span>
+                                    <div class="media-body">
+                                        <h4 class="mb-3 text-white">PERCEPATAN (MULP)</h4>
+                                    </div>
+                                    <!-- <div class="media-body text-right">
+                                        <h4 class="text-white mb-3 avg">XX HARI</h4>
+                                    </div> -->
+                                </div>
+                            </div>
+                            <div class="mb-2">
+                                <div class="chart-card">                                    
+                                    <canvas id="chart_percepatan_mulp"></canvas>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="col-6">
+                        <div id="percepatan_biller" class="card">
+                            <div class="card-body stat-widget-four" style="background-color: #349f89;">
+                                <div class="media"> 
+                                    <span class="mr-3">
+                                        <i class="fa fa-rocket fa-lg text-white"></i>
+                                    </span>
+                                    <div class="media-body">
+                                        <h4 class="mb-3 text-white">PERCEPATAN (BILLER)</h4>
+                                    </div>
+                                    <!-- <div class="media-body text-right">
+                                        <h4 class="text-white mb-3 avg">XX HARI</h4>
+                                    </div> -->
+                                </div>
+                            </div>
+                            <div class="mb-2">
+                                <div class="chart-card">                                    
+                                    <canvas id="chart_percepatan_biller"></canvas>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+
+                <div class="row">
+                    <div class="col-12">
+                        <div id="pola_bayar" class="card">
+                            <div class="card-body stat-widget-four" style="background-color: #135470;">
+                                <div class="media">
+                                    <span class="mr-3">
+                                        <i class="fa fa-rocket fa-lg text-white"></i>
+                                    </span>
+                                    <div class="media-body">
+                                        <h4 class="mb-3 text-white">STATUS POLA BAYAR PELANGGAN</h4>
+                                    </div>
+                                    <div class="media-body text-right">
+                                        <h4 class="text-white mb-3 avg"></h4>
+                                    </div>
+                                </div>
+                            </div>
+                            <div class="mb-2">
+                                <div class="row">
+                                    <div class="col-3">
+                                        <div class="chart-card">
+                                            <canvas id="chart_pola_bayar"></canvas>
+                                        </div>
+                                    </div>
+                                    <div class="col-9">
+                                        <div class="chart-card">
+                                            <canvas id="chart_pola_bayar_unit"></canvas>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+
+                <div class="row">
+                    <div class="col-6">
+                        <div id="rbm_lancar" class="card bg-transparent">
+                            <div class="card-body stat-widget-four" style="background-color: #74BCC7;">
+                                <div class="media"> 
+                                    <span class="mr-3">
+                                        <i class="fa fa-list fa-lg text-white"></i>
+                                    </span>
+                                    <div class="media-body">
+                                        <h4 class="mb-3 text-white">RBM TERLANCAR</h4>
+                                    </div>
+                                </div>
+                            </div>
+                            <div class="mb-2">
+                                <div class="table-responsive">
+                                    <table class="table table-hover table-padded table-responsive-fix-big property-overview-table">
+                                        <thead>
+                                            <tr>
+                                                <th>UNITAP</th>
+                                                <th>UNITUP</th>
+                                                <th>RBM</th>
+                                                <th>LANCAR</th>
+                                                <th>BARU</th>
+                                                <th>IRISAN</th>
+                                            </tr>
+                                        </thead>
+                                        <tbody></tbody>
+                                    </table>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="col-6">
+                        <div id="rbm_irisan" class="card bg-transparent">
+                            <div class="card-body stat-widget-four" style="background-color: #EC5B43;">
+                                <div class="media"> 
+                                    <span class="mr-3">
+                                        <i class="fa fa-list fa-lg text-white"></i>
+                                    </span>
+                                    <div class="media-body">
+                                        <h4 class="mb-3 text-white">RBM TERBANYAK IRISAN</h4>
+                                    </div>
+                                </div>
+                            </div>
+                            <div class="mb-2">
+                                <div class="table-responsive">
+                                    <table class="table table-hover table-padded table-responsive-fix-big property-overview-table">
+                                        <thead>
+                                            <tr>
+                                                <th>UNITAP</th>
+                                                <th>UNITUP</th>
+                                                <th>RBM</th>
+                                                <th>LANCAR</th>
+                                                <th>BARU</th>
+                                                <th>IRISAN</th>
+                                            </tr>
+                                        </thead>
+                                        <tbody></tbody>
+                                    </table>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+            <!-- #/ container -->
+        </div>
+        <!--**********************************
+            Content body end
+        ***********************************-->
+        
+        
+
+    </div>
+    <!--**********************************
+        Main wrapper end
+    ***********************************-->
+
+    <?php include 'parts/footer.php'; ?>
+
+    <!--**********************************
+        Scripts
+    ***********************************-->
+    <script src="../../assets/plugins/common/common.min.js"></script>
+    <script src="../js/custom.min.js"></script>
+    <script src="../js/settings.js"></script>
+    <script src="../js/gleek.js"></script>
+    
+    <script src="../../assets/plugins/block-ui/jquery.blockUI.js"></script>
+    <script src="../../assets/plugins/chart.js/Chart.bundle-3.5.1.min"></script>
+    <script src="../../assets/plugins/chartjs-plugin-datalabels/chartjs-plugin-datalabels-2.min.js"></script>
+    <!-- Morris Chart -->
+    <script src="../../assets/plugins/raphael/raphael.min.js"></script>
+    <script src="../../assets/plugins/morris/morris.min.js"></script>
+    
+    <script src="../js/pages/apps.js?time=<?php echo time() ?>"></script>
+    <script src="../js/pages/index-pola-bayar.js?time=<?php echo time() ?>"></script>
+</body>
+</html>

@@ -1,0 +1,61 @@
+$(document).ready(function () {
+
+    "use strict";
+
+    //$.blockUI({ message: '<h1 class="p-3">Mengambil data...</h1>' }); 
+    $('#tbl_acuan_jasa').DataTable( {
+        "processing": true,
+        "serverSide": true,
+        "ajax": {
+            "url": '../controller/getAcuanJasa.php',
+            "type": "GET",
+            "timeout": 10000
+        },
+        //"deferRender": true,
+        lengthMenu: [[25, 100, -1], [25, 100, "All"]],
+        pageLength: 25,
+        buttons: [
+            { extend: 'copyHtml5', text: '<i class="fa fa-file-o"></i>&nbsp;&nbsp;Copy', footer: true },
+            { extend: 'excelHtml5', text: '<i class="fa fa-file-excel-o"></i>&nbsp;&nbsp;Excel', footer: true },
+            { extend: 'csvHtml5', text: '<i class="fa fa-file-text-o"></i>&nbsp;&nbsp;CSV', footer: true },
+            { extend: 'colvis', text: 'Columns' }
+        ],
+        columns: [
+          {
+            data: "ID",
+            readonly: true,
+          },
+          {
+            data: "JENIS",
+            readonly: true,
+          },
+          {
+            data: "PEKERJAAN",
+          },
+          {
+            data: "DAYA_BARU_FROM",
+            type: 'number',
+            "sClass" : "text-right" , //render: $.fn.dataTable.render.number(",", ".", 0, '')
+          },
+          {
+            data: "DAYA_BARU_TO",
+            type: 'number',
+            "sClass" : "text-right" , //render: $.fn.dataTable.render.number(",", ".", 0, '')
+          },
+          {
+            data: "HARGA_TOTAL",
+            type: 'number',
+            "sClass" : "text-right" , //render: $.fn.dataTable.render.number(",", ".", 0, '')
+          },
+          
+        ],
+        dom:
+        "<'row'<'col-sm-12 col-md-6'B><'col-sm-12 col-md-6'f>>" +
+        "<'row'<'col-sm-12'tr>>" +
+        "<'row'<'col-sm-12 col-md-5'i><'col-sm-12 col-md-7'p>>",
+        "scrollY": 500,
+        "scrollX": true,
+        
+    });
+
+});

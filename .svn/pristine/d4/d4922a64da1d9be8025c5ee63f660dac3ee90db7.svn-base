@@ -1,0 +1,72 @@
+(function($) {
+    "use strict"
+
+    console.log($('.card'));
+
+    $("#sel_unitupi").selectpicker({
+	    style: "btn-default btn-sm"
+	});
+
+    $("#sel_unitap").selectpicker({
+	    style: "btn-default btn-sm"
+	});
+	
+    $("#sel_unitup").selectpicker({
+	    style: "btn-default btn-sm"
+	});
+	
+    $.getJSON('../controller/referensi/getUnitupi.php', function(data){
+    	
+	    $('#sel_unitupi').empty();
+	    $('#sel_unitap').empty();
+	    $('#sel_unitup').empty();
+
+    	$.each(data.rows,function(i,v){
+        	$('#sel_unitupi').append('<option value="'+v.kode+'">'+v.nama+'</option>');
+    	});
+		$('#sel_unitupi').append('<option selected value="00">SEMUA UNIT</option>');
+		$('#sel_unitap').append('<option selected value="00">SEMUA UNIT</option>');
+		$('#sel_unitup').append('<option selected value="00">SEMUA UNIT</option>');
+
+		$('#sel_unitupi').selectpicker('refresh');
+		$('#sel_unitap').selectpicker('refresh');
+		$('#sel_unitup').selectpicker('refresh');
+    });
+
+    $('#sel_unitupi').change(function(){
+
+	    $('#sel_unitap').empty();
+	    $('#sel_unitup').empty();
+
+	    $.getJSON('../controller/referensi/getUnitap.php?unitupi='+$('#sel_unitupi').val(), function(data){
+	    	$.each(data.rows,function(i,v){
+	        	$('#sel_unitap').append('<option value="'+v.kode+'">'+v.nama+'</option>');
+	    	});
+			$('#sel_unitap').append('<option selected value="00">SEMUA UNIT</option>');
+			$('#sel_unitup').append('<option selected value="00">SEMUA UNIT</option>');
+
+			$('#sel_unitap').selectpicker('refresh');
+			$('#sel_unitup').selectpicker('refresh');
+	    });
+
+    });
+
+    $('#sel_unitap').change(function(){
+
+	    $('#sel_unitup').empty();
+
+	    $.getJSON('../controller/referensi/getUnitup.php?unitap='+$('#sel_unitap').val(), function(data){
+	    	$.each(data.rows,function(i,v){
+
+	        	$('#sel_unitup').append('<option value="'+v.kode+'">'+v.nama+'</option>');
+	    	});
+			$('#sel_unitup').append('<option selected value="00">SEMUA UNIT</option>');
+
+			$('#sel_unitup').selectpicker('refresh');
+	    });
+
+    });
+
+
+
+})(jQuery);

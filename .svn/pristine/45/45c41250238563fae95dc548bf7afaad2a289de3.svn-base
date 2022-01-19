@@ -1,0 +1,52 @@
+<?php
+require_once '../../bo/config/config.php';
+require_once '../../bo/config/database.php';
+require_once '../../bo/config/router.php';
+
+$data = file_get_contents("php://input");
+$decode = json_decode($data,true);
+ 
+date_default_timezone_set("Asia/Jakarta");
+
+$area = $decode['data']['area'];
+$foto = $decode['data']['foto'];
+$idpel = $decode['data']['idpel'];
+$blth = date("mY");
+$fileName = $idpel."-".$blth.".jpeg";
+
+
+$to_path = PATH_UPLOAD_PHOTOS_INTIMASI.$blth."/".$area."/".$idpel."-".$blth.".jpeg";
+$to_dir = PATH_UPLOAD_PHOTOS_INTIMASI.$blth."/".$area."/";
+$path = "D:/P3_TEMP/".$blth."/".$area."/".$idpel."-".$blth.".jpeg";
+$dir = "D:/P3_TEMP/".$blth."/".$area."/";
+if(!file_exists($path)){
+    if(!file_exists($dir)){ mkdir($dir, 0777, true); }
+    //$fotoGet = $foto;
+    $bin =base64_decode($foto);
+    $im = imageCreateFromString($bin);
+    if (!$im) {
+        $response['success'] = false;
+        $response['msg'] = 'Gagal menyimpan Foto';
+    }else{
+        $img_file = $path;
+        imagepng($im, $img_file, 0);
+        if(!file_exists($to_dir)){ mkdir($to_dir, 0777, true); }
+
+        if (!copy($path, $to_path)) {
+            $response['success'] = false;
+            $response['msg'] = 'Gagal Copy Foto ke NAS';
+        }else{
+            unlink($path);
+            $response['success'] = true;
+            $response['msg'] = 'Berhasil menyimpan Foto';
+        }
+    }
+}else {
+    $response['success'] = false;
+    $response['msg'] = 'Foto sudah ada di Server';
+}
+
+
+echo json_encode($response);
+?>
+

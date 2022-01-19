@@ -1,0 +1,124 @@
+$(document).ready(function () {
+
+    "use strict";
+
+    const queryString = window.location.search;
+    const urlParams = new URLSearchParams(queryString);
+   
+
+    //$.blockUI({ message: '<h1 class="p-3">Mengambil data...</h1>' }); 
+    var table = $('#tbl_mon_intimasi')
+      .on('preXhr.dt', function ( e, settings, data ) {
+        console.log('preXhr!');
+        $('div.content-body').block({ message: 'Mengambil data...' });
+      })
+      .on('xhr.dt', function ( e, settings, data ) {
+        console.log('xhr!');
+        $('div.content-body').unblock();
+      })
+      .DataTable( {
+        "processing": true,
+        "serverSide": true,
+        "deferLoading": 0,
+        "ajax": {
+            "url": '../controller/intimasi/getDataIntimasi.php',
+            "type": "POST",
+            "timeout": 60000
+        },
+        //responsive: true,
+        columns: [
+          {
+            data: "UNITAP",
+            visible: true
+          },
+          {
+            data: "UNITUP",
+            visible: true
+          },
+          {
+            data: "IDPEL",
+            visible: true
+          },
+          {
+            data: "TGL_INTIMASI",
+            visible: true,
+            render: $.fn.dataTable.render.moment( 'YYYY-MM-DD HH:mm:ss.SSS', 'YYYY-MM-DD HH:mm' )
+          },
+          {
+            data: "KET",
+            visible: true
+          },
+          {
+            data: "TGL_JANJI",
+            visible: true,
+            render: $.fn.dataTable.render.moment( 'YYYY-MM-DD HH:mm:ss.SSS', 'YYYY-MM-DD' )
+          },
+          {
+            data: "PAHAM",
+            visible: true
+          },
+          {
+            data: "PUTUS",
+            visible: true
+          },
+          {
+            data: "LATITUDE",
+            visible: true
+          },
+          {
+            data: "LONGITUDE",
+            visible: true
+          },
+          {
+            data: "USER_APP",
+            visible: true
+          },
+          {
+            data: "FOTOPATH",
+            visible: true,
+            sortable: false,
+            render: function ( data, type, row ) {
+                  //console.log(data);
+                  //532710010845_2020-09-01.jpg
+                  if(!data && data == null)
+                    return '<a href="#" class="btn btn-sm btn-primary disabled" title="TIDAK ADA FOTO"><i class="fa fa-picture-o" aria-hidden="true"></i></a>';
+                  else
+                    return '<a href="#" class="btn btn-sm btn-primary foto" title="FOTO" data-foto="'+data+'"><i class="fa fa-picture-o" aria-hidden="true"></i></a>';
+              },
+          },
+        ],
+        dom:
+           // "<'row'<'col-sm-12 col-md-9 mb-2'B>>" +
+            "<'row'<'col-sm-12 col-md-6 mb-2'B><'col-sm-12 col-md-2 mb-2'l><'col-sm-12 col-md-4'f>>" +
+            "<'row'<'col-sm-12 mb-2'tr>>" +
+            "<'row'<'col-sm-12 col-md-5 mb-2'i><'col-sm-12 col-md-7'p>>",
+        buttons: [
+            { extend: 'colvis', text: 'Columns' },
+            { extend: 'excelHtml5', 
+              text: '<i class="fa fa-file-excel-o"></i>&nbsp;&nbsp;Download Semua', 
+              titleAttr: 'Download ke Excel',
+              footer: true
+            },
+        ],
+        "scrollY": 370,
+        "scrollX": true,
+        "paging": true,
+        lengthMenu: [[25, 100, -1], [25, 100, "All"]],
+        pageLength: 100,
+        "order": [[3, 'desc']],
+    });
+
+    $('#tbl_mon_intimasi').on('click', 'td a.foto', function (e) {
+        e.preventDefault();    
+        var foto = $(this).data('foto');
+        $('#img_foto').attr('src', foto);
+        $("#modal_foto").modal('show');
+      });
+
+    $( 'body' ).on( 'click', '#btn_cari', function(btn) {
+        console.log('Klikk');
+        table.ajax.url( '../controller/intimasi/getDataIntimasi.php?unitupi='+$('#sel_unitupi').val()+'&unitap='+$('#sel_unitap').val()+'&unitup='+$('#sel_unitup').val()+'&blth='+$('#sel_blth').val() ).load();
+    });
+
+
+});

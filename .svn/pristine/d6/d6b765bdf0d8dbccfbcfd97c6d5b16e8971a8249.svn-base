@@ -1,0 +1,54 @@
+/* CUSTOM DATATABLES */
+.table thead,
+.table th {text-align: center;}
+table.dataTable thead th, table.dataTable tfoot th {
+    padding: 4px 6px; /* e.g. change 8x to 4px here */
+    font-size: 12px;
+    line-height: 2.2rem;
+}
+table.dataTable thead td, table.dataTable thead th {
+    border-bottom: .1rem solid rgba(120,130,140,.13);
+}
+table.dataTable tbody td {
+    padding: 2px 6px; /* e.g. change 8x to 4px here */
+    font-size: 11px;
+    color: '#464a53' !important;
+    line-height: 1.8rem;
+}
+table.dataTable.stripe tbody tr.odd, table.dataTable.display tbody tr.odd {
+    background-color: #F3F3F3 !important;
+}
+table.dataTable.table-striped.DTFC_Cloned tbody tr:nth-of-type(odd) {
+    background: #F3F3F3 !important;
+}
+
+table.dataTable.table-striped.DTFC_Cloned tbody tr:nth-of-type(even) {
+    background: white !important;
+}
+table.dataTable.table-striped.DTFC_Cloned thead tr, table.dataTable.table-striped.DTFC_Cloned tfoot tr {
+    background: white !important;
+}
+.DTFC_LeftHeadWrapper{top:16px !important;}
+.DTFC_LeftFootWrapper{top:27px !important;}
+.dataTables_wrapper{
+    font-size: 1.2rem;
+    font-weight: 300;
+}
+.dataTables_wrapper .btn{
+    font-size: 1.2rem;
+    font-weight: 300;
+}
+.dataTables_filter{
+    font-size: 1.2rem;
+    font-weight: 300;
+
+}
+.dataTables_filter .form-control.form-control-sm {
+    min-height: 2.8rem;
+    height: 2.8rem;
+}
+.dataTables_scroll {
+    padding: 1.5rem 0;
+    overflow:auto;
+    position:relative;
+}

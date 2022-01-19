@@ -1,0 +1,23 @@
+<?php
+
+ini_set('upload_max_filesize', '30M');
+ini_set('post_max_size', '30M');
+
+require_once '../../../config/database.php';
+
+$unitupi = $_REQUEST['unitupi'];
+$unitap = $_REQUEST['unitap'];
+$unitup = $_REQUEST['unitup'];
+
+if ( 0 < $_FILES['file']['error'] ) {
+    echo 'Error: ' . $_FILES['file']['error'] . '<br>';
+}
+else {
+    move_uploaded_file($_FILES['file']['tmp_name'], '../../../assets/uploads/' . 'LUNAS_'.$unitup.'_'.date('Ymdhis').'.xls');
+}
+
+$response['success'] = true;
+$response['msg'] = 'Upload pelunasan berhasil';
+
+echo json_encode($response);
+?>

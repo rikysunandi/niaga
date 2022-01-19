@@ -1,0 +1,416 @@
+$(function() {
+    "use strict";
+
+    var chart_unit, chart_status_proses, chart_tmp, chart_segmen_tegangan, chart_alasan, chart_ket_transaksi;
+
+    $('div#card_permohonan').block({ message: 'Mengambil data...' });
+    $.getJSON('../controller/getDashboardPermohonan.php', function(data){
+        $('#total_agenda').html(data.total_agenda);
+        $('#total_agenda_rab').html(data.total_agenda_rab);
+        $('#total_proses').html(data.total_proses);
+        $('#total_evaluasi').html(data.total_evaluasi);
+
+        var ctx = document.getElementById("chart_permohonan");
+        ctx.height = 240;
+        chart_unit = new Chart(ctx, {
+            type: 'bar',
+            data: {
+                labels: data.singkatan,
+                datasets: [
+                    {
+                        label: "BP>=RAB",
+                        type: "bar",
+                        stack: 'Agenda per Status Proses',
+                        backgroundColor: "#135470",
+                        backgroundColorHover: "#135470",
+                        data: data.jml_proses,
+                    },
+                    {
+                        label: "BP<RAB",
+                        type: "bar",
+                        stack: 'Agenda per Status Proses',
+                        backgroundColor: "#9DA6AB",
+                        backgroundColorHover: "#9DA6AB",
+                        data: data.jml_evaluasi,
+                    },
+                    {
+                        label: "Dalam TMP",
+                        type: "bar",
+                        stack: 'Agenda per Status TMP',
+                        backgroundColor: "#74BCC7",
+                        backgroundColorHover: "#74BCC7",
+                        data: data.jml_agenda_dalam_tmp,
+                    },
+                    {
+                        label: "Mendekati TMP",
+                        type: "bar",
+                        stack: 'Agenda per Status TMP',
+                        backgroundColor: "#F2C36B",
+                        backgroundColorHover: "#F2C36B",
+                        data: data.jml_agenda_mendekati_tmp,
+                    },
+                    {
+                        label: "Melebihi TMP",
+                        type: "bar",
+                        stack: 'Agenda per Status TMP',
+                        backgroundColor: "#EC5B43",
+                        backgroundColorHover: "#EC5B43",
+                        data: data.jml_agenda_melebihi_tmp,
+                    },
+                ]
+            },
+            options: {
+                responsive: true, 
+                maintainAspectRatio: false, 
+                barRadius: 2,
+                title: {
+                    display: false,
+                    text: 'Rekap Permohonan'
+                },
+                tooltips: {
+                    mode: 'index',
+                    intersect: false,
+                    callbacks: {
+                        // title: function(tooltipItem, data) {
+                        //     // console.log('title tool', tooltipItem[0]); 
+                        //     // console.log(data); 
+                        //     var nama = saldo_unit_chart.data.longlabels[tooltipItem[0].index];
+                        //     return nama;
+                        // },
+                        // label: function (t, d) {
+                        //     console.log('t', t);
+                        //     console.log('d', d);
+                        //     //new Intl.NumberFormat('id-ID', { style: 'decimal'}).format(t.yLabel);
+                        //     // if (t.datasetIndex === 0) {
+                        //     //     return t.yLabel.toFixed(0);
+                        //     // } else if (t.datasetIndex === 1) {
+                        //     //     if (t.yLabel.toString().length === 9) {
+                        //     //         return Math.round(+t.yLabel.toString().replace(/(\d{3})(.*)/, '$1.$2')) + 'M';
+                        //     //     } else return Math.round(+t.yLabel.toString().replace(/(\d{2})(.*)/, '$1.$2')) + 'M';
+                        //     // }
+                        // }
+                    }
+                },
+                legend: {
+                    position: 'bottom',
+                    display: true,
+                    labels: {
+                        // fontFamily: 'CircularStdBook',
+                    },
+                },
+                plugins: {
+                    labels: []
+                },
+                scales: {
+                    yAxes: [{
+                        display: false,
+                        stacked: true,
+                        gridLines: {
+                            display: false,
+                            drawBorder: false
+                        },
+                        ticks: {
+                            beginAtZero: true
+                        }
+                    }],
+                    xAxes: [{
+                        stacked: true,
+                        gridLines: {
+                            display: false,
+                            drawBorder: false
+                        },
+                    }]
+                }
+            }
+        });
+
+        $('div#card_permohonan').unblock();
+    });
+
+    
+    $('div#card_permohonan_tmp').block({ message: 'Mengambil data...' });
+    $.getJSON('../controller/getDashboardPermohonanTMP.php', function(data){
+        var ctx = document.getElementById("chart_permohonan_tmp");
+        chart_tmp = new Chart(ctx, {
+            type: 'pie',
+            data: {
+                datasets: [{
+                    data: data.jml_permohonan,
+                    backgroundColor: [
+                        '#74BCC7',
+                        '#F2C36B',
+                        '#EC5B43',
+                        '#7F63F4',
+                        '#3D494A',
+                        '#9DA6AB',
+                    ],
+                    label: 'Status TMP'
+                }],
+                labels: data.status_tmp
+            },
+            options: {
+                responsive: true,
+                elements: {
+                    arc: {
+                        borderWidth: 0
+                    }
+                },
+                legend: {
+                    position: 'bottom',
+                    display: true,
+                    labels: {
+                        // fontFamily: 'CircularStdBook',
+                        fontSize: 8,
+                    },
+                },
+                tooltips:{
+                    titleFontSize: 8,
+                    bodyFontSize: 8,
+                    footerFontSize: 8,
+                },
+                plugins: {
+                    labels: [
+                        {
+                          render: 'percentage',
+                          fontSize: 9,
+                          fontColor: 'white',
+                          precision: 1
+                        }
+                    ]
+                },
+            }
+        });
+
+        $('div#card_permohonan_tmp').unblock();
+    });
+
+    $('div#card_permohonan_status_proses').block({ message: 'Mengambil data...' });
+    $.getJSON('../controller/getDashboardPermohonanStatusProses.php', function(data){
+        var ctx = document.getElementById("chart_permohonan_status_proses");
+        new Chart(ctx, {
+            type: 'pie',
+            data: {
+                datasets: [{
+                    data: data.jml_permohonan,
+                    backgroundColor: [
+                        '#135470',
+                        '#9DA6AB',
+                    ],
+                    label: 'Segmen Tegangan'
+                }],
+                labels: data.status_proses
+            },
+            options: {
+                responsive: true,
+                elements: {
+                    arc: {
+                        borderWidth: 0
+                    }
+                },
+                legend: {
+                    position: 'bottom',
+                    display: true,
+                    labels: {
+                        // fontFamily: 'CircularStdBook',
+                        fontSize: 8,
+                    },
+                },
+                tooltips:{
+                    titleFontSize: 8,
+                    bodyFontSize: 8,
+                    footerFontSize: 8,
+                },
+                plugins: {
+                    labels: [
+                        {
+                          render: 'percentage',
+                          fontSize: 9,
+                          fontColor: 'white',
+                        }
+                    ]
+                },
+            }
+        });
+
+        $('div#card_permohonan_status_proses').unblock();
+    });
+
+    $('div#card_permohonan_alasan').block({ message: 'Mengambil data...' });
+    $.getJSON('../controller/getDashboardPermohonanAlasan.php', function(data){
+        var ctx = document.getElementById("chart_permohonan_alasan");
+        new Chart(ctx, {
+            type: 'pie',
+            data: {
+                datasets: [{
+                    data: data.jml_permohonan,
+                    backgroundColor: [
+                        '#135470',
+                        '#74BCC7',
+                        '#F2C36B',
+                        '#EC5B43',
+                        '#7F63F4',
+                        '#3D494A',
+                        '#9DA6AB',
+                    ],
+                    label: 'Alasan Kriteria TMP'
+                }],
+                labels: data.alasan_kriteria_tmp
+            },
+            options: {
+                responsive: true,
+                elements: {
+                    arc: {
+                        borderWidth: 0
+                    }
+                },
+                legend: {
+                    position: 'bottom',
+                    display: true,
+                    labels: {
+                        // fontFamily: 'CircularStdBook',
+                        fontSize: 8,
+                    },
+                },
+                tooltips:{
+                    titleFontSize: 8,
+                    bodyFontSize: 8,
+                    footerFontSize: 8,
+                },
+                plugins: {
+                    labels: [
+                        {
+                          render: 'percentage',
+                          fontSize: 9,
+                          fontColor: 'white',
+                          precision: 1
+                        }
+                    ]
+                },
+            }
+        });
+
+        $('div#card_permohonan_alasan').unblock();
+    });
+
+
+    $('div#card_permohonan_jenis').block({ message: 'Mengambil data...' });
+    $.getJSON('../controller/getDashboardPermohonanJenis.php', function(data){
+        var ctx = document.getElementById("chart_permohonan_jenis");
+        new Chart(ctx, {
+            type: 'pie',
+            data: {
+                datasets: [{
+                    data: data.jml_permohonan,
+                    backgroundColor: [
+                        '#135470',
+                        '#74BCC7',
+                        '#F2C36B',
+                        '#EC5B43',
+                        '#7F63F4',
+                        '#3D494A',
+                        '#9DA6AB',
+                    ],
+                    label: 'Jenis Transaksi'
+                }],
+                labels: data.ket_transaksi
+            },
+            options: {
+                responsive: true,
+                elements: {
+                    arc: {
+                        borderWidth: 0
+                    }
+                },
+                legend: {
+                    position: 'bottom',
+                    display: true,
+                    labels: {
+                        // fontFamily: 'CircularStdBook',
+                        fontSize: 8,
+                    },
+                },
+                tooltips:{
+                    titleFontSize: 8,
+                    bodyFontSize: 8,
+                    footerFontSize: 8,
+                },
+                plugins: {
+                    labels: [
+                        {
+                          render: 'percentage',
+                          fontSize: 9,
+                          fontColor: 'white',
+                          precision: 1,
+                        }
+                    ]
+                },
+            }
+        });
+
+        $('div#card_permohonan_jenis').unblock();
+    });
+
+    $('div#card_latest_agenda').block({ message: 'Mengambil data...' });
+    $.getJSON('../controller/getDashboardPermohonanTerbaru.php', function(data){
+        
+        var tr = '';
+        $.each(data.rows, function(k,v){
+            tr += '<tr>';
+            tr += '<td><a href="info-agenda.php?noagenda='+v.noagenda+'" target="_blank">'+v.noagenda+'</a></td>';
+            tr += '<td>'+v.tglmohon+'</td>';
+            tr += '<td>'+v.jenis_transaksi+'</td>';
+            tr += '<td>'+v.tarif_daya_lama+'</td>';
+            tr += '<td>'+v.tarif_daya_baru+'</td>';
+            // tr += '<td>'+v.alasan_kriteria_tmp+'</td>';
+            tr += '<td>'+v.rp_bp+'</td>';
+            tr += '<td>'+v.rp_rab+'</td>';
+            tr += '<td><span class="label '+v.label_status+'">'+v.status+'</span></td>';
+            tr += '</tr>';
+        });
+        $('div#card_latest_agenda table tbody').append(tr);
+        $('div#card_latest_agenda').unblock();
+    });
+
+
+    $('#sel_unit').change(function(){
+        var unitap=this.value;
+
+        // Update Bar Chart per Unit
+        $('div#card_permohonan').block({ message: 'Mengambil data...' });
+        $.getJSON('../controller/getDashboardPermohonan.php?unitap='+unitap, function(data){
+            $('#total_agenda').html(data.total_agenda);
+            $('#total_agenda_rab').html(data.total_agenda_rab);
+            $('#total_proses').html(data.total_proses);
+            $('#total_evaluasi').html(data.total_evaluasi);
+            chart_unit.data.labels = data.singkatan;
+            chart_unit.data.datasets[0].data = data.jml_proses;
+            chart_unit.data.datasets[1].data = data.jml_evaluasi;
+            chart_unit.data.datasets[2].data = data.jml_agenda_dalam_tmp;
+            chart_unit.data.datasets[3].data = data.jml_agenda_mendekati_tmp;
+            chart_unit.data.datasets[4].data = data.jml_agenda_melebihi_tmp;
+            chart_unit.update();
+            $('div#card_permohonan').unblock();
+        });
+
+    });
+
+    // draw background
+    var backgroundColor = 'white';
+    Chart.plugins.register({
+        beforeDraw: function(c) {
+            var ctx = c.chart.ctx;
+            ctx.fillStyle = backgroundColor;
+            ctx.fillRect(0, 0, c.chart.width, c.chart.height);
+        }
+    });
+
+    $(".btn-download").click(function(){
+        console.log('download');
+        var canvas = $(this).closest( ".card" ).children('.card-body').children('canvas');
+
+        canvas.get(0).toBlob(function(blob) {
+            saveAs(blob, "Chart.png");
+        });
+    });
+
+});

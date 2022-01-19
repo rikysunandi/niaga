@@ -1,0 +1,304 @@
+<?php
+
+ini_set('max_execution_time', 0);
+ini_set('memory_limit',-1);
+ini_set('sqlsrv.timeout', 10000000);
+ini_set('sqlsrv.connect_timeout', 10000000);
+ini_set('date.timezone', 'Asia/Jakarta');
+
+function logToDB($unitupi, $unitap, $filename, $jml_data, $jml_foto, $keterangan, $filepath){
+  $params = array(
+    array($unitupi, SQLSRV_PARAM_IN),
+    array($unitap, SQLSRV_PARAM_IN),
+    array($filename, SQLSRV_PARAM_IN),
+    array($jml_data, SQLSRV_PARAM_IN),
+    array($jml_foto, SQLSRV_PARAM_IN),
+    array($keterangan, SQLSRV_PARAM_IN),
+    array($filepath, SQLSRV_PARAM_IN),
+  );
+
+  $sql = "EXEC SP_LOG_FTP_PRIANGAN_SIMPAN @UNITUPI = ?, @UNITAP = ?, @FILENAME = ?, @JML_DATA = ?, @JML_FOTO = ?, @KETERANGAN = ?, @FILEPATH = ? ";
+  $stmt = sqlsrv_prepare($conn, $sql, $params);
+
+  return (sqlsrv_execute($stmt));
+
+}
+
+function echoAndLog( $txt, $logfile){
+    echo $txt;
+    fwrite($logfile, $txt);
+}
+
+function getDirContents($dir, &$results = array()) {
+    $files = scandir($dir);
+
+    foreach ($files as $key => $value) {
+        $path = realpath($dir . DIRECTORY_SEPARATOR . $value);
+        if (!is_dir($path)) {
+            $results[] = $path;
+        } else if ($value != "." && $value != "..") {
+            getDirContents($path, $results);
+            $results[] = $path;
+        }
+    }
+
+    return $results;
+}
+
+function deleteDir($dir) {
+    $it = new RecursiveDirectoryIterator($dir, RecursiveDirectoryIterator::SKIP_DOTS);
+    $files = new RecursiveIteratorIterator($it,
+                 RecursiveIteratorIterator::CHILD_FIRST);
+    foreach($files as $file) {
+        if ($file->isDir()){
+            rmdir($file->getRealPath());
+        } else {
+            unlink($file->getRealPath());
+        }
+    }
+    rmdir($dir);
+}
+
+function delete_files($target) {
+    if(is_dir($target)){
+        $files = glob( $target . '*', GLOB_MARK ); //GLOB_MARK adds a slash to directories returned
+
+        foreach( $files as $file ){
+            delete_files( $file );
+        }
+
+        rmdir( $target );
+    } elseif(is_file($target)) {
+        unlink( $target );
+    }
+}
+
+function prosesUpload(){
+
+    require __DIR__ . '/../config/database.php';
+    require __DIR__ . '/../config/router.php';
+    system('cls');
+    set_time_limit (0);
+    //date_default_timezone_set('Asia/Jakarta');
+
+    $scan = (getDirContents(FTP_UPLOADS));
+
+    foreach($scan as $entry)
+    {
+
+        echo date('Y-m-d h:i:s').' '.'Cek '.$entry. PHP_EOL;
+
+        $jml_data = 0;
+        $jml_foto = 0;
+        $ext = pathinfo($entry, PATHINFO_EXTENSION);
+        if(strtolower($ext) === 'zip'){
+
+            // SET LOG FILE
+            $unitap = substr($entry,16,5);
+            $unitap_dir = substr($entry,0,21);  // D:\_FTP\uploads\53MJA Z:\_FTP\uploads\53BDG
+            $log_filename = '_log_'.$unitap.'_'.date('Ymd').'.txt';
+
+            if (file_exists($unitap_dir.'/'.$log_filename)) {
+                $log = fopen($unitap_dir.'/'.$log_filename, "a") or die("Unable to open file!");
+            } else {
+                $log = fopen($unitap_dir.'/'.$log_filename, "w") or die("Unable to open file!");
+            }
+
+            $zip = new ZipArchive;
+
+            if ($zip->open($entry)) {
+
+              $data_filename='';
+
+
+              for($i = 0; $i < $zip->numFiles; $i++)
+              {
+                  $OnlyFileName = $zip->getNameIndex($i);
+                  $FullFileName = $zip->statIndex($i);
+
+                  if (!($FullFileName['name'][strlen($FullFileName['name'])-1] =="/"))
+                  {
+                      if (preg_match('#\.(jpg|jpeg|png|csv)$#i', $OnlyFileName))
+                      {
+
+                        if(strtolower(substr(basename($OnlyFileName), -3))=='jpg'){
+
+                          $uploads_dir = PATH_UPLOAD_PHOTOS_PEMERIKSAAN_LPB.$unitap.'/'.substr(substr(basename($OnlyFileName), -14), 0, 10);
+                          if(!file_exists($uploads_dir)) mkdir($uploads_dir);
+
+                          echoAndLog( date('Y-m-d h:i:s').' '. 'Ekstrak file '.$OnlyFileName.' ke Folder '.$uploads_dir.'.. '.PHP_EOL, $log);
+
+                          if(copy('zip://'. $entry .'#'. $OnlyFileName , $uploads_dir."/".basename($OnlyFileName)))
+                            $jml_foto++;
+
+                        }else
+                        if(strtolower(substr(basename($OnlyFileName), -3))=='csv'){
+
+                          $data_filename = "D:/temp/".$unitap."-data-".date('Ymdhis').rand(0,100).".csv";
+
+                          echoAndLog( date('Y-m-d h:i:s').' '. 'Ekstrak file data '.$OnlyFileName.' ke '.$data_filename.'.. '.PHP_EOL, $log);
+
+                          copy('zip://'. $entry .'#'. $OnlyFileName , $data_filename);
+
+                        }
+                      }
+                  }
+              }
+
+              $zip->close();
+
+              echoAndLog( date('Y-m-d h:i:s').' '. 'Membaca data '.$data_filename.'.. '.PHP_EOL, $log);
+
+              if (($handle = fopen($data_filename, "r")) !== FALSE) {
+                $filename_entry = basename($entry);
+                $row = 0;
+                $berhasil = false;
+                while (($data = fgetcsv($handle)) !== FALSE) {
+                    $row++;
+                    if($row==1){
+                        $columns = $data;
+                    }
+                    else if($row>1){
+
+
+                        $data = array_combine( $columns, $data );
+                        if(!isset($data['idpel']))
+                          break;
+
+                        $filename = $data['idpel'].'_'.$data['tgl_pemeriksaan'].'.jpg';
+
+                        if(file_exists(PATH_UPLOAD_PHOTOS_PEMERIKSAAN_LPB.$unitap.'/'.$data['tgl_pemeriksaan'].'/'.$filename)){
+
+                          $foto = $unitap.'/'.$data['tgl_pemeriksaan'].'/'.$filename;
+
+                        }else{
+                          $foto = '';
+                        }
+
+                        
+                        // if(file_exists($uploads_dir.'/'.$filename)){
+                        //     $folder_to = PATH_UPLOAD_PHOTOS_PEMERIKSAAN_LPB.$data['tgl_pemeriksaan'];
+                        //     if(!file_exists($folder_to))
+                        //       mkdir($folder_to);
+
+                        //     $copy_to = $folder_to.'/'.$filename;
+
+                        //     if(copy($uploads_dir.'/'.$filename, $copy_to)){
+
+                        //       $foto = $data['tgl_pemeriksaan'].'/'.$filename;
+                        //       echoAndLog( date('Y-m-d h:i:s').' '. 'Berhasil memindahkan foto '.$filename.PHP_EOL, $log);
+
+                        //     }else{
+                        //       echoAndLog( date('Y-m-d h:i:s').' '. 'Gagal memindahkan foto '.$filename.PHP_EOL, $log);
+                        //     }
+                        // }else{
+                        //     echoAndLog( date('Y-m-d h:i:s').' '. 'Foto '.$filename.' tidak ditemukan! '.PHP_EOL, $log);
+                        // }
+                        
+
+                        $akurasi_koordinat = (isset($data['akurasi_koordinat']))? $data['akurasi_koordinat']:'';
+
+                        $params = array(
+                            array($data['tgl_pemeriksaan'], SQLSRV_PARAM_IN),
+                            array($data['idpel'], SQLSRV_PARAM_IN),
+                            array($data['nama'], SQLSRV_PARAM_IN),
+                            array($data['tarif'], SQLSRV_PARAM_IN),
+                            array($data['daya'], SQLSRV_PARAM_IN),
+                            array($data['nik'], SQLSRV_PARAM_IN),
+                            array($data['kk'], SQLSRV_PARAM_IN),
+                            array($data['nohp'], SQLSRV_PARAM_IN),
+                            array($data['email'], SQLSRV_PARAM_IN),
+                            array($data['peruntukan'], SQLSRV_PARAM_IN),
+                            array($data['sisa_kwh'], SQLSRV_PARAM_IN),
+                            array($foto, SQLSRV_PARAM_IN),
+                            array($filename_entry, SQLSRV_PARAM_IN),
+                            array('UPLOAD_FTP', SQLSRV_PARAM_IN),
+                            array($data['latitude'], SQLSRV_PARAM_IN),
+                            array($data['longitude'], SQLSRV_PARAM_IN),
+                            array($akurasi_koordinat, SQLSRV_PARAM_IN),
+                            array($data['user'], SQLSRV_PARAM_IN),
+                            array($data['tgl_insert'], SQLSRV_PARAM_IN),
+                        );
+
+                        $sql = "EXEC SP_PEMERIKSAAN_LPB_SIMPAN @TGL_PEMERIKSAAN = ?, @IDPEL = ?, @NAMA = ?, @TARIF = ?, @DAYA = ?, @NIK = ?, @KK = ?, @NOHP = ?, @EMAIL = ?, @PERUNTUKAN = ?, @SISA_KWH = ?, @FOTO = ?, @FILENAME = ?, @INPUT_TYPE = ?, @LATITUDE = ?, @LONGITUDE = ?, @AKURASI_KOORDINAT = ?, @USER_INPUT = ?, @TGL_INPUT = ? ";
+                        $stmt = sqlsrv_prepare($conn, $sql, $params);
+
+                        if(sqlsrv_execute($stmt)){
+
+                          if(sqlsrv_rows_affected( $stmt ) > 0){
+                            echoAndLog( date('Y-m-d h:i:s').' '. 'Berhasil memasukan data '.$unitap.': '.$data['idpel'].PHP_EOL, $log);
+
+                            $berhasil = true;
+                            $jml_data++;
+                            if(file_exists($entry) && copy($entry, "D:/temp/done/".$unitap."/".basename($entry))) unlink($entry);
+                          }else
+                            echoAndLog( date('Y-m-d h:i:s').' '. 'Berhasil memasukan data '.$unitap.': '.$data['idpel'].PHP_EOL, $log);
+
+                        }else{
+                            echoAndLog( date('Y-m-d h:i:s').' '. 'Gagal eksekusi menyimpan data '.$data['idpel'].PHP_EOL, $log);
+                        }
+
+                        sqlsrv_free_stmt($stmt);
+
+                    }
+                    echoAndLog( ' '. PHP_EOL, $log);
+                }
+                fclose($handle);
+
+
+                logToDB('53', $unitap, $filename_entry, $jml_data, $jml_foto, 'FILE BERHASIL DIPROSES', $entry);
+
+                if($row==1){
+                  if(file_exists($entry)) {
+
+                    copy($entry, "D:/temp/nodata/".$unitap."/"."kosong_".basename($entry));
+                    unlink($entry);
+                  }
+                  echoAndLog( date('Y-m-d h:i:s').' '. "data.csv kosong". PHP_EOL, $log);
+                }
+
+                if($berhasil) {
+                  unlink($data_filename);
+                  echoAndLog( date('Y-m-d h:i:s').' '. "Menghapus File Temp Data ".$data_filename. PHP_EOL, $log);
+                }
+
+              }else {
+
+                logToDB('53', $unitap, $filename_entry, $jml_data, $jml_foto, 'TIDAK ADA DATA.csv', $entry);
+
+                copy($entry, "D:/temp/nodata/".$unitap."/".basename($entry));
+                unlink($entry);
+                echoAndLog( date('Y-m-d h:i:s').' '. "Tidak ada data.csv". PHP_EOL, $log);
+              }
+
+            }else {
+
+              logToDB('53', $unitap, basename($entry), $jml_data, $jml_foto, 'GAGAL EXPORT ZIP (FILE CORRUPT)', $entry);
+              echoAndLog( date('Y-m-d h:i:s').' '. "Gagal export Zip". PHP_EOL, $log);
+            }
+
+
+        echoAndLog( '-----'.PHP_EOL.PHP_EOL, $log);
+        fclose($log);
+        }else{
+
+          logToDB('53', $unitap, basename($entry), $jml_data, $jml_foto, 'FILE TIDAK DIKENALI (BUKAN ZIP)', $entry);
+
+          copy($entry, "D:/temp/invalid/".$unitap."/".basename($entry));
+          unlink($entry);
+        }
+
+    }
+
+    sqlsrv_close($conn);
+    echo date('Y-m-d h:i:s').' '.'Menunggu 1 menit...'. PHP_EOL . PHP_EOL;
+    sleep(5*60); //sleep 5 menit
+
+    prosesUpload();
+}
+
+system('net use Z: "\\\\172.16.1.2\\public" ');
+prosesUpload();
+
+
+?>

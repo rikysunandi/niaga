@@ -1,0 +1,71 @@
+<?php
+
+require_once '../../bo/config/config.php';
+require_once '../../bo/config/database.php';
+
+$data = file_get_contents("php://input");
+$decode = json_decode($data,true);
+
+$now = date("Y-m-d");
+$survey = $decode['data']['survey'];
+
+$area = $decode['data']['area'];
+$idpiu = $decode['data']['idpiu'];
+$idpel = $decode['data']['idpel'];
+$ket = $decode['data']['ket'];
+$tgl = $decode['data']['tgl'];
+$nope = $decode['data']['nope'];
+$catatan = upper($decode['data']['catatan']);
+$foto = $decode['data']['foto'];
+$username = $decode['data']['username'];
+$blth = substr($idpiu,0,6);
+$blth = substr($blth,2,4).substr($blth,0,2);
+$email = '';
+
+$foto = ($foto=='')? $idpel.'-'.substr($idpiu,0,6).'-PEMUTUSAN.jpeg':$foto;
+
+$unitupi = substr($area,0,2);
+$unitap = $area;
+$unitup = substr($username,0,5);
+
+// -7.63594539,108.42757274
+$koordinat = explode(",",$lokasi);
+$latitude = $koordinat[0];
+$longitude = $koordinat[1];
+$akurasi = 0;
+
+$params = array(
+        array($blth, SQLSRV_PARAM_IN),
+        array($unitupi, SQLSRV_PARAM_IN),
+        array($unitap, SQLSRV_PARAM_IN),
+        array($unitup, SQLSRV_PARAM_IN),
+        array($idpel, SQLSRV_PARAM_IN),
+        array($tgl, SQLSRV_PARAM_IN),
+        array($ket, SQLSRV_PARAM_IN),
+        array($nope, SQLSRV_PARAM_IN),
+        array($catatan, SQLSRV_PARAM_IN),
+        array($latitude, SQLSRV_PARAM_IN),
+        array($longitude, SQLSRV_PARAM_IN),
+        array($akurasi, SQLSRV_PARAM_IN),
+        array($foto, SQLSRV_PARAM_IN),
+        array($username, SQLSRV_PARAM_IN),
+    );
+
+$sql = "EXEC SP_WS_PEMUTUSAN_SIMPAN @BLTH = ?, @UNITUPI = ?, @UNITAP = ?, @UNITUP = ?, @IDPEL = ?, @TGL_PUTUS = ?, @KET = ?, @NOHP = ?, @CATATAN = ?, @LATITUDE = ?, @LONGITUDE = ?, @AKURASI = ?, @FOTO = ?, @USERID = ? ";
+$stmt = sqlsrv_prepare($conn, $sql, $params);
+
+if(sqlsrv_execute($stmt)){
+    $response['success'] = true;
+    $response['msg'] = 'Data berhasil disimpan';
+
+}else{
+    $response['success'] = false;
+    $response['msg'] = 'Data gagal disimpan';
+}
+
+sqlsrv_free_stmt($stmt);
+sqlsrv_close($conn);
+
+echo json_encode($response);
+
+?>

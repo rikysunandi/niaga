@@ -1,0 +1,926 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="utf-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width,initial-scale=1">
+    <title>Backoffice Niaga</title>
+    <!-- Favicon icon -->
+    <link rel="icon" type="image/png" sizes="16x16" href="../../assets/images/favicon.png">
+    <link href="../css/style.css?time=<?php echo time() ?>" rel="stylesheet">
+    <link href="../css/custom.css?time=<?php echo time() ?>" rel="stylesheet">
+    
+</head>
+
+<body>
+    
+    <?php include 'parts/preloader.php'; ?>
+    
+    <!--**********************************
+        Main wrapper start
+    ***********************************-->
+    <div id="main-wrapper">
+
+        <?php include 'parts/header.php'; ?>
+        <?php include 'parts/sidebar.php'; ?>
+
+        <!--**********************************
+            Content body start
+        ***********************************-->
+        <div class="content-body">
+            <div class="container-fluid">
+                <div class="row page-titles">
+                    <div class="col p-md-0">
+                        <h4>Dashboard Saldo TS P2TL</h4>
+                        <span id="tgl_data">tanggal data: </span>
+                    </div>
+                    <div class="table-action float-right">
+                        <form action="#">
+                            <div class="form-row">
+                                <div class="form-group mb-0">
+                                    <select id="sel_unit" class="selectpicker select-sm show-tick" data-size="5" data-width="fit">
+                                        <option value="00" selected="selected">UID JABAR</option>
+                                        <option data-divider="true"></option>
+                                        <option value="53BDG">UP3 BANDUNG</option>
+                                        <option value="53BKS">UP3 BEKASI</option>
+                                        <option value="53BGR">UP3 BOGOR</option>
+                                        <option value='53CJR'>UP3 CIANJUR</option>
+                                        <option value='53CKG'>UP3 CIKARANG</option>
+                                        <option value='53CMI'>UP3 CIMAHI</option>
+                                        <option value='53CRB'>UP3 CIREBON</option>
+                                        <option value='53DPK'>UP3 DEPOK</option>
+                                        <option value='53GRT'>UP3 GARUT</option>
+                                        <option value='53GPI'>UP3 GUNUNG PUTRI</option>
+                                        <option value='53IDM'>UP3 INDRAMAYU</option>
+                                        <option value='53KRG'>UP3 KARAWANG</option>
+                                        <option value='53MJA'>UP3 MAJALAYA</option>
+                                        <option value='53PWK'>UP3 PURWAKARTA</option>
+                                        <option value='53SKI'>UP3 SUKABUMI</option>
+                                        <option value='53SMD'>UP3 SUMEDANG</option>
+                                        <option value='53TSK'>UP3 TASIKMALAYA</option>
+                                    </select>
+                                </div>
+                            </div>
+                        </form>
+                    </div>
+                </div>
+                <!-- <div class="row">
+                    <div class="col-sm-12 col-lg-12 mb-2 mt-0">
+                        <div class="table-action float-right">
+                            <form action="#">
+                                <div class="form-row">
+                                    <div class="form-group mb-0">
+                                        <select class="selectpicker show-tick" data-width="auto">
+                                            <option selected="selected">UID JABAR</option>
+                                            <option value="53BDG">UP3 BANDUNG</option>
+                                            <option value="53BKS">UP3 BEKASI</option>
+                                            <option value="53BGR">UP3 BOGOR</option>
+                                        </select>
+                                    </div>
+                                </div>
+                            </form>
+                        </div>
+                    </div>
+                </div> -->
+                <div class="row">
+                    <div class="col-sm-4 col-lg-4">
+                        <div id="card_saldo_awal" class="card">
+                            <div class="card-body bg-danger">
+                                <div class="media pl-xl-5 align-items-center">
+                                    <img class="mr-3 mt-2" src="../../assets/images/icons/13.png" alt="">
+                                    <div class="media-body pl-3">
+                                        <h2 id="total_rpts" class="mt-4 mb-2 text-white">-</h2>
+                                        <h6 id="total_jml_plg" class="mt-0 mb-0 text-white">-</h6>
+                                        <h6 id="total_jml_agenda" class="mt-0 mb-0 text-white">-</h6>
+                                        <p class="mt-4 text-white">SALDO AWAL</p>
+                                    </div>
+                                </div>
+                            </div>
+                            <div class="card-body">
+                                <div class="row">
+                                    <div class="col-6">
+                                        <h4 id="total_sesuai_rpts" class="mt-4 mb-2">-</h4>
+                                        <h6 id="total_sesuai_jml_agenda" class="mt-0 mb-0">-</h6>
+                                        <p class="mt-4">SESUAI</p>
+                                    </div>
+                                    <div class="col-6">
+                                        <h4 id="total_tdk_sesuai_rpts" class="mt-4 mb-2">-</h4>
+                                        <h6 id="total_tdk_sesuai_jml_agenda" class="mt-0 mb-0">-</h6>
+                                        <p class="mt-4">TIDAK SESUAI</p>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="col-sm-4 col-lg-4">
+                        <div id="card_pengurangan" class="card">
+                            <div class="card-body bg-primary">
+                                <div class="media pl-xl-5 align-items-center">
+                                    <img class="mr-3 mt-2" src="../../assets/images/icons/15.png" alt="">
+                                    <div class="media-body pl-3">
+                                        <h2 id="total_pengurangan_rpts" class="mt-4 mb-2 text-white">-</h2>
+                                        <h6 id="total_pengurangan_jml_plg" class="mt-0 mb-0 text-white">-</h6>
+                                        <h6 id="total_pengurangan_jml_agenda" class="mt-0 mb-0 text-white">-</h6>
+                                        <p class="mt-4 text-white">(LUNAS, BATAL, DLL)</p>
+                                    </div>
+                                </div>
+                            </div>
+                            <div class="card-body">
+                                <div class="row">
+                                    <div class="col-6">
+                                        <h4 id="total_pengurangan_sesuai_rpts" class="mt-4 mb-2">-</h4>
+                                        <h6 id="total_pengurangan_sesuai_jml_agenda" class="mt-0 mb-0">-</h6>
+                                        <p class="mt-4">SESUAI</p>
+                                    </div>
+                                    <div class="col-6">
+                                        <h4 id="total_pengurangan_tdk_sesuai_rpts" class="mt-4 mb-2">-</h4>
+                                        <h6 id="total_pengurangan_tdk_sesuai_jml_agenda" class="mt-0 mb-0">-</h6>
+                                        <p class="mt-4">TIDAK SESUAI</p>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="col-sm-4 col-lg-4">
+                        <div id="card_saldo_akhir" class="card">
+                            <div class="card-body bg-warning">
+                                <div class="media pl-xl-5 align-items-center">
+                                    <img class="mr-3 mt-2" src="../../assets/images/icons/13.png" alt="">
+                                    <div class="media-body pl-3">
+                                        <h2 id="total_saldo_akhir_rpts" class="mt-4 mb-2 text-white">-</h2>
+                                        <h6 id="total_saldo_akhir_jml_plg" class="mt-0 mb-0 text-white">-</h6>
+                                        <h6 id="total_saldo_akhir_jml_agenda" class="mt-0 mb-0 text-white">-</h6>
+                                        <p class="mt-4 text-white">SALDO AKHIR</p>
+                                    </div>
+                                </div>
+                            </div>
+                            <div class="card-body">
+                                <div class="row">
+                                    <div class="col-6">
+                                        <h4 id="total_saldo_akhir_sesuai_rpts" class="mt-4 mb-2">-</h4>
+                                        <h6 id="total_saldo_akhir_sesuai_jml_agenda" class="mt-0 mb-0">-</h6>
+                                        <p class="mt-4">SESUAI</p>
+                                    </div>
+                                    <div class="col-6">
+                                        <h4 id="total_saldo_akhir_tdk_sesuai_rpts" class="mt-4 mb-2">-</h4>
+                                        <h6 id="total_saldo_akhir_tdk_sesuai_jml_agenda" class="mt-0 mb-0">-</h6>
+                                        <p class="mt-4">TIDAK SESUAI</p>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+
+
+                <div class="row">
+                    <div class="col-sm-12 col-lg-12">
+                        <div class="row">
+                            <div class="col-sm-12 col-lg-12">
+                                <div id="2_card_saldo_akhir" class="card">
+                                    <div class="card-body bg-warning">
+                                        <div class="media pl-xl-5 align-items-center">
+                                            <img class="mr-3 mt-2" src="../../assets/images/icons/13.png" alt="">
+                                            <div class="media-body pl-3">
+                                                <h2 id="breakdown_rpts" class="mt-4 mb-2 text-white">-</h2>
+                                                <h6 id="breakdown_jml_plg" class="mt-0 mb-0 text-white">-</h6>
+                                                <h6 id="breakdown_jml_agenda" class="mt-0 mb-0 text-white">-</h6>
+                                                <p class="mt-4 text-white">SALDO AKHIR</p>
+                                            </div>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                        <div class="row">
+                            <div class="col-sm-6 col-lg-6">
+                                <div class="card">
+                                    <div class="card-body bg-success">
+                                        <h4 id="breakdown_sesuai_rpts" class="mt-4 mb-2 text-white">-</h4>
+                                        <h6 id="breakdown_sesuai_jml_plg" class="mt-0 mb-0 text-white">-</h6>
+                                        <h6 id="breakdown_sesuai_jml_agenda" class="mt-0 mb-0 text-white">-</h6>
+                                        <p class="mt-4 text-white">SESUAI</p>
+                                    </div>
+                                </div>
+                            </div>
+                            <div class="col-sm-6 col-lg-6">
+                                <div class="card">
+                                    <div class="card-body bg-warning">
+                                        <h4 id="breakdown_tdk_sesuai_rpts" class="mt-4 mb-2 text-white">-</h4>
+                                        <h6 id="breakdown_tdk_sesuai_jml_plg" class="mt-0 mb-0 text-white">-</h6>
+                                        <h6 id="breakdown_tdk_sesuai_jml_agenda" class="mt-0 mb-0 text-white">-</h6>
+                                        <p class="mt-4 text-white">TIDAK SESUAI</p>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                        <div class="row">
+                            <div class="col-sm-3 col-lg-3">
+                                <div class="card">
+                                    <div class="card-body bg-success">
+                                        <h4 id="breakdown_sesuai_lancar_rpts" class="mt-4 mb-2 text-white">-</h4>
+                                        <h6 id="breakdown_sesuai_lancar_jml_plg" class="mt-0 mb-0 text-white">-</h6>
+                                        <h6 id="breakdown_sesuai_lancar_jml_agenda" class="mt-0 mb-0 text-white">-</h6>
+                                        <p class="mt-4 text-white">LANCAR</p>
+                                    </div>
+                                </div>
+                            </div>
+                            <div class="col-sm-3 col-lg-3">
+                                <div class="card">
+                                    <div class="card-body bg-warning">
+                                        <h4 id="breakdown_sesuai_tdk_lancar_rpts" class="mt-4 mb-2 text-white">-</h4>
+                                        <h6 id="breakdown_sesuai_tdk_lancar_jml_plg" class="mt-0 mb-0 text-white">-</h6>
+                                        <h6 id="breakdown_sesuai_tdk_lancar_jml_agenda" class="mt-0 mb-0 text-white">-</h6>
+                                        <p class="mt-4 text-white">TIDAK LANCAR</p>
+                                    </div>
+                                </div>
+                            </div>
+                            <div class="col-sm-3 col-lg-3">
+                                <div class="card">
+                                    <div class="card-body bg-success">
+                                        <h4 id="breakdown_tdk_sesuai_lancar_rpts" class="mt-4 mb-2 text-white">-</h4>
+                                        <h6 id="breakdown_tdk_sesuai_lancar_jml_plg" class="mt-0 mb-0 text-white">-</h6>
+                                        <h6 id="breakdown_tdk_sesuai_lancar_jml_agenda" class="mt-0 mb-0 text-white">-</h6>
+                                        <p class="mt-4 text-white">LANCAR</p>
+                                    </div>
+                                </div>
+                            </div>
+                            <div class="col-sm-3 col-lg-3">
+                                <div class="card">
+                                    <div class="card-body bg-warning">
+                                        <h4 id="breakdown_tdk_sesuai_tdk_lancar_rpts" class="mt-4 mb-2 text-white">-</h4>
+                                        <h6 id="breakdown_tdk_sesuai_tdk_lancar_jml_plg" class="mt-0 mb-0 text-white">-</h6>
+                                        <h6 id="breakdown_tdk_sesuai_tdk_lancar_jml_agenda" class="mt-0 mb-0 text-white">-</h6>
+                                        <p class="mt-4 text-white">TIDAK LANCAR</p>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                        <div class="row">
+                            <div class="col-sm-6 col-lg-6">
+                                <div class="row">
+                                    <div class="col-sm-3 col-lg-3 p-1">
+                                        <div class="card">
+                                            <div class="card-body bg-success">
+                                                <h4 id="breakdown_sesuai_lancar_beli_token_rpts" class="mt-4 mb-2 text-white">-</h4>
+                                                <h6 id="breakdown_sesuai_lancar_beli_token_jml_plg" class="mt-0 mb-0 text-white">-</h6>
+                                                <h6 id="breakdown_sesuai_lancar_beli_token_jml_agenda" class="mt-0 mb-0 text-white">-</h6>
+                                                <p class="mt-4 text-white"><small>BELI TOKEN 6BLN</small></p>
+                                            </div>
+                                        </div>
+                                    </div>
+                                    <div class="col-sm-3 col-lg-3 p-1">
+                                        <div class="card">
+                                            <div class="card-body bg-warning">
+                                                <h4 id="breakdown_sesuai_lancar_tdk_beli_token_rpts" class="mt-4 mb-2 text-white">-</h4>
+                                                <h6 id="breakdown_sesuai_lancar_tdk_beli_token_jml_plg" class="mt-0 mb-0 text-white">-</h6>
+                                                <h6 id="breakdown_sesuai_lancar_tdk_beli_token_jml_agenda" class="mt-0 mb-0 text-white">-</h6>
+                                                <p class="mt-4 text-white"><small>TDK BELI TOKEN > 6BLN</small></p>
+                                            </div>
+                                        </div>
+                                    </div>
+                                    <div class="col-sm-3 col-lg-3 p-1">
+                                        <div class="card">
+                                            <div class="card-body bg-success">
+                                                <h4 id="breakdown_sesuai_tdk_lancar_blocking_rpts" class="mt-4 mb-2 text-white">-</h4>
+                                                <h6 id="breakdown_sesuai_tdk_lancar_blocking_jml_plg" class="mt-0 mb-0 text-white">-</h6>
+                                                <h6 id="breakdown_sesuai_tdk_lancar_blocking_jml_agenda" class="mt-0 mb-0 text-white">-</h6>
+                                                <p class="mt-4 text-white"><small>BLOCKING TOKEN</small></p>
+                                            </div>
+                                        </div>
+                                    </div>
+                                    <div class="col-sm-3 col-lg-3 p-1">
+                                        <div class="card">
+                                            <div class="card-body bg-warning">
+                                                <h4 id="breakdown_sesuai_tdk_lancar_blm_blocking_rpts" class="mt-4 mb-2 text-white">-</h4>
+                                                <h6 id="breakdown_sesuai_tdk_lancar_blm_blocking_jml_plg" class="mt-0 mb-0 text-white">-</h6>
+                                                <h6 id="breakdown_sesuai_tdk_lancar_blm_blocking_jml_agenda" class="mt-0 mb-0 text-white">-</h6>
+                                                <p class="mt-4 text-white"><small>BELUM BLOCKING</small></p>
+                                            </div>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+
+                            <div class="col-sm-6 col-lg-6">
+                                <div class="row">
+                                    <div class="col-sm-3 col-lg-3 p-1">
+                                        <div class="card">
+                                            <div class="card-body bg-success">
+                                                <h4 id="breakdown_tdk_sesuai_lancar_beli_token_rpts" class="mt-4 mb-2 text-white">-</h4>
+                                                <h6 id="breakdown_tdk_sesuai_lancar_beli_token_jml_plg" class="mt-0 mb-0 text-white">-</h6>
+                                                <h6 id="breakdown_tdk_sesuai_lancar_beli_token_jml_agenda" class="mt-0 mb-0 text-white">-</h6>
+                                                <p class="mt-4 text-white"><small>BELI TOKEN 6BLN</small></p>
+                                            </div>
+                                        </div>
+                                    </div>
+                                    <div class="col-sm-3 col-lg-3 p-1">
+                                        <div class="card">
+                                            <div class="card-body bg-warning">
+                                                <h4 id="breakdown_tdk_sesuai_lancar_tdk_beli_token_rpts" class="mt-4 mb-2 text-white">-</h4>
+                                                <h6 id="breakdown_tdk_sesuai_lancar_tdk_beli_token_jml_plg" class="mt-0 mb-0 text-white">-</h6>
+                                                <h6 id="breakdown_tdk_sesuai_lancar_tdk_beli_token_jml_agenda" class="mt-0 mb-0 text-white">-</h6>
+                                                <p class="mt-4 text-white"><small>TDK BELI TOKEN > 6BLN</small></p>
+                                            </div>
+                                        </div>
+                                    </div>
+                                    <div class="col-sm-3 col-lg-3 p-1">
+                                        <div class="card">
+                                            <div class="card-body bg-success">
+                                                <h4 id="breakdown_tdk_sesuai_tdk_lancar_blocking_rpts" class="mt-4 mb-2 text-white">-</h4>
+                                                <h6 id="breakdown_tdk_sesuai_tdk_lancar_blocking_jml_plg" class="mt-0 mb-0 text-white">-</h6>
+                                                <h6 id="breakdown_tdk_sesuai_tdk_lancar_blocking_jml_agenda" class="mt-0 mb-0 text-white">-</h6>
+                                                <p class="mt-4 text-white"><small>BLOCKING TOKEN</small></p>
+                                            </div>
+                                        </div>
+                                    </div>
+                                    <div class="col-sm-3 col-lg-3 p-1">
+                                        <div class="card">
+                                            <div class="card-body bg-warning">
+                                                <h4 id="breakdown_tdk_sesuai_tdk_lancar_blm_blocking_rpts" class="mt-4 mb-2 text-white">-</h4>
+                                                <h6 id="breakdown_tdk_sesuai_tdk_lancar_blm_blocking_jml_plg" class="mt-0 mb-0 text-white">-</h6>
+                                                <h6 id="breakdown_tdk_sesuai_tdk_lancar_blm_blocking_jml_agenda" class="mt-0 mb-0 text-white">-</h6>
+                                                <p class="mt-4 text-white"><small>BELUM BLOCKING</small></p>
+                                            </div>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                        <div class="row">
+                            <div class="col-sm-6 col-lg-6">
+                                <div class="row">
+                                    <div class="col-sm-3 col-lg-3 p-1">
+                                        <div class="card">
+                                            <div class="card-body bg-primary">
+                                                <h6 id="breakdown_sesuai_lancar_beli_token_koordinat_jml_plg" class="mt-0 mb-0 text-white">-</h6>
+                                                <p class="mt-4 text-white"><small>ADA KOORDINAT</small></p>
+                                            </div>
+                                        </div>
+                                    </div>
+                                    <div class="col-sm-3 col-lg-3 p-1">
+                                        <div class="card">
+                                            <div class="card-body bg-primary">
+                                                <h6 id="breakdown_sesuai_lancar_tdk_beli_token_koordinat_jml_plg" class="mt-0 mb-0 text-white">-</h6>
+                                                <p class="mt-4 text-white"><small>ADA KOORDINAT</small></p>
+                                            </div>
+                                        </div>
+                                    </div>
+                                    <div class="col-sm-3 col-lg-3 p-1">
+                                        <div class="card">
+                                            <div class="card-body bg-primary">
+                                                <h6 id="breakdown_sesuai_tdk_lancar_blocking_koordinat_jml_plg" class="mt-0 mb-0 text-white">-</h6>
+                                                <p class="mt-4 text-white"><small>ADA KOORDINAT</small></p>
+                                            </div>
+                                        </div>
+                                    </div>
+                                    <div class="col-sm-3 col-lg-3 p-1">
+                                        <div class="card">
+                                            <div class="card-body bg-primary">
+                                                <h6 id="breakdown_sesuai_tdk_lancar_blm_blocking_koordinat_jml_plg" class="mt-0 mb-0 text-white">-</h6>
+                                                <p class="mt-4 text-white"><small>ADA KOORDINAT</small></p>
+                                            </div>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+
+                            <div class="col-sm-6 col-lg-6">
+                                <div class="row">
+                                    <div class="col-sm-3 col-lg-3 p-1">
+                                        <div class="card">
+                                            <div class="card-body bg-primary">
+                                                <h6 id="breakdown_tdk_sesuai_lancar_beli_token_koordinat_jml_plg" class="mt-0 mb-0 text-white">-</h6>
+                                                <p class="mt-4 text-white"><small>ADA KOORDINAT</small></p>
+                                            </div>
+                                        </div>
+                                    </div>
+                                    <div class="col-sm-3 col-lg-3 p-1">
+                                        <div class="card">
+                                            <div class="card-body bg-primary">
+                                                <h6 id="breakdown_tdk_sesuai_lancar_tdk_beli_token_koordinat_jml_plg" class="mt-0 mb-0 text-white">-</h6>
+                                                <p class="mt-4 text-white"><small>ADA KOORDINAT</small></p>
+                                            </div>
+                                        </div>
+                                    </div>
+                                    <div class="col-sm-3 col-lg-3 p-1">
+                                        <div class="card">
+                                            <div class="card-body bg-primary">
+                                                <h6 id="breakdown_tdk_sesuai_tdk_lancar_blocking_koordinat_jml_plg" class="mt-0 mb-0 text-white">-</h6>
+                                                <p class="mt-4 text-white"><small>ADA KOORDINAT</small></p>
+                                            </div>
+                                        </div>
+                                    </div>
+                                    <div class="col-sm-3 col-lg-3 p-1">
+                                        <div class="card">
+                                            <div class="card-body bg-primary">
+                                                <h6 id="breakdown_tdk_sesuai_tdk_lancar_blm_blocking_koordinat_jml_plg" class="mt-0 mb-0 text-white">-</h6>
+                                                <p class="mt-4 text-white"><small>ADA KOORDINAT</small></p>
+                                            </div>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+
+
+
+                            
+<!-- 
+                <div class="row">
+                    <div class="col-xl-7 col-xxl-12 col-12">
+                        <div class="card d-flex">
+                            <div class="row m-0">
+                                <div class="col-lg-3 col-md-6 p-0">
+                                    <div class="card-body total-activity-time bg-danger">
+                                        <div class="text-center">
+                                            <span class="display-4"><i class="icon-ban text-white"></i></span>
+                                            <h2 id="total_semua_tidak_sesuai" class="mt-4 mb-0 text-white">-</h2>
+                                            <h5 id="rp_semua_tidak_sesuai" class="mt-0 mb-4 text-white">-</h5>
+                                            <p>TS P2TL TIDAK SESUAI</p>
+                                        </div>
+                                    </div>
+                                </div>
+                                <div class="col-lg-9 col-md-6 p-0">
+                                    <div class="row">
+                                        <div class="col-xl-6 col-xxl-6 col-6">
+                                            <div class="card-body">
+                                                <div class="text-center text-dark">
+                                                    <h2 id="total_ba_penetapan_sph_sesuai" class="mt-2 text-dark">-</h2>
+                                                    <p>BA, TS, SPH, <strike class="text-muted">CEKLOK</strike></p>
+                                                </div>
+                                            </div>
+                                        </div>
+                                        <div class="col-xl-6 col-xxl-6 col-6">
+                                            <div class="card-body">
+                                                <div class="text-center text-dark">
+                                                    <h2 id="total_ba_penetapan_sesuai" class="mt-2 text-dark">-</h2>
+                                                    <p>BA, TS, <strike class="text-muted">SPH, CEKLOK</strike></p>
+                                                </div>
+                                            </div>
+                                        </div>
+                                        <div class="col-xl-6 col-xxl-6 col-6">
+                                            <div class="card-body">
+                                                <div class="text-center text-dark">
+                                                    <h2 id="total_ba_sesuai" class="mt-2 text-dark">-</h2>
+                                                    <p>BA, <strike class="text-muted">TS, SPH, CEKLOK</strike></p>
+                                                </div>
+                                            </div>
+                                        </div>
+                                        <div class="col-xl-6 col-xxl-6 col-6">
+                                            <div class="card-body">
+                                                <div class="text-center text-dark">
+                                                    <h2 id="total_tidak_sesuai" class="mt-2 text-dark">-</h2>
+                                                    <p><strike class="text-muted">BA, TS, SPH, CEKLOK</strike></p>
+                                                </div>
+                                            </div>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div> -->
+                <!-- row -->
+                <div class="row">
+                    <div class="col-xl-12">
+                        <div id="card_ts_p2tl" class="card">
+                            <div class="card-header">
+                                <h4 class="card-title mt-3">Saldo Awal TS P2TL per Unit</h4>
+                                <div class="table-action float-right">
+                                    <form action="#">
+                                        <div class="form-row">
+                                            <div class="form-group mb-0">
+                                                <button type="button" class="btn btn-sm btn-outline-primary btn-ft btn-download" title="Download Image"><i class="fa fa-download"></i></span>
+                                                </button> 
+                                            </div>
+                                        </div>
+                                    </form>
+                                </div>
+                            </div>
+                            <div class="card-body">
+                                <canvas id="chart_ts_p2tl_unit"></canvas>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+
+                <div class="row">
+                    <div class="col-xl-7 col-xxl-12 col-12">
+                        <div id="card_saldo_detail" class="card d-flex bg-transparent">
+                            <div class="row m-0">
+                                <div class="col-lg-3 col-md-6 p-0">
+                                    <div class="card-body total-activity-time bg-warning">
+                                        <div class="text-center">
+                                            <!-- <span class="display-4"><i class="icon-check text-white"></i></span> -->
+                                            <h2 id="total_saldo_akhir_rpts2" class="mt-4 mb-0 text-white">-</h2>
+                                            <h5 id="total_saldo_akhir_jml_plg2" class="mt-0 mb-4 text-white">-</h5>
+                                            <p class="mt-4">SALDO AKHIR</p>
+                                        </div>
+                                    </div>
+                                </div>
+
+                                <div class="col-xl-9 col-sm-6">
+                                    <div class="card-body">
+                                        <div class="row">
+                                            <div class="col-md-6 col-xl-6 pt-4 pb-4 mb-5 mb-xl-0">
+                                                <div class="pull-left">
+                                                    <h4>Prabayar</h4>
+                                                    <p id="total_saldo_akhir_prabayar_jml_plg">-</p>
+                                                </div>
+                                                <div class="pull-right">
+                                                    <h2 id="total_saldo_akhir_prabayar_rpts" class="text-primary">-</h2>
+                                                </div>
+                                                <div class="clearfix"></div>
+                                                <div class="progress mt-4 mt-md-5" style="height:12px;">
+                                                    <div id="progress_blocking" class="progress-bar bg-primary" style="width: 0%; height:12px;" role="progressbar"><span id="text_persen_blocking" >0%</span>
+                                                    </div>
+                                                </div>
+                                                <h6 class="mt-2 text-muted">Blocking Token <span id="text_blocking" class="pull-right">-</span></h6>
+                                            </div>
+                                            <div class="col-md-6 col-xl-6 pt-4 pb-4 mb-5 mb-xl-0">
+                                                <div class="pull-left">
+                                                    <h4>Paskabayar</h4>
+                                                    <p id="total_saldo_akhir_paskabayar_jml_plg">-</p>
+                                                </div>
+                                                <div class="pull-right">
+                                                    <h2 id="total_saldo_akhir_paskabayar_rpts" class="text-success">-</h2>
+                                                </div>
+                                                <div class="clearfix"></div>
+                                                <div class="progress mt-4 mt-md-5" style="height:12px;">
+                                                    <div class="progress-bar bg-success" style="width: 10%; height:12px;" role="progressbar"><span class="sr-only">10% Complete</span>
+                                                    </div>
+                                                </div>
+                                                <h6 class="mt-2 text-muted">Pemutusan (data blm lengkap)<span class="pull-right">XX% (...plg)</span></h6>
+                                            </div>
+                                        </div>
+                                        <div class="row">
+                                            <div class="col-md-6 col-xl-6 pt-4 pb-4 mb-5 mb-xl-0">
+                                                <div class="pull-left">
+                                                    <h4>Single Agenda</h4>
+                                                    <p id="total_saldo_akhir_single_agenda_jml_plg">-</p>
+                                                </div>
+                                                <div class="pull-right">
+                                                    <h2 id="total_saldo_akhir_single_agenda_rpts" class="text-primary">-</h2>
+                                                </div>
+                                            </div>
+                                            <div class="col-md-6 col-xl-6 pt-4 pb-4 mb-5 mb-xl-0">
+                                                <div class="pull-left">
+                                                    <h4>Multi Agenda</h4>
+                                                    <p id="total_saldo_akhir_multi_agenda_jml_plg">-</p>
+                                                </div>
+                                                <div class="pull-right">
+                                                    <h2 id="total_saldo_akhir_multi_agenda_rpts" class="text-success">-</h2>
+                                                </div>
+                                            </div>
+                                        </div>
+                                    </div>
+                                </div>
+                                <!-- <div class="col-lg-9 col-md-6 p-0">
+                                    <div class="row">
+                                        <div class="col-xl-3 col-xxl-3 col-3">
+                                            <div class="card-body">
+                                                <div class="text-center text-dark">
+                                                    <h2 sph_sesuai" class="mt-2 text-dark">-</h2>
+                                                    <p>BA, TS, SPH, <strike class="text-muted">CEKLOK</strike></p>
+                                                </div>
+                                            </div>
+                                        </div>
+                                        <div class="col-xl-3 col-xxl-3 col-3">
+                                            <div class="card-body">
+                                                <div class="text-center text-dark">
+                                                    <h2 uai" class="mt-2 text-dark">-</h2>
+                                                    <p>BA, TS, <strike class="text-muted">SPH, CEKLOK</strike></p>
+                                                </div>
+                                            </div>
+                                        </div>
+                                        <div class="col-xl-3 col-xxl-3 col-3">
+                                            <div class="card-body">
+                                                <div class="text-center text-dark">
+                                                    <h2 class="mt-2 text-dark">-</h2>
+                                                    <p>BA, <strike class="text-muted">TS, SPH, CEKLOK</strike></p>
+                                                </div>
+                                            </div>
+                                        </div>
+                                        <div class="col-xl-3 col-xxl-3 col-3">
+                                            <div class="card-body">
+                                                <div class="text-center text-dark">
+                                                    <h2 class="mt-2 text-dark">-</h2>
+                                                    <p><strike class="text-muted">BA, TS, SPH, CEKLOK</strike></p>
+                                                </div>
+                                            </div>
+                                        </div>
+                                    </div>
+                                </div> -->
+                            </div>
+                        </div>
+                    </div>
+                </div>
+
+                <div class="row">
+                    <div class="col-xl-12">
+                        <div id="card_ts_p2tl_akhir" class="card">
+                            <div class="card-header">
+                                <h4 class="card-title mt-3">Saldo Akhir TS P2TL per Unit</h4>
+                                <div class="table-action float-right">
+                                    <form action="#">
+                                        <div class="form-row">
+                                            <div class="form-group mb-0">
+                                                <button type="button" class="btn btn-sm btn-outline-primary btn-ft btn-download" title="Download Image"><i class="fa fa-download"></i></span>
+                                                </button> 
+                                            </div>
+                                        </div>
+                                    </form>
+                                </div>
+                            </div>
+                            <div class="card-body">
+                                <canvas id="chart_ts_p2tl_akhir_unit"></canvas>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+
+
+
+                <div class="row">
+                    <div class="col-xl-7 col-xxl-12 col-12">
+                        <div id="card_saldo_akhir_tetap" class="card d-flex bg-transparent">
+                            <div class="row m-0">
+                                <div class="col-lg-3 col-md-6 p-0">
+                                    <div class="card-body total-activity-time bg-danger">
+                                        <div class="text-center">
+                                            <!-- <span class="display-4"><i class="icon-check text-white"></i></span> -->
+                                            <h2 id="total_saldo_akhir_tetap_rpts" class="mt-4 mb-0 text-white">-</h2>
+                                            <h5 id="total_saldo_akhir_tetap_jml_agenda" class="mt-0 mb-4 text-white">-</h5>
+                                            <p class="mt-4">TS P2TL Tanpa Progress</p>
+                                        </div>
+                                    </div>
+                                </div>
+
+                                <div class="col-xl-9 col-sm-6">
+                                    <div class="card-body">
+                                        <div class="row">
+                                            <div class="col-md-6 col-xl-6 pt-4 pb-4 mb-5 mb-xl-0">
+                                                <div class="pull-left">
+                                                    <h4>Agenda Sesuai</h4>
+                                                    <p id="total_saldo_akhir_tetap_sesuai_jml_agenda">-</p>
+                                                </div>
+                                                <div class="pull-right">
+                                                    <h2 id="total_saldo_akhir_tetap_sesuai_rpts" class="text-primary">-</h2>
+                                                </div>
+                                            </div>
+                                            <div class="col-md-6 col-xl-6 pt-4 pb-4 mb-5 mb-xl-0">
+                                                <div class="pull-left">
+                                                    <h4>Agenda Tidak Sesuai</h4>
+                                                    <p id="total_saldo_akhir_tetap_tdk_sesuai_jml_agenda">-</p>
+                                                </div>
+                                                <div class="pull-right">
+                                                    <h2 id="total_saldo_akhir_tetap_tdk_sesuai_rpts" class="text-danger">-</h2>
+                                                </div>
+                                            </div>
+                                        </div>
+                                    </div>
+                                </div>
+                                <!-- <div class="col-lg-9 col-md-6 p-0">
+                                    <div class="row">
+                                        <div class="col-xl-3 col-xxl-3 col-3">
+                                            <div class="card-body">
+                                                <div class="text-center text-dark">
+                                                    <h2 sph_sesuai" class="mt-2 text-dark">-</h2>
+                                                    <p>BA, TS, SPH, <strike class="text-muted">CEKLOK</strike></p>
+                                                </div>
+                                            </div>
+                                        </div>
+                                        <div class="col-xl-3 col-xxl-3 col-3">
+                                            <div class="card-body">
+                                                <div class="text-center text-dark">
+                                                    <h2 uai" class="mt-2 text-dark">-</h2>
+                                                    <p>BA, TS, <strike class="text-muted">SPH, CEKLOK</strike></p>
+                                                </div>
+                                            </div>
+                                        </div>
+                                        <div class="col-xl-3 col-xxl-3 col-3">
+                                            <div class="card-body">
+                                                <div class="text-center text-dark">
+                                                    <h2 class="mt-2 text-dark">-</h2>
+                                                    <p>BA, <strike class="text-muted">TS, SPH, CEKLOK</strike></p>
+                                                </div>
+                                            </div>
+                                        </div>
+                                        <div class="col-xl-3 col-xxl-3 col-3">
+                                            <div class="card-body">
+                                                <div class="text-center text-dark">
+                                                    <h2 class="mt-2 text-dark">-</h2>
+                                                    <p><strike class="text-muted">BA, TS, SPH, CEKLOK</strike></p>
+                                                </div>
+                                            </div>
+                                        </div>
+                                    </div>
+                                </div> -->
+                            </div>
+                        </div>
+                    </div>
+                </div>
+
+                <div class="row">
+                    <div class="col-xl-12">
+                        <div id="card_ts_p2tl_akhir_tetap" class="card">
+                            <div class="card-header">
+                                <h4 class="card-title mt-3">TS P2TL Tanpa Progress per Unit</h4>
+                                <div class="table-action float-right">
+                                    <form action="#">
+                                        <div class="form-row">
+                                            <div class="form-group mb-0">
+                                                <button type="button" class="btn btn-sm btn-outline-primary btn-ft btn-download" title="Download Image"><i class="fa fa-download"></i></span>
+                                                </button> 
+                                            </div>
+                                        </div>
+                                    </form>
+                                </div>
+                            </div>
+                            <div class="card-body">
+                                <canvas id="chart_ts_p2tl_akhir_tetap_unit"></canvas>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+
+                <div class="row">
+                    <div class="col-xl-12">
+                        <div id="card_blocking_token" class="card">
+                            <div class="card-header">
+                                <h4 class="card-title mt-3">Blocking Token per Unit</h4>
+                                <div class="table-action float-right">
+                                    <form action="#">
+                                        <div class="form-row">
+                                            <div class="form-group mb-0">
+                                                <button type="button" class="btn btn-sm btn-outline-primary btn-ft btn-download" title="Download Image"><i class="fa fa-download"></i></span>
+                                                </button> 
+                                            </div>
+                                        </div>
+                                    </form>
+                                </div>
+                            </div>
+                            <div class="card-body">
+                                <canvas id="chart_blocking_unit"></canvas>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+
+                <div class="row">
+                    <div class="col-xl-12">
+                        <div id="card_rekap_blocking" class="card transparent-card m-b-0">
+                            <div class="card-header">
+                                <h4 class="card-title mt-3">Progress Blocking per UP3</h4>
+                            </div>
+                            <div class="card-body p-0">
+                                <div class="table-responsive">
+                                    <table class="table table-padded table-responsive-fix-big property-overview-table">
+                                        <thead>
+                                            <tr>
+                                                <th>KODE</th>
+                                                <th>NAMA</th>
+                                                <th>JML PLG</th>
+                                                <th>JML JATUH TEMPO</th>
+                                                <th>SUDAH BLOCKING</th>
+                                                <th>BLM BLOCKING</th>
+                                                <th>PERSENTASE</th>
+                                            </tr>
+                                        </thead>
+                                        <tbody></tbody>
+                                    </table>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+<!-- 
+                <div class="row">
+                    <div class="col-lg-12">
+                        <div class="row">
+                            <div class="col-sm-6">
+                                <div id="card_permohonan_status_proses" class="card chartjs-stat-card-1">
+                                    <div class="card-header">
+                                        <h4 class="card-title mb-4 text-dark">Status Proses</h4>
+                                        <div class="table-action float-right">
+                                            <form action="#">
+                                                <div class="form-row">
+                                                    <div class="form-group mb-0">
+                                                        <button type="button" class="btn btn-sm btn-outline-primary btn-ft btn-download" title="Download Image"><i class="fa fa-download"></i></span>
+                                                        </button> 
+                                                    </div>
+                                                </div>
+                                            </form>
+                                        </div>
+                                    </div>
+                                    <div class="card-body">
+                                    </div>
+                                </div>
+                            </div>
+                            <div class="col-sm-6">
+                                <div id="card_permohonan_tmp" class="card chartjs-stat-card-1">
+                                    <div class="card-header">
+                                        <h4 class="card-title mb-4 text-dark">Status TMP</h4>
+                                        <div class="table-action float-right">
+                                            <form action="#">
+                                                <div class="form-row">
+                                                    <div class="form-group mb-0">
+                                                        <button type="button" class="btn btn-sm btn-outline-primary btn-ft btn-download" title="Download Image"><i class="fa fa-download"></i></span>
+                                                        </button> 
+                                                    </div>
+                                                </div>
+                                            </form>
+                                        </div>
+                                    </div>
+                                    <div class="card-body">
+                                        <canvas id="chart_permohonan_tmp"></canvas>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                <div class="row">
+                    <div class="col-lg-12">
+                        <div class="row">
+                            <div class="col-sm-6">
+                                <div id="card_permohonan_alasan" class="card chartjs-stat-card-1">
+                                    <div class="card-header">
+                                        <h4 class="card-title mb-4 text-dark">Alasan Kriteria TMP</h4>
+                                        <div class="table-action float-right">
+                                            <form action="#">
+                                                <div class="form-row">
+                                                    <div class="form-group mb-0">
+                                                        <button type="button" class="btn btn-sm btn-outline-primary btn-ft btn-download" title="Download Image"><i class="fa fa-download"></i></span>
+                                                        </button> 
+                                                    </div>
+                                                </div>
+                                            </form>
+                                        </div>
+                                    </div>
+                                    <div class="card-body">
+                                        <canvas id="chart_permohonan_alasan"></canvas>
+                                    </div>
+                                </div>
+                            </div>
+                            <div class="col-sm-6">
+                                <div id="card_permohonan_jenis" class="card chartjs-stat-card-1">
+                                    <div class="card-header">
+                                        <h4 class="card-title mb-4 text-dark">Keterangan Transaksi</h4>
+                                        <div class="table-action float-right">
+                                            <form action="#">
+                                                <div class="form-row">
+                                                    <div class="form-group mb-0">
+                                                        <button type="button" class="btn btn-sm btn-outline-primary btn-ft btn-download" title="Download Image"><i class="fa fa-download"></i></span>
+                                                        </button> 
+                                                    </div>
+                                                </div>
+                                            </form>
+                                        </div>
+                                    </div>
+                                    <div class="card-body">
+                                        <canvas id="chart_permohonan_jenis"></canvas>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                 -->
+            </div>
+            <!-- #/ container -->
+        </div>
+        <!--**********************************
+            Content body end
+        ***********************************-->
+        
+        
+
+    </div>
+    <!--**********************************
+        Main wrapper end
+    ***********************************-->
+
+    <?php include 'parts/footer.php'; ?>
+
+    <!--**********************************
+        Scripts
+    ***********************************-->
+    <script src="../../assets/plugins/common/common.min.js"></script>
+    <script src="../js/custom.min.js"></script>
+    <script src="../js/settings.js"></script>
+    <script src="../js/gleek.js"></script>
+    
+    <script src="../../assets/plugins/block-ui/jquery.blockUI.js"></script>
+    <script src="../../assets/plugins/chart.js/Chart.bundle.min.js"></script>
+    <script src="../../assets/plugins/wnumb/wNumb.js"></script>
+    <script src="https://cdn.jsdelivr.net/gh/emn178/chartjs-plugin-labels/src/chartjs-plugin-labels.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/FileSaver.js/1.3.3/FileSaver.min.js"></script>
+    
+    <script src="../js/pages/index-admaga.js"></script>
+</body>
+</html>

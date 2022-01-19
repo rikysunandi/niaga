@@ -1,0 +1,31 @@
+<?php
+
+require_once '../../config/config.php';
+require_once '../../config/database.php';
+
+
+$response = array();
+
+$stmt = sqlsrv_query($conn, "select * from vw_rekap_daftung_tmp order by URUT ASC");
+if($stmt){
+	$i=0;
+	while( $row = sqlsrv_fetch_array( $stmt, SQLSRV_FETCH_ASSOC) ) {
+		$response['status_tmp'][$i] = $row['STATUS_TMP']; 
+		$response['jml_permohonan'][$i] = intval($row['JML_PERMOHONAN']); 
+
+		$i++;
+	}
+
+	$response['success'] = true;
+	sqlsrv_free_stmt($stmt);
+
+
+}else{
+	$response['success'] = false;
+	$response['msg'] = 'Gagal melakukan Query ke Database';
+}
+
+
+echo json_encode($response);
+
+?>

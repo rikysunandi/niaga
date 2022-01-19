@@ -1,0 +1,48 @@
+<?php
+
+require_once '../bo/config/config.php';
+require_once '../bo/config/database.php';
+
+$data = file_get_contents("php://input");
+$decode = json_decode($data,true);
+
+$now = date("Y-m-d");
+$username = $decode['data']['username'];
+$tgl = $decode['data']['tgl'];
+//$tgl = date("Y-m-d H:i:s", strtotime($tgl));
+$blth = date("Ym", strtotime($tgl));
+
+$unitupi = substr($area,0,2);
+$unitap = $area;
+$unitup = substr($username,0,5);
+
+$params = array(
+        array($username, SQLSRV_PARAM_IN),
+        array($tgl, SQLSRV_PARAM_IN),
+    );
+
+$sql = "EXEC SP_WS_CEK_CLOCKIN @USERNAME = ?, @TGL_CLOCKIN = ? ";
+$stmt = sqlsrv_prepare($conn, $sql, $params);
+
+if(sqlsrv_execute($stmt)){
+    $response['success'] = true;
+    $row = sqlsrv_fetch_array( $stmt, SQLSRV_FETCH_ASSOC) ;
+    if($row['TGL_CLOCKIN']==''){
+        $response['success'] = false;
+        $response['msg'] = 'Anda belum Clock In hari ini';   
+    }else{
+        $response['success'] = true;
+        $response['msg'] = $row['TGL_CLOCKIN'];   
+    }
+
+}else{
+    $response['success'] = false;
+    $response['msg'] = 'Data gagal disimpan';
+}
+
+sqlsrv_free_stmt($stmt);
+sqlsrv_close($conn);
+
+echo json_encode($response);
+
+?>

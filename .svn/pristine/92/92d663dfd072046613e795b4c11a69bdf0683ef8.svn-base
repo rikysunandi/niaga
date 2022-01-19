@@ -1,0 +1,84 @@
+<?php
+
+ini_set('memory_limit', '512M');
+ini_set('upload_max_filesize', '120M');
+ini_set('post_max_size', '120M');
+ini_set('max_input_time', 100);
+ini_set('max_execution_time', 100);
+
+require_once '../config/database.php';
+
+function getDirContents($dir, &$results = array()) {
+    $files = scandir($dir);
+
+    foreach ($files as $key => $value) {
+        $path = realpath($dir . DIRECTORY_SEPARATOR . $value);
+        if (!is_dir($path)) {
+            $results[] = $path;
+        } else if ($value != "." && $value != "..") {
+            getDirContents($path, $results);
+            $results[] = $path;
+        }
+    }
+
+    return $results;
+}
+
+$scan = (getDirContents('D:\_FTP\uploads'));
+
+foreach($scan as $entry)
+{
+    echo $entry.'<br/>';
+
+    $ext = pathinfo($entry, PATHINFO_EXTENSION);
+    if(strtolower($ext) === 'zip'){
+
+        $zip = new ZipArchive;
+
+        if ($zip->open($entry)) {
+          $uploads_dir = '../assets/uploads/upload-'.date('Ymdhis');
+          if(!file_exists($uploads_dir)) mkdir($uploads_dir);
+
+          echo 'Ekstrak file '.$entry.' ke Folder '.$uploads_dir.'.. <br/>';
+          for($i = 0; $i < $zip->numFiles; $i++) 
+          { 
+              $OnlyFileName = $zip->getNameIndex($i);
+              $FullFileName = $zip->statIndex($i);    
+
+              if (!($FullFileName['name'][strlen($FullFileName['name'])-1] =="/"))
+              {
+                  if (preg_match('#\.(jpg|jpeg|png|csv)$#i', $OnlyFileName))
+                  {
+                      copy('zip://'. $entry .'#'. $OnlyFileName , $uploads_dir."/".basename($OnlyFileName)); 
+                  } 
+              }
+          }
+
+          $zip->close();
+
+          $fp = file(($uploads_dir).'/data.csv', FILE_SKIP_EMPTY_LINES);
+          $count = count($fp)-1;
+
+          $row = 1;
+          if (($handle = fopen($uploads_dir."/data.csv", "r")) !== FALSE) {
+            while (($data = fgetcsv($handle)) !== FALSE) {
+                if($row>1){
+                    echo 'DATA: '.$data[0].', '.$data[1].', '.$data[2].'<br/>';
+                }
+                $row++;
+            }
+            fclose($handle);
+          }
+
+        }else {
+          echo "Gagal export Zip<br/>";
+        }
+
+    }
+
+    echo '<hr/>';
+}
+
+
+
+?>

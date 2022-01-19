@@ -1,0 +1,60 @@
+<?php
+
+require_once '../../config/config.php';
+require_once '../../config/database.php';
+
+
+$unitupi = $_GET['unitupi'];
+$unitap = $_GET['unitap'];
+$unitup = $_GET['unitup'];
+$user = 'SYSTEM';
+
+$params = array(
+        array($user, SQLSRV_PARAM_IN),
+        array($unitupi, SQLSRV_PARAM_IN),
+        array($unitap, SQLSRV_PARAM_IN),
+        array($unitup, SQLSRV_PARAM_IN),
+    );
+
+$sql = "EXEC sp_vw_Create_Daftung_Unit @UserID = ?, @Unitupi = ?, @Unitap = ?, @Unitup = ? ";
+$stmt = sqlsrv_prepare($conn, $sql, $params);
+
+//sqlsrv_execute($stmt);
+if(!sqlsrv_execute($stmt)){
+    die(print_r( sqlsrv_errors(), true));
+}
+
+$response = array();
+
+$stmt = sqlsrv_query($conn, "select TOP 10 * from vw_Create_Daftung_Unit order by TGLMOHON DESC");
+if($stmt){
+	$i=0;
+	while( $row = sqlsrv_fetch_array( $stmt, SQLSRV_FETCH_ASSOC) ) {
+		$response['rows'][$i]['noagenda'] = $row['NOAGENDA_INDIVIDU']; 
+		$response['rows'][$i]['tglmohon'] = date_format($row['TGLMOHON'],"d/m/Y H:i"); 
+		$response['rows'][$i]['idpel'] = $row['IDPEL']; 
+		$response['rows'][$i]['jenis_transaksi'] = $row['JENIS_TRANSAKSI']; 
+		$response['rows'][$i]['alasan_kriteria_tmp'] = $row['ALASAN_KRITERIA_TMP']; 
+		$response['rows'][$i]['tarif_daya_lama'] = ($row['TARIF_LAMA']=='')? '':$row['TARIF_LAMA'].'/'.number_format($row['DAYA_LAMA']).' VA'; 
+		$response['rows'][$i]['tarif_daya_baru'] = $row['TARIF_BARU'].'/'.number_format($row['DAYA_BARU']).' VA'; 
+		$response['rows'][$i]['rp_bp'] = number_format($row['RP_BP']); 
+		$response['rows'][$i]['rp_rab'] = number_format($row['RP_RAB']); 
+		$response['rows'][$i]['status'] = $row['STATUS_PROSES']; 
+		$response['rows'][$i]['label_status'] = ($row['STATUS_PROSES']=='PROSES')? 'label-success':'label-warning'; 
+
+		$i++;
+	}
+
+	$response['success'] = true;
+	sqlsrv_free_stmt($stmt);
+
+
+}else{
+	$response['success'] = false;
+	$response['msg'] = 'Gagal melakukan Query ke Database';
+}
+
+
+echo json_encode($response);
+
+?>

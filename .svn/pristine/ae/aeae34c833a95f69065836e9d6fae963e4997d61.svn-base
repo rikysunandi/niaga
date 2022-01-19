@@ -1,0 +1,309 @@
+$(function() {
+    "use strict";
+
+
+    let draw = Chart.controllers.line.prototype.draw;
+    Chart.controllers.line = Chart.controllers.line.extend({
+        draw: function() {
+            draw.apply(this, arguments);
+            let ctx = this.chart.chart.ctx;
+            let _stroke = ctx.stroke;
+            ctx.stroke = function() {
+                ctx.save();
+                ctx.shadowColor = '#f060b1';
+                ctx.shadowBlur = 10;
+                ctx.shadowOffsetX = 0;
+                ctx.shadowOffsetY = 9;
+                _stroke.apply(this, arguments)
+                ctx.restore();
+            }
+        }
+    });
+
+
+    $('div#card_permohonan').block({ message: 'Mengambil data...' });
+    $.getJSON('../controller/getDashboardPermohonan.php', function(data){
+        $('#total_permohonan').html(data.total_permohonan);
+        $('#total_proses').html(data.total_proses);
+        $('#total_evaluasi').html(data.total_evaluasi);
+
+        var ctx = document.getElementById("chart_permohonan");
+        ctx.height = 240;
+        new Chart(ctx, {
+            type: 'bar',
+            data: {
+                labels: data.ap,
+                datasets: [
+                    {
+                        label: "BP>=RAB",
+                        type: "bar",
+                        backgroundColor: "#74BCC7",
+                        backgroundColorHover: "#74BCC7",
+                        data: data.jml_proses,
+                    },
+                    {
+                        label: "BP<RAB",
+                        type: "bar",
+                        backgroundColor: "#EC5B43",
+                        backgroundColorHover: "#EC5B43",
+                        data: data.jml_evaluasi,
+                    }
+                ]
+            },
+            options: {
+                responsive: true, 
+                maintainAspectRatio: false, 
+                barRadius: 4,
+                title: {
+                    display: false,
+                    text: 'Rekap Permohonan'
+                },
+                tooltips: {
+                    mode: 'index',
+                    intersect: false,
+                    // callbacks: {
+                    //     label: function (t, d) {
+                    //         if (t.datasetIndex === 0) {
+                    //             return t.yLabel.toFixed(0);
+                    //         } else if (t.datasetIndex === 1) {
+                    //             if (t.yLabel.toString().length === 9) {
+                    //                 return Math.round(+t.yLabel.toString().replace(/(\d{3})(.*)/, '$1.$2')) + 'M';
+                    //             } else return Math.round(+t.yLabel.toString().replace(/(\d{2})(.*)/, '$1.$2')) + 'M';
+                    //         }
+                    //     }
+                    // }
+                },
+                legend: {
+                    position: 'bottom',
+                    display: true,
+                    labels: {
+                        // fontFamily: 'CircularStdBook',
+                    },
+                },
+                scales: {
+                    yAxes: [{
+                        display: false,
+                        stacked: true,
+                        gridLines: {
+                            display: false,
+                            drawBorder: false
+                        },
+                        ticks: {
+                            beginAtZero: true
+                        }
+                    }],
+                    xAxes: [{
+                        stacked: true,
+                        gridLines: {
+                            display: false,
+                            drawBorder: false
+                        },
+                    }]
+                }
+            }
+        });
+
+        $('div#card_permohonan').unblock();
+    });
+
+    
+    $('div#card_permohonan_alasan').block({ message: 'Mengambil data...' });
+    $.getJSON('../controller/getDashboardPermohonanAlasan.php', function(data){
+        var ctx = document.getElementById("chart_permohonan_alasan");
+        new Chart(ctx, {
+            type: 'pie',
+            data: {
+                datasets: [{
+                    data: data.jml_permohonan,
+                    backgroundColor: [
+                        '#74BCC7',
+                        '#F2C36B',
+                        '#EC5B43',
+                    ],
+                    label: 'Alasan Kriteria TMP'
+                }],
+                labels: data.alasan_kriteria_tmp
+            },
+            options: {
+                responsive: true,
+                legend: {
+                    position: 'bottom',
+                    display: true,
+                    labels: {
+                        // fontFamily: 'CircularStdBook',
+                        fontSize: 8,
+                    },
+                },
+                tooltips:{
+                    titleFontSize: 8,
+                    bodyFontSize: 8,
+                    footerFontSize: 8,
+                }
+            }
+        });
+
+        $('div#card_permohonan_alasan').unblock();
+    });
+
+
+    $('div#card_permohonan_jenis').block({ message: 'Mengambil data...' });
+    $.getJSON('../controller/getDashboardPermohonanJenis.php', function(data){
+        var ctx = document.getElementById("chart_permohonan_jenis");
+        new Chart(ctx, {
+            type: 'pie',
+            data: {
+                datasets: [{
+                    data: data.jml_permohonan,
+                    backgroundColor: [
+                        '#7F63F4',
+                        '#74BCC7',
+                        '#F2C36B',
+                    ],
+                    label: 'Jenis Transaksi'
+                }],
+                labels: data.jenis_transaksi
+            },
+            options: {
+                responsive: true,
+                legend: {
+                    position: 'bottom',
+                    display: true,
+                    labels: {
+                        // fontFamily: 'CircularStdBook',
+                        fontSize: 8,
+                    },
+                },
+                tooltips:{
+                    titleFontSize: 8,
+                    bodyFontSize: 8,
+                    footerFontSize: 8,
+                }
+            }
+        });
+
+        $('div#card_permohonan_jenis').unblock();
+    });
+
+    $('div#card_latest_agenda').block({ message: 'Mengambil data...' });
+    $.getJSON('../controller/getDashboardPermohonanTerbaru.php', function(data){
+        
+        var tr = '';
+        $.each(data.rows, function(k,v){
+            tr += '<tr>';
+            tr += '<td>'+v.noagenda+'</td>';
+            tr += '<td>'+v.tglmohon+'</td>';
+            tr += '<td>'+v.jenis_transaksi+'</td>';
+            tr += '<td>'+v.tarif_daya_lama+'</td>';
+            tr += '<td>'+v.tarif_daya_baru+'</td>';
+            // tr += '<td>'+v.alasan_kriteria_tmp+'</td>';
+            tr += '<td>'+v.rp_bp+'</td>';
+            tr += '<td>'+v.rp_rab+'</td>';
+            tr += '<td><span class="label '+v.label_status+'">'+v.status+'</span></td>';
+            tr += '</tr>';
+        });
+        $('div#card_latest_agenda table tbody').append(tr);
+        $('div#card_latest_agenda').unblock();
+    });
+
+
+
+    // var ctx = document.getElementById("sales-properties");
+    // ctx.height = 100;
+    // new Chart(ctx, {
+    //     type: 'bar',
+    //     data: {
+    //         labels: ["A", "B", "C", "D", "E", "F", "G", "H", "I", "J", "K", "L", "M", "N", "O", "P", "Q", "R", "S", "T", "U", "V", "W", "X", "Y", "Z", "AA", "AB", ],
+    //         datasets: [{
+    //             label: '',
+    //             data: [5, 6, 4.5, 5.5, 3, 6, 4.5, 6, 8, 3, 5.5, 4, 6, 9, 12, 4, 3, 6, 4.5, 6, 8, 4.5, 5, 6, 4.5, 5.5, ],
+    //             backgroundColor: '#fdae3b',
+    //         }]
+    //     },
+    //     options: {
+    //         legend: {
+    //             display: false
+    //         },
+    //         scales: {
+    //             xAxes: [{
+    //                 gridLines: {
+    //                     drawBorder: false,
+    //                     display: false
+    //                 },
+    //                 ticks: {
+    //                     display: false, // hide main x-axis line
+    //                     beginAtZero: true
+    //                 },
+    //                 barPercentage: 1,
+    //                 categoryPercentage: 0.3
+    //             }],
+    //             yAxes: [{
+    //                 gridLines: {
+    //                     drawBorder: false, // hide main y-axis line
+    //                     display: false
+    //                 },
+    //                 ticks: {
+    //                     display: false,
+    //                     beginAtZero: true
+    //                 },
+    //             }]
+    //         },
+    //         tooltips: {
+    //             enabled: true
+    //         }
+    //     }
+    // });
+
+
+
+
+    // // Rent Properties
+
+
+
+    // var ctx = document.getElementById("rent-properties");
+    // ctx.height = 100;
+    // new Chart(ctx, {
+    //     type: 'bar',
+    //     data: {
+    //         labels: ["A", "B", "C", "D", "E", "F", "G", "H", "I", "J", "K", "L", "M", "N", "O", "P", "Q", "R", "S", "T", "U", "V", "W", "X", "Y", "Z", "AA", "AB", ],
+    //         datasets: [{
+    //             label: '',
+    //             data: [5, 6, 4.5, 5.5, 3, 6, 4.5, 6, 8, 3, 5.5, 4, 6, 9, 12, 4, 3, 6, 4.5, 6, 8, 4.5, 5, 6, 4.5, 5.5, ],
+    //             backgroundColor: '#71d875',
+    //         }]
+    //     },
+    //     options: {
+    //         legend: {
+    //             display: false
+    //         },
+    //         scales: {
+    //             xAxes: [{
+    //                 gridLines: {
+    //                     drawBorder: false,
+    //                     display: false
+    //                 },
+    //                 ticks: {
+    //                     display: false, // hide main x-axis line
+    //                     beginAtZero: true
+    //                 },
+    //                 barPercentage: 1,
+    //                 categoryPercentage: 0.3
+    //             }],
+    //             yAxes: [{
+    //                 gridLines: {
+    //                     drawBorder: false, // hide main y-axis line
+    //                     display: false
+    //                 },
+    //                 ticks: {
+    //                     display: false,
+    //                     beginAtZero: true
+    //                 },
+    //             }]
+    //         },
+    //         tooltips: {
+    //             enabled: true
+    //         }
+    //     }
+    // });
+
+});

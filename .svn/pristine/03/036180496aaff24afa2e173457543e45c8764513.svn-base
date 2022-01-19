@@ -1,0 +1,77 @@
+<?php
+
+require_once '../../../config/config.php';
+require_once '../../../config/database.php';
+
+$response = array();
+$unitap = $_GET['unitap'];
+
+if($unitap <> '00' AND strlen($unitap)==5)
+	$stmt = sqlsrv_query($conn, "select * from vw_rekap_ts_p2tl_up where UNITAP='$unitap' order by JML_TOTAL DESC");
+else
+	$stmt = sqlsrv_query($conn, "select * from vw_rekap_ts_p2tl_ap order by JML_TOTAL DESC");
+
+if($stmt){
+	$i=0;
+	$response['total_ts_p2tl'] = 0;
+	$response['total_sesuai'] = 0;
+	$response['rp_sesuai'] = 0;
+	$response['jml_sesuai_prabayar'] = 0;
+	$response['rp_sesuai_prabayar'] = 0;
+	$response['jml_sesuai_paskabayar'] = 0;
+	$response['rp_sesuai_paskabayar'] = 0;
+	$response['total_semua_tidak_sesuai'] = 0;
+	$response['total_ba_penetapan_sph_sesuai'] = 0;
+	$response['total_ba_penetapan_sesuai'] = 0;
+	$response['total_ba_sesuai'] = 0;
+	$response['total_tidak_sesuai'] = 0;
+	while( $row = sqlsrv_fetch_array( $stmt, SQLSRV_FETCH_ASSOC) ) {
+		$response['unit'][$i] = $row['UNIT']; 
+		$response['nama'][$i] = $row['NAMA']; 
+		$response['singkatan'][$i] = $row['SINGKATAN']; 
+		$response['jml_prabayar'][$i] = intval($row['JML_PRABAYAR']); 
+		$response['jml_paskabayar'][$i] = intval($row['JML_PASKABAYAR']); 
+		$response['jml_ba_penetapan_sph_ceklok_sesuai'][$i] = intval($row['JML_SESUAI']); 
+		$response['jml_ba_penetapan_sph_sesuai'][$i] = intval($row['JML_BA_PENETAPAN_SPH_SESUAI']); 
+		$response['jml_ba_penetapan_sesuai'][$i] = intval($row['JML_BA_PENETAPAN_SESUAI']); 
+		$response['jml_ba_sesuai'][$i] = intval($row['JML_BA_SESUAI']); 
+		$response['jml_tidak_sesuai'][$i] = intval($row['JML_TIDAK_SESUAI']); 
+		$response['jml_total'][$i] = intval($row['JML_TOTAL']); 
+		
+		$response['total_ts_p2tl'] += intval($row['JML_TOTAL']); 
+		$response['total_sesuai'] += intval($row['JML_BA_PENETAPAN_SPH_CEKLOK_SESUAI']); 
+		$response['total_ba_penetapan_sph_sesuai'] += intval($row['JML_BA_PENETAPAN_SPH_SESUAI']); 
+		$response['total_ba_penetapan_sesuai'] += intval($row['JML_BA_PENETAPAN_SESUAI']); 
+		$response['total_ba_sesuai'] += intval($row['JML_BA_SESUAI']); 
+		$response['total_tidak_sesuai'] += intval($row['JML_TIDAK_SESUAI']); 
+		$response['total_sesuai'] += intval($row['JML_SESUAI']); 
+		$response['rp_sesuai'] += intval($row['RP_SESUAI']); 
+		$response['jml_sesuai_prabayar'] += intval($row['JML_SESUAI_PRABAYAR']); 
+		$response['rp_sesuai_prabayar'] += intval($row['RP_SESUAI_PRABAYAR']); 
+		$response['jml_sesuai_paskabayar'] += intval($row['JML_SESUAI_PASKABAYAR']); 
+		$response['rp_sesuai_paskabayar'] += intval($row['RP_SESUAI_PASKABAYAR']); 
+		$response['total_semua_tidak_sesuai'] += (intval($row['JML_TOTAL']) -  intval($row['JML_SESUAI'])); 
+		// $response['jml_ts_p2tl_dalam_tmp'][$i] = intval($row['JML_ts_p2tl_DALAM_TMP']); 
+		// $response['jml_ts_p2tl_mendekati_tmp'][$i] = intval($row['JML_ts_p2tl_MENDEKATI_TMP']); 
+		// $response['jml_ts_p2tl_melebihi_tmp'][$i] = intval($row['JML_ts_p2tl_MELEBIHI_TMP']); 
+
+		$i++;
+	}
+
+	$response['total_agenda'] = number_format($response['total_agenda']);
+	$response['total_agenda_rab'] = number_format($response['total_agenda_rab']);
+	$response['total_proses'] = number_format($response['total_proses']);
+	$response['total_evaluasi'] = number_format($response['total_evaluasi']);
+	$response['success'] = true;
+	sqlsrv_free_stmt($stmt);
+
+
+}else{
+	$response['success'] = false;
+	$response['msg'] = 'Gagal melakukan Query ke Database';
+}
+
+
+echo json_encode($response);
+
+?>

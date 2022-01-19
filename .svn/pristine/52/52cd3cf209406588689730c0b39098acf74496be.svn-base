@@ -1,0 +1,14 @@
+(function($) {
+    "use strict"
+
+    Dropzone.options.filePemeriksaanLpb = {
+        maxFilesize: 30,
+        acceptedFiles: ".zip",
+        success: function(file, response){
+            console.log('response', response);
+        }
+    };
+
+
+
+})(jQuery);

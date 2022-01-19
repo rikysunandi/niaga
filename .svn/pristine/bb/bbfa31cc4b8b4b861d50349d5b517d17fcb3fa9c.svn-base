@@ -1,0 +1,42 @@
+<?php
+
+ini_set('upload_max_filesize', '30M');
+ini_set('post_max_size', '30M');
+
+require_once '../../../config/database.php';
+require_once '../../../config/ftp.php';
+
+$unitupi = $_REQUEST['unitupi'];
+$unitap = $_REQUEST['unitap'];
+$unitup = $_REQUEST['unitup'];
+
+$ext = pathinfo($_FILES['file']['tmp_name'], PATHINFO_EXTENSION);
+
+if ( 0 < $_FILES['file']['error'] ) {
+	$response['success'] = false;
+	$response['msg'] = $_FILES['file']['error'];
+}else if ( $ext <> 'xlsx' ) {
+	$response['success'] = false;
+	$response['msg'] = 'Silahkan upload File Excel 2007 (.xlsx)';
+}
+else {
+    //move_uploaded_file($_FILES['file']['tmp_name'], '../../../assets/uploads/' . 'LUNAS_'.$unitup.'_'.date('Ymdhis').'.xls');
+
+	$filename = 'LUNAS_'.$unitup.'_'.date('Ymdhis').'.xlsx';
+	// upload file
+	if (ftp_put($ftp_conn, '/uploads/'.$filename, $_FILES['file']['tmp_name'], FTP_ASCII)){
+		$response['success'] = true;
+		$response['msg'] = 'Upload pelunasan berhasil';
+	}
+	else{
+		$response['success'] = false;
+		$response['msg'] = 'Upload pelunasan gagal';
+	 }
+
+	// close connection
+	ftp_close($ftp_conn);
+}
+
+
+echo json_encode($response);
+?>

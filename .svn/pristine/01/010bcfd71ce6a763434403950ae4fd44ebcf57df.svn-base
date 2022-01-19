@@ -1,0 +1,118 @@
+$(document).ready(function () {
+
+    "use strict";
+
+    //$.blockUI({ message: '<h1 class="p-3">Mengambil data...</h1>' }); 
+    $('#tbl_saldo_up3').DataTable( {
+        "Processing": true,
+        "serverSide": true,
+        "ajax": {
+            "url": '../controller/getAcuanMaterial.php',
+            "type": "GET",
+            "timeout": 10000
+        },
+        columns: [
+          {
+            data: "ID",
+            title: "ID",
+            readonly: true,
+          },
+          {
+            data: "KATEGORI",
+            title: "KATEGORI",
+          },
+          {
+            data: "DAYA_BARU_FROM",
+            title: "DAYA AWAL",
+            type: 'number',
+            "sClass" : "text-right" , render: $.fn.dataTable.render.number(".", ",", 0, '')
+          },
+         {
+            data: "DAYA_BARU_TO",
+            title: "DAYA AKHIR",
+            type: 'number',
+            "sClass" : "text-right" , render: $.fn.dataTable.render.number(".", ",", 0, '')
+          },
+         {
+            data: "MATERIAL",
+            title: "MATERIAL"
+          },
+         {
+            data: "JUMLAH",
+            title: "JUMLAH",
+            type: 'number',
+            "sClass" : "text-right" , render: $.fn.dataTable.render.number(".", ",", 0, '')
+          },
+         {
+            data: "HARGA_SATUAN",
+            title: "HARGA SATUAN",
+            type: 'number',
+            "sClass" : "text-right" , render: $.fn.dataTable.render.number(".", ",", 0, 'Rp. ')
+          },
+         {
+            data: "HARGA_TOTAL",
+            title: "TOTAL HARGA",
+            type: 'number',
+            "sClass" : "text-right" , render: $.fn.dataTable.render.number(".", ",", 0, 'Rp. ')
+        }],
+        //"deferRender": true,
+        lengthMenu: [[25, 100, -1], [25, 100, "All"]],
+        pageLength: 25,
+        dom: 'Bfrtip',        // Needs button container
+        select: 'single',
+        //responsive: true,
+        altEditor: true,     // Enable altEditor
+        buttons: [{
+            text: 'Add',
+            name: 'add'        // do not change name
+        },
+        {
+            extend: 'selected', // Bind to Selected row
+            text: 'Edit',
+            name: 'edit'        // do not change name
+        },
+        {
+            extend: 'selected', // Bind to Selected row
+            text: 'Delete',
+            name: 'delete'      // do not change name
+        },
+        {
+            text: 'Refresh',
+            name: 'refresh'      // do not change name
+        }
+        ],
+        "scrollY": 500,
+        "scrollX": true,
+        onAddRow: function(datatable, rowdata, success, error) {
+            $.ajax({
+                // a tipycal url would be / with type='PUT'
+                url: "../controller/simpanAcuanMaterial.php",
+                type: 'GET',
+                data: rowdata,
+                success: success,
+                error: error
+            });
+        },
+        onDeleteRow: function(datatable, rowdata, success, error) {
+            $.ajax({
+                // a tipycal url would be /{id} with type='DELETE'
+                url: "../controller/hapusAcuanMaterial.php",
+                type: 'GET',
+                data: rowdata,
+                success: success,
+                error: error
+            });
+        },
+        onEditRow: function(datatable, rowdata, success, error) {
+            $.ajax({
+                // a tipycal url would be /{id} with type='POST'
+                url: "../controller/simpanAcuanMaterial.php",
+                type: 'GET',
+                data: rowdata,
+                success: success,
+                error: error
+            });
+        }
+    });
+
+});

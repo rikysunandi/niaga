@@ -1,0 +1,582 @@
+$(function() {
+    "use strict";
+
+    var chart_unit, chart_akhir_unit, chart_akhir_tetap_unit, chart_blocking, chart_segmen_tegangan, chart_alasan, chart_ket_transaksi;
+
+    $('#sel_unit').selectpicker('val', '00');
+        // Parsing miss-matches and typo's
+    var Format = wNumb({
+        thousand: ',',
+        decimals: 0
+    });
+    var Format1d = wNumb({
+        thousand: ',',
+        decimals: 1
+    });
+
+    function loadDataDashboard(unitap){
+
+        $('div.saldo-awal').block({ message: 'Mengambil data...' });
+        $('div.saldo-awal .jml-plg').html('-');
+        $('div.saldo-awal .jml-agenda').html('-');
+        $('div.saldo-awal .rpts-miliyar').html('-');
+        $("#chart_saldo_awal canvas").remove();
+        $('#chart_saldo_awal').append('<canvas></canvas>');
+        $.getJSON('../controller/ts_p2tl/getSaldoAwal.php?unitap='+unitap, function(data){
+            data = data.data;
+            //console.log(data);
+
+            var ctx = $("#chart_saldo_awal canvas");
+            new Chart(ctx, {
+                type: 'pie',
+                data: {
+                    datasets: [{
+                        data: [
+                                data.hijau_rpts_miliyar, 
+                                data.kuning_rpts_miliyar, 
+                                data.merah_rpts_miliyar
+                        ],
+                        backgroundColor: [
+                            '#4caf50',
+                            '#ffc107',
+                            '#ff5722',
+                        ],
+                        borderWidth: 1,
+                        label: 'Kategori'
+                    }],
+                    labels: ['Hijau','Kuning','Merah']
+                },
+                options: {
+                    responsive: true,
+                    legend: {
+                        display: false,
+                    },
+                    plugins: {
+                        labels: [
+                            {
+                              render: 'percentage',
+                              fontSize: 9,
+                              fontColor: 'white',
+                              precision: 1
+                            }
+                        ],
+                    },
+                }
+            });
+
+            $('div.saldo-awal tr.hijau td.jml-plg').html(Format.to(data.hijau_jml_plg));
+            $('div.saldo-awal tr.hijau td.jml-agenda').html(Format.to(data.hijau_jml_agenda));
+            $('div.saldo-awal tr.hijau td.rpts-miliyar').html(Format1d.to(data.hijau_rpts_miliyar)+'<small> M</small>');
+            $('div.saldo-awal tr.kuning td.jml-plg').html(Format.to(data.kuning_jml_plg));
+            $('div.saldo-awal tr.kuning td.jml-agenda').html(Format.to(data.kuning_jml_agenda));
+            $('div.saldo-awal tr.kuning td.rpts-miliyar').html(Format1d.to(data.kuning_rpts_miliyar)+'<small> M</small>');
+            $('div.saldo-awal tr.merah td.jml-plg').html(Format.to(data.merah_jml_plg));
+            $('div.saldo-awal tr.merah td.jml-agenda').html(Format.to(data.merah_jml_agenda));
+            $('div.saldo-awal tr.merah td.rpts-miliyar').html(Format1d.to(data.merah_rpts_miliyar)+'<small> M</small>');
+            //$('div.saldo-awal tr.total span.jml-plg').html(Format.to(data.total_jml_plg));
+            $('div.saldo-awal tr.total span.jml-agenda').html(Format.to(data.total_jml_agenda));
+            $('div.saldo-awal tr.total span.rpts-miliyar').html(Format1d.to(data.total_rpts_miliyar)+'<small> M</small>');
+            
+            $('div.saldo-awal').unblock();
+
+        });
+
+        $('div.realisasi').block({ message: 'Mengambil data...' });
+        $('div.realisasi .jml-plg').html('-');
+        $('div.realisasi .jml-agenda').html('-');
+        $('div.realisasi .rpts-miliyar').html('-');
+        $("#chart_realisasi canvas").remove();
+        $('#chart_realisasi').append('<canvas></canvas>');
+        $.getJSON('../controller/ts_p2tl/getRealisasi.php?unitap='+unitap, function(data){
+            data = data.data;
+            //console.log(data);
+
+            var ctx = $("#chart_realisasi canvas");
+            new Chart(ctx, {
+                type: 'pie',
+                data: {
+                    datasets: [{
+                        data: [
+                                data.hijau_rpts_miliyar, 
+                                data.kuning_rpts_miliyar, 
+                                data.merah_rpts_miliyar
+                        ],
+                        backgroundColor: [
+                            '#4caf50',
+                            '#ffc107',
+                            '#ff5722',
+                        ],
+                        borderWidth: 1,
+                        label: 'Kategori'
+                    }],
+                    labels: ['Hijau','Kuning','Merah']
+                },
+                options: {
+                    responsive: true,
+                    legend: {
+                        display: false,
+                    },
+                    plugins: {
+                        labels: [
+                            {
+                              render: 'percentage',
+                              fontSize: 9,
+                              fontColor: 'white',
+                              precision: 1
+                            }
+                        ]
+                    },
+                }
+            });
+
+            $('div.realisasi tr.hijau td.jml-plg').html(Format.to(data.hijau_jml_plg));
+            $('div.realisasi tr.hijau td.jml-agenda').html(Format.to(data.hijau_jml_agenda));
+            $('div.realisasi tr.hijau td.rpts-miliyar').html(Format1d.to(data.hijau_rpts_miliyar)+'<small> M</small>');
+            $('div.realisasi tr.kuning td.jml-plg').html(Format.to(data.kuning_jml_plg));
+            $('div.realisasi tr.kuning td.jml-agenda').html(Format.to(data.kuning_jml_agenda));
+            $('div.realisasi tr.kuning td.rpts-miliyar').html(Format1d.to(data.kuning_rpts_miliyar)+'<small> M</small>');
+            $('div.realisasi tr.merah td.jml-plg').html(Format.to(data.merah_jml_plg));
+            $('div.realisasi tr.merah td.jml-agenda').html(Format.to(data.merah_jml_agenda));
+            $('div.realisasi tr.merah td.rpts-miliyar').html(Format1d.to(data.merah_rpts_miliyar)+'<small> M</small>');
+            //$('div.realisasi tr.total span.jml-plg').html(Format.to(data.total_jml_plg));
+            $('div.realisasi tr.total span.jml-agenda').html(Format.to(data.total_jml_agenda));
+            $('div.realisasi tr.total span.rpts-miliyar').html(Format1d.to(data.total_rpts_miliyar)+'<small> M</small>');
+            $('div.realisasi').unblock();
+
+        });
+
+        $('div.saldo-akhir').block({ message: 'Mengambil data...' });
+        $('div.saldo-akhir .jml-plg').html('-');
+        $('div.saldo-akhir .jml-agenda').html('-');
+        $('div.saldo-akhir .rpts-miliyar').html('-');
+        $("#chart_saldo_akhir canvas").remove();
+        $('#chart_saldo_akhir').append('<canvas></canvas>');
+        $.getJSON('../controller/ts_p2tl/getSaldoAkhir.php?unitap='+unitap, function(data){
+            data = data.data;
+            //console.log(data);
+
+            var ctx = $("#chart_saldo_akhir canvas");
+            new Chart(ctx, {
+                type: 'pie',
+                data: {
+                    datasets: [{
+                        data: [
+                                data.hijau_rpts_miliyar, 
+                                data.kuning_rpts_miliyar, 
+                                data.merah_rpts_miliyar
+                        ],
+                        backgroundColor: [
+                            '#4caf50',
+                            '#ffc107',
+                            '#ff5722',
+                        ],
+                        borderWidth: 1,
+                        label: 'Kategori'
+                    }],
+                    labels: ['Hijau','Kuning','Merah']
+                },
+                options: {
+                    responsive: true,
+                    legend: {
+                        display: false,
+                    },
+                    plugins: {
+                        labels: [
+                            {
+                              render: 'percentage',
+                              fontSize: 9,
+                              fontColor: 'white',
+                              precision: 1
+                            }
+                        ]
+                    },
+                }
+            });
+
+            $('div.saldo-akhir tr.hijau td.jml-plg').html(Format.to(data.hijau_jml_plg));
+            $('div.saldo-akhir tr.hijau td.jml-agenda').html(Format.to(data.hijau_jml_agenda));
+            if($('#sel_unit').val().length==5)
+                $('div.saldo-akhir tr.hijau td.rpts-miliyar').html(
+                    '<a class="my-link" href="mon-ts-p2tl.php?unitupi=53&unitap='+$('#sel_unit').val()+'&unitup=00&jenis_plg=PRABAYAR&kategori=HIJAU" target="_blank" >'+Format1d.to(data.hijau_rpts_miliyar)+'<small> M</small></a>');
+            else
+                $('div.saldo-akhir tr.hijau td.rpts-miliyar').html(
+                    '<a class="my-link" href="mon-ts-p2tl.php?unitupi=53&unitap=00&unitup=00&jenis_plg=PRABAYAR&kategori=HIJAU" target="_blank" >'+Format1d.to(data.hijau_rpts_miliyar)+'<small> M</small></a>');
+            
+            $('div.saldo-akhir tr.kuning td.jml-plg').html(Format.to(data.kuning_jml_plg));
+            $('div.saldo-akhir tr.kuning td.jml-agenda').html(Format.to(data.kuning_jml_agenda));
+            if($('#sel_unit').val().length==5)
+                $('div.saldo-akhir tr.kuning td.rpts-miliyar').html(
+                    '<a class="my-link" href="mon-ts-p2tl.php?unitupi=53&unitap='+$('#sel_unit').val()+'&unitup=00&jenis_plg=PRABAYAR&kategori=KUNING" target="_blank" >'+Format1d.to(data.kuning_rpts_miliyar)+'<small> M</small></a>');
+            else
+                $('div.saldo-akhir tr.kuning td.rpts-miliyar').html(
+                    '<a class="my-link" href="mon-ts-p2tl.php?unitupi=53&unitap=00&unitup=00&jenis_plg=PRABAYAR&kategori=KUNING" target="_blank" >'+Format1d.to(data.kuning_rpts_miliyar)+'<small> M</small></a>');
+            
+            $('div.saldo-akhir tr.merah td.jml-plg').html(Format.to(data.merah_jml_plg));
+            $('div.saldo-akhir tr.merah td.jml-agenda').html(Format.to(data.merah_jml_agenda));
+            if($('#sel_unit').val().length==5)
+                $('div.saldo-akhir tr.merah td.rpts-miliyar').html(
+                    '<a class="my-link" href="mon-ts-p2tl.php?unitupi=53&unitap='+$('#sel_unit').val()+'&unitup=00&jenis_plg=PRABAYAR&kategori=MERAH" target="_blank" >'+Format1d.to(data.merah_rpts_miliyar)+'<small> M</small></a>');
+            else
+                $('div.saldo-akhir tr.merah td.rpts-miliyar').html(
+                    '<a class="my-link" href="mon-ts-p2tl.php?unitupi=53&unitap=00&unitup=00&jenis_plg=PRABAYAR&kategori=MERAH" target="_blank" >'+Format1d.to(data.merah_rpts_miliyar)+'<small> M</small></a>');
+            
+            //$('div.saldo-akhir tr.total span.jml-plg').html(Format.to(data.total_jml_plg));
+            $('div.saldo-akhir tr.total span.jml-agenda').html(Format.to(data.total_jml_agenda));
+            
+            if($('#sel_unit').val().length==5)
+                $('div.saldo-akhir tr.total span.rpts-miliyar').html(
+                    '<a class="my-link" href="mon-ts-p2tl.php?unitupi=53&unitap='+$('#sel_unit').val()+'&unitup=00&jenis_plg=PRABAYAR&kategori=00" target="_blank" >'+Format1d.to(data.total_rpts_miliyar)+'<small> M</small></a>');
+            else
+                $('div.saldo-akhir tr.total span.rpts-miliyar').html(
+                    '<a class="my-link" href="mon-ts-p2tl.php?unitupi=53&unitap=00&unitup=00&jenis_plg=PRABAYAR&kategori=00" target="_blank" >'+Format1d.to(data.total_rpts_miliyar)+'<small> M</small></a>');
+            
+            $('div.saldo-akhir').unblock();
+
+        });
+
+        $('article.histori-saldo-awal div.timeline-label').block({ message: 'Mengambil data...' });
+        $('article.histori-saldo-awal .jml-plg').html('-');
+        $('article.histori-saldo-awal .jml-agenda').html('-');
+        $('article.histori-saldo-awal .rpts-miliyar').html('-');
+        $.getJSON('../controller/ts_p2tl/getHistoriSaldoTS.php?unitap='+unitap+'&tgl_kategori=2021-02-18&tgl_saldo=2021-02-18', function(data){
+            data = data.data;
+            //console.log(data);
+            $('article.histori-saldo-awal tr.hijau td.jml-plg').html(Format.to(data.hijau_jml_plg));
+            $('article.histori-saldo-awal tr.hijau td.jml-agenda').html(Format.to(data.hijau_jml_agenda));
+            $('article.histori-saldo-awal tr.hijau td.rpts-miliyar').html(Format1d.to(data.hijau_rpts_miliyar)+'<small> M</small>');
+            $('article.histori-saldo-awal tr.kuning td.jml-plg').html(Format.to(data.kuning_jml_plg));
+            $('article.histori-saldo-awal tr.kuning td.jml-agenda').html(Format.to(data.kuning_jml_agenda));
+            $('article.histori-saldo-awal tr.kuning td.rpts-miliyar').html(Format1d.to(data.kuning_rpts_miliyar)+'<small> M</small>');
+            $('article.histori-saldo-awal tr.merah td.jml-plg').html(Format.to(data.merah_jml_plg));
+            $('article.histori-saldo-awal tr.merah td.jml-agenda').html(Format.to(data.merah_jml_agenda));
+            $('article.histori-saldo-awal tr.merah td.rpts-miliyar').html(Format1d.to(data.merah_rpts_miliyar)+'<small> M</small>');
+            //$('article.histori-saldo-awal tr.total span.jml-plg').html(Format.to(data.total_jml_plg));
+            $('article.histori-saldo-awal tr.total span.jml-agenda').html(Format.to(data.total_jml_agenda));
+            $('article.histori-saldo-awal tr.total span.rpts-miliyar').html(Format1d.to(data.total_rpts_miliyar)+'<small> M</small>');
+            $('article.histori-saldo-awal div.timeline-label').unblock();
+
+        });
+
+        $('article.histori-saldo-1 div.timeline-label').block({ message: 'Mengambil data...' });
+        $('article.histori-saldo-1 .jml-plg').html('-');
+        $('article.histori-saldo-1 .jml-agenda').html('-');
+        $('article.histori-saldo-1 .rpts-miliyar').html('-');
+        $.getJSON('../controller/ts_p2tl/getHistoriSaldoTS.php?unitap='+unitap+'&tgl_kategori=2021-02-18&tgl_saldo=2021-02-25', function(data){
+            data = data.data;
+            //console.log(data);
+            $('article.histori-saldo-1 tr.hijau td.jml-plg').html(Format.to(data.hijau_jml_plg));
+            $('article.histori-saldo-1 tr.hijau td.jml-agenda').html(Format.to(data.hijau_jml_agenda));
+            $('article.histori-saldo-1 tr.hijau td.rpts-miliyar').html(Format1d.to(data.hijau_rpts_miliyar)+'<small> M</small>');
+            $('article.histori-saldo-1 tr.kuning td.jml-plg').html(Format.to(data.kuning_jml_plg));
+            $('article.histori-saldo-1 tr.kuning td.jml-agenda').html(Format.to(data.kuning_jml_agenda));
+            $('article.histori-saldo-1 tr.kuning td.rpts-miliyar').html(Format1d.to(data.kuning_rpts_miliyar)+'<small> M</small>');
+            $('article.histori-saldo-1 tr.merah td.jml-plg').html(Format.to(data.merah_jml_plg));
+            $('article.histori-saldo-1 tr.merah td.jml-agenda').html(Format.to(data.merah_jml_agenda));
+            $('article.histori-saldo-1 tr.merah td.rpts-miliyar').html(Format1d.to(data.merah_rpts_miliyar)+'<small> M</small>');
+            //$('article.histori-saldo-1 tr.total span.jml-plg').html(Format.to(data.total_jml_plg));
+            $('article.histori-saldo-1 tr.total span.jml-agenda').html(Format.to(data.total_jml_agenda));
+            $('article.histori-saldo-1 tr.total span.rpts-miliyar').html(Format1d.to(data.total_rpts_miliyar)+'<small> M</small>');
+            $('article.histori-saldo-1 div.timeline-label').unblock();
+
+        });
+
+        $('article.histori-saldo-2 div.timeline-label').block({ message: 'Mengambil data...' });
+        $('article.histori-saldo-2 .jml-plg').html('-');
+        $('article.histori-saldo-2 .jml-agenda').html('-');
+        $('article.histori-saldo-2 .rpts-miliyar').html('-');
+        $.getJSON('../controller/ts_p2tl/getHistoriSaldoTS.php?unitap='+unitap+'&tgl_kategori=2021-02-25&tgl_saldo=2021-02-25', function(data){
+            data = data.data;
+            //console.log(data);
+            $('article.histori-saldo-2 tr.hijau td.jml-plg').html(Format.to(data.hijau_jml_plg));
+            $('article.histori-saldo-2 tr.hijau td.jml-agenda').html(Format.to(data.hijau_jml_agenda));
+            $('article.histori-saldo-2 tr.hijau td.rpts-miliyar').html(Format1d.to(data.hijau_rpts_miliyar)+'<small> M</small>');
+            $('article.histori-saldo-2 tr.kuning td.jml-plg').html(Format.to(data.kuning_jml_plg));
+            $('article.histori-saldo-2 tr.kuning td.jml-agenda').html(Format.to(data.kuning_jml_agenda));
+            $('article.histori-saldo-2 tr.kuning td.rpts-miliyar').html(Format1d.to(data.kuning_rpts_miliyar)+'<small> M</small>');
+            $('article.histori-saldo-2 tr.merah td.jml-plg').html(Format.to(data.merah_jml_plg));
+            $('article.histori-saldo-2 tr.merah td.jml-agenda').html(Format.to(data.merah_jml_agenda));
+            $('article.histori-saldo-2 tr.merah td.rpts-miliyar').html(Format1d.to(data.merah_rpts_miliyar)+'<small> M</small>');
+            //$('article.histori-saldo-2 tr.total span.jml-plg').html(Format.to(data.total_jml_plg));
+            $('article.histori-saldo-2 tr.total span.jml-agenda').html(Format.to(data.total_jml_agenda));
+            $('article.histori-saldo-2 tr.total span.rpts-miliyar').html(Format1d.to(data.total_rpts_miliyar)+'<small> M</small>');
+            $('article.histori-saldo-2 div.timeline-label').unblock();
+
+        });
+
+
+        $('article.histori-saldo-3 div.timeline-label').block({ message: 'Mengambil data...' });
+        $('article.histori-saldo-3 .jml-plg').html('-');
+        $('article.histori-saldo-3 .jml-agenda').html('-');
+        $('article.histori-saldo-3 .rpts-miliyar').html('-');
+        $.getJSON('../controller/ts_p2tl/getHistoriSaldoTS.php?unitap='+unitap+'&tgl_kategori=2021-02-25&tgl_saldo=2021-03-04', function(data){
+            data = data.data;
+            //console.log(data);
+            $('article.histori-saldo-3 tr.hijau td.jml-plg').html(Format.to(data.hijau_jml_plg));
+            $('article.histori-saldo-3 tr.hijau td.jml-agenda').html(Format.to(data.hijau_jml_agenda));
+            $('article.histori-saldo-3 tr.hijau td.rpts-miliyar').html(Format1d.to(data.hijau_rpts_miliyar)+'<small> M</small>');
+            $('article.histori-saldo-3 tr.kuning td.jml-plg').html(Format.to(data.kuning_jml_plg));
+            $('article.histori-saldo-3 tr.kuning td.jml-agenda').html(Format.to(data.kuning_jml_agenda));
+            $('article.histori-saldo-3 tr.kuning td.rpts-miliyar').html(Format1d.to(data.kuning_rpts_miliyar)+'<small> M</small>');
+            $('article.histori-saldo-3 tr.merah td.jml-plg').html(Format.to(data.merah_jml_plg));
+            $('article.histori-saldo-3 tr.merah td.jml-agenda').html(Format.to(data.merah_jml_agenda));
+            $('article.histori-saldo-3 tr.merah td.rpts-miliyar').html(Format1d.to(data.merah_rpts_miliyar)+'<small> M</small>');
+            //$('article.histori-saldo-3 tr.total span.jml-plg').html(Format.to(data.total_jml_plg));
+            $('article.histori-saldo-3 tr.total span.jml-agenda').html(Format.to(data.total_jml_agenda));
+            $('article.histori-saldo-3 tr.total span.rpts-miliyar').html(Format1d.to(data.total_rpts_miliyar)+'<small> M</small>');
+            $('article.histori-saldo-3 div.timeline-label').unblock();
+
+        });
+
+        $('article.histori-saldo-4 div.timeline-label').block({ message: 'Mengambil data...' });
+        $('article.histori-saldo-4 .jml-plg').html('-');
+        $('article.histori-saldo-4 .jml-agenda').html('-');
+        $('article.histori-saldo-4 .rpts-miliyar').html('-');
+        $.getJSON('../controller/ts_p2tl/getHistoriSaldoTS.php?unitap='+unitap+'&tgl_kategori=2021-03-04&tgl_saldo=2021-03-04', function(data){
+            data = data.data;
+            //console.log(data);
+            $('article.histori-saldo-4 tr.hijau td.jml-plg').html(Format.to(data.hijau_jml_plg));
+            $('article.histori-saldo-4 tr.hijau td.jml-agenda').html(Format.to(data.hijau_jml_agenda));
+            $('article.histori-saldo-4 tr.hijau td.rpts-miliyar').html(Format1d.to(data.hijau_rpts_miliyar)+'<small> M</small>');
+            $('article.histori-saldo-4 tr.kuning td.jml-plg').html(Format.to(data.kuning_jml_plg));
+            $('article.histori-saldo-4 tr.kuning td.jml-agenda').html(Format.to(data.kuning_jml_agenda));
+            $('article.histori-saldo-4 tr.kuning td.rpts-miliyar').html(Format1d.to(data.kuning_rpts_miliyar)+'<small> M</small>');
+            $('article.histori-saldo-4 tr.merah td.jml-plg').html(Format.to(data.merah_jml_plg));
+            $('article.histori-saldo-4 tr.merah td.jml-agenda').html(Format.to(data.merah_jml_agenda));
+            $('article.histori-saldo-4 tr.merah td.rpts-miliyar').html(Format1d.to(data.merah_rpts_miliyar)+'<small> M</small>');
+            //$('article.histori-saldo-4 tr.total span.jml-plg').html(Format.to(data.total_jml_plg));
+            $('article.histori-saldo-4 tr.total span.jml-agenda').html(Format.to(data.total_jml_agenda));
+            $('article.histori-saldo-4 tr.total span.rpts-miliyar').html(Format1d.to(data.total_rpts_miliyar)+'<small> M</small>');
+            $('article.histori-saldo-4 div.timeline-label').unblock();
+
+        });
+
+        $('article.histori-saldo-5 div.timeline-label').block({ message: 'Mengambil data...' });
+        $('article.histori-saldo-5 .jml-plg').html('-');
+        $('article.histori-saldo-5 .jml-agenda').html('-');
+        $('article.histori-saldo-5 .rpts-miliyar').html('-');
+        $.getJSON('../controller/ts_p2tl/getHistoriSaldoTS.php?unitap='+unitap+'&tgl_kategori=2021-03-04&tgl_saldo=2021-03-18', function(data){
+            data = data.data;
+            //console.log(data);
+            $('article.histori-saldo-5 tr.hijau td.jml-plg').html(Format.to(data.hijau_jml_plg));
+            $('article.histori-saldo-5 tr.hijau td.jml-agenda').html(Format.to(data.hijau_jml_agenda));
+            $('article.histori-saldo-5 tr.hijau td.rpts-miliyar').html(Format1d.to(data.hijau_rpts_miliyar)+'<small> M</small>');
+            $('article.histori-saldo-5 tr.kuning td.jml-plg').html(Format.to(data.kuning_jml_plg));
+            $('article.histori-saldo-5 tr.kuning td.jml-agenda').html(Format.to(data.kuning_jml_agenda));
+            $('article.histori-saldo-5 tr.kuning td.rpts-miliyar').html(Format1d.to(data.kuning_rpts_miliyar)+'<small> M</small>');
+            $('article.histori-saldo-5 tr.merah td.jml-plg').html(Format.to(data.merah_jml_plg));
+            $('article.histori-saldo-5 tr.merah td.jml-agenda').html(Format.to(data.merah_jml_agenda));
+            $('article.histori-saldo-5 tr.merah td.rpts-miliyar').html(Format1d.to(data.merah_rpts_miliyar)+'<small> M</small>');
+            //$('article.histori-saldo-5 tr.total span.jml-plg').html(Format.to(data.total_jml_plg));
+            $('article.histori-saldo-5 tr.total span.jml-agenda').html(Format.to(data.total_jml_agenda));
+            $('article.histori-saldo-5 tr.total span.rpts-miliyar').html(Format1d.to(data.total_rpts_miliyar)+'<small> M</small>');
+            $('article.histori-saldo-5 div.timeline-label').unblock();
+
+        });
+
+        $('article.histori-saldo-6 div.timeline-label').block({ message: 'Mengambil data...' });
+        $('article.histori-saldo-6 .jml-plg').html('-');
+        $('article.histori-saldo-6 .jml-agenda').html('-');
+        $('article.histori-saldo-6 .rpts-miliyar').html('-');
+        $.getJSON('../controller/ts_p2tl/getHistoriSaldoTS.php?unitap='+unitap+'&tgl_kategori=2021-03-18&tgl_saldo=2021-03-18', function(data){
+            data = data.data;
+            //console.log(data);
+            $('article.histori-saldo-6 tr.hijau td.jml-plg').html(Format.to(data.hijau_jml_plg));
+            $('article.histori-saldo-6 tr.hijau td.jml-agenda').html(Format.to(data.hijau_jml_agenda));
+            $('article.histori-saldo-6 tr.hijau td.rpts-miliyar').html(Format1d.to(data.hijau_rpts_miliyar)+'<small> M</small>');
+            $('article.histori-saldo-6 tr.kuning td.jml-plg').html(Format.to(data.kuning_jml_plg));
+            $('article.histori-saldo-6 tr.kuning td.jml-agenda').html(Format.to(data.kuning_jml_agenda));
+            $('article.histori-saldo-6 tr.kuning td.rpts-miliyar').html(Format1d.to(data.kuning_rpts_miliyar)+'<small> M</small>');
+            $('article.histori-saldo-6 tr.merah td.jml-plg').html(Format.to(data.merah_jml_plg));
+            $('article.histori-saldo-6 tr.merah td.jml-agenda').html(Format.to(data.merah_jml_agenda));
+            $('article.histori-saldo-6 tr.merah td.rpts-miliyar').html(Format1d.to(data.merah_rpts_miliyar)+'<small> M</small>');
+            //$('article.histori-saldo-6 tr.total span.jml-plg').html(Format.to(data.total_jml_plg));
+            $('article.histori-saldo-6 tr.total span.jml-agenda').html(Format.to(data.total_jml_agenda));
+            $('article.histori-saldo-6 tr.total span.rpts-miliyar').html(Format1d.to(data.total_rpts_miliyar)+'<small> M</small>');
+            $('article.histori-saldo-6 div.timeline-label').unblock();
+
+        });
+
+        $('div#card_ts_p2tl').block({ message: 'Mengambil data...' });
+        $('div#card_ts_p2tl table tbody').empty();
+        $('div#card_ts_p2tl table tfoot').empty();
+        $("#chart_ts_p2tl_unit canvas").remove();
+        $("#chart_ts_p2tl_unit").append('<canvas height="250"></canvas>');
+        $.getJSON('../controller/ts_p2tl/getHistoriSaldoTSUnit.php?unitap='+unitap, function(data){
+
+            var tr = '';
+            $.each(data.rows, function(k,v){
+                tr += '<tr>';
+                if(unitap.length==5)
+                    tr += '<td><a class="my-link" href="mon-ts-p2tl.php?unitupi=53&unitap='+unitap+'&unitup='+v.kode+'&jenis_plg=PRABAYAR&kategori=HIJAU" target="_blank" >'+v.kode+'</a></td>';
+                else
+                    tr += '<td><a class="my-link" href="mon-ts-p2tl.php?unitupi=53&unitap='+v.kode+'&unitup=00&jenis_plg=PRABAYAR&kategori=HIJAU" target="_blank" >'+v.kode+'</a></td>';
+                tr += '<td>'+v.nama+'</td>';
+                tr += '<td class="text-right">'+Format.to(v.jml_plg)+'</td>';
+                tr += '<td class="text-right">'+Format.to(v.jml_agenda)+'</td>';
+                tr += '<td class="text-right">'+Format.to(v.rpts)+'</td>';
+                tr += '</tr>';
+            });
+            $('div#card_ts_p2tl table tbody').append(tr);
+
+            tr = '<tr>';
+            tr += '<td colspan="2">TOTAL</td>';
+            tr += '<td class="text-right">'+Format.to(data.data.total_jml_plg)+'</td>';
+            tr += '<td class="text-right">'+Format.to(data.data.total_jml_agenda)+'</td>';
+            tr += '<td class="text-right">'+Format.to(data.data.total_rpts)+'</td>';
+            tr += '</tr>';
+            $('div#card_ts_p2tl table tfoot').append(tr);
+
+            data = data.data;
+            console.log(data);  
+        
+            var ctx = $("#chart_ts_p2tl_unit canvas");
+            ctx.height = 250;
+            new Chart(ctx, {
+                type: 'bar',
+                data: {
+                    labels: data.singkatan,
+                    datasets: [
+                        {
+                            label: "Merah",
+                            type: "bar",
+                            stack: 'Kategori',
+                            backgroundColor: "#ff5722",
+                            backgroundColorHover: "#ff5722",
+                            data: data.merah_rpts_miliyar_unit,
+                        },
+                        {
+                            label: "Kuning",
+                            type: "bar",
+                            stack: 'Kategori',
+                            backgroundColor: "#ffc107",
+                            backgroundColorHover: "#ffc107",
+                            data: data.kuning_rpts_miliyar_unit,
+                        },
+                        {
+                            label: "Hijau",
+                            type: "bar",
+                            stack: 'Kategori',
+                            backgroundColor: "#4caf50",
+                            backgroundColorHover: "#4caf50",
+                            data: data.hijau_rpts_miliyar_unit,
+                        },
+                    ]
+                },
+                plugins:
+                {      
+                    datasets: [],                                                                                                                                                                             
+                    getData(labels, datasets) {                                                                                                                                                      
+                        const sum = [];                                                                                                                                                              
+                        for (let i = 0; i < datasets[0].length; i++) {                                                                                                                                   
+                            sum.push({                                                                                                                                                               
+                                label: labels[i],                                                                                                                                                    
+                                data: datasets.map(e => e[i]),                                                                                                                                       
+                                    get sum() { // ES6 - getter                                                                                                                                      
+                                        return this.data.reduce((a, b) => a + b);                                                                                                                    
+                                    }                                                                                                                                                                
+                            });                                                                                                                                                                      
+                        }                                                                                                                                                                            
+                        return sum;                                                                                                                                                                  
+                    },                                                                                                                                                                               
+                    beforeInit(chart) { 
+                        chart.data.datasets.forEach((dataset, datasetIndex) => {                                                                                                                     
+                            this.datasets.push(dataset.data);                                                                                                                                        
+                        });                                                                                                                                                                          
+                        const data_store = this.getData(chart.data.labels, this.datasets).sort((a,b) => b.sum - a.sum);                                                                              
+
+                        data_store.forEach((d,i) => {                                                                                                                                                
+                            chart.data.labels[i] = d.label;                                                                                                                                          
+                            d.data.forEach((v, vi) => {                                                                                                                                              
+                                chart.data.datasets[vi].data[i] = v;                                                                                                                                 
+                            });                                                                                                                                                                      
+                        });                                                                                                                                                            
+                    }                                                                                                                                                                                
+                },
+                options: {
+                    responsive: true, 
+                    maintainAspectRatio: false, 
+                    barRadius: 2,
+                    title: {
+                        display: false,
+                        text: 'Rekap Saldo TS P2TL'
+                    },
+                    tooltips: {
+                       mode: 'label',
+                       bodyFontSize: 10,
+                       callbacks: {
+                          label: function(t, d) {
+                             var dstLabel = d.datasets[t.datasetIndex].label;
+                             var yLabel = t.yLabel;
+                             if(isNaN(yLabel))
+                                yLabel = 0;
+                             return dstLabel + ': Rp. ' + yLabel + ' M';
+                          }
+                       }
+                    },
+                    legend: {
+                        position: 'bottom',
+                        display: false,
+                        labels: {
+                            fontSize: 10,
+                        },
+                    },
+                    plugins: {
+                        labels: []
+                    },
+                    scales: {
+                        yAxes: [{
+                            display: false,
+                            stacked: true,
+                            gridLines: {
+                                display: false,
+                                drawBorder: false
+                            },
+                            ticks: {
+                                beginAtZero: true
+                            }
+                        }],
+                        xAxes: [{
+                            stacked: true,
+                            gridLines: {
+                                display: false,
+                                drawBorder: false
+                            },
+                        }]
+                    }
+                }
+            });
+
+            $('div#card_ts_p2tl').unblock();
+        });
+    }
+
+    loadDataDashboard('00');
+
+    $('#sel_unit').change(function(){
+        var unitap=this.value;
+
+        loadDataDashboard(unitap);
+        $('#sel_unit').blur();
+
+    });
+
+    // draw background
+    var backgroundColor = 'white';
+    Chart.plugins.register({
+        beforeDraw: function(c) {
+            var ctx = c.chart.ctx;
+            ctx.fillStyle = backgroundColor;
+            ctx.fillRect(0, 0, c.chart.width, c.chart.height);
+        }
+    });
+
+    $(".btn-download").click(function(){
+        console.log('download');
+        var canvas = $(this).closest( ".card" ).children('.card-body').children('canvas');
+
+        canvas.get(0).toBlob(function(blob) {
+            saveAs(blob, "Chart.png");
+        });
+    });
+
+});

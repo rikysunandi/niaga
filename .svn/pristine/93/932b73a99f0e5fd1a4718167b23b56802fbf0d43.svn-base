@@ -1,0 +1,14 @@
+(function($) {
+    "use strict"
+
+    Dropzone.options.filePelunasan = {
+        maxFilesize: 30,
+        acceptedFiles: ".xls,.xlsx,.csv,.txt",
+        success: function(file, response){
+            console.log('response', response);
+        }
+    };
+
+
+
+})(jQuery);

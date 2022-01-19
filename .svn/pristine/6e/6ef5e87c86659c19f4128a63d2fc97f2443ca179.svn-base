@@ -1,0 +1,239 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="utf-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width,initial-scale=1">
+    <title>Backoffice Niaga</title>
+    <!-- Favicon icon -->
+    <link rel="icon" type="image/png" sizes="16x16" href="../../assets/images/favicon.png">
+    <link href="../css/style.css" rel="stylesheet">
+    
+</head>
+
+<body>
+    
+    <?php include 'parts/preloader.php'; ?>
+    
+    <!--**********************************
+        Main wrapper start
+    ***********************************-->
+    <div id="main-wrapper">
+
+        <?php include 'parts/header.php'; ?>
+        <?php include 'parts/sidebar.php'; ?>
+
+        <!--**********************************
+            Content body start
+        ***********************************-->
+        <div class="content-body">
+            <div class="container-fluid">
+                <div class="row page-titles">
+                    <div class="col p-md-0">
+                        <!-- <h4>Dashboard</h4> -->
+                    </div>
+                    <div class="table-action float-right">
+                        <form action="#">
+                            <div class="form-row">
+                                <div class="form-group mb-0">
+                                    <select id="sel_unit" class="selectpicker select-sm show-tick" data-size="5" data-width="fit">
+                                        <option value="00" selected="selected">UID JABAR</option>
+                                        <option data-divider="true"></option>
+                                        <option value="53BDG">UP3 BANDUNG</option>
+                                        <option value="53BKS">UP3 BEKASI</option>
+                                        <option value="53BGR">UP3 BOGOR</option>
+                                    </select>
+                                </div>
+                            </div>
+                        </form>
+                    </div>
+                </div>
+                <!-- <div class="row">
+                    <div class="col-sm-12 col-lg-12 mb-2 mt-0">
+                        <div class="table-action float-right">
+                            <form action="#">
+                                <div class="form-row">
+                                    <div class="form-group mb-0">
+                                        <select class="selectpicker show-tick" data-width="auto">
+                                            <option selected="selected">UID JABAR</option>
+                                            <option value="53BDG">UP3 BANDUNG</option>
+                                            <option value="53BKS">UP3 BEKASI</option>
+                                            <option value="53BGR">UP3 BOGOR</option>
+                                        </select>
+                                    </div>
+                                </div>
+                            </form>
+                        </div>
+                    </div>
+                </div> -->
+                <div class="row">
+                    <div class="col-sm-6 col-lg-3">
+                        <div class="card">
+                            <div class="card-body rounded stat-widget-seven" style="background-color: #7F63F4;">
+                                <div class="media pl-xl-5 align-items-center">
+                                    <img class="mr-3 mt-2" src="../../assets/images/icons/icons8-file.png" alt="">
+                                    <div class="media-body pl-3">
+                                        <h2 class="mt-0 mb-2" id="total_agenda">0</h2>
+                                        <h6 class="text-uppercase text-white">AGENDA</h6>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="col-sm-6 col-lg-3">
+                        <div class="card">
+                            <div class="card-body rounded stat-widget-seven" style="background-color: #135470;">
+                                <div class="media pl-xl-5 align-items-center">
+                                    <img class="mr-3 mt-2" src="../../assets/images/icons/15.png" alt="">
+                                    <div class="media-body pl-3">
+                                        <h2 class="mt-0 mb-2" id="total_agenda_rab">0</h2>
+                                        <h6 class="text-uppercase text-white">RAB</h6>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="col-sm-6 col-lg-3">
+                        <div class="card">
+                            <div class="card-body rounded stat-widget-seven" style="background-color: #74BCC7;">
+                                <div class="media pl-xl-5 align-items-center">
+                                    <img class="mr-3 mt-2" src="../../assets/images/icons/icons8-check_file.png" alt="">
+                                    <div class="media-body pl-3">
+                                        <h2 class="mt-0 mb-2" id="total_proses">0</h2>
+                                        <h6 class="text-uppercase text-white">BP >= RAB</h6>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="col-sm-6 col-lg-3">
+                        <div class="card">
+                            <div class="card-body rounded stat-widget-seven" style="background-color: #EC5B43;">
+                                <div class="media pl-xl-5 align-items-center">
+                                    <img class="mr-3 mt-2" src="../../assets/images/icons/icons8-important_file.png" alt="">
+                                    <div class="media-body pl-3">
+                                        <h2 class="mt-0 mb-2" id="total_evaluasi">0</h2>
+                                        <h6 class="text-uppercase text-white">BP < RAB</h6>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                <!-- row -->
+                <div class="row">
+                    <div class="col-xl-12">
+                        <div id="card_permohonan" class="card">
+                            <div class="card-header">
+                                <h4 class="card-title mt-3">Permohonan per Unit</h4>
+                            </div>
+                            <div class="card-body">
+                                <canvas id="chart_permohonan"></canvas>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                <div class="row">
+                    <div class="col-lg-12">
+                        <div class="row">
+                            <div class="col-sm-6">
+                                <div id="card_permohonan_jenis" class="card chartjs-stat-card-1">
+                                    <div class="card-body">
+                                        <h4 class="card-title mb-4 text-dark">Status Proses</h4>
+                                        <canvas id="chart_permohonan_status_proses"></canvas>
+                                    </div>
+                                </div>
+                            </div>
+                            <div class="col-sm-6">
+                                <div id="card_permohonan_alasan" class="card chartjs-stat-card-1">
+                                    <div class="card-body">
+                                        <h4 class="card-title mb-4 text-dark">Status TMP</h4>
+                                        <canvas id="chart_permohonan_tmp"></canvas>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                <div class="row">
+                    <div class="col-lg-12">
+                        <div class="row">
+                            <div class="col-sm-6">
+                                <div id="card_permohonan_alasan" class="card chartjs-stat-card-1">
+                                    <div class="card-body">
+                                        <h4 class="card-title mb-4 text-dark">Alasan Kriteria TMP</h4>
+                                        <canvas id="chart_permohonan_alasan"></canvas>
+                                    </div>
+                                </div>
+                            </div>
+                            <div class="col-sm-6">
+                                <div id="card_permohonan_jenis" class="card chartjs-stat-card-1">
+                                    <div class="card-body">
+                                        <h4 class="card-title mb-4 text-dark">Ket Transaksi</h4>
+                                        <canvas id="chart_permohonan_jenis"></canvas>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                <div class="row">
+                    <div class="col-xl-12">
+                        <div id="card_latest_agenda" class="card transparent-card m-b-0">
+                            <div class="card-header">
+                                <h4 class="card-title">10 Agenda Tebaru</h4>
+                            </div>
+                            <div class="card-body p-0">
+                                <div class="table-responsive">
+                                    <table class="table table-padded table-responsive-fix-big property-overview-table">
+                                        <thead>
+                                            <tr>
+                                                <th>No Agenda</th>
+                                                <th>Tgl Mohon</th>
+                                                <th>Jenis</th>
+                                                <th>Daya Lama</th>
+                                                <th>Daya Baru</th>
+                                                <!-- <th>Alasan Kriteria TMP</th> -->
+                                                <th>RP BP</th>
+                                                <th>RP RAB</th>
+                                                <th>Status</th>
+                                            </tr>
+                                        </thead>
+                                        <tbody></tbody>
+                                    </table>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+            <!-- #/ container -->
+        </div>
+        <!--**********************************
+            Content body end
+        ***********************************-->
+        
+        
+
+    </div>
+    <!--**********************************
+        Main wrapper end
+    ***********************************-->
+
+    <?php include 'parts/footer.php'; ?>
+
+    <!--**********************************
+        Scripts
+    ***********************************-->
+    <script src="../../assets/plugins/common/common.min.js"></script>
+    <script src="../js/custom.min.js"></script>
+    <script src="../js/settings.js"></script>
+    <script src="../js/gleek.js"></script>
+    
+    <script src="../../assets/plugins/block-ui/jquery.blockUI.js"></script>
+    <script src="../../assets/plugins/chart.js/Chart.bundle.min.js"></script>
+    <script src="https://cdn.jsdelivr.net/gh/emn178/chartjs-plugin-labels/src/chartjs-plugin-labels.js"></script>
+    <script src="../js/pages/index.js"></script>
+</body>
+</html>

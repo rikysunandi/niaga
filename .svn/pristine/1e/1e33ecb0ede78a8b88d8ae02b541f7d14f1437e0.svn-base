@@ -1,0 +1,33 @@
+(function($) {
+    "use strict"
+
+
+    Dropzone.options.fileDapot = {
+        maxFilesize: 120,
+        acceptedFiles: ".xls, .xlsx",
+        // uploadMultiple: false,
+        // parallelUploads: 1,
+        //maxFiles: 3,
+        timeout: 50000,
+        success: function(file, response){
+            console.log('response', response);
+
+
+        },
+        error: function(file, response){
+            console.log('response', response);
+            alert('Error Upload, cek koneksi anda atau format file yang diupload, lalu refresh Halaman');
+        }
+    };
+
+    $('#btn_cari').click(function(){
+        var unitupi = $('#sel_unitupi').val();
+        if(unitupi=='00') unitupi = 'SEMUA';
+        var unitap = $('#sel_unitap').val();
+        if(unitap=='00') unitap = 'SEMUA';
+
+        $('iframe').attr('src','https://ap2t.pln.co.id/cube/laporan.aspx?jenis=rekap_mohon_pbpd_baru&parameter=%27'+unitupi+'%27,%27'+unitap+'%27,%2753563%27,%2720210101%27,%2720210510%27,%27SEMUA%20TRANSAKSI%27,%27BELUM%20BAYAR%27,%27%27,%27%27,%27SEMUA%20STATUS%27,%27%27,%27%27&piped=true');
+    });
+
+
+})(jQuery);

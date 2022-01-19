@@ -1,0 +1,44 @@
+<?php
+
+require_once '../../config/config.php';
+require_once '../../config/database.php';
+
+
+$response = array();
+$noagenda = $_GET['noagenda'];
+
+$stmt = sqlsrv_query($conn, "select * from m_daftung where noagenda_individu = '$noagenda' ");
+if($stmt){
+	$row = sqlsrv_fetch_array( $stmt, SQLSRV_FETCH_ASSOC);
+	$response['jenislap'] = $row['JENISLAP']; 
+	$response['tglmohon'] = date_format($row['TGLMOHON'],"d/m/Y H:i"); 
+	$response['noagenda_individu'] = ($row['NOAGENDA_INDIVIDU']); 
+	$response['noagenda_kolektif'] = ($row['NOAGENDA_KOLEKTIF']); 
+	$response['jenis_transaksi'] = ($row['JENIS_TRANSAKSI']); 
+	$response['ket_transaksi'] = ($row['KET_TRANSAKSI']); 
+	$response['jenis_mk'] = ($row['JENIS_MK']); 
+	$response['idpel'] = ($row['IDPEL']); 
+	$response['nama'] = ($row['NAMA']); 
+	$response['tarif_daya_lama'] = ($row['TARIF_LAMA']=='')? '':$row['TARIF_LAMA'].'/'.number_format($row['DAYA_LAMA']).' VA'; 
+	$response['tarif_daya_baru'] = ($row['TARIF_BARU']=='')? '':$row['TARIF_BARU'].'/'.number_format($row['DAYA_BARU']).' VA'; 
+	$response['segmen_tegangan'] = ($row['SEGMEN_TEGANGAN']); 
+	$response['keterangan_gol_tarif'] = ($row['KETERANGAN_GOL_TARIF']); 
+	$response['rp_bp'] = number_format($row['RP_BP']); 
+	$response['rp_ujl'] = number_format($row['RP_UJL']); 
+	$response['status_permohonan'] = ($row['STATUS_PERMOHONAN']); 
+	$response['alasan_kriteria_tmp'] = ($row['ALASAN_KRITERIA_TMP']); 
+	$response['rp_rab'] = number_format($row['RP_RAB']); 
+	$response['keterangan_rab'] = ($row['KETERANGAN_RAB']); 
+
+	sqlsrv_free_stmt($stmt);
+
+
+}else{
+	$response['success'] = false;
+	$response['msg'] = 'Gagal melakukan Query ke Database';
+}
+
+
+echo json_encode($response);
+
+?>

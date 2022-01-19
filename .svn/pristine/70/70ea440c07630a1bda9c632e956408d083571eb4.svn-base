@@ -1,0 +1,203 @@
+$(document).ready(function () {
+
+    "use strict";
+
+    //$.blockUI({ message: '<h1 class="p-3">Mengambil data...</h1>' }); 
+    $('#tbl_rekap_agenda').DataTable( {
+        "Processing": true,
+        "serverSide": true,
+        "ajax": {
+            "url": '../controller/getRekapAgendaAP.php',
+            "type": "GET",
+            "timeout": 10000
+        },
+        columns: [
+          {
+            data: "UNITAP",
+            title: "UNITAP",
+            readonly: true,
+          },
+          {
+            data: "NAMA_AP",
+            title: "NAMA UNIT",
+          },
+          {
+            data: "JML_AGENDA",
+            title: "JML_AGENDA",
+            type: 'number',
+            "sClass" : "text-right" , render: $.fn.dataTable.render.number(".", ",", 0, '')
+          },
+          {
+            data: "JML_AGENDA_INDIVIDU",
+            title: "INDIVIDU",
+            type: 'number',
+            "sClass" : "text-right" , render: $.fn.dataTable.render.number(".", ",", 0, '')
+          },
+          {
+            data: "JML_AGENDA_KOLEKTIF",
+            title: "KOLEKTIF",
+            type: 'number',
+            "sClass" : "text-right" , render: $.fn.dataTable.render.number(".", ",", 0, '')
+          },
+          {
+            data: "JML_AGENDA_TR",
+            title: "TR",
+            type: 'number',
+            "sClass" : "text-right" , render: $.fn.dataTable.render.number(".", ",", 0, '')
+          },
+          {
+            data: "JML_AGENDA_TM",
+            title: "TM",
+            type: 'number',
+            "sClass" : "text-right" , render: $.fn.dataTable.render.number(".", ",", 0, '')
+          },
+          {
+            data: "JML_AGENDA_TT",
+            title: "TT",
+            type: 'number',
+            "sClass" : "text-right" , render: $.fn.dataTable.render.number(".", ",", 0, '')
+          },
+          {
+            data: "JML_AGENDA_PASANG_BARU",
+            title: "PASANG BARU",
+            type: 'number',
+            "sClass" : "text-right" , render: $.fn.dataTable.render.number(".", ",", 0, '')
+          },
+          {
+            data: "JML_AGENDA_TAMBAH_DAYA",
+            title: "TAMBAH_DAYA",
+            type: 'number',
+            "sClass" : "text-right" , render: $.fn.dataTable.render.number(".", ",", 0, '')
+          },
+          {
+            data: "JML_AGENDA_TURUN_DAYA",
+            title: "TURUN_DAYA",
+            type: 'number',
+            "sClass" : "text-right" , render: $.fn.dataTable.render.number(".", ",", 0, '')
+          },
+          {
+            data: "JML_AGENDA_UBAH_TARIF",
+            title: "UBAH_TARIF",
+            type: 'number',
+            "sClass" : "text-right" , render: $.fn.dataTable.render.number(".", ",", 0, '')
+          },
+          {
+            data: "JML_AGENDA_MIGRASI_KE_PRABAYAR",
+            title: "MIGRASI_KE_PRABAYAR",
+            type: 'number',
+            "sClass" : "text-right" , render: $.fn.dataTable.render.number(".", ",", 0, '')
+          },
+          {
+            data: "JML_AGENDA_MIGRASI_KE_PASCABAYAR",
+            title: "MIGRASI_KE_PASCABAYAR",
+            type: 'number',
+            "sClass" : "text-right" , render: $.fn.dataTable.render.number(".", ",", 0, '')
+          },
+          {
+            data: "JML_AGENDA_SAMBUNG_KEMBALI",
+            title: "SAMBUNG_KEMBALI",
+            type: 'number',
+            "sClass" : "text-right" , render: $.fn.dataTable.render.number(".", ",", 0, '')
+          },
+          
+        ],
+        //"deferRender": true,
+        lengthMenu: [[25, 100, -1], [25, 100, "All"]],
+        pageLength: 25,
+        "scrollY": 560,
+        "scrollX": true,
+        "paging": false,
+        "autoWidth": true,
+        "footerCallback": function ( row, data, start, end, display ) {
+          var api = this.api();
+          nb_cols = api.columns().nodes().length;
+          var j = 3;
+          while(j < nb_cols){
+            var pageTotal = api
+                  .column( j, { page: 'current'} )
+                  .data()
+                  .reduce( function (a, b) {
+                      return Number(a) + Number(b);
+                  }, 0 );
+            // Update footer
+            $( api.column( j ).footer() ).html(pageTotal);
+            j++;
+          } 
+        }
+    });
+
+    // $('#tbl_rekap_agenda_ket_transaksi').DataTable( {
+    //     "Processing": true,
+    //     "serverSide": true,
+    //     "ajax": {
+    //         "url": '../controller/getRekapAgendaAP.php',
+    //         "type": "GET",
+    //         "timeout": 10000
+    //     },
+    //     columns: [
+    //       {
+    //         data: "UNITAP",
+    //         title: "UNITAP",
+    //         readonly: true,
+    //       },
+    //       {
+    //         data: "NAMA_AP",
+    //         title: "NAMA UNIT",
+    //       },
+    //       {
+    //         data: "JML_AGENDA",
+    //         title: "JML_AGENDA",
+    //         type: 'number',
+    //         "sClass" : "text-right" , render: $.fn.dataTable.render.number(".", ",", 0, '')
+    //       },
+    //       {
+    //         data: "JML_AGENDA_PASANG_BARU",
+    //         title: "PASANG BARU",
+    //         type: 'number',
+    //         "sClass" : "text-right" , render: $.fn.dataTable.render.number(".", ",", 0, '')
+    //       },
+    //       {
+    //         data: "JML_AGENDA_TAMBAH_DAYA",
+    //         title: "TAMBAH_DAYA",
+    //         type: 'number',
+    //         "sClass" : "text-right" , render: $.fn.dataTable.render.number(".", ",", 0, '')
+    //       },
+    //       {
+    //         data: "JML_AGENDA_TURUN_DAYA",
+    //         title: "TURUN_DAYA",
+    //         type: 'number',
+    //         "sClass" : "text-right" , render: $.fn.dataTable.render.number(".", ",", 0, '')
+    //       },
+    //       {
+    //         data: "JML_AGENDA_UBAH_TARIF",
+    //         title: "UBAH_TARIF",
+    //         type: 'number',
+    //         "sClass" : "text-right" , render: $.fn.dataTable.render.number(".", ",", 0, '')
+    //       },
+    //       {
+    //         data: "JML_AGENDA_MIGRASI_KE_PRABAYAR",
+    //         title: "MIGRASI_KE_PRABAYAR",
+    //         type: 'number',
+    //         "sClass" : "text-right" , render: $.fn.dataTable.render.number(".", ",", 0, '')
+    //       },
+    //       {
+    //         data: "JML_AGENDA_MIGRASI_KE_PASCABAYAR",
+    //         title: "MIGRASI_KE_PASCABAYAR",
+    //         type: 'number',
+    //         "sClass" : "text-right" , render: $.fn.dataTable.render.number(".", ",", 0, '')
+    //       },
+    //       {
+    //         data: "JML_AGENDA_SAMBUNG_KEMBALI",
+    //         title: "SAMBUNG_KEMBALI",
+    //         type: 'number',
+    //         "sClass" : "text-right" , render: $.fn.dataTable.render.number(".", ",", 0, '')
+    //       },
+    //     ],
+    //     //"deferRender": true,
+    //     lengthMenu: [[25, 100, -1], [25, 100, "All"]],
+    //     pageLength: 25,
+    //     "scrollY": 280,
+    //     "scrollX": true,
+    // });
+
+});
