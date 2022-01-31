@@ -263,7 +263,7 @@
         }
 
         function uploadFile(file, i) {
-            var url = 'http://localhost:8080/upload'
+            var url = 'http://10.2.1.103:8080/upload'
             var xhr = new XMLHttpRequest()
             var formData = new FormData()
             xhr.open('POST', url, true)
