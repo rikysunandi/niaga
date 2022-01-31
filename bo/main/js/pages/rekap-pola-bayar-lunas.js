@@ -1052,7 +1052,7 @@ $(document).ready(function () {
       blth = $('#sel_blth').val();
 
 
-      table.ajax.url( '../controller/pelunasan/getRekapPelunasanIntimasi.php?unitupi='+unitupi+'&unitap='+unitap+'&unitup='+unitup+'&blth='+blth ).load();
+      // table.ajax.url( '../controller/pelunasan/getRekapPelunasanIntimasi.php?unitupi='+unitupi+'&unitap='+unitap+'&unitup='+unitup+'&blth='+blth ).load();
       
       table_up.ajax.url( '../controller/pelunasan/getRekapPelunasanIntimasiUP.php?unitupi='+unitupi+'&unitap='+unitap+'&unitup='+unitup+'&blth='+blth ).load();
         
@@ -1062,60 +1062,60 @@ $(document).ready(function () {
             } );
         } ).draw();
 
-      $.getJSON('../controller/pelunasan/getPelunasanPolaBayarUnit.php?unitupi='+unitupi+'&unitap='+unitap+'&unitup='+unitup+'&blth='+blth , function(data){
+      // $.getJSON('../controller/pelunasan/getPelunasanPolaBayarUnit.php?unitupi='+unitupi+'&unitap='+unitap+'&unitup='+unitup+'&blth='+blth , function(data){
 
 
-        chart_pelunasan_irisan.data.labels= data.tanggal;
-        chart_pelunasan_irisan.data.datasets[0].label = 'TARGET';
-        chart_pelunasan_irisan.data.datasets[0].data = data.target_irisan;
-        chart_pelunasan_irisan.data.datasets[1].label = 'SALDO IRISAN';
-        chart_pelunasan_irisan.data.datasets[1].data = data.jml_irisan;
-        chart_pelunasan_irisan.update();
+      //   chart_pelunasan_irisan.data.labels= data.tanggal;
+      //   chart_pelunasan_irisan.data.datasets[0].label = 'TARGET';
+      //   chart_pelunasan_irisan.data.datasets[0].data = data.target_irisan;
+      //   chart_pelunasan_irisan.data.datasets[1].label = 'SALDO IRISAN';
+      //   chart_pelunasan_irisan.data.datasets[1].data = data.jml_irisan;
+      //   chart_pelunasan_irisan.update();
 
-        chart_pelunasan_baru.data.labels= data.tanggal;
-        chart_pelunasan_baru.data.datasets[0].label = 'TARGET';
-        chart_pelunasan_baru.data.datasets[0].data = data.target_baru;
-        chart_pelunasan_baru.data.datasets[1].label = 'SALDO BARU';
-        chart_pelunasan_baru.data.datasets[1].data = data.jml_baru;
-        chart_pelunasan_baru.update();
+      //   chart_pelunasan_baru.data.labels= data.tanggal;
+      //   chart_pelunasan_baru.data.datasets[0].label = 'TARGET';
+      //   chart_pelunasan_baru.data.datasets[0].data = data.target_baru;
+      //   chart_pelunasan_baru.data.datasets[1].label = 'SALDO BARU';
+      //   chart_pelunasan_baru.data.datasets[1].data = data.jml_baru;
+      //   chart_pelunasan_baru.update();
 
-        chart_pelunasan_lancar.data.labels= data.tanggal;
-        chart_pelunasan_lancar.data.datasets[0].label = 'TARGET';
-        chart_pelunasan_lancar.data.datasets[0].data = data.target_lancar;
-        chart_pelunasan_lancar.data.datasets[1].label = 'SALDO LANCAR';
-        chart_pelunasan_lancar.data.datasets[1].data = data.jml_lancar;
-        chart_pelunasan_lancar.update();
+      //   chart_pelunasan_lancar.data.labels= data.tanggal;
+      //   chart_pelunasan_lancar.data.datasets[0].label = 'TARGET';
+      //   chart_pelunasan_lancar.data.datasets[0].data = data.target_lancar;
+      //   chart_pelunasan_lancar.data.datasets[1].label = 'SALDO LANCAR';
+      //   chart_pelunasan_lancar.data.datasets[1].data = data.jml_lancar;
+      //   chart_pelunasan_lancar.update();
 
-        $('div.pelunasan').unblock();
+      //   $('div.pelunasan').unblock();
 
-        $('div#table_lunas').block({ message: 'Mengambil data...' });
-        var tr = '';
-        $('div#table_lunas table tbody').empty();
-        $.each(data.rows, function(k,v){
-            tr += '<tr data-tanggal="'+v.tanggal+'" data-unitupi="'+unitupi+'" data-unitap="'+unitap+'" data-unitup="'+unitup+'" data-blth="'+blth+'" >';
-            tr += '<td>'+v.tanggal+'</td>';
-            tr += '<td class="text-right">'+v.awal_irisan+'</td>';
-            tr += '<td class="text-right">'+v.jml_irisan+'</td>';
-            tr += '<td class="text-right">'+v.saldo_irisan+'</td>';
-            tr += '<td class="text-right">'+v.target_irisan+'</td>';
-            tr += '<td class="text-right">'+v.real_irisan+'</td>';
-            tr += '<td class="text-right">'+v.awal_baru+'</td>';
-            tr += '<td class="text-right">'+v.jml_baru+'</td>';
-            tr += '<td class="text-right">'+v.saldo_baru+'</td>';
-            tr += '<td class="text-right">'+v.target_baru+'</td>';
-            tr += '<td class="text-right">'+v.real_baru+'</td>';
-            tr += '<td class="text-right">'+v.awal_lancar+'</td>';
-            tr += '<td class="text-right">'+v.jml_lancar+'</td>';
-            tr += '<td class="text-right">'+v.saldo_lancar+'</td>';
-            tr += '<td class="text-right">'+v.target_lancar+'</td>';
-            tr += '<td class="text-right">'+v.real_lancar+'</td>';
-            tr += '</tr>';
-        });
-        $('div#table_lunas table tbody').append(tr);
+      //   $('div#table_lunas').block({ message: 'Mengambil data...' });
+      //   var tr = '';
+      //   $('div#table_lunas table tbody').empty();
+      //   $.each(data.rows, function(k,v){
+      //       tr += '<tr data-tanggal="'+v.tanggal+'" data-unitupi="'+unitupi+'" data-unitap="'+unitap+'" data-unitup="'+unitup+'" data-blth="'+blth+'" >';
+      //       tr += '<td>'+v.tanggal+'</td>';
+      //       tr += '<td class="text-right">'+v.awal_irisan+'</td>';
+      //       tr += '<td class="text-right">'+v.jml_irisan+'</td>';
+      //       tr += '<td class="text-right">'+v.saldo_irisan+'</td>';
+      //       tr += '<td class="text-right">'+v.target_irisan+'</td>';
+      //       tr += '<td class="text-right">'+v.real_irisan+'</td>';
+      //       tr += '<td class="text-right">'+v.awal_baru+'</td>';
+      //       tr += '<td class="text-right">'+v.jml_baru+'</td>';
+      //       tr += '<td class="text-right">'+v.saldo_baru+'</td>';
+      //       tr += '<td class="text-right">'+v.target_baru+'</td>';
+      //       tr += '<td class="text-right">'+v.real_baru+'</td>';
+      //       tr += '<td class="text-right">'+v.awal_lancar+'</td>';
+      //       tr += '<td class="text-right">'+v.jml_lancar+'</td>';
+      //       tr += '<td class="text-right">'+v.saldo_lancar+'</td>';
+      //       tr += '<td class="text-right">'+v.target_lancar+'</td>';
+      //       tr += '<td class="text-right">'+v.real_lancar+'</td>';
+      //       tr += '</tr>';
+      //   });
+      //   $('div#table_lunas table tbody').append(tr);
 
-        $('div#table_lunas').unblock();
+      //   $('div#table_lunas').unblock();
 
-      });
+      // });
 
 
         
