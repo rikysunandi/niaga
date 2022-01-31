@@ -16,6 +16,27 @@
                     </li>
                     
                     
+                    <li class="nav-label">4DX</li>
+                     <li><a class="has-arrow" href="javascript:void()" aria-expanded="false"><i class="mdi mdi-cloud-upload"></i> <span class="nav-text">WIG</span></a>
+                        <ul aria-expanded="false">
+                            <li><a href="input-wig.php">Input WIG</a>
+                            </li>
+                            <li><a href="daftar-wig.php">Daftar WIG</a>
+                            </li>
+                            <li><a href="input-target-lag.php">Input Target Lag Measures</a>
+                            </li>
+                            <li><a href="input-target-lm.php">Input Target Lead Measures</a>
+                            </li>
+                        </ul>
+                    </li>
+                     <li><a class="has-arrow" href="javascript:void()" aria-expanded="false"><i class="mdi mdi-cloud-upload"></i> <span class="nav-text">Eksekusi</span></a>
+                        <ul aria-expanded="false">
+                            <li><a href="input-realisasi.php">Input Pencapaian LM</a>
+                            </li>
+                            <li><a href="daftar-wig.php">Daftar WIG</a>
+                            </li>
+                        </ul>
+                    </li>
                     <li class="nav-label">ADM NIAGA</li>
                      <li><a class="has-arrow" href="javascript:void()" aria-expanded="false"><i class="mdi mdi-cloud-upload"></i> <span class="nav-text">Upload Data</span></a>
                         <ul aria-expanded="false">
