@@ -62,6 +62,27 @@
         #fileElem {
             display: none;
         }
+
+        .loader-upload {
+            border: 4px solid #f3f3f3;
+            /* Light grey */
+            border-top: 4px solid #3498db;
+            /* Blue */
+            border-radius: 50%;
+            width: 30px;
+            height: 30px;
+            animation: spin 2s linear infinite;
+        }
+
+        @keyframes spin {
+            0% {
+                transform: rotate(0deg);
+            }
+
+            100% {
+                transform: rotate(360deg);
+            }
+        }
     </style>
 
 </head>
@@ -122,9 +143,10 @@
                                             <p>Drop files here to upload</p>
                                             <input type="file" name="files" id="fileElem" multiple accept=".csv" onchange="handleFiles(this.files)">
                                             <label class="button text-white" for="fileElem">Select some files</label>
+                                            <div id="gallery"></div>
                                         </form>
                                         <progress id="progress-bar" max=100 value=0></progress>
-                                        <div id="gallery"></div>
+                                        <div id="progress"></div>
                                     </div>
                                 </div>
                             </div>
@@ -243,6 +265,10 @@
             uploadProgress[fileNumber] = percent
             let total = uploadProgress.reduce((tot, curr) => tot + curr, 0) / uploadProgress.length
             progressBar.value = total
+
+            // if (progressBar.value == 100) {
+            //     progressBar.style.backgroundColor = '#4CAF50';
+            // }
         }
 
         function handleFiles(files) {
@@ -263,7 +289,7 @@
         }
 
         function uploadFile(file, i) {
-            var url = 'http://10.2.1.103:8080/upload'
+            var url = 'http://localhost:8080/upload'
             var xhr = new XMLHttpRequest()
             var formData = new FormData()
             xhr.open('POST', url, true)
@@ -272,17 +298,26 @@
             // Update progress (can be used to show progress indicator)
             xhr.upload.addEventListener("progress", function(e) {
                 updateProgress(i, (e.loaded * 100.0 / e.total) || 100)
+                let loader = document.getElementById('progress')
+                loader.innerHTML = `<div class="loader-upload"></div><p id="msg-result" class="text-info mt-3">Inserting data to db</p>`
             })
 
             xhr.addEventListener('readystatechange', function(e) {
                 if (xhr.readyState == 4 && xhr.status == 200) {
-                    updateProgress(i, 100) // <- Add this
+                    updateProgress(i, 100)
+                    let progress = document.getElementsByClassName('loader-upload');
+                    progress[0].remove()
+
+                    let msg = JSON.parse(this.responseText);
+                    document.getElementById('msg-result').innerHTML = `Jumlah data yang di-insert ke database sebanyak: ${msg['inserted-rows']} row`
+                    let // <- Add this
                 } else if (xhr.readyState == 4 && xhr.status != 200) {
-                    // Error. Inform the user
+                    alert('Error')
                 }
             })
 
             formData.append('files', file)
+
             xhr.send(formData)
         }
     </script>
