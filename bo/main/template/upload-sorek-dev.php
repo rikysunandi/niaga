@@ -289,7 +289,7 @@
         }
 
         function uploadFile(file, i) {
-            var url = 'http://localhost:8080/upload'
+            var url = 'http://10.2.1.103:8080/upload'
             var xhr = new XMLHttpRequest()
             var formData = new FormData()
             xhr.open('POST', url, true)
@@ -298,19 +298,14 @@
             // Update progress (can be used to show progress indicator)
             xhr.upload.addEventListener("progress", function(e) {
                 updateProgress(i, (e.loaded * 100.0 / e.total) || 100)
-                let loader = document.getElementById('progress')
-                loader.innerHTML = `<div class="loader-upload"></div><p id="msg-result" class="text-info mt-3">Inserting data to db</p>`
             })
 
             xhr.addEventListener('readystatechange', function(e) {
                 if (xhr.readyState == 4 && xhr.status == 200) {
                     updateProgress(i, 100)
-                    let progress = document.getElementsByClassName('loader-upload');
-                    progress[0].remove()
+                    let response = JSON.parse(this.responseText)
 
-                    let msg = JSON.parse(this.responseText);
-                    document.getElementById('msg-result').innerHTML = `Jumlah data yang di-insert ke database sebanyak: ${msg['inserted-rows']} row`
-                    let // <- Add this
+                    document.getElementById('progress').innerHTML = 'Upload File Berhasil' // <- Add this
                 } else if (xhr.readyState == 4 && xhr.status != 200) {
                     alert('Error')
                 }
