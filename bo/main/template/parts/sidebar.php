@@ -38,9 +38,9 @@
             <li class="nav-label">ADM NIAGA</li>
             <li><a class="has-arrow" href="javascript:void()" aria-expanded="false"><i class="mdi mdi-cloud-upload"></i> <span class="nav-text">Upload Data</span></a>
                 <ul aria-expanded="false">
-                    <li><a href="upload-sorek.php">Upload Sorek OLAP AP2T</a>
+                    <li class="d-none"><a href="upload-sorek.php">Upload Sorek OLAP AP2T <span class="badge badge-warning">Development</span></a>
                     </li>
-                    <li><a href="upload-sorek-dev.php">Upload Sorek OLAP AP2T <span class="badge badge-warning">Development</span></a>
+                    <li><a href="upload-sorek-dev.php">Upload Sorek OLAP AP2T</a>
                     </li>
                     <li><a href="update-pelunasan.php">Upload Pelunasan AP2T</a>
                     </li>
