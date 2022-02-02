@@ -305,7 +305,9 @@
                     updateProgress(i, 100)
                     let response = JSON.parse(this.responseText)
 
-                    document.getElementById('progress').innerHTML = 'Upload File Berhasil' // <- Add this
+                    let progress = document.getElementById('progress')
+                    progress.classList.add('text-success')
+                    progress.innerHTML = 'Upload File Berhasil' // <- Add this
                 } else if (xhr.readyState == 4 && xhr.status != 200) {
                     alert('Error')
                 }
