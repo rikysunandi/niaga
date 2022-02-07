@@ -35,6 +35,7 @@ if(sqlsrv_execute($stmt)){
 		$response['pelanggan'][$i]['tarif'] = $row['TARIF']; 
 		$response['pelanggan'][$i]['daya'] = $row['DAYA'];
 		$response['pelanggan'][$i]['gardu'] = $row['NAMA_GARDU'];
+		$response['pelanggan'][$i]['string_1'] = $row['NOMOR_JURUSAN_TIANG'];
 		$response['pelanggan'][$i]['kddk'] = $row['KDDK'];
 		$response['pelanggan'][$i]['nomor_meter_kwh'] = $row['NOMOR_METER_KWH'];
 		$response['pelanggan'][$i]['notelp'] = $row['NOTELP'];
