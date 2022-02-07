@@ -1,11 +1,12 @@
 <?php
 
-require_once '../../../config/config.php';
-require_once '../../../config/database.php';
+require_once '../../bo/config/config.php';
+require_once '../../bo/config/database.php';
 
 // ini_set('display_errors', 1);
 // ini_set('display_startup_errors', 1);
 // error_reporting(E_ALL);
+ini_set('memory_limit', '-1');
 
 $unitupi = $_GET['unitupi'];
 $unitap = $_GET['unitap'];
@@ -33,7 +34,12 @@ if(sqlsrv_execute($stmt)){
 		$response['pelanggan'][$i]['nama'] = $row['NAMA']; 
 		$response['pelanggan'][$i]['tarif'] = $row['TARIF']; 
 		$response['pelanggan'][$i]['daya'] = $row['DAYA'];
-		$response['pelanggan'][$i]['kddk'] = $row['NOMOR_METER_KWH'];
+		$response['pelanggan'][$i]['gardu'] = $row['NAMA_GARDU'];
+		$response['pelanggan'][$i]['kddk'] = $row['KDDK'];
+		$response['pelanggan'][$i]['nomor_meter_kwh'] = $row['NOMOR_METER_KWH'];
+		$response['pelanggan'][$i]['notelp'] = $row['NOTELP'];
+		$response['pelanggan'][$i]['latitude'] = $row['LATITUDE'];
+		$response['pelanggan'][$i]['longitude'] = $row['LONGITUDE'];
 
 		$i++;
 	}
