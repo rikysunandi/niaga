@@ -4,7 +4,7 @@ $(document).ready(function () {
 
     const queryString = window.location.search;
     const urlParams = new URLSearchParams(queryString);
-    
+    var unitupi, unitap, unitup, blth;
 
     //$.blockUI({ message: '<h1 class="p-3">Mengambil data...</h1>' }); 
     var table = $('#tbl_wo_intimasi')
@@ -96,10 +96,28 @@ $(document).ready(function () {
         ],
         "scrollY": 360,
         "scrollX": true,
-        "paging": true,
+        "paging": false,
         lengthMenu: [[50, 100, -1], [50, 100, "All"]],
-        pageLength: 50,
+        pageLength: 100,
         order: [[0, 'asc'],[1, 'asc']],
+
+        footerCallback: function ( row, data, start, end, display ) {
+          var api = this.api();
+          //console.log('footerCallback', api);
+          var nb_cols = api.columns().nodes().length;
+          var j = 4;
+          while(j < nb_cols){
+            var pageTotal = api
+                  .column( j, { page: 'current'} )
+                  .data()
+                  .reduce( function (a, b) {
+                      return Number(a) + Number(b);
+                  }, 0 );
+            // Update footer
+            $( api.column( j ).footer() ).html($.fn.dataTable.render.number(".", ",", 0, '').display(pageTotal));
+            j++;
+          } 
+        }
         // rowGroup: {
         //     startRender: null,
         //     endRender: function ( rows, group ) {
@@ -148,9 +166,52 @@ $(document).ready(function () {
     });
 
     $( 'body' ).on( 'click', '#btn_cari', function(btn) {
-        console.log('Klikk');
+        unitupi = $('#sel_unitupi').val();
+        unitap = $('#sel_unitap').val();
+        unitup = $('#sel_unitup').val();
+        blth = $('#sel_blth').val();
         table.ajax.url( '../controller/pelunasan/getWOIntimasi.php?unitupi='+$('#sel_unitupi').val()+'&unitap='+$('#sel_unitap').val()+'&unitup='+$('#sel_unitup').val()+'&blth='+$('#sel_blth').val() ).load();
     });
+
+    $( 'body' ).on( 'click', '#btn_wo', function(btn) {
+
+        $('div.content-body').block({ message: 'Menetapkan WO Intimasi...' });
+        $.post( '../controller/pelunasan/tetapkanWOIntimasi.php',{ 
+            unitupi: unitupi, 
+            unitap: unitap, 
+            unitup: unitup, 
+            blth: blth, 
+        })
+        .done(function( data ) {
+          $('div.content-body').unblock();
+          $.notify({
+                message: data.msg 
+            },{
+                // settings
+              type: (data.success)?'success':'warning', 
+              offset: {
+                  y: 20, 
+                  x: 320
+              },
+              spacing: 5,
+              z_index: 1031,
+              delay: 5000,
+              timer: 1000,
+              placement: {
+                  from: 'top', 
+                  align: 'right'
+              },
+              animate: {
+                  enter: 'animated fadeInDown',
+                  exit: 'animated fadeOutUp'
+              }
+          });
+        
+        });
+
+    });
+
+
 
 
 });

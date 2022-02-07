@@ -24,53 +24,78 @@ $ext = pathinfo($_FILES['file']['name'], PATHINFO_EXTENSION);
 if ( 0 < $_FILES['file']['error'] ) {
 	$response['success'] = false;
 	$response['msg'] = $_FILES['file']['error'];
-}else if ( $ext <> 'xls' ) {
+}else if ( $ext <> 'xls' AND $ext <> 'csv' ) {
 	$response['success'] = false;
-	$response['msg'] = 'Silahkan upload File Excel (.xlsx), file anda berekstensi '.$ext.' '.$_FILES['file']['tmp_name'].' UP:'.$unitup;
+	$response['msg'] = 'Silahkan upload File Excel (.xls) atau .csv, file anda berekstensi '.$ext.' '.$_FILES['file']['tmp_name'].' UP:'.$unitup;
 	header("HTTP/1.0 400 Bad Request");
-	echo 'Silahkan upload File Excel (.xlsx), file anda berekstensi '.$ext.' '.$_FILES['file']['tmp_name'].' UP:'.$unitup;
+	echo 'Silahkan upload File Excel (.xls) atau .csv, file anda berekstensi '.$ext.' '.$_FILES['file']['tmp_name'].' UP:'.$unitup;
 }
 else {
 	$filesize = $_FILES['file']['size'];
-    
-	if ( $xls = new Spreadsheet_Excel_Reader($_FILES['file']['tmp_name'],false) ) {
-		
-		if(substr(preg_replace("/[^a-zA-Z0-9]+/", "", $xls->val(1,1,0)),0,3)=='THB' && $xls->colcount($sheet_index=0)==73){
+
+	if ( $ext =='xls')  {  
+		if ( $xls = new Spreadsheet_Excel_Reader($_FILES['file']['tmp_name'],false) ) {
+			
+			if(substr(preg_replace("/[^a-zA-Z0-9]+/", "", $xls->val(1,1,0)),0,3)=='THB' && $xls->colcount($sheet_index=0)==73){
 
 
-			$filename = 'SOREK_'.date('mdHi').'_'.preg_replace("/[^a-zA-Z0-9]+/", "", $_FILES['file']['name']).'_'.substr(bin2hex( random_bytes(12) ), 0, 6).'.xls';
-			// upload file
-			if (ftp_put($ftp_conn, '/uploads_sorek/'.$filename, $_FILES['file']['tmp_name'])){
+				$filename = 'SOREK_'.date('mdHi').'_'.preg_replace("/[^a-zA-Z0-9]+/", "", $_FILES['file']['name']).'_'.substr(bin2hex( random_bytes(12) ), 0, 6).'.xls';
+				// upload file
+				if (ftp_put($ftp_conn, '/uploads_sorek/'.$filename, $_FILES['file']['tmp_name'])){
 
-				$response['success'] = true;
-				$response['msg'] = 'Upload Sorek berhasil';
-				$response['filename'] = $filename;
-				$response['filesize'] = $filesize;
-				$response['rowcount'] = $xls->rowcount($sheet_index=0);
-				$response['colcount'] = $xls->colcount($sheet_index=0);
+					$response['success'] = true;
+					$response['msg'] = 'Upload Sorek berhasil';
+					$response['filename'] = $filename;
+					$response['filesize'] = $filesize;
+					$response['rowcount'] = $xls->rowcount($sheet_index=0);
+					$response['colcount'] = $xls->colcount($sheet_index=0);
 
-				echo json_encode($response);
-			}
-			else{
+					echo json_encode($response);
+				}
+				else{
+					$response['success'] = false;
+					$response['msg'] = 'Upload Sorek gagal';
+					header("HTTP/1.0 400 Bad Request");
+					echo 'Upload Sorek gagal';
+				 }
+
+				// close connection
+				ftp_close($ftp_conn);
+			}else{
 				$response['success'] = false;
-				$response['msg'] = 'Upload Sorek gagal';
+				$response['msg'] = 'Format File yang diupload tidak dikenali, pastikan download xls';
 				header("HTTP/1.0 400 Bad Request");
-				echo 'Upload Sorek gagal';
-			 }
-
-			// close connection
-			ftp_close($ftp_conn);
-		}else{
+				echo 'Format File yang diupload tidak dikenali, pastikan download xls dari AP2T - '.substr(preg_replace("/[^a-zA-Z0-9]+/", "", $xls->val(1,1,0)),0,3).' - '.$xls->colcount($sheet_index=0).' - '.$xls->val(1,1);
+			}
+		} else {
 			$response['success'] = false;
-			$response['msg'] = 'Format File yang diupload tidak dikenali, pastikan download xls';
+			$response['msg'] = 'Gagal membaca file yang diupload';
 			header("HTTP/1.0 400 Bad Request");
-			echo 'Format File yang diupload tidak dikenali, pastikan download xls dari AP2T - '.$xls->val(1,1);
+			echo 'Gagal membaca file yang diupload';
 		}
-	} else {
-		$response['success'] = false;
-		$response['msg'] = 'Gagal membaca file yang diupload';
-		header("HTTP/1.0 400 Bad Request");
-		echo 'Gagal membaca file yang diupload';
+	}else{
+		$filename = 'SOREK_'.date('mdHi').'_'.preg_replace("/[^a-zA-Z0-9]+/", "", $_FILES['file']['name']).'_'.substr(bin2hex( random_bytes(12) ), 0, 6).'.csv';
+
+		if (ftp_put($ftp_conn, '/uploads_sorek/'.$filename, $_FILES['file']['tmp_name'])){
+
+			$response['success'] = true;
+			$response['msg'] = 'Upload Sorek berhasil';
+			$response['filename'] = $filename;
+			$response['filesize'] = $filesize;
+			$response['rowcount'] = rand(0,1000);
+			$response['colcount'] = 73;
+
+			echo json_encode($response);
+		}
+		else{
+			$response['success'] = false;
+			$response['msg'] = 'Upload Sorek gagal';
+			header("HTTP/1.0 400 Bad Request");
+			echo 'Upload Sorek gagal';
+		 }
+
+		// close connection
+		ftp_close($ftp_conn);
 	}
 
 }

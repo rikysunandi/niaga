@@ -111,6 +111,8 @@
                                 <h4 class="card-title">Monitoring Upload Sorek (OLAP AP2T)</h4>
                             </div>
                             <div class="card-body">
+                                <p>Untuk menetapkan WO Intimasi dan agar dapat didownload di HP Petugas, silahkan lakukan prosesnya <a href="wo-intimasi.php" class="badge badge-primary" target="_blank">di sini</a>
+                                </p>
                                 <div class="table-responsive">
                                     <table id="tbl_upload_sorek" class="table table-striped table-bordered nowrap" style="width: 100%">
                                     <thead>

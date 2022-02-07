@@ -9,7 +9,7 @@
     $('#btn_upload').prop('disabled', true);
 
     Dropzone.options.uploadSorek = {
-        acceptedFiles: '.xls',
+        acceptedFiles: '.xls,.csv',
         addRemoveLinks: true,
         clickable: true,
         maxFiles: 5,

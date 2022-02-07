@@ -51,21 +51,6 @@
                     </li>
                 </ul>
             </li>
-            <li class="mega-menu mega-menu-md"><a class="has-arrow" href="javascript:void()" aria-expanded="false"><i class="mdi mdi-cash-multiple"></i><span class="nav-text">Pelunasan Piutang </span> </a>
-                <ul aria-expanded="false">
-                    <!-- <li><a href="update-pelunasan.php">Update Pelunasan</a>
-                            </li> -->
-                    <li><a href="mon-dpp.php">Monitoring Data Piutang</a>
-                    </li>
-                    <li><a href="mon-pola-bayar.php">Monitoring Pola Bayar</a>
-                    </li>
-                    <li><a href="rekap-pola-bayar-lunas.php">Rekap Pelunasan Berdasarkan Pola Bayar</a>
-                    <li><a href="rekap-tgl-bayar.php">Rekap Pelunasan per Tgl Bayar</a>
-                    <li><a href="rekap-pola-bayar-tarif-daya.php">Rekap Pola Bayar per Tarif Daya</a>
-                    </li>
-                    <!-- <li><a href="input-va.php">Input Virtual Account</a></li> -->
-                </ul>
-            </li>
             <li class="mega-menu mega-menu-md"><a class="has-arrow" href="javascript:void()" aria-expanded="false"><i class="mdi mdi-information-outline"></i><span class="nav-text">Intimasi </span> </a>
                 <ul aria-expanded="false">
                     <!-- <li><a href="update-pelunasan.php">Update Pelunasan</a>
@@ -78,6 +63,21 @@
                     <li><a href="rekap-intimasi-koordinator.php">Rekap Intimasi per Koordinator</a>
                     </li>
                     <li><a href="rekap-intimasi-petugas.php">Rekap Intimasi per Petugas</a>
+                    </li>
+                    <!-- <li><a href="input-va.php">Input Virtual Account</a></li> -->
+                </ul>
+            </li>
+            <li class="mega-menu mega-menu-md"><a class="has-arrow" href="javascript:void()" aria-expanded="false"><i class="mdi mdi-cash-multiple"></i><span class="nav-text">Pelunasan Piutang </span> </a>
+                <ul aria-expanded="false">
+                    <!-- <li><a href="update-pelunasan.php">Update Pelunasan</a>
+                            </li> -->
+                    <li><a href="mon-dpp.php">Monitoring Data Piutang</a>
+                    </li>
+                    <li><a href="mon-pola-bayar.php">Monitoring Pola Bayar</a>
+                    </li>
+                    <li><a href="rekap-pola-bayar-lunas.php">Rekap Pelunasan Berdasarkan Pola Bayar</a>
+                    <li><a href="rekap-tgl-bayar.php">Rekap Pelunasan per Tgl Bayar</a>
+                    <li><a href="rekap-pola-bayar-tarif-daya.php">Rekap Pola Bayar per Tarif Daya</a>
                     </li>
                     <!-- <li><a href="input-va.php">Input Virtual Account</a></li> -->
                 </ul>

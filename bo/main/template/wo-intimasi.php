@@ -58,19 +58,19 @@
                                         <div class="form-row">
                                             <div class="form-group mb-2 mr-4">
                                                 <label class="text-label d-block"><small>UID</small></label>
-                                                <select id="sel_unitupi" class="selectpicker show-tick" data-size="5" >
+                                                <select id="sel_unitupi" class="selectpicker show-tick" data-size="5" data-inc-semua="T" >
                                                     <option disabled>Pilih Unit Induk</option>
                                                 </select>
                                             </div>
                                             <div class="form-group mb-2 mr-4">
                                                 <label class="text-label d-block"><small>UP3</small></label>
-                                                <select id="sel_unitap" class="selectpicker show-tick" data-size="5" >
+                                                <select id="sel_unitap" class="selectpicker show-tick" data-size="5" data-inc-semua="T" >
                                                     <option disabled>Pilih UP3</option>
                                                 </select>
                                             </div>
                                             <div class="form-group mb-2 mr-4">
                                                 <label class="text-label d-block"><small>ULP</small></label>
-                                                <select id="sel_unitup" class="selectpicker show-tick" data-size="5" >
+                                                <select id="sel_unitup" class="selectpicker show-tick" data-size="5" data-inc-semua="T" >
                                                     <option disabled>Pilih ULP</option>
                                                 </select>
                                             </div>
@@ -104,6 +104,9 @@
                     <div class="col-12">
                         <div class="card">
                             <div class="card-body">
+                                <p>
+                                    Sebelum petugas dapat melakukan Download WO Intimasi di HP, silahkan lakukan penetapan terlebih dahulu dengan mengklik tombol di bawah
+                                </p>
                                 <div class="table-responsive">
                                     <table id="tbl_wo_intimasi" class="table table-striped table-bordered nowrap" style="width: 100%">
                                     <thead>
@@ -113,7 +116,7 @@
                                             <th rowspan="2" class="text-center bg-primary-lighten-2">ULP</th>
                                             <th rowspan="2" class="text-center bg-primary-lighten-2">KODEPETUGAS</th>
                                             <th rowspan="2" class="text-center bg-primary-lighten-2">JML<br/>RBM</th>
-                                            <th class="text-center bg-primary-lighten-2" colspan="3">WORKORDER INTIMASI</th>
+                                            <th class="text-center bg-primary-lighten-2" colspan="3">WORKORDER INTIMASI (PLG)</th>
                                         </tr>
                                         <tr>
                                             <th class="text-center bg-primary-lighten-2">JML BARU</th>
@@ -121,7 +124,23 @@
                                             <th class="text-center bg-primary-lighten-2">TOTAL</th>
                                         </tr>
                                     </thead>
+                                    <tfoot>
+                                        <tr>
+                                            <th class="bg-primary-lighten-2" colspan="4">TOTAL</th>
+                                            <th class="bg-primary-lighten-2"></th>
+                                            <th class="bg-primary-lighten-2"></th>
+                                            <th class="bg-primary-lighten-2"></th>
+                                            <th class="bg-primary-lighten-2"></th>
+                                        </tr>
+                                    </tfoot>
                                 </table>
+                                </div>
+                            </div>
+                            <div class="card-footer">
+                                <div class="text-right mt-2">
+                                    <button id="btn_wo" type="button" class="btn btn-sm btn-primary waves-effect waves-light">Tetapkan WO <span class="btn-icon-right"><i
+                                        class="fa fa-gear"></i></span>
+                                    </button>
                                 </div>
                             </div>
                         </div>
@@ -168,6 +187,7 @@
     <script src="https://cdn.datatables.net/responsive/2.2.5/js/dataTables.responsive.min.js"></script>
     <script src="https://cdn.datatables.net/fixedcolumns/3.3.1/js/dataTables.fixedColumns.min.js"></script>
     <script src="https://cdn.datatables.net/rowgroup/1.1.3/js/dataTables.rowGroup.min.js"></script>
+    <script src="../../assets/plugins/bootstrap4-notify/bootstrap-notify.min.js"></script>
     <script src="../../assets/plugins/block-ui/jquery.blockUI.js"></script>
 
     <script src="../js/pages/apps.js"></script>
