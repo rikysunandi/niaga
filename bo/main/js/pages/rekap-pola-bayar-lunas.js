@@ -1052,7 +1052,7 @@ $(document).ready(function () {
       blth = $('#sel_blth').val();
 
 
-      // table.ajax.url( '../controller/pelunasan/getRekapPelunasanIntimasi.php?unitupi='+unitupi+'&unitap='+unitap+'&unitup='+unitup+'&blth='+blth ).load();
+      table.ajax.url( '../controller/pelunasan/getRekapPelunasanIntimasi.php?unitupi='+unitupi+'&unitap='+unitap+'&unitup='+unitup+'&blth='+blth ).load();
       
       table_up.ajax.url( '../controller/pelunasan/getRekapPelunasanIntimasiUP.php?unitupi='+unitupi+'&unitap='+unitap+'&unitup='+unitup+'&blth='+blth ).load();
         
