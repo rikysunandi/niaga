@@ -49,7 +49,7 @@ if($param <> ''){
 			$response['pelanggan'] = null;
 			$response['msg'] = $row['ERROR'];
 		}
-		
+
 		sqlsrv_free_stmt($stmt);
 
 
@@ -101,7 +101,7 @@ if($param <> ''){
 	}
 }
 
-header('Content-Type: application/json');
+header('Content-Type: application/json; charset=utf-8');
 echo json_encode(utf8ize($response));
 
 function utf8ize($d) {
