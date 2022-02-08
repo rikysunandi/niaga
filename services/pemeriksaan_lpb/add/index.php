@@ -30,6 +30,61 @@ $tgl_input = $json_data['tglInsert'];
 
 $response = array();
 
+if(isset($_FILES['image'])){
+  $file_name = $idpel.'_'.$tgl_pemeriksaan.'.jpg';
+  $file_size =$_FILES['image']['size'];
+  $file_tmp =$_FILES['image']['tmp_name'];
+  $file_type=$_FILES['image']['type'];
+  $file_ext=strtolower(end(explode('.',$_FILES['image']['name'])));
+
+  $extensions= array("jpeg","jpg","png");
+
+  if(in_array($file_ext,$extensions)=== false){
+     $response['error'][]="extension not allowed, please choose a JPEG or PNG file.";
+  }
+
+  if($file_size > 2097152){
+     $response['error'][]='File size must be excately 2 MB';
+  }
+
+  if(empty($response['error'])==true){
+    $file_path = "../../uploads/tagging/".$unitap."/".$unitup;
+    if (!file_exists($file_path)) {
+        mkdir($file_path, 0777, true);
+    }
+    if(move_uploaded_file($file_tmp, $file_path."/".$file_name))
+      $foto = $file_name;
+  }
+}
+
+if(isset($_FILES['image2'])){
+  $file_name = $idpel.'_'.$tgl_pemeriksaan.'.jpg';
+  $file_size =$_FILES['image']['size'];
+  $file_tmp =$_FILES['image']['tmp_name'];
+  $file_type=$_FILES['image']['type'];
+  $file_ext=strtolower(end(explode('.',$_FILES['image']['name'])));
+
+  $extensions= array("jpeg","jpg","png");
+
+  if(in_array($file_ext,$extensions)=== false){
+     $response['error'][]="extension not allowed, please choose a JPEG or PNG file.";
+  }
+
+  if($file_size > 2097152){
+     $response['error'][]='File size must be excately 2 MB';
+  }
+
+  if(empty($response['error'])==true){
+    $file_path = "../../uploads/rumah/".$unitap."/".$unitup;
+    if (!file_exists($file_path)) {
+        mkdir($file_path, 0777, true);
+    }
+    if(move_uploaded_file($file_tmp, $file_path."/".$file_name))
+      $foto_rumah = $file_name;
+  }
+}
+
+
 $params = array(
         array($tgl_pemeriksaan, SQLSRV_PARAM_IN),
         array($idpel, SQLSRV_PARAM_IN),
@@ -42,14 +97,15 @@ $params = array(
         array($email, SQLSRV_PARAM_IN),
         array($peruntukan, SQLSRV_PARAM_IN),
         array($sisa_kwh, SQLSRV_PARAM_IN),
-        //array($foto, SQLSRV_PARAM_IN),
+        array($foto, SQLSRV_PARAM_IN),
+        array($foto_rumah, SQLSRV_PARAM_IN),
         array($latitude, SQLSRV_PARAM_IN),
         array($longitude, SQLSRV_PARAM_IN),
         array($user_input, SQLSRV_PARAM_IN),
         array($tgl_input, SQLSRV_PARAM_IN),
     );
 
-$sql = "EXEC SP_WS_PEMERIKSAAN_LPB_SIMPAN @TGL_PEMERIKSAAN = ?, @IDPEL = ?,     @NAMA = ?, @TARIF = ?, @DAYA = ?, @NIK = ?, @KK = ?, @NOHP = ?, @EMAIL = ?, @PERUNTUKAN = ?, @SISA_KWH = ?, @LATITUDE = ?, @LONGITUDE = ?, @USER_INPUT = ?, @TGL_INPUT = ? ";
+$sql = "EXEC SP_WS_PEMERIKSAAN_LPB_SIMPAN @TGL_PEMERIKSAAN = ?, @IDPEL = ?, @NAMA = ?, @TARIF = ?, @DAYA = ?, @NIK = ?, @KK = ?, @NOHP = ?, @EMAIL = ?, @PERUNTUKAN = ?, @SISA_KWH = ?, @FOTO = ?, @FOTO_RUMAH = ?, @LATITUDE = ?, @LONGITUDE = ?, @USER_INPUT = ?, @TGL_INPUT = ? ";
 $stmt = sqlsrv_prepare($conn, $sql, $params);
 
 if(sqlsrv_execute($stmt)){
@@ -65,58 +121,6 @@ if(sqlsrv_execute($stmt)){
     // sqlsrv_next_result($stmt);
     // $row = sqlsrv_fetch_array($stmt, SQLSRV_FETCH_ASSOC);
 
-
-    if(isset($_FILES['image'])){
-      $file_name = $idpel.'_'.$tgl_pemeriksaan.'.jpg';
-      $file_size =$_FILES['image']['size'];
-      $file_tmp =$_FILES['image']['tmp_name'];
-      $file_type=$_FILES['image']['type'];
-      $file_ext=strtolower(end(explode('.',$_FILES['image']['name'])));
-
-      $extensions= array("jpeg","jpg","png");
-
-      if(in_array($file_ext,$extensions)=== false){
-         $response['error'][]="extension not allowed, please choose a JPEG or PNG file.";
-      }
-
-      if($file_size > 2097152){
-         $response['error'][]='File size must be excately 2 MB';
-      }
-
-      if(empty($response['error'])==true){
-        $file_path = "../../uploads/tagging/".$unitap."/".$unitup;
-        if (!file_exists($file_path)) {
-            mkdir($file_path, 0777, true);
-        }
-         move_uploaded_file($file_tmp, $file_path."/".$file_name);
-      }
-    }
-
-    if(isset($_FILES['image2'])){
-      $file_name = $idpel.'_'.$tgl_pemeriksaan.'.jpg';
-      $file_size =$_FILES['image']['size'];
-      $file_tmp =$_FILES['image']['tmp_name'];
-      $file_type=$_FILES['image']['type'];
-      $file_ext=strtolower(end(explode('.',$_FILES['image']['name'])));
-
-      $extensions= array("jpeg","jpg","png");
-
-      if(in_array($file_ext,$extensions)=== false){
-         $response['error'][]="extension not allowed, please choose a JPEG or PNG file.";
-      }
-
-      if($file_size > 2097152){
-         $response['error'][]='File size must be excately 2 MB';
-      }
-
-      if(empty($response['error'])==true){
-        $file_path = "../../uploads/rumah/".$unitap."/".$unitup;
-        if (!file_exists($file_path)) {
-            mkdir($file_path, 0777, true);
-        }
-         move_uploaded_file($file_tmp, $file_path."/".$file_name);
-      }
-    }
 
     //$response['success'] = true;
 
