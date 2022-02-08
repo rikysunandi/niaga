@@ -1,13 +1,17 @@
 <?php
 
-require_once '../../../../config/config.php';
-require_once '../../../../config/database.php';
+require_once '../../bo/config/config.php';
+require_once '../../bo/config/database.php';
 
 $file = $_FILES['image']['tmp_name'];
+$foto_rumah = $_FILES['image2']['tmp_name'];
 $data = $_REQUEST['params'];
 $json_data = json_decode($data , true);
 
 $tgl_pemeriksaan = $json_data['tglPemeriksaan'];
+$unitupi = $json_data['unitupi'];
+$unitap = $json_data['unitap'];
+$unitup = $json_data['unitup'];
 $idpel = $json_data['idpel'];
 $nama = $json_data['nama'];
 $tarif = $json_data['tarif'];
@@ -80,7 +84,33 @@ if(sqlsrv_execute($stmt)){
       }
 
       if(empty($response['error'])==true){
-        $file_path = "../../../../assets/uploads/photos/pemeriksaan_lpb/".$tgl_pemeriksaan;
+        $file_path = "../../uploads/tagging/".$unitap."/".$unitup;
+        if (!file_exists($file_path)) {
+            mkdir($file_path, 0777, true);
+        }
+         move_uploaded_file($file_tmp, $file_path."/".$file_name);
+      }
+    }
+
+    if(isset($_FILES['image2'])){
+      $file_name = $idpel.'_'.$tgl_pemeriksaan.'.jpg';
+      $file_size =$_FILES['image']['size'];
+      $file_tmp =$_FILES['image']['tmp_name'];
+      $file_type=$_FILES['image']['type'];
+      $file_ext=strtolower(end(explode('.',$_FILES['image']['name'])));
+
+      $extensions= array("jpeg","jpg","png");
+
+      if(in_array($file_ext,$extensions)=== false){
+         $response['error'][]="extension not allowed, please choose a JPEG or PNG file.";
+      }
+
+      if($file_size > 2097152){
+         $response['error'][]='File size must be excately 2 MB';
+      }
+
+      if(empty($response['error'])==true){
+        $file_path = "../../uploads/rumah/".$unitap."/".$unitup;
         if (!file_exists($file_path)) {
             mkdir($file_path, 0777, true);
         }
