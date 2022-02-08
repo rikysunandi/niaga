@@ -109,7 +109,7 @@ $sql = "EXEC SP_WS_PEMERIKSAAN_LPB_SIMPAN @TGL_PEMERIKSAAN = ?, @IDPEL = ?, @NAM
 $stmt = sqlsrv_prepare($conn, $sql, $params);
 
 if(sqlsrv_execute($stmt)){
-    sqlsrv_next_result($stmt);
+    //sqlsrv_next_result($stmt);
     $row = sqlsrv_fetch_array($stmt, SQLSRV_FETCH_ASSOC);
     // if($row['IDPEL']==''){
     //     sqlsrv_next_result($stmt);
