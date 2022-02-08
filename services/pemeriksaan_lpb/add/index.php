@@ -111,7 +111,7 @@ $stmt = sqlsrv_prepare($conn, $sql, $params);
 if(sqlsrv_execute($stmt)){
     sqlsrv_next_result($stmt);
     $row = sqlsrv_fetch_array($stmt, SQLSRV_FETCH_ASSOC);
-    if(!$row){
+    if($row['IDPEL']==''){
         sqlsrv_next_result($stmt);
         $row = sqlsrv_fetch_array($stmt, SQLSRV_FETCH_ASSOC);
     }
