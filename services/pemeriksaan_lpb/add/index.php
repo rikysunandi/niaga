@@ -25,7 +25,8 @@ $sisa_kwh = $json_data['sisa_kwh'];
 // $foto = $json_data['foto'];
 $latitude = $json_data['latitude'];
 $longitude = $json_data['longitude'];
-$user_input = "SYSTEM";
+$akurasi_koordinat = $json_data['akurasi_koordinat'];
+$user_input = $json_data['user'];
 $tgl_input = $json_data['tglInsert'];
 
 $response = array();
@@ -87,6 +88,9 @@ if(isset($_FILES['image2'])){
 
 $params = array(
         array($tgl_pemeriksaan, SQLSRV_PARAM_IN),
+        array($unitupi, SQLSRV_PARAM_IN),
+        array($unitap, SQLSRV_PARAM_IN),
+        array($unitap, SQLSRV_PARAM_IN),
         array($idpel, SQLSRV_PARAM_IN),
         array($nama, SQLSRV_PARAM_IN),
         array($tarif, SQLSRV_PARAM_IN),
@@ -101,11 +105,12 @@ $params = array(
         array($foto_rumah, SQLSRV_PARAM_IN),
         array($latitude, SQLSRV_PARAM_IN),
         array($longitude, SQLSRV_PARAM_IN),
+        array($akurasi_koordinat, SQLSRV_PARAM_IN),
         array($user_input, SQLSRV_PARAM_IN),
         array($tgl_input, SQLSRV_PARAM_IN),
     );
 
-$sql = "EXEC SP_WS_PEMERIKSAAN_LPB_SIMPAN @TGL_PEMERIKSAAN = ?, @IDPEL = ?, @NAMA = ?, @TARIF = ?, @DAYA = ?, @NIK = ?, @KK = ?, @NOHP = ?, @EMAIL = ?, @PERUNTUKAN = ?, @SISA_KWH = ?, @FOTO = ?, @FOTO_RUMAH = ?, @LATITUDE = ?, @LONGITUDE = ?, @USER_INPUT = ?, @TGL_INPUT = ? ";
+$sql = "EXEC SP_WS_PEMERIKSAAN_LPB_SIMPAN @TGL_PEMERIKSAAN = ?, @UNITUPI = ?, @UNITAP = ?, @UNITUP = ?, @IDPEL = ?, @NAMA = ?, @TARIF = ?, @DAYA = ?, @NIK = ?, @KK = ?, @NOHP = ?, @EMAIL = ?, @PERUNTUKAN = ?, @SISA_KWH = ?, @FOTO = ?, @FOTO_RUMAH = ?, @LATITUDE = ?, @LONGITUDE = ?, @AKURASI_KOORDINAT = ?, @USER_INPUT = ?, @TGL_INPUT = ? ";
 $stmt = sqlsrv_prepare($conn, $sql, $params);
 
 if(sqlsrv_execute($stmt)){
