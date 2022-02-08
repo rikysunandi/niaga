@@ -25,8 +25,8 @@ if($param <> ''){
 
 	//sqlsrv_execute($stmt);
 	if(sqlsrv_execute($stmt)){
-		$i=0;
-		while( $row = sqlsrv_fetch_array( $stmt, SQLSRV_FETCH_ASSOC) ) {
+		$row = sqlsrv_fetch_array( $stmt, SQLSRV_FETCH_ASSOC);
+		if(!isset($row['ERROR'])){
 			$response['pelanggan']['unitupi'] = $row['UNITUPI']; 
 			$response['pelanggan']['unitap'] = $row['UNITAP']; 
 			$response['pelanggan']['unitup'] = $row['UNITUP']; 
@@ -42,11 +42,14 @@ if($param <> ''){
 			$response['pelanggan']['latitude'] = $row['LATITUDE'];
 			$response['pelanggan']['longitude'] = $row['LONGITUDE'];
 
-			$i++;
+			$response['success'] = true;
+			$response['msg'] = 'Pencarian berhasil';
+		}else{
+			$response['success'] = false;
+			$response['pelanggan'] = null;
+			$response['msg'] = $row['ERROR'];
 		}
-
-		$response['success'] = true;
-		$response['msg'] = 'Pencarian berhasil';
+		
 		sqlsrv_free_stmt($stmt);
 
 
