@@ -1,7 +1,7 @@
 <?php
 
-require_once '../../bo/config/config.php';
-require_once '../../bo/config/database.php';
+require_once '../../../bo/config/config.php';
+require_once '../../../bo/config/database.php';
 
 $file = $_FILES['image']['tmp_name'];
 $foto_rumah = $_FILES['image2']['tmp_name'];
