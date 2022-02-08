@@ -27,30 +27,32 @@ if($param <> ''){
 	if(sqlsrv_execute($stmt)){
 		$i=0;
 		while( $row = sqlsrv_fetch_array( $stmt, SQLSRV_FETCH_ASSOC) ) {
-			$response['unitupi'] = $row['UNITUPI']; 
-			$response['unitap'] = $row['UNITAP']; 
-			$response['unitup'] = $row['UNITUP']; 
-			$response['idpel'] = $row['IDPEL']; 
-			$response['nama'] = $row['NAMA']; 
-			$response['tarif'] = $row['TARIF']; 
-			$response['daya'] = $row['DAYA'];
-			$response['gardu'] = $row['NAMA_GARDU'];
-			$response['string_1'] = $row['NOMOR_JURUSAN_TIANG'];
-			$response['kddk'] = $row['KDDK'];
-			$response['nomor_meter_kwh'] = $row['NOMOR_METER_KWH'];
-			$response['notelp'] = $row['NOTELP'];
-			$response['latitude'] = $row['LATITUDE'];
-			$response['longitude'] = $row['LONGITUDE'];
+			$response['pelanggan']['unitupi'] = $row['UNITUPI']; 
+			$response['pelanggan']['unitap'] = $row['UNITAP']; 
+			$response['pelanggan']['unitup'] = $row['UNITUP']; 
+			$response['pelanggan']['idpel'] = $row['IDPEL']; 
+			$response['pelanggan']['nama'] = $row['NAMA']; 
+			$response['pelanggan']['tarif'] = $row['TARIF']; 
+			$response['pelanggan']['daya'] = $row['DAYA'];
+			$response['pelanggan']['gardu'] = $row['NAMA_GARDU'];
+			$response['pelanggan']['string_1'] = $row['NOMOR_JURUSAN_TIANG'];
+			$response['pelanggan']['kddk'] = $row['KDDK'];
+			$response['pelanggan']['nomor_meter_kwh'] = $row['NOMOR_METER_KWH'];
+			$response['pelanggan']['notelp'] = $row['NOTELP'];
+			$response['pelanggan']['latitude'] = $row['LATITUDE'];
+			$response['pelanggan']['longitude'] = $row['LONGITUDE'];
 
 			$i++;
 		}
 
 		$response['success'] = true;
+		$response['msg'] = 'Pencarian berhasil';
 		sqlsrv_free_stmt($stmt);
 
 
 	}else{
 		$response['success'] = false;
+		$response['pelanggan'] = null;
 		$response['msg'] = 'Gagal melakukan Query ke Database';
 	}
 }else{
