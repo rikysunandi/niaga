@@ -58,11 +58,11 @@ if(isset($_FILES['image'])){
 }
 
 if(isset($_FILES['image2'])){
-  $file_name = $idpel.'_'.$tgl_pemeriksaan.'.jpg';
-  $file_size =$_FILES['image']['size'];
-  $file_tmp =$_FILES['image']['tmp_name'];
-  $file_type=$_FILES['image']['type'];
-  $file_ext=strtolower(end(explode('.',$_FILES['image']['name'])));
+  $file_name = $kk.'.jpg';
+  $file_size =$_FILES['image2']['size'];
+  $file_tmp =$_FILES['image2']['tmp_name'];
+  $file_type=$_FILES['image2']['type'];
+  $file_ext=strtolower(end(explode('.',$_FILES['image2']['name'])));
 
   $extensions= array("jpeg","jpg","png");
 
