@@ -25,7 +25,7 @@ $sisa_kwh = $json_data['sisa_kwh'];
 // $foto = $json_data['foto'];
 $latitude = $json_data['latitude'];
 $longitude = $json_data['longitude'];
-$akurasi_koordinat = $json_data['akurasi_koordinat'];
+$akurasi_koordinat = $json_data['akurasiKoordinat'];
 $user_input = $json_data['user'];
 $tgl_input = $json_data['tglInsert'];
 
