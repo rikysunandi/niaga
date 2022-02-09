@@ -39,9 +39,9 @@ if(!sqlsrv_execute($stmt)){
 
         $fp = fopen('php://output', 'wb');
         $columns = array( "UNITUPI", "UNITAP", "UNITUP", "IDPEL", "NAMA", "TARIF", "DAYA", "NOMETER", "TGL_PEMERIKSAAN", "PERUNTUKAN", "SISA_KWH", "LATITUDE", "LONGITUDE", "AKURASI_KOORDINAT", "USER_INPUT");
-        fputcsv($fp, $columns);
+        fputcsv($fp, $columns, chr(9));
         while( $row = sqlsrv_fetch_array( $stmt, SQLSRV_FETCH_NUMERIC) ) {
-            fputcsv($fp, $row);
+            fputcsv($fp, $row, chr(9));
         }
         fclose($fp);
     }

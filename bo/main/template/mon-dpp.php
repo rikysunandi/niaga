@@ -82,6 +82,15 @@
                                                 </select>
                                             </div>
                                             <div class="form-group mb-2 mr-4">
+                                                <label class="text-label d-block"><small>STATUS</label></small>
+                                                <select id="sel_status_lalu" title="POLA BAYAR" class="selectpicker show-tick" data-size="5" >
+                                                    <option value="00">SEMUA DATA</option>
+                                                    <option value="LANCAR">LANCAR</option>
+                                                    <option value="BARU">BARU</option>
+                                                    <option value="IRISAN">IRISAN</option>
+                                                </select>
+                                            </div>
+                                            <div class="form-group mb-2 mr-4">
                                                 <label class="text-label d-block"><small>BLTH</label></small>
                                                 <select id="sel_blth" class="selectpicker select-sm show-tick" data-size="5" data-width="fit">
                                                     <option value="<?php echo date('Ym') ?>" selected="selected"><?php echo date('Ym') ?></option>
@@ -128,6 +137,7 @@
                                             <th class="text-center bg-primary-lighten-2">PIC</th>
                                             <th class="text-center bg-primary-lighten-2">PETUGAS</th>
                                             <th class="text-center bg-primary-lighten-2">RBM</th>
+                                            <th class="text-center bg-primary-lighten-2">STATUS_LALU</th>
                                             <th class="text-center bg-primary-lighten-2">PEMKWH</th>
                                             <th class="text-center bg-primary-lighten-2">RPPTL</th>
                                             <th class="text-center bg-primary-lighten-2">TGLBAYAR</th>

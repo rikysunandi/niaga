@@ -9,6 +9,7 @@ $unitap = $_REQUEST['unitap'];
 $unitup = $_REQUEST['unitup'];
 $rbm = $_REQUEST['rbm'];
 $blth = $_REQUEST['blth'];
+$status_lalu = $_REQUEST['status_lalu'];
 $user = 'SYSTEM';
 
 $params = array(
@@ -18,9 +19,10 @@ $params = array(
         array($unitup, SQLSRV_PARAM_IN),
         array($rbm, SQLSRV_PARAM_IN),
         array($blth, SQLSRV_PARAM_IN),
+        array($status_lalu, SQLSRV_PARAM_IN),
     );
 
-$sql = "EXEC sp_vw_Create_Detail_DPP @UserID = ?, @Unitupi = ?, @Unitap = ?, @Unitup = ?, @RBM = ?, @BLTH = ? ";
+$sql = "EXEC sp_vw_Create_Detail_DPP @UserID = ?, @Unitupi = ?, @Unitap = ?, @Unitup = ?, @RBM = ?, @BLTH = ?, @Status_Lalu = ? ";
 $stmt = sqlsrv_prepare($conn, $sql, $params);
 
 //sqlsrv_execute($stmt);
@@ -51,6 +53,7 @@ $columns = array(
     array( 'db' => 'PEMKWH',  'dt' => 'PEMKWH' ),
     array( 'db' => 'RPPTL',  'dt' => 'RPPTL' ),
     array( 'db' => 'TGLBAYAR',  'dt' => 'TGLBAYAR' ),
+    array( 'db' => 'STATUS_LALU',  'dt' => 'STATUS_LALU' ),
     array( 'db' => 'UMUR_PIUTANG',  'dt' => 'UMUR_PIUTANG' ),
     array( 'db' => 'PERCEPATAN',  'dt' => 'PERCEPATAN' ),
     array( 'db' => 'JML_TUNGGAKAN',  'dt' => 'JML_TUNGGAKAN' ),

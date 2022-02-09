@@ -40,9 +40,9 @@ if(!sqlsrv_execute($stmt)){
 
         $fp = fopen('php://output', 'wb');
         $columns = array("UNITUPI","UNITAP","UNITUP","NOAGENDA","IDPEL","NAMA","TARIF","DAYA","KATEGORI","BL_ANG_AW","BL_ANG_AK","RPTS","BA_SESUAI","TS_SESUAI","SPH_SESUAI","CEKLOK_SESUAI","NAMA_GARDU","NOMOR_GARDU","NOMOR_TIANG","KOORDINAT_X","KOORDINAT_Y","AKURASI_KOORDINAT","SUMBER_KOORDINAT");
-        fputcsv($fp, $columns);
+        fputcsv($fp, $columns, chr(9));
         while( $row = sqlsrv_fetch_array( $stmt, SQLSRV_FETCH_NUMERIC) ) {
-            fputcsv($fp, $row);
+            fputcsv($fp, $row, chr(9));
         }
         fclose($fp);
     }

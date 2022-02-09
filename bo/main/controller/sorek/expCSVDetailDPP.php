@@ -9,6 +9,7 @@ $unitap = $_REQUEST['unitap'];
 $unitup = $_REQUEST['unitup'];
 $rbm = $_REQUEST['rbm'];
 $blth = $_REQUEST['blth'];
+$status_lalu = $_REQUEST['status_lalu'];
 $user = 'SYSTEM';
 
 $params = array(
@@ -18,9 +19,10 @@ $params = array(
         array($unitup, SQLSRV_PARAM_IN),
         array($rbm, SQLSRV_PARAM_IN),
         array($blth, SQLSRV_PARAM_IN),
+        array($status_lalu, SQLSRV_PARAM_IN),
     );
 
-$sql = "EXEC sp_vw_Create_Detail_DPP @UserID = ?, @Unitupi = ?, @Unitap = ?, @Unitup = ?, @RBM = ?, @BLTH = ? ";
+$sql = "EXEC sp_vw_Create_Detail_DPP @UserID = ?, @Unitupi = ?, @Unitap = ?, @Unitup = ?, @RBM = ?, @BLTH = ?, @Status_Lalu = ? ";
 $stmt = sqlsrv_prepare($conn, $sql, $params);
 
 //sqlsrv_execute($stmt);
@@ -28,7 +30,7 @@ if(!sqlsrv_execute($stmt)){
     die(print_r( sqlsrv_errors(), true));
 }else{
 
-    $sql = "select BLTH, UNITUPI, UNITAP, UNITUP, IDPEL, NAMA, KOGOL, TARIF, DAYA, PIC, KODEPETUGAS, RBM, PEMKWH, RPPTL, TGLBAYAR, UMUR_PIUTANG, PERCEPATAN, JML_TUNGGAKAN, STATUS_BAYAR, KDPP, KDPEMBAYAR, KODESTATUS from vw_Create_Detail_DPP Order by IDPEL ASC";
+    $sql = "select BLTH, UNITUPI, UNITAP, UNITUP, IDPEL, NAMA, KOGOL, TARIF, DAYA, PIC, KODEPETUGAS, RBM, STATUS_LALU, PEMKWH, RPPTL, TGLBAYAR, UMUR_PIUTANG, PERCEPATAN, JML_TUNGGAKAN, STATUS_BAYAR, KDPP, KDPEMBAYAR, KODESTATUS from vw_Create_Detail_DPP Order by IDPEL ASC";
     $stmt = sqlsrv_prepare($conn, $sql);
 
     if(!sqlsrv_execute($stmt)){
@@ -38,10 +40,10 @@ if(!sqlsrv_execute($stmt)){
         header('Content-Disposition: attachment; filename="DPP_'.$unitap.'_'.$unitup.'_'.date('Ymdhis').'.csv"');
 
         $fp = fopen('php://output', 'wb');
-        $columns = array("BLTH", "UNITUPI", "UNITAP", "UNITUP", "IDPEL", "NAMA", "KOGOL", "TARIF", "DAYA", "PIC",  "KODEPETUGAS", "RBM", "PEMKWH", "RPPTL", "TGLBAYAR", "UMUR_PIUTANG", "PERCEPATAN", "JML_TUNGGAKAN", "STATUS", "KDPP", "KDPEMBAYAR", "KODESTATUS");
-        fputcsv($fp, $columns);
+        $columns = array("BLTH", "UNITUPI", "UNITAP", "UNITUP", "IDPEL", "NAMA", "KOGOL", "TARIF", "DAYA", "PIC",  "KODEPETUGAS", "RBM", "STATUS_LALU", "PEMKWH", "RPPTL", "TGLBAYAR", "UMUR_PIUTANG", "PERCEPATAN", "JML_TUNGGAKAN", "STATUS", "KDPP", "KDPEMBAYAR", "KODESTATUS");
+        fputcsv($fp, $columns, chr(9));
         while( $row = sqlsrv_fetch_array( $stmt, SQLSRV_FETCH_NUMERIC) ) {
-            fputcsv($fp, $row);
+            fputcsv($fp, $row, chr(9));
         }
         fclose($fp);
     }

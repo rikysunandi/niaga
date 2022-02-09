@@ -93,6 +93,20 @@ $(document).ready(function () {
             visible: true
           },
           {
+            data: "STATUS_LALU",
+            render: function ( data, type, row ) {
+                  if(data){
+                    if(data == 'LANCAR')
+                        return '<span class="label label-success">'+data+'</span>';
+                    else if(data == 'BARU')
+                        return '<span class="label label-warning">'+data+'</span>';
+                    else if(data == 'IRISAN')
+                        return '<span class="label label-danger">'+data+'</span>';
+                  }else
+                    return null;
+                },
+          },
+          {
             data: "PEMKWH",
             type: 'number',
             "sClass" : "text-right" , render: $.fn.dataTable.render.number(".", ",", 0, '')
@@ -179,7 +193,7 @@ $(document).ready(function () {
 
     $( 'body' ).on( 'click', '#btn_cari', function(btn) {
         console.log('Klikk');
-        table.ajax.url( '../controller/sorek/getDetailDPP.php?unitupi='+$('#sel_unitupi').val()+'&unitap='+$('#sel_unitap').val()+'&unitup='+$('#sel_unitup').val()+'&rbm='+$('#sel_rbm').val()+'&blth='+$('#sel_blth').val() ).load();
+        table.ajax.url( '../controller/sorek/getDetailDPP.php?unitupi='+$('#sel_unitupi').val()+'&unitap='+$('#sel_unitap').val()+'&unitup='+$('#sel_unitup').val()+'&rbm='+$('#sel_rbm').val()+'&blth='+$('#sel_blth').val()+'&status_lalu='+$('#sel_status_lalu').val() ).load();
     });
     
     if(urlParams.has('unitap')){
