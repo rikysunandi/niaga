@@ -82,7 +82,7 @@
                                                 </select>
                                             </div>
                                             <div class="form-group mb-2 mr-4">
-                                                <label class="text-label d-block"><small>STATUS</label></small>
+                                                <label class="text-label d-block"><small>STATUS LALU</label></small>
                                                 <select id="sel_status_lalu" title="POLA BAYAR" class="selectpicker show-tick" data-size="5" >
                                                     <option value="00">SEMUA DATA</option>
                                                     <option value="LANCAR">LANCAR</option>
@@ -137,7 +137,7 @@
                                             <th class="text-center bg-primary-lighten-2">PIC</th>
                                             <th class="text-center bg-primary-lighten-2">PETUGAS</th>
                                             <th class="text-center bg-primary-lighten-2">RBM</th>
-                                            <th class="text-center bg-primary-lighten-2">STATUS_LALU</th>
+                                            <th class="text-center bg-primary-lighten-2">STATUS LALU</th>
                                             <th class="text-center bg-primary-lighten-2">PEMKWH</th>
                                             <th class="text-center bg-primary-lighten-2">RPPTL</th>
                                             <th class="text-center bg-primary-lighten-2">TGLBAYAR</th>
