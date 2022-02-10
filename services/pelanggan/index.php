@@ -68,7 +68,7 @@ if($param <> ''){
 	        array($longitude, SQLSRV_PARAM_IN),
 	    );
 
-	$sql = "EXEC sp_WS_Get_DIL_Unit @UserID = ?, @UNITUP = ?, @LAT = ?, @LONG = ? ";
+	$sql = "EXEC sp_WS_Get_DIL_Nearest @UserID = ?, @UNITUP = ?, @LAT = ?, @LONG = ? ";
 	$stmt = sqlsrv_prepare($conn, $sql, $params);
 
 	//sqlsrv_execute($stmt);
