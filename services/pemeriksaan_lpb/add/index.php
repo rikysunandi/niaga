@@ -49,7 +49,10 @@ if(isset($_FILES['image'])){
   }
 
   if(empty($response['error'])==true){
-    $file_path = "../../uploads/tagging/".$unitap."/".$unitup;
+    if(strlen($unitup)==5)
+      $file_path = "../../uploads/tagging/".$unitap."/".$unitup;
+    else
+      $file_path = "../../uploads/tagging/53XXX";
     if (!file_exists($file_path)) {
         mkdir($file_path, 0777, true);
     }
@@ -76,7 +79,10 @@ if(isset($_FILES['image2'])){
   }
 
   if(empty($response['error'])==true){
-    $file_path = "../../uploads/rumah/".$unitap."/".$unitup;
+    if(strlen($unitup)==5)
+      $file_path = "../../uploads/rumah/".$unitap."/".$unitup;
+    else
+      $file_path = "../../uploads/rumah/53XXX";
     if (!file_exists($file_path)) {
         mkdir($file_path, 0777, true);
     }
