@@ -106,7 +106,6 @@
                                                 <label class="text-label">KOORDINAT DIL</label><br/>
                                                 <select id="sel_koordinat" title="PILIH KOORDINAT" class="selectpicker show-tick" data-size="5" >
                                                     <option value="01">FORMAT KOORDINAT VALID</option>
-                                                    <option value="02">KOORDINAT KOSONG/TDK VALID</option>
                                                     <option value="00" selected>SEMUA DATA</option>
                                                 </select>
                                             </div>
