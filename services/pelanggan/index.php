@@ -60,7 +60,7 @@ if($param <> ''){
 		$response['pelanggan'] = null;
 		$response['msg'] = 'Gagal melakukan Query ke Database';
 	}
-}else if($param <> ''){
+}else if($latitude <> '' && $longitude <> ''){
 	$params = array(
 	        array($user, SQLSRV_PARAM_IN),
 	        array($unitup, SQLSRV_PARAM_IN),
