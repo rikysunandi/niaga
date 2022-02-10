@@ -38,9 +38,9 @@ if(!sqlsrv_execute($stmt)){
 
         $fp = fopen('php://output', 'wb');
         $columns = array("UNITUPI","UNITAP","UNITUP","IDPEL","NAMA","TARIF","DAYA","KOGOL","RBM","ALAMAT","NAMA_GARDU","NOMOR_JURUSAN_TIANG","KOORDINAT_X","KOORDINAT_Y","NOMOR_METER_KWH");
-        fputcsv($fp, $columns, chr(9));
+        fputcsv($fp, $columns);
         while( $row = sqlsrv_fetch_array( $stmt, SQLSRV_FETCH_NUMERIC) ) {
-            fputcsv($fp, $row, chr(9));
+            fputcsv($fp, $row);
         }
         fclose($fp);
     }
