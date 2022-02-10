@@ -55,4 +55,15 @@ if(sqlsrv_execute($stmt)){
 header('Content-Type: application/json; charset=utf-8');
 echo json_encode(utf8ize($response));
 
+function utf8ize($d) {
+    if (is_array($d)) {
+        foreach ($d as $k => $v) {
+            $d[$k] = utf8ize($v);
+        }
+    } else if (is_string ($d)) {
+        return utf8_encode($d);
+    }
+    return $d;
+}
+
 ?>
