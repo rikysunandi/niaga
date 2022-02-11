@@ -3,6 +3,9 @@
 require_once '../../../bo/config/config.php';
 require_once '../../../bo/config/database.php';
 
+ini_set('max_execution_time', 600);
+set_time_limit(600);
+
 $file = $_FILES['image']['tmp_name'];
 $foto_rumah = $_FILES['image2']['tmp_name'];
 $data = $_REQUEST['params'];
