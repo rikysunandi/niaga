@@ -40,7 +40,7 @@ $stmt = sqlsrv_query( $conn, $sql, $params);
 if( $stmt === false ) {
   
     $response['success'] = false;
-    $response['msg'] = 'Data gagal disimpan';
+    $response['msg'] = 'Data gagal disimpan karena sudah pernah ditagging';
 
 }else{
 
