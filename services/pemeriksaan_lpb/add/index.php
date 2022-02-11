@@ -152,7 +152,7 @@ if( $stmt === false ) {
 
     }else{
         $response['success'] = false;
-        $response['msg'] = 'Data gagal disimpan';
+        $response['msg'] = 'Data Idpel '.$idpel.'gagal disimpan';
     }
 
   }else{
