@@ -96,7 +96,7 @@ $params = array(
         array($tgl_pemeriksaan, SQLSRV_PARAM_IN),
         array($unitupi, SQLSRV_PARAM_IN),
         array($unitap, SQLSRV_PARAM_IN),
-        array($unitap, SQLSRV_PARAM_IN),
+        array($unitup, SQLSRV_PARAM_IN),
         array($idpel, SQLSRV_PARAM_IN),
         array($nama, SQLSRV_PARAM_IN),
         array($tarif, SQLSRV_PARAM_IN),
