@@ -86,13 +86,13 @@
                                         <div class="form-row">
                                             <div class="form-group mb-4 col-3">
                                                 <label class="text-label">UNIT INDUK</label>
-                                                <select id="sel_unitupi" title="PILIH UNIT INDUK" class="selectpicker show-tick" data-size="5" >
+                                                <select id="sel_unitupi" title="PILIH UNIT INDUK" class="selectpicker show-tick" data-size="5" data-inc-semua="T" >
                                                     <option value="00" selected>SEMUA UNIT</option>
                                                 </select>
                                             </div>
                                             <div class="form-group mb-4 col-3">
                                                 <label class="text-label">UP3</label>
-                                                <select id="sel_unitap" title="PILIH UP3" class="selectpicker show-tick" data-size="5" >
+                                                <select id="sel_unitap" title="PILIH UP3" class="selectpicker show-tick" data-size="5" data-inc-semua="T" >
                                                     <option value="00" selected>SEMUA UNIT</option>
                                                 </select>
                                             </div>
