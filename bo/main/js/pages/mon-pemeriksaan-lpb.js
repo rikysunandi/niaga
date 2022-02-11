@@ -358,7 +358,7 @@ $(document).ready(function () {
     $('#tbl_mon_pemeriksaan_lpb').on('click', 'td a.foto', function (e) {
         e.preventDefault();    
         var foto = $(this).data('foto');
-        $('#img_foto').attr('src', foto);
+        $('#img_foto').attr('src', foto+'?time='+$.now());
         $("#modal_foto").modal('show');
       });
 
