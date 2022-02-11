@@ -31,12 +31,10 @@ $tgl_input = $json_data['tglInsert'];
 
 $response = array();
 
+$sql = 'SELECT TOP 1 * FROM m_pemeriksaan_lpb WHERE LEFT(IDPEL,11) = \''.substr($idpel,0,11).'\' ';
+//$params = array(1, substr($idpel,0,11));
 
-
-$sql = "SELECT TOP 1 * FROM m_pemeriksaan_lpb WHERE LEFT(IDPEL,11) = ? ";
-$params = array(1, substr($idpel,0,11));
-
-$stmt = sqlsrv_query( $conn, $sql, $params);
+$stmt = sqlsrv_query( $conn, $sql );
 if( $stmt === false ) {
   
     $response['success'] = false;
