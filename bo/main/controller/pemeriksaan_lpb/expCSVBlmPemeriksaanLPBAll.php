@@ -26,7 +26,7 @@ if(!sqlsrv_execute($stmt)){
     die(print_r( sqlsrv_errors(), true));
 }else{
 
-    $sql = "select * from vw_Exp_CSV_Blm_Pemeriksaan_LPB_Unit ";
+    $sql = "select * from vw_Exp_CSV_Blm_Pemeriksaan_LPB_Unit_".$unitup;
     $stmt = sqlsrv_prepare($conn, $sql);
 
     if(!sqlsrv_execute($stmt)){

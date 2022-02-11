@@ -29,7 +29,7 @@ if(!sqlsrv_execute($stmt)){
 }
 
 // DB table to use
-$table = 'NIAGA.dbo.vw_Create_Pemeriksaan_LPB_Unit';
+$table = 'NIAGA.dbo.vw_Create_Pemeriksaan_LPB_Unit_'.$unitup;
  
 // Table's primary key
 $primaryKey = 'IDPEL';

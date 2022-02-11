@@ -28,7 +28,7 @@ if(!sqlsrv_execute($stmt)){
     die(print_r( sqlsrv_errors(), true));
 }else{
 
-    $sql = "select UNITUPI, UNITAP, UNITUP, IDPEL, NAMA, TARIF, DAYA, NOMOR_METER_KWH, CONVERT(VARCHAR, TGL_PEMERIKSAAN, 120), PERUNTUKAN, SISA_KWH, LATITUDE, LONGITUDE, AKURASI_KOORDINAT, USER_INPUT from vw_Create_Pemeriksaan_LPB_Unit ";
+    $sql = "select UNITUPI, UNITAP, UNITUP, IDPEL, NAMA, TARIF, DAYA, NOMOR_METER_KWH, CONVERT(VARCHAR, TGL_PEMERIKSAAN, 120), PERUNTUKAN, SISA_KWH, LATITUDE, LONGITUDE, AKURASI_KOORDINAT, USER_INPUT from vw_Create_Pemeriksaan_LPB_Unit_".$unitup;
     $stmt = sqlsrv_prepare($conn, $sql);
 
     if(!sqlsrv_execute($stmt)){
