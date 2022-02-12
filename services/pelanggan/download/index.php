@@ -26,7 +26,7 @@ if(sqlsrv_execute($stmt)){
 	while( $row = sqlsrv_fetch_array( $stmt, SQLSRV_FETCH_ASSOC) ) {
 		if($row['ERROR']<>''){
 			$response['success'] = false;
-			$response['msg'] = row['ERROR'];
+			$response['msg'] = $row['ERROR'];
 		}else{
 			$response['pelanggan'][$i]['unitupi'] = $row['UNITUPI']; 
 			$response['pelanggan'][$i]['unitap'] = $row['UNITAP']; 
