@@ -24,20 +24,25 @@ $stmt = sqlsrv_prepare($conn, $sql, $params);
 if(sqlsrv_execute($stmt)){
 	$i=0;
 	while( $row = sqlsrv_fetch_array( $stmt, SQLSRV_FETCH_ASSOC) ) {
-		$response['pelanggan'][$i]['unitupi'] = $row['UNITUPI']; 
-		$response['pelanggan'][$i]['unitap'] = $row['UNITAP']; 
-		$response['pelanggan'][$i]['unitup'] = $row['UNITUP']; 
-		$response['pelanggan'][$i]['idpel'] = $row['IDPEL']; 
-		$response['pelanggan'][$i]['nama'] = $row['NAMA']; 
-		$response['pelanggan'][$i]['tarif'] = $row['TARIF']; 
-		$response['pelanggan'][$i]['daya'] = $row['DAYA'];
-		$response['pelanggan'][$i]['gardu'] = $row['NAMA_GARDU'];
-		$response['pelanggan'][$i]['string_1'] = $row['NOMOR_JURUSAN_TIANG'];
-		$response['pelanggan'][$i]['kddk'] = $row['KDDK'];
-		$response['pelanggan'][$i]['nomorMeterKwh'] = $row['NOMOR_METER_KWH'];
-		$response['pelanggan'][$i]['notelp'] = $row['NOTELP'];
-		$response['pelanggan'][$i]['latitude'] = $row['LATITUDE'];
-		$response['pelanggan'][$i]['longitude'] = $row['LONGITUDE'];
+		if($row['ERROR']<>''){
+			$response['success'] = false;
+			$response['msg'] = row['ERROR'];
+		}else{
+			$response['pelanggan'][$i]['unitupi'] = $row['UNITUPI']; 
+			$response['pelanggan'][$i]['unitap'] = $row['UNITAP']; 
+			$response['pelanggan'][$i]['unitup'] = $row['UNITUP']; 
+			$response['pelanggan'][$i]['idpel'] = $row['IDPEL']; 
+			$response['pelanggan'][$i]['nama'] = $row['NAMA']; 
+			$response['pelanggan'][$i]['tarif'] = $row['TARIF']; 
+			$response['pelanggan'][$i]['daya'] = $row['DAYA'];
+			$response['pelanggan'][$i]['gardu'] = $row['NAMA_GARDU'];
+			$response['pelanggan'][$i]['string_1'] = $row['NOMOR_JURUSAN_TIANG'];
+			$response['pelanggan'][$i]['kddk'] = $row['KDDK'];
+			$response['pelanggan'][$i]['nomorMeterKwh'] = $row['NOMOR_METER_KWH'];
+			$response['pelanggan'][$i]['notelp'] = $row['NOTELP'];
+			$response['pelanggan'][$i]['latitude'] = $row['LATITUDE'];
+			$response['pelanggan'][$i]['longitude'] = $row['LONGITUDE'];
+		}
 
 		$i++;
 	}
