@@ -147,7 +147,7 @@ if( $stmt === false ) {
         // sqlsrv_next_result($stmt);
         // $row = sqlsrv_fetch_array($stmt, SQLSRV_FETCH_ASSOC);
 
-
+        $response['msg'] = 'Data Idpel '.$idpel.' berhasil disimpan';
         $response['success'] = true;
 
     }else{
@@ -156,8 +156,8 @@ if( $stmt === false ) {
     }
 
   }else{
-    $response['success'] = false;
-    $response['msg'] = 'Data Idpel '.$idpel.' gagal disimpan karena sudah pernah ditagging';
+    $response['success'] = true;
+    $response['msg'] = 'Data Idpel '.$idpel.' gagal disimpan karena sudah pernah ditagging!';
     
   }
 }
