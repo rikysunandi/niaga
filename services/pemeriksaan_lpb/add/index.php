@@ -142,7 +142,7 @@ if( $stmt === false ) {
             $row = sqlsrv_fetch_array($stmt, SQLSRV_FETCH_ASSOC);
         }
 
-        $response = $row;
+        $response['pemeriksaan_lpb'] = $row;
 
         // sqlsrv_next_result($stmt);
         // $row = sqlsrv_fetch_array($stmt, SQLSRV_FETCH_ASSOC);
