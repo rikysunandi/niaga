@@ -34,16 +34,16 @@ $tgl_input = $json_data['tglInsert'];
 
 $response = array();
 
-$sql = 'SELECT TOP 1 * FROM m_pemeriksaan_lpb WHERE LEFT(IDPEL,11) = \''.substr($idpel,0,11).'\' ';
-//$params = array(1, substr($idpel,0,11));
+// $sql = 'SELECT TOP 1 * FROM m_pemeriksaan_lpb WHERE LEFT(IDPEL,11) = \''.substr($idpel,0,11).'\' ';
+// //$params = array(1, substr($idpel,0,11));
 
-$stmt = sqlsrv_query( $conn, $sql );
-if( $stmt === false ) {
-    $response['success'] = false;
-    $response['msg'] = 'Gagal query ke Database';
-}else{
+// $stmt = sqlsrv_query( $conn, $sql );
+// if( $stmt === false ) {
+//     $response['success'] = false;
+//     $response['msg'] = 'Gagal query ke Database';
+// }else{
 
-  if(sqlsrv_num_rows( $stmt )==0){
+//   if(sqlsrv_num_rows( $stmt )==0){
 
     if(isset($_FILES['image'])){
       $file_name = $idpel.'_'.$tgl_pemeriksaan.'.jpg';
@@ -105,9 +105,9 @@ if( $stmt === false ) {
       }
     }
 
-    sqlsrv_free_stmt($stmt);
+    //sqlsrv_free_stmt($stmt);
 
-    $params = array(
+    $params2 = array(
             array($tgl_pemeriksaan, SQLSRV_PARAM_IN),
             array($unitupi, SQLSRV_PARAM_IN),
             array($unitap, SQLSRV_PARAM_IN),
@@ -131,8 +131,8 @@ if( $stmt === false ) {
             array($tgl_input, SQLSRV_PARAM_IN),
         );
 
-    $sql = "EXEC SP_WS_PEMERIKSAAN_LPB_SIMPAN @TGL_PEMERIKSAAN = ?, @UNITUPI = ?, @UNITAP = ?, @UNITUP = ?, @IDPEL = ?, @NAMA = ?, @TARIF = ?, @DAYA = ?, @NIK = ?, @KK = ?, @NOHP = ?, @EMAIL = ?, @PERUNTUKAN = ?, @SISA_KWH = ?, @FOTO = ?, @FOTO_RUMAH = ?, @LATITUDE = ?, @LONGITUDE = ?, @AKURASI_KOORDINAT = ?, @USER_INPUT = ?, @TGL_INPUT = ? ";
-    $stmt2 = sqlsrv_prepare($conn, $sql, $params);
+    $sql2 = "EXEC SP_WS_PEMERIKSAAN_LPB_SIMPAN @TGL_PEMERIKSAAN = ?, @UNITUPI = ?, @UNITAP = ?, @UNITUP = ?, @IDPEL = ?, @NAMA = ?, @TARIF = ?, @DAYA = ?, @NIK = ?, @KK = ?, @NOHP = ?, @EMAIL = ?, @PERUNTUKAN = ?, @SISA_KWH = ?, @FOTO = ?, @FOTO_RUMAH = ?, @LATITUDE = ?, @LONGITUDE = ?, @AKURASI_KOORDINAT = ?, @USER_INPUT = ?, @TGL_INPUT = ? ";
+    $stmt2 = sqlsrv_prepare($conn, $sql2, $params2);
 
     if(sqlsrv_execute($stmt2)){
         //sqlsrv_next_result($stmt);
@@ -155,12 +155,12 @@ if( $stmt === false ) {
         $response['msg'] = 'Data Idpel '.$idpel.' gagal disimpan';
     }
 
-  }else{
-    $response['success'] = false;
-    $response['msg'] = 'Data Idpel '.$idpel.' gagal disimpan karena sudah pernah ditagging';
+//   }else{
+//     $response['success'] = false;
+//     $response['msg'] = 'Data Idpel '.$idpel.' gagal disimpan karena sudah pernah ditagging';
     
-  }
-}
+//   }
+// }
 
 sqlsrv_free_stmt($stmt);
 sqlsrv_free_stmt($stmt2);
