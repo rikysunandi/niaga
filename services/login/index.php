@@ -1,98 +1,54 @@
 <?php
 
-require_once '../../../../config/config.php';
-require_once '../../../../config/database.php';
+require_once '../../bo/config/config.php';
+require_once '../../bo/config/database.php';
 
-$file = $_FILES['image']['tmp_name'];
-$data = $_POST['params'];
-$json_data = json_decode($data , true);
-
-$tgl_pemeriksaan = $json_data['tglPemeriksaan'];
-$idpel = $json_data['idpel'];
-$nama = $json_data['nama'];
-$tarif = $json_data['tarif'];
-$daya = $json_data['daya'];
-$nik = $json_data['nik'];
-$kk = $json_data['kk'];
-$nohp = $json_data['nohp'];
-$email = $json_data['email'];
-$peruntukan = $json_data['peruntukan'];
-$sisa_kwh = $json_data['sisa_kwh'];
-// $foto = $json_data['foto'];
-$latitude = $json_data['latitude'];
-$longitude = $json_data['longitude'];
-$user_input = "SYSTEM";
-$tgl_input = $json_data['tglInsert'];
+$username = $_REQUEST['username'];
+$password = $_REQUEST['password'];
+$device_id = $_REQUEST['device_id'];
+$device_name = $_REQUEST['device_name'];
+$os_version = $_REQUEST['os_version'];
+$app_version = $_REQUEST['app_version'];
+$jam_client = $_REQUEST['jam_client'];
 
 $response = array();
 
 $params = array(
-        array($tgl_pemeriksaan, SQLSRV_PARAM_IN),
-        array($idpel, SQLSRV_PARAM_IN),
-        array($nama, SQLSRV_PARAM_IN),
-        array($tarif, SQLSRV_PARAM_IN),
-        array($daya, SQLSRV_PARAM_IN),
-        array($nik, SQLSRV_PARAM_IN),
-        array($kk, SQLSRV_PARAM_IN),
-        array($nohp, SQLSRV_PARAM_IN),
-        array($email, SQLSRV_PARAM_IN),
-        array($peruntukan, SQLSRV_PARAM_IN),
-        array($sisa_kwh, SQLSRV_PARAM_IN),
-        //array($foto, SQLSRV_PARAM_IN),
-        array($latitude, SQLSRV_PARAM_IN),
-        array($longitude, SQLSRV_PARAM_IN),
-        array($user_input, SQLSRV_PARAM_IN),
-        array($tgl_input, SQLSRV_PARAM_IN),
+        array($username, SQLSRV_PARAM_IN),
+        array($password, SQLSRV_PARAM_IN),
+        array($device_id, SQLSRV_PARAM_IN),
+        array($device_name, SQLSRV_PARAM_IN),
+        array($os_version, SQLSRV_PARAM_IN),
+        array($app_version, SQLSRV_PARAM_IN),
+        array($jam_client, SQLSRV_PARAM_IN),
     );
 
-$sql = "EXEC SP_WS_PEMERIKSAAN_LPB_SIMPAN @TGL_PEMERIKSAAN = ?, @IDPEL = ?,     @NAMA = ?, @TARIF = ?, @DAYA = ?, @NIK = ?, @KK = ?, @NOHP = ?, @EMAIL = ?, @PERUNTUKAN = ?, @SISA_KWH = ?, @LATITUDE = ?, @LONGITUDE = ?, @USER_INPUT = ?, @TGL_INPUT = ? ";
+$sql = "EXEC SP_WS_LOGIN_PRIANGAN @USERNAME = ?, @PASSWORD = ?, @DEVICE_ID = ?, @DEVICE_NAME = ?, @OS_VERSION = ?, @APP_VERSION = ?, @JAM_CLIENT = ?  ";
 $stmt = sqlsrv_prepare($conn, $sql, $params);
 
 if(sqlsrv_execute($stmt)){
-    sqlsrv_next_result($stmt);
-    $row = sqlsrv_fetch_array($stmt, SQLSRV_FETCH_ASSOC);
-    if(!$row){
-        sqlsrv_next_result($stmt);
-        $row = sqlsrv_fetch_array($stmt, SQLSRV_FETCH_ASSOC);
+    $row = sqlsrv_fetch_array( $stmt, SQLSRV_FETCH_ASSOC);
+    if(!isset($row['msg'])){
+      $response['user']['unitupi'] = $row['UNITUPI']; 
+      $response['user']['unitap'] = $row['UNITAP']; 
+      $response['user']['unitup'] = $row['UNITUP']; 
+      $response['user']['username'] = $row['username']; 
+      $response['user']['nama'] = $row['NAMA']; 
+      $response['user']['password'] = $row['password']; 
+
+      $response['success'] = true;
+      $response['msg'] = 'Login berhasil';
+    }else{
+      $response['success'] = false;
+      $response['user'] = null;
+      $response['msg'] = $row['msg'];
     }
 
-    $response = $row;
-
-    // sqlsrv_next_result($stmt);
-    // $row = sqlsrv_fetch_array($stmt, SQLSRV_FETCH_ASSOC);
-
-
-    if(isset($_FILES['image'])){
-      $file_name = $idpel.'_'.$tgl_pemeriksaan.'.jpg';
-      $file_size =$_FILES['image']['size'];
-      $file_tmp =$_FILES['image']['tmp_name'];
-      $file_type=$_FILES['image']['type'];
-      $file_ext=strtolower(end(explode('.',$_FILES['image']['name'])));
-      
-      $extensions= array("jpeg","jpg","png");
-      
-      if(in_array($file_ext,$extensions)=== false){
-         $response['error'][]="extension not allowed, please choose a JPEG or PNG file.";
-      }
-      
-      if($file_size > 2097152){
-         $response['error'][]='File size must be excately 2 MB';
-      }
-      
-      if(empty($response['error'])==true){
-        $file_path = "../../../../assets/uploads/photos/pemeriksaan_lpb/".$tgl_pemeriksaan;
-        if (!file_exists($file_path)) {
-            mkdir($file_path, 0777, true);
-        }
-         move_uploaded_file($file_tmp, $file_path."/".$file_name);
-      }
-    }
-
-    //$response['success'] = true;
+    sqlsrv_free_stmt($stmt);
 
 }else{
     $response['success'] = false;
-    $response['msg'] = 'Data gagal disimpan';
+    $response['msg'] = 'Login gagal';
 }
 
 sqlsrv_free_stmt($stmt);  
