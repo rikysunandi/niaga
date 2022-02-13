@@ -151,12 +151,12 @@ if( $stmt === false ) {
         $response['success'] = true;
 
     }else{
-        $response['success'] = 'false';
+        $response['success'] = false;
         $response['msg'] = 'Data Idpel '.$idpel.'gagal disimpan';
     }
 
   }else{
-    $response['success'] = 'false';
+    $response['success'] = false;
     $response['msg'] = 'Data gagal disimpan karena sudah pernah ditagging';
     
   }
@@ -167,7 +167,7 @@ sqlsrv_free_stmt($stmt);
 sqlsrv_close($conn);
 
 
-header('Content-Type: application/json');
+//header('Content-Type: application/json');
 echo json_encode(utf8ize($response));
 
 function utf8ize($d) {
