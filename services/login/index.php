@@ -32,9 +32,9 @@ if(sqlsrv_execute($stmt)){
       $response['user']['unitupi'] = $row['UNITUPI']; 
       $response['user']['unitap'] = $row['UNITAP']; 
       $response['user']['unitup'] = $row['UNITUP']; 
-      $response['user']['username'] = $row['username']; 
+      $response['user']['username'] = $row['USERNAME']; 
       $response['user']['nama'] = $row['NAMA']; 
-      $response['user']['password'] = $row['password']; 
+      $response['user']['password'] = $row['PASSWORD']; 
 
       $response['success'] = true;
       $response['msg'] = 'Login berhasil';
