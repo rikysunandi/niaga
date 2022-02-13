@@ -34,7 +34,7 @@ $tgl_input = $json_data['tglInsert'];
 
 $response = array();
 
-$sql = 'SELECT TOP 1 * FROM m_pemeriksaan_lpb WHERE LEFT(IDPEL,11) = \''.substr($idpel,0,11).'\' ';
+$sql = 'SELECT * FROM m_pemeriksaan_lpb WHERE LEFT(IDPEL,11) = \''.substr($idpel,0,11).'\' ';
 //$params = array(1, substr($idpel,0,11));
 
 $stmt = sqlsrv_query( $conn, $sql );
@@ -157,8 +157,7 @@ if( $stmt === false ) {
 
   }else{
     $response['success'] = true;
-    $response['msg'] = 'Data Idpel '.$idpel.' gagal disimpan karena sudah pernah ditagging!';
-    
+    $response['msg'] = 'Data Idpel '.$idpel.' tidak disimpan karena sudah pernah ditagging sebelumnya!';
   }
 }
 
