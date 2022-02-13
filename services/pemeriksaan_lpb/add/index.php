@@ -43,8 +43,7 @@ if( $stmt === false ) {
     $response['msg'] = 'Gagal query ke Database';
 }else{
 
-  $row = sqlsrv_fetch_array($stmt, SQLSRV_FETCH_ASSOC);
-  if($row['IDPEL']==''){
+  if(sqlsrv_num_rows( $stmt )==0){
 
     if(isset($_FILES['image'])){
       $file_name = $idpel.'_'.$tgl_pemeriksaan.'.jpg';
@@ -157,7 +156,7 @@ if( $stmt === false ) {
 
   }else{
     $response['success'] = false;
-    $response['msg'] = 'Data gagal disimpan karena sudah pernah ditagging';
+    $response['msg'] = 'Data Idpel '.$idpel.' gagal disimpan karena sudah pernah ditagging';
     
   }
 }
