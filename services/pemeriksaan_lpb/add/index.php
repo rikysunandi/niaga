@@ -148,7 +148,7 @@ if( $stmt === false ) {
         // $row = sqlsrv_fetch_array($stmt, SQLSRV_FETCH_ASSOC);
 
 
-        //$response['success'] = true;
+        $response['success'] = true;
 
     }else{
         $response['success'] = false;
