@@ -42,8 +42,11 @@ if( $stmt === false ) {
     $response['success'] = false;
     $response['msg'] = 'Gagal query ke Database';
 }else{
-
-  if(sqlsrv_num_rows( $stmt )==0){
+  $row = sqlsrv_fetch_array($stmt, SQLSRV_FETCH_ASSOC);
+  if(strlen($row['IDPEL'])>=11){
+    $response['success'] = true;
+    $response['msg'] = 'Data Idpel '.$idpel.' tidak disimpan karena sudah pernah ditagging sebelumnya!';
+  }else{
 
     if(isset($_FILES['image'])){
       $file_name = $idpel.'_'.$tgl_pemeriksaan.'.jpg';
@@ -155,9 +158,6 @@ if( $stmt === false ) {
         $response['msg'] = 'Data Idpel '.$idpel.' gagal disimpan';
     }
 
-  }else{
-    $response['success'] = true;
-    $response['msg'] = 'Data Idpel '.$idpel.' tidak disimpan karena sudah pernah ditagging sebelumnya!';
   }
 }
 
