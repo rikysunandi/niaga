@@ -151,12 +151,12 @@ if( $stmt === false ) {
         $response['success'] = true;
 
     }else{
-        $response['success'] = false;
+        $response['success'] = 'false';
         $response['msg'] = 'Data Idpel '.$idpel.'gagal disimpan';
     }
 
   }else{
-    $response['success'] = false;
+    $response['success'] = 'false';
     $response['msg'] = 'Data gagal disimpan karena sudah pernah ditagging';
     
   }
