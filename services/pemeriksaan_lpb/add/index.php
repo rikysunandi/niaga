@@ -105,6 +105,7 @@ if( $stmt === false ) {
       }
     }
 
+    sqlsrv_free_stmt($stmt);
 
     $params = array(
             array($tgl_pemeriksaan, SQLSRV_PARAM_IN),
@@ -151,7 +152,7 @@ if( $stmt === false ) {
 
     }else{
         $response['success'] = false;
-        $response['msg'] = 'Data Idpel '.$idpel.'gagal disimpan';
+        $response['msg'] = 'Data Idpel '.$idpel.' gagal disimpan';
     }
 
   }else{
