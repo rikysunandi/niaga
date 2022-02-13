@@ -132,14 +132,14 @@ if( $stmt === false ) {
         );
 
     $sql = "EXEC SP_WS_PEMERIKSAAN_LPB_SIMPAN @TGL_PEMERIKSAAN = ?, @UNITUPI = ?, @UNITAP = ?, @UNITUP = ?, @IDPEL = ?, @NAMA = ?, @TARIF = ?, @DAYA = ?, @NIK = ?, @KK = ?, @NOHP = ?, @EMAIL = ?, @PERUNTUKAN = ?, @SISA_KWH = ?, @FOTO = ?, @FOTO_RUMAH = ?, @LATITUDE = ?, @LONGITUDE = ?, @AKURASI_KOORDINAT = ?, @USER_INPUT = ?, @TGL_INPUT = ? ";
-    $stmt = sqlsrv_prepare($conn, $sql, $params);
+    $stmt2 = sqlsrv_prepare($conn, $sql, $params);
 
-    if(sqlsrv_execute($stmt)){
+    if(sqlsrv_execute($stmt2)){
         //sqlsrv_next_result($stmt);
-        $row = sqlsrv_fetch_array($stmt, SQLSRV_FETCH_ASSOC);
+        $row = sqlsrv_fetch_array($stmt2, SQLSRV_FETCH_ASSOC);
         if($row['IDPEL']==''){
-            sqlsrv_next_result($stmt);
-            $row = sqlsrv_fetch_array($stmt, SQLSRV_FETCH_ASSOC);
+            sqlsrv_next_result($stmt2);
+            $row = sqlsrv_fetch_array($stmt2, SQLSRV_FETCH_ASSOC);
         }
 
         $response['pemeriksaan_lpb'] = $row;
@@ -162,8 +162,8 @@ if( $stmt === false ) {
   }
 }
 
-
 sqlsrv_free_stmt($stmt);
+sqlsrv_free_stmt($stmt2);
 sqlsrv_close($conn);
 
 
