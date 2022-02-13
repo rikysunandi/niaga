@@ -35,6 +35,7 @@ if(sqlsrv_execute($stmt)){
       $response['user']['username'] = $row['USERNAME']; 
       $response['user']['nama'] = $row['NAMA']; 
       $response['user']['password'] = $row['PASSWORD']; 
+      $response['user']['rbm'] = $row['RBM']; 
 
       $response['success'] = true;
       $response['msg'] = 'Login berhasil';
