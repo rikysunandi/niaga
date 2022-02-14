@@ -54,6 +54,9 @@ else {
 	    //           } 
 	    //       }
 
+	        if(!file_exists($folder.$dir))
+	          mkdir($folder.$dir);
+
 			if(copy('zip://'. $filepath .'#'. 'data.csv' , $folder.$dir."/data.csv")){
 				$response['success'] = true;
 				$response['filename'] = $filename;
