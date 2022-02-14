@@ -101,7 +101,7 @@ if( $stmt === false ) {
 
           ftp_pasv ( $ftp_conn, true ) ;
           if(ftp_put($ftp_conn, $file_name, $dir.'/'.$file_name, FTP_ASCII)){
-            $foto = $file_name;
+            $foto_rumah = $file_name;
             $response['msg'] .= 'Berhasil upload file foto rumah, '; 
           }else{
             $response['msg'] .= 'gagal menyalin file foto rumah, '; 
