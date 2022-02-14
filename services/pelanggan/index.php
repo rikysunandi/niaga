@@ -3,8 +3,8 @@
 require_once '../../bo/config/config.php';
 require_once '../../bo/config/database.php';
 
-ini_set('max_execution_time', 600);
-set_time_limit(600);
+ini_set('max_execution_time', 60);
+set_time_limit(60);
 
 $param = $_GET['param'];
 $unitupi = $_GET['unitupi'];
