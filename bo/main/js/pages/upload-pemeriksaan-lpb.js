@@ -16,7 +16,7 @@
         timeout: 180000,
         maxFilesize: 32,
         parallelUploads: 2,
-        autoProcessQueue: false,
+        autoProcessQueue: true,
         init: function() {
 
             this.on("addedfile", file => {
@@ -45,7 +45,7 @@
             });
             this.on("complete", function() {
                 $('#btn_upload').prop('disabled', true);
-                this.options.autoProcessQueue = false;
+                //this.options.autoProcessQueue = false;
             });
 
             this.on("success", function (file, response) {
