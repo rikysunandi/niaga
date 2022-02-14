@@ -65,7 +65,7 @@ if( $stmt === false ) {
 
     if(file_exists($dir.'/'.$file_name)){
 
-        if(strlen($unitup)==5)
+        if(strlen($unitap)==5)
           $file_path = "tagging/".$unitap."/".$unitup."/";
         else
           $file_path = "tagging/53XXX/";
@@ -91,7 +91,7 @@ if( $stmt === false ) {
     //if($zip->extractTo($dir."/".$file_name, $file_name)){
     //if(copy('zip://'. $zipfile .'#'. $file_name , $dir."/".$file_name)){
     if(file_exists($dir.'/'.$file_name)){
-        if(strlen($unitup)==5)
+        if(strlen($unitap)==5)
           $file_path = "/rumah/".$unitap."/".$unitup;
         else
           $file_path = "/rumah/53XXX";
