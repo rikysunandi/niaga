@@ -110,7 +110,7 @@
 	    	console.log(valeur);
 	    	// console.log(v);
 	    	$($(progress).find('.progress-bar')[0]).css('width', valeur+'%').attr('aria-valuenow', valeur);
-	    	$($(progress).find('.msg')[0]).html('Memproses data idpel '+v.idpel+', mohon menunggu...');
+	    	$($(progress).find('.msg')[0]).html('Memproses data idpel '+v.idpel+' dari File '+uploadname+', mohon menunggu...');
 
 	    	$.post('../controller/pemeriksaan_lpb/prosesPemeriksaanLpb.php', 
 	    	{ filepath: filepath, uploadname:uploadname, zipfile:zipfile, row: v }, 
