@@ -68,36 +68,36 @@ else {
 		   //          } 
 		   //      }
 		   //  }
-		  	for ($i = 0; $i < $zip->numFiles; $i++)
-			{
-				$oldname = $zip->getNameIndex($i);
-				// $newname;
-				// $arr=explode('.',$file );
-				// if(substr_count($arr[0],"_")==2)
-				// {
-				// 	$underscorearr=explode('_',$arr[0] );
-				// 	$newname=$underscorearr[1].'_'.$underscorearr[2];
-				// }
-				// else
-				// {
-				// 	$newname=$arr[0];
-				// }
-				// $nameindex=$i+1;
-				// $newname.='.00'.$nameindex;
-				$newname = str_replace(' ', '', $oldname);
-				$zip->renameName($oldname, $newname);
-			}
-		  	//$zip->extractTo($path);
+		 //  	for ($i = 0; $i < $zip->numFiles; $i++)
+			// {
+			// 	$oldname = $zip->getNameIndex($i);
+			// 	// $newname;
+			// 	// $arr=explode('.',$file );
+			// 	// if(substr_count($arr[0],"_")==2)
+			// 	// {
+			// 	// 	$underscorearr=explode('_',$arr[0] );
+			// 	// 	$newname=$underscorearr[1].'_'.$underscorearr[2];
+			// 	// }
+			// 	// else
+			// 	// {
+			// 	// 	$newname=$arr[0];
+			// 	// }
+			// 	// $nameindex=$i+1;
+			// 	// $newname.='.00'.$nameindex;
+			// 	$newname = str_replace(' ', '', $oldname);
+			// 	$zip->renameName($oldname, $newname);
+			// }
+		  	$zip->extractTo($path);
 		  	//make all the folders
 
 		  	$zip->close();
-		  	
-			$zip1 = new ZipArchive;
-			$res1 = $zip1->open($filepath);
-			if($res1){
-				$success=$zip1->extractTo($path);
-			}
-			$zip1->close();
+
+			// $zip1 = new ZipArchive;
+			// $res1 = $zip1->open($filepath);
+			// if($res1){
+			// 	$success=$zip1->extractTo($path);
+			// }
+			// $zip1->close();
 
 			$response['success'] = true;
 			$response['filename'] = $filename;
