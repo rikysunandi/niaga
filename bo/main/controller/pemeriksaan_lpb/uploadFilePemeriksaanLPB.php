@@ -58,6 +58,7 @@ else {
 			}
 			else{
 				header("HTTP/1.0 400 Bad Request");
+				echo '7z x "'.dirname(__FILE__).$filepath.'"';
 				echo 'File csv tidak ditemukan!';	
 			}
 		} else {
