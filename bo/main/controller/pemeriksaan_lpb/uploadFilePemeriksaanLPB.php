@@ -39,40 +39,26 @@ else {
 		$res = $zip->open($filepath);
 		if ($res === TRUE) {
 
-		  	//$path = '../../../assets/uploads/';
-		  	$dir_in_zip = trim($zip->getNameIndex(0), '/');
-		  	$dir = date('Ymdhis').substr(bin2hex( random_bytes(12) ), 0, 6);
+		  	$path = '../../../assets/uploads/';
+		  	$dir = trim($zip->getNameIndex(0), '/');
 		  	//$zip->extractTo($path);
-		  	// $OnlyFileName = $zip->getNameIndex($i);
-	    //     $FullFileName = $zip->statIndex($i);    
+		  	$output=null;
+			$retval=null;
+			exec('7z x '.dirname(__FILE__).$filepath, $output, $retval);
+		  	$zip->close();
 
-	    //       if (!($FullFileName['name'][strlen($FullFileName['name'])-1] =="/"))
-	    //       {
-	    //           if (preg_match('#\.(jpg|jpeg|png|csv)$#i', $OnlyFileName))
-	    //           {
-	    //               copy('zip://'. $entry .'#'. $OnlyFileName , $uploads_dir."/".basename($OnlyFileName)); 
-	    //           } 
-	    //       }
-
-	        if(!file_exists($folder.$dir))
-	          mkdir($folder.$dir);
-
-			//if(copy('zip://'. $filepath .'#'. 'data.csv' , $folder.$dir."/data.csv")){
-	      	if($zip->extractTo($folder.$dir."/", $dir_in_zip."data.csv")){
+			if(file_exists(dirname($folder.$dir).'/data.csv')){
 				$response['success'] = true;
 				$response['filename'] = $filename;
-				$response['dir_in_zip'] = $dir_in_zip."data.csv";
 				$response['zipfile'] = $filepath;
 				$response['filepath'] = $folder.$dir;
 				$response['rows'] = csvToJson(dirname($folder.$dir).'/data.csv');
-				unlink($folder.$dir."/data.csv");
 				echo json_encode($response);
 			}
 			else{
 				header("HTTP/1.0 400 Bad Request");
 				echo 'File csv tidak ditemukan!';	
 			}
-		  	$zip->close();
 		} else {
 			header("HTTP/1.0 400 Bad Request");
 			echo 'Gagal mengekstrak file ZIP!';
