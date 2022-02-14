@@ -41,11 +41,40 @@ else {
 
 		  	$path = '../../../assets/uploads/';
 		  	$dir = trim($zip->getNameIndex(0), '/');
-		  	$zip->extractTo($path);
+		  	$dir = date('Ymdhis').rand(0,100);
+		  	$home_folder = '../../../assets/uploads/'.$dir;
+		  	//$zip->extractTo($path);
+		  	//make all the folders
+		    for($i = 0; $i < $zip->numFiles; $i++) 
+		    { 
+		        $OnlyFileName = $zip->getNameIndex($i);
+		        $FullFileName = $zip->statIndex($i);    
+		        if ($FullFileName['name'][strlen($FullFileName['name'])-1] =="/")
+		        {
+		            @mkdir($home_folder."/".$FullFileName['name'],0700,true);
+		        }
+		    }
+
+		    //unzip into the folders
+		    for($i = 0; $i < $zip->numFiles; $i++) 
+		    { 
+		        $OnlyFileName = $zip->getNameIndex($i);
+		        $FullFileName = $zip->statIndex($i);    
+
+		        if (!($FullFileName['name'][strlen($FullFileName['name'])-1] =="/"))
+		        {
+		            if (preg_match('#\.(jpg|jpeg|gif|png)$#i', $OnlyFileName))
+		            {
+		                copy('zip://'. $ZipFileName .'#'. $OnlyFileName , $home_folder."/".$FullFileName['name'] ); 
+		            } 
+		        }
+		    }
+
 		  	$zip->close();
 
 			$response['success'] = true;
 			$response['filename'] = $filename;
+			$response['zipfile'] = $filepath;
 			$response['filepath'] = $folder.$dir;
 			if(file_exists(dirname($folder.$dir).'/data.csv')){
 				$response['rows'] = csvToJson(dirname($folder.$dir).'/data.csv');

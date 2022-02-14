@@ -73,7 +73,7 @@
                         var rows = JSON.parse(data.rows);
                         console.log(rows);
                         if(rows.length>0){
-	                        prosesUpload(rows, 0, data.filepath, progress, file.name);
+	                        prosesUpload(rows, 0, data.filepath, progress, file.name, data.zipfile);
 	                    }
                         // $.post('../controller/pemeriksaan_lpb/prosespemeriksaan_lpb.php', { filename: data.filename, kodegerak: $('#sel_kodegerak').val() }, function(res){
                         //     //progress-bar progress-bar-striped progress-bar-animated bg-warning
@@ -101,7 +101,7 @@
 
     };
 
-    function prosesUpload(datas, i, filepath, progress, uploadname){
+    function prosesUpload(datas, i, filepath, progress, uploadname, zipfile){
 
     	if(i<datas.length){
 
@@ -122,7 +122,7 @@
                	}else{
                     $($(progress).find('ul')[0]).append('<li class="text-danger">'+res.msg+'</li>');
                	}
-	        	prosesUpload(datas, i+1, filepath, progress, uploadname);
+	        	prosesUpload(datas, i+1, filepath, progress, uploadname, zipfile);
 
 	        });
 
