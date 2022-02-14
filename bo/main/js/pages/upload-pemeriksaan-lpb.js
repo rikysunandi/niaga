@@ -43,10 +43,10 @@
                 console.log('error');
                 $(file.previewElement).find('.dz-error-message').text(response);
             });
-            // this.on("complete", function() {
-            //     $('#btn_upload').prop('disabled', true);
-            //     this.options.autoProcessQueue = false;
-            // });
+            this.on("complete", function() {
+                $('#btn_upload').prop('disabled', true);
+                this.options.autoProcessQueue = false;
+            });
 
             this.on("success", function (file, response) {
                 console.log(file);
@@ -58,7 +58,7 @@
                     $(file.previewElement).find('.dz-error-message').text('Error, silahkan periksa isi File!');
                   
                 }else{
-                    this.removeFile(file);
+                    //this.removeFile(file);
                     var data = JSON.parse(response);
                     if(data.success){
                         var progress = $( ".progress-upload:first" ).clone().appendTo( ".container-fluid" );
