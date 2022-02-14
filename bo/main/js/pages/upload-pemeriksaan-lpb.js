@@ -24,7 +24,7 @@
             });
             this.on("processing", function(file, xhr, formData) {
                 console.log('processing');
-                //this.options.autoProcessQueue = true;
+                this.options.autoProcessQueue = true;
             });
             this.on("sending", function(file, xhr, formData) {
                 console.log(file);
