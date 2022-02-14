@@ -60,10 +60,10 @@ if( $stmt === false ) {
     $file_name = $idpel.'_'.$tgl_pemeriksaan.'.jpg';
 
 
-    if($zip->extractTo($dir."/".$file_name, $file_name)){
+    //if($zip->extractTo($dir."/".$file_name, $file_name)){
     //if(copy('zip://'. $zipfile .'#'. $file_name , $dir."/".$file_name)){
 
-    //if(file_exists($dir.'/'.$file_name)){
+    if(file_exists($dir.'/'.$file_name)){
 
         if(strlen($unitup)==5)
           $file_path = "tagging/".$unitap."/".$unitup."/";
@@ -88,9 +88,9 @@ if( $stmt === false ) {
 
     $file_name = $kk.'.jpg';
 
-    if($zip->extractTo($dir."/".$file_name, $file_name)){
+    //if($zip->extractTo($dir."/".$file_name, $file_name)){
     //if(copy('zip://'. $zipfile .'#'. $file_name , $dir."/".$file_name)){
-    //if(file_exists($dir.'/'.$file_name)){
+    if(file_exists($dir.'/'.$file_name)){
         if(strlen($unitup)==5)
           $file_path = "/rumah/".$unitap."/".$unitup;
         else

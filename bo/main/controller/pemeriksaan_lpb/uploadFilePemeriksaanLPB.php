@@ -41,24 +41,27 @@ else {
 
 		  	$path = '../../../assets/uploads/';
 		  	$dir = trim($zip->getNameIndex(0), '/');
+		  	$dir = str_replace(' ', '_', $dir);
 		  	//$zip->extractTo($path);
+		  	$zip->close();
+
 		  	$output=null;
 			$retval=null;
-			exec('C:\\Program Files\\7-Zip\\7z x "D:\\wamp64\\www\\niaga\\bo\\assets\\uploads\\'.$filename.'"', $output, $retval);
-		  	$zip->close();
+			chdir("D:/wamp64/www/niaga/bo/assets/uploads/");
+			exec('"C:/Program Files/7-Zip/7z" x "D:/wamp64/www/niaga/bo/assets/uploads/'.$filename.'"', $output, $retval);
 
 			if(file_exists(dirname($folder.$dir).'/data.csv')){
 				$response['success'] = true;
 				$response['filename'] = $filename;
 				$response['zipfile'] = $filepath;
-				$response['path7z'] = '7z x "D:\\wamp64\\www\\niaga\\bo\\assets\\uploads\\'.$filename.'"';
+				$response['path7z'] = '7z x "D:/wamp64/www/niaga/bo/assets/uploads/'.$filename.'"';
 				$response['filepath'] = $folder.$dir;
 				$response['rows'] = csvToJson(dirname($folder.$dir).'/data.csv');
 				echo json_encode($response);
 			}
 			else{
 				header("HTTP/1.0 400 Bad Request");
-				echo '7z x "D:\\wamp64\\www\\niaga\\bo\\assets\\uploads\\'.$filename.'"';
+				echo '7z x "D:/wamp64/www/niaga/bo/assets/uploads/'.$filename.'"';
 				echo 'File csv tidak ditemukan!';	
 			}
 		} else {
