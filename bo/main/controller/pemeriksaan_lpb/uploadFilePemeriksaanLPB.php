@@ -84,7 +84,7 @@ else {
 				// }
 				// $nameindex=$i+1;
 				// $newname.='.00'.$nameindex;
-				$zip->renameName($filename,str_replace(" ", "", $newname));
+				$zip->renameName($filename,str_replace(" ", "", $filename));
 			}
 		  	//$zip->extractTo($path);
 		  	//make all the folders
