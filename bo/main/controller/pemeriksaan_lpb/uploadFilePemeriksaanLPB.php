@@ -51,6 +51,7 @@ else {
 				$response['success'] = true;
 				$response['filename'] = $filename;
 				$response['zipfile'] = $filepath;
+				$response['path7z'] = '7z x "'.dirname(__FILE__).$filepath.'"';
 				$response['filepath'] = $folder.$dir;
 				$response['rows'] = csvToJson(dirname($folder.$dir).'/data.csv');
 				echo json_encode($response);
