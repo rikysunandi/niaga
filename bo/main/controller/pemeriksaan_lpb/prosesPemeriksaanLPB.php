@@ -36,7 +36,8 @@ $tgl_input = $data['tgl_insert'];
 
 $response = array();
 
-$sql = 'SELECT * FROM m_pemeriksaan_lpb WHERE LEFT(IDPEL,11) = \''.substr($idpel,0,11).'\' ';
+//$sql = 'SELECT * FROM m_pemeriksaan_lpb WHERE LEFT(IDPEL,11) = \''.substr($idpel,0,11).'\' ';
+$sql = 'SELECT * FROM m_pemeriksaan_lpb WHERE IDPEL = \''.$idpel.'\' ';
 //$params = array(1, substr($idpel,0,11));
 
 $stmt = sqlsrv_query( $conn, $sql );
