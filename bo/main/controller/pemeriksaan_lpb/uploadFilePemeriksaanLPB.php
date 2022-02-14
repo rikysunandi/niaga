@@ -41,63 +41,8 @@ else {
 
 		  	$path = '../../../assets/uploads/';
 		  	$dir = trim($zip->getNameIndex(0), '/');
-
-		  	// $dir = date('Ymdhis').rand(0,100);
-		  	// $home_folder = '../../../assets/uploads/'.$dir;
-		   //  for($i = 0; $i < $zip->numFiles; $i++) 
-		   //  { 
-		   //      $OnlyFileName = $zip->getNameIndex($i);
-		   //      $FullFileName = $zip->statIndex($i);    
-		   //      if ($FullFileName['name'][strlen($FullFileName['name'])-1] =="/")
-		   //      {
-		   //          @mkdir($home_folder."/".$FullFileName['name'],0700,true);
-		   //      }
-		   //  }
-
-		   //  //unzip into the folders
-		   //  for($i = 0; $i < $zip->numFiles; $i++) 
-		   //  { 
-		   //      $OnlyFileName = $zip->getNameIndex($i);
-		   //      $FullFileName = $zip->statIndex($i);    
-
-		   //      if (!($FullFileName['name'][strlen($FullFileName['name'])-1] =="/"))
-		   //      {
-		   //          if (preg_match('#\.(jpg|jpeg|gif|png)$#i', $OnlyFileName))
-		   //          {
-		   //              copy('zip://'. $ZipFileName .'#'. $OnlyFileName , $home_folder."/".$FullFileName['name'] ); 
-		   //          } 
-		   //      }
-		   //  }
-		 //  	for ($i = 0; $i < $zip->numFiles; $i++)
-			// {
-			// 	$oldname = $zip->getNameIndex($i);
-			// 	// $newname;
-			// 	// $arr=explode('.',$file );
-			// 	// if(substr_count($arr[0],"_")==2)
-			// 	// {
-			// 	// 	$underscorearr=explode('_',$arr[0] );
-			// 	// 	$newname=$underscorearr[1].'_'.$underscorearr[2];
-			// 	// }
-			// 	// else
-			// 	// {
-			// 	// 	$newname=$arr[0];
-			// 	// }
-			// 	// $nameindex=$i+1;
-			// 	// $newname.='.00'.$nameindex;
-			// 	$newname = str_replace(' ', '', $oldname);
-			// 	$zip->renameName($oldname, $newname);
-			// }
 		  	$zip->extractTo($path);
-		  	//make all the folders
-
 		  	$zip->close();
-
-			// $zip1 = new ZipArchive;
-			// $res1 = $zip1->open($filepath);
-			// if($res1){
-			// 	$success=$zip1->extractTo($path);
-			// }
-			// $zip1->close();
 
 			$response['success'] = true;
 			$response['filename'] = $filename;
