@@ -87,10 +87,17 @@ else {
 				$newname = str_replace(' ', '', $oldname);
 				$zip->renameName($oldname, $newname);
 			}
-		  	$zip->extractTo($path);
+		  	//$zip->extractTo($path);
 		  	//make all the folders
 
 		  	$zip->close();
+		  	
+			$zip1 = new ZipArchive;
+			$res1 = $zip1->open($filepath);
+			if($res1){
+				$success=$zip1->extractTo($path);
+			}
+			$zip1->close();
 
 			$response['success'] = true;
 			$response['filename'] = $filename;
