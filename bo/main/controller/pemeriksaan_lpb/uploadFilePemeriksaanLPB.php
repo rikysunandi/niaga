@@ -44,7 +44,7 @@ else {
 		  	//$zip->extractTo($path);
 		  	$output=null;
 			$retval=null;
-			exec('7z x '.dirname(__FILE__).$filepath, $output, $retval);
+			exec('7z x "'.dirname(__FILE__).$filepath.'"', $output, $retval);
 		  	$zip->close();
 
 			if(file_exists(dirname($folder.$dir).'/data.csv')){
