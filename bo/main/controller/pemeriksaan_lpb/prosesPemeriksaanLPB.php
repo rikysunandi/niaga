@@ -45,7 +45,7 @@ if( $stmt === false ) {
     $response['msg'] = 'Gagal query ke Database';
 }else{
   $row = sqlsrv_fetch_array($stmt, SQLSRV_FETCH_ASSOC);
-  if(strlen($row['IDPEL'])>=11){
+  if(strlen($row['IDPEL'])<11){
     $response['success'] = false;
     $response['msg'] = 'Data Idpel '.$idpel.' tidak disimpan karena sudah pernah ditagging oleh '.$row['USER_INPUT'].' !';
   }else{
@@ -73,7 +73,7 @@ if( $stmt === false ) {
         if(ftp_chdir($ftp_conn, $file_path)){
 
           ftp_pasv ( $ftp_conn, true ) ;
-          if(ftp_put($ftp_conn, $file_name, $dir.'/'.$file_name, FTP_ASCII)){
+          if(ftp_put($ftp_conn, $file_name, $dir.'/'.$file_name)){
             $foto = $file_name;
             $response['msg'] .= 'Berhasil upload file foto meter, '; 
           }else{
@@ -100,7 +100,7 @@ if( $stmt === false ) {
         if(ftp_chdir($ftp_conn, $file_path)){
 
           ftp_pasv ( $ftp_conn, true ) ;
-          if(ftp_put($ftp_conn, $file_name, $dir.'/'.$file_name, FTP_ASCII)){
+          if(ftp_put($ftp_conn, $file_name, $dir.'/'.$file_name)){
             $foto_rumah = $file_name;
             $response['msg'] .= 'Berhasil upload file foto rumah, '; 
           }else{
