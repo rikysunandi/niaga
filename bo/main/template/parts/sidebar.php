@@ -120,7 +120,7 @@
                 <ul aria-expanded="false">
                     <!-- <li><a href="upload-dil.php">Upload DIL</a>
                     </li> -->
-                    <li><a href="upload-pemeriksaan-lpb.php">Update Data Pemeriksaan</a>
+                    <li><a href="upload-pemeriksaan-lpb.php">Upload Hasil Pemeriksaan</a>
                     </li>
                     <li><a href="mon-pelanggan-belum-diperiksa.php">Download DIL Belum Tagging Priangan</a>
                     </li>
