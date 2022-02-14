@@ -82,7 +82,7 @@
                                     <div id="result" class="mt-2"></div>
                                 </div>
                             </div>
-                            <div class="card-footer">
+                            <div class="card-footer d-none">
                                 <div class="text-right">
                                     <button disabled="disabled" id="btn_upload" type="button" class="btn btn-sm btn-primary waves-effect waves-light mt-2">Upload <span class="btn-icon-right"><i
                                     class="fa fa-upload"></i></span></button>

@@ -16,7 +16,7 @@
         timeout: 180000,
         maxFilesize: 32,
         parallelUploads: 2,
-        autoProcessQueue: false,
+        autoProcessQueue: true,
         init: function() {
 
             this.on("addedfile", file => {
