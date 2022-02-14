@@ -9,6 +9,7 @@ set_time_limit(60);
 
 $filepath = $_REQUEST['filepath'];
 $zipfile = $_REQUEST['zipfile'];
+$uploadname = $_REQUEST['uploadname'];
 $data = $_REQUEST['row'];
 //$json_data = json_decode($data , true);
 
@@ -32,7 +33,6 @@ $longitude = $data['longitude'];
 $akurasi_koordinat = $data['akurasi_koordinat'];
 $user_input = $data['user'];
 $tgl_input = $data['tgl_insert'];
-$uploadname = $data['uploadname'];
 
 $response = array();
 
