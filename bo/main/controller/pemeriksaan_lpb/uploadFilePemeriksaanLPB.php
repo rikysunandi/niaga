@@ -58,9 +58,10 @@ else {
 	          mkdir($folder.$dir);
 
 			//if(copy('zip://'. $filepath .'#'. 'data.csv' , $folder.$dir."/data.csv")){
-	      	if($zip->extractTo($folder.$dir."/", "data.csv")){
+	      	if($zip->extractTo($folder.$dir."/", $dir_in_zip."data.csv")){
 				$response['success'] = true;
 				$response['filename'] = $filename;
+				$response['dir_in_zip'] = $dir_in_zip."data.csv";
 				$response['zipfile'] = $filepath;
 				$response['filepath'] = $folder.$dir;
 				$response['rows'] = csvToJson(dirname($folder.$dir).'/data.csv');
