@@ -128,13 +128,27 @@
 
 	    }else{
 
-            $($(progress).find('.progress-bar')[0]).removeClass('progress-bar-striped');
-            $($(progress).find('.progress-bar')[0]).removeClass('progress-bar-animated');
-            $($(progress).find('.progress-bar')[0]).removeClass('bg-warning');
 
-            $($(progress).find('.progress-bar')[0]).css('width', '100%').attr('aria-valuenow', 100);
-            $($(progress).find('.progress-bar')[0]).addClass('bg-success');
-            $($(progress).find('.msg')[0]).html('Update data Pemeriksaan LPB sudah berhasil dari File '+uploadname+', silahkan cek Log Upload');
+	    	$($(progress).find('.progress-bar')[0]).css('width', '99%').attr('aria-valuenow', 99);
+	    	$($(progress).find('.msg')[0]).html('Membersihkan File hasil Upload, mohon menunggu...');
+
+	    	$.post('../controller/pemeriksaan_lpb/clearFilePemeriksaanLpb.php', 
+	    	{ filepath: filepath, uploadname:uploadname, zipfile:zipfile }, 
+	    	function(res){
+	    		res = JSON.parse(res);
+               	console.log(res);
+               	
+	            $($(progress).find('.progress-bar')[0]).removeClass('progress-bar-striped');
+	            $($(progress).find('.progress-bar')[0]).removeClass('progress-bar-animated');
+	            $($(progress).find('.progress-bar')[0]).removeClass('bg-warning');
+
+	            $($(progress).find('.progress-bar')[0]).css('width', '100%').attr('aria-valuenow', 100);
+	            $($(progress).find('.progress-bar')[0]).addClass('bg-success');
+	            $($(progress).find('.msg')[0]).html('Update data Pemeriksaan LPB sudah berhasil dari File '+uploadname+', silahkan cek Log Upload');
+
+	        });
+
+
 	    }
 
     }
