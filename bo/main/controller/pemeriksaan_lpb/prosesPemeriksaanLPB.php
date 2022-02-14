@@ -36,6 +36,15 @@ $tgl_input = $data['tgl_insert'];
 
 $response = array();
 
+if(substr($idpel, 0, 11)=='99999999999'){
+  // if(strlen($latitude)>5)
+  //   $idpel = '99'.substr($user_input, 0, 5).substr($latitude, -2).substr($longitude, -3);
+  // else
+  //   $idpel = '99'.substr($user_input, 0, 5).substr($latitude, -2).substr($longitude, -3);
+  $idpel = '99'.substr($user_input, 0, 5).substr(str_replace(':','',substr($tgl_input, -8)),0,5);
+  //210429
+}
+
 //$sql = 'SELECT * FROM m_pemeriksaan_lpb WHERE LEFT(IDPEL,11) = \''.substr($idpel,0,11).'\' ';
 $sql = 'SELECT * FROM m_pemeriksaan_lpb WHERE IDPEL = \''.$idpel.'\' ';
 //$params = array(1, substr($idpel,0,11));
