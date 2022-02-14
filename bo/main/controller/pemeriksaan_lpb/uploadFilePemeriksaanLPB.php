@@ -57,12 +57,14 @@ else {
 	        if(!file_exists($folder.$dir))
 	          mkdir($folder.$dir);
 
-			if(copy('zip://'. $filepath .'#'. 'data.csv' , $folder.$dir."/data.csv")){
+			//if(copy('zip://'. $filepath .'#'. 'data.csv' , $folder.$dir."/data.csv")){
+	      	if($zip->extractTo($folder.$dir."/data.csv", "data.csv")){
 				$response['success'] = true;
 				$response['filename'] = $filename;
 				$response['zipfile'] = $filepath;
 				$response['filepath'] = $folder.$dir;
 				$response['rows'] = csvToJson(dirname($folder.$dir).'/data.csv');
+				unlink($folder.$dir."/data.csv");
 				echo json_encode($response);
 			}
 			else{
