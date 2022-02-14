@@ -51,14 +51,14 @@ else {
 				$response['success'] = true;
 				$response['filename'] = $filename;
 				$response['zipfile'] = $filepath;
-				$response['path7z'] = '7z x "'.dirname(__FILE__).$filepath.'"';
+				$response['path7z'] = '7z x "D:\\wamp64\\www\\niaga\\bo\\assets\\uploads\\'.$filename.'"';
 				$response['filepath'] = $folder.$dir;
 				$response['rows'] = csvToJson(dirname($folder.$dir).'/data.csv');
 				echo json_encode($response);
 			}
 			else{
 				header("HTTP/1.0 400 Bad Request");
-				echo '7z x "'.dirname(__FILE__).$filepath.'"';
+				echo '7z x "D:\\wamp64\\www\\niaga\\bo\\assets\\uploads\\'.$filename.'"';
 				echo 'File csv tidak ditemukan!';	
 			}
 		} else {
