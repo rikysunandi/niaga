@@ -58,7 +58,7 @@ else {
 	          mkdir($folder.$dir);
 
 			//if(copy('zip://'. $filepath .'#'. 'data.csv' , $folder.$dir."/data.csv")){
-	      	if($zip->extractTo($folder.$dir."/", $dir_in_zip."/data.csv")){
+	      	if($zip->extractTo($folder.$dir."/", "data.csv")){
 				$response['success'] = true;
 				$response['filename'] = $filename;
 				$response['zipfile'] = $filepath;
