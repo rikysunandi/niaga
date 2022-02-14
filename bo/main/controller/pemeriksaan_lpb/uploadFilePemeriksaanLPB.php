@@ -50,13 +50,12 @@ else {
 			chdir("D:/wamp64/www/niaga/bo/assets/uploads/");
 			exec('"C:/Program Files/7-Zip/7z" x "D:/wamp64/www/niaga/bo/assets/uploads/'.$filename.'"', $output, $retval);
 
-			if(file_exists(dirname($folder.$dir).'/data.csv')){
+			if(true || file_exists(dirname($folder.$dir).'/data.csv')){
 				$response['success'] = true;
 				$response['filename'] = $filename;
 				$response['zipfile'] = $filepath;
-				$response['path7z'] = '7z x "D:/wamp64/www/niaga/bo/assets/uploads/'.$filename.'"';
-				$response['filepath'] = $folder.$dir;
-				$response['rows'] = csvToJson(dirname($folder.$dir).'/data.csv');
+				$response['filepath'] = "D:/wamp64/www/niaga/bo/assets/uploads/".$dir;
+				$response['rows'] = csvToJson(dirname("D:/wamp64/www/niaga/bo/assets/uploads/".$dir).'/data.csv');
 				echo json_encode($response);
 			}
 			else{
