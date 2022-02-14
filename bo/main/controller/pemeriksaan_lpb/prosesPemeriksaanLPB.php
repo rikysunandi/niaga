@@ -8,6 +8,7 @@ ini_set('max_execution_time', 60);
 set_time_limit(60);
 
 $filepath = $_REQUEST['filepath'];
+$zipfile = $_REQUEST['zipfile'];
 $data = $_REQUEST['row'];
 //$json_data = json_decode($data , true);
 
@@ -53,8 +54,15 @@ if( $stmt === false ) {
     //if (ftp_put($ftp_conn, '/uploads_sorek/'.$filename, $_FILES['file']['tmp_name']))
     $dir = dirname($filepath);
     //$dir = str_replace(" ", "", $dir);
+    $zip = new ZipArchive;
+    $res = $zip->open($zipfile);
+
     $file_name = $idpel.'_'.$tgl_pemeriksaan.'.jpg';
-    if(file_exists($dir.'/'.$file_name)){
+
+
+    if(copy('zip://'. $zipfile .'#'. $file_name , $dir."/".$file_name)){
+
+    //if(file_exists($dir.'/'.$file_name)){
 
         if(strlen($unitup)==5)
           $file_path = "tagging/".$unitap."/".$unitup."/";
@@ -78,7 +86,9 @@ if( $stmt === false ) {
     }
 
     $file_name = $kk.'.jpg';
-    if(file_exists($dir.'/'.$file_name)){
+
+    if(copy('zip://'. $zipfile .'#'. $file_name , $dir."/".$file_name)){
+    //if(file_exists($dir.'/'.$file_name)){
         if(strlen($unitup)==5)
           $file_path = "/rumah/".$unitap."/".$unitup;
         else

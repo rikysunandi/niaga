@@ -113,7 +113,7 @@
 	    	$($(progress).find('.msg')[0]).html('Memproses data idpel '+v.idpel+', mohon menunggu...');
 
 	    	$.post('../controller/pemeriksaan_lpb/prosesPemeriksaanLpb.php', 
-	    	{ filepath: filepath, uploadname:uploadname, row: v }, 
+	    	{ filepath: filepath, uploadname:uploadname, zipfile:zipfile, row: v }, 
 	    	function(res){
 	    		res = JSON.parse(res);
                	console.log(res);
