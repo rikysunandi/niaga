@@ -14,7 +14,7 @@
         clickable: true,
         maxFiles: 10,
         timeout: 180000,
-        maxFilesize: 10,
+        maxFilesize: 32,
         parallelUploads: 2,
         autoProcessQueue: false,
         init: function() {
