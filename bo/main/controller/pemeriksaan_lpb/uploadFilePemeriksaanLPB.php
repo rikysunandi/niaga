@@ -40,7 +40,7 @@ else {
 		if ($res === TRUE) {
 
 		  	//$path = '../../../assets/uploads/';
-		  	//$dir = trim($zip->getNameIndex(0), '/');
+		  	$dir_in_zip = trim($zip->getNameIndex(0), '/');
 		  	$dir = date('Ymdhis').substr(bin2hex( random_bytes(12) ), 0, 6);
 		  	//$zip->extractTo($path);
 		  	// $OnlyFileName = $zip->getNameIndex($i);
@@ -58,7 +58,7 @@ else {
 	          mkdir($folder.$dir);
 
 			//if(copy('zip://'. $filepath .'#'. 'data.csv' , $folder.$dir."/data.csv")){
-	      	if($zip->extractTo($folder.$dir."/data.csv", "data.csv")){
+	      	if($zip->extractTo($folder.$dir."/data.csv", $dir_in_zip."/data.csv")){
 				$response['success'] = true;
 				$response['filename'] = $filename;
 				$response['zipfile'] = $filepath;
