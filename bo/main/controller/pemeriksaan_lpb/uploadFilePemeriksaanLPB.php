@@ -44,7 +44,7 @@ else {
 		  	//$zip->extractTo($path);
 		  	$output=null;
 			$retval=null;
-			exec('7z x "D:\\wamp64\\www\\niaga\\bo\\assets\\uploads\\'.$filename.'"', $output, $retval);
+			exec('C:\\Program Files\\7-Zip\\7z x "D:\\wamp64\\www\\niaga\\bo\\assets\\uploads\\'.$filename.'"', $output, $retval);
 		  	$zip->close();
 
 			if(file_exists(dirname($folder.$dir).'/data.csv')){
