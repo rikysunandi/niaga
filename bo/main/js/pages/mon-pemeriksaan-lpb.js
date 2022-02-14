@@ -58,6 +58,7 @@ $(document).ready(function () {
           },
           {
             data: "NOMOR_METER_KWH",
+            visible: false
           },
           {
             data: "NAMA",
@@ -78,7 +79,8 @@ $(document).ready(function () {
             type: 'number',
             "sClass" : "text-right" , render: $.fn.dataTable.render.number(",", ".", 0, '')
           },
-          { data: "PERUNTUKAN", visible: false},
+          { data: "PERUNTUKAN", visible: true},
+          { data: "EMAIL", visible: true},
           {
             data: "SISA_KWH",
             type: 'number', 

@@ -48,6 +48,7 @@ $columns = array(
     array( 'db' => 'TARIF',  'dt' => 'TARIF' ),
     array( 'db' => 'DAYA',  'dt' => 'DAYA' ),
     array( 'db' => 'PERUNTUKAN',  'dt' => 'PERUNTUKAN' ),
+    array( 'db' => 'EMAIL',  'dt' => 'EMAIL' ),
     array( 'db' => 'SISA_KWH',  'dt' => 'SISA_KWH' ),
     array( 'db' => 'LATITUDE',  'dt' => 'LATITUDE' ),
     array( 'db' => 'LONGITUDE',  'dt' => 'LONGITUDE' ),

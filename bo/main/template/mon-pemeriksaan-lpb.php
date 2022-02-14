@@ -137,7 +137,8 @@
                                             <th class="text-center bg-primary-lighten-2">NAMA</th>
                                             <th class="text-center bg-primary-lighten-2">TARIF</th>
                                             <th class="text-center bg-primary-lighten-2">DAYA</th>
-                                            <th class="text-center bg-primary-lighten-2">PERUNTUKAN</th>
+                                            <th class="text-center bg-primary-lighten-2">RBM PASKA</th>
+                                            <th class="text-center bg-primary-lighten-2">KONDISI<br/>METER</th>
                                             <th class="text-center bg-primary-lighten-2">SISA KWH</th>
                                             <th class="text-center bg-primary-lighten-2">LAT</th>
                                             <th class="text-center bg-primary-lighten-2">LONG</th>
