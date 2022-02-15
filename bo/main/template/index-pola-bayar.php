@@ -113,6 +113,9 @@
                                         <option value='<?php echo date('Ym', strtotime("25 days")) ?>'><?php echo date('Ym', strtotime("25 days")) ?></option>
                                         <option value='<?php echo date('Ym', strtotime("-35 days")) ?>'><?php echo date('Ym', strtotime("-35 days")) ?></option>
                                         <option value='<?php echo date('Ym', strtotime("-65 days")) ?>'><?php echo date('Ym', strtotime("-65 days")) ?></option>
+                                        <option value='<?php echo date('Ym', strtotime("-95 days")) ?>'><?php echo date('Ym', strtotime("-95 days")) ?></option>
+                                        <option value='<?php echo date('Ym', strtotime("-125 days")) ?>'><?php echo date('Ym', strtotime("-125 days")) ?></option>
+                                        <option value='<?php echo date('Ym', strtotime("-155 days")) ?>'><?php echo date('Ym', strtotime("-155 days")) ?></option>
                                     </select>
                                 </div>
                                 <div class="form-group mb-0 clearfix">
