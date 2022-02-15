@@ -36,149 +36,155 @@ $tgl_input = $data['tgl_insert'];
 
 $response = array();
 
-if(substr($idpel, 0, 11)=='99999999999'){
-  // if(strlen($latitude)>5)
-  //   $idpel = '99'.substr($user_input, 0, 5).substr($latitude, -2).substr($longitude, -3);
-  // else
-  //   $idpel = '99'.substr($user_input, 0, 5).substr($latitude, -2).substr($longitude, -3);
-  $idpel = '99'.substr($user_input, 0, 5).substr(str_replace(':','',substr($tgl_input, -8)),0,5);
-  //210429
-}
+if(substr(str_replace('-','',$tgl_pemeriksaan),0,6)>='202202'){
 
-//$sql = 'SELECT * FROM m_pemeriksaan_lpb WHERE LEFT(IDPEL,11) = \''.substr($idpel,0,11).'\' ';
-$sql = 'SELECT * FROM m_pemeriksaan_lpb WHERE IDPEL = \''.$idpel.'\' ';
-//$params = array(1, substr($idpel,0,11));
-
-$stmt = sqlsrv_query( $conn, $sql );
-if( $stmt === false ) {
-    $response['success'] = false;
-    $response['msg'] = 'Gagal query ke Database';
-}else{
-  $row = sqlsrv_fetch_array($stmt, SQLSRV_FETCH_ASSOC);
-  if(strlen($row['IDPEL'])>=11){
-    $response['success'] = false;
-    $response['msg'] = 'Data Idpel '.$idpel.' tidak disimpan karena sudah pernah ditagging oleh '.$row['USER_INPUT'].' !';
-  }else{
-    $response['msg'] = $idpel.': ';
-
-    //if (ftp_put($ftp_conn, '/uploads_sorek/'.$filename, $_FILES['file']['tmp_name']))
-    $dir = dirname($filepath);
-    //$dir = str_replace(" ", "", $dir);
-    $zip = new ZipArchive;
-    $res = $zip->open($zipfile);
-
-    $file_name = $idpel.'_'.$tgl_pemeriksaan.'.jpg';
-
-
-    //if($zip->extractTo($dir."/".$file_name, $file_name)){
-    //if(copy('zip://'. $zipfile .'#'. $file_name , $dir."/".$file_name)){
-
-    if(file_exists($dir.'/'.$file_name)){
-
-        if(strlen($unitap)==5)
-          $file_path = "tagging/".$unitap."/".$unitup."/";
-        else
-          $file_path = "tagging/53XXX/";
-
-        if(ftp_chdir($ftp_conn, $file_path)){
-
-          ftp_pasv ( $ftp_conn, true ) ;
-          if(ftp_put($ftp_conn, $file_name, $dir.'/'.$file_name)){
-            $foto = $file_name;
-            $response['msg'] .= 'Berhasil upload file foto meter, '; 
-          }else{
-            $response['msg'] .= 'gagal menyalin file foto meter, '; 
-          }
-
-        }else{
-          $response['msg'] .= 'gagal mengakses folder foto meter, '; 
-        }
-
-    }
-
-    $file_name = $kk.'.jpg';
-
-    //if($zip->extractTo($dir."/".$file_name, $file_name)){
-    //if(copy('zip://'. $zipfile .'#'. $file_name , $dir."/".$file_name)){
-    if(file_exists($dir.'/'.$file_name)){
-        if(strlen($unitap)==5)
-          $file_path = "/rumah/".$unitap."/".$unitup;
-        else
-          $file_path = "/rumah/53XXX";
-
-        
-        if(ftp_chdir($ftp_conn, $file_path)){
-
-          ftp_pasv ( $ftp_conn, true ) ;
-          if(ftp_put($ftp_conn, $file_name, $dir.'/'.$file_name)){
-            $foto_rumah = $file_name;
-            $response['msg'] .= 'Berhasil upload file foto rumah, '; 
-          }else{
-            $response['msg'] .= 'gagal menyalin file foto rumah, '; 
-          }
-
-        }else{
-          $response['msg'] .= 'gagal mengakses folder foto rumah, '; 
-        }
-    }
-
-    ftp_close($ftp_conn);
-
-    sqlsrv_free_stmt($stmt);
-
-    $params = array(
-            array($tgl_pemeriksaan, SQLSRV_PARAM_IN),
-            array($unitupi, SQLSRV_PARAM_IN),
-            array($unitap, SQLSRV_PARAM_IN),
-            array($unitup, SQLSRV_PARAM_IN),
-            array($idpel, SQLSRV_PARAM_IN),
-            array($nama, SQLSRV_PARAM_IN),
-            array($tarif, SQLSRV_PARAM_IN),
-            array($daya, SQLSRV_PARAM_IN),
-            array($nik, SQLSRV_PARAM_IN),
-            array($kk, SQLSRV_PARAM_IN),
-            array($nohp, SQLSRV_PARAM_IN),
-            array($email, SQLSRV_PARAM_IN),
-            array($peruntukan, SQLSRV_PARAM_IN),
-            array($sisa_kwh, SQLSRV_PARAM_IN),
-            array($foto, SQLSRV_PARAM_IN),
-            array($foto_rumah, SQLSRV_PARAM_IN),
-            array($latitude, SQLSRV_PARAM_IN),
-            array($longitude, SQLSRV_PARAM_IN),
-            array($akurasi_koordinat, SQLSRV_PARAM_IN),
-            array($user_input, SQLSRV_PARAM_IN),
-            array($tgl_input, SQLSRV_PARAM_IN),
-            array($uploadname, SQLSRV_PARAM_IN),
-        );
-
-    $sql = "EXEC SP_PEMERIKSAAN_LPB_CSV_SIMPAN @TGL_PEMERIKSAAN = ?, @UNITUPI = ?, @UNITAP = ?, @UNITUP = ?, @IDPEL = ?, @NAMA = ?, @TARIF = ?, @DAYA = ?, @NIK = ?, @KK = ?, @NOHP = ?, @EMAIL = ?, @PERUNTUKAN = ?, @SISA_KWH = ?, @FOTO = ?, @FOTO_RUMAH = ?, @LATITUDE = ?, @LONGITUDE = ?, @AKURASI_KOORDINAT = ?, @USER_INPUT = ?, @TGL_INPUT = ? , @FILENAME = ? ";
-    $stmt = sqlsrv_prepare($conn, $sql, $params);
-
-    if(sqlsrv_execute($stmt)){
-        //sqlsrv_next_result($stmt);
-        $row = sqlsrv_fetch_array($stmt, SQLSRV_FETCH_ASSOC);
-        if($row['IDPEL']==''){
-            sqlsrv_next_result($stmt);
-            $row = sqlsrv_fetch_array($stmt, SQLSRV_FETCH_ASSOC);
-        }
-
-        $response['pemeriksaan_lpb'] = $row;
-
-        // sqlsrv_next_result($stmt);
-        // $row = sqlsrv_fetch_array($stmt, SQLSRV_FETCH_ASSOC);
-
-        $response['msg'] .= 'Data berhasil disimpan';
-        $response['success'] = true;
-
-    }else{
-        $response['success'] = false;
-        //$response['row'] = print_r($data);
-        $response['msg'] .= 'Data gagal disimpan';
-    }
-
+  if(substr($idpel, 0, 11)=='99999999999'){
+    // if(strlen($latitude)>5)
+    //   $idpel = '99'.substr($user_input, 0, 5).substr($latitude, -2).substr($longitude, -3);
+    // else
+    //   $idpel = '99'.substr($user_input, 0, 5).substr($latitude, -2).substr($longitude, -3);
+    $idpel = '99'.substr($user_input, 0, 5).substr(str_replace(':','',substr($tgl_input, -8)),0,5);
+    //210429
   }
-}
 
+  //$sql = 'SELECT * FROM m_pemeriksaan_lpb WHERE LEFT(IDPEL,11) = \''.substr($idpel,0,11).'\' ';
+  $sql = 'SELECT * FROM m_pemeriksaan_lpb WHERE IDPEL = \''.$idpel.'\' ';
+  //$params = array(1, substr($idpel,0,11));
+
+  $stmt = sqlsrv_query( $conn, $sql );
+  if( $stmt === false ) {
+      $response['success'] = false;
+      $response['msg'] = 'Gagal query ke Database';
+  }else{
+    $row = sqlsrv_fetch_array($stmt, SQLSRV_FETCH_ASSOC);
+    if(strlen($row['IDPEL'])>=11){
+      $response['success'] = false;
+      $response['msg'] = 'Data Idpel '.$idpel.' tidak disimpan karena sudah pernah ditagging oleh '.$row['USER_INPUT'].' !';
+    }else{
+      $response['msg'] = $idpel.': ';
+
+      //if (ftp_put($ftp_conn, '/uploads_sorek/'.$filename, $_FILES['file']['tmp_name']))
+      $dir = dirname($filepath);
+      //$dir = str_replace(" ", "", $dir);
+      $zip = new ZipArchive;
+      $res = $zip->open($zipfile);
+
+      $file_name = $idpel.'_'.$tgl_pemeriksaan.'.jpg';
+
+
+      //if($zip->extractTo($dir."/".$file_name, $file_name)){
+      //if(copy('zip://'. $zipfile .'#'. $file_name , $dir."/".$file_name)){
+
+      if(file_exists($dir.'/'.$file_name)){
+
+          if(strlen($unitap)==5)
+            $file_path = "tagging/".$unitap."/".$unitup."/";
+          else
+            $file_path = "tagging/53XXX/";
+
+          if(ftp_chdir($ftp_conn, $file_path)){
+
+            ftp_pasv ( $ftp_conn, true ) ;
+            if(ftp_put($ftp_conn, $file_name, $dir.'/'.$file_name)){
+              $foto = $file_name;
+              $response['msg'] .= 'Berhasil upload file foto meter, '; 
+            }else{
+              $response['msg'] .= 'gagal menyalin file foto meter, '; 
+            }
+
+          }else{
+            $response['msg'] .= 'gagal mengakses folder foto meter, '; 
+          }
+
+      }
+
+      $file_name = $kk.'.jpg';
+
+      //if($zip->extractTo($dir."/".$file_name, $file_name)){
+      //if(copy('zip://'. $zipfile .'#'. $file_name , $dir."/".$file_name)){
+      if(file_exists($dir.'/'.$file_name)){
+          if(strlen($unitap)==5)
+            $file_path = "/rumah/".$unitap."/".$unitup;
+          else
+            $file_path = "/rumah/53XXX";
+
+          
+          if(ftp_chdir($ftp_conn, $file_path)){
+
+            ftp_pasv ( $ftp_conn, true ) ;
+            if(ftp_put($ftp_conn, $file_name, $dir.'/'.$file_name)){
+              $foto_rumah = $file_name;
+              $response['msg'] .= 'Berhasil upload file foto rumah, '; 
+            }else{
+              $response['msg'] .= 'gagal menyalin file foto rumah, '; 
+            }
+
+          }else{
+            $response['msg'] .= 'gagal mengakses folder foto rumah, '; 
+          }
+      }
+
+      ftp_close($ftp_conn);
+
+      sqlsrv_free_stmt($stmt);
+
+      $params = array(
+              array($tgl_pemeriksaan, SQLSRV_PARAM_IN),
+              array($unitupi, SQLSRV_PARAM_IN),
+              array($unitap, SQLSRV_PARAM_IN),
+              array($unitup, SQLSRV_PARAM_IN),
+              array($idpel, SQLSRV_PARAM_IN),
+              array($nama, SQLSRV_PARAM_IN),
+              array($tarif, SQLSRV_PARAM_IN),
+              array($daya, SQLSRV_PARAM_IN),
+              array($nik, SQLSRV_PARAM_IN),
+              array($kk, SQLSRV_PARAM_IN),
+              array($nohp, SQLSRV_PARAM_IN),
+              array($email, SQLSRV_PARAM_IN),
+              array($peruntukan, SQLSRV_PARAM_IN),
+              array($sisa_kwh, SQLSRV_PARAM_IN),
+              array($foto, SQLSRV_PARAM_IN),
+              array($foto_rumah, SQLSRV_PARAM_IN),
+              array($latitude, SQLSRV_PARAM_IN),
+              array($longitude, SQLSRV_PARAM_IN),
+              array($akurasi_koordinat, SQLSRV_PARAM_IN),
+              array($user_input, SQLSRV_PARAM_IN),
+              array($tgl_input, SQLSRV_PARAM_IN),
+              array($uploadname, SQLSRV_PARAM_IN),
+          );
+
+      $sql = "EXEC SP_PEMERIKSAAN_LPB_CSV_SIMPAN @TGL_PEMERIKSAAN = ?, @UNITUPI = ?, @UNITAP = ?, @UNITUP = ?, @IDPEL = ?, @NAMA = ?, @TARIF = ?, @DAYA = ?, @NIK = ?, @KK = ?, @NOHP = ?, @EMAIL = ?, @PERUNTUKAN = ?, @SISA_KWH = ?, @FOTO = ?, @FOTO_RUMAH = ?, @LATITUDE = ?, @LONGITUDE = ?, @AKURASI_KOORDINAT = ?, @USER_INPUT = ?, @TGL_INPUT = ? , @FILENAME = ? ";
+      $stmt = sqlsrv_prepare($conn, $sql, $params);
+
+      if(sqlsrv_execute($stmt)){
+          //sqlsrv_next_result($stmt);
+          $row = sqlsrv_fetch_array($stmt, SQLSRV_FETCH_ASSOC);
+          if($row['IDPEL']==''){
+              sqlsrv_next_result($stmt);
+              $row = sqlsrv_fetch_array($stmt, SQLSRV_FETCH_ASSOC);
+          }
+
+          $response['pemeriksaan_lpb'] = $row;
+
+          // sqlsrv_next_result($stmt);
+          // $row = sqlsrv_fetch_array($stmt, SQLSRV_FETCH_ASSOC);
+
+          $response['msg'] .= 'Data berhasil disimpan';
+          $response['success'] = true;
+
+      }else{
+          $response['success'] = false;
+          //$response['row'] = print_r($data);
+          $response['msg'] .= 'Data gagal disimpan';
+      }
+
+    }
+  }
+
+}else{
+  $response['success'] = false;
+  $response['msg'] .= 'Data Idpel '.$idpel.' hasil tagging sebelum Feb 2022 ('.$tgl_pemeriksaan.')';
+}
 
 sqlsrv_free_stmt($stmt);
 sqlsrv_close($conn);
