@@ -40,25 +40,28 @@ else {
 		if ($res === TRUE) {
 
 		  	$path = '../../../assets/uploads/';
-		  	$dir = trim($zip->getNameIndex(0), '/');
+		  	$dir = trim($zip->getNameIndex(1), '/');
 
 		  	if (strtoupper(substr(PHP_OS, 0, 3)) === 'WIN') {
 		  		$dir = str_replace(' ', '_', $dir);
+		  		$uploads_dir = "D:/wamp64/www/niaga/bo/assets/uploads/";
 			  	$output=null;
 				$retval=null;
-				chdir("D:/wamp64/www/niaga/bo/assets/uploads/");
-				exec('"C:/Program Files/7-Zip/7z" x "D:/wamp64/www/niaga/bo/assets/uploads/'.$filename.'"', $output, $retval);
+				chdir($uploads_dir);
+				exec('"C:/Program Files/7-Zip/7z" x "'.$uploads_dir.$filename.'"', $output, $retval);
 			}else{
 				$zip->extractTo($path);
+				$uploads_dir = $folder;
 			}
 			$zip->close();
 
-			if(file_exists(dirname("D:/wamp64/www/niaga/bo/assets/uploads/".$dir).'/data.csv')){
+
+			if(file_exists(dirname($uploads_dir.$dir).'/data.csv')){
 				$response['success'] = true;
 				$response['filename'] = $filename;
 				$response['zipfile'] = $filepath;
-				$response['filepath'] = "D:/wamp64/www/niaga/bo/assets/uploads/".$dir;
-				$response['rows'] = csvToJson(dirname("D:/wamp64/www/niaga/bo/assets/uploads/".$dir).'/data.csv');
+				$response['filepath'] = $uploads_dir.$dir;
+				$response['rows'] = csvToJson(dirname($uploads_dir.$dir).'/data.csv');
 				echo json_encode($response);
 			}
 			else{
