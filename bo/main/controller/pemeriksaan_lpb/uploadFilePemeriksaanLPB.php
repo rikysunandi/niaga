@@ -53,12 +53,12 @@ else {
 			}
 			$zip->close();
 
-			if(file_exists(dirname($folder.$dir).'/data.csv')){
+			if(file_exists(dirname("D:/wamp64/www/niaga/bo/assets/uploads/".$dir).'/data.csv')){
 				$response['success'] = true;
 				$response['filename'] = $filename;
 				$response['zipfile'] = $filepath;
-				$response['filepath'] = $folder.$dir;
-				$response['rows'] = csvToJson(dirname($folder.$dir).'/data.csv');
+				$response['filepath'] = "D:/wamp64/www/niaga/bo/assets/uploads/".$dir;
+				$response['rows'] = csvToJson(dirname("D:/wamp64/www/niaga/bo/assets/uploads/".$dir).'/data.csv');
 				echo json_encode($response);
 			}
 			else{
