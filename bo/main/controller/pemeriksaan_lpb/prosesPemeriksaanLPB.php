@@ -64,7 +64,7 @@ if(substr(str_replace('-','',$tgl_pemeriksaan),0,6)>='202202'){
       $response['msg'] = $idpel.': ';
 
       //if (ftp_put($ftp_conn, '/uploads_sorek/'.$filename, $_FILES['file']['tmp_name']))
-      $dir = dirname($filepath);
+      $dir = ($filepath);
       //$dir = str_replace(" ", "", $dir);
       $zip = new ZipArchive;
       $res = $zip->open($zipfile);

@@ -41,9 +41,11 @@ else {
 
 		  	$path = '../../../assets/uploads/';
 		  	$dir = trim($zip->getNameIndex(1), '/');
+		  	$dir = dirname($dir);
 
 		  	if (strtoupper(substr(PHP_OS, 0, 3)) === 'WIN') {
-		  		$dir = str_replace(' ', '_', $dir);
+		  		if(substr($dir, -1)==' ')
+		  			$dir = substr($dir, 0, -1).'_';
 		  		$uploads_dir = "D:/wamp64/www/niaga/bo/assets/uploads/";
 			  	$output=null;
 				$retval=null;
@@ -56,18 +58,18 @@ else {
 			$zip->close();
 
 
-			if(file_exists(dirname($uploads_dir.$dir).'/data.csv')){
+			if(file_exists(($uploads_dir.$dir).'/data.csv')){
 				$response['success'] = true;
 				$response['filename'] = $filename;
 				$response['zipfile'] = $uploads_dir.basename($filepath);
 				$response['filepath'] = $uploads_dir.$dir;
-				$response['rows'] = csvToJson(dirname($uploads_dir.$dir).'/data.csv');
+				$response['rows'] = csvToJson(($uploads_dir.$dir).'/data.csv');
 				echo json_encode($response);
 			}
 			else{
 				header("HTTP/1.0 400 Bad Request");
 				//echo dirname($folder.$dir).'/data.csv';
-				echo 'File '.dirname($folder.$dir).'/data.csv'.' tidak ditemukan!';	
+				echo 'File '.($folder.$dir).'/data.csv'.' tidak ditemukan!';	
 			}
 		} else {
 			header("HTTP/1.0 400 Bad Request");
