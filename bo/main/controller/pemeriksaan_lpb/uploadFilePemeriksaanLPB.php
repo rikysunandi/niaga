@@ -30,7 +30,7 @@ else {
 
 	$filename = date('mdHi').'_'.preg_replace("/[^a-zA-Z0-9]_+/", "", $_FILES['file']['name']).'_'.substr(bin2hex( random_bytes(12) ), 0, 6).'.zip';
 	// upload file
-	$folder = '../../../assets/uploads/';
+	$folder = '../../assets/uploads/';
 	$filepath = $folder.$filename;
 	if (move_uploaded_file($_FILES['file']['tmp_name'], $filepath)){
 
@@ -39,7 +39,7 @@ else {
 		$res = $zip->open($filepath);
 		if ($res === TRUE) {
 
-		  	$path = '../../../assets/uploads/';
+		  	$path = '../../assets/uploads/';
 		  	$dir = trim($zip->getNameIndex(0), '/');
 
 		  	if (strtoupper(substr(PHP_OS, 0, 3)) === 'WIN') {
@@ -50,8 +50,8 @@ else {
 				exec('"C:/Program Files/7-Zip/7z" x "D:/wamp64/www/niaga/bo/assets/uploads/'.$filename.'"', $output, $retval);
 			}else{
 				$zip->extractTo($path);
-			  	$zip->close();
 			}
+		  	$zip->close();
 
 			if(file_exists(dirname($folder.$dir).'/data.csv')){
 				$response['success'] = true;
