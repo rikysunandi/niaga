@@ -123,7 +123,7 @@ if( $stmt === false ) {
     }
 
     ftp_close($ftp_conn);
-
+    
     sqlsrv_free_stmt($stmt);
 
     $params = array(

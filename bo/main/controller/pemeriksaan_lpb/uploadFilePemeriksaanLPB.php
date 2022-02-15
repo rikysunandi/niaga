@@ -50,7 +50,7 @@ else {
 			chdir("D:/wamp64/www/niaga/bo/assets/uploads/");
 			exec('"C:/Program Files/7-Zip/7z" x "D:/wamp64/www/niaga/bo/assets/uploads/'.$filename.'"', $output, $retval);
 
-			if(true || file_exists(dirname($folder.$dir).'/data.csv')){
+			if(file_exists(dirname("D:/wamp64/www/niaga/bo/assets/uploads/".$dir).'/data.csv')){
 				$response['success'] = true;
 				$response['filename'] = $filename;
 				$response['zipfile'] = $filepath;
