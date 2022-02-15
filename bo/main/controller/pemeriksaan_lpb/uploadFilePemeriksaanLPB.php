@@ -61,7 +61,7 @@ else {
 			else{
 				header("HTTP/1.0 400 Bad Request");
 				//echo dirname($folder.$dir).'/data.csv';
-				echo 'File '.dirname(dirname("D:/wamp64/www/niaga/bo/assets/uploads/".$dir)).'/data.csv'.' tidak ditemukan!';	
+				echo 'File '.dirname("D:/wamp64/www/niaga/bo/assets/uploads/".$dir).'/data.csv'.' tidak ditemukan!';	
 			}
 		} else {
 			header("HTTP/1.0 400 Bad Request");
