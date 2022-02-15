@@ -59,7 +59,7 @@ else {
 			if(file_exists(dirname($uploads_dir.$dir).'/data.csv')){
 				$response['success'] = true;
 				$response['filename'] = $filename;
-				$response['zipfile'] = $filepath;
+				$response['zipfile'] = $uploads_dir.basename($filepath);
 				$response['filepath'] = $uploads_dir.$dir;
 				$response['rows'] = csvToJson(dirname($uploads_dir.$dir).'/data.csv');
 				echo json_encode($response);

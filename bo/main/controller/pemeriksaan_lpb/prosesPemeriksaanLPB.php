@@ -91,7 +91,7 @@ if( $stmt === false ) {
           }
 
         }else{
-          $response['msg'] .= 'gagal menyalin file foto meter, '; 
+          $response['msg'] .= 'gagal mengakses folder foto meter, '; 
         }
 
     }
@@ -118,12 +118,12 @@ if( $stmt === false ) {
           }
 
         }else{
-          $response['msg'] .= 'gagal menyalin file foto rumah, '; 
+          $response['msg'] .= 'gagal mengakses folder foto rumah, '; 
         }
     }
 
     ftp_close($ftp_conn);
-    
+
     sqlsrv_free_stmt($stmt);
 
     $params = array(
