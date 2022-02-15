@@ -60,8 +60,8 @@ else {
 			}
 			else{
 				header("HTTP/1.0 400 Bad Request");
-				echo dirname($folder.$dir).'/data.csv';
-				echo 'File csv tidak ditemukan!';	
+				//echo dirname($folder.$dir).'/data.csv';
+				echo 'File '.dirname($dir).'/data.csv'.' tidak ditemukan!';	
 			}
 		} else {
 			header("HTTP/1.0 400 Bad Request");
