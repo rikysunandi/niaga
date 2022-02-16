@@ -67,7 +67,7 @@
                                     <p>Data yang diupload:
                                         <ul>
                                             <li>1. File ZIP hasil export data pemeriksaan LPB dari Priangan (tanpa diedit)</li>
-                                            <li>2. Maksimal 10 File/batch, dan ukuran maksimal 32MB per File Zip</li>
+                                            <li>2. Maksimal 10 File/batch, dan ukuran maksimal 10MB per File Zip</li>
                                             <li>3. Progress upload data per File akan ditampilan di bagian bawah</li>
                                         </ul>
                                     </p> 
