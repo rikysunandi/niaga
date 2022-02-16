@@ -43,9 +43,9 @@ else {
 		  	$dir = trim($zip->getNameIndex(1), '/');
 		  	$dir = dirname($dir);
 
-		  	if (strtoupper(substr(PHP_OS, 0, 3)) === 'WIN') {
-		  		if(substr($dir, -1)==' ')
-		  			$dir = substr($dir, 0, -1).'_';
+		  	if (strtoupper(substr(PHP_OS, 0, 3)) === 'WIN' && substr($dir, -1)==' ') {
+		  		//if(substr($dir, -1)==' ')
+		  		$dir = substr($dir, 0, -1).'_';
 		  		$uploads_dir = "D:/wamp64/www/niaga/bo/assets/uploads/";
 			  	$output=null;
 				$retval=null;
