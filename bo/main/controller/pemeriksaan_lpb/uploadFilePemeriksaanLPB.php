@@ -51,7 +51,7 @@ else {
 				$retval=null;
 				chdir($uploads_dir);
 				// exec('"C:/Program Files/7-Zip/7z" x "'.$uploads_dir.$filename.'"', $output, $retval);
-				shell_exec('"C:/Program Files/7-Zip/7z" x "'.$uploads_dir.$filename.'"');
+				exec('"C:/Program Files/7-Zip/7z" x "'.$uploads_dir.$filename.'"');
 				$task_completed=false;
 				while(!$task_completed){
 				    if(connection_aborted()==1){
