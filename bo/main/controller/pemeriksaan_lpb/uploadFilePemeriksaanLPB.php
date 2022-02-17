@@ -51,14 +51,14 @@ else {
 				$retval=null;
 				chdir($uploads_dir);
 				// exec('"C:/Program Files/7-Zip/7z" x "'.$uploads_dir.$filename.'"', $output, $retval);
-				exec('"C:/Program Files/7-Zip/7z" x "'.$uploads_dir.$filename.'"');
+				shell_exec('"C:/Program Files/7-Zip/7z" x "'.$uploads_dir.$filename.'"');
 				$task_completed=false;
 				while(!$task_completed){
 				    if(connection_aborted()==1){
 				        kill_the_process();//this will kill the running process launched by script
 				        die();
 				    }
-				    $task_completed=...;//true if the task completed
+				    $task_completed=true;//true if the task completed
 				    sleep(1);
 				}
 			}else{
