@@ -208,15 +208,43 @@ $(document).ready(function () {
                         var bounds = new google.maps.LatLngBounds();
 
                       const markers = data.rows.map((tagging, i) => {
-                        marker = new google.maps.Marker({
-                          position: {
-                                      lat: parseFloat(tagging.latitude), 
-                                      lng: parseFloat(tagging.longitude)
-                                    },
-                          label: ''+i,
-                          map: map,
-                          title: tagging.idpel+' | '+tagging.tgl_pemeriksaan+' | '+tagging.user_input+' | '+tagging.latitude+', '+tagging.longitude,
-                        });
+                        if(i==0 ){
+                          marker = new google.maps.Marker({
+                            position: {
+                                        lat: parseFloat(tagging.latitude), 
+                                        lng: parseFloat(tagging.longitude)
+                                      },
+                            label: ''+i,
+                            map: map,
+                            icon: {
+                              url: "https://maps.google.com/mapfiles/ms/icons/green-dot.png"
+                            },
+                            title: tagging.idpel+' | '+tagging.tgl_pemeriksaan+' | '+tagging.user_input+' | '+tagging.latitude+', '+tagging.longitude,
+                          });
+                        }else if(i==data.rows.length-1){
+                          marker = new google.maps.Marker({
+                            position: {
+                                        lat: parseFloat(tagging.latitude), 
+                                        lng: parseFloat(tagging.longitude)
+                                      },
+                            label: ''+i,
+                            map: map,
+                            icon: {
+                              url: "https://maps.google.com/mapfiles/ms/icons/blue-dot.png"
+                            },
+                            title: tagging.idpel+' | '+tagging.tgl_pemeriksaan+' | '+tagging.user_input+' | '+tagging.latitude+', '+tagging.longitude,
+                          });
+                        }else{
+                          marker = new google.maps.Marker({
+                            position: {
+                                        lat: parseFloat(tagging.latitude), 
+                                        lng: parseFloat(tagging.longitude)
+                                      },
+                            label: ''+i,
+                            map: map,
+                            title: tagging.idpel+' | '+tagging.tgl_pemeriksaan+' | '+tagging.user_input+' | '+tagging.latitude+', '+tagging.longitude,
+                          });
+                        }
 
                         bounds.extend(new google.maps.LatLng(parseFloat(tagging.latitude), parseFloat(tagging.longitude)));
 
