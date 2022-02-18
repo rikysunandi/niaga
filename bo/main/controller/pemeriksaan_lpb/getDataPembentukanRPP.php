@@ -6,7 +6,7 @@ require_once '../../../config/database.php';
 $unitupi = $_GET['unitupi'];
 $unitap = $_GET['unitap'];
 $unitup = $_GET['unitup'];
-$petugas = $_GET['petugas'];
+$petugas = '00'; //$_GET['petugas'];
 $tgl_pemeriksaan_from = $_GET['tgl_pemeriksaan_from'];
 $tgl_pemeriksaan_to = $_GET['tgl_pemeriksaan_to'];
 $user = 'SYSTEM';
@@ -30,7 +30,7 @@ if(!sqlsrv_execute($stmt)){
     die(print_r( sqlsrv_errors(), true));
 }
 
-$stmt = sqlsrv_query($conn, "select * from vw_Create_Pemeriksaan_LPB_Unit");
+$stmt = sqlsrv_query($conn, "select * from vw_Create_Pemeriksaan_LPB_Unit_".$unitup);
 
 if($stmt){
 	$i=0;
