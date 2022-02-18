@@ -30,7 +30,7 @@ if(!sqlsrv_execute($stmt)){
     die(print_r( sqlsrv_errors(), true));
 }else{
 
-    $sql = "select unitup, idpel, convert(varchar(10), tgl_pemeriksaan, 120) tgl_pemeriksaan, latitude, longitude, user_input, nomor_meter_kwh, fotopath from vw_Create_Pemeriksaan_LPB_Unit Where LEN(Latitude)>4 AND LEN(Longitude)>4 Order By tgl_pemeriksaan ";
+    $sql = "select unitup, idpel, convert(varchar(10), tgl_pemeriksaan, 120) tgl_pemeriksaan, latitude, longitude, user_input, nomor_meter_kwh, fotopath from vw_Create_Pemeriksaan_LPB_Unit_".$unitup." Where LEN(Latitude)>4 AND LEN(Longitude)>4 Order By tgl_pemeriksaan ";
     $stmt = sqlsrv_prepare($conn, $sql);
 
     if(!sqlsrv_execute($stmt)){

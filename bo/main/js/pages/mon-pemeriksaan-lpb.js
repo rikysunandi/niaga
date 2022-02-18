@@ -263,7 +263,7 @@ $(document).ready(function () {
                         for (var i = 0; i < m.length; i++) {
                           p.push(m[i].getTitle());
                         }
-                        if(m.length<20)
+                        if(m.length<100)
                           log(html + "&mdash;Tagging pada Cluster: <br/>" + p.join("<br/> "));
                         else
                           log(html + '&mdash;Tagging pada Cluster: <br/>Tidak ditampilkan karena lebih dari 20 tagging')
