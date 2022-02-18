@@ -198,13 +198,14 @@ $(document).ready(function () {
 
                     function initMap() {
                       const map = new google.maps.Map(document.getElementById("map"), {
-                        zoom: 8,
+                        zoom: 10,
                         center: { lat: -6.3487933, lng: 107.6809901 },
                       });
 
                         
                       var infowindow = new google.maps.InfoWindow();
                       var marker = new google.maps.Marker();
+                        var bounds = new google.maps.LatLngBounds();
 
                       const markers = data.rows.map((tagging, i) => {
                         marker = new google.maps.Marker({
@@ -212,8 +213,12 @@ $(document).ready(function () {
                                       lat: parseFloat(tagging.latitude), 
                                       lng: parseFloat(tagging.longitude)
                                     },
+                          label: ''+i,
+                          map: map,
                           title: tagging.idpel+' | '+tagging.tgl_pemeriksaan+' | '+tagging.user_input+' | '+tagging.latitude+', '+tagging.longitude,
                         });
+
+                        bounds.extend(new google.maps.LatLng(parseFloat(tagging.latitude), parseFloat(tagging.longitude)));
 
                         google.maps.event.addListener(marker, 'click', (function (marker, i) {
                             return function () {
@@ -245,29 +250,31 @@ $(document).ready(function () {
 
                         return marker;
                       });
-                      // Add a marker clusterer to manage the markers.
-                      var markerCluster = new MarkerClusterer(map, markers, {
-                        imagePath:
-                          "https://developers.google.com/maps/documentation/javascript/examples/markerclusterer/m",
-                        maxZoom: 20,
-                        //averageCenter: true,
-                      });
 
-                      google.maps.event.addListener(markerCluster, "click", function (c) {
-                        var html = "";
-                        html += ("<strong>Info Cluster: </strong> <span class='text-right'>("+moment().format('YYYY-MM-DD HH:mm:ss')+")</span><br/>");
-                        html += ("&mdash;Titik Tengah Cluster: " + c.getCenter()+"<br/>");
-                        html += ("&mdash;Jumlah Tagging: " + c.getSize()+"<br/>");
-                        var m = c.getMarkers();
-                        var p = [];
-                        for (var i = 0; i < m.length; i++) {
-                          p.push(m[i].getTitle());
-                        }
-                        if(m.length<100)
-                          log(html + "&mdash;Tagging pada Cluster: <br/>" + p.join("<br/> "));
-                        else
-                          log(html + '&mdash;Tagging pada Cluster: <br/>Tidak ditampilkan karena lebih dari 20 tagging')
-                      });
+                      map.fitBounds(bounds);
+                      // Add a marker clusterer to manage the markers.
+                      // var markerCluster = new MarkerClusterer(map, markers, {
+                      //   imagePath:
+                      //     "https://developers.google.com/maps/documentation/javascript/examples/markerclusterer/m",
+                      //   maxZoom: 20,
+                      //   //averageCenter: true,
+                      // });
+
+                      // google.maps.event.addListener(markerCluster, "click", function (c) {
+                      //   var html = "";
+                      //   html += ("<strong>Info Cluster: </strong> <span class='text-right'>("+moment().format('YYYY-MM-DD HH:mm:ss')+")</span><br/>");
+                      //   html += ("&mdash;Titik Tengah Cluster: " + c.getCenter()+"<br/>");
+                      //   html += ("&mdash;Jumlah Tagging: " + c.getSize()+"<br/>");
+                      //   var m = c.getMarkers();
+                      //   var p = [];
+                      //   for (var i = 0; i < m.length; i++) {
+                      //     p.push(m[i].getTitle());
+                      //   }
+                      //   if(m.length<100)
+                      //     log(html + "&mdash;Tagging pada Cluster: <br/>" + p.join("<br/> "));
+                      //   else
+                      //     log(html + '&mdash;Tagging pada Cluster: <br/>Tidak ditampilkan karena lebih dari 20 tagging')
+                      // });
 
                       // google.maps.event.addListener(markerCluster, "mouseover", function (c) {
                       //   log("<strong>mouseover: </strong>");
