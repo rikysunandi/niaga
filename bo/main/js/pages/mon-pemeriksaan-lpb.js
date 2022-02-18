@@ -15,6 +15,31 @@ $(document).ready(function () {
         }
     });
 
+
+    $('#sel_unitup').change(function(){
+
+      $('#sel_petugas').empty();
+      $.getJSON('../controller/referensi/getPetugasPriangan.php?unitup='+$('#sel_unitup').val(), function(data){
+          
+          $.each(data.rows,function(i,v){
+              $('#sel_petugas').append('<option value="'+v.kode+'">'+v.nama+'</option>');
+          });
+          $('#sel_petugas').append('<option value="00">SEMUA PETUGAS</option>');
+          $('#sel_petugas').selectpicker('refresh');
+
+          if(urlParams.has('petugas')){
+            $('#sel_petugas').selectpicker('val', urlParams.get('petugas'));
+            console.log('petugas', urlParams.get('petugas'));
+          }
+          else{
+            $('#sel_petugas').selectpicker('val', "00");
+            console.log('semua petugas');
+          }
+
+          //$('#sel_rbm').selectpicker('refresh');
+        });
+    });
+
     //$.blockUI({ message: '<h1 class="p-3">Mengambil data...</h1>' }); 
     var table = $('#tbl_mon_pemeriksaan_lpb') 
       .on('preXhr.dt', function ( e, settings, data ) {
@@ -139,6 +164,7 @@ $(document).ready(function () {
                   var unitupi = $('#sel_unitupi').val();
                   var unitap = $('#sel_unitap').val();
                   var unitup = $('#sel_unitup').val();
+                  var petugas = $('#sel_petugas').val();
                   var tgl_pemeriksaan_from = $('#tgl_pemeriksaan_range')
                                               .data('daterangepicker')
                                               .startDate.format('YYYY-MM-DD');
@@ -155,6 +181,8 @@ $(document).ready(function () {
                       unitupi : unitupi,
                       unitap : unitap,
                       unitup : unitup,
+                      unitup : unitup,
+                      petugas : petugas,
                       tgl_pemeriksaan_from : tgl_pemeriksaan_from,
                       tgl_pemeriksaan_to : tgl_pemeriksaan_to,
                     },
@@ -342,7 +370,7 @@ $(document).ready(function () {
                   // //this.disable(); // disable button
                   // console.log('dt', dt);
                   // console.log('node', node);
-                  window.open('../controller/pemeriksaan_lpb/expCSVPemeriksaanLPB.php?unitupi='+$('#sel_unitupi').val()+'&unitap='+$('#sel_unitap').val()+'&unitup='+$('#sel_unitup').val()+'&tgl_pemeriksaan_from='+$('#tgl_pemeriksaan_range').data('daterangepicker').startDate.format('YYYY-MM-DD')+'&tgl_pemeriksaan_to='+$('#tgl_pemeriksaan_range').data('daterangepicker').endDate.format('YYYY-MM-DD') );
+                  window.open('../controller/pemeriksaan_lpb/expCSVPemeriksaanLPB.php?unitupi='+$('#sel_unitupi').val()+'&unitap='+$('#sel_unitap').val()+'&unitup='+$('#sel_unitup').val()+'&tgl_pemeriksaan_from='+$('#tgl_pemeriksaan_range').data('daterangepicker').startDate.format('YYYY-MM-DD')+'&tgl_pemeriksaan_to='+$('#tgl_pemeriksaan_range').data('daterangepicker').endDate.format('YYYY-MM-DD')+'&petugas='+$('#sel_petugas').val() );
               }
 
             },
@@ -374,7 +402,7 @@ $(document).ready(function () {
         var container = $('#map').parent();
         $('#map').remove();
         container.append('<div id="map"></div>');
-        table.ajax.url( '../controller/pemeriksaan_lpb/getDataPemeriksaanLPB.php?unitupi='+$('#sel_unitupi').val()+'&unitap='+$('#sel_unitap').val()+'&unitup='+$('#sel_unitup').val()+'&tgl_pemeriksaan_from='+$('#tgl_pemeriksaan_range').data('daterangepicker').startDate.format('YYYY-MM-DD')+'&tgl_pemeriksaan_to='+$('#tgl_pemeriksaan_range').data('daterangepicker').endDate.format('YYYY-MM-DD') ).load();
+        table.ajax.url( '../controller/pemeriksaan_lpb/getDataPemeriksaanLPB.php?unitupi='+$('#sel_unitupi').val()+'&unitap='+$('#sel_unitap').val()+'&unitup='+$('#sel_unitup').val()+'&tgl_pemeriksaan_from='+$('#tgl_pemeriksaan_range').data('daterangepicker').startDate.format('YYYY-MM-DD')+'&tgl_pemeriksaan_to='+$('#tgl_pemeriksaan_range').data('daterangepicker').endDate.format('YYYY-MM-DD')+'&petugas='+$('#sel_petugas').val() ).load();
     });
 
 });

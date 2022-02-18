@@ -103,6 +103,12 @@
                                                 </select>
                                             </div>
                                             <div class="form-group mb-4 col-3">
+                                                <label class="text-label d-block"><small>PETUGAS</small></label>
+                                                <select id="sel_petugas" title="PETUGAS" class="selectpicker show-tick" data-size="5" >
+                                                    <option value="00">SEMUA PETUGAS</option>
+                                                </select>
+                                            </div>
+                                            <div class="form-group mb-4 col-3">
                                                 <label class="text-label">TGL PEMERIKSAAN</label>
                                                 <input id="tgl_pemeriksaan_range" class="form-control input-daterange-datepicker" type="text" name="daterange">
                                             </div>
