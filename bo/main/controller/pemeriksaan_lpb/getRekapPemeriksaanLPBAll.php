@@ -21,7 +21,7 @@ $params = array(
         array($tgl_pemeriksaan_to, SQLSRV_PARAM_IN),
     );
 
-$sql = "EXEC sp_vw_Create_Pemeriksaan_LPB_Unit @UserID = ?, @Unitupi = ?, @Unitap = ?, @Unitup = ?, @User_Input=?, @Tgl_Pemeriksaan_From = ?, @Tgl_Pemeriksaan_To = ? ";
+$sql = "EXEC sp_vw_Create_Rekap_Pemeriksaan_LPB @UserID = ?, @Unitupi = ?, @Unitap = ?, @Unitup = ?, @User_Input=?, @Tgl_Pemeriksaan_From = ?, @Tgl_Pemeriksaan_To = ? ";
 $stmt = sqlsrv_prepare($conn, $sql, $params);
 
 //sqlsrv_execute($stmt);
@@ -30,7 +30,7 @@ if(!sqlsrv_execute($stmt)){
 }
 
 // DB table to use
-$table = 'NIAGA.dbo.vw_Rekap_Pemeriksaan_LPB_Unit';
+$table = 'NIAGA.dbo.vw_Create_Rekap_Pemeriksaan_LPB_'.$unitup;
  
 // Table's primary key
 $primaryKey = 'UNITUP';
