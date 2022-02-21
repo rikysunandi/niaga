@@ -6,7 +6,7 @@ require_once '../../../config/database.php';
 $unitupi = $_GET['unitupi'];
 $unitap = $_GET['unitap'];
 $unitup = $_GET['unitup'];
-$petugas = '00'; //$_GET['petugas'];
+$petugas = $_GET['petugas'];
 $tgl_pemeriksaan_from = $_GET['tgl_pemeriksaan_from'];
 $tgl_pemeriksaan_to = $_GET['tgl_pemeriksaan_to'];
 $user = 'SYSTEM';
