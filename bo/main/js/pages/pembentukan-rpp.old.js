@@ -17,6 +17,33 @@ $(document).ready(function () {
     var red_house = "../../assets/images/markers/red/house.png";
     var blue_house = "../../assets/images/markers/blue/house.png";
 
+
+
+    $('#sel_unitup').change(function(){
+
+      $('#sel_petugas').empty();
+      $.getJSON('../controller/referensi/getPetugasPriangan.php?unitup='+$('#sel_unitup').val(), function(data){
+          
+          $.each(data.rows,function(i,v){
+              $('#sel_petugas').append('<option value="'+v.kode+'">'+v.nama+'</option>');
+          });
+          $('#sel_petugas').append('<option value="00">SEMUA PETUGAS</option>');
+          $('#sel_petugas').selectpicker('refresh');
+
+          if(urlParams.has('petugas')){
+            $('#sel_petugas').selectpicker('val', urlParams.get('petugas'));
+            console.log('petugas', urlParams.get('petugas'));
+          }
+          else{
+            $('#sel_petugas').selectpicker('val', "00");
+            console.log('semua petugas');
+          }
+
+          //$('#sel_rbm').selectpicker('refresh');
+        });
+    });
+
+
     var map = $('#map')
       .gmap3({
         address:"Bandung, Indonesia",
@@ -44,6 +71,7 @@ $(document).ready(function () {
             unitupi: $('#sel_unitupi').val(),
             unitap: $('#sel_unitap').val(),
             unitup: $('#sel_unitup').val(),
+            petugas: $('#sel_petugas').val(),
             tgl_pemeriksaan_from: $('#tgl_pemeriksaan_range').data('daterangepicker').startDate.format('YYYY-MM-DD'),
             tgl_pemeriksaan_to: $('#tgl_pemeriksaan_range').data('daterangepicker').endDate.format('YYYY-MM-DD')
             // tgl_baca_from: $("#tgl_baca_from").datepicker("getFormattedDate"),
@@ -90,15 +118,17 @@ $(document).ready(function () {
                 }
               })
               .on('click', function (marker) {
-                if(!marker.selected){
-                    marker.setIcon(blue_house);
-                    marker.selected = true;
-                    $('#plg_dipilih').html(parseInt($('#plg_dipilih').html())+1);
-                }else{
-                    marker.setIcon(red_house);
-                    marker.selected = false;
-                    $('#plg_dipilih').html(parseInt($('#plg_dipilih').html())-1);
+                if(marker){
+                    if(!marker.selected){
+                        marker.setIcon(blue_house);
+                        marker.selected = true;
+                        $('#plg_dipilih').html(parseInt($('#plg_dipilih').html())+1);
+                    }else{
+                        marker.setIcon(red_house);
+                        marker.selected = false;
+                        $('#plg_dipilih').html(parseInt($('#plg_dipilih').html())-1);
 
+                    }
                 }
               })
               .wait(2000) // to let you appreciate the current zoom & center

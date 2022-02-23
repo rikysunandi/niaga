@@ -103,11 +103,152 @@
                     </div>
                 </div>
 
+                 <div class="row">
+                    <div class="col-12">
+                        <div class="card">
+                            <div class="card-body">
+                                <h4 class="card-title mb-4">Rekap Pemutusan per UP3</h4>
+                                <div class="table-responsive">
+                                    <table id="tbl_rekap_pemutusan_up3" class="table table-striped table-bordered nowrap" style="width: 100%">
+                                    <thead>
+                                        <tr>
+                                            <th rowspan="3" class="text-center bg-primary-lighten-2">UNITUPI</th>
+                                            <th rowspan="3" class="text-center bg-primary-lighten-2">UNITAP</th>
+                                            <th rowspan="3" class="text-center bg-primary-lighten-2">UP3</th>
+                                            <th rowspan="3" class="text-center bg-danger-lighten-2">WORK ORDER</th>
+                                            <th rowspan="1" colspan="8" class="text-center bg-primary-lighten-2">EKSEKUSI PEMUTUSAN</th>
+                                            <th rowspan="1" colspan="42" class="text-center bg-primary-lighten-2">BREAKDOWN PER TANGGAL</th>
+                                            
+                                        </tr>
+                                        <tr>
+                                            <th rowspan="2" class="text-center bg-success-lighten-2">LUNAS<br/>MANDIRI</th>
+                                            <th rowspan="2" class="text-center bg-success-lighten-2">LUNAS<br/>DITEMPAT</th>
+                                            <th rowspan="2" class="text-center bg-warning-lighten-2">SEGEL<br/>MCB</th>
+                                            <th rowspan="2" class="text-center bg-warning-lighten-2">CABUT<br/>MCB</th>
+                                            <th rowspan="2" class="text-center bg-warning-lighten-2">CABUT<br/>APP</th>
+                                            <th rowspan="2" class="text-center bg-danger-lighten-2">RUMAH<br/>KOSONG</th>
+                                            <th rowspan="2" class="text-center bg-secondary-lighten-2">TOTAL</th>
+                                            <th rowspan="2" class="text-center bg-secondary-lighten-2">PERSEN</th>
+                                            <th rowspan="1" colspan="7" class="text-center bg-primary-lighten-2">TGL 21</th>
+                                            <th rowspan="1" colspan="7" class="text-center bg-primary-lighten-2">TGL 22</th>
+                                            <th rowspan="1" colspan="7" class="text-center bg-primary-lighten-2">TGL 23</th>
+                                            <th rowspan="1" colspan="7" class="text-center bg-primary-lighten-2">TGL 24</th>
+                                            <th rowspan="1" colspan="7" class="text-center bg-primary-lighten-2">TGL 25</th>
+                                            <th rowspan="1" colspan="7" class="text-center bg-primary-lighten-2">DIATAS TGL 25</th>
+                                        </tr>
+                                        <tr>
+                                            <th class="text-center bg-success-lighten-2">LUNAS<br/>MANDIRI</th>
+                                            <th class="text-center bg-success-lighten-2">LUNAS<br/>DITEMPAT</th>
+                                            <th class="text-center bg-warning-lighten-2">SEGEL<br/>MCB</th>
+                                            <th class="text-center bg-warning-lighten-2">CABUT<br/>MCB</th>
+                                            <th class="text-center bg-warning-lighten-2">CABUT<br/>APP</th>
+                                            <th class="text-center bg-danger-lighten-2">RUMAH<br/>KOSONG</th>
+                                            <th class="text-center bg-secondary-lighten-2">TOTAL</th>
+                                            <th class="text-center bg-success-lighten-2">LUNAS<br/>MANDIRI</th>
+                                            <th class="text-center bg-success-lighten-2">LUNAS<br/>DITEMPAT</th>
+                                            <th class="text-center bg-warning-lighten-2">SEGEL<br/>MCB</th>
+                                            <th class="text-center bg-warning-lighten-2">CABUT<br/>MCB</th>
+                                            <th class="text-center bg-warning-lighten-2">CABUT<br/>APP</th>
+                                            <th class="text-center bg-danger-lighten-2">RUMAH<br/>KOSONG</th>
+                                            <th class="text-center bg-secondary-lighten-2">TOTAL</th>
+                                            <th class="text-center bg-success-lighten-2">LUNAS<br/>MANDIRI</th>
+                                            <th class="text-center bg-success-lighten-2">LUNAS<br/>DITEMPAT</th>
+                                            <th class="text-center bg-warning-lighten-2">SEGEL<br/>MCB</th>
+                                            <th class="text-center bg-warning-lighten-2">CABUT<br/>MCB</th>
+                                            <th class="text-center bg-warning-lighten-2">CABUT<br/>APP</th>
+                                            <th class="text-center bg-danger-lighten-2">RUMAH<br/>KOSONG</th>
+                                            <th class="text-center bg-secondary-lighten-2">TOTAL</th>
+                                            <th class="text-center bg-success-lighten-2">LUNAS<br/>MANDIRI</th>
+                                            <th class="text-center bg-success-lighten-2">LUNAS<br/>DITEMPAT</th>
+                                            <th class="text-center bg-warning-lighten-2">SEGEL<br/>MCB</th>
+                                            <th class="text-center bg-warning-lighten-2">CABUT<br/>MCB</th>
+                                            <th class="text-center bg-warning-lighten-2">CABUT<br/>APP</th>
+                                            <th class="text-center bg-danger-lighten-2">RUMAH<br/>KOSONG</th>
+                                            <th class="text-center bg-secondary-lighten-2">TOTAL</th>
+                                            <th class="text-center bg-success-lighten-2">LUNAS<br/>MANDIRI</th>
+                                            <th class="text-center bg-success-lighten-2">LUNAS<br/>DITEMPAT</th>
+                                            <th class="text-center bg-warning-lighten-2">SEGEL<br/>MCB</th>
+                                            <th class="text-center bg-warning-lighten-2">CABUT<br/>MCB</th>
+                                            <th class="text-center bg-warning-lighten-2">CABUT<br/>APP</th>
+                                            <th class="text-center bg-danger-lighten-2">RUMAH<br/>KOSONG</th>
+                                            <th class="text-center bg-secondary-lighten-2">TOTAL</th>
+                                            <th class="text-center bg-success-lighten-2">LUNAS<br/>MANDIRI</th>
+                                            <th class="text-center bg-success-lighten-2">LUNAS<br/>DITEMPAT</th>
+                                            <th class="text-center bg-warning-lighten-2">SEGEL<br/>MCB</th>
+                                            <th class="text-center bg-warning-lighten-2">CABUT<br/>MCB</th>
+                                            <th class="text-center bg-warning-lighten-2">CABUT<br/>APP</th>
+                                            <th class="text-center bg-danger-lighten-2">RUMAH<br/>KOSONG</th>
+                                            <th class="text-center bg-secondary-lighten-2">TOTAL</th>
+                                        </tr>
+                                    </thead>
+                                    <tfoot>
+                                        <tr>
+                                            <th class="bg-primary-lighten-2" colspan="3">TOTAL</th>
+                                            <th class="bg-danger-lighten-2"></th>
+                                            <th class="bg-success-lighten-2"></th>
+                                            <th class="bg-success-lighten-2"></th>
+                                            <th class="bg-warning-lighten-2"></th>
+                                            <th class="bg-warning-lighten-2"></th>
+                                            <th class="bg-warning-lighten-2"></th>
+                                            <th class="bg-danger-lighten-2"></th>
+                                            <th class="bg-secondary-lighten-2"></th>
+                                            <th class="bg-secondary-lighten-2"></th>
+                                            <th class="bg-success-lighten-2"></th>
+                                            <th class="bg-success-lighten-2"></th>
+                                            <th class="bg-warning-lighten-2"></th>
+                                            <th class="bg-warning-lighten-2"></th>
+                                            <th class="bg-warning-lighten-2"></th>
+                                            <th class="bg-danger-lighten-2"></th>
+                                            <th class="bg-secondary-lighten-2"></th>
+                                            <th class="bg-success-lighten-2"></th>
+                                            <th class="bg-success-lighten-2"></th>
+                                            <th class="bg-warning-lighten-2"></th>
+                                            <th class="bg-warning-lighten-2"></th>
+                                            <th class="bg-warning-lighten-2"></th>
+                                            <th class="bg-danger-lighten-2"></th>
+                                            <th class="bg-secondary-lighten-2"></th>
+                                            <th class="bg-success-lighten-2"></th>
+                                            <th class="bg-success-lighten-2"></th>
+                                            <th class="bg-warning-lighten-2"></th>
+                                            <th class="bg-warning-lighten-2"></th>
+                                            <th class="bg-warning-lighten-2"></th>
+                                            <th class="bg-danger-lighten-2"></th>
+                                            <th class="bg-secondary-lighten-2"></th>
+                                            <th class="bg-success-lighten-2"></th>
+                                            <th class="bg-success-lighten-2"></th>
+                                            <th class="bg-warning-lighten-2"></th>
+                                            <th class="bg-warning-lighten-2"></th>
+                                            <th class="bg-warning-lighten-2"></th>
+                                            <th class="bg-danger-lighten-2"></th>
+                                            <th class="bg-secondary-lighten-2"></th>
+                                            <th class="bg-success-lighten-2"></th>
+                                            <th class="bg-success-lighten-2"></th>
+                                            <th class="bg-warning-lighten-2"></th>
+                                            <th class="bg-warning-lighten-2"></th>
+                                            <th class="bg-warning-lighten-2"></th>
+                                            <th class="bg-danger-lighten-2"></th>
+                                            <th class="bg-secondary-lighten-2"></th>
+                                            <th class="bg-success-lighten-2"></th>
+                                            <th class="bg-success-lighten-2"></th>
+                                            <th class="bg-warning-lighten-2"></th>
+                                            <th class="bg-warning-lighten-2"></th>
+                                            <th class="bg-warning-lighten-2"></th>
+                                            <th class="bg-danger-lighten-2"></th>
+                                            <th class="bg-secondary-lighten-2"></th>
+                                        </tr>
+                                    </tfoot>
+                                </table>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+
                 <div class="row">
                     <div class="col-12">
                         <div class="card">
                             <div class="card-body">
-                                <h4 class="card-title mb-4">Rekap Pemutusan dari P3</h4>
+                                <h4 class="card-title mb-4">Rekap Pemutusan per ULP</h4>
                                 <div class="table-responsive">
                                     <table id="tbl_rekap_pemutusan_ulp" class="table table-striped table-bordered nowrap" style="width: 100%">
                                     <thead>
@@ -115,99 +256,126 @@
                                             <th rowspan="3" class="text-center bg-primary-lighten-2">UNITAP</th>
                                             <th rowspan="3" class="text-center bg-primary-lighten-2">UNITUP</th>
                                             <th rowspan="3" class="text-center bg-primary-lighten-2">ULP</th>
-                                            <th rowspan="1" colspan="33" class="text-center bg-primary-lighten-2">JML EKSEKUSI PER TANGGAL</th>
-                                            <th rowspan="3" class="text-center bg-success-lighten-2">TOTAL <br/>LUNAS</th>
-                                            <th rowspan="3" class="text-center bg-warning-lighten-2">TOTAL <br/>PUTUS</th>
-                                            <th rowspan="3" class="text-center bg-primary-lighten-2">TOTAL</th>
+                                            <th rowspan="3" class="text-center bg-danger-lighten-2">WORK ORDER</th>
+                                            <th rowspan="1" colspan="8" class="text-center bg-primary-lighten-2">EKSEKUSI PEMUTUSAN</th>
+                                            <th rowspan="1" colspan="42" class="text-center bg-primary-lighten-2">BREAKDOWN PER TANGGAL</th>
+                                            
                                         </tr>
                                         <tr>
-                                            <th rowspan="1" colspan="3" class="text-center bg-primary-lighten-2">21</th>
-                                            <th rowspan="1" colspan="3" class="text-center bg-primary-lighten-2">22</th>
-                                            <th rowspan="1" colspan="3" class="text-center bg-primary-lighten-2">23</th>
-                                            <th rowspan="1" colspan="3" class="text-center bg-primary-lighten-2">24</th>
-                                            <th rowspan="1" colspan="3" class="text-center bg-primary-lighten-2">25</th>
-                                            <th rowspan="1" colspan="3" class="text-center bg-primary-lighten-2">26</th>
-                                            <th rowspan="1" colspan="3" class="text-center bg-primary-lighten-2">27</th>
-                                            <th rowspan="1" colspan="3" class="text-center bg-primary-lighten-2">28</th>
-                                            <th rowspan="1" colspan="3" class="text-center bg-primary-lighten-2">29</th>
-                                            <th rowspan="1" colspan="3" class="text-center bg-primary-lighten-2">30</th>
-                                            <th rowspan="1" colspan="3" class="text-center bg-primary-lighten-2">31</th>
+                                            <th rowspan="2" class="text-center bg-success-lighten-2">LUNAS<br/>MANDIRI</th>
+                                            <th rowspan="2" class="text-center bg-success-lighten-2">LUNAS<br/>DITEMPAT</th>
+                                            <th rowspan="2" class="text-center bg-warning-lighten-2">SEGEL<br/>MCB</th>
+                                            <th rowspan="2" class="text-center bg-warning-lighten-2">CABUT<br/>MCB</th>
+                                            <th rowspan="2" class="text-center bg-warning-lighten-2">CABUT<br/>APP</th>
+                                            <th rowspan="2" class="text-center bg-danger-lighten-2">RUMAH<br/>KOSONG</th>
+                                            <th rowspan="2" class="text-center bg-secondary-lighten-2">TOTAL</th>
+                                            <th rowspan="2" class="text-center bg-secondary-lighten-2">PERSEN</th>
+                                            <th rowspan="1" colspan="7" class="text-center bg-primary-lighten-2">TGL 21</th>
+                                            <th rowspan="1" colspan="7" class="text-center bg-primary-lighten-2">TGL 22</th>
+                                            <th rowspan="1" colspan="7" class="text-center bg-primary-lighten-2">TGL 23</th>
+                                            <th rowspan="1" colspan="7" class="text-center bg-primary-lighten-2">TGL 24</th>
+                                            <th rowspan="1" colspan="7" class="text-center bg-primary-lighten-2">TGL 25</th>
+                                            <th rowspan="1" colspan="7" class="text-center bg-primary-lighten-2">DIATAS TGL 25</th>
                                         </tr>
                                         <tr>
-                                            <th class="text-center bg-success-lighten-2">LUNAS</th>
-                                            <th class="text-center bg-warning-lighten-2">PUTUS</th>
-                                            <th class="text-center bg-primary-lighten-2">TOTAL</th>
-                                            <th class="text-center bg-success-lighten-2">LUNAS</th>
-                                            <th class="text-center bg-warning-lighten-2">PUTUS</th>
-                                            <th class="text-center bg-primary-lighten-2">TOTAL</th>
-                                            <th class="text-center bg-success-lighten-2">LUNAS</th>
-                                            <th class="text-center bg-warning-lighten-2">PUTUS</th>
-                                            <th class="text-center bg-primary-lighten-2">TOTAL</th>
-                                            <th class="text-center bg-success-lighten-2">LUNAS</th>
-                                            <th class="text-center bg-warning-lighten-2">PUTUS</th>
-                                            <th class="text-center bg-primary-lighten-2">TOTAL</th>
-                                            <th class="text-center bg-success-lighten-2">LUNAS</th>
-                                            <th class="text-center bg-warning-lighten-2">PUTUS</th>
-                                            <th class="text-center bg-primary-lighten-2">TOTAL</th>
-                                            <th class="text-center bg-success-lighten-2">LUNAS</th>
-                                            <th class="text-center bg-warning-lighten-2">PUTUS</th>
-                                            <th class="text-center bg-primary-lighten-2">TOTAL</th>
-                                            <th class="text-center bg-success-lighten-2">LUNAS</th>
-                                            <th class="text-center bg-warning-lighten-2">PUTUS</th>
-                                            <th class="text-center bg-primary-lighten-2">TOTAL</th>
-                                            <th class="text-center bg-success-lighten-2">LUNAS</th>
-                                            <th class="text-center bg-warning-lighten-2">PUTUS</th>
-                                            <th class="text-center bg-primary-lighten-2">TOTAL</th>
-                                            <th class="text-center bg-success-lighten-2">LUNAS</th>
-                                            <th class="text-center bg-warning-lighten-2">PUTUS</th>
-                                            <th class="text-center bg-primary-lighten-2">TOTAL</th>
-                                            <th class="text-center bg-success-lighten-2">LUNAS</th>
-                                            <th class="text-center bg-warning-lighten-2">PUTUS</th>
-                                            <th class="text-center bg-primary-lighten-2">TOTAL</th>
-                                            <th class="text-center bg-success-lighten-2">LUNAS</th>
-                                            <th class="text-center bg-warning-lighten-2">PUTUS</th>
-                                            <th class="text-center bg-primary-lighten-2">TOTAL</th>
+                                            <th class="text-center bg-success-lighten-2">LUNAS<br/>MANDIRI</th>
+                                            <th class="text-center bg-success-lighten-2">LUNAS<br/>DITEMPAT</th>
+                                            <th class="text-center bg-warning-lighten-2">SEGEL<br/>MCB</th>
+                                            <th class="text-center bg-warning-lighten-2">CABUT<br/>MCB</th>
+                                            <th class="text-center bg-warning-lighten-2">CABUT<br/>APP</th>
+                                            <th class="text-center bg-danger-lighten-2">RUMAH<br/>KOSONG</th>
+                                            <th class="text-center bg-secondary-lighten-2">TOTAL</th>
+                                            <th class="text-center bg-success-lighten-2">LUNAS<br/>MANDIRI</th>
+                                            <th class="text-center bg-success-lighten-2">LUNAS<br/>DITEMPAT</th>
+                                            <th class="text-center bg-warning-lighten-2">SEGEL<br/>MCB</th>
+                                            <th class="text-center bg-warning-lighten-2">CABUT<br/>MCB</th>
+                                            <th class="text-center bg-warning-lighten-2">CABUT<br/>APP</th>
+                                            <th class="text-center bg-danger-lighten-2">RUMAH<br/>KOSONG</th>
+                                            <th class="text-center bg-secondary-lighten-2">TOTAL</th>
+                                            <th class="text-center bg-success-lighten-2">LUNAS<br/>MANDIRI</th>
+                                            <th class="text-center bg-success-lighten-2">LUNAS<br/>DITEMPAT</th>
+                                            <th class="text-center bg-warning-lighten-2">SEGEL<br/>MCB</th>
+                                            <th class="text-center bg-warning-lighten-2">CABUT<br/>MCB</th>
+                                            <th class="text-center bg-warning-lighten-2">CABUT<br/>APP</th>
+                                            <th class="text-center bg-danger-lighten-2">RUMAH<br/>KOSONG</th>
+                                            <th class="text-center bg-secondary-lighten-2">TOTAL</th>
+                                            <th class="text-center bg-success-lighten-2">LUNAS<br/>MANDIRI</th>
+                                            <th class="text-center bg-success-lighten-2">LUNAS<br/>DITEMPAT</th>
+                                            <th class="text-center bg-warning-lighten-2">SEGEL<br/>MCB</th>
+                                            <th class="text-center bg-warning-lighten-2">CABUT<br/>MCB</th>
+                                            <th class="text-center bg-warning-lighten-2">CABUT<br/>APP</th>
+                                            <th class="text-center bg-danger-lighten-2">RUMAH<br/>KOSONG</th>
+                                            <th class="text-center bg-secondary-lighten-2">TOTAL</th>
+                                            <th class="text-center bg-success-lighten-2">LUNAS<br/>MANDIRI</th>
+                                            <th class="text-center bg-success-lighten-2">LUNAS<br/>DITEMPAT</th>
+                                            <th class="text-center bg-warning-lighten-2">SEGEL<br/>MCB</th>
+                                            <th class="text-center bg-warning-lighten-2">CABUT<br/>MCB</th>
+                                            <th class="text-center bg-warning-lighten-2">CABUT<br/>APP</th>
+                                            <th class="text-center bg-danger-lighten-2">RUMAH<br/>KOSONG</th>
+                                            <th class="text-center bg-secondary-lighten-2">TOTAL</th>
+                                            <th class="text-center bg-success-lighten-2">LUNAS<br/>MANDIRI</th>
+                                            <th class="text-center bg-success-lighten-2">LUNAS<br/>DITEMPAT</th>
+                                            <th class="text-center bg-warning-lighten-2">SEGEL<br/>MCB</th>
+                                            <th class="text-center bg-warning-lighten-2">CABUT<br/>MCB</th>
+                                            <th class="text-center bg-warning-lighten-2">CABUT<br/>APP</th>
+                                            <th class="text-center bg-danger-lighten-2">RUMAH<br/>KOSONG</th>
+                                            <th class="text-center bg-secondary-lighten-2">TOTAL</th>
                                         </tr>
                                     </thead>
                                     <tfoot>
                                         <tr>
                                             <th class="bg-primary-lighten-2" colspan="3">TOTAL</th>
+                                            <th class="bg-danger-lighten-2"></th>
+                                            <th class="bg-success-lighten-2"></th>
                                             <th class="bg-success-lighten-2"></th>
                                             <th class="bg-warning-lighten-2"></th>
-                                            <th class="bg-primary-lighten-2"></th>
+                                            <th class="bg-warning-lighten-2"></th>
+                                            <th class="bg-warning-lighten-2"></th>
+                                            <th class="bg-danger-lighten-2"></th>
+                                            <th class="bg-secondary-lighten-2"></th>
+                                            <th class="bg-secondary-lighten-2"></th>
+                                            <th class="bg-success-lighten-2"></th>
                                             <th class="bg-success-lighten-2"></th>
                                             <th class="bg-warning-lighten-2"></th>
-                                            <th class="bg-primary-lighten-2"></th>
+                                            <th class="bg-warning-lighten-2"></th>
+                                            <th class="bg-warning-lighten-2"></th>
+                                            <th class="bg-danger-lighten-2"></th>
+                                            <th class="bg-secondary-lighten-2"></th>
+                                            <th class="bg-success-lighten-2"></th>
                                             <th class="bg-success-lighten-2"></th>
                                             <th class="bg-warning-lighten-2"></th>
-                                            <th class="bg-primary-lighten-2"></th>
+                                            <th class="bg-warning-lighten-2"></th>
+                                            <th class="bg-warning-lighten-2"></th>
+                                            <th class="bg-danger-lighten-2"></th>
+                                            <th class="bg-secondary-lighten-2"></th>
+                                            <th class="bg-success-lighten-2"></th>
                                             <th class="bg-success-lighten-2"></th>
                                             <th class="bg-warning-lighten-2"></th>
-                                            <th class="bg-primary-lighten-2"></th>
+                                            <th class="bg-warning-lighten-2"></th>
+                                            <th class="bg-warning-lighten-2"></th>
+                                            <th class="bg-danger-lighten-2"></th>
+                                            <th class="bg-secondary-lighten-2"></th>
+                                            <th class="bg-success-lighten-2"></th>
                                             <th class="bg-success-lighten-2"></th>
                                             <th class="bg-warning-lighten-2"></th>
-                                            <th class="bg-primary-lighten-2"></th>
+                                            <th class="bg-warning-lighten-2"></th>
+                                            <th class="bg-warning-lighten-2"></th>
+                                            <th class="bg-danger-lighten-2"></th>
+                                            <th class="bg-secondary-lighten-2"></th>
+                                            <th class="bg-success-lighten-2"></th>
                                             <th class="bg-success-lighten-2"></th>
                                             <th class="bg-warning-lighten-2"></th>
-                                            <th class="bg-primary-lighten-2"></th>
+                                            <th class="bg-warning-lighten-2"></th>
+                                            <th class="bg-warning-lighten-2"></th>
+                                            <th class="bg-danger-lighten-2"></th>
+                                            <th class="bg-secondary-lighten-2"></th>
+                                            <th class="bg-success-lighten-2"></th>
                                             <th class="bg-success-lighten-2"></th>
                                             <th class="bg-warning-lighten-2"></th>
-                                            <th class="bg-primary-lighten-2"></th>
-                                            <th class="bg-success-lighten-2"></th>
                                             <th class="bg-warning-lighten-2"></th>
-                                            <th class="bg-primary-lighten-2"></th>
-                                            <th class="bg-success-lighten-2"></th>
                                             <th class="bg-warning-lighten-2"></th>
-                                            <th class="bg-primary-lighten-2"></th>
-                                            <th class="bg-success-lighten-2"></th>
-                                            <th class="bg-warning-lighten-2"></th>
-                                            <th class="bg-primary-lighten-2"></th>
-                                            <th class="bg-success-lighten-2"></th>
-                                            <th class="bg-warning-lighten-2"></th>
-                                            <th class="bg-primary-lighten-2"></th>
-                                            <th class="bg-success-lighten-2"></th>
-                                            <th class="bg-warning-lighten-2"></th>
-                                            <th class="bg-primary-lighten-2"></th>
+                                            <th class="bg-danger-lighten-2"></th>
+                                            <th class="bg-secondary-lighten-2"></th>
                                         </tr>
                                     </tfoot>
                                 </table>

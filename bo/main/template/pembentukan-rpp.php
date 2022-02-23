@@ -85,54 +85,105 @@
                                 <div class="mb-4">
                                     <form action="#">
                                         <div class="form-row">
-                                            <div class="form-group mb-4 col-3">
-                                                <label class="text-label">UNIT INDUK</label>
-                                                <select id="sel_unitupi" title="PILIH UNIT INDUK" class="selectpicker show-tick" data-size="5" >
+                                            <div class="form-group mb-2 mr-4">
+                                                <label class="text-label d-block"><small>UNIT INDUK</small></label>
+                                                <select id="sel_unitupi" title="PILIH UNIT INDUK" class="selectpicker show-tick" data-size="5" data-inc-semua="T" >
                                                     <option value="00" selected>SEMUA UNIT</option>
                                                 </select>
                                             </div>
-                                            <div class="form-group mb-4 col-3">
-                                                <label class="text-label">UP3</label>
-                                                <select id="sel_unitap" title="PILIH UP3" class="selectpicker show-tick" data-size="5" >
+                                            <div class="form-group mb-2 mr-4">
+                                                <label class="text-label d-block"><small>UP3</small></label>
+                                                <select id="sel_unitap" title="PILIH UP3" class="selectpicker show-tick" data-size="5" data-inc-semua="T" >
                                                     <option value="00" selected>SEMUA UNIT</option>
                                                 </select>
                                             </div>
-                                            <div class="form-group mb-4 col-3">
-                                                <label class="text-label">ULP</label>
-                                                <select id="sel_unitup" title="PILIH ULP" class="selectpicker show-tick" data-size="5" >
+                                            <div class="form-group mb-2 mr-4">
+                                                <label class="text-label d-block"><small>ULP</small></label>
+                                                <select id="sel_unitup" title="PILIH ULP" class="selectpicker show-tick" data-size="5" data-inc-semua="T" >
                                                     <option value="00" selected>SEMUA UNIT</option>
+                                                </select>
+                                            </div>
+                                            <!-- <div class="form-group mb-4 col-3">
+                                                <label class="text-label d-block"><small>PETUGAS</small></label>
+                                                <select id="sel_petugas" title="PETUGAS" class="selectpicker show-tick" data-size="5" data-inc-semua="T" >
+                                                    <option value="00">SEMUA PETUGAS</option>
                                                 </select>
                                             </div>
                                             <div class="form-group mb-4 col-3">
                                                 <label class="text-label">TGL PEMERIKSAAN</label>
                                                 <input id="tgl_pemeriksaan_range" class="form-control input-daterange-datepicker" type="text" name="daterange">
-                                            </div>
+                                            </div> -->
                                         </div>
                                     </form>
-                                    <div class="text-right">
-                                        <button id="btn_cari" type="button" class="btn btn-sm btn-primary waves-effect waves-light">Cari <span class="btn-icon-right"><i
-                                        class="fa fa-search"></i></span></button>
-
-                                       <!--  <button id="btn_cari" type="button" class="btn btn-sm btn-primary waves-effect waves-light"><i class="ti-search"></i> Cari</button> -->
-                                    </div>
                                 </div>
-                                <div style="height:480px; width:860px;">
+                            </div>
+                            <div class="card-footer">
+                                <div class="text-right mt-2">
+                                    <button id="btn_cari" type="button" class="btn btn-sm btn-primary waves-effect waves-light">Cari <span class="btn-icon-right"><i
+                                        class="fa fa-search"></i></span></button>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+
+                <div class="row">
+                    <div class="col-12">
+                        <div class="card">
+                            <div class="card-header">
+                                <h4 class="card-title">Peta Pembentukan RPP</h4>
+                            </div>
+                            <div class="card-body">
+                                <div style="height:480px;">
                                     <div id="map"></div>
                                 </div>
                             </div>
                             <div class="card-footer text-muted">
-                                Jumlah Pelanggan: <span id="total_plg">0</span>
-                                &nbsp;|&nbsp;
-                                Jumlah Titik yang dipilih: <span id="plg_dipilih">0</span>
-                                &nbsp;&nbsp;
-                                <a id="btn_create" href="#" class="btn btn-sm btn-primary waves-effect waves-light"><i class="fa fa-check-circle"></i> Buat RPP</a>
-                                <a id="btn_reset" href="#" class="btn btn-sm btn-danger waves-effect waves-light"><i class="fa fa-times-circle"></i> Reset</a>
+                                <div class="align-middle d-inline">
+                                    <span class="fa fa-info-circle"></span> Ada sebanyak <span id="plg_dipilih">0</span> Pelanggan yang dipilih dari total <span id="total_plg">0</span> Pelanggan
+                                </div>
+                                <button id="btn_create" class="btn btn-primary waves-effect waves-light btn-sm pull-right mr-2">Buat RPP <span class="btn-icon-right"><i class="fa fa-check-circle"></i></span></button>
+                                <button id="btn_reset" class="btn btn-secondary waves-effect waves-light btn-sm pull-right mr-2">Bersihkan Pilihan <span class="btn-icon-right"><i class="fa fa-refresh"></i></span></button>
+                                <button id="btn_remove" class="btn btn-danger waves-effect waves-light btn-sm pull-right mr-2">Hapus <span class="btn-icon-right"><i class="fa fa-times-circle"></i></span></button>
                             </div>
                         </div>
                     </div>
-
-
                 </div>
+
+                <div class="row">
+                    <div class="col-6">
+                        <div class="card">
+                            <div class="card-header">
+                                <h5 class="card-title">Petugas Tagging dari Pelanggan dipilih</h5>
+                            </div>
+                            <div class="card-body">
+                                <div class="basic-list-group">
+                                    <ul id="petugas-selected" class="list-group">
+                                        <!-- <li class="list-group-item d-flex justify-content-between align-items-center">Cras
+                                            justo odio <span class="badge badge-primary badge-pill">14</span>
+                                        </li> -->
+                                    </ul>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="col-6">
+                        <div class="card">
+                            <div class="card-header">
+                                <h5 class="card-title">Gardu dari Pelanggan Dipilih</h5>
+                            </div>
+                            <div class="card-body">
+                                <div class="basic-list-group">
+                                    <ul id="gardu-selected" class="list-group">
+                                        
+                                    </ul>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+
+
             </div>
             <!-- #/ container -->
         </div>
@@ -162,10 +213,11 @@
     <script src="../../assets/plugins/bootstrap-daterangepicker/daterangepicker.js"></script>
     <script src="https://maps.googleapis.com/maps/api/js?key=AIzaSyAqznXEC9IjyXrbRdKk1vKWJWLioZixUW8"></script>
 
-    <script src="https://cdn.jsdelivr.net/gmap3/7.2.0/gmap3.min.js"></script>
+    <script src="../../assets/plugins/gmaps/gmap3.js"></script>
     <script src="../../assets/plugins/keydragzoom/keydragzoom.js"></script>
-    <script src="https://unpkg.com/@googlemaps/markerclustererplus/dist/index.min.js"></script>
+    <!-- <script src="https://unpkg.com/@googlemaps/markerclustererplus/dist/index.min.js"></script> -->
     <script src="../../assets/plugins/sweetalert2/dist/sweetalert2.min.js"></script>
+    <script src="../../assets/plugins/block-ui/jquery.blockUI.js"></script>
 
     <script src="../js/pages/apps.js"></script>
     <script src="../js/pages/pembentukan-rpp.js"></script>

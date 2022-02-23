@@ -18,7 +18,7 @@ $params = array(
         array($blth, SQLSRV_PARAM_IN),
     );
 
-$sql = "EXEC sp_vw_Create_Rekap_Pemutusan @UserID = ?, @Unitupi = ?, @Unitap = ?, @Unitup = ?, @BLTH = ? ";
+$sql = "EXEC sp_vw_Create_Rekap_Pemutusan_UP3 @UserID = ?, @Unitupi = ?, @Unitap = ?, @Unitup = ?, @BLTH = ? ";
 $stmt = sqlsrv_prepare($conn, $sql, $params);
 
 //sqlsrv_execute($stmt);
@@ -27,19 +27,19 @@ if(!sqlsrv_execute($stmt)){
 }
 
 // DB table to use
-$table = 'NIAGA.dbo.vw_Create_Rekap_Pemutusan_'.$user;
+$table = 'NIAGA.dbo.vw_Create_Rekap_Pemutusan_UP3_'.$user;
  
 // Table's primary key
-$primaryKey = 'UNITUP';
+$primaryKey = 'UNITAP';
  
 // Array of database columns which should be read and sent back to DataTables.
 // The `db` parameter represents the column name in the database, while the `dt`
 // parameter represents the DataTables column identifier. In this case simple
 // indexes
 $columns = array(
+    array( 'db' => 'UNITUPI', 'dt' => 'UNITUPI' ),
     array( 'db' => 'UNITAP', 'dt' => 'UNITAP' ),
-    array( 'db' => 'UNITUP', 'dt' => 'UNITUP' ),
-    array( 'db' => 'ULP', 'dt' => 'ULP' ),
+    array( 'db' => 'UP3', 'dt' => 'UP3' ),
     array( 'db' => 'BLTH', 'dt' => 'BLTH' ),
     array( 'db' => 'JML_WO', 'dt' => 'JML_WO' ),
     array( 'db' => 'JML_LUNAS_MANDIRI_21', 'dt' => 'JML_LUNAS_MANDIRI_21' ),
