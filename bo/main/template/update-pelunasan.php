@@ -77,7 +77,7 @@
                                     <p>Data yang diupload:
                                         <ul>
                                             <li>1. Transaksi Piutang - Kode Gerak 22 (Pagi: rentang H-1 s.d hari H; Sore dan malam: hanya hari H)</li>
-                                            <li>2. Transaksi Piutang - Kode Gerak 23-Notabuku, 31-Pembatalan, 41-PRR, cukup sekali di akhir bulan atau ketika Nihil (Rentang 1 bulan setiap download)</li>
+                                            <li>2. Transaksi Piutang - Kode Gerak 23-Notabuku, 24-Beban Kantor, 31-Pembatalan, 41-PRR, cukup sekali di akhir bulan atau ketika Nihil (Rentang 1 bulan setiap download)</li>
                                         </ul>
                                     </p>
                                     <p>
