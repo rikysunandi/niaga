@@ -86,9 +86,9 @@
                                     </p>
                                     <form action="#">
                                         <div class="form-row">
-                                            <div class="form-group mb-2 mr-2 col-6">
+                                            <div class="form-group mb-2 mr-2 col-12">
                                                 <label class="text-label d-block"><small>KODE GERAK</small></label>
-                                                <select id="sel_kodegerak" title="KODE GERAK" class="selectpicker show-tick" data-size="5" style="width: auto;" >
+                                                <select id="sel_kodegerak" title="KODE GERAK" class="selectpicker show-tick col-4" data-size="5" style="width: auto;" >
                                                     <option value="22" selected="selected">22 - LUNAS ONLINE</option>
                                                     <option value="23">23 - LUNAS NOTABUKU</option>
                                                     <option value="24">24 - LUNAS BEBAN KANTOR</option>
