@@ -16,7 +16,14 @@ $(document).ready(function () {
     
     var red_house = "../../assets/images/markers/red/house.png";
     var blue_house = "../../assets/images/markers/blue/house.png";
+    var ic_gardu = "../../assets/images/markers/green/powersubstation.png";
     var selected = new Array();
+
+    $('#btn_reset').prop('disabled', true);
+    $('#btn_remove').prop('disabled', true);
+    $('#btn_create').prop('disabled', true);
+
+    var is_first = true;
 
     // $('#sel_unitup').change(function(){
 
@@ -56,6 +63,9 @@ $(document).ready(function () {
         console.log('cari!!');
         // console.log($("#tgl_baca_to").datepicker("getFormattedDate"));
         // console.log($("#tgl_baca_from").datepicker("getFormattedDate"));
+        $('#btn_reset').prop('disabled', true);
+        $('#btn_remove').prop('disabled', true);
+        $('#btn_create').prop('disabled', true);
 
         $('#map').gmap3({
             action: 'destroy'
@@ -79,12 +89,13 @@ $(document).ready(function () {
             // tgl_baca_to: $("#tgl_baca_to").datepicker("getFormattedDate")
         }).done(function( json ) {
 
-            console.log( "JSON Data: " + json );
+            //json = JSON.parse(json);
+            //console.log( "JSON Data: " + json );
 
 
             var markers = new Array(); 
 
-            $(json).each(function(key, obj){
+            $(json.plg).each(function(key, obj){
                 // console.log(obj);
                 markers.push(
                     {
@@ -96,40 +107,69 @@ $(document).ready(function () {
                         gardu: obj.nama_gardu
                     });
             });
+
+            var gardu_markers = new Array(); 
+
+            $(json.gardu).each(function(key, obj){
+                // console.log(obj);
+                gardu_markers.push(
+                    {
+                        title: obj.nama_gardu+" ( "+obj.kapasitas_trafo+" kVA ) ", 
+                        label: obj.nama_gardu,
+                        position:[obj.latitude, obj.longitude], 
+                        icon:ic_gardu,
+                        idpel:"X"
+                    });
+            });
                
             var markers_obj;
 
             var map = $('#map')
               .gmap3({
                 center: [-6.3487933,107.6809901],
-                zoom:10
+                zoom:11,
+                mapTypeControl: true,
+                mapTypeControlOptions: {
+                  style: google.maps.MapTypeControlStyle.DROPDOWN_MENU
+                },
+                navigationControl: true,
+                // scrollwheel: true,
+                // streetViewControl: true
               })
-              //.marker(markers)
+              .marker(gardu_markers)
               .cluster({
+                radius: 10,
                 //size: 300,
                 markers: markers,
                 cb: function (markers) {
                   markers_obj = markers;
                   if (markers.length > 300) { // 1 marker stay unchanged (because cb returns nothing)
-                    if (markers.length < 1000) {
+                    if (markers.length > 10000) {
                       return {
-                        content: "<div class='cluster cluster-1'>" + markers.length + "</div>",
-                        x: -26,
-                        y: -26
+                        content: "<div class='cluster cluster-3'>" + markers.length + "</div>",
+                        // x: -26,
+                        // y: -26,
+                        width: 86,
+                        height: 85
                       };
                     }
-                    if (markers.length < 500) {
+                    else if (markers.length > 1000) {
                       return {
                         content: "<div class='cluster cluster-2'>" + markers.length + "</div>",
                         x: -26,
-                        y: -26
+                        y: -26,
+                        width: 66,
+                        height: 65
+                      };
+                    }else{
+                      return {
+                        content: "<div class='cluster cluster-1'>" + markers.length + "</div>",
+                        x: -26,
+                        y: -26,
+                        width: 63,
+                        height: 62
                       };
                     }
-                      return {
-                        content: "<div class='cluster cluster-3'>" + markers.length + "</div>",
-                        x: -26,
-                        y: -26
-                      };
                   }
                 }
               })
@@ -137,8 +177,9 @@ $(document).ready(function () {
 
                     var map = this.get()[0];
                     console.log('map', map);
+                    console.log("cluster", cluster);
 
-                    $('#total_plg').html(cluster.markers().length);
+                    $('#total_plg').html(cluster.markers().filter(function(e) { return e.idpel!="X" }).length);
                     $('#plg_dipilih').html('0');
                       
                     map.enableKeyDragZoom({
@@ -155,8 +196,8 @@ $(document).ready(function () {
                     google.maps.event.addListener(dz, 'dragend', function (bnds) {
                         console.log('KeyDragZoom Ended: ' + bnds);
 
-                        $.each(cluster.markers(), function(i, marker){
-                            //console.log('marker cek posisi', marker.getPosition());
+                        $('div.content-body').block({ message: 'Memilih koordinat...' });
+                        asyncForEach(cluster.markers(), function(marker) {
                             var petugas = new Array(); 
                             var gardu = new Array(); 
                             if(marker.getPosition()){
@@ -164,11 +205,12 @@ $(document).ready(function () {
                                     //console.log('marker dalam pilihan', marker);
                                     
                                     //if(!marker.selected){
+                                    if(marker.idpel!="X"){
                                         marker.setIcon(blue_house);
                                         marker.selected = true;
                                         selected.push(marker);
                                         $('#plg_dipilih').html(parseInt($('#plg_dipilih').html())+1);
-
+                                    }
 
                                     // }else{
                                     //     marker.setIcon(red_house);
@@ -179,105 +221,236 @@ $(document).ready(function () {
                                 }
                             }
                           //marker.setIcon("http://maps.google.com/mapfiles/marker_green.png");
-                        });
-
-                        populateList(selected);
-
-                    });
-
-
-                    $('#btn_reset').bind( "click", function() {
-                        $.each( cluster.markers(), function(i, marker){
-                            if(marker.selected){
-                                marker.setIcon(red_house);
-                                marker.selected = false;
-                                selected = $.grep(selected, function(e) { return e.idpel!=marker.idpel });
-                                $('#plg_dipilih').html(selected.length);
-                            }
-                        });
-
-                        populateList(selected);
-                    });
-
-                    $('#btn_remove').bind( "click", function() {
-                        asyncForEach(cluster.markers(), function(marker) {
-                            if(marker.selected){
-                                marker.setIcon(red_house);
-                                marker.selected = false;
-                                marker.setMap(null);
-                                selected = $.grep(selected, function(e) { return e.idpel!=marker.idpel });
-                                $('#plg_dipilih').html(selected.length);
-                                $('#total_plg').html(cluster.markers().length);
-                            }
-                        },function() {
+                        },function(){
                             populateList(selected);
-                        });
-                        // $.each( cluster.markers(), function(i, marker){
-                        //     if(marker.selected){
-                        //         marker.setIcon(red_house);
-                        //         marker.selected = false;
-                        //         marker.setMap(null);
-                        //         selected = $.grep(selected, function(e) { return e.idpel!=marker.idpel });
-                        //         $('#plg_dipilih').html(selected.length);
-                        //     }
-                        // });
-
-                    });
-
-                    $('ul#petugas-selected li.list-group-item a').bind( "click", function(c) {
-                        console.log("PETUGAS HAPUS");
-                        console.log($(this));
-                        var petugas = $(this).prev().html();
-                        $.each( cluster.markers(), function(i, marker){
-                            if(marker.selected && marker.petugas==petugas){
-                                marker.setIcon(red_house);
-                                marker.selected = false;
-                                marker.setMap(null);
-                                selected = $.grep(selected, function(e) { return e.idpel!=marker.idpel });
-                                $('#plg_dipilih').html(selected.length);
+                            if(selected.length>0){
+                                $('#btn_reset').prop('disabled', false);
+                                $('#btn_remove').prop('disabled', false);
+                                $('#btn_create').prop('disabled', false);
                             }
+                            $('div.content-body').unblock();
+        
                         });
-
-                        populateList(selected);
 
                     });
 
-                    $('ul#gardu-selected li.list-group-item a').bind( "click", function(c) {
-                        console.log("GARDU HAPUS");
-                        console.log($(this));
-                        var gardu = $(this).prev().html();
-                        $.each( cluster.markers(), function(i, marker){
-                            if(marker.selected && marker.gardu==gardu){
-                                marker.setIcon(red_house);
-                                marker.selected = false;
-                                marker.setMap(null);
-                                selected = $.grep(selected, function(e) { return e.idpel!=marker.idpel });
-                                $('#plg_dipilih').html(selected.length);
+                    if(is_first){
+
+                        $('#btn_create').bind( "click", function() {
+                            if(selected.length>0){
+
+                                bootbox.confirm({
+                                    title: "Pembentukan RPP",
+                                    message: "Apakah anda yakin akan membersihkan "+selected.length+" pilihan titik koordinat dari Peta?", 
+                                    buttons: {
+                                        cancel: {
+                                            className: 'btn-light',
+                                            label: '<i class="fa fa-times"></i> Batal'
+                                        },
+                                        confirm: {
+                                            className: 'btn-primary',
+                                            label: '<i class="fa fa-check"></i> Ya, Bersihkan'
+                                        }
+                                    },
+                                    callback: function (result) {
+                                        if(result){
+                                            $('div.content-body').block({ message: 'Membersihkan koordinat yang dipilih...' });
+                                            asyncForEach(cluster.markers(), function(marker) {
+                                                if(marker.selected){
+                                                    marker.setIcon(red_house);
+                                                    marker.selected = false;
+                                                    selected = $.grep(selected, function(e) { return e.idpel!=marker.idpel });
+                                                    $('#plg_dipilih').html(selected.length);
+                                                }
+                                            },function(){
+                                                populateList(selected);
+                                                if(selected.length>0){
+                                                    $('#btn_reset').prop('disabled', false);
+                                                    $('#btn_remove').prop('disabled', false);
+                                                    $('#btn_create').prop('disabled', false);
+                                                }
+                                                $('div.content-body').unblock();
+                                            });
+                                        }
+                                    }
+                                });
+
+                            }else{
+                                bootbox.alert({
+                                    message: "Silahkan pilih koordinat yang akan dibentuk RPP!",
+                                    backdrop: true
+                                });
                             }
+
                         });
 
-                        populateList(selected);
 
-                    });
+                        $('#btn_reset').bind( "click", function() {
+                            if(selected.length>0){
+
+                                bootbox.confirm({
+                                    title: "Bersihkan Pilihan?",
+                                    message: "Apakah anda yakin akan membersihkan "+selected.length+" pilihan titik koordinat dari Peta?", 
+                                    buttons: {
+                                        cancel: {
+                                            className: 'btn-light',
+                                            label: '<i class="fa fa-times"></i> Batal'
+                                        },
+                                        confirm: {
+                                            className: 'btn-primary',
+                                            label: '<i class="fa fa-check"></i> Ya, Bersihkan'
+                                        }
+                                    },
+                                    callback: function (result) {
+                                        if(result){
+                                            $('div.content-body').block({ message: 'Membersihkan koordinat yang dipilih...' });
+                                            asyncForEach(cluster.markers(), function(marker) {
+                                                if(marker.selected){
+                                                    marker.setIcon(red_house);
+                                                    marker.selected = false;
+                                                    selected = $.grep(selected, function(e) { return e.idpel!=marker.idpel });
+                                                    $('#plg_dipilih').html(selected.length);
+                                                }
+                                            },function(){
+                                                populateList(selected);
+                                                if(selected.length>0){
+                                                    $('#btn_reset').prop('disabled', false);
+                                                    $('#btn_remove').prop('disabled', false);
+                                                    $('#btn_create').prop('disabled', false);
+                                                }
+                                                $('div.content-body').unblock();
+                                            });
+                                        }
+                                    }
+                                });
+
+                            }else{
+                                bootbox.alert({
+                                    message: "Silahkan pilih koordinat yang akan diunblok!",
+                                    backdrop: true
+                                });
+                            }
+
+                        });
+
+                        $('#btn_remove').bind( "click", function() {
+                            if(selected.length>0){
+
+                                bootbox.confirm({
+                                    title: "Hapus Koordinat?",
+                                    message: "Apakah anda yakin akan menghapus "+selected.length+" titik koordinat dari Peta?", 
+                                    buttons: {
+                                        cancel: {
+                                            className: 'btn-light',
+                                            label: '<i class="fa fa-times"></i> Batal'
+                                        },
+                                        confirm: {
+                                            className: 'btn-danger',
+                                            label: '<i class="fa fa-check"></i> Ya, Hapus'
+                                        }
+                                    },
+                                    callback: function (result) {
+                                        if(result){
+                                            $('div.content-body').block({ message: 'Menghapus koordinat yang dipilih...' });
+                                            asyncForEach(cluster.markers(), function(marker) {
+                                                if(marker.selected){
+                                                    console.log(marker);
+                                                    marker.setIcon(red_house);
+                                                    marker.selected = false;
+                                                    marker.setMap(null);
+                                                    cluster.remove(marker);
+                                                    //selected = $.grep(selected, function(e) { return e.idpel!=marker.idpel });
+                                                    selected = $.grep(selected, function(e) { return e.idpel!=marker.idpel });
+                                                    $('#plg_dipilih').html(selected.length);
+                                                    $('#total_plg').html(cluster.markers().filter(function(e) { return e.idpel!="X" }).length);
+                                                }
+                                            },function() {
+                                                populateList(selected);
+                                                if(selected.length>0){
+                                                    $('#btn_reset').prop('disabled', false);
+                                                    $('#btn_remove').prop('disabled', false);
+                                                    $('#btn_create').prop('disabled', false);
+                                                }
+                                                $('div.content-body').unblock();
+                                            });
+                                        }
+                                    }
+                                });
+
+                            }else{
+                                bootbox.alert({
+                                    message: "Silahkan pilih koordinat yang akan dihapus!",
+                                    backdrop: true
+                                });
+                            }
+
+                        });
+
+                        $("ul#petugas-selected").on("click", "li.list-group-item a", function(e){
+                            e.preventDefault();
+                            console.log("PETUGAS HAPUS");
+                            console.log($(this));
+                            //alert($(this).text());
+                            var petugas = $(this).prev().html();
+                            asyncForEach(cluster.markers(), function(marker) {
+                                if(marker.selected && marker.petugas==petugas){
+                                    marker.setIcon(red_house);
+                                    marker.selected = false;
+                                    selected = $.grep(selected, function(e) { return e.idpel!=marker.idpel });
+                                    $('#plg_dipilih').html(selected.length);
+                                }
+                            },function(){
+                                populateList(selected);
+                            });
+
+                        });
+
+                        $("ul#gardu-selected").on("click", "li.list-group-item a", function(e){
+                            e.preventDefault();
+                            console.log("GARDU HAPUS");
+                            console.log($(this));
+                            var gardu = $(this).prev().html();
+                            asyncForEach(cluster.markers(), function(marker) {
+                                if(marker.selected && marker.gardu==gardu){
+                                    marker.setIcon(red_house);
+                                    marker.selected = false;
+                                    selected = $.grep(selected, function(e) { return e.idpel!=marker.idpel });
+                                    $('#plg_dipilih').html(selected.length);
+                                }
+                            },function(){
+                                populateList(selected);
+                            });
+
+                        });
+
+                        is_first = false;
+                    }
 
                     $('div.content-body').unblock();
 
                 })
               .on('click', function (marker) {
                 if(marker){
-                    if(!marker.selected){
-                        marker.setIcon(blue_house);
-                        marker.selected = true;
-                        selected.push(marker);
-                        $('#plg_dipilih').html(parseInt($('#plg_dipilih').html())+1);
-                    }else{
-                        marker.setIcon(red_house);
-                        marker.selected = false;
-                        selected = $.grep(selected, function(e) { return e.idpel!=marker.idpel });
-                        $('#plg_dipilih').html(selected.length);
+                    if(marker.idpel!="X"){
+                        if(!marker.selected){
+                            marker.setIcon(blue_house);
+                            marker.selected = true;
+                            selected.push(marker);
+                            $('#plg_dipilih').html(parseInt($('#plg_dipilih').html())+1);
+                        }else{
+                            marker.setIcon(red_house);
+                            marker.selected = false;
+                            selected = $.grep(selected, function(e) { return e.idpel!=marker.idpel });
+                            $('#plg_dipilih').html(selected.length);
 
+                        }
+                        populateList(selected);
+                        if(selected.length>0){
+                            $('#btn_reset').prop('disabled', false);
+                            $('#btn_remove').prop('disabled', false);
+                            $('#btn_create').prop('disabled', false);
+                        }
                     }
-                    populateList(selected);
                 }
               })
               .wait(2000) // to let you appreciate the current zoom & center
@@ -299,39 +472,39 @@ $(document).ready(function () {
 
     });
 
-    $('#btn_create').click(function(){
+    // $('#btn_create').click(function(){
 
-        console.log('create!!');
-        Swal.fire({
-            title: 'Masukan nama RPP',
-            input: 'text',
-            showCancelButton: true,
-            cancelButtonText: 'Kembali',
-            confirmButtonText: 'Simpan',
-            showLoaderOnConfirm: true,
-            // confirmButtonColor: "#58db83",
-            // cancelButtonColor: "#ec536c",
-            preConfirm: function (nama_rpp) {
-                return new Promise(function (resolve, reject) {
-                    setTimeout(function () {
-                        if (nama_rpp === 'taken@example.com') {
-                            reject('This rpp is already taken.')
-                        } else {
-                            resolve()
-                        }
-                    }, 2000)
-                })
-            },
-            allowOutsideClick: false
-        }).then(function (nama_rpp) {
-            Swal.fire({
-                type: 'success',
-                title: 'Ajax request finished!',
-                html: 'Submitted rpp: ' + nama_rpp
-            })
-        })
+    //     console.log('create!!');
+    //     Swal.fire({
+    //         title: 'Masukan nama RPP',
+    //         input: 'text',
+    //         showCancelButton: true,
+    //         cancelButtonText: 'Kembali',
+    //         confirmButtonText: 'Simpan',
+    //         showLoaderOnConfirm: true,
+    //         // confirmButtonColor: "#58db83",
+    //         // cancelButtonColor: "#ec536c",
+    //         preConfirm: function (nama_rpp) {
+    //             return new Promise(function (resolve, reject) {
+    //                 setTimeout(function () {
+    //                     if (nama_rpp === 'taken@example.com') {
+    //                         reject('This rpp is already taken.')
+    //                     } else {
+    //                         resolve()
+    //                     }
+    //                 }, 2000)
+    //             })
+    //         },
+    //         allowOutsideClick: false
+    //     }).then(function (nama_rpp) {
+    //         Swal.fire({
+    //             type: 'success',
+    //             title: 'Ajax request finished!',
+    //             html: 'Submitted rpp: ' + nama_rpp
+    //         })
+    //     })
 
-    });
+    // });
 
         // Accepts the array and key
     const groupBy = (array, key) => {

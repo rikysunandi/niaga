@@ -91,6 +91,7 @@
                                                 <select id="sel_kodegerak" title="KODE GERAK" class="selectpicker show-tick" data-size="5" style="width: auto;" >
                                                     <option value="22" selected="selected">22 - LUNAS ONLINE</option>
                                                     <option value="23">23 - LUNAS NOTABUKU</option>
+                                                    <option value="24">24 - BEBAN KANTOR</option>
                                                     <option value="31">31 - PEMBATALAN REKENING</option>
                                                     <option value="41">41 - PINDAH KE PRR</option>
                                                 </select>

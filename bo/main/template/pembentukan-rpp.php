@@ -134,7 +134,11 @@
                                 <h4 class="card-title">Peta Pembentukan RPP</h4>
                             </div>
                             <div class="card-body">
-                                <div style="height:480px;">
+                                <div>
+                                    <p>Silahkan pilih pelanggan-pelanggan yang akan dibentuk RPP dengan cara memblok sekumpulan titik koordinat (tahan tombol SHIFT + blok area) atau klik pada masing-masing titik koordinat.
+                                    </p>
+                                </div>
+                                <div style="height:500px;">
                                     <div id="map"></div>
                                 </div>
                             </div>
@@ -191,7 +195,25 @@
         <!--**********************************
             Content body end
         ***********************************-->
-        
+        <!-- <div id="confirm_modal" class="modal" tabindex="-1" role="dialog">
+          <div class="modal-dialog" role="document">
+            <div class="modal-content">
+              <div class="modal-header">
+                <h5 class="modal-title">Konfirmasi</h5>
+                <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                  <span aria-hidden="true">&times;</span>
+                </button>
+              </div>
+              <div class="modal-body">
+                <p>Apakah anda yakin akan menghapus koordinat dari Map?</p>
+              </div>
+              <div class="modal-footer">
+                <button type="button" class="btn btn-secondary" data-dismiss="modal">Batal</button>
+                <button type="button" class="btn btn-primary">Ya</button>
+              </div>
+            </div>
+          </div>
+        </div> -->
         
 
     </div>
@@ -218,6 +240,7 @@
     <!-- <script src="https://unpkg.com/@googlemaps/markerclustererplus/dist/index.min.js"></script> -->
     <script src="../../assets/plugins/sweetalert2/dist/sweetalert2.min.js"></script>
     <script src="../../assets/plugins/block-ui/jquery.blockUI.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/bootbox.js/5.5.2/bootbox.min.js" integrity="sha512-RdSPYh1WA6BF0RhpisYJVYkOyTzK4HwofJ3Q7ivt/jkpW6Vc8AurL1R+4AUcvn9IwEKAPm/fk7qFZW3OuiUDeg==" crossorigin="anonymous" referrerpolicy="no-referrer"></script>
 
     <script src="../js/pages/apps.js"></script>
     <script src="../js/pages/pembentukan-rpp.js"></script>

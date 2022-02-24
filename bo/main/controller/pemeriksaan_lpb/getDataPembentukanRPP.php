@@ -37,15 +37,30 @@ if(!sqlsrv_execute($stmt)){
 if($stmt){
 	$i=0;
 	while( $row = sqlsrv_fetch_array( $stmt, SQLSRV_FETCH_ASSOC) ) {
-		$response[$i]['idpel'] = $row['IDPEL']; 
-		$response[$i]['nama'] = $row['NAMA']; 
-		// $response[$i]['tarif'] = $row['TARIF']; 
-		// $response[$i]['daya'] = intval($row['DAYA']);
-		$response[$i]['latitude'] = ($row['LATITUDE']); 
-		$response[$i]['longitude'] = ($row['LONGITUDE']); 
-		$response[$i]['petugas_priangan'] = ($row['PETUGAS_PRIANGAN']); 
-		$response[$i]['nama_gardu'] = ($row['NAMA_GARDU']); 
-		// $response[$i]['foto'] = ($row['FOTO']); 
+		$response['plg'][$i]['idpel'] = $row['IDPEL']; 
+		$response['plg'][$i]['nama'] = $row['NAMA']; 
+		// $response['plg'][$i]['tarif'] = $row['TARIF']; 
+		// $response['plg'][$i]['daya'] = intval($row['DAYA']);
+		$response['plg'][$i]['latitude'] = ($row['LATITUDE']); 
+		$response['plg'][$i]['longitude'] = ($row['LONGITUDE']); 
+		$response['plg'][$i]['petugas_priangan'] = ($row['PETUGAS_PRIANGAN']); 
+		$response['plg'][$i]['nama_gardu'] = ($row['NAMA_GARDU']); 
+		// $response['plg'][$i]['foto'] = ($row['FOTO']); 
+
+		$i++;
+	}
+	sqlsrv_next_result($stmt);
+
+	$i=0;
+	while( $row = sqlsrv_fetch_array( $stmt, SQLSRV_FETCH_ASSOC) ) {
+		$response['gardu'][$i]['nama_gardu'] = $row['NAMA_GARDU']; 
+		$response['gardu'][$i]['kapasitas_trafo'] = $row['KAPASITAS_TRAFO']; 
+		// $response['gardu'][$i]['tarif'] = $row['TARIF']; 
+		// $response['gardu'][$i]['daya'] = intval($row['DAYA']);
+		$response['gardu'][$i]['latitude'] = ($row['LATITUDE_EAM']); 
+		$response['gardu'][$i]['longitude'] = ($row['LONGITUDE_EAM']); 
+		$response['gardu'][$i]['nomor_gardu'] = ($row['NOMOR_GARDU']); 
+		// $response['gardu'][$i]['foto'] = ($row['FOTO']); 
 
 		$i++;
 	}
