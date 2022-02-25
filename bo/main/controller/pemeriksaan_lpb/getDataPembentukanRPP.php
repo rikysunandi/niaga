@@ -57,8 +57,8 @@ if($stmt){
 		$response['gardu'][$i]['kapasitas_trafo'] = $row['KAPASITAS_TRAFO']; 
 		// $response['gardu'][$i]['tarif'] = $row['TARIF']; 
 		// $response['gardu'][$i]['daya'] = intval($row['DAYA']);
-		$response['gardu'][$i]['latitude'] = ($row['LATITUDE_EAM']); 
-		$response['gardu'][$i]['longitude'] = ($row['LONGITUDE_EAM']); 
+		$response['gardu'][$i]['latitude'] = ($row['LATITUDE']); 
+		$response['gardu'][$i]['longitude'] = ($row['LONGITUDE']); 
 		$response['gardu'][$i]['nomor_gardu'] = ($row['NOMOR_GARDU']); 
 		// $response['gardu'][$i]['foto'] = ($row['FOTO']); 
 

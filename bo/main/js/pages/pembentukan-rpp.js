@@ -112,13 +112,26 @@ $(document).ready(function () {
 
             $(json.gardu).each(function(key, obj){
                 // console.log(obj);
-                gardu_markers.push(
+                markers.push(
                     {
                         title: obj.nama_gardu+" ( "+obj.kapasitas_trafo+" kVA ) ", 
-                        label: obj.nama_gardu,
+                        //label: obj.nama_gardu,
                         position:[obj.latitude, obj.longitude], 
-                        icon:ic_gardu,
-                        idpel:"X"
+                        //icon:ic_gardu,
+                        icon: {
+                          url: ic_gardu,
+                          labelOrigin: new google.maps.Point(20, 20),
+                          //size: new google.maps.Size(32,32),
+                          //anchor: new google.maps.Point(16,32)
+                        },
+                        label: {
+                          text: obj.nama_gardu,
+                          color: "#4caf50",
+                          fontWeight: "bold"
+                        },
+                        gardu:obj.nama_gardu,
+                        idpel:"X",
+                        zIndex: 9999,
                     });
             });
                
@@ -126,46 +139,49 @@ $(document).ready(function () {
 
             var map = $('#map')
               .gmap3({
-                center: [-6.3487933,107.6809901],
-                zoom:11,
-                mapTypeControl: true,
-                mapTypeControlOptions: {
-                  style: google.maps.MapTypeControlStyle.DROPDOWN_MENU
-                },
-                navigationControl: true,
+                //center: [-6.3487933,107.6809901],
+                //zoom:11,
+                // mapTypeControl: true,
+                // mapTypeControlOptions: {
+                //   style: google.maps.MapTypeControlStyle.DROPDOWN_MENU
+                // },
+                // navigationControl: true,
                 // scrollwheel: true,
                 // streetViewControl: true
               })
               .marker(gardu_markers)
               .cluster({
-                radius: 10,
+                //radius: 10,
                 //size: 300,
                 markers: markers,
                 cb: function (markers) {
                   markers_obj = markers;
-                  if (markers.length > 300) { // 1 marker stay unchanged (because cb returns nothing)
-                    if (markers.length > 10000) {
+
+                  var jml_plg = $.grep(markers, function(e) { return e.idpel!="X" }).length;
+
+                  if (jml_plg > 300) { // 1 marker stay unchanged (because cb returns nothing)
+                    if (jml_plg > 10000) {
                       return {
-                        content: "<div class='cluster cluster-3'>" + markers.length + "</div>",
-                        // x: -26,
-                        // y: -26,
+                        content: "<div class='cluster cluster-3'>" + jml_plg + "</div>",
+                        x: -43,
+                        y: -43,
                         width: 86,
                         height: 85
                       };
                     }
-                    else if (markers.length > 1000) {
+                    else if (jml_plg > 1000) {
                       return {
-                        content: "<div class='cluster cluster-2'>" + markers.length + "</div>",
-                        x: -26,
-                        y: -26,
+                        content: "<div class='cluster cluster-2'>" + jml_plg + "</div>",
+                        x: -33,
+                        y: -33,
                         width: 66,
                         height: 65
                       };
                     }else{
                       return {
-                        content: "<div class='cluster cluster-1'>" + markers.length + "</div>",
-                        x: -26,
-                        y: -26,
+                        content: "<div class='cluster cluster-1'>" + jml_plg + "</div>",
+                        x: -31,
+                        y: -31,
                         width: 63,
                         height: 62
                       };
