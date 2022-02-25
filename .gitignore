@@ -1,4 +1,4 @@
 bo/assets/uploads/*
-# exception to the rule
 bo/assets/uploads/.gitkeep 
+services/uploads/*
 documentation/*
