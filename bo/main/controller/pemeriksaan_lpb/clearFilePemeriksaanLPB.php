@@ -27,7 +27,7 @@ function delete_files($target) {
     }
 }
 
-delete_files(dirname($filepath));
+delete_files(($filepath));
 delete_files($zipfile);
 
 $response['msg'] .= 'Clear File berhasil';
