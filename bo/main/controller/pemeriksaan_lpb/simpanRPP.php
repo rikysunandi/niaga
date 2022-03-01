@@ -14,7 +14,7 @@ $params = array(
     array($user, SQLSRV_PARAM_IN),
 );
 
-$sql = "EXEC SP_RPP_SIMPAN @PETUGAS = ?, @RPP = ?, @IDPEL = ?, @USER_INPUT = ? ";
+$sql = "EXEC SP_PLG_RPP_SIMPAN @PETUGAS = ?, @RPP = ?, @IDPEL = ?, @USER_INPUT = ? ";
 $stmt = sqlsrv_prepare($conn, $sql, $params);
 
 if(sqlsrv_execute($stmt)){

@@ -144,7 +144,7 @@
                             </div>
                             <div class="card-footer text-muted">
                                 <div class="align-middle d-inline">
-                                    <span class="fa fa-info-circle"></span> Ada sebanyak <span id="plg_dipilih">0</span> Pelanggan yang dipilih dari total <span id="total_plg">0</span> Pelanggan
+                                    <span class="fa fa-info-circle"></span> Ada sebanyak <span id="plg_dipilih" class="text-success">0</span> Pelanggan yang dipilih dari total <span id="total_plg" class="text-primary">0</span> Pelanggan
                                 </div>
                                 <button id="btn_create" class="btn btn-primary waves-effect waves-light btn-sm pull-right mr-2">Buat RPP <span class="btn-icon-right"><i class="fa fa-check-circle"></i></span></button>
                                 <button id="btn_reset" class="btn btn-secondary waves-effect waves-light btn-sm pull-right mr-2">Bersihkan Pilihan <span class="btn-icon-right"><i class="fa fa-refresh"></i></span></button>

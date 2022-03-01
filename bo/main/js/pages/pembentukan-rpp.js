@@ -134,13 +134,13 @@ $(document).ready(function () {
               .gmap3({
                 //center: [-6.3487933,107.6809901],
                 //zoom:11,
-                // mapTypeControl: true,
-                // mapTypeControlOptions: {
-                //   style: google.maps.MapTypeControlStyle.DROPDOWN_MENU
-                // },
-                // navigationControl: true,
-                // scrollwheel: true,
-                // streetViewControl: true
+                mapTypeControl: true,
+                mapTypeControlOptions: {
+                  style: google.maps.MapTypeControlStyle.DROPDOWN_MENU
+                },
+                navigationControl: true,
+                scrollwheel: true,
+                streetViewControl: true
               })
               .marker(gardu_markers)
               .cluster({
@@ -204,42 +204,68 @@ $(document).ready(function () {
 
                     google.maps.event.addListener(dz, 'dragend', function (bnds) {
                         console.log('KeyDragZoom Ended: ' + bnds);
+                        console.log(bnds);
+                        console.log(bnds.getSouthWest());
 
-                        $('div.content-body').block({ message: 'Memilih koordinat...' });
-                        asyncForEach(cluster.markers(), function(marker) {
-                            var petugas = new Array(); 
-                            var gardu = new Array(); 
-                            if(marker.getPosition()){
-                                if (bnds.contains(marker.getPosition())) {
-                                    //console.log('marker dalam pilihan', marker);
-                                    
-                                    //if(!marker.selected){
-                                    if(marker.idpel!="X"){
-                                        marker.setIcon(blue_house);
-                                        marker.selected = true;
-                                        selected.push(marker);
-                                        $('#plg_dipilih').html(parseInt($('#plg_dipilih').html())+1);
+                        var GLOBE_WIDTH = 256; // a constant in Google's map projection
+                        var west = bnds.getSouthWest().lng();
+                        var east = bnds.getNorthEast().lng();
+                        var angle = east - west;
+                        if (angle < 0) {
+                          angle += 360;
+                        }
+                        var pixelWidth = $('div#map').width();
+                        var zoom = Math.round(Math.log(pixelWidth * 360 / angle / GLOBE_WIDTH) / Math.LN2);
+
+                        console.log('zoom', zoom);
+
+                        if(zoom>=10){
+
+                            $('div.content-body').block({ message: 'Memilih koordinat...' });
+                            asyncForEach(cluster.markers(), function(marker) {
+                                var petugas = new Array(); 
+                                var gardu = new Array(); 
+
+                                // if(selected.length > 500){
+                                //     bootbox.alert("Pelanggan yang dipilih sudah mencapai maksimal 500 pelanggan!");
+                                //     return false;
+                                // }
+
+                                if(marker.getPosition()){
+                                    if (bnds.contains(marker.getPosition())) {
+                                        //console.log('marker dalam pilihan', marker);
+                                        
+                                        //if(!marker.selected){
+                                        if(marker.idpel!="X"){
+                                            marker.setIcon(blue_house);
+                                            marker.selected = true;
+                                            selected.push(marker);
+                                            $('#plg_dipilih').html(parseInt($('#plg_dipilih').html())+1);
+                                        }
+
+                                        // }else{
+                                        //     marker.setIcon(red_house);
+                                        //     marker.selected = false;
+                                        //     $('#plg_dipilih').html(selected.length);
+
+                                        // }
                                     }
-
-                                    // }else{
-                                    //     marker.setIcon(red_house);
-                                    //     marker.selected = false;
-                                    //     $('#plg_dipilih').html(selected.length);
-
-                                    // }
                                 }
-                            }
-                          //marker.setIcon("http://maps.google.com/mapfiles/marker_green.png");
-                        },function(){
-                            populateList(selected);
-                            if(selected.length>0){
-                                $('#btn_reset').prop('disabled', false);
-                                $('#btn_remove').prop('disabled', false);
-                                $('#btn_create').prop('disabled', false);
-                            }
-                            $('div.content-body').unblock();
-        
-                        });
+                              //marker.setIcon("http://maps.google.com/mapfiles/marker_green.png");
+                            },function(){
+                                populateList(selected);
+                                if(selected.length>0){
+                                    $('#btn_reset').prop('disabled', false);
+                                    $('#btn_remove').prop('disabled', false);
+                                    $('#btn_create').prop('disabled', false);
+                                }
+                                $('div.content-body').unblock();
+            
+                            });
+                        }else{
+                            bootbox.alert("Rentang pilihan terlalu jauh!");
+                            return false;
+                        }
 
                     });
 
@@ -273,7 +299,7 @@ $(document).ready(function () {
                                             
                                             bootbox.prompt({
                                                 title: "Nama RPP",
-                                                message: "Silahkan berikan Nama RPP yang akan dibentuk (7 karakter)", 
+                                                message: "Tentukan Nama RPP untuk Petugas "+petugas_dipilih+" yang akan dibentuk (7 karakter)", 
                                                 required: true,
                                                 maxlength: 7,
                                                 callback: function (result) {
@@ -282,7 +308,7 @@ $(document).ready(function () {
                                                         console.log('petugas', petugas_dipilih);
                                                         console.log('rpp', rpp);
 
-                                                        if(rpp.length < 7){
+                                                        if(rpp.length != 7){
                                                             bootbox.alert("Silahkan masukan nama RPP sebanyak 7 karakter!");
                                                             return false;
                                                         }
