@@ -233,7 +233,7 @@
     
     <script src="../../assets/plugins/moment/moment.min.js"></script>
     <script src="../../assets/plugins/bootstrap-daterangepicker/daterangepicker.js"></script>
-    <script src="https://maps.googleapis.com/maps/api/js?key=AIzaSyAqznXEC9IjyXrbRdKk1vKWJWLioZixUW8"></script>
+    <script src="https://maps.googleapis.com/maps/api/js?key=AIzaSyCRViwwpnm9OuVSUmErg0PnV4I9t5aCcUw"></script>
 
     <script src="../../assets/plugins/gmaps/gmap3.js"></script>
     <script src="../../assets/plugins/keydragzoom/keydragzoom.js"></script>
