@@ -59,9 +59,9 @@
     	if($('#sel_unitup').data('inc-semua')!='T')
 			$('#sel_unitup').append('<option value="00">SEMUA UNIT</option>');
 
-        if(!unitupi){
-            unitupi = data.rows[0].kode;
-        }
+        // if(!unitupi){
+        //     unitupi = data.rows[0].kode;
+        // }
         console.log('set UNITUPI', unitupi);
         $('#sel_unitupi').selectpicker('refresh');
         $('#sel_unitupi').selectpicker('val', unitupi);
@@ -90,9 +90,9 @@
     	    	if($('#sel_unitup').data('inc-semua')!='T')
     				$('#sel_unitup').append('<option value="00">SEMUA UNIT</option>');
 
-                if(!unitap){
-                    unitap = data.rows[0].kode;
-                }
+                // if(!unitap){
+                //     unitap = data.rows[0].kode;
+                // }
                 $('#sel_unitap').selectpicker('refresh');
                 $('#sel_unitap').selectpicker('val', unitap);
     			//$('#sel_unitup').selectpicker('refresh');
@@ -117,9 +117,9 @@
     	    	if($('#sel_unitup').data('inc-semua')!='T')
     				$('#sel_unitup').append('<option value="00">SEMUA UNIT</option>');
 
-                if(!unitup){
-                    unitup = data.rows[0].kode;
-                }
+                // if(!unitup){
+                //     unitup = data.rows[0].kode;
+                // }
                 $('#sel_unitup').selectpicker('refresh');
                 $('#sel_unitup').selectpicker('val', unitup);
     	    });
