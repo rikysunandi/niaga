@@ -349,7 +349,11 @@ $(document).ready(function () {
                                                                 }
                                                                 progress.modal('hide');
 
-                                                                window.open("urut-langkah-rpp.php?petugas="+petugas+"&rpp="+rpp, "_blank");
+                                                                var unitupi= $('#sel_unitupi').val();
+                                                                var unitap= $('#sel_unitap').val();
+                                                                var unitup= $('#sel_unitup').val();
+
+                                                                window.open("urut-langkah-rpp.php?unitupi="+unitupi+"&unitap="+unitap+"&unitup="+unitup+"&petugas="+petugas+"&rpp="+rpp, "_blank");
 
                                                             }
 
