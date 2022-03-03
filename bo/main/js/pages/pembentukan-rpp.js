@@ -322,7 +322,7 @@ $(document).ready(function () {
                                                                 $($(progress).find('.msg')[0]).html('Menyimpan idpel '+marker.idpel+' ke RPP <span class="text-success">'+rpp+'</span> milik petugas <span class="text-success">'+petugas+'</span>...');
 
                                                                 $.post('../controller/pemeriksaan_lpb/simpanRPP.php', 
-                                                                { petugas: petugas, rpp: rpp, idpel:marker.idpel }, 
+                                                                { petugas: petugas, rpp: rpp, urutan:0, idpel:marker.idpel }, 
                                                                 function(res){
                                                                     console.log('res',res);
                                                                     if(res.success=='true' || res.success){
