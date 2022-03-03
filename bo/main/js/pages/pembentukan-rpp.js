@@ -1,18 +1,8 @@
 $(document).ready(function () {
 
     "use strict";
-
-    $('.input-daterange-datepicker').daterangepicker({
-        buttonClasses: ['btn', 'btn-sm'],
-        applyClass: 'btn-danger',
-        cancelClass: 'btn-inverse',
-        opens: 'left',
-        startDate: moment().subtract(3, 'days').format('DD/MM/YYYY'),
-        endDate: moment(),
-        locale: {
-          format: 'DD/MM/YYYY'
-        }
-    });
+    const queryString = window.location.search;
+    const urlParams = new URLSearchParams(queryString);
     
     var red_house = "../../assets/images/markers/red/house.png";
     var blue_house = "../../assets/images/markers/blue/house.png";
@@ -86,7 +76,8 @@ $(document).ready(function () {
             //console.log( "JSON Data: " + json );
 
 
-            var markers = new Array(); 
+            var markers = new Array();
+            var wilker = json.wil; 
 
             $(json.plg).each(function(key, obj){
                 // console.log(obj);
@@ -296,11 +287,18 @@ $(document).ready(function () {
                                     callback: function (result) {
                                         if(result){
                                             var petugas_dipilih = result;
+                                            console.log('wilker', wilker);
+                                            var wil = $.grep(wilker, function(e) { return e.kodepetugas==petugas_dipilih });
+                                            console.log(wil);
+                                            var rbm_prefill='';
+                                            if(wil.length>0)
+                                                rbm_prefill=wil[0].rbm;
                                             
                                             bootbox.prompt({
                                                 title: "Nama RPP",
                                                 message: "Tentukan Nama RPP untuk Petugas "+petugas_dipilih+" yang akan dibentuk (7 karakter)", 
                                                 required: true,
+                                                value: rbm_prefill,
                                                 maxlength: 7,
                                                 callback: function (result) {
                                                     if(result){
@@ -321,7 +319,7 @@ $(document).ready(function () {
                                                                 var marker = datas[i];
 
                                                                 $($(progress).find('.progress-bar')[0]).css('width', valeur+'%').attr('aria-valuenow', valeur);
-                                                                $($(progress).find('.msg')[0]).html('Menyimpan idpel '+marker.idpel+' ke RPP '+rpp+' milik petugas '+petugas+'...');
+                                                                $($(progress).find('.msg')[0]).html('Menyimpan idpel '+marker.idpel+' ke RPP <span class="text-success">'+rpp+'</span> milik petugas <span class="text-success">'+petugas+'</span>...');
 
                                                                 $.post('../controller/pemeriksaan_lpb/simpanRPP.php', 
                                                                 { petugas: petugas, rpp: rpp, idpel:marker.idpel }, 
@@ -350,6 +348,8 @@ $(document).ready(function () {
                                                                     $('#btn_create').prop('disabled', false);
                                                                 }
                                                                 progress.modal('hide');
+
+                                                                window.open("urut-langkah-rpp.php?petugas="+petugas+"&rpp="+rpp, "_blank");
 
                                                             }
 
@@ -401,7 +401,7 @@ $(document).ready(function () {
                                     callback: function (result) {
                                         if(result){
                                             $('div.content-body').block({ message: 'Membersihkan koordinat yang dipilih...' });
-                                            asyncForEach(cluster.markers(), function(marker) {
+                                            asyncForEach(selected, function(marker) {
                                                 if(marker.selected){
                                                     marker.setIcon(red_house);
                                                     marker.selected = false;
@@ -449,7 +449,7 @@ $(document).ready(function () {
                                     callback: function (result) {
                                         if(result){
                                             $('div.content-body').block({ message: 'Menghapus koordinat yang dipilih...' });
-                                            asyncForEach(cluster.markers(), function(marker) {
+                                            asyncForEach(selected, function(marker) {
                                                 if(marker.selected){
                                                     console.log(marker);
                                                     marker.setIcon(red_house);

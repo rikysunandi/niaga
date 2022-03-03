@@ -65,6 +65,16 @@ if($stmt){
 		$i++;
 	}
 
+	sqlsrv_next_result($stmt);
+
+	$i=0;
+	while( $row = sqlsrv_fetch_array( $stmt, SQLSRV_FETCH_ASSOC) ) {
+		$response['wil'][$i]['kodepetugas'] = $row['KODEPETUGAS']; 
+		$response['wil'][$i]['rbm'] = $row['RBM']; 
+
+		$i++;
+	}
+
 	//$response['success'] = true;
 	sqlsrv_free_stmt($stmt);
 

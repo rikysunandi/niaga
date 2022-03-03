@@ -2,6 +2,8 @@
 
 //require_once '../../config/config.php';
 
+error_reporting(E_ERROR | E_WARNING | E_PARSE | E_NOTICE);
+
 $text = $_GET["text"];
 $color = $_GET["color"];
 
@@ -15,7 +17,7 @@ else
 	$font_size = 11;
 
 define("FONT_SIZE", $font_size);                            // font size in points
-define("FONT_PATH", "c:/windows/fonts/arial.ttf"); // path to a ttf font file
+define("FONT_PATH", __DIR__."/../../assets/fonts/abel.ttf"); // path to a ttf font file
 define("FONT_COLOR", 0x00000000);                  // 4 byte color
                                                    // alpha  -- 0x00 thru 0x7F; solid thru transparent
                                                    // red    -- 0x00 thru 0xFF
@@ -25,7 +27,7 @@ define("FONT_COLOR", 0x00000000);                  // 4 byte color
 $gdimage = imagecreatefrompng('../../assets/images/markers/pin/48x48/icon-'.$color.'.png');
 imagesavealpha($gdimage, true);
 
-if (strtoupper(substr(PHP_OS, 0, 3)) === 'WIN'){
+// if (strtoupper(substr(PHP_OS, 0, 3)) === 'WIN'){
     list($x0, $y0, , , $x1, $y1) = imagettfbbox(FONT_SIZE, 0, FONT_PATH, $text);
 
 	$imwide = imagesx($gdimage);
@@ -37,9 +39,12 @@ if (strtoupper(substr(PHP_OS, 0, 3)) === 'WIN'){
 	$bbx = $tlx - $x0;                                 // top-left x to bottom left x + adjust base point
 	$bby = $tly + $bbtall - $y0;                       // top-left y to bottom left y + adjust base point
 
-	imagettftext($gdimage, FONT_SIZE, 0, $bbx, $bby, FONT_COLOR, FONT_PATH, $text);
+	imagettftext($gdimage, FONT_SIZE, 0, $bbx+2, $bby, FONT_COLOR, FONT_PATH, $text);
 
-}
+// }else{
+
+// }
+
 header("Content-Type: image/png");
 header("Expires: " . gmdate("D, d M Y H:i:s", time() + 60 * 60 * 24 * 180) . " GMT");
 imagepng($gdimage);

@@ -48,6 +48,7 @@
 	    $('#sel_unitup').empty();
 
     	$.each(data.rows,function(i,v){
+            console.log('opsi', v.nama);
         	$('#sel_unitupi').append('<option value="'+v.kode+'">'+v.nama+'</option>');
     	});
 
@@ -61,8 +62,9 @@
         if(!unitupi){
             unitupi = data.rows[0].kode;
         }
-        $('#sel_unitupi').selectpicker('val', unitupi);
+        console.log('set UNITUPI', unitupi);
         $('#sel_unitupi').selectpicker('refresh');
+        $('#sel_unitupi').selectpicker('val', unitupi);
         // $('#sel_unitap').selectpicker('refresh');
         // $('#sel_unitup').selectpicker('refresh');
 
@@ -71,50 +73,57 @@
 
     $('#sel_unitupi').change(function(){
 
-	    $('#sel_unitap').empty();
-	    $('#sel_unitup').empty();
+        console.log('sel_unitupi changed', $('#sel_unitupi').val());
+        if($('#sel_unitupi').val()!=null){
 
-	    $.getJSON('../controller/referensi/getUnitap.php?unitupi='+$('#sel_unitupi').val(), function(data){
-	    	console.log('rows', data.rows);
-            $.each(data.rows,function(i,v){
-	        	$('#sel_unitap').append('<option value="'+v.kode+'">'+v.nama+'</option>');
-	    	});
-            console.log('unitap1', unitap);
-	    	if($('#sel_unitap').data('inc-semua')!='T')
-				$('#sel_unitap').append('<option value="00">SEMUA UNIT</option>');
-	    	if($('#sel_unitup').data('inc-semua')!='T')
-				$('#sel_unitup').append('<option value="00">SEMUA UNIT</option>');
+    	    $('#sel_unitap').empty();
+    	    $('#sel_unitup').empty();
 
-            if(!unitap){
-                unitap = data.rows[0].kode;
-            }
-            $('#sel_unitap').selectpicker('val', unitap);
-			$('#sel_unitap').selectpicker('refresh');
-			//$('#sel_unitup').selectpicker('refresh');
-			
-			console.log('unitap', unitap);
-	    });
+    	    $.getJSON('../controller/referensi/getUnitap.php?unitupi='+$('#sel_unitupi').val(), function(data){
+    	    	console.log('rows', data.rows);
+                $.each(data.rows,function(i,v){
+    	        	$('#sel_unitap').append('<option value="'+v.kode+'">'+v.nama+'</option>');
+    	    	});
+                //console.log('unitap1', unitap);
+    	    	if($('#sel_unitap').data('inc-semua')!='T')
+    				$('#sel_unitap').append('<option value="00">SEMUA UNIT</option>');
+    	    	if($('#sel_unitup').data('inc-semua')!='T')
+    				$('#sel_unitup').append('<option value="00">SEMUA UNIT</option>');
+
+                if(!unitap){
+                    unitap = data.rows[0].kode;
+                }
+                $('#sel_unitap').selectpicker('refresh');
+                $('#sel_unitap').selectpicker('val', unitap);
+    			//$('#sel_unitup').selectpicker('refresh');
+    			
+    			console.log('unitap', unitap);
+    	    });
+        }
 
     });
 
     $('#sel_unitap').change(function(){
+        console.log('sel_unitap changed', $('#sel_unitap').val());
+        if($('#sel_unitupi').val()!=null){
 
-	    $('#sel_unitup').empty();
+    	    $('#sel_unitup').empty();
 
-	    $.getJSON('../controller/referensi/getUnitup.php?unitap='+$('#sel_unitap').val(), function(data){
-	    	$.each(data.rows,function(i,v){
+    	    $.getJSON('../controller/referensi/getUnitup.php?unitap='+$('#sel_unitap').val(), function(data){
+    	    	$.each(data.rows,function(i,v){
 
-	        	$('#sel_unitup').append('<option value="'+v.kode+'">'+v.nama+'</option>');
-	    	});
-	    	if($('#sel_unitup').data('inc-semua')!='T')
-				$('#sel_unitup').append('<option value="00">SEMUA UNIT</option>');
+    	        	$('#sel_unitup').append('<option value="'+v.kode+'">'+v.nama+'</option>');
+    	    	});
+    	    	if($('#sel_unitup').data('inc-semua')!='T')
+    				$('#sel_unitup').append('<option value="00">SEMUA UNIT</option>');
 
-            if(!unitup){
-                unitup = data.rows[0].kode;
-            }
-            $('#sel_unitup').selectpicker('val', unitup);
-            $('#sel_unitup').selectpicker('refresh');
-	    });
+                if(!unitup){
+                    unitup = data.rows[0].kode;
+                }
+                $('#sel_unitup').selectpicker('refresh');
+                $('#sel_unitup').selectpicker('val', unitup);
+    	    });
+        }
 
     });
 

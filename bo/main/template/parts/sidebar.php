@@ -138,9 +138,13 @@
                     </li>
                     <li><a href="rekap-pemeriksaan-lpb-all.php">Rekap Pemeriksaan LPB</a>
                     </li>
+                </ul>
+            </li>
+            <li><a class="has-arrow" href="javascript:void()" aria-expanded="false"><i class="mdi mdi-map"></i> <span class="nav-text">RPP</span></a>
+                <ul aria-expanded="false">
                     <li><a href="pembentukan-rpp.php">Peta Pembentukan RPP</a>
                     </li>
-                    <li><a href="rpp-per-gardu.php">RPP per Gardu</a>
+                    <li><a href="urut-langkah-rpp.php">Pembentukan Urut Langkah RPP</a>
                     </li>
                 </ul>
             </li>
