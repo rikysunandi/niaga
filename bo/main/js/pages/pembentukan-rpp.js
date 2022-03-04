@@ -311,7 +311,7 @@ $(document).ready(function () {
                                                             return false;
                                                         }
 
-                                                        function simpanRPP(datas, i, progress, petugas, rpp){
+                                                        function simpanRPP(datas, i, progress, petugas, rpp, berhasil){
 
                                                             if(i<datas.length){
 
@@ -319,13 +319,14 @@ $(document).ready(function () {
                                                                 var marker = datas[i];
 
                                                                 $($(progress).find('.progress-bar')[0]).css('width', valeur+'%').attr('aria-valuenow', valeur);
-                                                                $($(progress).find('.msg')[0]).html('Menyimpan idpel '+marker.idpel+' ke RPP <span class="text-success">'+rpp+'</span> milik petugas <span class="text-success">'+petugas+'</span>...');
+                                                                $($(progress).find('.msg')[0]).html('Menyimpan idpel '+marker.idpel+' ke RPP <span class="text-success">'+rpp+'</span> milik petugas <span class="text-success">'+petugas+'</span>('+(i+1)+'/'+datas.length+')...');
 
                                                                 $.post('../controller/pemeriksaan_lpb/simpanRPP.php', 
                                                                 { petugas: petugas, rpp: rpp, urutan:0, idpel:marker.idpel }, 
                                                                 function(res){
                                                                     console.log('res',res);
                                                                     if(res.success=='true' || res.success){
+                                                                        berhasil.push(marker.idpel);
                                                                         marker.setIcon(red_house);
                                                                         marker.selected = false;
                                                                         marker.setMap(null);
@@ -335,7 +336,7 @@ $(document).ready(function () {
                                                                         $('#total_plg').html(cluster.markers().filter(function(e) { return e.idpel!="X" }).length);
                                                                     }
 
-                                                                    simpanRPP(datas, i+1, dialog, petugas, rpp);
+                                                                    simpanRPP(datas, i+1, dialog, petugas, rpp, berhasil);
                                                                 });
 
                                                             }else{
@@ -349,11 +350,30 @@ $(document).ready(function () {
                                                                 }
                                                                 progress.modal('hide');
 
-                                                                var unitupi= $('#sel_unitupi').val();
-                                                                var unitap= $('#sel_unitap').val();
-                                                                var unitup= $('#sel_unitup').val();
+                                                                bootbox.confirm({
+                                                                    title: "Proses Selesai",
+                                                                    message: "Sebanyak "+berhasil.length+" pelanggan berhasil disimpan, apakah anda akan melanjutkan ke proses pemberian urut langkah? (klik allow/izinkan, jika muncul popup di browser anda)", 
+                                                                    buttons: {
+                                                                        cancel: {
+                                                                            className: 'btn-light',
+                                                                            label: '<i class="fa fa-times"></i> Tidak'
+                                                                        },
+                                                                        confirm: {
+                                                                            className: 'btn-primary',
+                                                                            label: '<i class="fa fa-check"></i> Ya, Lanjutkan'
+                                                                        }
+                                                                    },
+                                                                    callback: function (result) {
+                                                                        if(result){
 
-                                                                window.open("urut-langkah-rpp.php?unitupi="+unitupi+"&unitap="+unitap+"&unitup="+unitup+"&petugas="+petugas+"&rpp="+rpp, "_blank");
+                                                                            var unitupi= $('#sel_unitupi').val();
+                                                                            var unitap= $('#sel_unitap').val();
+                                                                            var unitup= $('#sel_unitup').val();
+
+                                                                            window.open("urut-langkah-rpp.php?unitupi="+unitupi+"&unitap="+unitap+"&unitup="+unitup+"&petugas="+petugas+"&rpp="+rpp, "_blank");
+                                                                        }
+                                                                    }
+                                                                });
 
                                                             }
 
@@ -365,8 +385,9 @@ $(document).ready(function () {
                                                         });
 
                                                         console.log('dialog', dialog);
+                                                        var berhasil = new Array();
 
-                                                        simpanRPP(selected, 0, dialog, petugas_dipilih, rpp);
+                                                        simpanRPP(selected, 0, dialog, petugas_dipilih, rpp, berhasil);
 
                                                             
                                                     }
