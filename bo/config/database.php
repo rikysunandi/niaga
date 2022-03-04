@@ -4,7 +4,8 @@ $serverName = "10.2.1.57";
 $connectionOptions = array(
     "database" => "NIAGA",
     "uid" => "sa",
-    "pwd" => "sqlsvr1q2w3e@@"
+    "pwd" => "sqlsvr1q2w3e@@",
+    "CharacterSet" => "UTF-8"
 );
 
 	$conn = sqlsrv_connect($serverName, $connectionOptions);
