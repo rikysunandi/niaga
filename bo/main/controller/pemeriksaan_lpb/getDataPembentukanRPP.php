@@ -4,6 +4,7 @@ require_once '../../../config/config.php';
 require_once '../../../config/database.php';
 
 ini_set("memory_limit", "128M");
+ini_set('max_execution_time', '500');
 
 $unitupi = $_GET['unitupi'];
 $unitap = $_GET['unitap'];
