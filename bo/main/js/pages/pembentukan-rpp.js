@@ -319,7 +319,7 @@ $(document).ready(function () {
                                                                 var marker = datas[i];
 
                                                                 $($(progress).find('.progress-bar')[0]).css('width', valeur+'%').attr('aria-valuenow', valeur);
-                                                                $($(progress).find('.msg')[0]).html('Menyimpan idpel '+marker.idpel+' ke RPP <span class="text-success">'+rpp+'</span> milik petugas <span class="text-success">'+petugas+'</span>('+(i+1)+'/'+datas.length+')...');
+                                                                $($(progress).find('.msg')[0]).html('Menyimpan idpel '+marker.idpel+' ke RPP <span class="text-success">'+rpp+'</span> milik petugas <span class="text-success">'+petugas+'</span> ('+(i+1)+'/'+datas.length+')...');
 
                                                                 $.post('../controller/pemeriksaan_lpb/simpanRPP.php', 
                                                                 { petugas: petugas, rpp: rpp, urutan:0, idpel:marker.idpel }, 

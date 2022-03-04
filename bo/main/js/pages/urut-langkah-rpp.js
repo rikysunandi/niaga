@@ -231,7 +231,10 @@ $(document).ready(function () {
                         $('#btn_simulasi').prop('disabled', false);
                         $('#btn_create').prop('disabled', false);
 
+                        $('#total_plg').html("("+markers.length+" plg)");
+
                         $('div.content-body').unblock();
+
 
                         const directionsService = new google.maps.DirectionsService();
                         const directionsRenderer = new google.maps.DirectionsRenderer();
