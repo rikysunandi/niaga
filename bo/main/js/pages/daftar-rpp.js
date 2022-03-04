@@ -134,12 +134,12 @@ $(document).ready(function () {
           },
           {
             data: "TARIF",
-            visible: false
+            visible: true
           },
           {
             data: "DAYA",
             type: 'number',
-            visible: false,
+            visible: true,
             "sClass" : "text-right" , render: $.fn.dataTable.render.number(".", ",", 0, '')
           },
           {
@@ -190,7 +190,7 @@ $(document).ready(function () {
                   // //this.disable(); // disable button
                   // console.log('dt', dt);
                   // console.log('node', node);
-                  window.open('../controller/pemeriksaan_lpb/expCSVRPP.php?unitupi='+$('#sel_unitupi').val()+'&unitap='+$('#sel_unitap').val()+'&unitup='+$('#sel_unitup').val()+'&petugas='+$('#sel_petugas').val()+'&rpp='+$('#sel_rpp').val() );
+                  window.open('../controller/pemeriksaan_lpb/expCSVDetailRPP.php?unitupi='+$('#sel_unitupi').val()+'&unitap='+$('#sel_unitap').val()+'&unitup='+$('#sel_unitup').val()+'&petugas='+$('#sel_petugas').val()+'&rpp='+$('#sel_rpp').val() );
               }
 
             },
@@ -255,7 +255,7 @@ $(document).ready(function () {
                             idpel: obj.idpel,
                             rpp: obj.rpp,
                             petugas: obj.petugas,
-                            urutan: null,
+                            urutan: obj.urutan,
                             start_end: false
                         });
                 });
