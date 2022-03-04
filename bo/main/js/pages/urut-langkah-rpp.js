@@ -458,7 +458,7 @@ $(document).ready(function () {
                                                 if (i < markers.length) {           //  if the counter < 10, call the loop function
                                                   simulasikan(markers, i+1);             //  ..  again which will trigger another 
                                                 }                       //  ..  setTimeout()
-                                            }, 300);
+                                            }, 400);
                                         }else{
                                             // map                    
                                             // .wait(2000) // to let you appreciate the current zoom & center
