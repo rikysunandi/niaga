@@ -150,7 +150,7 @@
                                 </div>
                                 <button id="btn_create" class="btn btn-primary waves-effect waves-light btn-sm pull-right mr-2">Buat RPP <span class="btn-icon-right"><i class="fa fa-check-circle"></i></span></button>
                                 <button id="btn_reset" class="btn btn-secondary waves-effect waves-light btn-sm pull-right mr-2">Bersihkan Pilihan <span class="btn-icon-right"><i class="fa fa-refresh"></i></span></button>
-                                <button id="btn_remove" class="btn btn-danger waves-effect waves-light btn-sm pull-right mr-2">Hapus <span class="btn-icon-right"><i class="fa fa-times-circle"></i></span></button>
+                                <button id="btn_remove" class="btn btn-danger waves-effect waves-light btn-sm pull-right mr-2">Hilangkan <span class="btn-icon-right"><i class="fa fa-times-circle"></i></span></button>
                             </div>
                         </div>
                     </div>
