@@ -739,6 +739,7 @@ $(document).ready(function () {
                                                 //marker.urutan=i;
                                                 i++;
                                             },function() {
+                                                generated = true;
                                                 $('div.content-body').unblock();
                                             });
                                         }
