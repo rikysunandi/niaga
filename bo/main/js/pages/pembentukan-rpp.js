@@ -459,8 +459,8 @@ $(document).ready(function () {
                             if(selected.length>0){
 
                                 bootbox.confirm({
-                                    title: "Hapus Koordinat?",
-                                    message: "Apakah anda yakin akan menghapus "+selected.length+" titik koordinat dari Peta?", 
+                                    title: "Hilangkan Koordinat?",
+                                    message: "Apakah anda yakin akan menghilangkan "+selected.length+" titik koordinat dari Peta?", 
                                     buttons: {
                                         cancel: {
                                             className: 'btn-light',
