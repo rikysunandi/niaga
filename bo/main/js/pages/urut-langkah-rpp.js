@@ -605,15 +605,16 @@ $(document).ready(function () {
                                             start.start_end = false;
                                             start = null;
                                             $('#plg_start').html("X");
-                                            $('div.content-body').block({ message: 'Menetapkan ulang urutan...' });
-                                            asyncForEach(markers, function(marker) {
-                                                marker.setIcon("../controller/getMarkerIcon.php?color=red&text=..");
-                                                marker.urutan = null;
-                                                marker.start_end = false;
-                                            },function() {
-                                                $('div.content-body').unblock();
-                                            });
                                         }
+                                        
+                                        $('div.content-body').block({ message: 'Menetapkan ulang urutan...' });
+                                        asyncForEach(markers, function(marker) {
+                                            marker.setIcon("../controller/getMarkerIcon.php?color=red&text=..");
+                                            marker.urutan = null;
+                                            marker.start_end = false;
+                                        },function() {
+                                            $('div.content-body').unblock();
+                                        });
 
                                         marker.setIcon("../controller/getMarkerIcon.php?color=blue&text=START");
                                         start = marker;
