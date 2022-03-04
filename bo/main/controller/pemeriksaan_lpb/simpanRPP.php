@@ -20,8 +20,10 @@ $sql = "EXEC SP_RPP_SIMPAN @PETUGAS = ?, @RPP = ?, @URUTAN = ?, @IDPEL = ?, @USE
 $stmt = sqlsrv_prepare($conn, $sql, $params);
 
 if(sqlsrv_execute($stmt)){
+  sqlsrv_next_result($stmt);
+  $row = sqlsrv_fetch_array( $stmt, SQLSRV_FETCH_ASSOC);
   
-  if(sqlsrv_rows_affected( $stmt ) > 0){
+  if($row['RPP']==$rpp && $row['URUTAN']==$urutan){
   	$response['success'] = true;
   }else
   	$response['success'] = false;

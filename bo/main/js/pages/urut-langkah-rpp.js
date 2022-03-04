@@ -423,6 +423,7 @@ $(document).ready(function () {
                                 },function() {
                                     $('div.content-body').unblock();
 
+                                    $('#btn_generate').prop('disabled', true);
                                     $('#btn_simulasi').prop('disabled', false);
                                     $('#btn_create').prop('disabled', false);
                                 });
@@ -529,7 +530,8 @@ $(document).ready(function () {
                                                             marker.setMap(null);
                                                             //markers.splice(i, 1);
                                                         }
-
+                                                        simpanRPP(datas, i+1, dialog, petugas, rpp);
+                                                    }).fail(function() { 
                                                         simpanRPP(datas, i+1, dialog, petugas, rpp);
                                                     });
 

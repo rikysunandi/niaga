@@ -335,7 +335,9 @@ $(document).ready(function () {
                                                                         $('#plg_dipilih').html(selected.length);
                                                                         $('#total_plg').html(cluster.markers().filter(function(e) { return e.idpel!="X" }).length);
                                                                     }
+                                                                    simpanRPP(datas, i+1, dialog, petugas, rpp, berhasil);
 
+                                                                }).fail(function() { 
                                                                     simpanRPP(datas, i+1, dialog, petugas, rpp, berhasil);
                                                                 });
 
