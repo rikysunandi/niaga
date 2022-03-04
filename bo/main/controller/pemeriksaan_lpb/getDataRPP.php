@@ -46,6 +46,7 @@ if($stmt){
 		$response['rpp'][$i]['petugas'] = ($row['RPP_PETUGAS']); 
 		$response['rpp'][$i]['rpp'] = ($row['RPP_KDDK']); 
 		$response['rpp'][$i]['nama_gardu'] = ($row['NAMA_GARDU']); 
+		$response['rpp'][$i]['urutan'] = intval($row['URUTAN']); 
 		// $response['rpp'][$i]['foto'] = ($row['FOTO']); 
 
 		$i++;

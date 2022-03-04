@@ -557,6 +557,7 @@ $(document).ready(function () {
                                                     $('#btn_create').prop('disabled', true);
                                                     $('#plg_start').html("Pelanggan X");
                                                     $('#plg_end').html("Pelanggan Y");
+                                                    $('#total_plg').html("");
                                                     progress.modal('hide');
 
                                                 }
