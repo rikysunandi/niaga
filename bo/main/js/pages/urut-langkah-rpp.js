@@ -18,6 +18,7 @@ $(document).ready(function () {
 
     var is_first = true;
     var opsi_petugas;
+    var generated=false;
 
     $('#sel_unitup').change(function(){
 
@@ -65,6 +66,8 @@ $(document).ready(function () {
                 if(urlParams.has('rpp')){
                     $('#sel_rpp').selectpicker('val', urlParams.get('rpp'));
                     console.log('rpp', urlParams.get('rpp'));
+
+                    setTimeout(function(){ $('#btn_cari').trigger('click'); }, 1000);
                 }
                 else{
                     $('#sel_rpp').selectpicker('val', "00");
@@ -364,15 +367,15 @@ $(document).ready(function () {
                                 var jarak, jarak_sebelumnya, closest_idx;
                                 for (var i = 0; i < datas.length; i++) {
 
-                                    if(datas[i].idpel==start.idpel){
-                                        datas[i].urutan=1;
-                                        datas[i].start_end=true;
-                                    }
+                                    // if(datas[i].idpel==start.idpel){
+                                    //     datas[i].urutan=1;
+                                    //     datas[i].start_end=true;
+                                    // }
 
-                                    if(datas[i].idpel==end.idpel){
-                                        datas[i].urutan=datas.length;
-                                        datas[i].start_end=true;
-                                    }
+                                    // if(datas[i].idpel==end.idpel){
+                                    //     datas[i].urutan=datas.length;
+                                    //     datas[i].start_end=true;
+                                    // }
 
                                     if(datas[i].urutan==null){
                                         jarak = google.maps.geometry.spherical.computeDistanceBetween(mulai.position, datas[i].position);
@@ -429,6 +432,7 @@ $(document).ready(function () {
 
                                     start = null;
                                     end = null;
+                                    generated = true;
                                 });
 
                             }else{
@@ -443,12 +447,12 @@ $(document).ready(function () {
                         $('#btn_simulasi').bind( "click", function() {
                             console.log("SIMULASI LANGKAH!");
                             if($(this).hasClass('btn-secondary')){
-                                if(start!=null && end!=null){
+                                if(generated){
                                     var i=1;
 
                                     function simulasikan(markers, i) {  
                                         if(i<markers.length && !stop_simulasi){
-                                            map.setZoom(20);
+                                            map.setZoom(19);
                                             map.panTo(markers[i].position);
                                             google.maps.event.trigger(markers[i], 'mouseover');
                                             $('#plg_dipilih').html('Pelanggan dipilih: <span class="text-primary">'+markers[i].title+'</span>');
@@ -496,7 +500,7 @@ $(document).ready(function () {
 
                         $('#btn_create').bind( "click", function() {
                             console.log("SIMPAN LANGKAH!");
-                            if(start!=null && end!=null){
+                            if(generated){
 
                                 bootbox.confirm({
                                     title: "Simpan Data",
@@ -606,7 +610,7 @@ $(document).ready(function () {
                                             start = null;
                                             $('#plg_start').html("X");
                                         }
-                                        
+
                                         $('div.content-body').block({ message: 'Menetapkan ulang urutan...' });
                                         asyncForEach(markers, function(marker) {
                                             marker.setIcon("../controller/getMarkerIcon.php?color=red&text=..");
@@ -623,6 +627,7 @@ $(document).ready(function () {
                                         $('#plg_start').html(marker.idpel);
                                         $('#plg_end').html("Pelanggan Y");
                                         end = null;
+                                        generated = false;
 
                                         $('#btn_generate').prop('disabled', true);
                                         $('#btn_simulasi').prop('disabled', true);
@@ -727,6 +732,9 @@ $(document).ready(function () {
                                                 $('div.content-body').unblock();
                                             });
 
+                                            console.log('markers[result-1]',markers[result-1]);
+                                            console.log('result-1',result-1);
+
                                             sortUrutan(markers, markers[result-1], end, result-1);
 
                                             $('div.content-body').block({ message: 'Memberikan Urutan baru...' });
@@ -736,6 +744,7 @@ $(document).ready(function () {
                                                 //marker.urutan=i;
                                                 i++;
                                             },function() {
+                                                generated = true;
                                                 $('div.content-body').unblock();
                                             });
                                         }
@@ -809,6 +818,11 @@ $(document).ready(function () {
                 //   });
 
             }else{
+
+                bootbox.alert({
+                    message: "Gagal meload data RPP!",
+                    backdrop: true
+                });
                 $('div.content-body').unblock();
             }
         }).fail(function( jqxhr, textStatus, error ) {
@@ -855,13 +869,15 @@ $(document).ready(function () {
     // });
 
 
-    if(urlParams.has('rpp')){
-        $('#sel_unitupi').selectpicker('val', urlParams.get('unitupi'));
-        $('#sel_unitap').selectpicker('val', urlParams.get('unitap'));
-        $('#sel_unitup').selectpicker('val', urlParams.get('unitup'));
+    // if(urlParams.has('rpp')){
+    //     $('#sel_unitupi').selectpicker('val', urlParams.get('unitupi'));
+    //     $('#sel_unitap').selectpicker('val', urlParams.get('unitap'));
+    //     $('#sel_unitup').selectpicker('val', urlParams.get('unitup'));
+    //     $('#sel_petugas').selectpicker('val', urlParams.get('petugas'));
+    //     $('#sel_rpp').selectpicker('val', urlParams.get('rpp'));
 
-        setTimeout(function(){ $('#btn_cari').trigger('click'); }, 3000);
-    }
+    //     setTimeout(function(){ $('#btn_cari').trigger('click'); }, 3000);
+    // }
 
     
 
