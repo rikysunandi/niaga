@@ -18,7 +18,6 @@ $(document).ready(function () {
 
     var is_first = true;
     var opsi_petugas;
-    var generated=false;
 
     $('#sel_unitup').change(function(){
 
@@ -430,7 +429,6 @@ $(document).ready(function () {
 
                                     start = null;
                                     end = null;
-                                    generated = true;
                                 });
 
                             }else{
@@ -445,7 +443,7 @@ $(document).ready(function () {
                         $('#btn_simulasi').bind( "click", function() {
                             console.log("SIMULASI LANGKAH!");
                             if($(this).hasClass('btn-secondary')){
-                                if(generated){
+                                if(start!=null && end!=null){
                                     var i=1;
 
                                     function simulasikan(markers, i) {  
@@ -498,7 +496,7 @@ $(document).ready(function () {
 
                         $('#btn_create').bind( "click", function() {
                             console.log("SIMPAN LANGKAH!");
-                            if(generated){
+                            if(start!=null && end!=null){
 
                                 bootbox.confirm({
                                     title: "Simpan Data",
@@ -608,7 +606,7 @@ $(document).ready(function () {
                                             start = null;
                                             $('#plg_start').html("X");
                                         }
-
+                                        
                                         $('div.content-body').block({ message: 'Menetapkan ulang urutan...' });
                                         asyncForEach(markers, function(marker) {
                                             marker.setIcon("../controller/getMarkerIcon.php?color=red&text=..");
@@ -625,7 +623,6 @@ $(document).ready(function () {
                                         $('#plg_start').html(marker.idpel);
                                         $('#plg_end').html("Pelanggan Y");
                                         end = null;
-                                        generated = false;
 
                                         $('#btn_generate').prop('disabled', true);
                                         $('#btn_simulasi').prop('disabled', true);
@@ -739,7 +736,6 @@ $(document).ready(function () {
                                                 //marker.urutan=i;
                                                 i++;
                                             },function() {
-                                                generated = true;
                                                 $('div.content-body').unblock();
                                             });
                                         }
