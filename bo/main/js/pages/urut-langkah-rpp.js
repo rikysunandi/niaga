@@ -606,6 +606,7 @@ $(document).ready(function () {
                                             asyncForEach(markers, function(marker) {
                                                 marker.setIcon("../controller/getMarkerIcon.php?color=red&text=..");
                                                 marker.urutan = null;
+                                                marker.start_end = false;
                                             },function() {
                                                 $('div.content-body').unblock();
                                             });
@@ -616,6 +617,8 @@ $(document).ready(function () {
                                         marker.urutan=1;
                                         marker.start_end = true;
                                         $('#plg_start').html(marker.idpel);
+                                        $('#plg_end').html("Pelanggan Y");
+                                        end = null;
 
                                         $('#btn_generate').prop('disabled', true);
                                         $('#btn_simulasi').prop('disabled', true);

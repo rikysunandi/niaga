@@ -146,6 +146,8 @@
                     </li>
                     <li><a href="urut-langkah-rpp.php">Pembentukan Urut Langkah RPP</a>
                     </li>
+                    <li><a href="daftar-rpp.php">Daftar RPP</a>
+                    </li>
                 </ul>
             </li>
             <li><a class="has-arrow" href="javascript:void()" aria-expanded="false"><i class="mdi mdi-file-document-box"></i> <span class="nav-text">Pendukung Baca Meter</span></a>
