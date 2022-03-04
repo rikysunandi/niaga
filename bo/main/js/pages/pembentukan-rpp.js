@@ -43,9 +43,9 @@ $(document).ready(function () {
     $('#btn_cari').click(function(){
 
         $('div.content-body').block({ message: 'Mengambil data pelanggan dengan koordinat...' });
-        console.log('cari!!');
-        // console.log($("#tgl_baca_to").datepicker("getFormattedDate"));
-        // console.log($("#tgl_baca_from").datepicker("getFormattedDate"));
+        //console.log('cari!!');
+        // //console.log($("#tgl_baca_to").datepicker("getFormattedDate"));
+        // //console.log($("#tgl_baca_from").datepicker("getFormattedDate"));
         $('#btn_reset').prop('disabled', true);
         $('#btn_remove').prop('disabled', true);
         $('#btn_create').prop('disabled', true);
@@ -76,14 +76,14 @@ $(document).ready(function () {
         }).done(function( json ) {
 
             //json = JSON.parse(json);
-            //console.log( "JSON Data: " + json );
+            ////console.log( "JSON Data: " + json );
 
 
             var markers = new Array();
             var wilker = json.wil; 
 
             $(json.plg).each(function(key, obj){
-                // console.log(obj);
+                // //console.log(obj);
                 markers.push(
                     {
                         title: obj.idpel+" ( "+obj.nama+" ) ", 
@@ -91,14 +91,15 @@ $(document).ready(function () {
                         icon:red_house,
                         idpel: obj.idpel,
                         petugas: obj.petugas_priangan,
-                        gardu: obj.nama_gardu
+                        gardu: obj.nama_gardu,
+                        rbm_paska: obj.rbm_paska,
                     });
             });
 
             var gardu_markers = new Array(); 
 
             $(json.gardu).each(function(key, obj){
-                // console.log(obj);
+                // //console.log(obj);
                 markers.push(
                     {
                         title: obj.nama_gardu+" ( "+obj.kapasitas_trafo+" kVA ) ", 
@@ -136,7 +137,7 @@ $(document).ready(function () {
                 scrollwheel: true,
                 streetViewControl: true
               })
-              .marker(gardu_markers)
+              //.marker(gardu_markers)
               .cluster({
                 //radius: 10,
                 //size: 300,
@@ -150,27 +151,21 @@ $(document).ready(function () {
                     if (jml_plg > 10000) {
                       return {
                         content: "<div class='cluster cluster-3'>" + jml_plg + "</div>",
-                        x: -43,
-                        y: -43,
-                        width: 96,
-                        height: 95
+                        x: -26,
+                        y: -26,
                       };
                     }
                     else if (jml_plg > 1000) {
                       return {
                         content: "<div class='cluster cluster-2'>" + jml_plg + "</div>",
-                        x: -33,
-                        y: -33,
-                        width: 76,
-                        height: 75
+                        x: -26,
+                        y: -26,
                       };
                     }else{
                       return {
                         content: "<div class='cluster cluster-1'>" + jml_plg + "</div>",
-                        x: -31,
-                        y: -31,
-                        width: 63,
-                        height: 62
+                        x: -26,
+                        y: -26,
                       };
                     }
                   }
@@ -179,8 +174,8 @@ $(document).ready(function () {
               .then(function (cluster) {
 
                     var map = this.get()[0];
-                    console.log('map', map);
-                    console.log("cluster", cluster);
+                    //console.log('map', map);
+                    //console.log("cluster", cluster);
 
                     $('#total_plg').html(cluster.markers().filter(function(e) { return e.idpel!="X" }).length);
                     $('#plg_dipilih').html('0');
@@ -193,13 +188,13 @@ $(document).ready(function () {
                     var dz = map.getDragZoomObject();
 
                     google.maps.event.addListener(dz, 'dragstart', function (latlng) {
-                        console.log('KeyDragZoom Started: ' + latlng);
+                        //console.log('KeyDragZoom Started: ' + latlng);
                     });
 
                     google.maps.event.addListener(dz, 'dragend', function (bnds) {
-                        console.log('KeyDragZoom Ended: ' + bnds);
-                        console.log(bnds);
-                        console.log(bnds.getSouthWest());
+                        //console.log('KeyDragZoom Ended: ' + bnds);
+                        //console.log(bnds);
+                        //console.log(bnds.getSouthWest());
 
                         var GLOBE_WIDTH = 256; // a constant in Google's map projection
                         var west = bnds.getSouthWest().lng();
@@ -211,7 +206,7 @@ $(document).ready(function () {
                         var pixelWidth = $('div#map').width();
                         var zoom = Math.round(Math.log(pixelWidth * 360 / angle / GLOBE_WIDTH) / Math.LN2);
 
-                        console.log('zoom', zoom);
+                        //console.log('zoom', zoom);
 
                         if(zoom>=10){
 
@@ -227,7 +222,7 @@ $(document).ready(function () {
 
                                 if(marker.getPosition()){
                                     if (bnds.contains(marker.getPosition())) {
-                                        //console.log('marker dalam pilihan', marker);
+                                        ////console.log('marker dalam pilihan', marker);
                                         
                                         //if(!marker.selected){
                                         if(marker.idpel!="X"){
@@ -278,8 +273,8 @@ $(document).ready(function () {
                                 else
                                     var petugas =  $('ul#petugas-selected li.list-group-item:first span').html();
 
-                                console.log('opsi_petugas', opsi_petugas);
-                                console.log('petugas', petugas);
+                                //console.log('opsi_petugas', opsi_petugas);
+                                //console.log('petugas', petugas);
                                 bootbox.prompt({
                                     title: "Pilih Petugas",
                                     message: "Silahkan pilih petugas untuk RPP yang akan dibentuk", 
@@ -290,9 +285,9 @@ $(document).ready(function () {
                                     callback: function (result) {
                                         if(result){
                                             var petugas_dipilih = result;
-                                            console.log('wilker', wilker);
+                                            //console.log('wilker', wilker);
                                             var wil = $.grep(wilker, function(e) { return e.kodepetugas==petugas_dipilih });
-                                            console.log(wil);
+                                            //console.log(wil);
                                             var rbm_prefill='';
                                             if(wil.length>0)
                                                 rbm_prefill=wil[0].rbm;
@@ -306,8 +301,8 @@ $(document).ready(function () {
                                                 callback: function (result) {
                                                     if(result){
                                                         var rpp = result;
-                                                        console.log('petugas', petugas_dipilih);
-                                                        console.log('rpp', rpp);
+                                                        //console.log('petugas', petugas_dipilih);
+                                                        //console.log('rpp', rpp);
 
                                                         if(rpp.length != 7){
                                                             bootbox.alert("Silahkan masukan nama RPP sebanyak 7 karakter!");
@@ -327,7 +322,7 @@ $(document).ready(function () {
                                                                 $.post('../controller/pemeriksaan_lpb/simpanRPP.php', 
                                                                 { petugas: petugas, rpp: rpp, urutan:0, idpel:marker.idpel }, 
                                                                 function(res){
-                                                                    console.log('res',res);
+                                                                    //console.log('res',res);
                                                                     if(res.success=='true' || res.success){
                                                                         berhasil.push(marker.idpel);
                                                                         marker.setIcon(red_house);
@@ -389,7 +384,7 @@ $(document).ready(function () {
                                                             closeButton: false 
                                                         });
 
-                                                        console.log('dialog', dialog);
+                                                        //console.log('dialog', dialog);
                                                         var berhasil = new Array();
 
                                                         simpanRPP(selected, 0, dialog, petugas_dipilih, rpp, berhasil);
@@ -481,7 +476,7 @@ $(document).ready(function () {
                                             $('div.content-body').block({ message: 'Menghapus koordinat yang dipilih...' });
                                             asyncForEach(selected, function(marker) {
                                                 if(marker.selected){
-                                                    console.log(marker);
+                                                    //console.log(marker);
                                                     marker.setIcon(red_house);
                                                     marker.selected = false;
                                                     marker.setMap(null);
@@ -515,14 +510,32 @@ $(document).ready(function () {
 
                         $("ul#petugas-selected").on("click", "li.list-group-item a", function(e){
                             e.preventDefault();
-                            //console.log($(this));
+                            ////console.log($(this));
                             //alert($(this).text());
                             var petugas = $(this).prev().html();
-                            console.log("PETUGAS HAPUS", petugas);
+                            //console.log("PETUGAS HAPUS", petugas);
                             asyncForEach(selected, function(marker) {
-                                //console.log("CEK MARKER", marker.petugas);
+                                ////console.log("CEK MARKER", marker.petugas);
                                 if(marker.selected && marker.petugas==petugas){
-                                    console.log("CLEAR MARKER", marker.idpel);
+                                    //console.log("CLEAR MARKER", marker.idpel);
+                                    marker.setIcon(red_house);
+                                    marker.selected = false;
+                                    selected = $.grep(selected, function(e) { return e.idpel!=marker.idpel });
+                                    $('#plg_dipilih').html(selected.length);
+                                }
+                            },function(){
+                                populateList(selected);
+                            });
+
+                        });
+
+                        $("ul#rbm-paska-selected").on("click", "li.list-group-item a", function(e){
+                            e.preventDefault();
+                            //console.log("rbm_paska HAPUS");
+                            //console.log($(this));
+                            var rbm_paska = $(this).prev().html();
+                            asyncForEach(selected, function(marker) {
+                                if(marker.selected && marker.rbm_paska==rbm_paska){
                                     marker.setIcon(red_house);
                                     marker.selected = false;
                                     selected = $.grep(selected, function(e) { return e.idpel!=marker.idpel });
@@ -536,8 +549,8 @@ $(document).ready(function () {
 
                         $("ul#gardu-selected").on("click", "li.list-group-item a", function(e){
                             e.preventDefault();
-                            console.log("GARDU HAPUS");
-                            console.log($(this));
+                            //console.log("GARDU HAPUS");
+                            //console.log($(this));
                             var gardu = $(this).prev().html();
                             asyncForEach(selected, function(marker) {
                                 if(marker.selected && marker.gardu==gardu){
@@ -594,16 +607,16 @@ $(document).ready(function () {
 
         }).fail(function( jqxhr, textStatus, error ) {
             var err = textStatus + ", " + error;
-            console.log( "Request Failed: " + err );
+            //console.log( "Request Failed: " + err );
         }).always(function() {
-            console.log( "complete" );
+            //console.log( "complete" );
         });
 
     });
 
     // $('#btn_create').click(function(){
 
-    //     console.log('create!!');
+    //     //console.log('create!!');
     //     Swal.fire({
     //         title: 'Masukan nama RPP',
     //         input: 'text',
@@ -659,6 +672,16 @@ $(document).ready(function () {
             return b[1] - a[1];
         });
 
+        var rbm_paska_list = groupBy(items, 'rbm_paska');
+        var rbm_paska_sort = [];
+        for (var rbm_paska in rbm_paska_list) {
+            rbm_paska_sort.push([rbm_paska, rbm_paska_list[rbm_paska].length]);
+        }
+
+        rbm_paska_sort.sort(function(a, b) {
+            return b[1] - a[1];
+        });
+
         var gardu_list = groupBy(items, 'gardu');
         var gardu_sort = [];
         for (var gardu in gardu_list) {
@@ -669,12 +692,25 @@ $(document).ready(function () {
             return b[1] - a[1];
         });
 
-        console.log('petugas_sort', petugas_sort);
-        console.log('gardu_sort', gardu_sort);
+        //console.log('petugas_sort', petugas_sort);
+        //console.log('gardu_sort', gardu_sort);
 
         $('ul#petugas-selected').empty();
         $.each(petugas_sort, function ( idx, val ) {
             $('ul#petugas-selected').append(
+                `<li class="list-group-item col-9">
+                    <span>`+val[0]+`</span>
+                    <a href="#" class="pull-right mr-2" role="button" aria-pressed="true">
+                      <i class="link-hapus fa fa-minus-circle"></i>
+                    </a>
+                    <span class="badge badge-primary badge-pill pull-right mr-2">`+val[1]+`</span>
+                </li>`
+            );
+        });
+
+        $('ul#rbm-paska-selected').empty();
+        $.each(rbm_paska_sort, function ( idx, val ) {
+            $('ul#rbm-paska-selected').append(
                 `<li class="list-group-item col-9">
                     <span>`+val[0]+`</span>
                     <a href="#" class="pull-right mr-2" role="button" aria-pressed="true">

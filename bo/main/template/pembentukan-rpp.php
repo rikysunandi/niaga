@@ -22,9 +22,11 @@
           color: #FFFFFF;
           text-align:center;
           font-family: 'Arial, Helvetica';
-          font-size:11px;
+          font-size:10px;
           font-weight:bold;
           cursor: pointer;
+          padding-left: 6px;
+          padding-top: 2px;
         }
         .cluster-1{
           background-image:url(../../assets/images/m1.png);
@@ -155,10 +157,10 @@
                 </div>
 
                 <div class="row">
-                    <div class="col-6">
+                    <div class="col-4">
                         <div class="card">
                             <div class="card-header">
-                                <h5 class="card-title">Petugas Tagging dari Pelanggan dipilih</h5>
+                                <h5 class="card-title">Summary Petugas Tagging</h5>
                             </div>
                             <div class="card-body">
                                 <div class="basic-list-group">
@@ -171,10 +173,24 @@
                             </div>
                         </div>
                     </div>
-                    <div class="col-6">
+                    <div class="col-4">
                         <div class="card">
                             <div class="card-header">
-                                <h5 class="card-title">Gardu dari Pelanggan Dipilih</h5>
+                                <h5 class="card-title">Summary RBM Paska</h5>
+                            </div>
+                            <div class="card-body">
+                                <div class="basic-list-group">
+                                    <ul id="rbm-paska-selected" class="list-group">
+                                        
+                                    </ul>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="col-4">
+                        <div class="card">
+                            <div class="card-header">
+                                <h5 class="card-title">Summary Gardu</h5>
                             </div>
                             <div class="card-body">
                                 <div class="basic-list-group">

@@ -46,6 +46,13 @@ if($stmt){
 		$response['rpp'][$i]['petugas'] = ($row['RPP_PETUGAS']); 
 		$response['rpp'][$i]['rpp'] = ($row['RPP_KDDK']); 
 		$response['rpp'][$i]['nama_gardu'] = ($row['NAMA_GARDU']); 
+		$response['rpp'][$i]['petugas_priangan'] = ($row['PETUGAS_PRIANGAN']); 
+		$response['rpp'][$i]['tgl_tagging'] = ($row['TGL_TAGGING']); 
+		if(strlen($row['TGL_TAGGING'])==19)
+			$tgl_tagging=$row['TGL_TAGGING'];
+		else
+			$tgl_tagging="9999-12-31 23:59:59";
+		$response['rpp'][$i]['tgl_tagging_time'] = strtotime($tgl_tagging); 
 		$response['rpp'][$i]['urutan'] = intval($row['URUTAN']); 
 		// $response['rpp'][$i]['foto'] = ($row['FOTO']); 
 
