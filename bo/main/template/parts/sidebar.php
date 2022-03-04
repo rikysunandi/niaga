@@ -146,6 +146,8 @@
                     </li>
                     <li><a href="urut-langkah-rpp.php">Pembentukan Urut Langkah RPP</a>
                     </li>
+                    <li><a href="rekap-rpp.php">Rekap RPP</a>
+                    </li>
                     <li><a href="daftar-rpp.php">Daftar RPP</a>
                     </li>
                 </ul>
