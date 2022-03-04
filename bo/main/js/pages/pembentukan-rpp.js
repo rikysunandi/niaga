@@ -55,6 +55,9 @@ $(document).ready(function () {
         });
 
         selected = new Array();
+        populateList(selected);
+        $('#plg_dipilih').html(selected.length);
+        $('#total_plg').html(0);
 
         var container = $('#map').parent();
         $('#map').remove();
