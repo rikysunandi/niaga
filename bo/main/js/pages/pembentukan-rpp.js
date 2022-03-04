@@ -519,8 +519,10 @@ $(document).ready(function () {
                             //alert($(this).text());
                             var petugas = $(this).prev().html();
                             console.log("PETUGAS HAPUS", petugas);
-                            asyncForEach(cluster.markers(), function(marker) {
+                            asyncForEach(selected, function(marker) {
+                                //console.log("CEK MARKER", marker.petugas);
                                 if(marker.selected && marker.petugas==petugas){
+                                    console.log("CLEAR MARKER", marker.idpel);
                                     marker.setIcon(red_house);
                                     marker.selected = false;
                                     selected = $.grep(selected, function(e) { return e.idpel!=marker.idpel });
@@ -537,7 +539,7 @@ $(document).ready(function () {
                             console.log("GARDU HAPUS");
                             console.log($(this));
                             var gardu = $(this).prev().html();
-                            asyncForEach(cluster.markers(), function(marker) {
+                            asyncForEach(selected, function(marker) {
                                 if(marker.selected && marker.gardu==gardu){
                                     marker.setIcon(red_house);
                                     marker.selected = false;
