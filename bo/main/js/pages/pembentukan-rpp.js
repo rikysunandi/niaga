@@ -515,10 +515,10 @@ $(document).ready(function () {
 
                         $("ul#petugas-selected").on("click", "li.list-group-item a", function(e){
                             e.preventDefault();
-                            console.log("PETUGAS HAPUS");
-                            console.log($(this));
+                            //console.log($(this));
                             //alert($(this).text());
                             var petugas = $(this).prev().html();
+                            console.log("PETUGAS HAPUS", petugas);
                             asyncForEach(cluster.markers(), function(marker) {
                                 if(marker.selected && marker.petugas==petugas){
                                     marker.setIcon(red_house);

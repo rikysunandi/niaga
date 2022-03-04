@@ -27,8 +27,9 @@ if(!sqlsrv_execute($stmt)){
 
 	$i=0;
 	while( $row = sqlsrv_fetch_array( $stmt, SQLSRV_FETCH_ASSOC) ) {
+		$thbl = date('mY');
 		$response['rbm'][$i]['i'] = $row['IDPEL']; 
-		$response['rbm'][$i]['idpiu'] = $row['THBL'].$row['IDPEL']; 
+		$response['rbm'][$i]['idpiu'] = $thbl.$row['IDPEL']; 
 		$response['rbm'][$i]['idpel'] = $row['IDPEL']; 
 		$response['rbm'][$i]['nama'] = $row['NAMA']; 
 		$response['rbm'][$i]['alamat'] = $row['ALAMAT']; 
@@ -42,7 +43,7 @@ if(!sqlsrv_execute($stmt)){
 		$response['rbm'][$i]['lbr'] = $row['LBR']; 
 		$response['rbm'][$i]['tag'] = $row['TAG']; 
 		$response['rbm'][$i]['bk'] = $row['BK']; 
-		$response['rbm'][$i]['blth'] = $row['THBL']; 
+		$response['rbm'][$i]['blth'] = $thbl; 
 		$response['rbm'][$i]['nope'] = $row['NOPE']; 
 		$response['rbm'][$i]['latitude'] = $row['LATITUDE']; 
 		$response['rbm'][$i]['longitude'] = $row['LONGITUDE'];
