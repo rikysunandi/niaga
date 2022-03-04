@@ -426,6 +426,9 @@ $(document).ready(function () {
                                     $('#btn_generate').prop('disabled', true);
                                     $('#btn_simulasi').prop('disabled', false);
                                     $('#btn_create').prop('disabled', false);
+
+                                    start = null;
+                                    end = null;
                                 });
 
                             }else{
@@ -635,43 +638,47 @@ $(document).ready(function () {
                             var idpel = $(this).data('idpel');
                             var marker = $.grep(markers, function(e) { return e.idpel==idpel })[0];
 
+                            if(start!=null){
 
-                            bootbox.confirm({
-                                title: "Tentukan titik akhir",
-                                message: "Apakah anda yakin akan mengakhiri urut langkah di titik ini ("+marker.title+") ?", 
-                                buttons: {
-                                    cancel: {
-                                        className: 'btn-light',
-                                        label: '<i class="fa fa-times"></i> Batal'
+                                bootbox.confirm({
+                                    title: "Tentukan titik akhir",
+                                    message: "Apakah anda yakin akan mengakhiri urut langkah di titik ini ("+marker.title+") ?", 
+                                    buttons: {
+                                        cancel: {
+                                            className: 'btn-light',
+                                            label: '<i class="fa fa-times"></i> Batal'
+                                        },
+                                        confirm: {
+                                            className: 'btn-primary',
+                                            label: '<i class="fa fa-check"></i> Ya, Akhiri di sini'
+                                        }
                                     },
-                                    confirm: {
-                                        className: 'btn-primary',
-                                        label: '<i class="fa fa-check"></i> Ya, Akhiri di sini'
-                                    }
-                                },
-                                callback: function (result) {
-                                    if(result){
+                                    callback: function (result) {
+                                        if(result){
 
-                                        if(end!=null){
-                                            end.setIcon("../controller/getMarkerIcon.php?color=red&text=..");
-                                            end.start_end = false;
-                                            end = null;
-                                            $('#plg_end').html("X");
+                                            if(end!=null){
+                                                end.setIcon("../controller/getMarkerIcon.php?color=red&text=..");
+                                                end.start_end = false;
+                                                end = null;
+                                                $('#plg_end').html("X");
+                                            }
+
+                                            marker.setIcon("../controller/getMarkerIcon.php?color=blue&text=END");
+                                            end = marker;
+                                            marker.urutan=markers.length;
+                                            marker.start_end = true;
+                                            $('#plg_end').html(marker.idpel);
+
+
+                                            $('#btn_generate').prop('disabled', false);
                                         }
 
-                                        marker.setIcon("../controller/getMarkerIcon.php?color=blue&text=END");
-                                        end = marker;
-                                        marker.urutan=markers.length;
-                                        marker.start_end = true;
-                                        $('#plg_end').html(marker.idpel);
-
-
-                                        $('#btn_generate').prop('disabled', false);
+                                        infowindow.close();
                                     }
-
-                                    infowindow.close();
-                                }
-                            });
+                                });
+                            }else{
+                                bootbox.alert("Silahkan tentukan titik awal terlebih dahulu!");
+                            }
 
                         });
 
