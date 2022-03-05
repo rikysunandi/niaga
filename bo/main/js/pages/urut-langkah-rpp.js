@@ -434,6 +434,33 @@ $(document).ready(function () {
                                 message: "Silahkan pilih metode pengurutan: <ul><li><span class='text-primary'><b>Jarak Terdekat:</b></span> Diurutkan berdasarkan jarak terdekat antar titik</li><li><span class='text-primary'><b>Tgl Tagging:</b></span> Diurutkan berdasarkan tanggal tagging App Priangan (Titik awal dan akhir akan diabaikan)</li></ul>",
                                 //size: 'small',
                                 buttons: {
+                                    tgl_tagging: {
+                                        label: "Tanggal Tagging",
+                                        className: 'btn-warning',
+                                        callback: function(){
+                                            markers = markers.sort((a,b) => (a.tgl_tagging > b.tgl_tagging) ? 1 : ((b.tgl_tagging > a.tgl_tagging) ? -1 : 0));
+                                            //console.log('urut tgl tagging', markers);
+                                            //calculateAndDisplayRoute(markers, directionsService, directionsRenderer);
+                                            
+                                            $('div.content-body').block({ message: 'Memberikan Urutan...' });
+                                            var i=1;
+                                            asyncForEach(markers, function(marker) {
+                                                marker.setIcon("../controller/getMarkerIcon.php?color=blue&text="+(i));
+                                                marker.urutan=i;
+                                                i++;
+                                            },function() {
+                                                $('div.content-body').unblock();
+
+                                                $('#btn_generate').prop('disabled', false);
+                                                $('#btn_simulasi').prop('disabled', false);
+                                                $('#btn_create').prop('disabled', false);
+
+                                                start = null;
+                                                end = null;
+                                                generated = true;
+                                            });
+                                        }
+                                    },
                                     jarak: {
                                         label: "Jarak Terdekat",
                                         className: 'btn-primary',
@@ -471,33 +498,6 @@ $(document).ready(function () {
                                                 });
                                             }
 
-                                        }
-                                    },
-                                    tgl_tagging: {
-                                        label: "Tanggal Tagging",
-                                        className: 'btn-secondary',
-                                        callback: function(){
-                                            markers = markers.sort((a,b) => (a.tgl_tagging > b.tgl_tagging) ? 1 : ((b.tgl_tagging > a.tgl_tagging) ? -1 : 0));
-                                            //console.log('urut tgl tagging', markers);
-                                            //calculateAndDisplayRoute(markers, directionsService, directionsRenderer);
-                                            
-                                            $('div.content-body').block({ message: 'Memberikan Urutan...' });
-                                            var i=1;
-                                            asyncForEach(markers, function(marker) {
-                                                marker.setIcon("../controller/getMarkerIcon.php?color=blue&text="+(i));
-                                                marker.urutan=i;
-                                                i++;
-                                            },function() {
-                                                $('div.content-body').unblock();
-
-                                                $('#btn_generate').prop('disabled', false);
-                                                $('#btn_simulasi').prop('disabled', false);
-                                                $('#btn_create').prop('disabled', false);
-
-                                                start = null;
-                                                end = null;
-                                                generated = true;
-                                            });
                                         }
                                     },
                                 }
