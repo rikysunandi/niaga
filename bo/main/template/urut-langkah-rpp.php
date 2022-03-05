@@ -152,6 +152,7 @@
                                 <div class="row">
                                     <div class="align-middle d-inline col-6">
                                         <span class="fa fa-info-circle"></span> Urut Langkah <span id="total_plg" class="text-primary"></span>: dari <span id="plg_start" class="text-success">Pelanggan X</span> ke <span id="plg_end" class="text-success">Pelanggan Y</span>
+                                        <div id="jml_plg_dipilih"></div>
                                         <div id="plg_dipilih"></div>
                                         <div id="info_tagging"></div>
                                     </div>

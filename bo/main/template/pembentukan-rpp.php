@@ -136,8 +136,21 @@
                                 <h4 class="card-title">Peta Pembentukan RPP</h4>
                             </div>
                             <div class="card-body">
-                                <div>
-                                    <p>Silahkan pilih pelanggan-pelanggan yang akan dibentuk RPP dengan cara memblok sekumpulan titik koordinat (tahan tombol SHIFT + blok area) atau klik pada masing-masing titik koordinat.
+                                <div class="mb-4">
+                                    <p>Pastikan sudah tidak ada cluster pada tampilan Peta, lalu silahkan pilih pelanggan-pelanggan yang akan dibentuk RPP dengan cara memblok sekumpulan titik koordinat (tahan tombol <span class="text-primary">SHIFT + blok area</span>) atau <span class="text-primary">KLIK</span> pada masing-masing titik koordinat.
+                                    </p>
+                                    <p>Lalu tentukan aksi apa yang akan dilakukan terhadap titik-titik yang sudah dipilih dengan tombol-tombol berikut:
+                                        <ul>
+                                            <li><span class="text-primary">Hilangkan:</span> untuk menghilangkan titik-titik yang dipilih dari Peta, jika dirasa titik yang ditampilkan melenceng</li>
+                                            <li><span class="text-primary">Bersihkan Pilihan:</span> untuk membatalkan pilihan dari titik-titik yang sudah dipilih (reset pilihan)</li>
+                                            <li><span class="text-primary">Buat RPP:</span> untuk membuat RPP dari titik-titik yang dipilih</li>
+                                        </ul>
+                                    </p>
+                                    <p>Aturan pembentukan RPP:
+                                        <ul>
+                                            <li>Satu RPP berisi kurang lebih <span class="text-primary">250 pelanggan</span></li>
+                                            <li>Penamaan RPP: mengikuti 6 karakter RBM Paska Petugas terkait, dimana karakter terakhir diisi kode hari baca yang <span class="text-primary">dimulai dari huruf H</span></li>
+                                        </ul>
                                     </p>
                                 </div>
                                 <div style="height:500px;">
@@ -146,7 +159,7 @@
                             </div>
                             <div class="card-footer text-muted">
                                 <div class="align-middle d-inline">
-                                    <span class="fa fa-info-circle"></span> Ada sebanyak <span id="plg_dipilih" class="text-success">0</span> Pelanggan yang dipilih dari total <span id="total_plg" class="text-primary">0</span> Pelanggan
+                                    <span class="fa fa-info-circle"></span> Ada sebanyak <span id="plg_dipilih" class="text-success">0</span> Pelanggan dipilih dari total <span id="total_plg" class="text-primary">0</span> Pelanggan
                                 </div>
                                 <button id="btn_create" class="btn btn-primary waves-effect waves-light btn-sm pull-right mr-2">Buat RPP <span class="btn-icon-right"><i class="fa fa-check-circle"></i></span></button>
                                 <button id="btn_reset" class="btn btn-secondary waves-effect waves-light btn-sm pull-right mr-2">Bersihkan Pilihan <span class="btn-icon-right"><i class="fa fa-refresh"></i></span></button>
