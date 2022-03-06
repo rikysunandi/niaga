@@ -139,12 +139,12 @@ $(document).ready(function () {
                 $(json.rpp).each(function(key, obj){
 
                     if(obj.urutan>0){
-                        urutan = obj.urutan;
-                        urutan_txt = obj.urutan;
+                        urutan = key+1;
+                        urutan_txt = key+1;
                         color = 'green-darker';
                         generated = true;
                     }else{
-                        urutan = null;
+                        urutan = 0;
                         urutan_txt = '..';
                         color = 'red';
                     }
@@ -163,33 +163,6 @@ $(document).ready(function () {
                             start_end: false
                         });
                 });
-
-                // var gardu_markers = new Array(); 
-
-                // $(json.gardu).each(function(key, obj){
-                //     // //console.log(obj);
-                //     markers.push(
-                //         {
-                //             title: obj.nama_gardu+" ( "+obj.kapasitas_trafo+" kVA ) ", 
-                //             //label: obj.nama_gardu,
-                //             position:[obj.latitude, obj.longitude], 
-                //             //icon:ic_gardu,
-                //             icon: {
-                //               url: ic_gardu,
-                //               labelOrigin: new google.maps.Point(15, 40),
-                //               //size: new google.maps.Size(32,32),
-                //               //anchor: new google.maps.Point(16,32)
-                //             },
-                //             label: {
-                //               text: obj.nama_gardu,
-                //               color: "#4caf50",
-                //               fontWeight: "bold"
-                //             },
-                //             gardu:obj.nama_gardu,
-                //             idpel:"X",
-                //             zIndex: 9999,
-                //         });
-                // });
                    
                 var markers_obj;
 
@@ -219,162 +192,6 @@ $(document).ready(function () {
                         $('#total_plg').html("("+markers.length+" plg)");
                         $('#jml_plg_dihapus').empty();
                           
-                        map.enableKeyDragZoom({
-                            noZoom: true,
-                            visualEnabled: false,
-                        });
-
-                        var dz = map.getDragZoomObject();
-
-                        google.maps.event.addListener(dz, 'dragstart', function (latlng) {
-                            //console.log('KeyDragZoom Started: ' + latlng);
-                        });
-
-                        google.maps.event.addListener(dz, 'dragend', function (bnds) {
-                            //console.log('KeyDragZoom Ended: ' + bnds);
-                            //console.log(bnds);
-                            //console.log(bnds.getSouthWest());
-
-                            var GLOBE_WIDTH = 256; // a constant in Google's map projection
-                            var west = bnds.getSouthWest().lng();
-                            var east = bnds.getNorthEast().lng();
-                            var angle = east - west;
-                            if (angle < 0) {
-                              angle += 360;
-                            }
-                            var pixelWidth = $('div#map').width();
-                            var zoom = Math.round(Math.log(pixelWidth * 360 / angle / GLOBE_WIDTH) / Math.LN2);
-
-                            //console.log('zoom', zoom);
-
-                            if(zoom>=10){
-
-                                $('div.content-body').block({ message: 'Memilih koordinat...' });
-                                var urutan, urutan_txt, color;
-                                asyncForEach(markers, function(marker) {
-
-                                    if(marker.getPosition()){
-                                        if (bnds.contains(marker.getPosition())) {
-                                            ////console.log('marker dalam pilihan', marker);
-                                            
-                                            //if(!marker.selected){
-                                            if(!marker.selected){
-
-                                                if(marker.urutan>0){
-                                                    urutan = marker.urutan;
-                                                    urutan_txt = marker.urutan;
-                                                    color = 'blue';
-                                                }else{
-                                                    urutan = null;
-                                                    urutan_txt = '..';
-                                                    color = 'red';
-                                                }
-
-                                                marker.setIcon("../controller/getMarkerIcon.php?color="+color+"&text="+urutan_txt);
-                                                marker.selected = true;
-                                                selected.push(marker);
-                                                // $('#jml_plg_dipilih').html("Jumlah Pelanggan dipilih: <span class='text-primary'>"+selected.length+'</span>');
-                                            }
-
-                                            // }else{
-                                            //     marker.setIcon(red_house);
-                                            //     marker.selected = false;
-                                            //     $('#plg_dipilih').html(selected.length);
-
-                                            // }
-                                        }
-                                    }
-                                  //marker.setIcon("http://maps.google.com/mapfiles/marker_green.png");
-                                },function(){
-                                    if(selected.length>0){
-
-                                        bootbox.confirm({
-                                            title: "Hapus Koordinat?",
-                                            message: "Apakah anda yakin akan menghapus "+selected.length+" titik koordinat dari Peta?", 
-                                            backdrop: false,
-                                            buttons: {
-                                                cancel: {
-                                                    className: 'btn-light',
-                                                    label: '<i class="fa fa-times"></i> Batal'
-                                                },
-                                                confirm: {
-                                                    className: 'btn-danger',
-                                                    label: '<i class="fa fa-check"></i> Ya, Hapus'
-                                                }
-                                            },
-                                            callback: function (result) {
-                                                if(result){
-                                                    $('div.content-body').block({ message: 'Menghapus koordinat pelanggan yang dipilih...' });
-                                                    asyncForEach(selected, function(marker) {
-                                                        if(marker.selected){
-
-                                                            marker.selected = false;
-                                                            marker.setMap(null);
-                                                            //selected = $.grep(selected, function(e) { return e.idpel!=marker.idpel });
-                                                            selected = $.grep(selected, function(e) { return e.idpel!=marker.idpel });
-                                                            markers = $.grep(markers, function(e) { return e.idpel!=marker.idpel });
-                                                            
-                                                            deleted.push(marker.idpel);
-                                                            $('#jml_plg_dihapus').html("Jumlah Pelanggan dihapus: "+deleted.length);
-                                                            $('#total_plg').html("("+markers.length+" plg)");
-                                                        }
-                                                    },function() {
-                                                        
-                                                        $('div.content-body').unblock();
-
-                                                        bootbox.alert("Proses hapus selesai, silahkan melakukan pengurutan ulang jika diperlukan!");
-                                                        // sortUrutan(markers, markers[0], markers[markers.length-1], 1);
-
-                                                        // $('div.content-body').block({ message: 'Memberikan Urutan baru...' });
-                                                        // var i=1;
-                                                        // asyncForEach(markers, function(marker) {
-                                                        //     marker.setIcon("../controller/getMarkerIcon.php?color=green-darker&text="+(marker.urutan));
-                                                        //     //marker.urutan=i;
-                                                        //     i++;
-                                                        // },function() {
-                                                        //     generated = true;
-                                                        //     $('div.content-body').unblock();
-                                                        // });
-
-                                                    });
-                                                }else{
-                                                    var urutan, urutan_txt, color;
-                                                    asyncForEach(selected, function(marker) {
-                                                        if(marker.selected){
-                                                            //console.log(marker);
-                                                            if(marker.urutan>0){
-                                                                urutan = marker.urutan;
-                                                                urutan_txt = marker.urutan;
-                                                                color = 'green-darker';
-                                                            }else{
-                                                                urutan = null;
-                                                                urutan_txt = '..';
-                                                                color = 'red';
-                                                            }
-                                                            
-                                                            marker.setIcon("../controller/getMarkerIcon.php?color="+color+"&text="+urutan_txt);
-                                                            marker.selected = false;
-                                                            selected = $.grep(selected, function(e) { return e.idpel!=marker.idpel });
-                                                            
-                                                        }
-                                                    },function() {
-
-                                                    });
-                                                }
-                                            }
-                                        });
-
-                                    }
-                                    $('div.content-body').unblock();
-                
-                                });
-                            }else{
-                                bootbox.alert("Rentang pilihan terlalu jauh!");
-                                return false;
-                            }
-
-                        });
-
 
                         if(is_first){
 
@@ -383,140 +200,29 @@ $(document).ready(function () {
                             const distanceMatrixService = new google.maps.DistanceMatrixService();
                             directionsRenderer.setMap(map);
 
-                            function chunkArrayInGroups(arr, size) {
-                              var myArray = [];
-                              for(var i = 0; i < arr.length; i += size) {
-                                myArray.push(arr.slice(i, i+size));
-                              }
-                              return myArray;
-                            }
-
-
-                            function generateByDirectionService(directionsService, directionsRenderer, waypts_chunks, i) {  
-
-                                const waypts = [];
-                                for (let j = 1; j < waypts_chunks[i].length-1; j++) {
-                                    //if (!waypts_chunks[i][j].start_end) {
-                                      waypts.push({
-                                        location: waypts_chunks[i][j].position,
-                                        stopover: true,
-                                      });
-                                    //}
+                            function array_move(arr, old_index, new_index) {
+                                if (new_index >= arr.length) {
+                                    var k = new_index - arr.length + 1;
+                                    while (k--) {
+                                        arr.push(undefined);
+                                    }
                                 }
-                                //console.log('waypts', waypts);
-
-                                setTimeout(function() { 
-
-                                    directionsService
-                                    .route({
-                                      origin: waypts_chunks[i][0].position,
-                                      destination: waypts_chunks[i][waypts_chunks[i].length-1].position,
-                                      waypoints: waypts,
-                                      optimizeWaypoints: true,
-                                      travelMode: google.maps.TravelMode.WALKING,
-                                    })
-                                    .then((response) => {
-                                        //console.log('response', response.routes[0].waypoint_order);
-                                        // if(first){
-                                        //     directionsRenderer.setDirections(response);
-                                        //     first = false;
-                                        // }
-                                        markers[(i*25)].setIcon("../controller/getMarkerIcon.php?color=green&text="+((i*25)+1));
-                                        markers[(i*25)].urutan=(i*25)+1;
-                                        markers[(i*25)+waypts_chunks[i].length-1].setIcon("../controller/getMarkerIcon.php?color=green&text="+((i*25)+waypts_chunks[i].length));
-                                        markers[(i*25)+waypts_chunks[i].length-1].urutan=(i*25)+waypts_chunks[i].length;
-                                        $.each(response.routes[0].waypoint_order, function(idx, urut){
-                                            ////console.log(i, urut);
-                                            markers[(i*25)+(urut+1)].setIcon("../controller/getMarkerIcon.php?color=green&text="+((i*25)+(urut+2)));
-                                            markers[(i*25)+(urut+1)].urutan=(i*25)+(urut+2);
-                                        });
-
-                                      const route = response.routes[0];
-                                      const summaryPanel = $('.urut-langkah');
-
-                                      //summaryPanel.innerHTML = "";
-
-                                      // For each route, display summary information.
-                                      for (let i = 0; i < route.legs.length; i++) {
-                                        const routeSegment = i + 1;
-
-                                        summaryPanel.innerHTML +=
-                                          "<b>Route Segment: " + routeSegment + "</b><br>";
-                                        summaryPanel.innerHTML += route.legs[i].start_address + " to ";
-                                        summaryPanel.innerHTML += route.legs[i].end_address + "<br>";
-                                        summaryPanel.innerHTML += route.legs[i].distance.text + "<br><br>";
-                                      }
-                                    })
-                                    .catch((e) => window.alert("Directions request failed due to " + status));
-          
-
-                                    if (i < waypts_chunks.length) {           //  if the counter < 10, call the loop function
-                                      generateByDirectionService(directionsService, directionsRenderer, waypts_chunks, i+1);             //  ..  again which will trigger another 
-                                    }                       //  ..  setTimeout()
-                                }, 2000)
+                                arr.splice(new_index, 0, arr.splice(old_index, 1)[0]);
+                                return arr; // for testing
                             }
 
+                            function sortUrutanJarak(datas, mulai, akhir, idx) {
+                                //console.log('sort '+idx, datas[idx]);
 
-                            function calculateAndDisplayRoute(datas, directionsService, directionsRenderer) {
-                                
-                                var waypts_chunks = chunkArrayInGroups(datas, 25);
-                                //console.log('waypts_chunks', waypts_chunks);
-
-                                const summaryPanel = $('.urut-langkah');
-                                var first = true;
-
-                                summaryPanel.innerHTML = "";
-
-                                generateByDirectionService(directionsService, directionsRenderer, waypts_chunks, 0);
-
-                            }
-
-                            function find_closest_markers(start) {
-                                var markers_distances = [];
-                                var before = start;
-                                $('div.content-body').block({ message: 'Mengkalkulasi jarak dan mengurutkan titik koordinat...' });
-                                for (var i = 0; i < markers.length; i++) {
-                                    // if(!markers[i].start_end){
-                                        var d = google.maps.geometry.spherical.computeDistanceBetween(before.position, markers[i].position);
-                                        // var d = turf.distance(
-                                        //     turf.point([start.position.lat(), start.position.lng()]), 
-                                        //     turf.point([markers[i].position.lat(), markers[i].position.lng()]), 
-                                        //     {units: 'miles'});
-                                        markers_distances[i] = {
-                                            distance: d, 
-                                            marker: markers[i]
-                                        }
-                                        markers[i].jarak = d;
-                                    // }
-                                }
-
-                                var closest_markers = markers_distances.sort((a, b) => {return a.distance-b.distance})
-                                $('div.content-body').unblock();
-
-                                return closest_markers.map((item) => {return item.marker})
-                            }
-
-                            function sortUrutan(datas, mulai, akhir, idx) {
-                                
                                 if(idx<datas.length){
                                     if(idx==0)
                                         $('div.content-body').block({ message: 'Mengkalkulasi jarak dan mengurutkan titik koordinat...' });
-                                    
+                                    console.log('sort '+idx, datas[idx]);
                                     //console.log('cek jarak ke-'+idx, mulai.title+' urutan ke-'+mulai.urutan);
                                     var jarak, jarak_sebelumnya, closest_idx;
                                     for (var i = 0; i < datas.length; i++) {
 
-                                        // if(datas[i].idpel==start.idpel){
-                                        //     datas[i].urutan=1;
-                                        //     datas[i].start_end=true;
-                                        // }
-
-                                        // if(datas[i].idpel==end.idpel){
-                                        //     datas[i].urutan=datas.length;
-                                        //     datas[i].start_end=true;
-                                        // }
-
-                                        if(datas[i].urutan==null){
+                                        if(datas[i].urutan==0){
                                             jarak = google.maps.geometry.spherical.computeDistanceBetween(mulai.position, datas[i].position);
                                             
                                             if(jarak_sebelumnya==null){
@@ -530,21 +236,222 @@ $(document).ready(function () {
                                         }
                                     }
                                     if(closest_idx!=null){
-                                        datas[closest_idx].urutan = idx+2;
-                                        //console.log('titik terdekat '+closest_idx, datas[closest_idx].title);
-                                        sortUrutan(datas, datas[closest_idx], end, idx+1);
+                                        //var next_marker = datas[closest_idx];
+                                        datas = array_move(datas, closest_idx, idx+1); 
+                                        datas[idx+1].urutan = idx+2;
+                                        sortUrutanJarak(datas, datas[idx+1], end, idx+1);
                                     }else{
-                                        sortUrutan(datas, datas[0], end, datas.length);
+                                        sortUrutanJarak(datas, datas[0], end, datas.length);
                                     }
                                 }else{
                                     //mulai.urutan = datas.length;
                                     //console.log('Selesai mengurutkan');
-                                    datas = datas.sort((a, b) => {return a.urutan-b.urutan});
+                                    //datas = datas.sort((a, b) => {return a.urutan-b.urutan});
                                     //console.log('datas dalam', datas);
                                     $('div.content-body').unblock();
 
                                 }
                             }
+
+                            // function sortUrutanTglTagging(datas){
+                            //     datas = datas.sort((a,b) => (a.tgl_tagging > b.tgl_tagging) ? 1 : ((b.tgl_tagging > a.tgl_tagging) ? -1 : 0));
+                            //     var i=0;
+                            //     asyncForEach(datas, function(marker) {
+                            //         marker.urutan=i+1;
+                            //         i++;
+                            //     },function() {
+
+                            //         $('#btn_generate').prop('disabled', false);
+                            //         $('#btn_simulasi').prop('disabled', false);
+                            //         $('#btn_create').prop('disabled', false);
+
+                            //         start = null;
+                            //         end = null;
+                            //         generated = true;
+                            //     });
+                            // }
+
+                            function refreshUrutanMarker(datas){
+                                $('div.content-body').block({ message: 'Memberikan Urutan...' });
+                                var i=0;
+                                var urutan, urutan_txt, color;
+                                asyncForEach(datas, function(marker) {
+
+                                    if(marker.urutan>0){
+                                        urutan = i+1;
+                                        urutan_txt = i+1;
+                                        color = 'green-darker';
+                                        generated = true;
+                                    }else{
+                                        urutan = 0;
+                                        urutan_txt = '..';
+                                        color = 'red';
+                                    }
+                                    
+                                    marker.setIcon("../controller/getMarkerIcon.php?color="+color+"&text="+urutan_txt);
+                                    marker.urutan=urutan;
+                                    i++;
+                                },function() {
+                                    $('div.content-body').unblock();
+
+                                    $('#btn_generate').prop('disabled', false);
+                                    $('#btn_simulasi').prop('disabled', false);
+                                    $('#btn_create').prop('disabled', false);
+
+                                    start = null;
+                                    end = null;
+                                    generated = true;
+                                });
+                            }
+
+
+                            map.enableKeyDragZoom({
+                                noZoom: true,
+                                visualEnabled: false,
+                            });
+
+                            var dz = map.getDragZoomObject();
+
+                            google.maps.event.addListener(dz, 'dragstart', function (latlng) {
+                                //console.log('KeyDragZoom Started: ' + latlng);
+                            });
+
+                            google.maps.event.addListener(dz, 'dragend', function (bnds) {
+                                //console.log('KeyDragZoom Ended: ' + bnds);
+                                //console.log(bnds);
+                                //console.log(bnds.getSouthWest());
+
+                                var GLOBE_WIDTH = 256; // a constant in Google's map projection
+                                var west = bnds.getSouthWest().lng();
+                                var east = bnds.getNorthEast().lng();
+                                var angle = east - west;
+                                if (angle < 0) {
+                                  angle += 360;
+                                }
+                                var pixelWidth = $('div#map').width();
+                                var zoom = Math.round(Math.log(pixelWidth * 360 / angle / GLOBE_WIDTH) / Math.LN2);
+
+                                //console.log('zoom', zoom);
+
+                                if(zoom>=10){
+
+                                    $('div.content-body').block({ message: 'Memilih koordinat...' });
+                                    var urutan, urutan_txt, color;
+                                    var i=0;
+                                    asyncForEach(markers, function(marker) {
+
+                                        if(marker.getPosition()){
+                                            if (bnds.contains(marker.getPosition())) {
+                                                ////console.log('marker dalam pilihan', marker);
+                                                
+                                                //if(!marker.selected){
+                                                if(!marker.selected){
+
+                                                    if(marker.urutan>0){
+                                                        urutan = i+1;
+                                                        urutan_txt = i+1;
+                                                        color = 'blue';
+                                                    }else{
+                                                        urutan = null;
+                                                        urutan_txt = '..';
+                                                        color = 'blue';
+                                                    }
+
+                                                    marker.setIcon("../controller/getMarkerIcon.php?color="+color+"&text="+urutan_txt);
+                                                    marker.urutan = urutan;
+                                                    marker.selected = true;
+                                                    selected.push(marker);
+                                                    // $('#jml_plg_dipilih').html("Jumlah Pelanggan dipilih: <span class='text-primary'>"+selected.length+'</span>');
+                                                }
+
+                                                // }else{
+                                                //     marker.setIcon(red_house);
+                                                //     marker.selected = false;
+                                                //     $('#plg_dipilih').html(selected.length);
+
+                                                // }
+                                            }
+                                        }
+
+                                        i++;
+                                      //marker.setIcon("http://maps.google.com/mapfiles/marker_green.png");
+                                    },function(){
+                                        if(selected.length>0){
+
+                                            bootbox.confirm({
+                                                title: "Hapus Koordinat?",
+                                                message: "Apakah anda yakin akan menghapus "+selected.length+" titik koordinat dari Peta?", 
+                                                scrollable: true,
+                                                buttons: {
+                                                    cancel: {
+                                                        className: 'btn-light',
+                                                        label: '<i class="fa fa-times"></i> Batal'
+                                                    },
+                                                    confirm: {
+                                                        className: 'btn-danger',
+                                                        label: '<i class="fa fa-check"></i> Ya, Hapus'
+                                                    }
+                                                },
+                                                callback: function (result) {
+                                                    if(result){
+                                                        $('div.content-body').block({ message: 'Menghapus koordinat pelanggan yang dipilih...' });
+                                                        asyncForEach(selected, function(marker) {
+                                                            if(marker.selected){
+
+                                                                marker.selected = false;
+                                                                marker.setMap(null);
+                                                                //selected = $.grep(selected, function(e) { return e.idpel!=marker.idpel });
+                                                                selected = $.grep(selected, function(e) { return e.idpel!=marker.idpel });
+                                                                markers = $.grep(markers, function(e) { return e.idpel!=marker.idpel });
+                                                                
+                                                                deleted.push(marker.idpel);
+                                                                $('#jml_plg_dihapus').html("Jumlah Pelanggan dihapus: "+deleted.length);
+                                                                $('#total_plg').html("("+markers.length+" plg)");
+                                                            }
+                                                        },function() {
+                                                            
+                                                            $('div.content-body').unblock();
+                                                            refreshUrutanMarker(markers);
+
+                                                        });
+                                                    }else{
+                                                        var urutan, urutan_txt, color;
+                                                        var i=0;
+                                                        asyncForEach(selected, function(marker) {
+                                                            //if(marker.selected){
+                                                                //console.log(marker);
+                                                                if(marker.urutan>0){
+                                                                    urutan = marker.urutan;
+                                                                    urutan_txt = marker.urutan;
+                                                                    color = 'green-darker';
+                                                                }else{
+                                                                    urutan = 0;
+                                                                    urutan_txt = '..';
+                                                                    color = 'red';
+                                                                }
+                                                                
+                                                                marker.setIcon("../controller/getMarkerIcon.php?color="+color+"&text="+urutan_txt);
+                                                                marker.selected = false;
+                                                                selected = $.grep(selected, function(e) { return e.idpel!=marker.idpel });
+                                                                
+                                                            //}
+                                                        },function() {
+
+                                                        });
+                                                    }
+                                                }
+                                            });
+
+                                        }
+                                        $('div.content-body').unblock();
+                    
+                                    });
+                                }else{
+                                    bootbox.alert("Rentang pilihan terlalu jauh!");
+                                    return false;
+                                }
+
+                            });
 
 
                             $('#btn_generate').bind( "click", function() {
@@ -559,18 +466,13 @@ $(document).ready(function () {
                                             className: 'btn-warning',
                                             callback: function(){
                                                 markers = markers.sort((a,b) => (a.tgl_tagging > b.tgl_tagging) ? 1 : ((b.tgl_tagging > a.tgl_tagging) ? -1 : 0));
-                                                //console.log('urut tgl tagging', markers);
-                                                //calculateAndDisplayRoute(markers, directionsService, directionsRenderer);
-                                                
-                                                $('div.content-body').block({ message: 'Memberikan Urutan...' });
-                                                var i=1;
+                                                var i=0;
                                                 asyncForEach(markers, function(marker) {
-                                                    marker.setIcon("../controller/getMarkerIcon.php?color=green-darker&text="+(i));
-                                                    marker.urutan=i;
+                                                    marker.urutan=i+1;
                                                     i++;
                                                 },function() {
-                                                    $('div.content-body').unblock();
-
+                                                    refreshUrutanMarker(markers);
+                                                    
                                                     $('#btn_generate').prop('disabled', false);
                                                     $('#btn_simulasi').prop('disabled', false);
                                                     $('#btn_create').prop('disabled', false);
@@ -579,6 +481,7 @@ $(document).ready(function () {
                                                     end = null;
                                                     generated = true;
                                                 });
+
                                             }
                                         },
                                         jarak: {
@@ -587,29 +490,8 @@ $(document).ready(function () {
                                             callback: function(){
                                                 
                                                 if(start!=null && end!=null){
-                                                    //calculateAndDisplayRoute(directionsService, directionsRenderer);
-                                                    //markers = find_closest_markers(start);
-                                                    sortUrutan(markers, start, end, 0);
-                                                    //console.log('closest_markers', markers);
-                                                    //calculateAndDisplayRoute(markers, directionsService, directionsRenderer);
-                                                    
-                                                    $('div.content-body').block({ message: 'Memberikan Urutan...' });
-                                                    var i=1;
-                                                    asyncForEach(markers, function(marker) {
-                                                        marker.setIcon("../controller/getMarkerIcon.php?color=green-darker&text="+(marker.urutan));
-                                                        //marker.urutan=i;
-                                                        i++;
-                                                    },function() {
-                                                        $('div.content-body').unblock();
-
-                                                        $('#btn_generate').prop('disabled', false);
-                                                        $('#btn_simulasi').prop('disabled', false);
-                                                        $('#btn_create').prop('disabled', false);
-
-                                                        start = null;
-                                                        end = null;
-                                                        generated = true;
-                                                    });
+                                                    sortUrutanJarak(markers, start, end, 0);
+                                                    refreshUrutanMarker(markers);
 
                                                 }else{
                                                     bootbox.alert({
@@ -631,7 +513,7 @@ $(document).ready(function () {
                                 var btn = $(this);
                                 if(btn.hasClass('btn-secondary')){
                                     if(generated){
-                                        var i=1;
+                                        var i=0;
 
                                         function simulasikan(markers, i, delay) {  
                                             if(i<markers.length && !stop_simulasi){
@@ -640,11 +522,11 @@ $(document).ready(function () {
                                                 google.maps.event.trigger(markers[i], 'mouseover');
                                                 $('#plg_dipilih').html('Pelanggan dipilih: <span class="text-primary">'+markers[i].title+'</span>');
                                                 $('#info_tagging').html('Info Tagging: <span class="text-primary">'+markers[i].info_tagging+'</span>');
-                                                markers[i].setIcon("../controller/getMarkerIcon.php?color=green&text="+(markers[i].urutan));
+                                                markers[i].setIcon("../controller/getMarkerIcon.php?color=green&text="+(i+1));
                                                 markers[i].setAnimation(google.maps.Animation.BOUNCE);
                                                 setTimeout(function() {   //  call a 3s setTimeout when the loop is called
                                                     //console.log('urutan', markers[i].urutan);
-                                                    markers[i].setIcon("../controller/getMarkerIcon.php?color=green-darker&text="+(markers[i].urutan));              //  increment the counter
+                                                    markers[i].setIcon("../controller/getMarkerIcon.php?color=green-darker&text="+(i+1));              //  increment the counter
                                                     markers[i].setAnimation(null);
                                                     if (i < markers.length) {           //  if the counter < 10, call the loop function
                                                       simulasikan(markers, i+1, delay);             //  ..  again which will trigger another 
@@ -657,7 +539,8 @@ $(document).ready(function () {
                                                 map.setZoom(18);
                                                 //map.panTo(markers[0].position);
                                                 stop_simulasi = false;
-                                                $('#plg_dipilih').html("");
+                                                $('#plg_dipilih').empty();
+                                                $('#info_tagging').empty();
 
                                                 btn.removeClass('btn-danger');
                                                 btn.addClass('btn-secondary');
@@ -669,7 +552,7 @@ $(document).ready(function () {
                                         btn.addClass('btn-danger');
                                         btn.html('Stop <span class="btn-icon-right"><i class="fa fa-stop-circle"></i></span>');
 
-                                        markers = markers.sort((a, b) => {return a.urutan-b.urutan});
+                                        //markers = markers.sort((a, b) => {return a.urutan-b.urutan});
 
                                         bootbox.dialog({ 
                                             title: 'Simulasi Urut Langkah',
@@ -745,12 +628,17 @@ $(document).ready(function () {
 
                                                         var valeur = parseInt((i / datas.length)*100);
                                                         var marker = datas[i];
+                                                        var urutan;
+                                                        if(marker.urutan>0)
+                                                            urutan=i+1;
+                                                        else
+                                                            urutan=0;
 
                                                         $($(progress).find('.progress-bar')[0]).css('width', valeur+'%').attr('aria-valuenow', valeur);
                                                         $($(progress).find('.msg')[0]).html('Menyimpan idpel '+marker.idpel+' ke RPP <span class="text-success">'+rpp+'</span> Urut Langkah ke-<span class="text-success">'+marker.urutan+'</span>...');
 
                                                         $.post('../controller/pemeriksaan_lpb/simpanRPP.php', 
-                                                        { petugas: petugas, rpp: rpp, urutan: marker.urutan, idpel:marker.idpel }, 
+                                                        { petugas: petugas, rpp: rpp, urutan: urutan, idpel:marker.idpel }, 
                                                         function(res){
                                                             //console.log('res',res);
                                                             if(res.success=='true' || res.success){
@@ -842,6 +730,7 @@ $(document).ready(function () {
                                 e.preventDefault();
                                 var idpel = $(this).data('idpel');
                                 var marker = $.grep(markers, function(e) { return e.idpel==idpel })[0];
+                                var idx_marker = markers.findIndex(x => x.idpel == idpel);
 
                                 bootbox.confirm({
                                     title: "Tentukan titik mulai",
@@ -869,12 +758,14 @@ $(document).ready(function () {
                                             $('div.content-body').block({ message: 'Menetapkan ulang urutan...' });
                                             asyncForEach(markers, function(marker) {
                                                 marker.setIcon("../controller/getMarkerIcon.php?color=red&text=..");
-                                                marker.urutan = null;
+                                                marker.urutan = 0;
                                                 marker.start_end = false;
                                             },function() {
                                                 $('div.content-body').unblock();
                                             });
 
+
+                                            markers = array_move(markers, idx_marker, 0); 
                                             marker.setIcon("../controller/getMarkerIcon.php?color=green-darker&text=START");
                                             start = marker;
                                             marker.urutan=1;
@@ -901,7 +792,8 @@ $(document).ready(function () {
                                 e.preventDefault();
                                 var idpel = $(this).data('idpel');
                                 var marker = $.grep(markers, function(e) { return e.idpel==idpel })[0];
-
+                                var idx_marker = markers.findIndex(x => x.idpel == idpel);
+                                
                                 if(start!=null){
 
                                     bootbox.confirm({
@@ -928,6 +820,8 @@ $(document).ready(function () {
                                                 }
 
                                                 marker.setIcon("../controller/getMarkerIcon.php?color=green-darker&text=END");
+                                                
+                                                markers = array_move(markers, idx_marker, markers.length-1);
                                                 end = marker;
                                                 marker.urutan=markers.length;
                                                 marker.start_end = true;
@@ -952,19 +846,9 @@ $(document).ready(function () {
                                 e.preventDefault();
                                 var idpel = $(this).data('idpel');
                                 var marker = $.grep(markers, function(e) { return e.idpel==idpel })[0];
+                                var idx_marker = markers.findIndex(x => x.idpel == idpel);
 
-                                function array_move(arr, old_index, new_index) {
-                                    if (new_index >= arr.length) {
-                                        var k = new_index - arr.length + 1;
-                                        while (k--) {
-                                            arr.push(undefined);
-                                        }
-                                    }
-                                    arr.splice(new_index, 0, arr.splice(old_index, 1)[0]);
-                                    return arr; // for testing
-                                }
-
-                                if(marker.urutan==null){
+                                if(marker.urutan==0){
                                     bootbox.alert("Silahkan tentukan titik awal dan generate langkah terlebih dahulu!");
                                 }else{
                                     bootbox.prompt({
@@ -972,25 +856,26 @@ $(document).ready(function () {
                                         message: "Silahkan isi urutan yang dikehendaki untuk Idpel "+idpel, 
                                         required: true,
                                         inputType: 'number',
-                                        value: marker.urutan,
+                                        value: idx_marker+1,
                                         callback: function (result) {
-                                            if(result>0){
+                                            if(result>0 && result<=markers.length){
 
-                                                var idx_lama = markers.findIndex(x => x.urutan == result);
-                                                console.log(idx_lama);
-                                                if(idx_lama>=0){
-                                                    markers[idx_lama].setIcon("../controller/getMarkerIcon.php?color=red&text=..");
-                                                    markers[idx_lama].urutan = 99999;
-                                                }
-                                                var idx_baru = markers.findIndex(x => x.urutan == marker.urutan);
-                                                markers[idx_baru].urutan = result;
-                                                markers = array_move(markers, idx_baru, result-1); 
+                                                // var idx_lama = markers.findIndex(x => x.urutan == result);
+                                                // console.log(idx_lama);
+                                                // if(idx_lama>=0){
+                                                //     markers[idx_lama].setIcon("../controller/getMarkerIcon.php?color=red&text=..");
+                                                //     markers[idx_lama].urutan = 99999;
+                                                // }
+                                                // var idx_baru = markers.findIndex(x => x.urutan == marker.urutan);
+                                                // markers[idx_baru].urutan = result;
+                                                markers = array_move(markers, idx_marker, result-1); 
 
                                                 $('div.content-body').block({ message: 'Menetapkan ulang urutan...' });
+                                                var i=0;
                                                 asyncForEach(markers, function(marker) {
-                                                    if(marker.urutan>result){
+                                                    if(i>result-1){
                                                         marker.setIcon("../controller/getMarkerIcon.php?color=red&text=..");
-                                                        marker.urutan = null;
+                                                        marker.urutan = 0;
                                                     }
                                                     i++;
                                                 },function() {
@@ -1000,24 +885,27 @@ $(document).ready(function () {
                                                 //console.log('markers[result-1]',markers[result-1]);
                                                 //console.log('result-1',result-1);
 
-                                                sortUrutan(markers, markers[result-1], end, result-1);
+                                                sortUrutanJarak(markers, markers[result-1], end, result-1);
+                                                refreshUrutanMarker(markers);
 
-                                                $('div.content-body').block({ message: 'Memberikan Urutan baru...' });
-                                                var i=1;
-                                                asyncForEach(markers, function(marker) {
-                                                    marker.setIcon("../controller/getMarkerIcon.php?color=green-darker&text="+(marker.urutan));
-                                                    //marker.urutan=i;
-                                                    i++;
-                                                },function() {
-                                                    generated = true;
-                                                    $('div.content-body').unblock();
-                                                });
+                                                // $('div.content-body').block({ message: 'Memberikan Urutan baru...' });
+                                                // var i=1;
+                                                // asyncForEach(markers, function(marker) {
+                                                //     marker.setIcon("../controller/getMarkerIcon.php?color=green-darker&text="+(marker.urutan));
+                                                //     //marker.urutan=i;
+                                                //     i++;
+                                                // },function() {
+                                                //     generated = true;
+                                                //     $('div.content-body').unblock();
+                                                // });
+                                            }else{
+                                                bootbox.alert("Silahkan isi dari 0 s.d "+markers.length);
+                                                return false;
                                             }
                                         }
                                     });
 
                                 }
-
 
                                 infowindow.close();
                                 $('#plg_dipilih').empty();
@@ -1085,13 +973,6 @@ $(document).ready(function () {
                       })
                     .wait(2000) // to let you appreciate the current zoom & center
                     .fit();
-
-                // var markerCluster = new MarkerClusterer(map, markers, {
-                //     imagePath:
-                //       "https://developers.google.com/maps/documentation/javascript/examples/markerclusterer/m",
-                //     maxZoom: 20,
-                //     //averageCenter: true,
-                //   });
 
             }else{
 

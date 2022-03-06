@@ -432,6 +432,8 @@ $(document).ready(function () {
                                                                     }
                                                                 },function(){
 
+                                                                    populateList(selected);
+
                                                                     bootbox.confirm({
                                                                         title: "Proses Selesai",
                                                                         message: "Sebanyak "+res.idpels.length+" pelanggan berhasil disimpan, apakah anda akan melanjutkan ke proses pemberian urut langkah? (klik allow/izinkan, jika muncul popup di browser anda)", 
