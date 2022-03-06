@@ -13,7 +13,7 @@
         addRemoveLinks: true,
         clickable: true,
         maxFiles: 5,
-        timeout: 180000,
+        timeout: 240000,
         maxFilesize: 50,
         parallelUploads: 2,
         autoProcessQueue: false,

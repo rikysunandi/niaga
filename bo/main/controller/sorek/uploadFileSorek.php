@@ -1,9 +1,9 @@
 <?php
 
 
-ini_set('upload_max_filesize', '30M');
-ini_set('post_max_size', '30M');
-ini_set('max_execution_time', 0);
+ini_set('upload_max_filesize', '50M');
+ini_set('post_max_size', '50M');
+ini_set('max_execution_time', -1);
 ini_set('memory_limit',-1);
 ini_set('sqlsrv.timeout', 3600);
 ini_set('sqlsrv.connect_timeout', 3600);
