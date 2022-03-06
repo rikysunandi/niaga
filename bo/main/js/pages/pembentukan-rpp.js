@@ -787,7 +787,7 @@ $(document).ready(function () {
         $('ul#petugas-selected').empty();
         $.each(petugas_sort, function ( idx, val ) {
             $('ul#petugas-selected').append(
-                `<li class="list-group-item col-9">
+                `<li class="list-group-item">
                     <span>`+val[0]+`</span>
                     <a href="#" class="pull-right mr-2" role="button" aria-pressed="true">
                       <i class="link-hapus fa fa-minus-circle"></i>
@@ -800,7 +800,7 @@ $(document).ready(function () {
         $('ul#rbm-paska-selected').empty();
         $.each(rbm_paska_sort, function ( idx, val ) {
             $('ul#rbm-paska-selected').append(
-                `<li class="list-group-item col-9">
+                `<li class="list-group-item">
                     <span>`+val[0]+`</span>
                     <a href="#" class="pull-right mr-2" role="button" aria-pressed="true">
                       <i class="link-hapus fa fa-minus-circle"></i>
@@ -813,7 +813,7 @@ $(document).ready(function () {
         $('ul#gardu-selected').empty();
         $.each(gardu_sort, function ( idx, val ) {
             $('ul#gardu-selected').append(
-                `<li class="list-group-item col-9">
+                `<li class="list-group-item">
                     <span>`+val[0]+`</span>
                     <a href="#" class="pull-right mr-2" role="button" aria-pressed="true">
                       <i class="link-hapus fa fa-minus-circle"></i>
