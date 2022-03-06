@@ -977,7 +977,8 @@ $(document).ready(function () {
                                             if(result>0){
 
                                                 var idx_lama = markers.findIndex(x => x.urutan == result);
-                                                if(idx_lama!=null){
+                                                console.log(idx_lama);
+                                                if(idx_lama>=0){
                                                     markers[idx_lama].setIcon("../controller/getMarkerIcon.php?color=red&text=..");
                                                     markers[idx_lama].urutan = 99999;
                                                 }
