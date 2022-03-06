@@ -604,7 +604,7 @@ $(document).ready(function () {
                                                             btn.addClass('btn-danger');
                                                             btn.html('Stop <span class="btn-icon-right"><i class="fa fa-stop-circle"></i></span>');
 
-                                                            simulasikan(markers, 0, 150); 
+                                                            simulasikan(markers, 0, 250); 
                                                         }, 800);
                                                     }
                                                 }
