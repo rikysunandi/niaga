@@ -797,13 +797,14 @@ $(document).ready(function () {
 
                                                                 console.log('res deleted',res);
                                                                 if(res.success=='true' || res.success){
-                                                                    bootbox.alert("Selesai menyimpan dan menghapus data!");
-                                                                    deleted = $.grep(deleted, function(e) { return !res.idpels.includes(e) }); 
-                                                                    $("#jml_plg_dihapus").html("Jumlah Pelanggan dihapus: "+deleted.length);
+                                                                    bootbox.alert("Selesai menyimpan dan menghapus data!", function () {
+                                                                        deleted = $.grep(deleted, function(e) { return !res.idpels.includes(e) }); 
+                                                                        $("#jml_plg_dihapus").html("Jumlah Pelanggan dihapus: "+deleted.length);
+                                                                        progress.modal('hide');
+                                                                        bootbox.hideAll();
+                                                                    });
                                                                 }
-                                                                
-                                                                progress.modal('hide');
-                                                                bootbox.hideAll();
+
 
                                                             }).fail(function() { 
                                                                 progress.modal('hide');
