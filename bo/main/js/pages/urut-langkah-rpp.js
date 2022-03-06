@@ -179,11 +179,12 @@ $(document).ready(function () {
                     streetViewControl: true
                   })
                   .marker(markers_resp)
-                    .then(function (markers) {
+                    .then(function (markers_then) {
 
-                        var map = this.get()[0];
-                        markers = markers;
-                        //console.log("map then", map);
+                        var map_then = this.get()[0];
+                        markers = markers_then;
+                        map = map_then;
+                        console.log("map then", map);
                         
                         $('#btn_generate').prop('disabled', false);
                         $('#btn_simulasi').prop('disabled', false);
@@ -522,12 +523,13 @@ $(document).ready(function () {
                                                 google.maps.event.trigger(markers[i], 'mouseover');
                                                 $('#plg_dipilih').html('Pelanggan dipilih: <span class="text-primary">'+markers[i].title+'</span>');
                                                 $('#info_tagging').html('Info Tagging: <span class="text-primary">'+markers[i].info_tagging+'</span>');
-                                                markers[i].setIcon("../controller/getMarkerIcon.php?color=green&text="+(i+1));
-                                                markers[i].setAnimation(google.maps.Animation.BOUNCE);
+                                                var zIndex = markers[i].getZIndex();
+                                                markers[i].setIcon("../controller/getMarkerIcon.php?color=green-darker&text="+(i+1));
+                                                markers[i].setZIndex(9999);
                                                 setTimeout(function() {   //  call a 3s setTimeout when the loop is called
                                                     //console.log('urutan', markers[i].urutan);
-                                                    markers[i].setIcon("../controller/getMarkerIcon.php?color=green-darker&text="+(i+1));              //  increment the counter
-                                                    markers[i].setAnimation(null);
+                                                    //markers[i].setIcon("../controller/getMarkerIcon.php?color=green-darker&text="+(i+1));              //  increment the counter
+                                                    markers[i].setZIndex(zIndex);
                                                     if (i < markers.length) {           //  if the counter < 10, call the loop function
                                                       simulasikan(markers, i+1, delay);             //  ..  again which will trigger another 
                                                     }                       //  ..  setTimeout()
@@ -548,10 +550,6 @@ $(document).ready(function () {
                                             }
                                         }
 
-                                        btn.removeClass('btn-secondary');
-                                        btn.addClass('btn-danger');
-                                        btn.html('Stop <span class="btn-icon-right"><i class="fa fa-stop-circle"></i></span>');
-
                                         //markers = markers.sort((a, b) => {return a.urutan-b.urutan});
 
                                         bootbox.dialog({ 
@@ -565,22 +563,49 @@ $(document).ready(function () {
                                                     label: 'Lambat',
                                                     className: 'btn-danger',
                                                     callback: function(){
-                                                        simulasikan(markers, 0, 1500); 
+
+                                                        $.each(markers, function(i, marker) {
+                                                            marker.setIcon("../controller/getMarkerIcon.php?color=red&text=..");
+                                                        });
+                                                        setTimeout(function() {  
+                                                            btn.removeClass('btn-secondary');
+                                                            btn.addClass('btn-danger');
+                                                            btn.html('Stop <span class="btn-icon-right"><i class="fa fa-stop-circle"></i></span>');
+
+                                                            simulasikan(markers, 0, 1200); 
+                                                        }, 800);
                                                     }
                                                 },
                                                 medium: {
                                                     label: 'Sedang',
                                                     className: 'btn-warning',
                                                     callback: function(){
-                                                        simulasikan(markers, 0, 1000); 
+                                                        $.each(markers, function(i, marker) {
+                                                            marker.setIcon("../controller/getMarkerIcon.php?color=red&text=..");
+                                                        });
+                                                        setTimeout(function() {  
+                                                            btn.removeClass('btn-secondary');
+                                                            btn.addClass('btn-danger');
+                                                            btn.html('Stop <span class="btn-icon-right"><i class="fa fa-stop-circle"></i></span>');
+
+                                                            simulasikan(markers, 0, 700); 
+                                                        }, 800);
                                                     }
                                                 },
                                                 fast: {
                                                     label: 'Cepat',
                                                     className: 'btn-success',
                                                     callback: function(){
-                                                        simulasikan(markers, 0, 600); 
-                                                                        
+                                                        $.each(markers, function(i, marker) {
+                                                            marker.setIcon("../controller/getMarkerIcon.php?color=red&text=..");
+                                                        });
+                                                        setTimeout(function() {  
+                                                            btn.removeClass('btn-secondary');
+                                                            btn.addClass('btn-danger');
+                                                            btn.html('Stop <span class="btn-icon-right"><i class="fa fa-stop-circle"></i></span>');
+
+                                                            simulasikan(markers, 0, 100); 
+                                                        }, 800);
                                                     }
                                                 }
                                             }
@@ -598,6 +623,7 @@ $(document).ready(function () {
                                     btn.removeClass('btn-danger');
                                     btn.addClass('btn-secondary');
                                     btn.html('Simulasikan <span class="btn-icon-right"><i class="fa fa-gears"></i></span>');
+                                    refreshUrutanMarker(markers);
                                 }
                             });
 
