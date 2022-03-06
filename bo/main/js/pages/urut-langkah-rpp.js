@@ -974,14 +974,14 @@ $(document).ready(function () {
                                         inputType: 'number',
                                         value: marker.urutan,
                                         callback: function (result) {
-                                            if(result){
+                                            if(result>0){
 
                                                 var idx_lama = markers.findIndex(x => x.urutan == result);
+                                                if(idx_lama!=null){
+                                                    markers[idx_lama].setIcon("../controller/getMarkerIcon.php?color=red&text=..");
+                                                    markers[idx_lama].urutan = 99999;
+                                                }
                                                 var idx_baru = markers.findIndex(x => x.urutan == marker.urutan);
-                                                console.log('idx urutan '+result+' lama', idx_lama );
-                                                console.log('idx urutan '+result+' yang baru', idx_baru );
-                                                markers[idx_lama].setIcon("../controller/getMarkerIcon.php?color=red&text=..");
-                                                markers[idx_lama].urutan = 99999;
                                                 markers[idx_baru].urutan = result;
                                                 markers = array_move(markers, idx_baru, result-1); 
 
