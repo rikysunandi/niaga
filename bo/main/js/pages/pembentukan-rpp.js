@@ -402,7 +402,7 @@ $(document).ready(function () {
                                                         // simpanRPP(selected, 0, dialog, petugas_dipilih, rpp, berhasil);
 
                                                         var dialog = bootbox.dialog({ 
-                                                            message: 'Menyimpan data RPP...', 
+                                                            message: '<div class="text-center"><i class="fa fa-spin fa-spinner"></i> Menyimpan data RPP...</div>', 
                                                             closeButton: false 
                                                         });
 

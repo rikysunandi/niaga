@@ -1,11 +1,12 @@
 <?php
 
-//require_once '../../config/config.php';
+require_once '../../config/config.php';
 
-error_reporting(E_ERROR | E_WARNING | E_PARSE | E_NOTICE);
+//error_reporting(E_ERROR | E_WARNING | E_PARSE | E_NOTICE);
 
 $text = $_GET["text"];
 $color = $_GET["color"];
+$transparent = $_GET["transparent"];
 
 if(strlen($text)==1)
 	$font_size = 11;
@@ -24,8 +25,20 @@ define("FONT_COLOR", 0x00000000);                  // 4 byte color
                                                    // greeen -- 0x00 thru 0xFF
                                                    // blue -- 0x00 thru 0xFF
 
-$gdimage = imagecreatefrompng('../../assets/images/markers/pin/48x48/icon-'.$color.'.png');
-imagesavealpha($gdimage, true);
+if($transparent=='Y'){
+	$srcimage = imagecreatefrompng('../../assets/images/markers/pin/48x48/icon-'.$color.'.png');
+	$gdimage = imagecreatetruecolor( 48, 48 ); 
+	imagealphablending( $gdimage, false );
+	imagesavealpha($gdimage, true);
+	imagecopyresampled( $gdimage, $srcimage, 
+                    0, 0, 
+                    0, 0, 
+                    48, 48, 
+                    48, 48 );
+}else{
+	$gdimage = imagecreatefrompng('../../assets/images/markers/pin/48x48/icon-'.$color.'.png');
+	imagesavealpha($gdimage, true);
+}
 
 // if (strtoupper(substr(PHP_OS, 0, 3)) === 'WIN'){
     list($x0, $y0, , , $x1, $y1) = imagettfbbox(FONT_SIZE, 0, FONT_PATH, $text);
