@@ -59,6 +59,6 @@ if(!sqlsrv_execute($stmt)){
 sqlsrv_free_stmt($stmt);
 sqlsrv_close($conn);
 
-echo json_encode($response);
+echo json_encode($response, JSON_UNESCAPED_UNICODE);
 
 ?>
