@@ -140,6 +140,7 @@
                                             <th class="text-center bg-primary-lighten-2">PETUGAS</th>
                                             <th class="text-center bg-primary-lighten-2">RPP</th>
                                             <th class="text-center bg-primary-lighten-2">JML PLG</th>
+                                            <th class="text-center bg-primary-lighten-2">JML URUTAN</th>
                                         </tr>
                                     </thead>
                                     <tfoot>

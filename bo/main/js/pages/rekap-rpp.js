@@ -84,6 +84,12 @@ $(document).ready(function () {
             visible: true,
             "sClass" : "text-right" , render: $.fn.dataTable.render.number(".", ",", 0, '')
           },
+          {
+            data: "JML_URUT",
+            type: 'number',
+            visible: true,
+            "sClass" : "text-right" , render: $.fn.dataTable.render.number(".", ",", 0, '')
+          },
         ],
         dom:
            // "<'row'<'col-sm-12 col-md-9 mb-2'B>>" +

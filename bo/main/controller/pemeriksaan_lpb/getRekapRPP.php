@@ -42,6 +42,7 @@ $columns = array(
     array( 'db' => 'PETUGAS', 'dt' => 'PETUGAS' ),
     array( 'db' => 'RPP',  'dt' => 'RPP' ),
     array( 'db' => 'JML',  'dt' => 'JML' ),
+    array( 'db' => 'JML_URUT',  'dt' => 'JML_URUT' ),
 );
  
 // SQL server connection information
