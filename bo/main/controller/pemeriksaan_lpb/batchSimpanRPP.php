@@ -27,11 +27,14 @@ if(sqlsrv_execute($stmt)){
   
   if(count($response['idpels'])>0){
   	$response['success'] = true;
+    $response['msg'] = 'Data Pelanggan berhasil disimpan';
   }else
   	$response['success'] = false;
+    $response['msg'] = 'Tidak ada data Pelanggan yang disimpan';
 
 }else{
   $response['success'] = false;
+  $response['msg'] = 'Gagal mengeksekusi procedure di Database!';
 }
 
 sqlsrv_free_stmt($stmt);  
