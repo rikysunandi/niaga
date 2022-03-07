@@ -147,6 +147,7 @@
                                         <tr>
                                             <th class="bg-primary-lighten-2" colspan="5">TOTAL</th>
                                             <th class="bg-primary-lighten-2"></th>
+                                            <th class="bg-primary-lighten-2"></th>
                                         </tr>
                                     </tfoot>
                                 </table>

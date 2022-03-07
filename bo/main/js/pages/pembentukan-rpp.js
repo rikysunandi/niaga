@@ -463,7 +463,7 @@ $(document).ready(function () {
 
                                                             }else{
                                                                 bootbox.alert({
-                                                                    message: "Gagal menyimpan data!",
+                                                                    message: res.msg,
                                                                     backdrop: true
                                                                 });
                                                             }
