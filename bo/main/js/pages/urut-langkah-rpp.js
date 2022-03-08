@@ -911,7 +911,7 @@ $(document).ready(function () {
                                                 //console.log('markers[result-1]',markers[result-1]);
                                                 //console.log('result-1',result-1);
 
-                                                //sortUrutanJarak(markers, markers[result-1], end, result-1);
+                                                sortUrutanJarak(markers, markers[result-1], end, result-1);
                                                 refreshUrutanMarker(markers);
 
                                                 // $('div.content-body').block({ message: 'Memberikan Urutan baru...' });
