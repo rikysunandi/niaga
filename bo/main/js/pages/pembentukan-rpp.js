@@ -549,7 +549,7 @@ $(document).ready(function () {
 
                                 bootbox.confirm({
                                     title: "Hilangkan Koordinat?",
-                                    message: "Apakah anda yakin akan menghilangkan "+selected.length+" titik koordinat dari Peta?", 
+                                    message: "Apakah anda yakin akan menghilangkan sementara "+selected.length+" titik koordinat dari Peta?", 
                                     buttons: {
                                         cancel: {
                                             className: 'btn-light',
@@ -557,12 +557,12 @@ $(document).ready(function () {
                                         },
                                         confirm: {
                                             className: 'btn-danger',
-                                            label: '<i class="fa fa-check"></i> Ya, Hapus'
+                                            label: '<i class="fa fa-check"></i> Ya, Hilangkan'
                                         }
                                     },
                                     callback: function (result) {
                                         if(result){
-                                            $('div.content-body').block({ message: 'Menghapus koordinat yang dipilih...' });
+                                            $('div.content-body').block({ message: 'Menghilangkan sementara koordinat yang dipilih...' });
                                             asyncForEach(selected, function(marker) {
                                                 if(marker.selected){
                                                     //console.log(marker);
