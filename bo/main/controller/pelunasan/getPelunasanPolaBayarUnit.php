@@ -76,7 +76,7 @@ if($stmt){
             $response['rows'][$j]['TARGET_LANCAR'] = ($row['TARGET_LANCAR'])?($row['TARGET_LANCAR']):'';
             $response['rows'][$j]['TARGET_BARU'] = ($row['TARGET_BARU'])?($row['TARGET_BARU']):'';
             $response['rows'][$j]['TARGET_IRISAN'] = ($row['TARGET_IRISAN'])?($row['TARGET_IRISAN']):'';
-            $response['rows'][$j]['TARGET_TOTAL'] = ($row['TARGET_LANCAR']+$row['TARGET_BARU']+$row['TARGET_IRISAN']);
+            $response['rows'][$j]['TARGET_TOTAL'] = '';//($row['TARGET_LANCAR']+$row['TARGET_BARU']+$row['TARGET_IRISAN']);
 
             if($row['TANGGAL']<=date('Ymd')){
                 $response['rows'][$j]['AWAL_LANCAR'] = ($sal_lancar_lalu)? ($sal_lancar_lalu): '';
