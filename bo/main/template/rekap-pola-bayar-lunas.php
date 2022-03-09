@@ -173,6 +173,7 @@
                                             <th class="bg-primary-lighten-2"></th>
                                             <th class="bg-primary-lighten-2"></th>
                                             <th class="bg-primary-lighten-2"></th>
+                                            <th class="bg-primary-lighten-2"></th>
                                         </tr>
                                     </tfoot>
                                 </table>
@@ -247,6 +248,7 @@
                     </div>
                 </div>
 
+
                 <div class="row">
                     <div class="col-12">
                         <div class="card pelunasan">
@@ -302,7 +304,77 @@
 
                 <div class="row">
                     <div class="col-12">
-                    <div id="table_lunas" class="card bg-transparent">
+                        <div class="card">
+                            <div class="card-body">
+                                <h4 class="card-title mb-4">Rekap Per Tanggal Bayar</h4>
+                                <div class="table-responsive">
+                                    <table id="tbl_rekap_tglbayar" class="table table-striped table-bordered nowrap" style="width: 100%">
+                                    <thead>
+                                        <tr>
+                                            <th rowspan="2" class="text-center bg-primary-lighten-2">TANGGAL</th>
+                                            <th colspan="5" class="text-center bg-danger-lighten-2">IRISAN</th>
+                                            <th colspan="5" class="text-center bg-warning-lighten-2">BARU</th>
+                                            <th colspan="5" class="text-center bg-success-lighten-2">LANCAR</th>
+                                            <th colspan="5" class="text-center bg-primary-lighten-2">TOTAL</th>
+                                        </tr>
+                                        <tr>
+                                            <th class="text-center bg-danger-lighten-2">SALDO<br/>AWAL</th>
+                                            <th class="text-center bg-danger-lighten-2">LUNAS</th>
+                                            <th class="text-center bg-danger-lighten-2">SALDO<br/>AKHIR</th>
+                                            <th class="text-center bg-danger-lighten-2">TARGET<br/>SALDO</th>
+                                            <th class="text-center bg-danger-lighten-2">REALISASI</th>
+                                            <th class="text-center bg-warning-lighten-2">SALDO<br/>AWAL</th>
+                                            <th class="text-center bg-warning-lighten-2">LUNAS</th>
+                                            <th class="text-center bg-warning-lighten-2">SALDO<br/>AKHIR</th>
+                                            <th class="text-center bg-warning-lighten-2">TARGET<br/>SALDO</th>
+                                            <th class="text-center bg-warning-lighten-2">REALISASI</th>
+                                            <th class="text-center bg-success-lighten-2">SALDO<br/>AWAL</th>
+                                            <th class="text-center bg-success-lighten-2">LUNAS</th>
+                                            <th class="text-center bg-success-lighten-2">SALDO<br/>AKHIR</th>
+                                            <th class="text-center bg-success-lighten-2">TARGET<br/>SALDO</th>
+                                            <th class="text-center bg-success-lighten-2">REALISASI</th>
+                                            <th class="text-center bg-primary-lighten-2">SALDO<br/>AWAL</th>
+                                            <th class="text-center bg-primary-lighten-2">LUNAS</th>
+                                            <th class="text-center bg-primary-lighten-2">SALDO<br/>AKHIR</th>
+                                            <th class="text-center bg-primary-lighten-2">TARGET<br/>SALDO</th>
+                                            <th class="text-center bg-primary-lighten-2">REALISASI</th>
+                                        </tr>
+                                    </thead>
+                                    <!-- <tfoot>
+                                        <tr>
+                                            <th class="bg-primary-lighten-2">TOTAL</th>
+                                            <th class="bg-danger-lighten-2"></th>
+                                            <th class="bg-danger-lighten-2"></th>
+                                            <th class="bg-danger-lighten-2"></th>
+                                            <th class="bg-danger-lighten-2"></th>
+                                            <th class="bg-danger-lighten-2"></th>
+                                            <th class="bg-warning-lighten-2"></th>
+                                            <th class="bg-warning-lighten-2"></th>
+                                            <th class="bg-warning-lighten-2"></th>
+                                            <th class="bg-warning-lighten-2"></th>
+                                            <th class="bg-warning-lighten-2"></th>
+                                            <th class="bg-success-lighten-2"></th>
+                                            <th class="bg-success-lighten-2"></th>
+                                            <th class="bg-success-lighten-2"></th>
+                                            <th class="bg-success-lighten-2"></th>
+                                            <th class="bg-success-lighten-2"></th>
+                                            <th class="bg-primary-lighten-2"></th>
+                                            <th class="bg-primary-lighten-2"></th>
+                                            <th class="bg-primary-lighten-2"></th>
+                                            <th class="bg-primary-lighten-2"></th>
+                                            <th class="bg-primary-lighten-2"></th>
+                                        </tr>
+                                    </tfoot> -->
+                                </table>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+
+                <div class="row">
+                    <div class="col-12">
+                    <div id="table_lunas" class="card bg-transparent d-none">
                             <!-- <div class="card-body stat-widget-four" style="background-color: #74BCC7;">
                                 <div class="media"> 
                                     <span class="mr-3">

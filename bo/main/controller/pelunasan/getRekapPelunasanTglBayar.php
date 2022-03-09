@@ -18,7 +18,7 @@ $params = array(
         array($blth, SQLSRV_PARAM_IN),
     );
 
-$sql = "EXEC sp_vw_Create_Rekap_Pelunasan_Intimasi_UP_Pre @UserID = ?, @Unitupi = ?, @Unitap = ?, @Unitup = ?, @BLTH = ? ";
+$sql = "EXEC sp_vw_Create_Rekap_Pelunasan_Tgl_Bayar @UserID = ?, @Unitupi = ?, @Unitap = ?, @Unitup = ?, @BLTH = ? ";
 $stmt = sqlsrv_prepare($conn, $sql, $params);
 
 //sqlsrv_execute($stmt);
@@ -27,35 +27,37 @@ if(!sqlsrv_execute($stmt)){
 }
 
 // DB table to use
-$table = 'NIAGA.dbo._vw_Create_Rekap_Pelunasan_Intimasi_UP_'.$user;
+$table = 'NIAGA.dbo._vw_Create_Rekap_Pelunasan_Tgl_Bayar_'.$user;
  
 // Table's primary key
-$primaryKey = 'UNIT';
+$primaryKey = 'TANGGAL';
  
 // Array of database columns which should be read and sent back to DataTables.
 // The `db` parameter represents the column name in the database, while the `dt`
 // parameter represents the DataTables column identifier. In this case simple
 // indexes
 $columns = array(
-    array( 'db' => 'UNITAP', 'dt' => 'UNITAP' ),
-    array( 'db' => 'UNIT', 'dt' => 'UNIT' ),
-    array( 'db' => 'NAMA', 'dt' => 'NAMA' ),
-    array( 'db' => 'TARGET_IRISAN', 'dt' => 'TARGET_IRISAN' ),
-    array( 'db' => 'TARGET_BARU', 'dt' => 'TARGET_BARU' ),
-    array( 'db' => 'TARGET_WO', 'dt' => 'TARGET_WO' ),
-    array( 'db' => 'MUTASI', 'dt' => 'MUTASI' ),
+    array( 'db' => 'TANGGAL', 'dt' => 'TANGGAL' ),
+    array( 'db' => 'SAL_IRISAN', 'dt' => 'SAL_IRISAN' ),
     array( 'db' => 'LUNAS_IRISAN', 'dt' => 'LUNAS_IRISAN' ),
+    array( 'db' => 'TARGET_IRISAN', 'dt' => 'TARGET_IRISAN' ),
+    array( 'db' => 'SAH_IRISAN', 'dt' => 'SAH_IRISAN' ),
+    array( 'db' => 'REAL_IRISAN', 'dt' => 'REAL_IRISAN' ),
+    array( 'db' => 'SAL_BARU', 'dt' => 'SAL_BARU' ),
     array( 'db' => 'LUNAS_BARU', 'dt' => 'LUNAS_BARU' ),
-    array( 'db' => 'LUNAS_WO', 'dt' => 'LUNAS_WO' ),
-    array( 'db' => 'SALDO_IRISAN', 'dt' => 'SALDO_IRISAN' ),
-    array( 'db' => 'SALDO_BARU', 'dt' => 'SALDO_BARU' ),
-    array( 'db' => 'SALDO_WO', 'dt' => 'SALDO_WO' ),
-    array( 'db' => 'SALDO_MUP3', 'dt' => 'SALDO_MUP3' ),
-    array( 'db' => 'SALDO_MBSAR', 'dt' => 'SALDO_MBSAR' ),
-    array( 'db' => 'SALDO_MULP', 'dt' => 'SALDO_MULP' ),
-    array( 'db' => 'SALDO_BILLER', 'dt' => 'SALDO_BILLER' ),
-    array( 'db' => 'PERSEN_TOTAL', 'dt' => 'PERSEN_TOTAL' ),
-    array( 'db' => 'LATEST_TGLBAYAR', 'dt' => 'LATEST_TGLBAYAR' ),
+    array( 'db' => 'TARGET_BARU', 'dt' => 'TARGET_BARU' ),
+    array( 'db' => 'SAH_BARU', 'dt' => 'SAH_BARU' ),
+    array( 'db' => 'REAL_BARU', 'dt' => 'REAL_BARU' ),
+    array( 'db' => 'SAL_LANCAR', 'dt' => 'SAL_LANCAR' ),
+    array( 'db' => 'LUNAS_LANCAR', 'dt' => 'LUNAS_LANCAR' ),
+    array( 'db' => 'TARGET_LANCAR', 'dt' => 'TARGET_LANCAR' ),
+    array( 'db' => 'SAH_LANCAR', 'dt' => 'SAH_LANCAR' ),
+    array( 'db' => 'REAL_LANCAR', 'dt' => 'REAL_LANCAR' ),
+    array( 'db' => 'SAL_TOTAL', 'dt' => 'SAL_TOTAL' ),
+    array( 'db' => 'LUNAS_TOTAL', 'dt' => 'LUNAS_TOTAL' ),
+    array( 'db' => 'TARGET_TOTAL', 'dt' => 'TARGET_TOTAL' ),
+    array( 'db' => 'SAH_TOTAL', 'dt' => 'SAH_TOTAL' ),
+    array( 'db' => 'REAL_TOTAL', 'dt' => 'REAL_TOTAL' ),
 );
  
 // SQL server connection information

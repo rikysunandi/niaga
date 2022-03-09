@@ -57,7 +57,7 @@ $(document).ready(function () {
             "sClass" : "text-right" , render: $.fn.dataTable.render.number(".", ",", 0, '')
           },
           {
-            data: "TARGET_TOTAL",
+            data: "TARGET_WO",
             title: "TOTAL",
             ariaTitle: "WO TOTAL",
             type: 'number',
@@ -83,7 +83,7 @@ $(document).ready(function () {
             "sClass" : "text-right" , render: $.fn.dataTable.render.number(".", ",", 0, '')
           },
           {
-            data: "LUNAS_TOTAL",
+            data: "LUNAS_WO",
             type: 'number',
             visible: false,
             "sClass" : "text-right" , render: $.fn.dataTable.render.number(".", ",", 0, '')
@@ -121,7 +121,7 @@ $(document).ready(function () {
             },
           },
           {
-            data: "SALDO_TOTAL",
+            data: "SALDO_WO",
             type: 'number',
             visible: true,
             "sClass" : "text-right" , 
@@ -366,7 +366,7 @@ $(document).ready(function () {
             "sClass" : "text-right" , render: $.fn.dataTable.render.number(".", ",", 0, '')
           },
           {
-            data: "TARGET_TOTAL",
+            data: "TARGET_WO",
             title: "TOTAL",
             ariaTitle: "WO TOTAL",
             type: 'number',
@@ -392,7 +392,7 @@ $(document).ready(function () {
             "sClass" : "text-right" , render: $.fn.dataTable.render.number(".", ",", 0, '')
           },
           {
-            data: "LUNAS_TOTAL",
+            data: "LUNAS_WO",
             type: 'number',
             visible: true,
             "sClass" : "text-right" , render: $.fn.dataTable.render.number(".", ",", 0, '')
@@ -430,7 +430,7 @@ $(document).ready(function () {
             },
           },
           {
-            data: "SALDO_TOTAL",
+            data: "SALDO_WO",
             type: 'number',
             visible: true,
             "sClass" : "text-right" , 
@@ -621,6 +621,356 @@ $(document).ready(function () {
             j++;
           } 
         }
+    });
+
+    
+    var table_tglbayar = $('#tbl_rekap_tglbayar')
+      .on('preXhr.dt', function ( e, settings, data ) {
+        console.log('preXhr!');
+        $('div.content-body').block({ message: 'Mengambil data...' });
+      })
+      .on('xhr.dt', function ( e, settings, data ) {
+        console.log('xhr!', data);
+        $('div.content-body').unblock();
+
+      })
+      .DataTable( {
+        "processing": false,
+        "serverSide": false,
+        // "deferLoading": 0,
+        // "ajax": {
+        //     "url": '#',
+        //     "type": "POST",
+        //     "timeout": 60000
+        // },
+        //language: { "thousands": ".", "decimal": ","},
+        //responsive: true,
+        columns: [
+          {
+            data: "TANGGAL",
+            visible: true
+          },
+          {
+            data: "AWAL_IRISAN",
+          //  title: "AWAL_IRISAN",
+            ariaTitle: "SALDO AWAL IRISAN",
+            type: 'number',
+            visible: true,
+            "sClass" : "text-right" , render: $.fn.dataTable.render.number(".", ",", 0, '')
+          },
+          {
+            data: "JML_IRISAN",
+          //  title: "JML_IRISAN",
+            ariaTitle: "LUNAS IRISAN",
+            type: 'number',
+            visible: true,
+            "sClass" : "text-right" , render: $.fn.dataTable.render.number(".", ",", 0, '')
+          },
+          {
+            data: "SALDO_IRISAN",
+          //  title: "SALDO_IRISAN",
+            ariaTitle: "SALDO AKHIR IRISAN",
+            type: 'number',
+            visible: true,
+            "sClass" : "text-right" , render: $.fn.dataTable.render.number(".", ",", 0, '')
+          },
+          {
+            data: "TARGET_IRISAN",
+          //  title: "TARGET_IRISAN",
+            ariaTitle: "TARGET IRISAN",
+            type: 'number',
+            visible: true,
+            "sClass" : "text-right" , render: $.fn.dataTable.render.number(".", ",", 0, '')
+          },
+          {
+            data: "REAL_IRISAN",
+          //  title: "REAL_IRISAN",
+            ariaTitle: "REALISASI IRISAN",
+            type: 'number',
+            visible: true,
+            "sClass" : "text-right" , 
+            render: function ( data, type, row ) {
+                var cls;
+                //console.log(data);
+                if(data=== ""){
+                  return data;
+                }else{
+                  if (data < 50) {
+                      cls='danger';
+                    }else if (data < 80) {
+                      cls='warning';
+                    }else {
+                      cls='success';
+                    }
+                  return '<span class="text-'+cls+'">'+
+                    $.fn.dataTable.render.number(".", ",", 2, '').display(data)+'%</span>';
+                }
+
+            },
+          },
+          {
+            data: "AWAL_BARU",
+          //  title: "AWAL_BARU",
+            ariaTitle: "SALDO AWAL BARU",
+            type: 'number',
+            visible: true,
+            "sClass" : "text-right" , render: $.fn.dataTable.render.number(".", ",", 0, '')
+          },
+          {
+            data: "JML_BARU",
+          //  title: "JML_BARU",
+            ariaTitle: "LUNAS BARU",
+            type: 'number',
+            visible: true,
+            "sClass" : "text-right" , render: $.fn.dataTable.render.number(".", ",", 0, '')
+          },
+          {
+            data: "SALDO_BARU",
+          //  title: "SALDO_BARU",
+            ariaTitle: "SALDO AKHIR BARU",
+            type: 'number',
+            visible: true,
+            "sClass" : "text-right" , render: $.fn.dataTable.render.number(".", ",", 0, '')
+          },
+          {
+            data: "TARGET_BARU",
+          //  title: "TARGET_BARU",
+            ariaTitle: "TARGET BARU",
+            type: 'number',
+            visible: true,
+            "sClass" : "text-right" , render: $.fn.dataTable.render.number(".", ",", 0, '')
+          },
+          {
+            data: "REAL_BARU",
+          //  title: "REAL_BARU",
+            ariaTitle: "REALISASI BARU",
+            type: 'number',
+            visible: true,
+            "sClass" : "text-right" , 
+            render: function ( data, type, row ) {
+                var cls;
+                //console.log(data);
+                if(data=== ""){
+                  return data;
+                }else{
+                  if (data < 50) {
+                      cls='danger';
+                    }else if (data < 80) {
+                      cls='warning';
+                    }else {
+                      cls='success';
+                    }
+                  return '<span class="text-'+cls+'">'+
+                    $.fn.dataTable.render.number(".", ",", 2, '').display(data)+'%</span>';
+                }
+
+            },
+          },
+          {
+            data: "AWAL_LANCAR",
+          //  title: "AWAL_LANCAR",
+            ariaTitle: "SALDO AWAL LANCAR",
+            type: 'number',
+            visible: true,
+            "sClass" : "text-right" , render: $.fn.dataTable.render.number(".", ",", 0, '')
+          },
+          {
+            data: "JML_LANCAR",
+          //  title: "JML_LANCAR",
+            ariaTitle: "LUNAS LANCAR",
+            type: 'number',
+            visible: true,
+            "sClass" : "text-right" , render: $.fn.dataTable.render.number(".", ",", 0, '')
+          },
+          {
+            data: "SALDO_LANCAR",
+          //  title: "SALDO_LANCAR",
+            ariaTitle: "SALDO AKHIR LANCAR",
+            type: 'number',
+            visible: true,
+            "sClass" : "text-right" , render: $.fn.dataTable.render.number(".", ",", 0, '')
+          },
+          {
+            data: "TARGET_LANCAR",
+          //  title: "TARGET_LANCAR",
+            ariaTitle: "TARGET LANCAR",
+            type: 'number',
+            visible: true,
+            "sClass" : "text-right" , render: $.fn.dataTable.render.number(".", ",", 0, '')
+          },
+          {
+            data: "REAL_LANCAR",
+          //  title: "REAL_LANCAR",
+            ariaTitle: "REALISASI LANCAR",
+            type: 'number',
+            visible: true,
+            "sClass" : "text-right" , 
+            render: function ( data, type, row ) {
+                var cls;
+                //console.log(data);
+                if(data=== ""){
+                  return data;
+                }else{
+                  if (data < 50) {
+                      cls='danger';
+                    }else if (data < 80) {
+                      cls='warning';
+                    }else {
+                      cls='success';
+                    }
+                  return '<span class="text-'+cls+'">'+
+                    $.fn.dataTable.render.number(".", ",", 2, '').display(data)+'%</span>';
+                }
+
+            },
+          },
+          {
+            data: "AWAL_TOTAL",
+          //  title: "AWAL_TOTAL",
+            ariaTitle: "SALDO AWAL TOTAL",
+            type: 'number',
+            visible: true,
+            "sClass" : "text-right" , render: $.fn.dataTable.render.number(".", ",", 0, '')
+          },
+          {
+            data: "JML_TOTAL",
+          //  title: "JML_TOTAL",
+            ariaTitle: "LUNAS TOTAL",
+            type: 'number',
+            visible: true,
+            "sClass" : "text-right" , render: $.fn.dataTable.render.number(".", ",", 0, '')
+          },
+          {
+            data: "SALDO_TOTAL",
+          //  title: "SALDO_TOTAL",
+            ariaTitle: "SALDO AKHIR TOTAL",
+            type: 'number',
+            visible: true,
+            "sClass" : "text-right" , render: $.fn.dataTable.render.number(".", ",", 0, '')
+          },
+          {
+            data: "TARGET_TOTAL",
+          //  title: "TARGET_TOTAL",
+            ariaTitle: "TARGET TOTAL",
+            type: 'number',
+            visible: true,
+            "sClass" : "text-right" , render: $.fn.dataTable.render.number(".", ",", 0, '')
+          },
+          {
+            data: "REAL_TOTAL",
+          //  title: "REAL_TOTAL",
+            ariaTitle: "REALISASI TOTAL",
+            type: 'number',
+            visible: true,
+            "sClass" : "text-right" , 
+            render: function ( data, type, row ) {
+                var cls;
+                //console.log(data);
+                if(data=== ""){
+                  return data;
+                }else{
+                  if (data < 50) {
+                      cls='danger';
+                    }else if (data < 80) {
+                      cls='warning';
+                    }else {
+                      cls='success';
+                    }
+                  return '<span class="text-'+cls+'">'+
+                    $.fn.dataTable.render.number(".", ",", 2, '').display(data)+'%</span>';
+                }
+
+            },
+          },
+        ],
+        // rowCallback: function( row, data, index ) {
+        //   if (data.PERSEN_TOTAL < 50) {
+        //     $('td:eq(12)', row).addClass('bg-danger-lighten-2');
+        //   }else if (data.PERSEN_TOTAL < 80) {
+        //     $('td:eq(12)', row).addClass('bg-warning-lighten-2');
+        //   }else {
+        //     $('td:eq(12)', row).addClass('bg-success-lighten-2');
+        //   }
+        // }, 
+        dom:
+           // "<'row'<'col-sm-12 col-md-9 mb-2'B>>" +
+            "<'row'<'col-sm-12 col-md-6 mb-2'B><'col-sm-12 col-md-2 mb-2'l><'col-sm-12 col-md-4'f>>" +
+            "<'row'<'col-sm-12 mb-2'tr>>" +
+            "<'row'<'col-sm-12 col-md-5 mb-2'i><'col-sm-12 col-md-7'p>>",
+        buttons: [
+            { extend: 'colvis', text: 'Columns' },
+            { extend: 'csvHtml5', 
+              text: '<i class="fa fa-file-text-o"></i>&nbsp;&nbsp;CSV', 
+              titleAttr: 'Download ke CSV',
+              footer: false
+            },
+            { 
+                extend: 'excelHtml5', 
+                text: '<i class="fa fa-file-excel-o"></i>&nbsp;&nbsp;Excel', 
+                titleAttr: 'Download ke Excel',
+                title: null,
+                exportOptions: {
+                  columns: ':visible',
+                  format: {
+                      body: function(data, row, column, node) {
+                        data = $('<p>' + data + '</p>').text();
+                        return $.isNumeric(data.replace('.', '')) ? data.replace('.', '') : data;
+                      }
+                  }
+                },
+                filename: function(){
+                    return 'REKAP_TGL_BAYAR_' +  moment().format('YYYYMMDDHHmmss');
+                },
+                footer: false
+            },
+        ],
+        //"scrollY": 430,
+        "scrollX": true,
+        "paging": false,
+        lengthMenu: [[25, 100, -1], [25, 100, "All"]],
+        pageLength: 100,
+        "order": [[0, 'asc']],
+        // footerCallback: function ( row, data, start, end, display ) {
+        //   var api = this.api();
+        //   //console.log('footerCallback', api);
+        //   var nb_cols = api.columns().nodes().length;
+        //   var wo, jml;
+        //   var j = 1;
+        //   while(j < nb_cols){
+        //     if(j==nb_cols-2){
+
+        //         var persen;
+        //         persen = (1-(jml/wo))*100;
+        //         var cls;
+
+        //         if (persen < 50) {
+        //             cls='danger';
+        //           }else if (persen < 80) {
+        //             cls='warning';
+        //           }else {
+        //             cls='success';
+        //           }
+
+        //         $( api.column( j ).footer() ).html('<span class="text-'+cls+'">'+$.fn.dataTable.render.number(".", ",", 2, '').display(persen)+'%</span>');
+        //     }else{
+        //         var pageTotal = api
+        //             .column( j, { page: 'current'} )
+        //             .data()
+        //             .reduce( function (a, b) {
+        //                 return Number(a) + Number(b);
+        //             }, 0 );
+
+        //         if(j==4)
+        //         wo=pageTotal;
+        //         if(j==11)
+        //         jml=pageTotal;
+        //         // Update footer
+        //         $( api.column( j ).footer() ).html($.fn.dataTable.render.number(".", ",", 0, '').display(pageTotal));
+        //     }
+
+        //     j++;
+        //   } 
+        // }
     });
 
 
@@ -1045,22 +1395,29 @@ $(document).ready(function () {
 
     $( 'body' ).on( 'click', '#btn_cari', function(btn) {
 
-      $('div.pelunasan').block({ message: 'Mengambil data...' });
+      $('div.content-body').block({ message: 'Mengambil data...' });
       unitupi = $('#sel_unitupi').val();
       unitap = $('#sel_unitap').val();
       unitup = $('#sel_unitup').val();
       blth = $('#sel_blth').val();
+
+      table.clear();
+      table_up.clear();
+      table_tglbayar.clear();
 
 
       table.ajax.url( '../controller/pelunasan/getRekapPelunasanIntimasi.php?unitupi='+unitupi+'&unitap='+unitap+'&unitup='+unitup+'&blth='+blth ).load();
       
       table_up.ajax.url( '../controller/pelunasan/getRekapPelunasanIntimasiUP.php?unitupi='+unitupi+'&unitap='+unitap+'&unitup='+unitup+'&blth='+blth ).load();
         
-        table_up.on( 'order.dt search.dt', function () {
-            table_up.column(0, {search:'applied', order:'applied'}).nodes().each( function (cell, i) {
-                cell.innerHTML = i+1;
-            } );
-        } ).draw();
+      table_up.on( 'order.dt search.dt', function () {
+          table_up.column(0, {search:'applied', order:'applied'}).nodes().each( function (cell, i) {
+              cell.innerHTML = i+1;
+          } );
+      } ).draw();
+
+      //table_tglbayar.ajax.url( '../controller/pelunasan/getRekapPelunasanTglBayar.php?unitupi='+unitupi+'&unitap='+unitap+'&unitup='+unitup+'&blth='+blth ).load();
+        
 
       $.getJSON('../controller/pelunasan/getPelunasanPolaBayarUnit.php?unitupi='+unitupi+'&unitap='+unitap+'&unitup='+unitup+'&blth='+blth , function(data){
 
@@ -1088,32 +1445,34 @@ $(document).ready(function () {
 
         $('div.pelunasan').unblock();
 
-        $('div#table_lunas').block({ message: 'Mengambil data...' });
-        var tr = '';
-        $('div#table_lunas table tbody').empty();
-        $.each(data.rows, function(k,v){
-            tr += '<tr data-tanggal="'+v.tanggal+'" data-unitupi="'+unitupi+'" data-unitap="'+unitap+'" data-unitup="'+unitup+'" data-blth="'+blth+'" >';
-            tr += '<td>'+v.tanggal+'</td>';
-            tr += '<td class="text-right">'+v.awal_irisan+'</td>';
-            tr += '<td class="text-right">'+v.jml_irisan+'</td>';
-            tr += '<td class="text-right">'+v.saldo_irisan+'</td>';
-            tr += '<td class="text-right">'+v.target_irisan+'</td>';
-            tr += '<td class="text-right">'+v.real_irisan+'</td>';
-            tr += '<td class="text-right">'+v.awal_baru+'</td>';
-            tr += '<td class="text-right">'+v.jml_baru+'</td>';
-            tr += '<td class="text-right">'+v.saldo_baru+'</td>';
-            tr += '<td class="text-right">'+v.target_baru+'</td>';
-            tr += '<td class="text-right">'+v.real_baru+'</td>';
-            tr += '<td class="text-right">'+v.awal_lancar+'</td>';
-            tr += '<td class="text-right">'+v.jml_lancar+'</td>';
-            tr += '<td class="text-right">'+v.saldo_lancar+'</td>';
-            tr += '<td class="text-right">'+v.target_lancar+'</td>';
-            tr += '<td class="text-right">'+v.real_lancar+'</td>';
-            tr += '</tr>';
-        });
-        $('div#table_lunas table tbody').append(tr);
+        // $('div#table_lunas').block({ message: 'Mengambil data...' });
+        // var tr = '';
+        // $('div#table_lunas table tbody').empty();
+        // $.each(data.rows, function(k,v){
+        //     tr += '<tr data-tanggal="'+v.tanggal+'" data-unitupi="'+unitupi+'" data-unitap="'+unitap+'" data-unitup="'+unitup+'" data-blth="'+blth+'" >';
+        //     tr += '<td>'+v.tanggal+'</td>';
+        //     tr += '<td class="text-right">'+v.awal_irisan+'</td>';
+        //     tr += '<td class="text-right">'+v.jml_irisan+'</td>';
+        //     tr += '<td class="text-right">'+v.saldo_irisan+'</td>';
+        //     tr += '<td class="text-right">'+v.target_irisan+'</td>';
+        //     tr += '<td class="text-right">'+v.real_irisan+'</td>';
+        //     tr += '<td class="text-right">'+v.awal_baru+'</td>';
+        //     tr += '<td class="text-right">'+v.jml_baru+'</td>';
+        //     tr += '<td class="text-right">'+v.saldo_baru+'</td>';
+        //     tr += '<td class="text-right">'+v.target_baru+'</td>';
+        //     tr += '<td class="text-right">'+v.real_baru+'</td>';
+        //     tr += '<td class="text-right">'+v.awal_lancar+'</td>';
+        //     tr += '<td class="text-right">'+v.jml_lancar+'</td>';
+        //     tr += '<td class="text-right">'+v.saldo_lancar+'</td>';
+        //     tr += '<td class="text-right">'+v.target_lancar+'</td>';
+        //     tr += '<td class="text-right">'+v.real_lancar+'</td>';
+        //     tr += '</tr>';
+        // });
+        // $('div#table_lunas table tbody').append(tr);
 
-        $('div#table_lunas').unblock();
+        // $('div#table_lunas').unblock();
+        console.log('data.rows', data.rows);
+        table_tglbayar.rows.add(data.rows).draw(false);
 
       });
 

@@ -18,7 +18,7 @@ $params = array(
         array($blth, SQLSRV_PARAM_IN),
     );
 
-$sql = "EXEC sp_vw_Create_Rekap_Pelunasan_Intimasi @UserID = ?, @Unitupi = ?, @Unitap = ?, @Unitup = ?, @BLTH = ? ";
+$sql = "EXEC sp_vw_Create_Rekap_Pelunasan_Intimasi_Pre @UserID = ?, @Unitupi = ?, @Unitap = ?, @Unitup = ?, @BLTH = ? ";
 $stmt = sqlsrv_prepare($conn, $sql, $params);
 
 //sqlsrv_execute($stmt);
@@ -41,14 +41,14 @@ $columns = array(
     array( 'db' => 'NAMA', 'dt' => 'NAMA' ),
     array( 'db' => 'TARGET_IRISAN', 'dt' => 'TARGET_IRISAN' ),
     array( 'db' => 'TARGET_BARU', 'dt' => 'TARGET_BARU' ),
-    array( 'db' => 'TARGET_TOTAL', 'dt' => 'TARGET_TOTAL' ),
+    array( 'db' => 'TARGET_WO', 'dt' => 'TARGET_WO' ),
     array( 'db' => 'MUTASI', 'dt' => 'MUTASI' ),
     array( 'db' => 'LUNAS_IRISAN', 'dt' => 'LUNAS_IRISAN' ),
     array( 'db' => 'LUNAS_BARU', 'dt' => 'LUNAS_BARU' ),
-    array( 'db' => 'LUNAS_TOTAL', 'dt' => 'LUNAS_TOTAL' ),
+    array( 'db' => 'LUNAS_WO', 'dt' => 'LUNAS_WO' ),
     array( 'db' => 'SALDO_IRISAN', 'dt' => 'SALDO_IRISAN' ),
     array( 'db' => 'SALDO_BARU', 'dt' => 'SALDO_BARU' ),
-    array( 'db' => 'SALDO_TOTAL', 'dt' => 'SALDO_TOTAL' ),
+    array( 'db' => 'SALDO_WO', 'dt' => 'SALDO_WO' ),
     array( 'db' => 'SALDO_MUP3', 'dt' => 'SALDO_MUP3' ),
     array( 'db' => 'SALDO_MBSAR', 'dt' => 'SALDO_MBSAR' ),
     array( 'db' => 'SALDO_MULP', 'dt' => 'SALDO_MULP' ),
