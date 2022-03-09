@@ -18,7 +18,7 @@ $params = array(
         array($blth, SQLSRV_PARAM_IN),
     );
 
-$sql = "EXEC sp_vw_Create_Rekap_Pelunasan_Intimasi_Pre @UserID = ?, @Unitupi = ?, @Unitap = ?, @Unitup = ?, @BLTH = ? ";
+$sql = "EXEC sp_vw_Create_Rekap_Pelunasan_Intimasi @UserID = ?, @Unitupi = ?, @Unitap = ?, @Unitup = ?, @BLTH = ? ";
 $stmt = sqlsrv_prepare($conn, $sql, $params);
 
 //sqlsrv_execute($stmt);
