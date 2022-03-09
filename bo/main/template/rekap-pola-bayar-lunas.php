@@ -496,6 +496,6 @@
     <script src="../../assets/plugins/block-ui/jquery.blockUI.js"></script>
 
     <script src="../js/pages/apps.js"></script>
-    <script src="../js/pages/rekap-pola-bayar-lunas.js"></script>
+    <script src="../js/pages/rekap-pola-bayar-lunas.js?time=123"></script>
 </body>
 </html>
