@@ -276,9 +276,14 @@ $(document).ready(function () {
                                         petugas_sort.push([petugas, petugas_list[petugas].length]);
                                 }
 
-                                petugas_sort.sort(function(a, b) {
-                                    return b[1] - a[1];
-                                }); 
+                                var petugas_init='';
+                                if(petugas_sort.length>0){
+                                    petugas_sort.sort(function(a, b) {
+                                        return b[1] - a[1];
+                                    }); 
+                                    
+                                    petugas_init = petugas_sort[0][0];
+                                }
 
                                 // if($('ul#petugas-selected li.list-group-item:first span').html()=='DIL')
                                 //     var petugas =  $('ul#petugas-selected li.list-group-item:first').next().children('span').html();
@@ -287,10 +292,7 @@ $(document).ready(function () {
 
                                 //console.log('opsi_petugas', opsi_petugas);
                                 //console.log('petugas', petugas);
-                                var petugas_init='';
-                                if(petugas_sort.length>0)
-                                    petugas_init = petugas_sort[0][0];
-                                
+
                                 bootbox.prompt({
                                     title: "Pilih Petugas",
                                     message: "Silahkan pilih petugas untuk RPP yang akan dibentuk", 
