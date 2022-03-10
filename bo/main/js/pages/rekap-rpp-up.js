@@ -174,16 +174,40 @@ $(document).ready(function () {
           var j = 3;
           
           while(j < nb_cols){
-            var pageTotal = api
-                  .column( j, { page: 'current'} )
-                  .data()
-                  .reduce( function (a, b) {
-                      return Number(a) + Number(b);
-                  }, 0 );
-            // Update footer
-            $( api.column( j ).footer() ).html( $.fn.dataTable.render.number('.', ',', 0, '').display( pageTotal ));
+            if(j==nb_cols-1){
+
+                var persen;
+                persen = ((jml/wo))*100;
+                var cls;
+
+                if (persen < 50) {
+                    cls='danger';
+                  }else if (persen < 80) {
+                    cls='warning';
+                  }else {
+                    cls='success';
+                  }
+
+                $( api.column( j ).footer() ).html('<span class="text-'+cls+'">'+$.fn.dataTable.render.number(".", ",", 2, '').display(persen)+'%</span>');
+            }else{
+                var pageTotal = api
+                    .column( j, { page: 'current'} )
+                    .data()
+                    .reduce( function (a, b) {
+                        return Number(a) + Number(b);
+                    }, 0 );
+
+                if(j==4)
+                wo=pageTotal;
+                if(j==7)
+                jml=pageTotal;
+                // Update footer
+                $( api.column( j ).footer() ).html($.fn.dataTable.render.number(".", ",", 0, '').display(pageTotal));
+            }
+
             j++;
           } 
+
 
         }
     });

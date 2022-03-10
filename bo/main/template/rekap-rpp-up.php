@@ -133,7 +133,7 @@
                                             <th rowspan="2" class="text-center bg-primary-lighten-2">ULP</th>
                                             <th colspan="2" class="text-center bg-primary-lighten-2">DATA DIL</th>
                                             <th colspan="4" class="text-center bg-primary-lighten-2">DATA RPP</th>
-                                            <th rowspan="2" class="text-center bg-primary-lighten-2">PERSEN</th>
+                                            <th rowspan="2" class="text-center bg-primary-lighten-2">PERSEN<br/>(PLG RPP/TAGGING)</th>
                                         </tr>
                                         <tr>
                                             <th class="text-center bg-primary-lighten-2">JML PLG</th>
