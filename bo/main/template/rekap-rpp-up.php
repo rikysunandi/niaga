@@ -13,7 +13,7 @@
     <link href="../../assets/plugins/datatables-lib/FixedColumns-4.0.1/css/fixedColumns.bootstrap4.min.css">
     <link href="../../assets/plugins/datatables-lib/Buttons-2.1.1/css/buttons.bootstrap4.min.css" rel="stylesheet">
     <link href="../../assets/plugins/datatables-lib/Responsive-2.2.9/css/responsive.dataTables.min.css" rel="stylesheet">
-    <!-- <link href="../css/custom.css?time=<?php echo time() ?>" rel="stylesheet"> -->
+    <link href="../css/custom.css?time=<?php echo time() ?>" rel="stylesheet">
     <!-- <link href="../../assets/plugins/gmaps/gmap-context-menu.css" rel="stylesheet"> -->
 
     <style type="text/css">
@@ -96,13 +96,13 @@
                                             </div>
                                             <div class="form-group mb-2 mr-4">
                                                 <label class="text-label d-block"><small>UP3</small></label>
-                                                <select id="sel_unitap" title="PILIH UP3" class="selectpicker show-tick" data-size="5" data-inc-semua="T" >
+                                                <select id="sel_unitap" title="PILIH UP3" class="selectpicker show-tick" data-size="5" data-inc-semua="Y" >
                                                     <option value="00" selected>SEMUA UNIT</option>
                                                 </select>
                                             </div>
                                             <div class="form-group mb-2 mr-4">
                                                 <label class="text-label d-block"><small>ULP</small></label>
-                                                <select id="sel_unitup" title="PILIH ULP" class="selectpicker show-tick" data-size="5" data-inc-semua="T" >
+                                                <select id="sel_unitup" title="PILIH ULP" class="selectpicker show-tick" data-size="5" data-inc-semua="Y" >
                                                     <option value="00" selected>SEMUA UNIT</option>
                                                 </select>
                                             </div>
@@ -128,16 +128,21 @@
                                     <table id="tbl_rekap_rpp_up" class="table table-striped table-bordered nowrap" style="width: 100%">
                                     <thead>
                                         <tr>
-                                            <th class="text-center bg-primary-lighten-2">UNITAP</th>
-                                            <th class="text-center bg-primary-lighten-2">UNITUP</th>
-                                            <th class="text-center bg-primary-lighten-2">ULP</th>
-                                            <th class="text-center bg-primary-lighten-2">JML DIL LPB</th>
-                                            <th class="text-center bg-primary-lighten-2">JML DIL TAGGING</th>
+                                            <th rowspan="2" class="text-center bg-primary-lighten-2">UNITAP</th>
+                                            <th rowspan="2" class="text-center bg-primary-lighten-2">UNITUP</th>
+                                            <th rowspan="2" class="text-center bg-primary-lighten-2">ULP</th>
+                                            <th colspan="2" class="text-center bg-primary-lighten-2">DATA DIL</th>
+                                            <th colspan="4" class="text-center bg-primary-lighten-2">DATA RPP</th>
+                                            <th rowspan="2" class="text-center bg-primary-lighten-2">PERSEN</th>
+                                        </tr>
+                                        <tr>
+                                            <th class="text-center bg-primary-lighten-2">JML PLG</th>
+                                            <th class="text-center bg-primary-lighten-2">JML TAGGING</th>
+                                            <!-- <th class="text-center bg-primary-lighten-2">JML PETUGAS</th> -->
                                             <th class="text-center bg-primary-lighten-2">JML PETUGAS</th>
                                             <th class="text-center bg-primary-lighten-2">JML RPP</th>
                                             <th class="text-center bg-primary-lighten-2">JML PLG</th>
                                             <th class="text-center bg-primary-lighten-2">JML URUTAN</th>
-                                            <th class="text-center bg-primary-lighten-2">PERSEN</th>
                                         </tr>
                                     </thead>
                                     <tfoot>
@@ -145,6 +150,7 @@
                                             <th class="bg-primary-lighten-2" colspan="3">TOTAL</th>
                                             <th class="bg-primary-lighten-2"></th>
                                             <th class="bg-primary-lighten-2"></th>
+                                            <!-- <th class="bg-primary-lighten-2"></th> -->
                                             <th class="bg-primary-lighten-2"></th>
                                             <th class="bg-primary-lighten-2"></th>
                                             <th class="bg-primary-lighten-2"></th>

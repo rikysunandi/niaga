@@ -13,7 +13,7 @@
     <link href="../../assets/plugins/datatables-lib/FixedColumns-4.0.1/css/fixedColumns.bootstrap4.min.css">
     <link href="../../assets/plugins/datatables-lib/Buttons-2.1.1/css/buttons.bootstrap4.min.css" rel="stylesheet">
     <link href="../../assets/plugins/datatables-lib/Responsive-2.2.9/css/responsive.dataTables.min.css" rel="stylesheet">
-    <!-- <link href="../css/custom.css?time=<?php echo time() ?>" rel="stylesheet"> -->
+    <link href="../css/custom.css?time=<?php echo time() ?>" rel="stylesheet">
     <!-- <link href="../../assets/plugins/gmaps/gmap-context-menu.css" rel="stylesheet"> -->
 
     <style type="text/css">

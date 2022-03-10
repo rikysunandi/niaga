@@ -111,7 +111,8 @@
                 <ul aria-expanded="false">
                     <li><a href="pembentukan-rpp.php">Peta Pembentukan RPP</a></li>
                     <li><a href="urut-langkah-rpp.php">Pembentukan Urut Langkah RPP</a></li>
-                    <li><a href="rekap-rpp.php">Rekap RPP</a></li>
+                    <li><a href="rekap-rpp-up.php">Rekap RPP per ULP</a></li>
+                    <li><a href="rekap-rpp.php">Rekap RPP per Petugas</a></li>
                     <li><a href="daftar-rpp.php">Daftar RPP</a></li>
                 </ul>
             </li>
