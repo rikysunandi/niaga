@@ -287,13 +287,17 @@ $(document).ready(function () {
 
                                 //console.log('opsi_petugas', opsi_petugas);
                                 //console.log('petugas', petugas);
+                                var petugas_init='';
+                                if(petugas_sort.length>0)
+                                    petugas_init = petugas_sort[0][0];
+                                
                                 bootbox.prompt({
                                     title: "Pilih Petugas",
                                     message: "Silahkan pilih petugas untuk RPP yang akan dibentuk", 
                                     required: true,
                                     inputType: 'select',
                                     inputOptions: opsi_petugas,
-                                    value: petugas_sort[0][0],
+                                    value: petugas_init,
                                     callback: function (result) {
                                         if(result){
                                             var petugas_dipilih = result;
