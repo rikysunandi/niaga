@@ -96,7 +96,7 @@
                                             </div>
                                             <div class="form-group mb-2 mr-4">
                                                 <label class="text-label d-block"><small>UP3</small></label>
-                                                <select id="sel_unitap" title="PILIH UP3" class="selectpicker show-tick" data-size="5" data-inc-semua="T" >
+                                                <select id="sel_unitap" title="PILIH UP3" class="selectpicker show-tick" data-size="5" data-inc-semua="Y" >
                                                     <option value="00" selected>SEMUA UNIT</option>
                                                 </select>
                                             </div>
@@ -132,17 +132,18 @@
                                             <th rowspan="2" class="text-center bg-primary-lighten-2">UNITUP</th>
                                             <th rowspan="2" class="text-center bg-primary-lighten-2">ULP</th>
                                             <th colspan="2" class="text-center bg-primary-lighten-2">DATA DIL</th>
-                                            <th colspan="4" class="text-center bg-primary-lighten-2">DATA RPP</th>
+                                            <th colspan="4" class="text-center bg-success-lighten-2">DATA RPP</th>
+                                            <th rowspan="2" class="text-center bg-danger-lighten-2">JML PLG<br/>BLM RPP</th>
                                             <th rowspan="2" class="text-center bg-primary-lighten-2">PERSEN<br/>(PLG RPP/TAGGING)</th>
                                         </tr>
                                         <tr>
                                             <th class="text-center bg-primary-lighten-2">JML PLG</th>
                                             <th class="text-center bg-primary-lighten-2">JML TAGGING</th>
                                             <!-- <th class="text-center bg-primary-lighten-2">JML PETUGAS</th> -->
-                                            <th class="text-center bg-primary-lighten-2">JML PETUGAS</th>
-                                            <th class="text-center bg-primary-lighten-2">JML RPP</th>
-                                            <th class="text-center bg-primary-lighten-2">JML PLG</th>
-                                            <th class="text-center bg-primary-lighten-2">JML URUTAN</th>
+                                            <th class="text-center bg-success-lighten-2">JML PETUGAS</th>
+                                            <th class="text-center bg-success-lighten-2">JML RPP</th>
+                                            <th class="text-center bg-success-lighten-2">JML PLG</th>
+                                            <th class="text-center bg-success-lighten-2">JML URUTAN</th>
                                         </tr>
                                     </thead>
                                     <tfoot>
@@ -151,10 +152,11 @@
                                             <th class="bg-primary-lighten-2"></th>
                                             <th class="bg-primary-lighten-2"></th>
                                             <!-- <th class="bg-primary-lighten-2"></th> -->
-                                            <th class="bg-primary-lighten-2"></th>
-                                            <th class="bg-primary-lighten-2"></th>
-                                            <th class="bg-primary-lighten-2"></th>
-                                            <th class="bg-primary-lighten-2"></th>
+                                            <th class="bg-success-lighten-2"></th>
+                                            <th class="bg-success-lighten-2"></th>
+                                            <th class="bg-success-lighten-2"></th>
+                                            <th class="bg-success-lighten-2"></th>
+                                            <th class="bg-danger-lighten-2"></th>
                                             <th class="bg-primary-lighten-2"></th>
                                         </tr>
                                     </tfoot>

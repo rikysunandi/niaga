@@ -88,6 +88,12 @@ $(document).ready(function () {
             "sClass" : "text-right" , render: $.fn.dataTable.render.number(".", ",", 0, '')
           },
           {
+            data: "JML_PLG_BLM",
+            type: 'number',
+            visible: true,
+            "sClass" : "text-right" , render: $.fn.dataTable.render.number(".", ",", 0, '')
+          },
+          {
             data: "PERSEN",
             ariaTitle: "PERSEN",
             type: 'number',
@@ -164,7 +170,7 @@ $(document).ready(function () {
         "paging": false,
         lengthMenu: [[25, 100, -1], [25, 100, "All"]],
         pageLength: 100,
-        "order": [[0, 'asc'],[1, 'asc']],
+        "order": [[10, 'desc']],
         
         footerCallback: function ( row, data, start, end, display ) {
           var api = this.api();

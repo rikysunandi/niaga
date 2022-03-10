@@ -43,6 +43,7 @@ $columns = array(
     array( 'db' => 'JML_PETUGAS', 'dt' => 'JML_PETUGAS' ),
     array( 'db' => 'JML_RPP', 'dt' => 'JML_RPP' ),
     array( 'db' => 'JML_PLG_RPP', 'dt' => 'JML_PLG_RPP' ),
+    array( 'db' => 'JML_PLG_BLM', 'dt' => 'JML_PLG_BLM' ),
     array( 'db' => 'JML_URUT_RPP', 'dt' => 'JML_URUT_RPP' ),
     array( 'db' => 'PERSEN',  'dt' => 'PERSEN' ),
 );
