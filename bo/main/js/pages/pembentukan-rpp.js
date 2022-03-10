@@ -147,7 +147,7 @@ $(document).ready(function () {
 
                   var jml_plg = $.grep(markers, function(e) { return e.idpel!="X" }).length;
 
-                  if (jml_plg > 300) { // 1 marker stay unchanged (because cb returns nothing)
+                  if (jml_plg > 400) { // 1 marker stay unchanged (because cb returns nothing)
                     if (jml_plg > 10000) {
                       return {
                         content: "<div class='cluster cluster-3'>" + jml_plg + "</div>",
@@ -224,6 +224,7 @@ $(document).ready(function () {
                                     if (bnds.contains(marker.getPosition())) {
                                         ////console.log('marker dalam pilihan', marker);
                                         
+                                        //console.log('select', marker.idpel+": "+marker.getPosition().lat()+","+marker.getPosition().lng());
                                         //if(!marker.selected){
                                         if(marker.idpel!="X" && !marker.selected){
                                             marker.setIcon(blue_house);
@@ -281,7 +282,7 @@ $(document).ready(function () {
                                     petugas_sort.sort(function(a, b) {
                                         return b[1] - a[1];
                                     }); 
-                                    
+
                                     petugas_init = petugas_sort[0][0];
                                 }
 
