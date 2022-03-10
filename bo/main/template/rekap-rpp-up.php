@@ -106,12 +106,6 @@
                                                     <option value="00" selected>SEMUA UNIT</option>
                                                 </select>
                                             </div>
-                                            <div class="form-group mb-4 col-3">
-                                                <label class="text-label d-block"><small>PETUGAS</small></label>
-                                                <select id="sel_petugas" title="PETUGAS" class="selectpicker show-tick" data-size="5" data-inc-semua="Y" >
-                                                    <option value="00">SEMUA PETUGAS</option>
-                                                </select>
-                                            </div>
                                         </div>
                                     </form>
                                 </div>
@@ -131,21 +125,29 @@
                         <div class="card">
                             <div class="card-body">
                                 <div class="table-responsive">
-                                    <table id="tbl_rekap_rpp" class="table table-striped table-bordered nowrap" style="width: 100%">
+                                    <table id="tbl_rekap_rpp_up" class="table table-striped table-bordered nowrap" style="width: 100%">
                                     <thead>
                                         <tr>
                                             <th class="text-center bg-primary-lighten-2">UNITAP</th>
                                             <th class="text-center bg-primary-lighten-2">UNITUP</th>
                                             <th class="text-center bg-primary-lighten-2">ULP</th>
-                                            <th class="text-center bg-primary-lighten-2">PETUGAS</th>
-                                            <th class="text-center bg-primary-lighten-2">RPP</th>
+                                            <th class="text-center bg-primary-lighten-2">JML DIL LPB</th>
+                                            <th class="text-center bg-primary-lighten-2">JML DIL TAGGING</th>
+                                            <th class="text-center bg-primary-lighten-2">JML PETUGAS</th>
+                                            <th class="text-center bg-primary-lighten-2">JML RPP</th>
                                             <th class="text-center bg-primary-lighten-2">JML PLG</th>
                                             <th class="text-center bg-primary-lighten-2">JML URUTAN</th>
+                                            <th class="text-center bg-primary-lighten-2">PERSEN</th>
                                         </tr>
                                     </thead>
                                     <tfoot>
                                         <tr>
-                                            <th class="bg-primary-lighten-2" colspan="5">TOTAL</th>
+                                            <th class="bg-primary-lighten-2" colspan="3">TOTAL</th>
+                                            <th class="bg-primary-lighten-2"></th>
+                                            <th class="bg-primary-lighten-2"></th>
+                                            <th class="bg-primary-lighten-2"></th>
+                                            <th class="bg-primary-lighten-2"></th>
+                                            <th class="bg-primary-lighten-2"></th>
                                             <th class="bg-primary-lighten-2"></th>
                                             <th class="bg-primary-lighten-2"></th>
                                         </tr>
@@ -221,7 +223,7 @@
     <script src="https://cdnjs.cloudflare.com/ajax/libs/bootbox.js/5.5.2/bootbox.min.js" integrity="sha512-RdSPYh1WA6BF0RhpisYJVYkOyTzK4HwofJ3Q7ivt/jkpW6Vc8AurL1R+4AUcvn9IwEKAPm/fk7qFZW3OuiUDeg==" crossorigin="anonymous" referrerpolicy="no-referrer"></script>
 
     <script src="../js/pages/apps.js"></script>
-    <script src="../js/pages/rekap-rpp.js?time=1234"></script>
+    <script src="../js/pages/rekap-rpp-up.js?time=1234"></script>
 
 </body>
 </html>

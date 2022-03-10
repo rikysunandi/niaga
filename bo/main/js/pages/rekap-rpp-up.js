@@ -8,36 +8,8 @@ $(document).ready(function () {
     var unitupi, unitap, unitup, petugas;
 
 
-    $('#sel_unitup').change(function(){
-
-        if($('#sel_unitup').val()!=null){
-            $('#sel_petugas').empty();
-            $.getJSON('../controller/referensi/getPetugasPriangan.php?unitup='+$('#sel_unitup').val(), function(data){
-              
-                $.each(data.rows,function(i,v){
-                  $('#sel_petugas').append('<option value="'+v.kode+'">'+v.nama+'</option>');
-                });
-            
-                if($('#sel_petugas').data('inc-semua')!='T')
-                  $('#sel_petugas').append('<option value="00">SEMUA PETUGAS</option>');
-
-                $('#sel_petugas').selectpicker('refresh');
-
-                if(urlParams.has('petugas')){
-                    $('#sel_petugas').selectpicker('val', urlParams.get('petugas'));
-                }
-                // else{
-                //     $('#sel_petugas').selectpicker('val', "00");
-                //     console.log('semua petugas');
-                // }
-
-              //$('#sel_rbm').selectpicker('refresh');
-            });
-        }
-    });
-
     //$.blockUI({ message: '<h1 class="p-3">Mengambil data...</h1>' }); 
-    var table = $('#tbl_rekap_rpp')
+    var table = $('#tbl_rekap_rpp_up')
       .on('preXhr.dt', function ( e, settings, data ) {
         console.log('preXhr!');
         $('div.content-body').block({ message: 'Mengambil data...' });
