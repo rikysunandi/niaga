@@ -76,9 +76,9 @@ if( $stmt === false ) {
 
       if(empty($response['error'])==true){
         if(strlen($unitup)==5)
-          $file_path = "../../uploads/tagging/".$unitap."/".$unitup;
+          $file_path = "../../../../../../mnt/uploads/PRIANGAN/tagging/".$unitap."/".$unitup;
         else
-          $file_path = "../../uploads/tagging/53XXX";
+          $file_path = "../../../../../../mnt/uploads/PRIANGAN/tagging/53XXX";
         if (!file_exists($file_path)) {
             mkdir($file_path, 0777, true);
         }
@@ -106,9 +106,9 @@ if( $stmt === false ) {
 
       if(empty($response['error'])==true){
         if(strlen($unitup)==5)
-          $file_path = "../../uploads/rumah/".$unitap."/".$unitup;
+          $file_path = "../../../../../../mnt/uploads/PRIANGAN/rumah/".$unitap."/".$unitup;
         else
-          $file_path = "../../uploads/rumah/53XXX";
+          $file_path = "../../../../../../mnt/uploads/PRIANGAN/rumah/53XXX";
         if (!file_exists($file_path)) {
             mkdir($file_path, 0777, true);
         }
