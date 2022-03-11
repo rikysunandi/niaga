@@ -244,20 +244,29 @@ $(document).ready(function () {
             if(json!=null){
 
                 var markers = new Array();
-
+                var colors = ['blue-darker','blue','dark','green-darker','green','orange','pink','red'];
+                var iclr=0, rpp_prev='', first=tru;
                 $(json.rpp).each(function(key, obj){
                     // console.log(obj);
+                    if(!first && obj.rpp<>rpp_prev){
+                      iclr++;
+                      if(iclr<colors.length)
+                        iclr=0;
+                    }
+
                     markers.push(
                         {
                             title: obj.idpel+" ( "+obj.nama+" ) ", 
                             position:[obj.latitude, obj.longitude], 
-                            icon: "../controller/getMarkerIcon.php?color=blue&text="+obj.urutan,
+                            icon: "../controller/getMarkerIcon.php?color="+colors[iclr]+"&text="+obj.urutan,
                             idpel: obj.idpel,
                             rpp: obj.rpp,
                             petugas: obj.petugas,
                             urutan: obj.urutan,
                             start_end: false
                         });
+
+                    rpp_prev = obj.rpp;
                 });
 
                 // var gardu_markers = new Array(); 

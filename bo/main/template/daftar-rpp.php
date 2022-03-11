@@ -108,13 +108,13 @@
                                             </div>
                                             <div class="form-group mb-4 col-3">
                                                 <label class="text-label d-block"><small>PETUGAS</small></label>
-                                                <select id="sel_petugas" title="PETUGAS" class="selectpicker show-tick" data-size="5" data-inc-semua="Y" >
+                                                <select id="sel_petugas" title="PETUGAS" class="selectpicker show-tick" data-size="5" data-inc-semua="T" >
                                                     <option value="00">SEMUA PETUGAS</option>
                                                 </select>
                                             </div>
                                             <div class="form-group mb-4 col-3">
                                                 <label class="text-label d-block"><small>RPP</small></label>
-                                                <select id="sel_rpp" title="RPP" class="selectpicker show-tick" data-size="5" data-inc-semua="T" >
+                                                <select id="sel_rpp" title="RPP" class="selectpicker show-tick" data-size="5" data-inc-semua="Y" >
                                                     <option value="00">SEMUA RPP</option>
                                                 </select>
                                             </div>
