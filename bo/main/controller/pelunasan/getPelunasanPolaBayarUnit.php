@@ -62,7 +62,10 @@ if($stmt){
         $saldo_irisan = $awal_irisan - $akum_irisan ;
         
         $response['awal_baru'][$i] = $awal_baru;
-        $response['tanggal'][$i] = str_replace('99', 'N+', substr($row['TANGGAL'],-2)); 
+        if(substr($row['TANGGAL'],0,6)==$blth)
+            $response['tanggal'][$i] = str_replace('99', 'N+', substr($row['TANGGAL'],-2)); 
+        else
+            $response['tanggal'][$i] = str_replace('99', 'N+', substr($row['TANGGAL'],-4));
         $response['target_lancar'][$i] = $row['TARGET_LANCAR'];
         $response['target_baru'][$i] = $row['TARGET_BARU'];
         $response['target_irisan'][$i] = $row['TARGET_IRISAN'];
@@ -72,39 +75,44 @@ if($stmt){
 
         if($i>0){
 
-            $response['rows'][$j]['TANGGAL'] = str_replace('00', 'N-1', substr($row['TANGGAL'],-2));
-            $response['rows'][$j]['TARGET_LANCAR'] = ($row['TARGET_LANCAR'])?($row['TARGET_LANCAR']):'';
-            $response['rows'][$j]['TARGET_BARU'] = ($row['TARGET_BARU'])?($row['TARGET_BARU']):'';
-            $response['rows'][$j]['TARGET_IRISAN'] = ($row['TARGET_IRISAN'])?($row['TARGET_IRISAN']):'';
-            $response['rows'][$j]['TARGET_TOTAL'] = '';//($row['TARGET_LANCAR']+$row['TARGET_BARU']+$row['TARGET_IRISAN']);
+            if(substr($row['TANGGAL'],0,6)==$blth)
+                $response['rows'][$j]['TANGGAL'] = str_replace('00', 'N-1', substr($row['TANGGAL'],-2));
+            else
+                $response['rows'][$j]['TANGGAL'] = str_replace('00', 'N-1', substr($row['TANGGAL'],-4));
+            $response['rows'][$j]['TARGET_LANCAR'] = ($row['TARGET_LANCAR']>=0)?($row['TARGET_LANCAR']):'';
+            $response['rows'][$j]['TARGET_BARU'] = ($row['TARGET_BARU']>=0)?($row['TARGET_BARU']):'';
+            $response['rows'][$j]['TARGET_IRISAN'] = ($row['TARGET_IRISAN']>=0)?($row['TARGET_IRISAN']):'';
+            $response['rows'][$j]['TARGET_TOTAL'] = '';
+
+            //($row['TARGET_LANCAR']+$row['TARGET_BARU']+$row['TARGET_IRISAN']);
 
             if($row['TANGGAL']<=date('Ymd')){
                 $response['rows'][$j]['AWAL_LANCAR'] = ($sal_lancar_lalu)? ($sal_lancar_lalu): '';
                 $response['rows'][$j]['AWAL_BARU'] = ($sal_baru_lalu)? ($sal_baru_lalu): '';
                 $response['rows'][$j]['AWAL_IRISAN'] = ($sal_irisan_lalu)? ($sal_irisan_lalu): '';
                 $response['rows'][$j]['AWAL_TOTAL'] = ($sal_lancar_lalu+$sal_baru_lalu+$sal_irisan_lalu);
-                $response['rows'][$j]['JML_LANCAR'] = ($row['JML_LANCAR'])?($row['JML_LANCAR']):'';
-                $response['rows'][$j]['JML_BARU'] = ($row['JML_BARU'])?($row['JML_BARU']):'';
-                $response['rows'][$j]['JML_IRISAN'] = ($row['JML_IRISAN'])?($row['JML_IRISAN']):'';
+                $response['rows'][$j]['JML_LANCAR'] = ($row['JML_LANCAR']>=0)?($row['JML_LANCAR']):'';
+                $response['rows'][$j]['JML_BARU'] = ($row['JML_BARU']>=0)?($row['JML_BARU']):'';
+                $response['rows'][$j]['JML_IRISAN'] = ($row['JML_IRISAN']>=0)?($row['JML_IRISAN']):'';
                 $response['rows'][$j]['JML_TOTAL'] = ($row['JML_LANCAR']+$row['JML_BARU']+$row['JML_IRISAN']);
-                $response['rows'][$j]['SALDO_LANCAR'] = ($row['JML_LANCAR'])? ($saldo_lancar): '';
-                $response['rows'][$j]['SALDO_BARU'] = ($row['JML_BARU'])? ($saldo_baru): '';
-                $response['rows'][$j]['SALDO_IRISAN'] = ($row['JML_IRISAN'])? ($saldo_irisan): '';
+                $response['rows'][$j]['SALDO_LANCAR'] = ($row['JML_LANCAR']>=0)? ($saldo_lancar): '';
+                $response['rows'][$j]['SALDO_BARU'] = ($row['JML_BARU']>=0)? ($saldo_baru): '';
+                $response['rows'][$j]['SALDO_IRISAN'] = ($row['JML_IRISAN']>=0)? ($saldo_irisan): '';
                 $response['rows'][$j]['SALDO_TOTAL'] = ($saldo_lancar+$saldo_baru+$saldo_irisan);
 
-                $real_lancar = (2-($saldo_lancar/$row['TARGET_LANCAR']));
-                $real_baru = (2-($saldo_baru/$row['TARGET_BARU']));
-                $real_irisan = (2-($saldo_irisan/$row['TARGET_IRISAN']));
-                $real_total = (2-(($saldo_lancar+$saldo_baru+$saldo_irisan)/($row['TARGET_LANCAR']+$row['TARGET_BARU']+$row['TARGET_IRISAN']) ));
-                $real_lancar = ($real_lancar<0)?"0":($real_lancar);
-                $real_baru = ($real_baru<0)?"0":($real_baru);
-                $real_irisan = ($real_irisan<0)?"0":($real_irisan);
-                $real_total = ($real_total<0)?"0":($real_total);
+                $real_lancar = (2-(max(1,$saldo_lancar)/max(1,$row['TARGET_LANCAR'])));
+                $real_baru = (2-(max(1,$saldo_baru)/max(1,$row['TARGET_BARU'])));
+                $real_irisan = (2-(max(1,$saldo_irisan)/max(1,$row['TARGET_IRISAN'])));
+                $real_total = (2-(max(1,($saldo_lancar+$saldo_baru+$saldo_irisan))/max(1,($row['TARGET_LANCAR']+$row['TARGET_BARU']+$row['TARGET_IRISAN'])) ));
+                $real_lancar = max(0, $real_lancar);
+                $real_baru = max(0, $real_baru);
+                $real_irisan = max(0, $real_irisan);
+                $real_total = max(0, $real_total);
 
-                $response['rows'][$j]['REAL_LANCAR']=($row['TARGET_LANCAR'])? ($real_lancar*100): '';
-                $response['rows'][$j]['REAL_BARU']=($row['TARGET_BARU'])? ($real_baru*100): '';
-                $response['rows'][$j]['REAL_IRISAN']=($row['TARGET_IRISAN'])? ($real_irisan*100): '';
-                $response['rows'][$j]['REAL_TOTAL']=($row['TARGET_TOTAL'])?($real_total*100):'';
+                $response['rows'][$j]['REAL_LANCAR']=($row['TARGET_LANCAR']<>'')? ($real_lancar*100): '';
+                $response['rows'][$j]['REAL_BARU']=($row['TARGET_BARU']<>'')? ($real_baru*100): '';
+                $response['rows'][$j]['REAL_IRISAN']=($row['TARGET_IRISAN']<>'')? ($real_irisan*100): '';
+                $response['rows'][$j]['REAL_TOTAL']=($row['TARGET_TOTAL']<>'')?($real_total*100):'';
 
             }else{
                 $response['rows'][$j]['AWAL_LANCAR'] = '';

@@ -16,7 +16,7 @@ $(document).ready(function () {
         $('div.content-body').block({ message: 'Mengambil data...' });
       })
       .on('xhr.dt', function ( e, settings, data ) {
-        console.log('xhr!', data);
+        //console.log('xhr!', data);
         $('div.content-body').unblock();
 
       })
@@ -321,7 +321,7 @@ $(document).ready(function () {
         $('div.content-body').block({ message: 'Mengambil data...' });
       })
       .on('xhr.dt', function ( e, settings, data ) {
-        console.log('xhr!', data);
+        //console.log('xhr!', data);
         $('div.content-body').unblock();
 
       })
@@ -630,7 +630,7 @@ $(document).ready(function () {
         $('div.content-body').block({ message: 'Mengambil data...' });
       })
       .on('xhr.dt', function ( e, settings, data ) {
-        console.log('xhr!', data);
+        ////console.log('xhr!', data);
         $('div.content-body').unblock();
 
       })
@@ -987,7 +987,7 @@ $(document).ready(function () {
     //     $('div.content-body').block({ message: 'Mengambil data...' });
     //   })
     //   .on('xhr.dt', function ( e, settings, data ) {
-    //     console.log('xhr!', data);
+    //     //console.log('xhr!', data);
     //     $('div.content-body').unblock();
 
     //     $('div.chart-card').block({ message: 'Mengambil data...' });

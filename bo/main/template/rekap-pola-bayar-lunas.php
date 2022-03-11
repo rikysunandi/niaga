@@ -318,26 +318,26 @@
                                             <th colspan="5" class="text-center bg-primary-lighten-2">TOTAL</th>
                                         </tr>
                                         <tr>
-                                            <th class="text-center bg-danger-lighten-2">SALDO<br/>AWAL</th>
-                                            <th class="text-center bg-danger-lighten-2">LUNAS</th>
-                                            <th class="text-center bg-danger-lighten-2">SALDO<br/>AKHIR</th>
-                                            <th class="text-center bg-danger-lighten-2">TARGET<br/>SALDO</th>
-                                            <th class="text-center bg-danger-lighten-2">REALISASI</th>
-                                            <th class="text-center bg-warning-lighten-2">SALDO<br/>AWAL</th>
-                                            <th class="text-center bg-warning-lighten-2">LUNAS</th>
-                                            <th class="text-center bg-warning-lighten-2">SALDO<br/>AKHIR</th>
-                                            <th class="text-center bg-warning-lighten-2">TARGET<br/>SALDO</th>
-                                            <th class="text-center bg-warning-lighten-2">REALISASI</th>
-                                            <th class="text-center bg-success-lighten-2">SALDO<br/>AWAL</th>
-                                            <th class="text-center bg-success-lighten-2">LUNAS</th>
-                                            <th class="text-center bg-success-lighten-2">SALDO<br/>AKHIR</th>
-                                            <th class="text-center bg-success-lighten-2">TARGET<br/>SALDO</th>
-                                            <th class="text-center bg-success-lighten-2">REALISASI</th>
-                                            <th class="text-center bg-primary-lighten-2">SALDO<br/>AWAL</th>
-                                            <th class="text-center bg-primary-lighten-2">LUNAS</th>
-                                            <th class="text-center bg-primary-lighten-2">SALDO<br/>AKHIR</th>
-                                            <th class="text-center bg-primary-lighten-2">TARGET<br/>SALDO</th>
-                                            <th class="text-center bg-primary-lighten-2">REALISASI</th>
+                                            <th class="text-center bg-danger-lighten-2">SALDO<br/>AWAL<br/>(a)</th>
+                                            <th class="text-center bg-danger-lighten-2">LUNAS<br/>(b)</th>
+                                            <th class="text-center bg-danger-lighten-2">SALDO<br/>AKHIR<br/>(c)</th>
+                                            <th class="text-center bg-danger-lighten-2">TARGET<br/>SALDO<br/>(d)</th>
+                                            <th class="text-center bg-danger-lighten-2">REALISASI<br/>(e=(2-(c/d))*100%)</th>
+                                            <th class="text-center bg-warning-lighten-2">SALDO<br/>AWAL<br/>(f)</th>
+                                            <th class="text-center bg-warning-lighten-2">LUNAS<br/>(g)</th>
+                                            <th class="text-center bg-warning-lighten-2">SALDO<br/>AKHIR<br/>(h)</th>
+                                            <th class="text-center bg-warning-lighten-2">TARGET<br/>SALDO<br/>(i)</th>
+                                            <th class="text-center bg-warning-lighten-2">REALISASI<br/>(j=(2-(h/i))*100%)</th>
+                                            <th class="text-center bg-success-lighten-2">SALDO<br/>AWAL<br/>(k)</th>
+                                            <th class="text-center bg-success-lighten-2">LUNAS<br/>(l)</th>
+                                            <th class="text-center bg-success-lighten-2">SALDO<br/>AKHIR<br/>(m)</th>
+                                            <th class="text-center bg-success-lighten-2">TARGET<br/>SALDO<br/>(n)</th>
+                                            <th class="text-center bg-success-lighten-2">REALISASI<br/>(o=(2-(m/n))*100%)</th>
+                                            <th class="text-center bg-primary-lighten-2">SALDO<br/>AWAL<br/>(p)</th>
+                                            <th class="text-center bg-primary-lighten-2">LUNAS<br/>(q)</th>
+                                            <th class="text-center bg-primary-lighten-2">SALDO<br/>AKHIR<br/>(r)</th>
+                                            <th class="text-center bg-primary-lighten-2">TARGET<br/>SALDO<br/>(s)</th>
+                                            <th class="text-center bg-primary-lighten-2">REALISASI<br/>(t=(2-(r/s))*100%)</th>
                                         </tr>
                                     </thead>
                                     <!-- <tfoot>
