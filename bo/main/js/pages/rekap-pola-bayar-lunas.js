@@ -8,7 +8,7 @@ $(document).ready(function () {
     var unitupi, unitap, unitup, blth;
     var chart_pelunasan_irisan, chart_pelunasan_baru, chart_pelunasan_lancar ;
 
-    $('#sel_unitupi').val('53');
+    //$('#sel_unitupi').val('53');
 
     var table = $('#tbl_rekap_lunas_intimasi')
       .on('preXhr.dt', function ( e, settings, data ) {
