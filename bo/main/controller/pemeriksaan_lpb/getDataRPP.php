@@ -44,7 +44,8 @@ if($stmt){
 		$response['rpp'][$i]['latitude'] = ($row['LATITUDE']); 
 		$response['rpp'][$i]['longitude'] = ($row['LONGITUDE']); 
 		$response['rpp'][$i]['petugas'] = ($row['RPP_PETUGAS']); 
-		$response['rpp'][$i]['rpp'] = ($row['RPP_KDDK']); 
+		$response['rpp'][$i]['rpp_kddk'] = ($row['RPP_KDDK']); 
+		$response['rpp'][$i]['rpp'] = ($row['RPP']); 
 		$response['rpp'][$i]['nama_gardu'] = ($row['NAMA_GARDU']); 
 		$response['rpp'][$i]['petugas_priangan'] = ($row['PETUGAS_PRIANGAN']); 
 		$response['rpp'][$i]['tgl_tagging'] = ($row['TGL_TAGGING']); 
