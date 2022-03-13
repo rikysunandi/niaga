@@ -33,8 +33,8 @@ $unitup = substr($username,0,5);
 $foto = $decode['data']['foto'];
 $nama_foto = $decode['data']['nama_foto'];
 
-$path = "../../../../../mnt/uploads/PEMUTUSAN/".$blth."/".$area."/".$nama_foto;
-$dir = "../../../../../mnt/uploads/PEMUTUSAN/".$blth."/".$area."/";
+$path = "/media/nas/uploads/PEMUTUSAN/".$blth."/".$area."/".$nama_foto;
+$dir = "/media/nas/uploads/PEMUTUSAN/".$blth."/".$area."/";
 
 if(!file_exists($path)){
     if(!file_exists($dir)){ mkdir($dir, 0777, true); }
