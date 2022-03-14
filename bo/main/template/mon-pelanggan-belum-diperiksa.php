@@ -106,13 +106,14 @@
                                                 <label class="text-label">KOORDINAT DIL</label><br/>
                                                 <select id="sel_koordinat" title="PILIH KOORDINAT" class="selectpicker show-tick" data-size="5" >
                                                     <option value="01">FORMAT KOORDINAT VALID</option>
+                                                    <option value="02">KOORDINAT TIDAK VALID</option>
                                                     <option value="00" selected>SEMUA DATA</option>
                                                 </select>
                                             </div>
                                             <div class="form-group mb-4 col-4">
                                                 <label class="text-label">STATUS</label><br/>
                                                 <select id="sel_tagging" title="PILIH STATUS TAGGING" class="selectpicker show-tick" data-size="5" >
-                                                    <option value="01" selected>BELUM DITAGGING</option>
+                                                    <option value="01" selected>BELUM DITAGGING PRIANGAN</option>
                                                     <option value="00">SEMUA DATA DIL</option>
                                                 </select>
                                             </div>
