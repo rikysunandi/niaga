@@ -62,7 +62,7 @@
                                         <div class="form-row">
                                             <div class="form-group mb-2 mr-4">
                                                 <label class="text-label d-block">UID</label>
-                                                <select id="sel_unitupi" class="selectpicker show-tick" data-size="5" >
+                                                <select id="sel_unitupi" class="selectpicker show-tick" data-size="5" data-inc-semua="T" >
                                                     <option disabled>Pilih Unit Induk</option>
                                                 </select>
                                             </div>

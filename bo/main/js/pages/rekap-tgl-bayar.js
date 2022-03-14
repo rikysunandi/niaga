@@ -19,15 +19,24 @@ $(document).ready(function () {
 
         $('div.chart-card').block({ message: 'Mengambil data...' });
 
+        var jml_irisan = new Array();
+        var jml_baru = new Array();
+        var jml_lancar = new Array();
         var jml_lunas = new Array();
         var labels = new Array();
         $.each(data.data, function(k, v){
           labels[k] = v.TGLBAYAR.substring(v.TGLBAYAR.length - 2);
-          jml_lunas[k] = v.JML_PLG;
+          jml_irisan[k] = v.LUNAS_IRISAN;
+          jml_baru[k] = v.LUNAS_BARU;
+          jml_lancar[k] = v.LUNAS_LANCAR;
+          jml_lunas[k] = v.JML_LUNAS;
         });
 
         chart_tgl_bayar.data.labels= labels;
-        chart_tgl_bayar.data.datasets[0].data = jml_lunas;
+        chart_tgl_bayar.data.datasets[0].data = jml_irisan;
+        chart_tgl_bayar.data.datasets[1].data = jml_baru;
+        chart_tgl_bayar.data.datasets[2].data = jml_lancar;
+        chart_tgl_bayar.data.datasets[3].data = jml_lunas;
         chart_tgl_bayar.update();
 
         $('div.chart-card').unblock();
@@ -61,7 +70,25 @@ $(document).ready(function () {
             visible: true,
           },
           {
-            data: "JML_PLG",
+            data: "LUNAS_IRISAN",
+            type: 'number',
+            visible: true,
+            "sClass" : "text-right" , render: $.fn.dataTable.render.number(".", ",", 0, '')
+          },
+          {
+            data: "LUNAS_BARU",
+            type: 'number',
+            visible: true,
+            "sClass" : "text-right" , render: $.fn.dataTable.render.number(".", ",", 0, '')
+          },
+          {
+            data: "LUNAS_LANCAR",
+            type: 'number',
+            visible: true,
+            "sClass" : "text-right" , render: $.fn.dataTable.render.number(".", ",", 0, '')
+          },
+          {
+            data: "JML_LUNAS",
             type: 'number',
             visible: true,
             "sClass" : "text-right" , render: $.fn.dataTable.render.number(".", ",", 0, '')
@@ -85,7 +112,7 @@ $(document).ready(function () {
               footer: true
             },
         ],
-        "scrollY": 370,
+        //"scrollY": 370,
         "scrollX": true,
         "paging": false,
         lengthMenu: [[25, 100, -1], [25, 100, "All"]],
@@ -125,7 +152,25 @@ $(document).ready(function () {
         data: {
             datasets: [
                 {
-                  label: 'JML_LUNAS',
+                  label: 'IRISAN',
+                  borderColor: '#EC5B43',
+                  backgroundColor: '#EC5B43',
+                  fill: false
+                },
+                {
+                  label: 'BARU',
+                  borderColor: '#F2C36B',
+                  backgroundColor: '#F2C36B',
+                  fill: false
+                },
+                {
+                  label: 'LANCAR',
+                  borderColor: '#74BCC7',
+                  backgroundColor: '#74BCC7',
+                  fill: false
+                },
+                {
+                  label: 'TOTAL',
                   borderColor: '#135470',
                   backgroundColor: '#135470',
                   fill: false

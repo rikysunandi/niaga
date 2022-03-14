@@ -8,7 +8,7 @@ $unitupi = $_REQUEST['unitupi'];
 $unitap = $_REQUEST['unitap'];
 $unitup = $_REQUEST['unitup'];
 $blth = $_REQUEST['blth'];
-$user = 'SYSTEM';
+$user = rand (1,5);
 
 $params = array(
         array($user, SQLSRV_PARAM_IN),
@@ -18,7 +18,7 @@ $params = array(
         array($blth, SQLSRV_PARAM_IN),
     );
 
-$sql = "EXEC sp_vw_Create_Rekap_Tglbayar_UP @UserID = ?, @Unitupi = ?, @Unitap = ?, @Unitup = ?, @BLTH = ? ";
+$sql = "EXEC sp_vw_Create_Rekap_Lunas_Tgl_Bayar @UserID = ?, @Unitupi = ?, @Unitap = ?, @Unitup = ?, @BLTH = ? ";
 $stmt = sqlsrv_prepare($conn, $sql, $params);
 
 //sqlsrv_execute($stmt);
@@ -27,7 +27,7 @@ if(!sqlsrv_execute($stmt)){
 }
 
 // DB table to use
-$table = 'NIAGA.dbo.vw_Create_Rekap_Tglbayar_UP';
+$table = 'NIAGA.dbo._vw_Create_Rekap_Lunas_Tgl_Bayar_'.$user;
  
 // Table's primary key
 $primaryKey = 'ULP';
@@ -42,7 +42,10 @@ $columns = array(
     array( 'db' => 'UNITUP', 'dt' => 'UNITUP' ),
     array( 'db' => 'ULP', 'dt' => 'ULP' ),
     array( 'db' => 'TGLBAYAR', 'dt' => 'TGLBAYAR' ),
-    array( 'db' => 'JML_PLG', 'dt' => 'JML_PLG' ),
+    array( 'db' => 'LUNAS_IRISAN', 'dt' => 'LUNAS_IRISAN' ),
+    array( 'db' => 'LUNAS_BARU', 'dt' => 'LUNAS_BARU' ),
+    array( 'db' => 'LUNAS_LANCAR', 'dt' => 'LUNAS_LANCAR' ),
+    array( 'db' => 'JML_LUNAS', 'dt' => 'JML_LUNAS' ),
 );
  
 // SQL server connection information

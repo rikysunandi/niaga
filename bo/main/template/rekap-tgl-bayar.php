@@ -106,6 +106,9 @@
                 <div class="row">
                     <div class="col-12">
                         <div class="card">
+                            <div class="card-header">
+                                <h4 class="card-title">Pelunasan Non Kogol 1</h4>
+                            </div>
                             <div class="card-body">
                                 <!-- <h4 class="card-title mb-4">Rekap Pelunasan per Tgl Bayar</h4> -->
                                 <div class="table-responsive">
@@ -116,12 +119,18 @@
                                             <th class="text-center bg-primary-lighten-2">UNITUP</th>
                                             <th class="text-center bg-primary-lighten-2">ULP</th>
                                             <th class="text-center bg-primary-lighten-2">TGL <br/>BAYAR</th>
+                                            <th class="text-center bg-danger-lighten-2">JML IRISAN</th>
+                                            <th class="text-center bg-warning-lighten-2">JML BARU</th>
+                                            <th class="text-center bg-success-lighten-2">JML LANCAR</th>
                                             <th class="text-center bg-primary-lighten-2">JML LUNAS</th>
                                         </tr>
                                     </thead>
                                     <tfoot>
                                         <tr>
                                             <th class="bg-primary-lighten-2" colspan="4">TOTAL</th>
+                                            <th class="bg-danger-lighten-2"></th>
+                                            <th class="bg-warning-lighten-2"></th>
+                                            <th class="bg-success-lighten-2"></th>
                                             <th class="bg-primary-lighten-2"></th>
                                         </tr>
                                     </tfoot>
