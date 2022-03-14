@@ -41,8 +41,11 @@ $columns = array(
     array( 'db' => 'DAYA', 'dt' => 'DAYA' ),
     array( 'db' => 'JML_PLG', 'dt' => 'JML_PLG' ),
     array( 'db' => 'JML_LANCAR', 'dt' => 'JML_LANCAR' ),
+    array( 'db' => 'PERSEN_LANCAR', 'dt' => 'PERSEN_LANCAR' ),
     array( 'db' => 'JML_BARU', 'dt' => 'JML_BARU' ),
+    array( 'db' => 'PERSEN_BARU', 'dt' => 'PERSEN_BARU' ),
     array( 'db' => 'JML_IRISAN', 'dt' => 'JML_IRISAN' ),
+    array( 'db' => 'PERSEN_IRISAN', 'dt' => 'PERSEN_IRISAN' ),
 );
  
 // SQL server connection information

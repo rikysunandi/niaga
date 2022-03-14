@@ -66,10 +66,29 @@ $(document).ready(function () {
             "sClass" : "text-right" , render: $.fn.dataTable.render.number(".", ",", 0, '')
           },
           {
-            data: "JML_LANCAR",
+            data: "JML_IRISAN",
             type: 'number',
             visible: true,
             "sClass" : "text-right" , render: $.fn.dataTable.render.number(".", ",", 0, '')
+          },
+          {
+            data: "PERSEN_IRISAN",
+            visible: true,
+            "sClass" : "text-right" , 
+            render: function ( data, type, row ) {
+                var cls;
+                //console.log($(this));
+                if (data < 50) {
+                    cls='danger';
+                  }else if (data < 80) {
+                    cls='warning';
+                  }else {
+                    cls='success';
+                  }
+              return '<span class="text-'+cls+'">'+
+                $.fn.dataTable.render.number(".", ",", 2, '').display(data)+'%</span>';
+
+            },
           },
           {
             data: "JML_BARU",
@@ -78,10 +97,48 @@ $(document).ready(function () {
             "sClass" : "text-right" , render: $.fn.dataTable.render.number(".", ",", 0, '')
           },
           {
-            data: "JML_IRISAN",
+            data: "PERSEN_BARU",
+            visible: true,
+            "sClass" : "text-right" , 
+            render: function ( data, type, row ) {
+                var cls;
+                //console.log($(this));
+                if (data < 50) {
+                    cls='danger';
+                  }else if (data < 80) {
+                    cls='warning';
+                  }else {
+                    cls='success';
+                  }
+              return '<span class="text-'+cls+'">'+
+                $.fn.dataTable.render.number(".", ",", 2, '').display(data)+'%</span>';
+
+            },
+          },
+          {
+            data: "JML_LANCAR",
             type: 'number',
             visible: true,
             "sClass" : "text-right" , render: $.fn.dataTable.render.number(".", ",", 0, '')
+          },
+          {
+            data: "PERSEN_LANCAR",
+            visible: true,
+            "sClass" : "text-right" , 
+            render: function ( data, type, row ) {
+                var cls;
+                //console.log($(this));
+                if (data < 50) {
+                    cls='danger';
+                  }else if (data < 80) {
+                    cls='warning';
+                  }else {
+                    cls='success';
+                  }
+              return '<span class="text-'+cls+'">'+
+                $.fn.dataTable.render.number(".", ",", 2, '').display(data)+'%</span>';
+
+            },
           },
         ],
         dom:
@@ -102,7 +159,7 @@ $(document).ready(function () {
               footer: true
             },
         ],
-        "scrollY": 370,
+        //"scrollY": 370,
         "scrollX": true,
         "paging": false,
         lengthMenu: [[25, 100, -1], [25, 100, "All"]],
@@ -110,9 +167,11 @@ $(document).ready(function () {
         "order": [[0, 'asc'],[1, 'asc']],
         footerCallback: function ( row, data, start, end, display ) {
           var api = this.api();
-          //console.log('footerCallback', api);
+          // console.log('row', row);
+          // console.log('data', data);
           var nb_cols = api.columns().nodes().length;
           var j = 2;
+          var jml_plg, jml;
           while(j < nb_cols){
             var pageTotal = api
                   .column( j, { page: 'current'} )
@@ -120,8 +179,25 @@ $(document).ready(function () {
                   .reduce( function (a, b) {
                       return Number(a) + Number(b);
                   }, 0 );
+            if(j==2)
+                jml_plg = pageTotal;
+            if(j==3 || j==5 || j==7)
+                jml = pageTotal;
             // Update footer
-            $( api.column( j ).footer() ).html($.fn.dataTable.render.number(".", ",", 0, '').display(pageTotal));
+            if(j==4 || j==6 || j==8){
+                var persen = (jml/jml_plg)*100;
+                var cls;
+                if (persen < 50) {
+                    cls='danger';
+                }else if (persen < 80) {
+                    cls='warning';
+                }else {
+                    cls='success';
+                }
+                $( api.column( j ).footer() ).html('<span class="text-'+cls+'">'+$.fn.dataTable.render.number(".", ",", 2, '').display(persen)+'%</span>');
+            }
+            else
+                $( api.column( j ).footer() ).html($.fn.dataTable.render.number(".", ",", 0, '').display(pageTotal));
             j++;
           } 
         }

@@ -112,21 +112,32 @@
                                     <table id="tbl_rekap_pola_bayar_tarif_daya" class="table table-striped table-bordered nowrap" style="width: 100%">
                                     <thead>
                                         <tr>
-                                            <th class="text-center bg-primary-lighten-2">TARIF</th>
-                                            <th class="text-center bg-primary-lighten-2">DAYA</th>
-                                            <th class="text-center bg-primary-lighten-2">JML PLG</th>
-                                            <th class="text-center bg-success-lighten-2">JML LANCAR</th>
-                                            <th class="text-center bg-warning-lighten-2">JML BARU</th>
-                                            <th class="text-center bg-danger-lighten-2">JML IRISAN</th>
+                                            <th rowspan="2" class="text-center bg-primary-lighten-2">TARIF</th>
+                                            <th rowspan="2" class="text-center bg-primary-lighten-2">DAYA</th>
+                                            <th rowspan="2" class="text-center bg-primary-lighten-2">JML PLG</th>
+                                            <th colspan="2" class="text-center bg-danger-lighten-2">IRISAN</th>
+                                            <th colspan="2" class="text-center bg-warning-lighten-2">BARU</th>
+                                            <th colspan="2" class="text-center bg-success-lighten-2">LANCAR</th>
+                                        </tr>
+                                        <tr>
+                                            <th class="text-center bg-danger-lighten-2">JML PLG</th>
+                                            <th class="text-center bg-danger-lighten-2">PERSEN</th>
+                                            <th class="text-center bg-warning-lighten-2">JML PLG</th>
+                                            <th class="text-center bg-warning-lighten-2">PERSEN</th>
+                                            <th class="text-center bg-success-lighten-2">JML PLG</th>
+                                            <th class="text-center bg-success-lighten-2">PERSEN</th>
                                         </tr>
                                     </thead>
                                     <tfoot>
                                         <tr>
                                             <th class="text-center bg-primary-lighten-2" colspan="2">TOTAL</th>
                                             <th class="bg-primary-lighten-2"></th>
-                                            <th class="bg-success-lighten-2"></th>
-                                            <th class="bg-warning-lighten-2"></th>
                                             <th class="bg-danger-lighten-2"></th>
+                                            <th class="bg-danger-lighten-2"></th>
+                                            <th class="bg-warning-lighten-2"></th>
+                                            <th class="bg-warning-lighten-2"></th>
+                                            <th class="bg-success-lighten-2"></th>
+                                            <th class="bg-success-lighten-2"></th>
                                         </tr>
                                     </tfoot>
                                 </table>
