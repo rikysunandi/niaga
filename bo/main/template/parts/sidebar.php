@@ -46,6 +46,7 @@
                             </li> -->
                     <li><a href="wo-intimasi.php">Penetapan WO Intimasi</a></li>
                     <li><a href="mon-intimasi.php">Monitoring Detail Intimasi</a></li>
+                    <li><a href="rekap-intimasi-keterangan.php">Rekap Intimasi per Keterangan</a>
                     <li><a href="rekap-intimasi-ulp.php">Rekap Intimasi per ULP</a>
                     <li><a href="rekap-intimasi-koordinator.php">Rekap Intimasi per Koordinator</a></li>
                     <li><a href="rekap-intimasi-petugas.php">Rekap Intimasi per Petugas</a></li>
@@ -114,6 +115,7 @@
                     <li><a href="rekap-rpp-up.php">Rekap RPP per ULP</a></li>
                     <li><a href="rekap-rpp.php">Rekap RPP per Petugas</a></li>
                     <li><a href="daftar-rpp.php">Daftar RPP</a></li>
+                    <li><a href="rekomendasi-rpp.php">Rekomendasi RPP</a></li>
                 </ul>
             </li>
             <li><a class="has-arrow" href="javascript:void()" aria-expanded="false"><i class="mdi mdi-file-document-box"></i> <span class="nav-text">Pendukung Baca Meter</span></a>
@@ -133,8 +135,8 @@
                     <li><a href="info-agenda.php">Info Agenda</a></li>
                     <li><a href="input-rab.php">Update RAB</a></li>
                     <li><a href="update-kondisi.php">Update Kondisi Daftung</a></li>
-                    <li><a href="mon-potensi.php">Monitoring Potensi</a>
-                    <li><a href="mon-usulan-skai.php">Monitoring Usulan Investasi</a>
+                    <li><a href="mon-potensi.php">Monitoring Potensi</a></li>
+                    <li><a href="mon-usulan-skai.php">Monitoring Usulan Investasi</a></li>
                     <li><a href="mon-rab-perluasan.php">Daftar RAB Perluasan</a></li>
                     <li><a href="mon-agenda-evaluasi.php">Monitoring Agenda (RP BP < RP RAB)</a></li>
                     <li><a href="acuan-material.php">Acuan Perhitungan Material</a></li>
