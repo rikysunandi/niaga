@@ -107,7 +107,7 @@ if($blth>='202202'){
           if(strlen($unitap)==5)
             $file_path = "uploads/PRIANGAN/rumah/".$unitap."/".$unitup."/".$blth."/";
           else
-            $file_path = "uploads/PRIANGAN/rumah/53XXX";
+            $file_path = "uploads/PRIANGAN/rumah/53XXX/";
 
           
           if(ftp_chdir($ftp_conn, $file_path)){
