@@ -206,7 +206,19 @@ $(document).ready(function () {
                     data = dt.row( i ).data();
                     dt.cell({row: i, column: 10}).data('Mohon menunggu...');  
                     $.getJSON('../controller/pemeriksaan_lpb/getRekomendasiRPP.php?unitup='+data.UNITUP+'&petugas='+data.USER_INPUT+'&latitude='+data.LATITUDE+'&longitude='+data.LONGITUDE, function(resp){
-                      if(resp.success)dt.cell({row: i, column: 10}).data(resp.rekomendasi+'  <a href="#" class="cek-rekomendasi" data-unitupi="'+data.UNITAP.substring(0,2)+'" data-unitap="'+data.UNITAP+'" data-unitup="'+data.UNITUP+'" data-petugas="'+resp.rekomendasi.substring(resp.rekomendasi.indexOf(' - ') + 3)+'" data-rpp="'+resp.rekomendasi.substring(0,7)+'" data-kddk="'+resp.rekomendasi.substring(0,12)+'" data-latitude="'+data.LATITUDE+'"" data-longitude="'+data.LONGITUDE+'" data-idpel="'+data.IDPEL+'" ><i class="fa fa-search"></i></a>');  
+                      var kddk, rekomendasi, jml=1;
+                      var rpp = resp.rekomendasi.substring(0,7);
+                      var petugas = resp.rekomendasi.substring(resp.rekomendasi.indexOf(' - ') + 3);
+                      table.rows().every( function ( rowIdx, tableLoop, rowLoop ) {
+                          //console.log('dataaa', this.data().REKOMENDASI_RPP);
+                          if( this.data().REKOMENDASI_RPP.substring(0,7) == rpp )
+                            jml++;
+                      } );
+                      //console.log("JML ", ("00"+jml).substring(3-2) );
+                      kddk = resp.rekomendasi.substring(0,10)+("00"+jml).substring(3-2);
+                      rekomendasi = kddk+' - '+petugas;
+
+                      if(resp.success)dt.cell({row: i, column: 10}).data(rekomendasi+'  <a href="#" class="cek-rekomendasi" data-unitupi="'+data.UNITAP.substring(0,2)+'" data-unitap="'+data.UNITAP+'" data-unitup="'+data.UNITUP+'" data-petugas="'+petugas+'" data-rpp="'+rpp+'" data-kddk="'+kddk+'" data-latitude="'+data.LATITUDE+'"" data-longitude="'+data.LONGITUDE+'" data-idpel="'+data.IDPEL+'" ><i class="fa fa-search"></i></a>');  
                       else dt.cell({row: i, column: 10}).data(null);  
                       getRekomendasiRPP(i+1);
                     });

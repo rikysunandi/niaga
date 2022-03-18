@@ -33,10 +33,11 @@ $longitude = $data['longitude'];
 $akurasi_koordinat = $data['akurasi_koordinat'];
 $user_input = $data['user'];
 $tgl_input = $data['tgl_insert'];
+$blth = substr(str_replace('-','',$tgl_pemeriksaan),0,6);
 
 $response = array();
 
-if(substr(str_replace('-','',$tgl_pemeriksaan),0,6)>='202202'){
+if($blth>='202202'){
 
   if(substr($idpel, 0, 11)=='99999999999'){
     // if(strlen($latitude)>5)
@@ -57,7 +58,7 @@ if(substr(str_replace('-','',$tgl_pemeriksaan),0,6)>='202202'){
       $response['msg'] = 'Gagal query ke Database';
   }else{
     $row = sqlsrv_fetch_array($stmt, SQLSRV_FETCH_ASSOC);
-    if(strlen($row['IDPEL'])>=11){
+    if(strlen($row['IDPEL'])>=11 && $row['USER_INPUT']!=$user_input){
       $response['success'] = false;
       $response['msg'] = 'Data Idpel '.$idpel.' tidak disimpan karena sudah pernah ditagging oleh '.$row['USER_INPUT'].' !';
     }else{
@@ -78,15 +79,15 @@ if(substr(str_replace('-','',$tgl_pemeriksaan),0,6)>='202202'){
       if(file_exists($dir.'/'.$file_name)){
 
           if(strlen($unitap)==5)
-            $file_path = "tagging/".$unitap."/".$unitup."/";
+            $file_path = "uploads/PRIANGAN/tagging/".$unitap."/".$unitup."/".$blth."/";
           else
-            $file_path = "tagging/53XXX/";
+            $file_path = "uploads/PRIANGAN/tagging/53XXX/";
 
           if(ftp_chdir($ftp_conn, $file_path)){
 
             ftp_pasv ( $ftp_conn, true ) ;
             if(ftp_put($ftp_conn, $file_name, $dir.'/'.$file_name)){
-              $foto = $file_name;
+              $foto = $blth."/".$file_name;
               $response['msg'] .= 'Berhasil upload file foto meter, '; 
             }else{
               $response['msg'] .= 'gagal menyalin file foto meter, '; 
@@ -104,16 +105,16 @@ if(substr(str_replace('-','',$tgl_pemeriksaan),0,6)>='202202'){
       //if(copy('zip://'. $zipfile .'#'. $file_name , $dir."/".$file_name)){
       if(file_exists($dir.'/'.$file_name)){
           if(strlen($unitap)==5)
-            $file_path = "/rumah/".$unitap."/".$unitup;
+            $file_path = "uploads/PRIANGAN/rumah/".$unitap."/".$unitup."/".$blth."/";
           else
-            $file_path = "/rumah/53XXX";
+            $file_path = "uploads/PRIANGAN/rumah/53XXX";
 
           
           if(ftp_chdir($ftp_conn, $file_path)){
 
             ftp_pasv ( $ftp_conn, true ) ;
             if(ftp_put($ftp_conn, $file_name, $dir.'/'.$file_name)){
-              $foto_rumah = $file_name;
+              $foto_rumah = $blth."/".$file_name;
               $response['msg'] .= 'Berhasil upload file foto rumah, '; 
             }else{
               $response['msg'] .= 'gagal menyalin file foto rumah, '; 
