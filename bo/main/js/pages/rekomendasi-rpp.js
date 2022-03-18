@@ -349,14 +349,22 @@ $(document).ready(function () {
                     first = false;
                 });
 
-                markers.push(
-                    {
-                        title: idpel, 
-                        position:[latitude, longitude], 
-                        icon: "../controller/getMarkerIcon.php?color=red&text=BARU",
-                        idpel: idpel,
-                        zIndex: 9999,
-                    });
+
+                table.rows().every( function ( rowIdx, tableLoop, rowLoop ) {
+
+                    if( this.data().REKOMENDASI_RPP.substring(0,7) == rpp ){
+                      markers.push({
+                          title: this.data().IDPEL, 
+                          position:[this.data().LATITUDE, this.data().LONGITUDE], 
+                          icon: "../controller/getMarkerIcon.php?color=red&text=BARU",
+                          idpel: this.data().IDPEL,
+                          zIndex: 9999,
+                      });
+                    }
+
+                });
+
+                
 
                 var markers_obj;
 
