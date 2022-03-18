@@ -109,6 +109,8 @@ if($blth>='202202'){
           else
             $file_path = "uploads/PRIANGAN/rumah/53XXX/";
 
+          $ftp_conn = ftp_connect($ftp_server) or die("Could not connect to $ftp_server");
+          $login = ftp_login($ftp_conn, 'ftpniaga', '123');
           
           if(ftp_chdir($ftp_conn, $file_path)){
 
@@ -121,7 +123,7 @@ if($blth>='202202'){
             }
 
           }else{
-            $response['msg'] .= 'gagal mengakses folder foto rumah, '; 
+            $response['msg'] .= 'gagal mengakses folder foto rumah '.$file_path.', '; 
           }
       }
 
@@ -176,7 +178,7 @@ if($blth>='202202'){
       }else{
           $response['success'] = false;
           //$response['row'] = print_r($data);
-          $response['msg'] .= 'Data gagal disimpan';
+          $response['msg'] .= 'Data gagal disimpan'.$sql;
       }
 
     }
