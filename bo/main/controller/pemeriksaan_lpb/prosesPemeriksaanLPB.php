@@ -79,7 +79,7 @@ if($blth>='202202'){
       if(file_exists($dir.'/'.$file_name)){
 
           if(strlen($unitap)==5)
-            $file_path = "uploads/PRIANGAN/tagging/".$unitap."/".$unitup."/".$blth."/";
+            $file_path = "uploads/PRIANGAN/tagging/".$unitap."/".$unitup."/";
           else
             $file_path = "uploads/PRIANGAN/tagging/53XXX/";
 
@@ -87,7 +87,7 @@ if($blth>='202202'){
 
             ftp_pasv ( $ftp_conn, true ) ;
             if(ftp_put($ftp_conn, $file_name, $dir.'/'.$file_name)){
-              $foto = $blth."/".$file_name;
+              $foto = $file_name;
               $response['msg'] .= 'Berhasil upload file foto meter, '; 
             }else{
               $response['msg'] .= 'gagal menyalin file foto meter, '; 
@@ -105,7 +105,7 @@ if($blth>='202202'){
       //if(copy('zip://'. $zipfile .'#'. $file_name , $dir."/".$file_name)){
       if(file_exists($dir.'/'.$file_name)){
           if(strlen($unitap)==5)
-            $file_path = "uploads/PRIANGAN/rumah/".$unitap."/".$unitup."/".$blth."/";
+            $file_path = "uploads/PRIANGAN/rumah/".$unitap."/".$unitup."/";
           else
             $file_path = "uploads/PRIANGAN/rumah/53XXX/";
 
@@ -114,7 +114,7 @@ if($blth>='202202'){
 
             ftp_pasv ( $ftp_conn, true ) ;
             if(ftp_put($ftp_conn, $file_name, $dir.'/'.$file_name)){
-              $foto_rumah = $blth."/".$file_name;
+              $foto_rumah = $file_name;
               $response['msg'] .= 'Berhasil upload file foto rumah, '; 
             }else{
               $response['msg'] .= 'gagal menyalin file foto rumah, '; 
