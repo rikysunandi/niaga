@@ -69,7 +69,7 @@
                                             </div>
                                             <div class="form-group mb-2 col-3">
                                                 <label class="text-label d-block">UP3</label>
-                                                <select id="sel_unitap" class="selectpicker show-tick" data-size="5" data-inc-semua="Y" >
+                                                <select id="sel_unitap" class="selectpicker show-tick" data-size="5" data-inc-semua="T" >
                                                     <option disabled>Pilih UP3</option>
                                                 </select>
                                             </div>
