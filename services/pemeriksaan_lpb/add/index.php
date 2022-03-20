@@ -52,7 +52,7 @@ if( $stmt === false ) {
     $response['msg'] = 'Gagal query ke Database';
 }else{
   $row = sqlsrv_fetch_array($stmt, SQLSRV_FETCH_ASSOC);
-  if(strlen($row['IDPEL'])>=11){
+  if(strlen($row['IDPEL'])>=11  && $row['USER_INPUT']!=$user_input){
     $response['success'] = true;
     $response['msg'] = 'Data Idpel '.$idpel.' tidak disimpan karena sudah pernah ditagging sebelumnya!';
   }else{
