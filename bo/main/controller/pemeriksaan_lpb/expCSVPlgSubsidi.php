@@ -24,7 +24,7 @@ if(!sqlsrv_execute($stmt)){
     die(print_r( sqlsrv_errors(), true));
 }else{
 
-    $sql = "select UNITUPI,UNITAP,UNITUP,IDPEL,NAMA,TARIF,DAYA,KOGOL, RBM, KOORDINAT_X, KOORDINAT_Y,NOMOR_METER_KWH, TELEPON, ALAMAT, THBLMUT, JENIS_MK, NAMA_GARDU, JENIS,'' INFO,'' KETERANGAN,'' STRING_1,'' STRING_2,'' STRING_3 from vw_Create_Plg_Subsidi_Unit ";
+    $sql = "select UNITUPI,UNITAP,UNITUP,IDPEL,NAMA,TARIF,DAYA,KOGOL, KDDK, KOORDINAT_X, KOORDINAT_Y,NOMOR_METER_KWH, TELEPON, ALAMAT, THBLMUT, JENIS_MK, NAMA_GARDU, JENIS,'' INFO,'' KETERANGAN, NOMOR_JURUSAN_TIANG STRING_1, RPP STRING_2,KODEPETUGAS STRING_3 from vw_Create_Plg_Subsidi_Unit ";
     $stmt = sqlsrv_prepare($conn, $sql);
 
     if(!sqlsrv_execute($stmt)){
