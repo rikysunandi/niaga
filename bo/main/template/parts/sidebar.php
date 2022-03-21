@@ -71,6 +71,7 @@
                             </li> -->
                     <li><a href="wo-pemutusan.php">Penetapan WO Pemutusan</a></li>
                     <li><a href="rekap-pemutusan-ulp.php">Rekap Pemutusan per Unit</a></li>
+                    <li><a href="rekap-pemutusan-keterangan.php">Rekap Pemutusan per Petugas</a></li>
                     <li><a href="mon-pemutusan.php">Monitoring Pemutusan</a></li>
                     <!-- <li><a href="input-va.php">Input Virtual Account</a></li> -->
                 </ul>

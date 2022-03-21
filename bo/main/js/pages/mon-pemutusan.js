@@ -260,7 +260,7 @@ $(document).ready(function () {
         e.preventDefault();    
         var row = (JSON.parse(decodeURIComponent($(this).data('row'))));
         var foto = $(this).data('foto');
-        $('#img_foto').attr('src', foto);
+        $('#img_foto').attr('src', foto+'?time='+$.now());
         $('#idpel').html(row.IDPEL);
         $('#tgl_pemutusan').html(row.TGL_PUTUS.substr(0,16));
         $('#ket').html(row.KET);

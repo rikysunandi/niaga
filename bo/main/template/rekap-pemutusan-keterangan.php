@@ -18,12 +18,6 @@
     <link href="../css/style.css?time=<?php echo time() ?>" rel="stylesheet">
     <link href="../css/custom.css?time=<?php echo time() ?>" rel="stylesheet">
 
-    <style type="text/css">
-        #map {
-            width:100%;
-            height: 100%;
-        }
-    </style>
 </head>
 
 <body>
@@ -45,13 +39,13 @@
             <div class="container-fluid">
                 <div class="row page-titles">
                     <div class="col p-md-0">
-                        <h4>Monitoring Pemutusan</h4>
+                        <h4>Rekap Pemutusan per Petugas</h4>
                     </div>
                     <div class="col p-md-0">
                         <ol class="breadcrumb">
                             <li class="breadcrumb-item"><a href="javascript:void(0)">Pemutusan</a>
                             </li>
-                            <li class="breadcrumb-item active">Monitoring Pemutusan</li>
+                            <li class="breadcrumb-item active">Rekap Pemutusan per Petugas</li>
                         </ol>
                     </div>
                 </div>
@@ -86,14 +80,8 @@
                                                 </select>
                                             </div>
                                             <div class="form-group mb-2 col-3">
-                                                <label class="text-label d-block"><small>PETUGAS</small></label>
-                                                <select id="sel_petugas" title="PETUGAS" class="selectpicker show-tick" data-size="5" >
-                                                    <option value="00">SEMUA PETUGAS</option>
-                                                </select>
-                                            </div>
-                                            <div class="form-group mb-2 col-3">
                                                 <label class="text-label d-block">BLTH REK</label>
-                                                <select id="sel_blth" class="selectpicker select-sm show-tick" data-size="5">
+                                                <select id="sel_blth" class="selectpicker select-sm show-tick" data-size="5" data-width="fit">
                                                     <option value="<?php echo date('Ym') ?>" selected="selected"><?php echo date('Ym') ?></option>
                                                     <option data-divider="true"></option>
                                                     <option value='<?php echo date('Ym', strtotime("-1 month")) ?>'><?php echo date('Ym', strtotime("-1 month")) ?></option>
@@ -102,7 +90,7 @@
                                                 </select>
                                             </div>
                                             <div class="form-group mb-2  col-3">
-                                                <label class="text-label">TGL EKSEKUSI</label>
+                                                <label class="text-label">TGL PEMUTUSAN</label>
                                                 <input id="tgl_pemutusan_range" class="form-control input-daterange-datepicker" type="text" name="daterange">
                                             </div>
                                         </div>
@@ -124,82 +112,77 @@
                     <div class="col-12">
                         <div class="card">
                             <div class="card-body">
-
-                                <div id="modal_foto" class="modal fade" tabindex="-1" role="dialog">
-                                  <div class="modal-dialog" role="document">
-                                    <div class="modal-content">
-                                      <div class="modal-header">
-                                        <h5 class="modal-title">Foto Pemutusan</h5>
-                                        <button type="button" class="close" data-dismiss="modal" aria-label="Close">
-                                          <span aria-hidden="true">&times;</span>
-                                        </button>
-                                      </div>
-                                      <div class="modal-body">
-                                        <div class="row">
-                                            <div class="col-6">
-                                                <img id="img_foto" class="img-fluid img-thumbnail" alt="Foto Pemutusan">
-                                            </div>
-                                            <div class="col-6">
-                                                <dl class="row">
-                                                  <dt class="col-6">IDPEL</dt>
-                                                  <dd class="col-6" id="idpel"></dd>
-                                                  <dt class="col-6">TANGGAL</dt>
-                                                  <dd class="col-6" id="tgl_pemutusan">
-                                                  <dt class="col-6">KET</dt>
-                                                  <dd class="col-6" id="ket">
-                                                  <dt class="col-6">PETUGAS</dt>
-                                                  <dd class="col-6" id="user_app">
-                                                  </dd>
-                                                </dl>
-                                            </div>
-                                        </div>
-                                      </div>
-                                      <div class="modal-footer">
-                                        <button type="button" class="btn btn-secondary" data-dismiss="modal">Close</button>
-                                      </div>
-                                    </div>
-                                  </div>
-                                </div>
-
-                                <h4 class="card-title mb-4">Monitoring Pemutusan P3</h4>
+                                <!-- <h4 class="card-title mb-4">Rekap pemutusan per ULP</h4> -->
                                 <div class="table-responsive">
-                                    <table id="tbl_mon_pemutusan" class="table table-striped table-bordered nowrap" style="width: 100%">
+                                    <table id="tbl_pemutusan_keterangan" class="table table-striped table-bordered nowrap" style="width: 100%">
                                     <thead>
                                         <tr>
-                                            <th class="text-center bg-primary-lighten-2">UNITAP</th>
-                                            <th class="text-center bg-primary-lighten-2">UNITUP</th>
-                                            <th class="text-center bg-primary-lighten-2">IDPEL</th>
-                                            <th class="text-center bg-primary-lighten-2">TGL <br/>EKSEKUSI</th>
-                                            <th class="text-center bg-primary-lighten-2">KET</th>
-                                            <th class="text-center bg-primary-lighten-2">NOHP</th>
-                                            <th class="text-center bg-primary-lighten-2">LATITUDE</th>
-                                            <th class="text-center bg-primary-lighten-2">LONGITUDE</th>
-                                            <th class="text-center bg-primary-lighten-2">USER</th>
-                                            <th class="text-center bg-primary-lighten-2">FOTO</th>
+                                            <th rowspan="3" class="text-center bg-primary-lighten-2">UNITAP</th>
+                                            <th rowspan="3" class="text-center bg-primary-lighten-2">UNITUP</th>
+                                            <th rowspan="3" class="text-center bg-primary-lighten-2">ULP</th>
+                                            <th rowspan="3" class="text-center bg-primary-lighten-2">PETUGAS</th>
+                                            <th colspan="4" class="text-center bg-warning-lighten-2">WORK ORDER</th>
+                                            <th colspan="16" class="text-center bg-success-lighten-2">HASIL PEMUTUSAN</th>
+                                        </tr>
+                                        <tr>
+                                            <th rowspan="2" class="text-center bg-danger-lighten-2">IRISAN</th>
+                                            <th rowspan="2" class="text-center bg-warning-lighten-2">BARU</th>
+                                            <th rowspan="2" class="text-center bg-success-lighten-2">LANCAR</th>
+                                            <th rowspan="2" class="text-center bg-secondary-lighten-2">TOTAL</th>
+                                            <th colspan="2" class="text-center bg-success-lighten-2">LUNAS MANDIRI</th>
+                                            <th colspan="2" class="text-center bg-success-lighten-2">LUNAS DITEMPAT</th>
+                                            <th colspan="2" class="text-center bg-warning-lighten-2">SEGEL MCB</th>
+                                            <th colspan="2" class="text-center bg-warning-lighten-2">CABUT MCB</th>
+                                            <th colspan="2" class="text-center bg-warning-lighten-2">CABUT APP</th>
+                                            <th colspan="2" class="text-center bg-danger-lighten-2">RUMAH KOSONG</th>
+                                            <th colspan="2" class="text-center bg-secondary-lighten-2">TOTAL PEMUTUSAN</th>
+                                            <th colspan="2" class="text-center bg-secondary-lighten-2">TOTAL LUNAS</th>
+                                        </tr>
+                                        <tr>
+                                            <th class="text-center bg-success-lighten-2">JML</th>
+                                            <th class="text-center bg-success-lighten-2">LNS</th>
+                                            <th class="text-center bg-success-lighten-2">JML</th>
+                                            <th class="text-center bg-success-lighten-2">LNS</th>
+                                            <th class="text-center bg-warning-lighten-2">JML</th>
+                                            <th class="text-center bg-warning-lighten-2">LNS</th>
+                                            <th class="text-center bg-warning-lighten-2">JML</th>
+                                            <th class="text-center bg-warning-lighten-2">LNS</th>
+                                            <th class="text-center bg-warning-lighten-2">JML</th>
+                                            <th class="text-center bg-warning-lighten-2">LNS</th>
+                                            <th class="text-center bg-danger-lighten-2">JML</th>
+                                            <th class="text-center bg-danger-lighten-2">LNS</th>
+                                            <th class="text-center bg-secondary-lighten-2">JML</th>
+                                            <th class="text-center bg-secondary-lighten-2">PERSEN</th>
+                                            <th class="text-center bg-secondary-lighten-2">LUNAS</th>
+                                            <th class="text-center bg-secondary-lighten-2">PERSEN</th>
                                         </tr>
                                     </thead>
-                                    <!-- <tfoot>
+                                    <tfoot>
                                         <tr>
-                                            <th class="bg-primary-lighten-2" colspan="3">TOTAL</th>
+                                            <th class="bg-primary-lighten-2" colspan="4">TOTAL</th>
+                                            <th class="bg-danger-lighten-2"></th>
+                                            <th class="bg-warning-lighten-2"></th>
+                                            <th class="bg-success-lighten-2"></th>
+                                            <th class="bg-secondary-lighten-2"></th>
+                                            <th class="bg-success-lighten-2"></th>
+                                            <th class="bg-success-lighten-2"></th>
+                                            <th class="bg-success-lighten-2"></th>
                                             <th class="bg-success-lighten-2"></th>
                                             <th class="bg-warning-lighten-2"></th>
-                                            <th class="bg-primary-lighten-2"></th>
+                                            <th class="bg-warning-lighten-2"></th>
+                                            <th class="bg-warning-lighten-2"></th>
+                                            <th class="bg-warning-lighten-2"></th>
+                                            <th class="bg-warning-lighten-2"></th>
+                                            <th class="bg-warning-lighten-2"></th>
+                                            <th class="bg-danger-lighten-2"></th>
+                                            <th class="bg-danger-lighten-2"></th>
+                                            <th class="bg-secondary-lighten-2"></th>
+                                            <th class="bg-secondary-lighten-2"></th>
+                                            <th class="bg-secondary-lighten-2"></th>
+                                            <th class="bg-secondary-lighten-2"></th>
                                         </tr>
-                                    </tfoot> -->
+                                    </tfoot>
                                 </table>
-                                </div>
-                            </div>
-                        </div>
-                    </div>
-                </div>
-
-                <div class="row">
-                    <div class="col-12">
-                        <div class="card">
-                            <div class="card-body">
-                                <h4 class="card-title mb-4">Peta Pemutusan</h4>
-                                <div style="height:480px; width:860px;">
-                                    <div id="map"></div>
                                 </div>
                             </div>
                         </div>
@@ -245,17 +228,11 @@
     <script src="../../assets/plugins/datatables-lib/pdfmake-0.1.36/vfs_fonts.js"></script>
     <script src="../../assets/plugins/datatables-lib/Responsive-2.2.9/js/dataTables.responsive.min.js"></script>
     <script src="../../assets/plugins/datatables-lib/plug-ins/api/sum().js"></script>
-    <script src="../../assets/plugins/datatables-lib/plug-ins/dataRender/datetime.js"></script>
-    <script src="../../assets/plugins/datatables-lib/DateTime-1.1.1/js/dataTables.dateTime.min.js"></script>
     <script src="../../assets/plugins/bootstrap-daterangepicker/daterangepicker.js"></script>
-
-    <script src="https://maps.googleapis.com/maps/api/js?key=AIzaSyCRViwwpnm9OuVSUmErg0PnV4I9t5aCcUw"></script>
-    <!-- <script src="https://cdn.jsdelivr.net/gmap3/7.2.0/gmap3.min.js"></script> -->
-    <!-- <script src="https://unpkg.com/@googlemaps/markerclustererplus/dist/index.min.js"></script> -->
 
     <script src="../../assets/plugins/block-ui/jquery.blockUI.js"></script>
 
     <script src="../js/pages/apps.js"></script>
-    <script src="../js/pages/mon-pemutusan.js"></script>
+    <script src="../js/pages/rekap-pemutusan-keterangan.js?time=123"></script>
 </body>
 </html>
