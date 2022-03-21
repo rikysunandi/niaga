@@ -50,6 +50,7 @@ $columns = array(
     array( 'db' => 'TARIF',  'dt' => 'TARIF' ),
     array( 'db' => 'DAYA',  'dt' => 'DAYA' ),
     array( 'db' => 'PERUNTUKAN',  'dt' => 'PERUNTUKAN' ),
+    array( 'db' => 'NIK',  'dt' => 'NIK' ),
     array( 'db' => 'EMAIL',  'dt' => 'EMAIL' ),
     array( 'db' => 'SISA_KWH',  'dt' => 'SISA_KWH' ),
     array( 'db' => 'LATITUDE',  'dt' => 'LATITUDE' ),
@@ -57,6 +58,7 @@ $columns = array(
     array( 'db' => 'AKURASI_KOORDINAT',  'dt' => 'AKURASI_KOORDINAT' ),
     array( 'db' => 'USER_INPUT',  'dt' => 'USER_INPUT' ),
     array( 'db' => 'FOTOPATH',  'dt' => 'FOTOPATH' ),
+    array( 'db' => 'FOTORUMAH',  'dt' => 'FOTORUMAH' ),
 );
  
 // SQL server connection information

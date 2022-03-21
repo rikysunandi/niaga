@@ -143,7 +143,7 @@
                                             <th class="text-center bg-primary-lighten-2">NAMA</th>
                                             <th class="text-center bg-primary-lighten-2">TARIF</th>
                                             <th class="text-center bg-primary-lighten-2">DAYA</th>
-                                            <th class="text-center bg-primary-lighten-2">RBM PASKA</th>
+                                            <th class="text-center bg-primary-lighten-2">NIK</th>
                                             <th class="text-center bg-primary-lighten-2">KONDISI<br/>METER</th>
                                             <th class="text-center bg-primary-lighten-2">SISA KWH</th>
                                             <th class="text-center bg-primary-lighten-2">LAT</th>
@@ -151,6 +151,7 @@
                                             <th class="text-center bg-primary-lighten-2">AKURASI (m)</th>
                                             <th class="text-center bg-primary-lighten-2">PETUGAS</th>
                                             <th class="text-center bg-primary-lighten-2">FOTO</th>
+                                            <th class="text-center bg-primary-lighten-2">FOTO<br/>RUMAH</th>
                                         </tr>
                                     </thead>
                                     <!-- <tfoot>

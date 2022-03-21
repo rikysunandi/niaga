@@ -104,7 +104,7 @@ $(document).ready(function () {
             type: 'number',
             "sClass" : "text-right" , render: $.fn.dataTable.render.number(",", ".", 0, '')
           },
-          { data: "PERUNTUKAN", visible: true},
+          { data: "NIK", visible: true},
           { data: "EMAIL", visible: true},
           {
             data: "SISA_KWH",
@@ -144,7 +144,19 @@ $(document).ready(function () {
                   if(!data && data == null)
                     return '<a href="#" class="btn btn-sm btn-primary disabled" title="TIDAK ADA FOTO"><i class="fa fa-picture-o" aria-hidden="true"></i></a>';
                   else
-                    return '<a href="#" class="btn btn-sm btn-primary foto" title="FOTO" data-foto="'+data+'"><i class="fa fa-picture-o" aria-hidden="true"></i></a>';
+                    return '<a href="#" class="btn btn-sm btn-primary foto" title="FOTO" data-foto="'+data+'" data-jenis-foto="RUMAH"><i class="fa fa-picture-o" aria-hidden="true"></i></a>';
+              },
+          },
+          {
+            data: "FOTORUMAH",
+            sortable: false,
+            render: function ( data, type, row ) {
+                  //console.log(data);
+                  //532710010845_2020-09-01.jpg
+                  if(!data && data == null)
+                    return '<a href="#" class="btn btn-sm btn-primary disabled" title="TIDAK ADA FOTO"><i class="fa fa-picture-o" aria-hidden="true"></i></a>';
+                  else
+                    return '<a href="#" class="btn btn-sm btn-primary foto" title="FOTO" data-foto="'+data+'" data-jenis-foto="METER"><i class="fa fa-picture-o" aria-hidden="true"></i></a>';
               },
           },
         ],
