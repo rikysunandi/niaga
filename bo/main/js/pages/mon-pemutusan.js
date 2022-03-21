@@ -38,7 +38,7 @@ $(document).ready(function () {
         applyClass: 'btn-danger',
         cancelClass: 'btn-inverse',
         opens: 'left',
-        startDate: moment(), //.subtract(1, 'months').format('DD/MM/YYYY'),
+        startDate: '21/'+moment().format('MM/YYYY'),
         endDate: moment(),
         locale: {
           format: 'DD/MM/YYYY'
@@ -223,12 +223,13 @@ $(document).ready(function () {
                                           </dl>
                                         </div>
                                         <div class="col-6">
-                                          <img src="`+tagging.FOTOPATH+`" width="150px" height="220px"/></dd>
+                                          <img id="map_foto" src="`+tagging.FOTOPATH+`" width="150px" height="220px"/></dd>
                                         </div>
                                       </div>
                                     `
                                     );
                                   infowindow.open(map, marker);
+
                               }
                           })(marker, i)); 
 
@@ -266,6 +267,19 @@ $(document).ready(function () {
         $('#ket').html(row.KET);
         $('#user_app').html(row.USER_APP);
         $("#modal_foto").modal('show');
+
+        var $image = $('#img_foto');
+
+        $image.viewer({
+          //inline: true,
+          viewed: function() {
+            $image.viewer('zoomTo', 1);
+          }
+        });
+
+        // Get the Viewer.js instance after initialized
+        //var viewer = $image.data('viewer');
+
       });
 
     $( 'body' ).on( 'click', '#btn_cari', function(btn) {

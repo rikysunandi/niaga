@@ -14,6 +14,7 @@
     <link href="../../assets/plugins/datatables-lib/Responsive-2.2.9/css/responsive.dataTables.min.css" rel="stylesheet">
     <link href="../../assets/plugins/datatables-lib/RowGroup-1.1.4/css/rowGroup.dataTables.min.css" rel="stylesheet">
     <link href="../../assets/plugins/bootstrap-daterangepicker/daterangepicker.css" rel="stylesheet">
+    <link href="../../assets/plugins/viewer/viewer.css" rel="stylesheet">
 
     <link href="../css/style.css?time=<?php echo time() ?>" rel="stylesheet">
     <link href="../css/custom.css?time=<?php echo time() ?>" rel="stylesheet">
@@ -22,6 +23,9 @@
         #map {
             width:100%;
             height: 100%;
+        }
+        #img_foto:hover{
+            cursor: pointer;
         }
     </style>
 </head>
@@ -137,7 +141,8 @@
                                       <div class="modal-body">
                                         <div class="row">
                                             <div class="col-6">
-                                                <img id="img_foto" class="img-fluid img-thumbnail" alt="Foto Intimasi">
+                                                <img id="img_foto" class="img-fluid img-thumbnail mb-2" alt="Foto Intimasi">
+                                                <small class="float-right">*Klik untuk memperbesar</small>
                                             </div>
                                             <div class="col-6">
                                                 <dl class="row">
@@ -250,6 +255,7 @@
     <script src="../../assets/plugins/datatables-lib/plug-ins/dataRender/datetime.js"></script>
     <script src="../../assets/plugins/datatables-lib/DateTime-1.1.1/js/dataTables.dateTime.min.js"></script>
     <script src="../../assets/plugins/bootstrap-daterangepicker/daterangepicker.js"></script>
+    <script src="../../assets/plugins/viewer/viewer.js"></script>
 
     <script src="https://maps.googleapis.com/maps/api/js?key=AIzaSyCRViwwpnm9OuVSUmErg0PnV4I9t5aCcUw"></script>
     <!-- <script src="https://cdn.jsdelivr.net/gmap3/7.2.0/gmap3.min.js"></script> -->

@@ -38,7 +38,7 @@ $(document).ready(function () {
         applyClass: 'btn-danger',
         cancelClass: 'btn-inverse',
         opens: 'left',
-        startDate: moment(), //.subtract(1, 'months').format('DD/MM/YYYY'),
+        startDate: moment().startOf('month').format('DD/MM/YYYY'),
         endDate: moment(),
         locale: {
           format: 'DD/MM/YYYY'
@@ -275,6 +275,16 @@ $(document).ready(function () {
         $('#ket').html(row.KET);
         $('#user_app').html(row.USER_APP);
         $("#modal_foto").modal('show');
+
+        var $image = $('#img_foto');
+
+        $image.viewer({
+          //inline: true,
+          viewed: function() {
+            $image.viewer('zoomTo', 1);
+          }
+        });
+
       });
 
     $( 'body' ).on( 'click', '#btn_cari', function(btn) {

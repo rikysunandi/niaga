@@ -14,6 +14,7 @@
     <link href="../../assets/plugins/datatables-lib/Responsive-2.2.9/css/responsive.dataTables.min.css" rel="stylesheet">
     <link href="../../assets/plugins/datatables-lib/RowGroup-1.1.4/css/rowGroup.dataTables.min.css" rel="stylesheet">
     <link href="../../assets/plugins/bootstrap-daterangepicker/daterangepicker.css" rel="stylesheet">
+    <link href="../../assets/plugins/viewer/viewer.css" rel="stylesheet">
 
     <link href="../css/style.css?time=<?php echo time() ?>" rel="stylesheet">
     <link href="../css/custom.css?time=<?php echo time() ?>" rel="stylesheet">
@@ -22,6 +23,9 @@
         #map {
             width:100%;
             height: 100%;
+        }
+        #img_foto:hover{
+            cursor: pointer;
         }
     </style>
     
@@ -67,13 +71,29 @@
                                   <div class="modal-dialog" role="document">
                                     <div class="modal-content">
                                       <div class="modal-header">
-                                        <h5 class="modal-title">Foto Pemeriksaan LPB</h5>
+                                        <h5 class="modal-title">Hasil Foto</h5>
                                         <button type="button" class="close" data-dismiss="modal" aria-label="Close">
                                           <span aria-hidden="true">&times;</span>
                                         </button>
                                       </div>
                                       <div class="modal-body">
-                                        <img id="img_foto" class="img-fluid img-thumbnail" alt="Foto Pemeriksaan LPB">
+                                        <div class="row">
+                                            <div class="col-6">
+                                                <img id="img_foto" class="img-fluid img-thumbnail mb-2" alt="Foto Pemeriksaan" width="200" height="300">
+                                                <small class="float-right">*Klik untuk memperbesar</small>
+                                            </div>
+                                            <div class="col-6">
+                                                <dl class="row">
+                                                  <dt class="col-6">IDPEL</dt>
+                                                  <dd class="col-6" id="idpel"></dd>
+                                                  <dt class="col-6">TANGGAL</dt>
+                                                  <dd class="col-6" id="tgl_pemeriksaan">
+                                                  <dt class="col-6">PETUGAS</dt>
+                                                  <dd class="col-6" id="user_app">
+                                                  </dd>
+                                                </dl>
+                                            </div>
+                                        </div>
                                       </div>
                                       <div class="modal-footer">
                                         <button type="button" class="btn btn-secondary" data-dismiss="modal">Close</button>
@@ -241,6 +261,7 @@
 
     <script src="../../assets/plugins/moment/moment.min.js"></script>
     <script src="../../assets/plugins/bootstrap-daterangepicker/daterangepicker.js"></script>
+    <script src="../../assets/plugins/viewer/viewer.js"></script>
 
     <script src="https://maps.googleapis.com/maps/api/js?key=AIzaSyAqznXEC9IjyXrbRdKk1vKWJWLioZixUW8"></script>
 

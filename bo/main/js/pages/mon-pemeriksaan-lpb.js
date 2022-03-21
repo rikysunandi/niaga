@@ -144,7 +144,7 @@ $(document).ready(function () {
                   if(!data && data == null)
                     return '<a href="#" class="btn btn-sm btn-primary disabled" title="TIDAK ADA FOTO"><i class="fa fa-picture-o" aria-hidden="true"></i></a>';
                   else
-                    return '<a href="#" class="btn btn-sm btn-primary foto" title="FOTO" data-foto="'+data+'" data-jenis-foto="RUMAH"><i class="fa fa-picture-o" aria-hidden="true"></i></a>';
+                    return '<a href="#" class="btn btn-sm btn-primary foto" title="FOTO" data-foto="'+data+'" data-jenis-foto="RUMAH" data-row="'+encodeURIComponent(JSON.stringify(row))+'"><i class="fa fa-picture-o" aria-hidden="true"></i></a>';
               },
           },
           {
@@ -156,7 +156,7 @@ $(document).ready(function () {
                   if(!data && data == null)
                     return '<a href="#" class="btn btn-sm btn-primary disabled" title="TIDAK ADA FOTO"><i class="fa fa-picture-o" aria-hidden="true"></i></a>';
                   else
-                    return '<a href="#" class="btn btn-sm btn-primary foto" title="FOTO" data-foto="'+data+'" data-jenis-foto="METER"><i class="fa fa-picture-o" aria-hidden="true"></i></a>';
+                    return '<a href="#" class="btn btn-sm btn-primary foto" title="FOTO" data-foto="'+data+'" data-jenis-foto="METER" data-row="'+encodeURIComponent(JSON.stringify(row))+'"><i class="fa fa-picture-o" aria-hidden="true"></i></a>';
               },
           },
         ],
@@ -434,9 +434,23 @@ $(document).ready(function () {
 
     $('#tbl_mon_pemeriksaan_lpb').on('click', 'td a.foto', function (e) {
         e.preventDefault();    
+        var row = (JSON.parse(decodeURIComponent($(this).data('row'))));
         var foto = $(this).data('foto');
         $('#img_foto').attr('src', foto+'?time='+$.now());
+        $('#idpel').html(row.IDPEL);
+        $('#tgl_pemeriksaan').html(row.TGL_PEMERIKSAAN.substr(0,16));
+        $('#user_app').html(row.USER_INPUT);
         $("#modal_foto").modal('show');
+
+        var $image = $('#img_foto');
+
+        $image.viewer({
+          //inline: true,
+          viewed: function() {
+            $image.viewer('zoomTo', 1);
+          }
+        });
+
       });
 
     $('#clear_log').click(function(){
