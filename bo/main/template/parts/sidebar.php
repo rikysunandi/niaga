@@ -50,6 +50,7 @@
                     <li><a href="rekap-intimasi-ulp.php">Rekap Intimasi per ULP</a>
                     <li><a href="rekap-intimasi-koordinator.php">Rekap Intimasi per Koordinator</a></li>
                     <li><a href="rekap-intimasi-petugas.php">Rekap Intimasi per Petugas</a></li>
+                    <li><a href="efektivitas-petugas.php">Efektivitas Petugas</a></li>
                     <!-- <li><a href="input-va.php">Input Virtual Account</a></li> -->
                 </ul>
             </li>

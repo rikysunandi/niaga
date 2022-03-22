@@ -7,6 +7,33 @@ $(document).ready(function () {
 
     var unitupi, unitap, unitup, petugas, blth, tgl_intimasi_from, tgl_intimasi_to;
 
+    if(urlParams.has('tgl_intimasi_from')){
+      tgl_intimasi_from = moment(urlParams.get('tgl_intimasi_from')).format('DD/MM/YYYY');
+    }else{
+      tgl_intimasi_from = moment().startOf('month').format('DD/MM/YYYY');
+    }
+
+    if(urlParams.has('tgl_intimasi_to')){
+      tgl_intimasi_to = moment(urlParams.get('tgl_intimasi_to')).format('DD/MM/YYYY');
+    }else{
+      tgl_intimasi_to = moment();
+    }
+
+    if(urlParams.has('blth')){
+      $('#sel_blth').val(urlParams.get('blth'));
+    }
+
+    $('.input-daterange-datepicker').daterangepicker({
+        buttonClasses: ['btn', 'btn-sm'],
+        applyClass: 'btn-danger',
+        cancelClass: 'btn-inverse',
+        opens: 'left',
+        startDate: tgl_intimasi_from,
+        endDate: tgl_intimasi_to,
+        locale: {
+          format: 'DD/MM/YYYY'
+        }
+    });
 
     $('#sel_unitup').change(function(){
 
@@ -22,6 +49,8 @@ $(document).ready(function () {
           if(urlParams.has('petugas')){
             $('#sel_petugas').selectpicker('val', urlParams.get('petugas'));
             console.log('petugas', urlParams.get('petugas'));
+
+            setTimeout(function(){ $('#btn_cari').trigger('click'); }, 500);
           }
           else{
             $('#sel_petugas').selectpicker('val', "00");
@@ -32,18 +61,6 @@ $(document).ready(function () {
         });
     });
 
-
-    $('.input-daterange-datepicker').daterangepicker({
-        buttonClasses: ['btn', 'btn-sm'],
-        applyClass: 'btn-danger',
-        cancelClass: 'btn-inverse',
-        opens: 'left',
-        startDate: moment().startOf('month').format('DD/MM/YYYY'),
-        endDate: moment(),
-        locale: {
-          format: 'DD/MM/YYYY'
-        }
-    });
     //$.blockUI({ message: '<h1 class="p-3">Mengambil data...</h1>' }); 
     var table = $('#tbl_mon_intimasi')
       .on('preXhr.dt', function ( e, settings, data ) {
