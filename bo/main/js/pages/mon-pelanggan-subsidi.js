@@ -54,7 +54,7 @@ $(document).ready(function () {
             visible: false
           },
           {
-            data: "RBM",
+            data: "KDDK",
           },
           {
             data: "ALAMAT",

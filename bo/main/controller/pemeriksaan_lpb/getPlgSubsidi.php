@@ -44,6 +44,7 @@ $columns = array(
     array( 'db' => 'DAYA',  'dt' => 'DAYA' ),
     array( 'db' => 'KOGOL',  'dt' => 'KOGOL' ),
     array( 'db' => 'RBM',  'dt' => 'RBM' ),
+    array( 'db' => 'KDDK',  'dt' => 'KDDK' ),
     array( 'db' => 'ALAMAT',  'dt' => 'ALAMAT' ),
     array( 'db' => 'NAMA_GARDU',  'dt' => 'NAMA_GARDU' ),
     array( 'db' => 'NOMOR_JURUSAN_TIANG',  'dt' => 'NOMOR_JURUSAN_TIANG' ),
