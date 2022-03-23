@@ -11,6 +11,10 @@
     	$('input').val('');
     	$('#input_cari').val(input_cari);
 
+        var container = $('.map').parent();
+        $('.map').remove();
+        container.append('<div class="map"></div>');
+
     	$('div.content-body').block({ message: 'Mencari data...' });
     	$.getJSON('../controller/pemeriksaan_lpb/getInfoPemeriksaanLPB.php?query='+input_cari, function(data){
 	        $('#idpel').val(data.idpel);
@@ -27,10 +31,31 @@
 
             $('.img_foto').attr('src', data.foto);
 
-            $('.foto').zoom({
-                url: data.foto,
-                magnify: 2
-            });
+            // $('.foto').zoom({
+            //     url: data.foto,
+            //     magnify: 2
+            // });
+
+	        var $image = $('.img_foto');
+
+	        $image.viewer({
+	          //inline: true,
+	          viewed: function() {
+	            $image.viewer('zoomTo', 1);
+	          }
+	        });
+
+	        var center = [data.latitude, data.longitude];
+		    $('.map')
+		      .gmap3({
+		        center: center,
+		        zoom: 13,
+		        mapTypeId : google.maps.MapTypeId.ROADMAP
+		      })
+		      .marker({
+		        position: center,
+		        icon: "../../assets/images/markers/red/house.png"
+		      });
 
 	        $('div.content-body').unblock();
 	    });

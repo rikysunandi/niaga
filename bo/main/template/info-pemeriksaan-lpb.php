@@ -16,6 +16,8 @@
     <link href="https://cdn.datatables.net/responsive/2.2.5/css/responsive.dataTables.min.css" rel="stylesheet">
     <link href="https://cdn.datatables.net/select/1.3.1/css/select.bootstrap4.min.css" rel="stylesheet"/>
     <link rel="stylesheet" href="../../assets/plugins/select2/css/select2.min.css">
+    <link href="../../assets/plugins/viewer/viewer.css" rel="stylesheet">
+
     
     <link href="../css/style.css?time=<?php echo time() ?>" rel="stylesheet">
     <link href="../css/custom.css?time=<?php echo time() ?>" rel="stylesheet">
@@ -30,6 +32,9 @@
             height: 400px;
             width: 300px;
             border: 0px;
+        }
+        .img_foto:hover{
+            cursor: pointer;
         }
         .map{
             height: 300px;
@@ -203,7 +208,8 @@
                             <div class="card-body">
                                 <h4 class="card-title mb-4">Foto</h4>
                                 <div class="foto">
-                                    <img class="img_foto" />
+                                    <img class="img_foto mb-2" />
+                                    <small class="float-right">*Klik untuk memperbesar</small>
                                 </div>
                             </div>
                         </div>
@@ -245,11 +251,12 @@
     <script src="../js/gleek.js"></script>
     <script src="../../assets/plugins/block-ui/jquery.blockUI.js"></script>
 
-    <script src="https://maps.googleapis.com/maps/api/js?key=AIzaSyAqznXEC9IjyXrbRdKk1vKWJWLioZixUW8"></script>
+    <script src="https://maps.googleapis.com/maps/api/js?key=AIzaSyCRViwwpnm9OuVSUmErg0PnV4I9t5aCcUw"></script>
 
     <script src="https://cdn.jsdelivr.net/gmap3/7.2.0/gmap3.min.js"></script>
+    <script src="../../assets/plugins/viewer/viewer.js"></script>
 
-    <script src="../../assets/plugins/jquery-zoom/jquery.zoom.min.js"></script>
+    <!-- <script src="../../assets/plugins/jquery-zoom/jquery.zoom.min.js"></script> -->
     <script src="../js/pages/apps.js"></script>
     <script src="../js/pages/info-pemeriksaan-lpb.js"></script>
 </body>
