@@ -126,7 +126,7 @@ $(document).ready(function () {
                 mnt = mnt.replace(' MENIT/PLG','');
                 if (mnt > 30) {
                     cls='danger';
-                  }else if (mnt > 10) {
+                  }else if (mnt > 15 || mnt < 5) {
                     cls='warning';
                   }else {
                     cls='success';

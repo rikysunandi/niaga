@@ -112,7 +112,19 @@
                     <div class="col-12">
                         <div class="card">
                             <div class="card-body">
-                                <!-- <h4 class="card-title mb-4">Efektivitas ULP</h4> -->
+                                <!-- <h4 class="card-title mb-4">Efektivitas Intimasi</h4> -->
+                                <div>
+                                    <p>Keterangan Ratio Waktu Intimasi per Pelanggan:
+                                        <ul>
+                                            <li>1. <span class="text-success">Hijau:</span> 5-15 menit</li>
+                                            <li>2. <span class="text-warning">Kuning:</span> dibawah 5 menit atau 15-30 menit</li>
+                                            <li>3. <span class="text-danger">Merah:</span> diatas 30 menit</li>
+                                        </ul>
+                                    </p> 
+                                    <p>
+                                        Silahkan klik angka pada kolom JML PLG untuk melihat detail hasil Intimasi, pastikan bahwa titik lokasi Intimasi sudah sesuai, kemudian data dan foto menunjukan proses Intimasi sudah dilakukan dengan benar.
+                                    </p>
+                                </div>
                                 <div class="table-responsive">
                                     <table id="tbl_efektivitas_petugas" class="table table-striped table-bordered nowrap" style="width: 100%">
                                     <thead>
