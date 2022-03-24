@@ -40,21 +40,7 @@
                     <li><a href="mon-upload-pelunasan.php">Monitoring Upload Pelunasan</a></li>
                 </ul>
             </li>
-            <li class="mega-menu mega-menu-md"><a class="has-arrow" href="javascript:void()" aria-expanded="false"><i class="mdi mdi-information-outline"></i><span class="nav-text">Intimasi </span> </a>
-                <ul aria-expanded="false">
-                    <!-- <li><a href="update-pelunasan.php">Update Pelunasan</a>
-                            </li> -->
-                    <li><a href="wo-intimasi.php">Penetapan WO Intimasi</a></li>
-                    <li><a href="mon-intimasi.php">Monitoring Detail Intimasi</a></li>
-                    <li><a href="rekap-intimasi-keterangan.php">Rekap Intimasi per Keterangan</a>
-                    <li><a href="rekap-intimasi-ulp.php">Rekap Intimasi per ULP</a>
-                    <li><a href="rekap-intimasi-koordinator.php">Rekap Intimasi per Koordinator</a></li>
-                    <li><a href="rekap-intimasi-petugas.php">Rekap Intimasi per Petugas</a></li>
-                    <li><a href="efektivitas-petugas.php">Efektivitas Petugas</a></li>
-                    <!-- <li><a href="input-va.php">Input Virtual Account</a></li> -->
-                </ul>
-            </li>
-            <li class="mega-menu mega-menu-md"><a class="has-arrow" href="javascript:void()" aria-expanded="false"><i class="mdi mdi-cash-multiple"></i><span class="nav-text">Pelunasan Piutang </span> </a>
+            <li class="mega-menu mega-menu-md"><a class="has-arrow" href="javascript:void()" aria-expanded="false"><i class="mdi mdi-cash-multiple"></i><span class="nav-text">Piutang Pelanggan </span> </a>
                 <ul aria-expanded="false">
                     <!-- <li><a href="update-pelunasan.php">Update Pelunasan</a>
                             </li> -->
@@ -66,11 +52,26 @@
                     <!-- <li><a href="input-va.php">Input Virtual Account</a></li> -->
                 </ul>
             </li>
+            <li class="mega-menu mega-menu-md"><a class="has-arrow" href="javascript:void()" aria-expanded="false"><i class="mdi mdi-information-outline"></i><span class="nav-text">Intimasi </span> </a>
+                <ul aria-expanded="false">
+                    <!-- <li><a href="update-pelunasan.php">Update Pelunasan</a>
+                            </li> -->
+                    <li><a href="wo-intimasi.php">Penetapan WO Intimasi</a></li>
+                    <li><a href="mon-intimasi.php">Monitoring Detail Intimasi</a></li>
+                    <li><a href="rekap-intimasi-keterangan.php">Rekap Intimasi per Keterangan</a>
+                    <li><a href="efektivitas-intimasi.php">Efektivitas Intimasi</a></li>
+                    <li><a href="rekap-intimasi-ulp.php">Rekap Intimasi per ULP</a>
+                    <li><a href="rekap-intimasi-koordinator.php">Rekap Intimasi per Koordinator</a></li>
+                    <li><a href="rekap-intimasi-petugas.php">Rekap Intimasi per Petugas</a></li>
+                    <!-- <li><a href="input-va.php">Input Virtual Account</a></li> -->
+                </ul>
+            </li>
             <li class="mega-menu mega-menu-md"><a class="has-arrow" href="javascript:void()" aria-expanded="false"><i class="mdi mdi-account-remove"></i><span class="nav-text">Pemutusan </span> </a>
                 <ul aria-expanded="false">
                     <!-- <li><a href="update-pelunasan.php">Update Pelunasan</a>
                             </li> -->
                     <li><a href="wo-pemutusan.php">Penetapan WO Pemutusan</a></li>
+                    <li><a href="efektivitas-pemutusan.php">Efektivitas Pemutusan</a></li>
                     <li><a href="rekap-pemutusan-ulp.php">Rekap Pemutusan per Unit</a></li>
                     <li><a href="rekap-pemutusan-keterangan.php">Rekap Pemutusan per Petugas</a></li>
                     <li><a href="mon-pemutusan.php">Monitoring Pemutusan</a></li>

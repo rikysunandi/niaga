@@ -39,13 +39,13 @@
             <div class="container-fluid">
                 <div class="row page-titles">
                     <div class="col p-md-0">
-                        <h4>Efektivitas Petugas</h4>
+                        <h4>Efektivitas Intimasi</h4>
                     </div>
                     <div class="col p-md-0">
                         <ol class="breadcrumb">
                             <li class="breadcrumb-item"><a href="javascript:void(0)">Intimasi</a>
                             </li>
-                            <li class="breadcrumb-item active">Efektivitas Petugas</li>
+                            <li class="breadcrumb-item active">Efektivitas Intimasi</li>
                         </ol>
                     </div>
                 </div>
@@ -116,9 +116,9 @@
                                 <div>
                                     <p>Keterangan Ratio Waktu Intimasi per Pelanggan:
                                         <ul>
-                                            <li>1. <span class="text-success">Hijau:</span> 5-15 menit</li>
-                                            <li>2. <span class="text-warning">Kuning:</span> dibawah 5 menit atau 15-30 menit</li>
-                                            <li>3. <span class="text-danger">Merah:</span> diatas 30 menit</li>
+                                            <li>1. <span class="text-success">Hijau (Relatif Efektif):</span> 5-15 menit</li>
+                                            <li>2. <span class="text-warning">Kuning (Cukup Efektif):</span> dibawah 5 menit atau 15-30 menit, data intimasi perlu diverifikasi </li>
+                                            <li>3. <span class="text-danger">Merah (Kurang Efektif):</span> diatas 30 menit, penyelesaian WO Intimasi kurang efektif</li>
                                         </ul>
                                     </p> 
                                     <p>
@@ -224,6 +224,6 @@
     <script src="../../assets/plugins/block-ui/jquery.blockUI.js"></script>
 
     <script src="../js/pages/apps.js"></script>
-    <script src="../js/pages/efektivitas-petugas.js"></script>
+    <script src="../js/pages/efektivitas-intimasi.js"></script>
 </body>
 </html>
