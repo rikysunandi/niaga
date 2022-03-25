@@ -43,7 +43,7 @@ if(substr($idpel, 0, 11)=='99999999999'){
   //210429
 }
 
-$sql = 'SELECT * FROM m_pemeriksaan_lpb WHERE IDPEL = \''.$idpel.'\' ';
+$sql = 'SELECT * FROM m_pemeriksaan_lpb WHERE IDPEL = \''.$idpel.'\' AND FOTO_RUMAH IS NOT NULL ';
 //$params = array(1, substr($idpel,0,11));
 
 $stmt = sqlsrv_query( $conn, $sql );
