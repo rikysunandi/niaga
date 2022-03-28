@@ -10,7 +10,7 @@ $unitup = $_REQUEST['unitup'];
 $rbm = $_REQUEST['rbm'];
 $status = $_REQUEST['status'];
 $blth = $_REQUEST['blth'];
-$user = 'SYSTEM';
+$user = rand(0,5);
 
 $params = array(
         array($user, SQLSRV_PARAM_IN),
@@ -31,7 +31,7 @@ if(!sqlsrv_execute($stmt)){
 }
 
 // DB table to use
-$table = 'NIAGA.dbo.vw_Create_Pola_Bayar';
+$table = 'NIAGA.dbo.vw_Create_Pola_Bayar_'.$user;
  
 // Table's primary key
 $primaryKey = 'IDPEL';
@@ -53,7 +53,8 @@ $columns = array(
     array( 'db' => 'UMUR_PIUTANG',  'dt' => 'UMUR_PIUTANG' ),
     array( 'db' => 'PERCEPATAN',  'dt' => 'PERCEPATAN' ),
     array( 'db' => 'JML_TUNGGAKAN',  'dt' => 'JML_TUNGGAKAN' ),
-    array( 'db' => 'STATUS',  'dt' => 'STATUS' ),
+    array( 'db' => 'STATUS_LALU',  'dt' => 'STATUS_LALU' ),
+    array( 'db' => 'STATUS_BAYAR',  'dt' => 'STATUS_BAYAR' ),
     array( 'db' => 'KODESTATUS',  'dt' => 'KODESTATUS' ),
     array( 'db' => 'KODEPETUGAS',  'dt' => 'KODEPETUGAS' ),
 );

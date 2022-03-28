@@ -59,13 +59,13 @@
                                         <div class="form-row">
                                             <div class="form-group mb-2 mr-4">
                                                 <label class="text-label d-block"><small>UID</small></label>
-                                                <select id="sel_unitupi" class="selectpicker show-tick" data-size="5" >
+                                                <select id="sel_unitupi" class="selectpicker show-tick" data-inc-semua="T" data-size="5" >
                                                     <option disabled>Pilih Unit Induk</option>
                                                 </select>
                                             </div>
                                             <div class="form-group mb-2 mr-4">
                                                 <label class="text-label d-block"><small>UP3</small></label>
-                                                <select id="sel_unitap" class="selectpicker show-tick" data-size="5" >
+                                                <select id="sel_unitap" class="selectpicker show-tick" data-inc-semua="T" data-size="5" >
                                                     <option disabled>Pilih UP3</option>
                                                 </select>
                                             </div>
@@ -82,12 +82,13 @@
                                                 </select>
                                             </div>
                                             <div class="form-group mb-2 mr-4">
-                                                <label class="text-label d-block"><small>STATUS</label></small>
+                                                <label class="text-label d-block"><small>POLA BAYAR</label></small>
                                                 <select id="sel_status" title="POLA BAYAR" class="selectpicker show-tick" data-size="5" >
                                                     <option value="00">SEMUA DATA</option>
                                                     <option value="LANCAR">LANCAR</option>
                                                     <option value="BARU">BARU</option>
                                                     <option value="IRISAN">IRISAN</option>
+                                                    <option value="BLM_LUNAS">BLM LUNAS</option>
                                                 </select>
                                             </div>
                                             <div class="form-group mb-2 mr-4">
@@ -130,11 +131,12 @@
                                             <th class="text-center bg-primary-lighten-2">KOGOL</th>
                                             <th class="text-center bg-primary-lighten-2">TARIF</th>
                                             <th class="text-center bg-primary-lighten-2">DAYA</th>
+                                            <th class="text-center bg-primary-lighten-2">WO</th>
                                             <th class="text-center bg-primary-lighten-2">TGLBAYAR</th>
                                             <th class="text-center bg-primary-lighten-2">UMUR<br/>PIUTANG</th>
                                             <th class="text-center bg-primary-lighten-2">PERCEPATAN</th>
                                             <th class="text-center bg-primary-lighten-2">KALI<br/>MENUNGGAK</th>
-                                            <th class="text-center bg-primary-lighten-2">STATUS</th>
+                                            <th class="text-center bg-primary-lighten-2">POLA<br/>BAYAR</th>
                                             <th class="text-center bg-primary-lighten-2">KODESTATUS</th>
                                             <th class="text-center bg-primary-lighten-2">RBM</th>
                                             <th class="text-center bg-primary-lighten-2">PIC</th>

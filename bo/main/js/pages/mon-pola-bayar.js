@@ -77,10 +77,23 @@ $(document).ready(function () {
             "sClass" : "text-right" , render: $.fn.dataTable.render.number(".", ",", 0, '')
           },
           {
-            data: "TGLBAYAR",
+            data: "STATUS_LALU",
             render: function ( data, type, row ) {
-                    return data.substring(0,10);
+                    if(data == 'LANCAR')
+                        return '<span class="label label-success">'+data+'</span>';
+                    else if(data == 'BARU')
+                        return '<span class="label label-warning">'+data+'</span>';
+                    else if(data == 'IRISAN')
+                        return '<span class="label label-danger">'+data+'</span>';
+                    else return data;
                 },
+          },
+          {
+            data: "TGLBAYAR",
+            // render: function ( data, type, row ) {
+
+            //         return data.substring(0,10);
+            //     },
           },
           {
             data: "UMUR_PIUTANG",
@@ -98,7 +111,7 @@ $(document).ready(function () {
             "sClass" : "text-right" , render: $.fn.dataTable.render.number(".", ",", 0, '')
           },
           {
-            data: "STATUS",
+            data: "STATUS_BAYAR",
             render: function ( data, type, row ) {
                     if(data == 'LANCAR')
                         return '<span class="label label-success">'+data+'</span>';
@@ -106,6 +119,7 @@ $(document).ready(function () {
                         return '<span class="label label-warning">'+data+'</span>';
                     else if(data == 'IRISAN')
                         return '<span class="label label-danger">'+data+'</span>';
+                    else return data;
                 },
           },
           {
@@ -155,7 +169,7 @@ $(document).ready(function () {
         "paging": true,
         lengthMenu: [[25, 100, -1], [25, 100, "All"]],
         pageLength: 25,
-        "order": [[11, 'asc'],[9, 'desc']],
+        "order": [[12, 'asc'],[10, 'desc']],
     });
 
     $( 'body' ).on( 'click', '#btn_cari', function(btn) {
