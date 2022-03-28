@@ -887,17 +887,10 @@ $(function() {
                       fill: true
                     },
                     {
-                      label: 'Baru',
-                      data: data.baru,
+                      label: '(Baru + Irisan)',
+                      data: data.wo,
                       borderColor: '#F2C36B',
                       backgroundColor: addAlpha('#F2C36B', 0.2),
-                      fill: true
-                    },
-                    {
-                      label: 'Irisan',
-                      data: data.irisan,
-                      borderColor: '#EC5B43',
-                      backgroundColor: addAlpha('#EC5B43', 0.2),
                       fill: true
                     },
                   ]
@@ -2592,10 +2585,9 @@ $(function() {
         $.getJSON('../controller/getDashboardTrendPercepatanPolaBayar.php?unitap='+unitap+'&kogol=X&pic=X&blth='+blth, function(data){
 
             chart_trend_percepatan_pola_bayar.data.labels= data.blth;
-            chart_trend_percepatan_pola_bayar.data.datasets[0].data = data.kogol_0;
-            chart_trend_percepatan_pola_bayar.data.datasets[1].data = data.kogol_2;
-            chart_trend_percepatan_pola_bayar.data.datasets[2].data = data.kogol_3;
-            chart_trend_percepatan_pola_bayar.data.datasets[3].data = data.kogol_4;
+            chart_trend_percepatan_pola_bayar.data.datasets[0].data = data.lancar;
+            chart_trend_percepatan_pola_bayar.data.datasets[1].data = data.baru;
+            chart_trend_percepatan_pola_bayar.data.datasets[2].data = data.irisan;
             chart_trend_percepatan_pola_bayar.update();
 
             $('div#trend_percepatan_pola_bayar').unblock();
@@ -2605,10 +2597,8 @@ $(function() {
         $.getJSON('../controller/getDashboardTrendJmlPlgPolaBayar.php?unitap='+unitap+'&kogol=X&pic=X&blth='+blth, function(data){
 
             chart_trend_jml_plg_pola_bayar.data.labels= data.blth;
-            chart_trend_jml_plg_pola_bayar.data.datasets[0].data = data.mup3;
-            chart_trend_jml_plg_pola_bayar.data.datasets[1].data = data.mbsar;
-            chart_trend_jml_plg_pola_bayar.data.datasets[2].data = data.mulp;
-            chart_trend_jml_plg_pola_bayar.data.datasets[3].data = data.biller;
+            chart_trend_jml_plg_pola_bayar.data.datasets[0].data = data.lancar;
+            chart_trend_jml_plg_pola_bayar.data.datasets[1].data = data.wo;
             chart_trend_jml_plg_pola_bayar.update();
 
             $('div#trend_jml_plg_pola_bayar').unblock();

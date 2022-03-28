@@ -29,6 +29,7 @@ if($stmt){
 		$response['lancar'][$i] = number_format($row['LANCAR'], 2, '.', ','); 
 		$response['baru'][$i] = number_format($row['BARU'], 2, '.', ','); 
 		$response['irisan'][$i] = number_format($row['IRISAN'], 2, '.', ','); 
+		$response['wo'][$i] = number_format($row['WO'], 2, '.', ','); 
 
 		$i++;
 	}

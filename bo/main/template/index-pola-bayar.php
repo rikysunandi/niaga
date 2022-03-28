@@ -731,7 +731,7 @@
                                         <i class="fa fa-rocket fa-lg text-white"></i>
                                     </span>
                                     <div class="media-body">
-                                        <h4 class="mb-3 text-white">TREND JUMLAH PLG (RIBU)</h4>
+                                        <h4 class="mb-3 text-white">TREND JUMLAH PLG (JUTA)</h4>
                                     </div>
                                 </div>
                             </div>
