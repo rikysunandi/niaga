@@ -37,12 +37,14 @@ if(sqlsrv_execute($stmt)){
 			$response['pelanggan'][$i]['tarif'] = $row['TARIF']; 
 			$response['pelanggan'][$i]['daya'] = $row['DAYA'];
 			$response['pelanggan'][$i]['gardu'] = $row['NAMA_GARDU'];
-			$response['pelanggan'][$i]['string_1'] = $row['NOMOR_JURUSAN_TIANG'];
 			$response['pelanggan'][$i]['kddk'] = $row['KDDK'];
 			$response['pelanggan'][$i]['nomorMeterKwh'] = $row['NOMOR_METER_KWH'];
 			$response['pelanggan'][$i]['notelp'] = $row['NOTELP'];
 			$response['pelanggan'][$i]['latitude'] = $row['LATITUDE'];
 			$response['pelanggan'][$i]['longitude'] = $row['LONGITUDE'];
+			$response['pelanggan'][$i]['string_1'] = $row['STRING_1'];
+			$response['pelanggan'][$i]['string_2'] = $row['STRING_2'];
+			$response['pelanggan'][$i]['string_3'] = $row['STRING_3'];
 		}
 
 		$i++;
