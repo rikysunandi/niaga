@@ -704,6 +704,93 @@
                 </div>
 
                 <div class="row">
+                    <div class="col-6">
+                        <div id="trend_percepatan_pola_bayar" class="card">
+                            <div class="card-body stat-widget-four" style="background-color: #EC5B43;">
+                                <div class="media">
+                                    <span class="mr-3">
+                                        <i class="fa fa-rocket fa-lg text-white"></i>
+                                    </span>
+                                    <div class="media-body">
+                                        <h4 class="mb-3 text-white">TREND PERCEPATAN (POLA BAYAR)</h4>
+                                    </div>
+                                </div>
+                            </div>
+                            <div class="mb-2">
+                                <div class="chart-card">
+                                    <canvas id="chart_trend_percepatan_pola_bayar"></canvas>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="col-6">
+                        <div id="trend_jml_plg_pola_bayar" class="card">
+                            <div class="card-body stat-widget-four" style="background-color: #EC5B32;">
+                                <div class="media">
+                                    <span class="mr-3">
+                                        <i class="fa fa-rocket fa-lg text-white"></i>
+                                    </span>
+                                    <div class="media-body">
+                                        <h4 class="mb-3 text-white">TREND JUMLAH PLG (RIBU)</h4>
+                                    </div>
+                                </div>
+                            </div>
+                            <div class="mb-2">
+                                <div class="chart-card">
+                                    <canvas id="chart_trend_jml_plg_pola_bayar"></canvas>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                <div class="row">
+                    <div class="col-6">
+                        <div id="percepatan_irisan_rata" class="card">
+                            <div class="card-body stat-widget-four" style="background-color: #EC5B21;">
+                                <div class="media">
+                                    <span class="mr-3">
+                                        <i class="fa fa-rocket fa-lg text-white"></i>
+                                    </span>
+                                    <div class="media-body">
+                                        <h4 class="mb-3 text-white">PERCEPATAN IRISAN RATA-RATA</h4>
+                                    </div>
+                                    <!-- <div class="media-body text-right">
+                                        <h4 class="text-white mb-3 avg">XX HARI</h4>
+                                    </div> -->
+                                </div>
+                            </div>
+                            <div class="mb-2">
+                                <div class="chart-card">                                    
+                                    <canvas id="chart_percepatan_irisan_rata"></canvas>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="col-6">
+                        <div id="percepatan_irisan" class="card">
+                            <div class="card-body stat-widget-four" style="background-color: #EC5B10;">
+                                <div class="media"> 
+                                    <span class="mr-3">
+                                        <i class="fa fa-rocket fa-lg text-white"></i>
+                                    </span>
+                                    <div class="media-body">
+                                        <h4 class="mb-3 text-white">PERCEPATAN IRISAN</h4>
+                                    </div>
+                                    <!-- <div class="media-body text-right">
+                                        <h4 class="text-white mb-3 avg">XX HARI</h4>
+                                    </div> -->
+                                </div>
+                            </div>
+                            <div class="mb-2">
+                                <div class="chart-card">                                    
+                                    <canvas id="chart_percepatan_irisan"></canvas>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+
+                <div class="row">
                     <div class="col-12">
                         <div id="pola_bayar" class="card">
                             <div class="card-body stat-widget-four" style="background-color: #135470;">

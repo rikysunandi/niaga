@@ -6,7 +6,9 @@ $(function() {
         chart_percepatan_kogol_3, chart_percepatan_kogol_4, 
         chart_percepatan_mup3, chart_percepatan_mbsar, 
         chart_percepatan_mulp, chart_percepatan_biller, 
+        chart_percepatan_irisan_rata, chart_percepatan_irisan, 
         chart_trend_percepatan, chart_trend_percepatan_pic,
+        chart_trend_percepatan_pola_bayar, chart_trend_jml_plg_pola_bayar,
         chart_pola_bayar, chart_pola_bayar_unit, chart_mom_per_tanggal, chart_mom_akumulasi_per_tanggal;
 
     var colours="";
@@ -750,6 +752,421 @@ $(function() {
         });
 
         $('div#percepatan_non_kogol_1').unblock();
+
+    });
+
+    $('div#trend_percepatan_pola_bayar').block({ message: 'Mengambil data...' });
+    $.getJSON('../controller/getDashboardTrendPercepatanPolaBayar.php?unitap='+unitap+'&kogol=X&pic=X&blth='+blth, function(data){
+
+        //const colours = data.percepatan.map((value) => value < 0 ? "#EC5B43" : "#135470");
+        //const alignments = data.percepatan.map((value) => value < 0 ? "start" : "end");
+
+        var ctx = document.getElementById("chart_trend_percepatan_pola_bayar");
+        ctx.height = 380;
+        //ctx.width = 0.45*panel_width;
+        chart_trend_percepatan_pola_bayar = new Chart(ctx, {
+            type: 'line',
+            data: {
+                labels: data.blth,
+                datasets: [
+                    {
+                      label: 'Lancar',
+                      data: data.lancar,
+                      borderColor: '#74BCC7',
+                      backgroundColor: addAlpha('#74BCC7', 0.2),
+                      fill: true
+                    },
+                    {
+                      label: 'Baru',
+                      data: data.baru,
+                      borderColor: '#F2C36B',
+                      backgroundColor: addAlpha('#F2C36B', 0.2),
+                      fill: true
+                    },
+                    {
+                      label: 'Irisan',
+                      data: data.irisan,
+                      borderColor: '#EC5B43',
+                      backgroundColor: addAlpha('#EC5B43', 0.2),
+                      fill: true
+                    },
+                  ]
+            },
+            plugins: [ChartDataLabels],
+            options: {
+                maintainAspectRatio: false, 
+                responsive: true,
+                barRadius: 2,
+                // Elements options apply to all of the options unless overridden in a dataset
+                // In this case, we are setting the border of each horizontal bar to be 2px wide
+                elements: {
+                  bar: {
+                    borderWidth: 2,
+                  }
+                },
+                layout: {
+                  padding: {
+                    left: 80,
+                    right: 60,
+                    top: 20,
+                    bottom: 20
+                  }
+                },
+                scales: {
+                    x: {
+                        grid: {
+                            display: true,
+                            drawBorder: true,
+                            drawOnChartArea: true,
+                            drawTicks: true,
+                        },
+                        ticks: {
+                            display: true //this will remove only the label
+                        }
+                    },
+                    y: {
+                        grid: {
+                            display: false,
+                            drawBorder: false,
+                            drawOnChartArea: false,
+                            drawTicks: false,
+                        },
+                        ticks: {
+                            display: false //this will remove only the label
+                        }
+                    },
+                },
+                plugins: {
+                    legend: {
+                        display: true,
+                        labels: {
+                          usePointStyle: true,
+                        },
+                        position: 'top'
+                    },
+                    title: {
+                        display: false,
+                    },
+                    datalabels: {
+                        // color: colours,
+                        anchor: 'end',
+                        align: 'right',
+                        clip: false,
+                        clamp: true,
+                        display: true,
+                        formatter: function(value, context) {
+                          return value;
+                        }
+                    }
+                }
+              },
+        });
+
+        $('div#trend_percepatan_pola_bayar').unblock();
+
+    });
+
+    $('div#trend_jml_plg_pola_bayar').block({ message: 'Mengambil data...' });
+    $.getJSON('../controller/getDashboardTrendJmlPlgPolaBayar.php?unitap='+unitap+'&kogol=X&pic=X&blth='+blth, function(data){
+
+        //const colours = data.percepatan.map((value) => value < 0 ? "#EC5B43" : "#135470");
+        //const alignments = data.percepatan.map((value) => value < 0 ? "start" : "end");
+
+        var ctx = document.getElementById("chart_trend_jml_plg_pola_bayar");
+        ctx.height = 380;
+        chart_trend_jml_plg_pola_bayar = new Chart(ctx, {
+            type: 'line',
+            data: {
+                labels: data.blth,
+                datasets: [
+                    {
+                      label: 'Lancar',
+                      data: data.lancar,
+                      borderColor: '#74BCC7',
+                      backgroundColor: addAlpha('#74BCC7', 0.2),
+                      fill: true
+                    },
+                    {
+                      label: 'Baru',
+                      data: data.baru,
+                      borderColor: '#F2C36B',
+                      backgroundColor: addAlpha('#F2C36B', 0.2),
+                      fill: true
+                    },
+                    {
+                      label: 'Irisan',
+                      data: data.irisan,
+                      borderColor: '#EC5B43',
+                      backgroundColor: addAlpha('#EC5B43', 0.2),
+                      fill: true
+                    },
+                  ]
+            },
+            plugins: [ChartDataLabels],
+            options: {
+                maintainAspectRatio: false, 
+                responsive: true,
+                barRadius: 2,
+                // Elements options apply to all of the options unless overridden in a dataset
+                // In this case, we are setting the border of each horizontal bar to be 2px wide
+                elements: {
+                  bar: {
+                    borderWidth: 2,
+                  }
+                },
+                layout: {
+                  padding: {
+                    left: 80,
+                    right: 60,
+                    top: 20,
+                    bottom: 20
+                  }
+                },
+                scales: {
+                    x: {
+                        grid: {
+                            display: true,
+                            drawBorder: true,
+                            drawOnChartArea: true,
+                            drawTicks: true,
+                        },
+                        ticks: {
+                            display: true //this will remove only the label
+                        }
+                    },
+                    y: {
+                        grid: {
+                            display: false,
+                            drawBorder: false,
+                            drawOnChartArea: false,
+                            drawTicks: false,
+                        },
+                        ticks: {
+                            display: false //this will remove only the label
+                        }
+                    },
+                },
+                plugins: {
+                    legend: {
+                        display: true,
+                        labels: {
+                          usePointStyle: true,
+                        },
+                        position: 'top'
+                    },
+                    title: {
+                        display: false,
+                    },
+                    datalabels: {
+                        // color: colours,
+                        anchor: 'end',
+                        align: 'right',
+                        clip: false,
+                        clamp: true,
+                        display: true,
+                        formatter: function(value, context) {
+                          return value;
+                        }
+                    }
+                }
+              },
+        });
+
+        $('div#trend_jml_plg_pola_bayar').unblock();
+
+    });
+
+    $('div#percepatan_irisan_rata').block({ message: 'Mengambil data...' });
+    $.getJSON('../controller/getDashboardPercepatanIrisanUnit.php?rata=Y&unitap='+unitap+'&kogol=X&pic=X&blth='+blth, function(data){
+
+        if(data.success=='true' || data.success){
+            colours = data.percepatan.map((value) => value < 0 ? "#EC5B43" : "#135470");
+            alignments = data.percepatan.map((value) => value < 0 ? "start" : "end");
+        }
+
+        var ctx = document.getElementById("chart_percepatan_irisan_rata");
+        ctx.height = 380;
+        ctx.width = 0.45*panel_width;
+        chart_percepatan_irisan_rata = new Chart(ctx, {
+            type: 'bar',
+            data: {
+                labels: data.singkatan,
+                datasets: [
+                    {
+                        label: "PERCEPATAN",
+                        backgroundColor: colours,
+                        backgroundColorHover: colours,
+                        borderColor: colours,
+                        borderColorHover: colours,
+                        data: data.percepatan,
+                    },
+                ]
+            },
+            plugins: [ChartDataLabels],
+            options: {
+                indexAxis: 'y',
+                maintainAspectRatio: false, 
+                responsive: false,
+                barRadius: 2,
+                // Elements options apply to all of the options unless overridden in a dataset
+                // In this case, we are setting the border of each horizontal bar to be 2px wide
+                elements: {
+                  bar: {
+                    borderWidth: 2,
+                  }
+                },
+                layout: {
+                  padding: {
+                    left: 80,
+                    right: 60,
+                    top: 20,
+                    bottom: 20
+                  }
+                },
+                scales: {
+                    x: {
+                        grid: {
+                            display: false,
+                            drawBorder: false,
+                            drawOnChartArea: false,
+                            drawTicks: false,
+                        },
+                        ticks: {
+                            display: false //this will remove only the label
+                        }
+                    },
+                    y: {
+                        grid: {
+                            display: false,
+                            drawBorder: false,
+                            drawOnChartArea: false,
+                            drawTicks: false,
+                        },
+                        ticks: {
+                            display: false //this will remove only the label
+                        }
+                    },
+                },
+                plugins: {
+                    legend: {
+                        display: false,
+                    },
+                    title: {
+                        display: false,
+                    },
+                    datalabels: {
+                        color: colours,
+                        anchor: alignments,
+                        align: alignments,
+                        clip: false,
+                        clamp: true,
+                        display: true,
+                        formatter: function(value, context) {
+                          return ' '+context.chart.data.labels[context.dataIndex] + ': ' + value+' ' ;
+                        }
+                    }
+                }
+              },
+        });
+
+        $('div#percepatan_irisan_rata').unblock();
+
+    });
+
+    $('div#percepatan_irisan').block({ message: 'Mengambil data...' });
+    $.getJSON('../controller/getDashboardPercepatanIrisanUnit.php?unitap='+unitap+'&kogol=X&pic=X&blth='+blth, function(data){
+
+        if(data.success=='true' || data.success){
+            colours = data.percepatan.map((value) => value < 0 ? "#EC5B43" : "#135470");
+            alignments = data.percepatan.map((value) => value < 0 ? "start" : "end");
+        }
+
+        var ctx = document.getElementById("chart_percepatan_irisan");
+        ctx.height = 380;
+        ctx.width = 0.45*panel_width;
+        chart_percepatan_irisan = new Chart(ctx, {
+            type: 'bar',
+            data: {
+                labels: data.singkatan,
+                datasets: [
+                    {
+                        label: "PERCEPATAN",
+                        backgroundColor: colours,
+                        backgroundColorHover: colours,
+                        borderColor: colours,
+                        borderColorHover: colours,
+                        data: data.percepatan,
+                    },
+                ]
+            },
+            plugins: [ChartDataLabels],
+            options: {
+                indexAxis: 'y',
+                maintainAspectRatio: false, 
+                responsive: false,
+                barRadius: 2,
+                // Elements options apply to all of the options unless overridden in a dataset
+                // In this case, we are setting the border of each horizontal bar to be 2px wide
+                elements: {
+                  bar: {
+                    borderWidth: 2,
+                  }
+                },
+                layout: {
+                  padding: {
+                    left: 80,
+                    right: 60,
+                    top: 20,
+                    bottom: 20
+                  }
+                },
+                scales: {
+                    x: {
+                        grid: {
+                            display: false,
+                            drawBorder: false,
+                            drawOnChartArea: false,
+                            drawTicks: false,
+                        },
+                        ticks: {
+                            display: false //this will remove only the label
+                        }
+                    },
+                    y: {
+                        grid: {
+                            display: false,
+                            drawBorder: false,
+                            drawOnChartArea: false,
+                            drawTicks: false,
+                        },
+                        ticks: {
+                            display: false //this will remove only the label
+                        }
+                    },
+                },
+                plugins: {
+                    legend: {
+                        display: false,
+                    },
+                    title: {
+                        display: false,
+                    },
+                    datalabels: {
+                        color: colours,
+                        anchor: alignments,
+                        align: alignments,
+                        clip: false,
+                        clamp: true,
+                        display: true,
+                        formatter: function(value, context) {
+                          return ' '+context.chart.data.labels[context.dataIndex] + ': ' + value+' ' ;
+                        }
+                    }
+                }
+              },
+        });
+
+        $('div#percepatan_irisan').unblock();
 
     });
 
@@ -2168,6 +2585,78 @@ $(function() {
             chart_percepatan_biller.update();
 
             $('div#percepatan_biller').unblock();
+
+        });
+
+        $('div#trend_percepatan_pola_bayar').block({ message: 'Mengambil data...' });
+        $.getJSON('../controller/getDashboardTrendPercepatanPolaBayar.php?unitap='+unitap+'&kogol=X&pic=X&blth='+blth, function(data){
+
+            chart_trend_percepatan_pola_bayar.data.labels= data.blth;
+            chart_trend_percepatan_pola_bayar.data.datasets[0].data = data.kogol_0;
+            chart_trend_percepatan_pola_bayar.data.datasets[1].data = data.kogol_2;
+            chart_trend_percepatan_pola_bayar.data.datasets[2].data = data.kogol_3;
+            chart_trend_percepatan_pola_bayar.data.datasets[3].data = data.kogol_4;
+            chart_trend_percepatan_pola_bayar.update();
+
+            $('div#trend_percepatan_pola_bayar').unblock();
+        });
+
+        $('div#trend_jml_plg_pola_bayar').block({ message: 'Mengambil data...' });
+        $.getJSON('../controller/getDashboardTrendJmlPlgPolaBayar.php?unitap='+unitap+'&kogol=X&pic=X&blth='+blth, function(data){
+
+            chart_trend_jml_plg_pola_bayar.data.labels= data.blth;
+            chart_trend_jml_plg_pola_bayar.data.datasets[0].data = data.mup3;
+            chart_trend_jml_plg_pola_bayar.data.datasets[1].data = data.mbsar;
+            chart_trend_jml_plg_pola_bayar.data.datasets[2].data = data.mulp;
+            chart_trend_jml_plg_pola_bayar.data.datasets[3].data = data.biller;
+            chart_trend_jml_plg_pola_bayar.update();
+
+            $('div#trend_jml_plg_pola_bayar').unblock();
+        });
+
+        $('div#percepatan_irisan_rata').block({ message: 'Mengambil data...' });
+        $.getJSON('../controller/getDashboardPercepatanIrisanUnit.php?rata=Y&unitap='+unitap+'&kogol=X&pic=X&blth='+blth, function(data){
+
+            if(data.success=='true' || data.success){
+                colours = data.percepatan.map((value) => value < 0 ? "#EC5B43" : "#135470");
+                alignments = data.percepatan.map((value) => value < 0 ? "start" : "end");
+            }
+
+            chart_percepatan_irisan_rata.data.labels= data.singkatan;
+            chart_percepatan_irisan_rata.data.datasets[0].data = data.percepatan;
+            chart_percepatan_irisan_rata.data.datasets[0].backgroundColor = colours;
+            chart_percepatan_irisan_rata.data.datasets[0].backgroundColorHover = colours;
+            chart_percepatan_irisan_rata.data.datasets[0].borderColor = colours;
+            chart_percepatan_irisan_rata.data.datasets[0].borderColorHover = colours;
+            chart_percepatan_irisan_rata.options.plugins.datalabels.color = colours;
+            chart_percepatan_irisan_rata.options.plugins.datalabels.anchor = alignments;
+            chart_percepatan_irisan_rata.options.plugins.datalabels.align = alignments;
+            chart_percepatan_irisan_rata.update();
+
+            $('div#percepatan_irisan_rata').unblock();
+
+        });
+
+        $('div#percepatan_irisan').block({ message: 'Mengambil data...' });
+        $.getJSON('../controller/getDashboardPercepatanIrisanUnit.php?unitap='+unitap+'&kogol=X&pic=X&blth='+blth, function(data){
+
+            if(data.success=='true' || data.success){
+                colours = data.percepatan.map((value) => value < 0 ? "#EC5B43" : "#135470");
+                alignments = data.percepatan.map((value) => value < 0 ? "start" : "end");
+            }
+            
+            chart_percepatan_irisan.data.labels= data.singkatan;
+            chart_percepatan_irisan.data.datasets[0].data = data.percepatan;
+            chart_percepatan_irisan.data.datasets[0].backgroundColor = colours;
+            chart_percepatan_irisan.data.datasets[0].backgroundColorHover = colours;
+            chart_percepatan_irisan.data.datasets[0].borderColor = colours;
+            chart_percepatan_irisan.data.datasets[0].borderColorHover = colours;
+            chart_percepatan_irisan.options.plugins.datalabels.color = colours;
+            chart_percepatan_irisan.options.plugins.datalabels.anchor = alignments;
+            chart_percepatan_irisan.options.plugins.datalabels.align = alignments;
+            chart_percepatan_irisan.update();
+
+            $('div#percepatan_irisan').unblock();
 
         });
 
