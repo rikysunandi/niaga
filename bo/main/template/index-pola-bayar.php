@@ -774,7 +774,7 @@
                                         <i class="fa fa-rocket fa-lg text-white"></i>
                                     </span>
                                     <div class="media-body">
-                                        <h4 class="mb-3 text-white">PERCEPATAN IRISAN</h4>
+                                        <h4 class="mb-3 text-white">PERCEPATAN IRISAN BULAN INI</h4>
                                     </div>
                                     <!-- <div class="media-body text-right">
                                         <h4 class="text-white mb-3 avg">XX HARI</h4>
