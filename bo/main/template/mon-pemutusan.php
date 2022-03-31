@@ -101,7 +101,7 @@
                                                 <select id="sel_blth" class="selectpicker select-sm show-tick" data-size="5">
                                                     <option value="<?php echo date('Ym') ?>" selected="selected"><?php echo date('Ym') ?></option>
                                                     <option data-divider="true"></option>
-                                                    <option value='<?php echo date('Ym', strtotime("-1 month")) ?>'><?php echo date('Ym', strtotime("-1 month")) ?></option>
+                                                    <option value='<?php echo date('Ym', strtotime("-".cal_days_in_month(CAL_GREGORIAN,date('m'),date('Y'))." day")) ?>'><?php echo date('Ym', strtotime("-".cal_days_in_month(CAL_GREGORIAN,date('m'),date('Y'))." day")) ?></option>
                                                     <option value='<?php echo date('Ym', strtotime("-2 month")) ?>'><?php echo date('Ym', strtotime("-2 month")) ?></option>
                                                     <option value='<?php echo date('Ym', strtotime("-3 month")) ?>'><?php echo date('Ym', strtotime("-3 month")) ?></option>
                                                 </select>
@@ -256,7 +256,7 @@
     <script src="../../assets/plugins/bootstrap-daterangepicker/daterangepicker.js"></script>
     <script src="../../assets/plugins/viewer/viewer.js"></script>
 
-    <script src="https://maps.googleapis.com/maps/api/js?key=AIzaSyCRViwwpnm9OuVSUmErg0PnV4I9t5aCcUw"></script>
+    <script src="https://maps.googleapis.com/maps/api/js?key=AIzaSyD0TuTeVzIMdevT3Rfc0BrVDKy466Tdsnc"></script>
     <!-- <script src="https://cdn.jsdelivr.net/gmap3/7.2.0/gmap3.min.js"></script> -->
     <!-- <script src="https://unpkg.com/@googlemaps/markerclustererplus/dist/index.min.js"></script> -->
 
