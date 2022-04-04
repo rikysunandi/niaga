@@ -38,8 +38,8 @@ if(sqlsrv_execute($stmt)){
 			$response['pelanggan'][$i]['daya'] = $row['DAYA'];
 			$response['pelanggan'][$i]['gardu'] = $row['NAMA_GARDU'];
 			$response['pelanggan'][$i]['kddk'] = $row['KDDK'];
-			$response['pelanggan'][$i]['jns_mutasi'] = $row['JNS_MUTASI'];
-			$response['pelanggan'][$i]['blth_mutasi'] = $row['BLTH_MUTASI'];
+			$response['pelanggan'][$i]['jnsMutasi'] = $row['JNS_MUTASI'];
+			$response['pelanggan'][$i]['blthMutasi'] = $row['BLTH_MUTASI'];
 			$response['pelanggan'][$i]['nomorMeterKwh'] = $row['NOMOR_METER_KWH'];
 			$response['pelanggan'][$i]['notelp'] = $row['NOTELP'];
 			$response['pelanggan'][$i]['latitude'] = $row['LATITUDE'];

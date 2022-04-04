@@ -37,10 +37,15 @@ if($param <> ''){
 			$response['pelanggan']['gardu'] = $row['NAMA_GARDU'];
 			$response['pelanggan']['string_1'] = $row['NOMOR_JURUSAN_TIANG'];
 			$response['pelanggan']['kddk'] = $row['KDDK'];
-			$response['pelanggan']['nomor_meter_kwh'] = $row['NOMOR_METER_KWH'];
-			$response['pelanggan']['notelp'] = $row['NOTELP'];
-			$response['pelanggan']['latitude'] = $row['LATITUDE'];
-			$response['pelanggan']['longitude'] = $row['LONGITUDE'];
+			$response['pelanggan'][$i]['jnsMutasi'] = $row['JNS_MUTASI'];
+			$response['pelanggan'][$i]['blthMutasi'] = $row['BLTH_MUTASI'];
+			$response['pelanggan'][$i]['nomorMeterKwh'] = $row['NOMOR_METER_KWH'];
+			$response['pelanggan'][$i]['notelp'] = $row['NOTELP'];
+			$response['pelanggan'][$i]['latitude'] = $row['LATITUDE'];
+			$response['pelanggan'][$i]['longitude'] = $row['LONGITUDE'];
+			$response['pelanggan'][$i]['string_1'] = $row['STRING_1'];
+			$response['pelanggan'][$i]['string_2'] = $row['STRING_2'];
+			$response['pelanggan'][$i]['string_3'] = $row['STRING_3'];
 
 			$response['success'] = true;
 			$response['msg'] = 'Pencarian berhasil';
