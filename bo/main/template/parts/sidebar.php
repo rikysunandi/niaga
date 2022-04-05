@@ -96,19 +96,29 @@
                 </ul>
             </li>
             <li class="nav-label">MEKAGA & REVASS</li>
-            <li><a class="has-arrow" href="javascript:void()" aria-expanded="false"><i class="mdi mdi-file-document-box"></i> <span class="nav-text">Pemeriksaan LPB</span></a>
+            <li><a class="has-arrow" href="javascript:void()" aria-expanded="false"><i class="mdi mdi-download-network"></i> <span class="nav-text">Download & Upload</span></a>
                 <ul aria-expanded="false">
-                    <!-- <li><a href="upload-dil.php">Upload DIL</a>
-> -->
                     <li><a href="upload-pemeriksaan-lpb.php">Upload Hasil Pemeriksaan</a></li>
                     <li><a href="mon-pelanggan-belum-diperiksa.php">Download DIL Belum Tagging Priangan</a></li>
                     <li><a href="mon-pelanggan-subsidi.php">Download DIL Subsidi</a></li>
                     <li><a href="mon-upload-pemeriksaan-lpb-ftp.php">Monitoring Upload FTP</a></li>
+                </ul>
+            </li>
+            <li><a class="has-arrow" href="javascript:void()" aria-expanded="false"><i class="mdi mdi-map-marker-radius"></i> <span class="nav-text">Pemeriksaan LPB</span></a>
+                <ul aria-expanded="false">
                     <li><a href="info-pemeriksaan-lpb.php">Info Pemeriksaan LPB</a></li>
                     <li><a href="mon-pemeriksaan-lpb.php">Monitoring Pemeriksaan LPB</a></li>
                     <li><a href="mon-missing-dil.php">Data Tidak Ditemukan Pada DIL</a></li>
                     <li><a href="rekap-pemeriksaan-lpb.php">Rekap per Tanggal Upload</a></li>
                     <li><a href="rekap-pemeriksaan-lpb-all.php">Rekap Pemeriksaan LPB</a></li>
+                </ul>
+            </li>
+            <li><a class="has-arrow" href="javascript:void()" aria-expanded="false"><i class="mdi mdi-home-map-marker"></i> <span class="nav-text">Foto Rumah</span></a>
+                <ul aria-expanded="false">
+                    <!-- <li><a href="upload-dil.php">Upload DIL</a>
+> -->
+                    <li><a href="rekap-foto-rumah.php">Rekap Foto Rumah</a></li>
+                    <li><a href="mon-foto-rumah.php">Detail Data Foto Rumah</a></li>
                 </ul>
             </li>
             <li><a class="has-arrow" href="javascript:void()" aria-expanded="false"><i class="mdi mdi-map"></i> <span class="nav-text">RPP</span></a>
