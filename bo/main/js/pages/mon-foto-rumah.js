@@ -432,7 +432,7 @@ $(document).ready(function () {
     });
 
 
-    $('#tbl_mon_pemeriksaan_lpb').on('click', 'td a.foto', function (e) {
+    $('#tbl_mon_foto_rumah').on('click', 'td a.foto', function (e) {
         e.preventDefault();    
         var row = (JSON.parse(decodeURIComponent($(this).data('row'))));
         var foto = $(this).data('foto');

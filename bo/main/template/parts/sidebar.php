@@ -117,7 +117,8 @@
                 <ul aria-expanded="false">
                     <!-- <li><a href="upload-dil.php">Upload DIL</a>
 > -->
-                    <li><a href="rekap-foto-rumah.php">Rekap Foto Rumah</a></li>
+                    <li><a href="rekap-foto-rumah-up.php">Rekap Foto Rumah per ULP</a></li>
+                    <li><a href="rekap-foto-rumah.php">Rekap Foto Rumah per Petugas</a></li>
                     <li><a href="mon-foto-rumah.php">Detail Data Foto Rumah</a></li>
                 </ul>
             </li>

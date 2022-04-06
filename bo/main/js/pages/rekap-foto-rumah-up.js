@@ -28,7 +28,7 @@ $(document).ready(function () {
         "processing": true,
         "serverSide": true,
         "ajax": {
-            "url": '../controller/pemeriksaan_lpb/getFotoRumah.php',
+            "url": '../controller/pemeriksaan_lpb/getFotoRumahUP.php',
             "type": "POST",
             "timeout": 180000
         },
@@ -47,12 +47,6 @@ $(document).ready(function () {
           },
           {
             data: "ULP",
-          },
-          {
-            data: "KODEPETUGAS",
-          },
-          {
-            data: "RPP",
           },
           {
             data: "JML_PLG",
@@ -115,7 +109,7 @@ $(document).ready(function () {
           var api = this.api();
           //console.log('footerCallback', api);
           var nb_cols = api.columns().nodes().length;
-          var j = 6;
+          var j = 4;
           while(j < nb_cols){
             console.log('j', j);
             console.log('nb_cols', nb_cols);
@@ -173,7 +167,7 @@ $(document).ready(function () {
 
     $('#btn_cari').click(function(btn){
         console.log('Klikk');
-        table.ajax.url( '../controller/pemeriksaan_lpb/getFotoRumah.php?unitupi='+$('#sel_unitupi').val()+'&unitap='+$('#sel_unitap').val()+'&unitup='+$('#sel_unitup').val()+'&tgl_pemeriksaan_from='+$('#tgl_pemeriksaan_range').data('daterangepicker').startDate.format('YYYY-MM-DD')+'&tgl_pemeriksaan_to='+$('#tgl_pemeriksaan_range').data('daterangepicker').endDate.format('YYYY-MM-DD')  ).load();
+        table.ajax.url( '../controller/pemeriksaan_lpb/getFotoRumahUP.php?unitupi='+$('#sel_unitupi').val()+'&unitap='+$('#sel_unitap').val()+'&unitup='+$('#sel_unitup').val()+'&tgl_pemeriksaan_from='+$('#tgl_pemeriksaan_range').data('daterangepicker').startDate.format('YYYY-MM-DD')+'&tgl_pemeriksaan_to='+$('#tgl_pemeriksaan_range').data('daterangepicker').endDate.format('YYYY-MM-DD')  ).load();
     });
 
 });
