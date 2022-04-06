@@ -1,6 +1,8 @@
 $(document).ready(function () {
 
     "use strict";
+    const queryString = window.location.search;
+    const urlParams = new URLSearchParams(queryString);
 
 
     $('.input-daterange-datepicker').daterangepicker({
@@ -29,7 +31,11 @@ $(document).ready(function () {
 
           if(urlParams.has('petugas')){
             $('#sel_petugas').selectpicker('val', urlParams.get('petugas'));
-            console.log('petugas', urlParams.get('petugas'));
+            $('#sel_foto_rumah').selectpicker('val', urlParams.get('foto_rumah'));
+            $('#tgl_pemeriksaan_range').data('daterangepicker').setStartDate(urlParams.get('tgl_pemeriksaan_from'));
+            $('#tgl_pemeriksaan_range').data('daterangepicker').setEndDate(urlParams.get('tgl_pemeriksaan_to'));
+            
+            setTimeout(function(){ $('#btn_cari').trigger('click'); }, 1000);
           }
           else{
             $('#sel_petugas').selectpicker('val', "00");

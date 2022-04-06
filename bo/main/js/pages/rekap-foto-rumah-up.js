@@ -56,12 +56,30 @@ $(document).ready(function () {
           {
             data: "JML_PLG_SDH",
             type: 'number', 
-            "sClass" : "text-right" , render: $.fn.dataTable.render.number(",", ".", 0, '')
+            "sClass" : "text-right" , 
+            render: $.fn.dataTable.render.number(",", ".", 0, '')
+            // render: function ( data, type, row ) {
+            //     var cls;
+            //     //console.log('row', row);
+            //     var jml = data;
+            //     //window.open("urut-langkah-rpp.php?unitupi="+unitupi+"&unitap="+unitap+"&unitup="+unitup+"&petugas="+petugas_dipilih+"&rpp="+rpp, "_blank");
+            //     return '<a class="btn btn-primary btn-xs" href="mon-foto-rumah.php?unitupi=53&unitap='+row.UNITAP+'&unitup='+row.UNITUP+'&petugas=00&foto_rumah=00&tgl_pemeriksaan_from='+$('#tgl_pemeriksaan_range').data('daterangepicker').startDate.format('DD/MM/YYYY')+'&tgl_pemeriksaan_to='+$('#tgl_pemeriksaan_range').data('daterangepicker').endDate.format('DD/MM/YYYY')+'" target="_blank" role="button">'+jml+'</a>';
+            //     //return rpp;
+            // },
           },
           {
             data: "JML_FOTO_RUMAH",
             type: 'number', 
-            "sClass" : "text-right" , render: $.fn.dataTable.render.number(",", ".", 0, '')
+            "sClass" : "text-right" , 
+            render: $.fn.dataTable.render.number(",", ".", 0, '')
+            // render: function ( data, type, row ) {
+            //     var cls;
+            //     //console.log('row', row);
+            //     var jml = data;
+            //     //window.open("urut-langkah-rpp.php?unitupi="+unitupi+"&unitap="+unitap+"&unitup="+unitup+"&petugas="+petugas_dipilih+"&rpp="+rpp, "_blank");
+            //     return '<a class="btn btn-primary btn-xs" href="mon-foto-rumah.php?unitupi=53&unitap='+row.UNITAP+'&unitup='+row.UNITUP+'&petugas=00&foto_rumah=Y&tgl_pemeriksaan_from='+$('#tgl_pemeriksaan_range').data('daterangepicker').startDate.format('DD/MM/YYYY')+'&tgl_pemeriksaan_to='+$('#tgl_pemeriksaan_range').data('daterangepicker').endDate.format('DD/MM/YYYY')+'" target="_blank" role="button">'+jml+'</a>';
+            //     //return rpp;
+            // },
           },
           {
             data: "JML_PLG_BLM",
