@@ -61,6 +61,8 @@ $columns = array(
     array( 'db' => 'USER_INPUT',  'dt' => 'USER_INPUT' ),
     array( 'db' => 'FOTOPATH',  'dt' => 'FOTOPATH' ),
     array( 'db' => 'FOTORUMAH',  'dt' => 'FOTORUMAH' ),
+    array( 'db' => 'ADA_FOTO_RUMAH',  'dt' => 'ADA_FOTO_RUMAH' ),
+    array( 'db' => 'ADA_FOTO_METER',  'dt' => 'ADA_FOTO_METER' ),
 );
  
 // SQL server connection information
