@@ -58,8 +58,16 @@ $(document).ready(function () {
           },
           {
             data: "TARGET_WO",
-            title: "TOTAL",
+            title: "PLG",
             ariaTitle: "WO TOTAL",
+            type: 'number',
+            visible: true,
+            "sClass" : "text-right" , render: $.fn.dataTable.render.number(".", ",", 0, '')
+          },
+          {
+            data: "TARGET_WO_RP",
+            title: "RPPTL",
+            ariaTitle: "RP WO TOTAL",
             type: 'number',
             visible: true,
             "sClass" : "text-right" , render: $.fn.dataTable.render.number(".", ",", 0, '')
@@ -84,6 +92,12 @@ $(document).ready(function () {
           },
           {
             data: "LUNAS_WO",
+            type: 'number',
+            visible: false,
+            "sClass" : "text-right" , render: $.fn.dataTable.render.number(".", ",", 0, '')
+          },
+          {
+            data: "LUNAS_WO_RP",
             type: 'number',
             visible: false,
             "sClass" : "text-right" , render: $.fn.dataTable.render.number(".", ",", 0, '')
@@ -122,6 +136,22 @@ $(document).ready(function () {
           },
           {
             data: "SALDO_WO",
+            type: 'number',
+            visible: true,
+            "sClass" : "text-right" , 
+            render: function ( data, type, row ) {
+                var cls;
+                //console.log($(this));
+                if (data == 0) 
+                    return '<span class="text-success">'+
+                        $.fn.dataTable.render.number(".", ",", 0, '').display(data)+'</span>';
+                else
+                    return $.fn.dataTable.render.number(".", ",", 0, '').display(data);
+
+            },
+          },
+          {
+            data: "SALDO_WO_RP",
             type: 'number',
             visible: true,
             "sClass" : "text-right" , 
@@ -270,7 +300,7 @@ $(document).ready(function () {
         "paging": false,
         lengthMenu: [[25, 100, -1], [25, 100, "All"]],
         pageLength: 100,
-        "order": [[16, 'desc'],[17, 'asc']],
+        "order": [[19, 'desc'],[20, 'asc']],
         footerCallback: function ( row, data, start, end, display ) {
           var api = this.api();
           //console.log('footerCallback', api);
