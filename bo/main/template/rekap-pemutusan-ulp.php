@@ -62,7 +62,7 @@
                                         <div class="form-row">
                                             <div class="form-group mb-2 mr-4">
                                                 <label class="text-label d-block">UID</label>
-                                                <select id="sel_unitupi" class="selectpicker show-tick" data-size="5" >
+                                                <select id="sel_unitupi" class="selectpicker show-tick" data-size="5" data-inc-semua="T">
                                                     <option disabled>Pilih Unit Induk</option>
                                                 </select>
                                             </div>
@@ -108,6 +108,14 @@
                         <div class="card">
                             <div class="card-body">
                                 <h4 class="card-title mb-4">Rekap Pemutusan per UP3</h4>
+                                <div>
+                                    <p>
+                                        Periode Pemutusan: Tanggal 21-Akhir Bulan pada Bulan Berjalan.
+                                    </p>
+                                    <p>
+                                        <span class="text-success">LUNAS BY SYSTEM: </span>WO Pemutusan sudah lunas terlebih dahulu secara AP2T sebelum ditindaklanjuti di Lapangan.
+                                    </p>
+                                </div>
                                 <div class="table-responsive">
                                     <table id="tbl_rekap_pemutusan_up3" class="table table-striped table-bordered nowrap" style="width: 100%">
                                     <thead>
@@ -116,11 +124,12 @@
                                             <th rowspan="3" class="text-center bg-primary-lighten-2">UNITAP</th>
                                             <th rowspan="3" class="text-center bg-primary-lighten-2">UP3</th>
                                             <th rowspan="3" class="text-center bg-danger-lighten-2">WORK ORDER</th>
-                                            <th rowspan="1" colspan="8" class="text-center bg-primary-lighten-2">EKSEKUSI PEMUTUSAN</th>
-                                            <th rowspan="1" colspan="42" class="text-center bg-primary-lighten-2">BREAKDOWN PER TANGGAL</th>
+                                            <th rowspan="1" colspan="9" class="text-center bg-primary-lighten-2">EKSEKUSI PEMUTUSAN</th>
+                                            <th rowspan="1" colspan="48" class="text-center bg-primary-lighten-2">BREAKDOWN PER TANGGAL</th>
                                             
                                         </tr>
                                         <tr>
+                                            <th rowspan="2" class="text-center bg-success-lighten-2">LUNAS<br/>BY SYSTEM</th>
                                             <th rowspan="2" class="text-center bg-success-lighten-2">LUNAS<br/>MANDIRI</th>
                                             <th rowspan="2" class="text-center bg-success-lighten-2">LUNAS<br/>DITEMPAT</th>
                                             <th rowspan="2" class="text-center bg-warning-lighten-2">SEGEL<br/>MCB</th>
@@ -129,14 +138,15 @@
                                             <th rowspan="2" class="text-center bg-danger-lighten-2">RUMAH<br/>KOSONG</th>
                                             <th rowspan="2" class="text-center bg-secondary-lighten-2">TOTAL</th>
                                             <th rowspan="2" class="text-center bg-secondary-lighten-2">PERSEN</th>
-                                            <th rowspan="1" colspan="7" class="text-center bg-primary-lighten-2">TGL 21</th>
-                                            <th rowspan="1" colspan="7" class="text-center bg-primary-lighten-2">TGL 22</th>
-                                            <th rowspan="1" colspan="7" class="text-center bg-primary-lighten-2">TGL 23</th>
-                                            <th rowspan="1" colspan="7" class="text-center bg-primary-lighten-2">TGL 24</th>
-                                            <th rowspan="1" colspan="7" class="text-center bg-primary-lighten-2">TGL 25</th>
-                                            <th rowspan="1" colspan="7" class="text-center bg-primary-lighten-2">DIATAS TGL 25</th>
+                                            <th rowspan="1" colspan="8" class="text-center bg-primary-lighten-2">TGL 21</th>
+                                            <th rowspan="1" colspan="8" class="text-center bg-primary-lighten-2">TGL 22</th>
+                                            <th rowspan="1" colspan="8" class="text-center bg-primary-lighten-2">TGL 23</th>
+                                            <th rowspan="1" colspan="8" class="text-center bg-primary-lighten-2">TGL 24</th>
+                                            <th rowspan="1" colspan="8" class="text-center bg-primary-lighten-2">TGL 25</th>
+                                            <th rowspan="1" colspan="8" class="text-center bg-primary-lighten-2">DIATAS TGL 25</th>
                                         </tr>
                                         <tr>
+                                            <th class="text-center bg-success-lighten-2">LUNAS<br/>BY SYSTEM</th>
                                             <th class="text-center bg-success-lighten-2">LUNAS<br/>MANDIRI</th>
                                             <th class="text-center bg-success-lighten-2">LUNAS<br/>DITEMPAT</th>
                                             <th class="text-center bg-warning-lighten-2">SEGEL<br/>MCB</th>
@@ -144,6 +154,7 @@
                                             <th class="text-center bg-warning-lighten-2">CABUT<br/>APP</th>
                                             <th class="text-center bg-danger-lighten-2">RUMAH<br/>KOSONG</th>
                                             <th class="text-center bg-secondary-lighten-2">TOTAL</th>
+                                            <th class="text-center bg-success-lighten-2">LUNAS<br/>BY SYSTEM</th>
                                             <th class="text-center bg-success-lighten-2">LUNAS<br/>MANDIRI</th>
                                             <th class="text-center bg-success-lighten-2">LUNAS<br/>DITEMPAT</th>
                                             <th class="text-center bg-warning-lighten-2">SEGEL<br/>MCB</th>
@@ -151,6 +162,7 @@
                                             <th class="text-center bg-warning-lighten-2">CABUT<br/>APP</th>
                                             <th class="text-center bg-danger-lighten-2">RUMAH<br/>KOSONG</th>
                                             <th class="text-center bg-secondary-lighten-2">TOTAL</th>
+                                            <th class="text-center bg-success-lighten-2">LUNAS<br/>BY SYSTEM</th>
                                             <th class="text-center bg-success-lighten-2">LUNAS<br/>MANDIRI</th>
                                             <th class="text-center bg-success-lighten-2">LUNAS<br/>DITEMPAT</th>
                                             <th class="text-center bg-warning-lighten-2">SEGEL<br/>MCB</th>
@@ -158,6 +170,7 @@
                                             <th class="text-center bg-warning-lighten-2">CABUT<br/>APP</th>
                                             <th class="text-center bg-danger-lighten-2">RUMAH<br/>KOSONG</th>
                                             <th class="text-center bg-secondary-lighten-2">TOTAL</th>
+                                            <th class="text-center bg-success-lighten-2">LUNAS<br/>BY SYSTEM</th>
                                             <th class="text-center bg-success-lighten-2">LUNAS<br/>MANDIRI</th>
                                             <th class="text-center bg-success-lighten-2">LUNAS<br/>DITEMPAT</th>
                                             <th class="text-center bg-warning-lighten-2">SEGEL<br/>MCB</th>
@@ -165,6 +178,7 @@
                                             <th class="text-center bg-warning-lighten-2">CABUT<br/>APP</th>
                                             <th class="text-center bg-danger-lighten-2">RUMAH<br/>KOSONG</th>
                                             <th class="text-center bg-secondary-lighten-2">TOTAL</th>
+                                            <th class="text-center bg-success-lighten-2">LUNAS<br/>BY SYSTEM</th>
                                             <th class="text-center bg-success-lighten-2">LUNAS<br/>MANDIRI</th>
                                             <th class="text-center bg-success-lighten-2">LUNAS<br/>DITEMPAT</th>
                                             <th class="text-center bg-warning-lighten-2">SEGEL<br/>MCB</th>
@@ -172,6 +186,7 @@
                                             <th class="text-center bg-warning-lighten-2">CABUT<br/>APP</th>
                                             <th class="text-center bg-danger-lighten-2">RUMAH<br/>KOSONG</th>
                                             <th class="text-center bg-secondary-lighten-2">TOTAL</th>
+                                            <th class="text-center bg-success-lighten-2">LUNAS<br/>BY SYSTEM</th>
                                             <th class="text-center bg-success-lighten-2">LUNAS<br/>MANDIRI</th>
                                             <th class="text-center bg-success-lighten-2">LUNAS<br/>DITEMPAT</th>
                                             <th class="text-center bg-warning-lighten-2">SEGEL<br/>MCB</th>
@@ -187,6 +202,7 @@
                                             <th class="bg-danger-lighten-2"></th>
                                             <th class="bg-success-lighten-2"></th>
                                             <th class="bg-success-lighten-2"></th>
+                                            <th class="bg-success-lighten-2"></th>
                                             <th class="bg-warning-lighten-2"></th>
                                             <th class="bg-warning-lighten-2"></th>
                                             <th class="bg-warning-lighten-2"></th>
@@ -194,12 +210,6 @@
                                             <th class="bg-secondary-lighten-2"></th>
                                             <th class="bg-secondary-lighten-2"></th>
                                             <th class="bg-success-lighten-2"></th>
-                                            <th class="bg-success-lighten-2"></th>
-                                            <th class="bg-warning-lighten-2"></th>
-                                            <th class="bg-warning-lighten-2"></th>
-                                            <th class="bg-warning-lighten-2"></th>
-                                            <th class="bg-danger-lighten-2"></th>
-                                            <th class="bg-secondary-lighten-2"></th>
                                             <th class="bg-success-lighten-2"></th>
                                             <th class="bg-success-lighten-2"></th>
                                             <th class="bg-warning-lighten-2"></th>
@@ -209,12 +219,6 @@
                                             <th class="bg-secondary-lighten-2"></th>
                                             <th class="bg-success-lighten-2"></th>
                                             <th class="bg-success-lighten-2"></th>
-                                            <th class="bg-warning-lighten-2"></th>
-                                            <th class="bg-warning-lighten-2"></th>
-                                            <th class="bg-warning-lighten-2"></th>
-                                            <th class="bg-danger-lighten-2"></th>
-                                            <th class="bg-secondary-lighten-2"></th>
-                                            <th class="bg-success-lighten-2"></th>
                                             <th class="bg-success-lighten-2"></th>
                                             <th class="bg-warning-lighten-2"></th>
                                             <th class="bg-warning-lighten-2"></th>
@@ -223,11 +227,29 @@
                                             <th class="bg-secondary-lighten-2"></th>
                                             <th class="bg-success-lighten-2"></th>
                                             <th class="bg-success-lighten-2"></th>
+                                            <th class="bg-success-lighten-2"></th>
                                             <th class="bg-warning-lighten-2"></th>
                                             <th class="bg-warning-lighten-2"></th>
                                             <th class="bg-warning-lighten-2"></th>
                                             <th class="bg-danger-lighten-2"></th>
                                             <th class="bg-secondary-lighten-2"></th>
+                                            <th class="bg-success-lighten-2"></th>
+                                            <th class="bg-success-lighten-2"></th>
+                                            <th class="bg-success-lighten-2"></th>
+                                            <th class="bg-warning-lighten-2"></th>
+                                            <th class="bg-warning-lighten-2"></th>
+                                            <th class="bg-warning-lighten-2"></th>
+                                            <th class="bg-danger-lighten-2"></th>
+                                            <th class="bg-secondary-lighten-2"></th>
+                                            <th class="bg-success-lighten-2"></th>
+                                            <th class="bg-success-lighten-2"></th>
+                                            <th class="bg-success-lighten-2"></th>
+                                            <th class="bg-warning-lighten-2"></th>
+                                            <th class="bg-warning-lighten-2"></th>
+                                            <th class="bg-warning-lighten-2"></th>
+                                            <th class="bg-danger-lighten-2"></th>
+                                            <th class="bg-secondary-lighten-2"></th>
+                                            <th class="bg-success-lighten-2"></th>
                                             <th class="bg-success-lighten-2"></th>
                                             <th class="bg-success-lighten-2"></th>
                                             <th class="bg-warning-lighten-2"></th>
@@ -257,11 +279,12 @@
                                             <th rowspan="3" class="text-center bg-primary-lighten-2">UNITUP</th>
                                             <th rowspan="3" class="text-center bg-primary-lighten-2">ULP</th>
                                             <th rowspan="3" class="text-center bg-danger-lighten-2">WORK ORDER</th>
-                                            <th rowspan="1" colspan="8" class="text-center bg-primary-lighten-2">EKSEKUSI PEMUTUSAN</th>
-                                            <th rowspan="1" colspan="42" class="text-center bg-primary-lighten-2">BREAKDOWN PER TANGGAL</th>
+                                            <th rowspan="1" colspan="9" class="text-center bg-primary-lighten-2">EKSEKUSI PEMUTUSAN</th>
+                                            <th rowspan="1" colspan="48" class="text-center bg-primary-lighten-2">BREAKDOWN PER TANGGAL</th>
                                             
                                         </tr>
                                         <tr>
+                                            <th rowspan="2" class="text-center bg-success-lighten-2">LUNAS<br/>BY SYSTEM</th>
                                             <th rowspan="2" class="text-center bg-success-lighten-2">LUNAS<br/>MANDIRI</th>
                                             <th rowspan="2" class="text-center bg-success-lighten-2">LUNAS<br/>DITEMPAT</th>
                                             <th rowspan="2" class="text-center bg-warning-lighten-2">SEGEL<br/>MCB</th>
@@ -270,14 +293,15 @@
                                             <th rowspan="2" class="text-center bg-danger-lighten-2">RUMAH<br/>KOSONG</th>
                                             <th rowspan="2" class="text-center bg-secondary-lighten-2">TOTAL</th>
                                             <th rowspan="2" class="text-center bg-secondary-lighten-2">PERSEN</th>
-                                            <th rowspan="1" colspan="7" class="text-center bg-primary-lighten-2">TGL 21</th>
-                                            <th rowspan="1" colspan="7" class="text-center bg-primary-lighten-2">TGL 22</th>
-                                            <th rowspan="1" colspan="7" class="text-center bg-primary-lighten-2">TGL 23</th>
-                                            <th rowspan="1" colspan="7" class="text-center bg-primary-lighten-2">TGL 24</th>
-                                            <th rowspan="1" colspan="7" class="text-center bg-primary-lighten-2">TGL 25</th>
-                                            <th rowspan="1" colspan="7" class="text-center bg-primary-lighten-2">DIATAS TGL 25</th>
+                                            <th rowspan="1" colspan="8" class="text-center bg-primary-lighten-2">TGL 21</th>
+                                            <th rowspan="1" colspan="8" class="text-center bg-primary-lighten-2">TGL 22</th>
+                                            <th rowspan="1" colspan="8" class="text-center bg-primary-lighten-2">TGL 23</th>
+                                            <th rowspan="1" colspan="8" class="text-center bg-primary-lighten-2">TGL 24</th>
+                                            <th rowspan="1" colspan="8" class="text-center bg-primary-lighten-2">TGL 25</th>
+                                            <th rowspan="1" colspan="8" class="text-center bg-primary-lighten-2">DIATAS TGL 25</th>
                                         </tr>
                                         <tr>
+                                            <th class="text-center bg-success-lighten-2">LUNAS<br/>BY SYSTEM</th>
                                             <th class="text-center bg-success-lighten-2">LUNAS<br/>MANDIRI</th>
                                             <th class="text-center bg-success-lighten-2">LUNAS<br/>DITEMPAT</th>
                                             <th class="text-center bg-warning-lighten-2">SEGEL<br/>MCB</th>
@@ -285,6 +309,7 @@
                                             <th class="text-center bg-warning-lighten-2">CABUT<br/>APP</th>
                                             <th class="text-center bg-danger-lighten-2">RUMAH<br/>KOSONG</th>
                                             <th class="text-center bg-secondary-lighten-2">TOTAL</th>
+                                            <th class="text-center bg-success-lighten-2">LUNAS<br/>BY SYSTEM</th>
                                             <th class="text-center bg-success-lighten-2">LUNAS<br/>MANDIRI</th>
                                             <th class="text-center bg-success-lighten-2">LUNAS<br/>DITEMPAT</th>
                                             <th class="text-center bg-warning-lighten-2">SEGEL<br/>MCB</th>
@@ -292,6 +317,7 @@
                                             <th class="text-center bg-warning-lighten-2">CABUT<br/>APP</th>
                                             <th class="text-center bg-danger-lighten-2">RUMAH<br/>KOSONG</th>
                                             <th class="text-center bg-secondary-lighten-2">TOTAL</th>
+                                            <th class="text-center bg-success-lighten-2">LUNAS<br/>BY SYSTEM</th>
                                             <th class="text-center bg-success-lighten-2">LUNAS<br/>MANDIRI</th>
                                             <th class="text-center bg-success-lighten-2">LUNAS<br/>DITEMPAT</th>
                                             <th class="text-center bg-warning-lighten-2">SEGEL<br/>MCB</th>
@@ -299,6 +325,7 @@
                                             <th class="text-center bg-warning-lighten-2">CABUT<br/>APP</th>
                                             <th class="text-center bg-danger-lighten-2">RUMAH<br/>KOSONG</th>
                                             <th class="text-center bg-secondary-lighten-2">TOTAL</th>
+                                            <th class="text-center bg-success-lighten-2">LUNAS<br/>BY SYSTEM</th>
                                             <th class="text-center bg-success-lighten-2">LUNAS<br/>MANDIRI</th>
                                             <th class="text-center bg-success-lighten-2">LUNAS<br/>DITEMPAT</th>
                                             <th class="text-center bg-warning-lighten-2">SEGEL<br/>MCB</th>
@@ -306,6 +333,7 @@
                                             <th class="text-center bg-warning-lighten-2">CABUT<br/>APP</th>
                                             <th class="text-center bg-danger-lighten-2">RUMAH<br/>KOSONG</th>
                                             <th class="text-center bg-secondary-lighten-2">TOTAL</th>
+                                            <th class="text-center bg-success-lighten-2">LUNAS<br/>BY SYSTEM</th>
                                             <th class="text-center bg-success-lighten-2">LUNAS<br/>MANDIRI</th>
                                             <th class="text-center bg-success-lighten-2">LUNAS<br/>DITEMPAT</th>
                                             <th class="text-center bg-warning-lighten-2">SEGEL<br/>MCB</th>
@@ -313,6 +341,7 @@
                                             <th class="text-center bg-warning-lighten-2">CABUT<br/>APP</th>
                                             <th class="text-center bg-danger-lighten-2">RUMAH<br/>KOSONG</th>
                                             <th class="text-center bg-secondary-lighten-2">TOTAL</th>
+                                            <th class="text-center bg-success-lighten-2">LUNAS<br/>BY SYSTEM</th>
                                             <th class="text-center bg-success-lighten-2">LUNAS<br/>MANDIRI</th>
                                             <th class="text-center bg-success-lighten-2">LUNAS<br/>DITEMPAT</th>
                                             <th class="text-center bg-warning-lighten-2">SEGEL<br/>MCB</th>
@@ -328,6 +357,7 @@
                                             <th class="bg-danger-lighten-2"></th>
                                             <th class="bg-success-lighten-2"></th>
                                             <th class="bg-success-lighten-2"></th>
+                                            <th class="bg-success-lighten-2"></th>
                                             <th class="bg-warning-lighten-2"></th>
                                             <th class="bg-warning-lighten-2"></th>
                                             <th class="bg-warning-lighten-2"></th>
@@ -335,12 +365,6 @@
                                             <th class="bg-secondary-lighten-2"></th>
                                             <th class="bg-secondary-lighten-2"></th>
                                             <th class="bg-success-lighten-2"></th>
-                                            <th class="bg-success-lighten-2"></th>
-                                            <th class="bg-warning-lighten-2"></th>
-                                            <th class="bg-warning-lighten-2"></th>
-                                            <th class="bg-warning-lighten-2"></th>
-                                            <th class="bg-danger-lighten-2"></th>
-                                            <th class="bg-secondary-lighten-2"></th>
                                             <th class="bg-success-lighten-2"></th>
                                             <th class="bg-success-lighten-2"></th>
                                             <th class="bg-warning-lighten-2"></th>
@@ -350,12 +374,6 @@
                                             <th class="bg-secondary-lighten-2"></th>
                                             <th class="bg-success-lighten-2"></th>
                                             <th class="bg-success-lighten-2"></th>
-                                            <th class="bg-warning-lighten-2"></th>
-                                            <th class="bg-warning-lighten-2"></th>
-                                            <th class="bg-warning-lighten-2"></th>
-                                            <th class="bg-danger-lighten-2"></th>
-                                            <th class="bg-secondary-lighten-2"></th>
-                                            <th class="bg-success-lighten-2"></th>
                                             <th class="bg-success-lighten-2"></th>
                                             <th class="bg-warning-lighten-2"></th>
                                             <th class="bg-warning-lighten-2"></th>
@@ -364,11 +382,29 @@
                                             <th class="bg-secondary-lighten-2"></th>
                                             <th class="bg-success-lighten-2"></th>
                                             <th class="bg-success-lighten-2"></th>
+                                            <th class="bg-success-lighten-2"></th>
                                             <th class="bg-warning-lighten-2"></th>
                                             <th class="bg-warning-lighten-2"></th>
                                             <th class="bg-warning-lighten-2"></th>
                                             <th class="bg-danger-lighten-2"></th>
                                             <th class="bg-secondary-lighten-2"></th>
+                                            <th class="bg-success-lighten-2"></th>
+                                            <th class="bg-success-lighten-2"></th>
+                                            <th class="bg-success-lighten-2"></th>
+                                            <th class="bg-warning-lighten-2"></th>
+                                            <th class="bg-warning-lighten-2"></th>
+                                            <th class="bg-warning-lighten-2"></th>
+                                            <th class="bg-danger-lighten-2"></th>
+                                            <th class="bg-secondary-lighten-2"></th>
+                                            <th class="bg-success-lighten-2"></th>
+                                            <th class="bg-success-lighten-2"></th>
+                                            <th class="bg-success-lighten-2"></th>
+                                            <th class="bg-warning-lighten-2"></th>
+                                            <th class="bg-warning-lighten-2"></th>
+                                            <th class="bg-warning-lighten-2"></th>
+                                            <th class="bg-danger-lighten-2"></th>
+                                            <th class="bg-secondary-lighten-2"></th>
+                                            <th class="bg-success-lighten-2"></th>
                                             <th class="bg-success-lighten-2"></th>
                                             <th class="bg-success-lighten-2"></th>
                                             <th class="bg-warning-lighten-2"></th>

@@ -45,6 +45,12 @@ $(document).ready(function () {
             "sClass" : "text-right" , render: $.fn.dataTable.render.number(".", ",", 0, '')
           },
           {
+            data: "JML_LUNAS_BY_SYSTEM",
+            type: 'number',
+            visible: true,
+            "sClass" : "text-right" , render: $.fn.dataTable.render.number(".", ",", 0, '')
+          },
+          {
             data: "JML_LUNAS_MANDIRI",
             type: 'number',
             visible: true,
@@ -106,6 +112,12 @@ $(document).ready(function () {
             },
           },
           {
+            data: "JML_LUNAS_BY_SYSTEM_21",
+            type: 'number',
+            visible: true,
+            "sClass" : "text-right" , render: $.fn.dataTable.render.number(".", ",", 0, '')
+          },
+          {
             data: "JML_LUNAS_MANDIRI_21",
             type: 'number',
             visible: true,
@@ -143,6 +155,12 @@ $(document).ready(function () {
           },
           {
             data: "JML_PLG_21",
+            type: 'number',
+            visible: true,
+            "sClass" : "text-right" , render: $.fn.dataTable.render.number(".", ",", 0, '')
+          },
+          {
+            data: "JML_LUNAS_BY_SYSTEM_22",
             type: 'number',
             visible: true,
             "sClass" : "text-right" , render: $.fn.dataTable.render.number(".", ",", 0, '')
@@ -190,6 +208,12 @@ $(document).ready(function () {
             "sClass" : "text-right" , render: $.fn.dataTable.render.number(".", ",", 0, '')
           },
           {
+            data: "JML_LUNAS_BY_SYSTEM_23",
+            type: 'number',
+            visible: true,
+            "sClass" : "text-right" , render: $.fn.dataTable.render.number(".", ",", 0, '')
+          },
+          {
             data: "JML_LUNAS_MANDIRI_23",
             type: 'number',
             visible: true,
@@ -227,6 +251,12 @@ $(document).ready(function () {
           },
           {
             data: "JML_PLG_23",
+            type: 'number',
+            visible: true,
+            "sClass" : "text-right" , render: $.fn.dataTable.render.number(".", ",", 0, '')
+          },
+          {
+            data: "JML_LUNAS_BY_SYSTEM_24",
             type: 'number',
             visible: true,
             "sClass" : "text-right" , render: $.fn.dataTable.render.number(".", ",", 0, '')
@@ -274,6 +304,12 @@ $(document).ready(function () {
             "sClass" : "text-right" , render: $.fn.dataTable.render.number(".", ",", 0, '')
           },
           {
+            data: "JML_LUNAS_BY_SYSTEM_25",
+            type: 'number',
+            visible: true,
+            "sClass" : "text-right" , render: $.fn.dataTable.render.number(".", ",", 0, '')
+          },
+          {
             data: "JML_LUNAS_MANDIRI_25",
             type: 'number',
             visible: true,
@@ -311,6 +347,12 @@ $(document).ready(function () {
           },
           {
             data: "JML_PLG_25",
+            type: 'number',
+            visible: true,
+            "sClass" : "text-right" , render: $.fn.dataTable.render.number(".", ",", 0, '')
+          },
+          {
+            data: "JML_LUNAS_BY_SYSTEM_GT_25",
             type: 'number',
             visible: true,
             "sClass" : "text-right" , render: $.fn.dataTable.render.number(".", ",", 0, '')
@@ -386,7 +428,7 @@ $(document).ready(function () {
         "paging": false,
         lengthMenu: [[25, 100, -1], [25, 100, "All"]],
         pageLength: 100,
-        "order": [[11, 'desc'],[3, 'asc']],
+        "order": [[12, 'desc'],[3, 'asc']],
         footerCallback: function ( row, data, start, end, display ) {
           var api = this.api();
           //console.log('footerCallback', api);
@@ -394,7 +436,7 @@ $(document).ready(function () {
           var j = 3;
           var wo, jml;
           while(j < nb_cols){
-            if(j==11){
+            if(j==12){
 
                 var persen;
                 persen = ((jml/wo))*100;
@@ -419,7 +461,7 @@ $(document).ready(function () {
 
                 if(j==3)
                   wo=pageTotal;
-                if(j==10)
+                if(j==11)
                   jml=pageTotal;
                 // Update footer
                 $( api.column( j ).footer() ).html($.fn.dataTable.render.number(".", ",", 0, '').display(pageTotal));
@@ -473,6 +515,12 @@ $(document).ready(function () {
           },
           {
             data: "JML_WO",
+            type: 'number',
+            visible: true,
+            "sClass" : "text-right" , render: $.fn.dataTable.render.number(".", ",", 0, '')
+          },
+          {
+            data: "JML_LUNAS_BY_SYSTEM",
             type: 'number',
             visible: true,
             "sClass" : "text-right" , render: $.fn.dataTable.render.number(".", ",", 0, '')
@@ -539,6 +587,12 @@ $(document).ready(function () {
             },
           },
           {
+            data: "JML_LUNAS_BY_SYSTEM_21",
+            type: 'number',
+            visible: true,
+            "sClass" : "text-right" , render: $.fn.dataTable.render.number(".", ",", 0, '')
+          },
+          {
             data: "JML_LUNAS_MANDIRI_21",
             type: 'number',
             visible: true,
@@ -576,6 +630,12 @@ $(document).ready(function () {
           },
           {
             data: "JML_PLG_21",
+            type: 'number',
+            visible: true,
+            "sClass" : "text-right" , render: $.fn.dataTable.render.number(".", ",", 0, '')
+          },
+          {
+            data: "JML_LUNAS_BY_SYSTEM_22",
             type: 'number',
             visible: true,
             "sClass" : "text-right" , render: $.fn.dataTable.render.number(".", ",", 0, '')
@@ -623,6 +683,12 @@ $(document).ready(function () {
             "sClass" : "text-right" , render: $.fn.dataTable.render.number(".", ",", 0, '')
           },
           {
+            data: "JML_LUNAS_BY_SYSTEM_23",
+            type: 'number',
+            visible: true,
+            "sClass" : "text-right" , render: $.fn.dataTable.render.number(".", ",", 0, '')
+          },
+          {
             data: "JML_LUNAS_MANDIRI_23",
             type: 'number',
             visible: true,
@@ -660,6 +726,12 @@ $(document).ready(function () {
           },
           {
             data: "JML_PLG_23",
+            type: 'number',
+            visible: true,
+            "sClass" : "text-right" , render: $.fn.dataTable.render.number(".", ",", 0, '')
+          },
+          {
+            data: "JML_LUNAS_BY_SYSTEM_24",
             type: 'number',
             visible: true,
             "sClass" : "text-right" , render: $.fn.dataTable.render.number(".", ",", 0, '')
@@ -707,6 +779,12 @@ $(document).ready(function () {
             "sClass" : "text-right" , render: $.fn.dataTable.render.number(".", ",", 0, '')
           },
           {
+            data: "JML_LUNAS_BY_SYSTEM_25",
+            type: 'number',
+            visible: true,
+            "sClass" : "text-right" , render: $.fn.dataTable.render.number(".", ",", 0, '')
+          },
+          {
             data: "JML_LUNAS_MANDIRI_25",
             type: 'number',
             visible: true,
@@ -744,6 +822,12 @@ $(document).ready(function () {
           },
           {
             data: "JML_PLG_25",
+            type: 'number',
+            visible: true,
+            "sClass" : "text-right" , render: $.fn.dataTable.render.number(".", ",", 0, '')
+          },
+          {
+            data: "JML_LUNAS_BY_SYSTEM_GT_25",
             type: 'number',
             visible: true,
             "sClass" : "text-right" , render: $.fn.dataTable.render.number(".", ",", 0, '')
@@ -819,7 +903,7 @@ $(document).ready(function () {
         "paging": false,
         lengthMenu: [[25, 100, -1], [25, 100, "All"]],
         pageLength: 100,
-        "order": [[11, 'desc'],[3, 'asc']],
+        "order": [[12, 'desc'],[3, 'asc']],
         footerCallback: function ( row, data, start, end, display ) {
           var api = this.api();
           //console.log('footerCallback', api);
@@ -827,7 +911,7 @@ $(document).ready(function () {
           var j = 3;
           var wo, jml;
           while(j < nb_cols){
-            if(j==11){
+            if(j==12){
 
                 var persen;
                 persen = ((jml/wo))*100;
@@ -852,7 +936,7 @@ $(document).ready(function () {
 
                 if(j==3)
                   wo=pageTotal;
-                if(j==10)
+                if(j==11)
                   jml=pageTotal;
                 // Update footer
                 $( api.column( j ).footer() ).html($.fn.dataTable.render.number(".", ",", 0, '').display(pageTotal));
