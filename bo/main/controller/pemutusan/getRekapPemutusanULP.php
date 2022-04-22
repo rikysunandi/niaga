@@ -41,6 +41,7 @@ $columns = array(
     array( 'db' => 'UNITUP', 'dt' => 'UNITUP' ),
     array( 'db' => 'ULP', 'dt' => 'ULP' ),
     array( 'db' => 'BLTH', 'dt' => 'BLTH' ),
+    array( 'db' => 'JML_PETUGAS', 'dt' => 'JML_PETUGAS' ),
     array( 'db' => 'JML_WO', 'dt' => 'JML_WO' ),
     array( 'db' => 'JML_LUNAS_BY_SYSTEM_21', 'dt' => 'JML_LUNAS_BY_SYSTEM_21' ),
     array( 'db' => 'JML_LUNAS_MANDIRI_21', 'dt' => 'JML_LUNAS_MANDIRI_21' ),
@@ -99,6 +100,7 @@ $columns = array(
     array( 'db' => 'JML_RUMAH_KOSONG', 'dt' => 'JML_RUMAH_KOSONG' ),
     array( 'db' => 'JML_PLG', 'dt' => 'JML_PLG' ),
     array( 'db' => 'PERSEN_TOTAL', 'dt' => 'PERSEN_TOTAL' ),
+    array( 'db' => 'RATA_PLG_PER_PETUGAS', 'dt' => 'RATA_PLG_PER_PETUGAS' ),
 );
  
 // SQL server connection information

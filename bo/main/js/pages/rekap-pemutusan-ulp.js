@@ -39,6 +39,12 @@ $(document).ready(function () {
             visible: true
           },
           {
+            data: "JML_PETUGAS",
+            type: 'number',
+            visible: true,
+            "sClass" : "text-right" , render: $.fn.dataTable.render.number(".", ",", 0, '')
+          },
+          {
             data: "JML_WO",
             type: 'number',
             visible: true,
@@ -110,6 +116,12 @@ $(document).ready(function () {
                 $.fn.dataTable.render.number(".", ",", 2, '').display(data)+'%</span>';
 
             },
+          },
+          {
+            data: "RATA_PLG_PER_PETUGAS",
+            type: 'number',
+            visible: true,
+            "sClass" : "text-right" , render: $.fn.dataTable.render.number(".", ",", 0, '')
           },
           {
             data: "JML_LUNAS_BY_SYSTEM_21",
@@ -428,7 +440,7 @@ $(document).ready(function () {
         "paging": false,
         lengthMenu: [[25, 100, -1], [25, 100, "All"]],
         pageLength: 100,
-        "order": [[12, 'desc'],[3, 'asc']],
+        "order": [[13, 'desc'],[4, 'asc']],
         footerCallback: function ( row, data, start, end, display ) {
           var api = this.api();
           //console.log('footerCallback', api);
@@ -436,7 +448,7 @@ $(document).ready(function () {
           var j = 3;
           var wo, jml;
           while(j < nb_cols){
-            if(j==12){
+            if(j==13){
 
                 var persen;
                 persen = ((jml/wo))*100;
@@ -459,9 +471,9 @@ $(document).ready(function () {
                         return Number(a) + Number(b);
                     }, 0 );
 
-                if(j==3)
+                if(j==4)
                   wo=pageTotal;
-                if(j==11)
+                if(j==12)
                   jml=pageTotal;
                 // Update footer
                 $( api.column( j ).footer() ).html($.fn.dataTable.render.number(".", ",", 0, '').display(pageTotal));
@@ -512,6 +524,12 @@ $(document).ready(function () {
           {
             data: "ULP",
             visible: true
+          },
+          {
+            data: "JML_PETUGAS",
+            type: 'number',
+            visible: true,
+            "sClass" : "text-right" , render: $.fn.dataTable.render.number(".", ",", 0, '')
           },
           {
             data: "JML_WO",
@@ -585,6 +603,12 @@ $(document).ready(function () {
                 $.fn.dataTable.render.number(".", ",", 2, '').display(data)+'%</span>';
 
             },
+          },
+          {
+            data: "RATA_PLG_PER_PETUGAS",
+            type: 'number',
+            visible: true,
+            "sClass" : "text-right" , render: $.fn.dataTable.render.number(".", ",", 0, '')
           },
           {
             data: "JML_LUNAS_BY_SYSTEM_21",
@@ -903,7 +927,7 @@ $(document).ready(function () {
         "paging": false,
         lengthMenu: [[25, 100, -1], [25, 100, "All"]],
         pageLength: 100,
-        "order": [[12, 'desc'],[3, 'asc']],
+        "order": [[13, 'desc'],[4, 'asc']],
         footerCallback: function ( row, data, start, end, display ) {
           var api = this.api();
           //console.log('footerCallback', api);
@@ -911,7 +935,7 @@ $(document).ready(function () {
           var j = 3;
           var wo, jml;
           while(j < nb_cols){
-            if(j==12){
+            if(j==13){
 
                 var persen;
                 persen = ((jml/wo))*100;
@@ -934,9 +958,9 @@ $(document).ready(function () {
                         return Number(a) + Number(b);
                     }, 0 );
 
-                if(j==3)
+                if(j==4)
                   wo=pageTotal;
-                if(j==11)
+                if(j==12)
                   jml=pageTotal;
                 // Update footer
                 $( api.column( j ).footer() ).html($.fn.dataTable.render.number(".", ",", 0, '').display(pageTotal));
