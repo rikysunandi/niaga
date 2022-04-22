@@ -476,7 +476,11 @@ $(document).ready(function () {
                 if(j==12)
                   jml=pageTotal;
                 // Update footer
-                $( api.column( j ).footer() ).html($.fn.dataTable.render.number(".", ",", 0, '').display(pageTotal));
+
+                if(j==14)
+                  $( api.column( j ).footer() ).html($.fn.dataTable.render.number(".", ",", 0, '').display(pageTotal/data.length));
+                else
+                  $( api.column( j ).footer() ).html($.fn.dataTable.render.number(".", ",", 0, '').display(pageTotal));
             }
             
             // var pageTotal = api
@@ -963,7 +967,11 @@ $(document).ready(function () {
                 if(j==12)
                   jml=pageTotal;
                 // Update footer
-                $( api.column( j ).footer() ).html($.fn.dataTable.render.number(".", ",", 0, '').display(pageTotal));
+                
+                if(j==14)
+                  $( api.column( j ).footer() ).html($.fn.dataTable.render.number(".", ",", 0, '').display(pageTotal/data.length));
+                else
+                  $( api.column( j ).footer() ).html($.fn.dataTable.render.number(".", ",", 0, '').display(pageTotal));
             }
             
             // var pageTotal = api
