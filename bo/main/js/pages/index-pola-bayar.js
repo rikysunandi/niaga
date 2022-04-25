@@ -102,11 +102,27 @@ $(function() {
                       fill: true
                     },
                     {
+                      label: 'RPPTL '+data.blth,
+                      data: data.rpptl,
+                      borderColor: '#135440',
+                      backgroundColor: addAlpha('#135440', 0.1),
+                      fill: true,
+                      hidden: true
+                    },
+                    {
                       label: 'REK '+data.blth_n1,
                       data: data.jml_plg_n1,
                       borderColor: '#F2C36B',
                       backgroundColor: addAlpha('#F2C36B', 0.1),
                       fill: true
+                    },
+                    {
+                      label: 'RPPTL '+data.blth_n1,
+                      data: data.rpptl_n1,
+                      borderColor: '#F2C33B',
+                      backgroundColor: addAlpha('#F2C33B', 0.1),
+                      fill: true,
+                      hidden: true
                     },
                   ]
             },
@@ -153,7 +169,7 @@ $(function() {
                             display: true,
                             text: 'Jml Pelanggan (Ribu)',
                             callback: function(value, index, values) {
-                                        return (value*10)+'k';
+                                        return (value*10)+'Rb';
                                     }
                         }
                     },
@@ -180,7 +196,10 @@ $(function() {
                                 console.log('label', t);
                                 var dstLabel = t.dataset.label;
                                 var yLabel = t.raw;
-                                return dstLabel + ': ' + new Intl.NumberFormat('id-ID').format((parseFloat(yLabel)*10).toFixed(2)) + 'k';
+                                if(dstLabel.substring(0,2)=="RP")
+                                    return dstLabel + ': ' + new Intl.NumberFormat('id-ID').format((parseFloat(yLabel)*10).toFixed(2)) + 'Myr';
+                                else
+                                    return dstLabel + ': ' + new Intl.NumberFormat('id-ID').format((parseFloat(yLabel)*10).toFixed(2)) + 'Rb';
                             }
                        }
                     },
@@ -225,11 +244,27 @@ $(function() {
                       fill: true
                     },
                     {
+                      label: 'RPPTL '+data.blth,
+                      data: data.rpptl,
+                      borderColor: '#135440',
+                      backgroundColor: addAlpha('#135440', 0.1),
+                      fill: true,
+                      hidden: true
+                    },
+                    {
                       label: 'REK '+data.blth_n1,
                       data: data.jml_plg_n1,
                       borderColor: '#F2C36B',
                       backgroundColor: addAlpha('#F2C36B', 0.1),
                       fill: true
+                    },
+                    {
+                      label: 'RPPTL '+data.blth_n1,
+                      data: data.rpptl_n1,
+                      borderColor: '#F2C33B',
+                      backgroundColor: addAlpha('#F2C33B', 0.1),
+                      fill: true,
+                      hidden: true
                     },
                   ]
             },
@@ -276,7 +311,7 @@ $(function() {
                             display: true,
                             text: 'Jml Pelanggan (Ribu)',
                             callback: function(value, index, values) {
-                                        return (value*10)+'k';
+                                        return (value*10)+'Rb';
                                     }
                         }
                     },
@@ -303,7 +338,10 @@ $(function() {
                                 console.log('label', t);
                                 var dstLabel = t.dataset.label;
                                 var yLabel = t.raw;
-                                return dstLabel + ': ' + new Intl.NumberFormat('id-ID').format((parseFloat(yLabel)*10).toFixed(2)) + 'k';
+                                if(dstLabel.substring(0,2)=="RP")
+                                    return dstLabel + ': ' + new Intl.NumberFormat('id-ID').format((parseFloat(yLabel)*10).toFixed(2)) + 'Myr';
+                                else
+                                    return dstLabel + ': ' + new Intl.NumberFormat('id-ID').format((parseFloat(yLabel)*10).toFixed(2)) + 'Rb';
                             }
                        }
                     },

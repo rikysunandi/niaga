@@ -30,7 +30,7 @@ if(!sqlsrv_execute($stmt)){
 $table = 'NIAGA.dbo._vw_Create_Rekap_Lunas_Tgl_Bayar_'.$user;
  
 // Table's primary key
-$primaryKey = 'ULP';
+$primaryKey = 'TGLBAYAR';
  
 // Array of database columns which should be read and sent back to DataTables.
 // The `db` parameter represents the column name in the database, while the `dt`
@@ -38,14 +38,18 @@ $primaryKey = 'ULP';
 // indexes
 $columns = array(
     array( 'db' => 'BLTH', 'dt' => 'BLTH' ),
-    array( 'db' => 'UNITAP', 'dt' => 'UNITAP' ),
-    array( 'db' => 'UNITUP', 'dt' => 'UNITUP' ),
-    array( 'db' => 'ULP', 'dt' => 'ULP' ),
+    // array( 'db' => 'UNITAP', 'dt' => 'UNITAP' ),
+    // array( 'db' => 'UNITUP', 'dt' => 'UNITUP' ),
+    // array( 'db' => 'ULP', 'dt' => 'ULP' ),
     array( 'db' => 'TGLBAYAR', 'dt' => 'TGLBAYAR' ),
     array( 'db' => 'LUNAS_IRISAN', 'dt' => 'LUNAS_IRISAN' ),
+    array( 'db' => 'RP_IRISAN', 'dt' => 'RP_IRISAN' ),
     array( 'db' => 'LUNAS_BARU', 'dt' => 'LUNAS_BARU' ),
+    array( 'db' => 'RP_BARU', 'dt' => 'RP_BARU' ),
     array( 'db' => 'LUNAS_LANCAR', 'dt' => 'LUNAS_LANCAR' ),
+    array( 'db' => 'RP_LANCAR', 'dt' => 'RP_LANCAR' ),
     array( 'db' => 'JML_LUNAS', 'dt' => 'JML_LUNAS' ),
+    array( 'db' => 'RP_LUNAS', 'dt' => 'RP_LUNAS' ),
 );
  
 // SQL server connection information

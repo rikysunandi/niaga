@@ -68,13 +68,13 @@
                                             </div>
                                             <div class="form-group mb-2 mr-4">
                                                 <label class="text-label d-block">UP3</label>
-                                                <select id="sel_unitap" class="selectpicker show-tick" data-size="5" data-inc-semua="T" >
+                                                <select id="sel_unitap" class="selectpicker show-tick" data-size="5" data-inc-semua="Y" >
                                                     <option disabled>Pilih UP3</option>
                                                 </select>
                                             </div>
                                             <div class="form-group mb-2 mr-4">
                                                 <label class="text-label d-block">ULP</label>
-                                                <select id="sel_unitup" class="selectpicker show-tick" data-size="5" data-inc-semua="T" >
+                                                <select id="sel_unitup" class="selectpicker show-tick" data-size="5" data-inc-semua="Y" >
                                                     <option disabled>Pilih ULP</option>
                                                 </select>
                                             </div>
@@ -115,22 +115,36 @@
                                     <table id="tbl_rekap_tglbayar" class="table table-striped table-bordered nowrap" style="width: 100%">
                                     <thead>
                                         <tr>
-                                            <th class="text-center bg-primary-lighten-2">UNITAP</th>
-                                            <th class="text-center bg-primary-lighten-2">UNITUP</th>
-                                            <th class="text-center bg-primary-lighten-2">ULP</th>
-                                            <th class="text-center bg-primary-lighten-2">TGL <br/>BAYAR</th>
-                                            <th class="text-center bg-danger-lighten-2">JML IRISAN</th>
-                                            <th class="text-center bg-warning-lighten-2">JML BARU</th>
-                                            <th class="text-center bg-success-lighten-2">JML LANCAR</th>
-                                            <th class="text-center bg-primary-lighten-2">JML LUNAS</th>
+                                            <!-- <th rowspan="2" class="text-center bg-primary-lighten-2">UNITAP</th>
+                                            <th rowspan="2" class="text-center bg-primary-lighten-2">UNITUP</th>
+                                            <th rowspan="2" class="text-center bg-primary-lighten-2">ULP</th> -->
+                                            <th rowspan="2" class="text-center bg-primary-lighten-2">TGL <br/>BAYAR</th>
+                                            <th colspan="2" class="text-center bg-danger-lighten-2">JML IRISAN</th>
+                                            <th colspan="2" class="text-center bg-warning-lighten-2">JML BARU</th>
+                                            <th colspan="2" class="text-center bg-success-lighten-2">JML LANCAR</th>
+                                            <th colspan="2" class="text-center bg-primary-lighten-2">JML LUNAS</th>
+                                        </tr>
+                                        <tr>
+                                            <th class="text-center bg-danger-lighten-2">LBR</th>
+                                            <th class="text-center bg-danger-lighten-2">RUPIAH</th>
+                                            <th class="text-center bg-warning-lighten-2">LBR</th>
+                                            <th class="text-center bg-warning-lighten-2">RUPIAH</th>
+                                            <th class="text-center bg-success-lighten-2">LBR</th>
+                                            <th class="text-center bg-success-lighten-2">RUPIAH</th>
+                                            <th class="text-center bg-primary-lighten-2">LBR</th>
+                                            <th class="text-center bg-primary-lighten-2">RUPIAH</th>
                                         </tr>
                                     </thead>
                                     <tfoot>
                                         <tr>
-                                            <th class="bg-primary-lighten-2" colspan="4">TOTAL</th>
+                                            <th class="bg-primary-lighten-2">TOTAL</th>
+                                            <th class="bg-danger-lighten-2"></th>
                                             <th class="bg-danger-lighten-2"></th>
                                             <th class="bg-warning-lighten-2"></th>
+                                            <th class="bg-warning-lighten-2"></th>
                                             <th class="bg-success-lighten-2"></th>
+                                            <th class="bg-success-lighten-2"></th>
+                                            <th class="bg-primary-lighten-2"></th>
                                             <th class="bg-primary-lighten-2"></th>
                                         </tr>
                                     </tfoot>
@@ -144,6 +158,9 @@
                 <div class="row">
                     <div class="col-12">
                         <div class="card">
+                            <div class="card-header">
+                                <h4 class="card-title">Trend Pelunasan Per Tanggal</h4>
+                            </div>
                             <div class="card-body">
                                 <div class="chart-card">
                                     <canvas id="chart_tgl_bayar"></canvas>
@@ -152,7 +169,22 @@
                         </div>
                     </div>
                 </div>
-
+<!-- 
+                <div class="row">
+                    <div class="col-12">
+                        <div class="card">
+                            <div class="card-header">
+                                <h4 class="card-title">MoM Trend Pelunasan</h4>
+                            </div>
+                            <div class="card-body">
+                                <div class="chart-card">
+                                    <canvas id="chart_mom_tgl_bayar"></canvas>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+ -->
             </div>
             <!-- #/ container -->
         </div>
@@ -199,6 +231,6 @@
     <script src="../../assets/plugins/block-ui/jquery.blockUI.js"></script>
 
     <script src="../js/pages/apps.js"></script>
-    <script src="../js/pages/rekap-tgl-bayar.js"></script>
+    <script src="../js/pages/rekap-tgl-bayar.js?time=223"></script>
 </body>
 </html>

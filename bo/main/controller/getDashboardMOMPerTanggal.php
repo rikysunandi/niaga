@@ -32,6 +32,8 @@ if($stmt){
 		$response['tanggal'][$i] = str_replace('99', 'N+', $row['TANGGAL']); 
 		$response['jml_plg'][$i] = ($row['JML_PLG']<>'')? number_format($row['JML_PLG']/10000, 2, '.', ','):null; 
 		$response['jml_plg_n1'][$i] = ($row['JML_PLG_N1'])? number_format($row['JML_PLG_N1']/10000, 2, '.', ','):null; 
+		$response['rpptl'][$i] = ($row['RPPTL']<>'')? number_format($row['RPPTL']/10000000000, 2, '.', ','):null; 
+		$response['rpptl_n1'][$i] = ($row['RPPTL_N1'])? number_format($row['RPPTL_N1']/10000000000, 2, '.', ','):null; 
 
 
 		$i++;

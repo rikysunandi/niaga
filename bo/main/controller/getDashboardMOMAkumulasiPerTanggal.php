@@ -30,13 +30,19 @@ if($stmt){
 	$i=0;
 	$jml_plg=0;
 	$jml_plg_n1=0;
+	$rpptl=0;
+	$rpptl_n1=0;
 	while( $row = sqlsrv_fetch_array( $stmt, SQLSRV_FETCH_ASSOC) ) {
 		$response['tanggal'][$i] = str_replace('99', 'N+', $row['TANGGAL']); 
 		$jml_plg += ($row['JML_PLG']/10000); 
 		$jml_plg_n1 += ($row['JML_PLG_N1']/10000); 
+		$rpptl += ($row['RPPTL']/10000000000); 
+		$rpptl_n1 += ($row['RPPTL_N1']/10000000000); 
 
 		$response['jml_plg'][$i]=($row['JML_PLG']<>'')? number_format($jml_plg, 2, '.', ','):null;
 		$response['jml_plg_n1'][$i]=($row['JML_PLG_N1']<>'')? number_format($jml_plg_n1, 2, '.', ','):null;
+		$response['rpptl'][$i]=($row['RPPTL']<>'')? number_format($rpptl, 2, '.', ','):null;
+		$response['rpptl_n1'][$i]=($row['RPPTL_N1']<>'')? number_format($rpptl_n1, 2, '.', ','):null;
 
 		$i++;
 	}
