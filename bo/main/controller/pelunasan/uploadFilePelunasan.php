@@ -1,8 +1,9 @@
 <?php
 
 
-ini_set('upload_max_filesize', '50M');
-ini_set('post_max_size', '50M');
+ini_set('upload_max_filesize', '30M');
+ini_set('upload_max_size', '30M');
+ini_set('post_max_size', '30M');
 ini_set('max_execution_time', -1);
 ini_set('memory_limit',-1);
 ini_set('sqlsrv.timeout', 3600);
@@ -25,6 +26,30 @@ $ext = pathinfo($_FILES['file']['name'], PATHINFO_EXTENSION);
 if ( 0 < $_FILES['file']['error'] ) {
 	$response['success'] = false;
 	$response['msg'] = $_FILES['file']['error'];
+
+	header("HTTP/1.0 400 Bad Request");
+
+	switch($_FILES['file']['error']) {
+	    case UPLOAD_ERR_INI_SIZE:
+	        echo 'Exceeds max size in php.ini';
+	        break;
+	    case UPLOAD_ERR_PARTIAL:
+	        echo 'Exceeds max size in html form';
+	        break;
+	    case UPLOAD_ERR_NO_FILE:
+	        echo 'No file was uploaded';
+	        break;
+	    case UPLOAD_ERR_NO_TMP_DIR:
+	        echo 'No /tmp dir to write to';
+	        break;
+	    case UPLOAD_ERR_CANT_WRITE:
+	        echo 'Error writing to disk';
+	        break;
+	    default:
+	        echo 'No error was faced! Phew!';
+	        break;
+	}
+
 }else if ( $ext <> 'xls' ) {
 	$response['success'] = false;
 	$response['msg'] = 'Silahkan upload File Excel (.xls), file anda berekstensi '.$ext.' '.$_FILES['file']['tmp_name'].' UP:'.$unitup;
