@@ -1,12 +1,12 @@
 <?php
 
 
-ini_set('upload_max_filesize', '30M');
-ini_set('post_max_size', '30M');
-ini_set('max_execution_time', 0);
+ini_set('upload_max_filesize', '50M');
+ini_set('post_max_size', '50M');
+ini_set('max_execution_time', -1);
 ini_set('memory_limit',-1);
-ini_set('sqlsrv.timeout', 10000000);
-ini_set('sqlsrv.connect_timeout', 10000000);
+ini_set('sqlsrv.timeout', 3600);
+ini_set('sqlsrv.connect_timeout', 3600);
 ini_set('date.timezone', 'Asia/Jakarta');
 
 //require_once '../../../config/database.php';
@@ -27,9 +27,9 @@ if ( 0 < $_FILES['file']['error'] ) {
 	$response['msg'] = $_FILES['file']['error'];
 }else if ( $ext <> 'xls' ) {
 	$response['success'] = false;
-	$response['msg'] = 'Silahkan upload File Excel (.xlsx), file anda berekstensi '.$ext.' '.$_FILES['file']['tmp_name'].' UP:'.$unitup;
+	$response['msg'] = 'Silahkan upload File Excel (.xls), file anda berekstensi '.$ext.' '.$_FILES['file']['tmp_name'].' UP:'.$unitup;
 	header("HTTP/1.0 400 Bad Request");
-	echo 'Silahkan upload File Excel (.xlsx), file anda berekstensi '.$ext.' '.$_FILES['file']['tmp_name'].' UP:'.$unitup;
+	echo 'Silahkan upload File Excel (.xls), file anda berekstensi '.$ext.' '.$_FILES['file']['tmp_name'].' UP:'.$unitup;
 }
 else {
 
