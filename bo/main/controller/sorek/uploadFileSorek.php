@@ -17,6 +17,11 @@ require_once '../../../libs/excel_reader2.php';
 set_time_limit(180);
 
 
+header("HTTP/1.0 400 Bad Request");
+echo 'Pemeliharaan Sistem, mohon menunggu!';
+exit();
+
+
 $user = 'SYSTEM';
 
 $ext = pathinfo($_FILES['file']['name'], PATHINFO_EXTENSION);
