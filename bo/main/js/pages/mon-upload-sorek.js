@@ -44,24 +44,6 @@ $(document).ready(function () {
             visible: true
           },
           {
-            data: "JML_PLG",
-            type: 'number',
-            visible: true,
-            "sClass" : "text-right" , render: $.fn.dataTable.render.number(",", ".", 0, '')
-          },
-          {
-            data: "PEMKWH",
-            type: 'number',
-            visible: true,
-            "sClass" : "text-right" , render: $.fn.dataTable.render.number(",", ".", 0, '')
-          },
-          {
-            data: "RPPTL",
-            type: 'number',
-            visible: true,
-            "sClass" : "text-right" , render: $.fn.dataTable.render.number(",", ".", 0, '')
-          },
-          {
             data: "EIS_LEMBAR",
             type: 'number',
             visible: true,
@@ -75,6 +57,24 @@ $(document).ready(function () {
           },
           {
             data: "EIS_RPPTL",
+            type: 'number',
+            visible: true,
+            "sClass" : "text-right" , render: $.fn.dataTable.render.number(",", ".", 0, '')
+          },
+          {
+            data: "JML_PLG",
+            type: 'number',
+            visible: true,
+            "sClass" : "text-right" , render: $.fn.dataTable.render.number(",", ".", 0, '')
+          },
+          {
+            data: "PEMKWH",
+            type: 'number',
+            visible: true,
+            "sClass" : "text-right" , render: $.fn.dataTable.render.number(",", ".", 0, '')
+          },
+          {
+            data: "RPPTL",
             type: 'number',
             visible: true,
             "sClass" : "text-right" , render: $.fn.dataTable.render.number(",", ".", 0, '')
