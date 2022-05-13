@@ -61,6 +61,40 @@ $(document).ready(function () {
             visible: true,
             "sClass" : "text-right" , render: $.fn.dataTable.render.number(",", ".", 0, '')
           },
+          {
+            data: "EIS_LEMBAR",
+            type: 'number',
+            visible: true,
+            "sClass" : "text-right" , render: $.fn.dataTable.render.number(",", ".", 0, '')
+          },
+          {
+            data: "EIS_PEMKWH",
+            type: 'number',
+            visible: true,
+            "sClass" : "text-right" , render: $.fn.dataTable.render.number(",", ".", 0, '')
+          },
+          {
+            data: "EIS_RPPTL",
+            type: 'number',
+            visible: true,
+            "sClass" : "text-right" , render: $.fn.dataTable.render.number(",", ".", 0, '')
+          },
+          {
+            data: "SELISIH",
+            type: 'number',
+            visible: true,
+            "sClass" : "text-right" , 
+            render: function ( data, type, row ) {
+                var cls;
+                //console.log($(this));
+                if (data == 0) 
+                    return '<span class="text-success">'+
+                        $.fn.dataTable.render.number(".", ",", 0, '').display(data)+'</span>';
+                else
+                    return $.fn.dataTable.render.number(".", ",", 0, '').display(data);
+
+            },
+          },
         ],
         dom:
            // "<'row'<'col-sm-12 col-md-9 mb-2'B>>" +

@@ -45,6 +45,10 @@ $columns = array(
     array( 'db' => 'JML_PLG', 'dt' => 'JML_PLG' ),
     array( 'db' => 'PEMKWH', 'dt' => 'PEMKWH' ),
     array( 'db' => 'RPPTL', 'dt' => 'RPPTL' ),
+    array( 'db' => 'EIS_LEMBAR', 'dt' => 'EIS_LEMBAR' ),
+    array( 'db' => 'EIS_PEMKWH', 'dt' => 'EIS_PEMKWH' ),
+    array( 'db' => 'EIS_RPPTL', 'dt' => 'EIS_RPPTL' ),
+    array( 'db' => 'SELISIH', 'dt' => 'SELISIH' ),
 );
  
 // SQL server connection information

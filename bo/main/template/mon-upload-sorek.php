@@ -117,22 +117,33 @@
                                     <table id="tbl_upload_sorek" class="table table-striped table-bordered nowrap" style="width: 100%">
                                     <thead>
                                         <tr>
-                                            <th class="text-center bg-primary-lighten-2">UNITAP</th>
-                                            <th class="text-center bg-primary-lighten-2">UP3</th>
-                                            <th class="text-center bg-primary-lighten-2">UNITUP</th>
-                                            <th class="text-center bg-primary-lighten-2">ULP</th>
-                                            
-                                            <th class="text-center bg-primary-lighten-2">JML PLG</th>
-                                            <th class="text-center bg-primary-lighten-2">PEMKWH</th>
-                                            <th class="text-center bg-primary-lighten-2">RPPTL</th>
+                                            <th rowspan="2" class="text-center bg-primary-lighten-2">UNITAP</th>
+                                            <th rowspan="2" class="text-center bg-primary-lighten-2">UP3</th>
+                                            <th rowspan="2" class="text-center bg-primary-lighten-2">UNITUP</th>
+                                            <th rowspan="2" class="text-center bg-primary-lighten-2">ULP</th>
+                                            <th colspan="3" class="text-center bg-success-lighten-2">VERSI REKAP EIS</th>
+                                            <th colspan="3" class="text-center bg-success-lighten-2">SOREK YANG DIUPLOAD</th>
+                                            <th rowspan="2" class="text-center bg-warning-lighten-2">SELISIH<br/>LEMBAR</th>
+                                        </tr>
+                                        <tr>
+                                            <th class="text-center bg-success-lighten-2">LEMBAR</th>
+                                            <th class="text-center bg-success-lighten-2">PEMKWH</th>
+                                            <th class="text-center bg-success-lighten-2">RPPTL</th>
+                                            <th class="text-center bg-success-lighten-2">LEMBAR</th>
+                                            <th class="text-center bg-success-lighten-2">PEMKWH</th>
+                                            <th class="text-center bg-success-lighten-2">RPPTL</th>
                                         </tr>
                                     </thead>
                                     <tfoot>
                                         <tr>
                                             <th class="bg-primary-lighten-2" colspan="4">TOTAL</th>
-                                            <th class="text-right bg-primary-lighten-2"></th>
-                                            <th class="text-right bg-primary-lighten-2"></th>
-                                            <th class="text-right bg-primary-lighten-2"></th>
+                                            <th class="text-right bg-success-lighten-2"></th>
+                                            <th class="text-right bg-success-lighten-2"></th>
+                                            <th class="text-right bg-success-lighten-2"></th>
+                                            <th class="text-right bg-success-lighten-2"></th>
+                                            <th class="text-right bg-success-lighten-2"></th>
+                                            <th class="text-right bg-success-lighten-2"></th>
+                                            <th class="text-right bg-warning-lighten-2"></th>
                                         </tr>
                                     </tfoot>
                                 </table>
