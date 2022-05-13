@@ -18,6 +18,11 @@
 </head>
 
 <body>
+
+    <?php
+        header("Location: maintenance.php");
+        exit();
+    ?>
     
     <?php include 'parts/preloader.php'; ?>
     
