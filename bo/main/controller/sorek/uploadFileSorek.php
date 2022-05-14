@@ -13,10 +13,9 @@ ini_set('date.timezone', 'Asia/Jakarta');
 require_once '../../../config/ftp.php';
 require_once '../../../libs/excel_reader2.php';
 
-header("HTTP/1.0 400 Bad Request");
-echo 'Pemeliharaan Sistem, mohon menunggu!';
-exit();
-
+// header("HTTP/1.0 400 Bad Request");
+// echo 'Pemeliharaan Sistem, mohon menunggu!';
+// exit();
 //error_reporting(E_ERROR);
 set_time_limit(180);
 
