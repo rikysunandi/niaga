@@ -95,7 +95,7 @@
                                         <option value='53GRT'>UP3 GARUT</option>
                                         <option value='53GPI'>UP3 GUNUNG PUTRI</option>
                                         <option value='53IDM'>UP3 INDRAMAYU</option>
-                                        <option value='53KRG'>UP3 KARAWANG</option>
+                                        <option value='53KRW'>UP3 KARAWANG</option>
                                         <option value='53MJA'>UP3 MAJALAYA</option>
                                         <option value='53PWK'>UP3 PURWAKARTA</option>
                                         <option value='53SKI'>UP3 SUKABUMI</option>
