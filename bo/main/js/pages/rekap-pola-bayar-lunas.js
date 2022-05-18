@@ -333,7 +333,7 @@ $(document).ready(function () {
 
                 if(j==4)
                 wo=pageTotal;
-                if(j==11)
+                if(j==13)
                 jml=pageTotal;
                 // Update footer
                 $( api.column( j ).footer() ).html($.fn.dataTable.render.number(".", ",", 0, '').display(pageTotal));
