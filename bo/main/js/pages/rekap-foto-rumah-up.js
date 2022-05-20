@@ -8,8 +8,8 @@ $(document).ready(function () {
         applyClass: 'btn-danger',
         cancelClass: 'btn-inverse',
         opens: 'left',
-        startDate: '20/03/2022',
-        endDate: moment(),
+        startDate: '01/01/1990',
+        endDate: '31/12/9999',
         locale: {
           format: 'DD/MM/YYYY'
         }
@@ -117,7 +117,7 @@ $(document).ready(function () {
             { extend: 'csvHtml5', text: '<i class="fa fa-file-text-o"></i>&nbsp;&nbsp;CSV', footer: true },
             { extend: 'colvis', text: 'Columns' }
         ],
-        "scrollY": 520,
+        //"scrollY": 520,
         "scrollX": true,
         "paging": false,
         // lengthMenu: [[25, 100, -1], [25, 100, "All"]],

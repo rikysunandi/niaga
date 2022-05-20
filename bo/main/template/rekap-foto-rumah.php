@@ -126,6 +126,10 @@
                                     <table id="tbl_rekap_foto_rumah" class="table table-striped table-bordered nowrap" style="width: 100%">
                                     <thead>
                                         <tr>
+                                            <th colspan="7" class="text-center bg-primary-lighten-2">WORKORDER</th>
+                                            <th colspan="4" class="text-center bg-success-lighten-2">REALISASI</th>
+                                        </tr>
+                                        <tr>
                                             <th class="text-center bg-primary-lighten-2">UNITUPI</th>
                                             <th class="text-center bg-primary-lighten-2">UNITAP</th>
                                             <th class="text-center bg-primary-lighten-2">UNITUP</th>
@@ -133,20 +137,20 @@
                                             <th class="text-center bg-primary-lighten-2">KODEPETUGAS</th>
                                             <th class="text-center bg-primary-lighten-2">RPP/RBM/GARDU</th>
                                             <th class="text-center bg-primary-lighten-2">JML PLG</th>
-                                            <th class="text-center bg-primary-lighten-2">JML PLG<br/>SDH INPUT</th>
-                                            <th class="text-center bg-primary-lighten-2">JML FOTO<br/>RUMAH</th>
-                                            <th class="text-center bg-primary-lighten-2">JML PLG<br/>BLM FOTO RUMAH</th>
-                                            <th class="text-center bg-primary-lighten-2">PROGRESS (%)</th>
+                                            <th class="text-center bg-success-lighten-2">JML PLG<br/>SDH INPUT</th>
+                                            <th class="text-center bg-success-lighten-2">JML FOTO<br/>RUMAH</th>
+                                            <th class="text-center bg-success-lighten-2">JML PLG<br/>BLM FOTO RUMAH</th>
+                                            <th class="text-center bg-success-lighten-2">PROGRESS (%)</th>
                                         </tr>
                                     </thead>
                                     <tfoot>
                                         <tr>
                                             <th class="text-center bg-primary-lighten-2" colspan="6">TOTAL</th>
                                             <th class="text-right bg-primary-lighten-2"></th>
-                                            <th class="text-right bg-primary-lighten-2"></th>
-                                            <th class="text-right bg-primary-lighten-2"></th>
-                                            <th class="text-right bg-primary-lighten-2"></th>
-                                            <th class="text-right bg-primary-lighten-2"></th>
+                                            <th class="text-right bg-success-lighten-2"></th>
+                                            <th class="text-right bg-success-lighten-2"></th>
+                                            <th class="text-right bg-success-lighten-2"></th>
+                                            <th class="text-right bg-success-lighten-2"></th>
                                         </tr>
                                     </tfoot>
                                 </table>
@@ -202,6 +206,6 @@
     <script src="../../assets/plugins/bootstrap-daterangepicker/daterangepicker.js"></script>
     <script src="../../assets/plugins/block-ui/jquery.blockUI.js"></script>
     <script src="../js/pages/apps.js"></script>
-    <script src="../js/pages/rekap-foto-rumah.js"></script>
+    <script src="../js/pages/rekap-foto-rumah.js?time=123"></script>
 </body>
 </html>

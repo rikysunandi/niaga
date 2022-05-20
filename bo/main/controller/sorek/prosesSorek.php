@@ -22,15 +22,18 @@ $user = 'SYSTEM';
 
 $params = array(
         array($user, SQLSRV_PARAM_IN),
-        array($ori_filename, SQLSRV_PARAM_IN),
+        // array($ori_filename, SQLSRV_PARAM_IN),
         array($filename, SQLSRV_PARAM_IN),
-        array($filesize, SQLSRV_PARAM_IN),
-        array($rowcount, SQLSRV_PARAM_IN),
-        array($colcount, SQLSRV_PARAM_IN),
+        // array($filesize, SQLSRV_PARAM_IN),
+        // array($rowcount, SQLSRV_PARAM_IN),
+        // array($colcount, SQLSRV_PARAM_IN),
     );
 
-$sql = "EXEC sp_Upload_Sorek_With_Check @UserID = ?, @Original_Filename = ?, @Filename = ?, @Filesize = ?, @Row_Count = ?, @Col_Count = ? ";
+$sql = "EXEC sp_Upload_Sorek @UserID = ?, @Original_Filename = ?, @Filename = ?, @Filesize = ?, @Row_Count = ?, @Col_Count = ? ";
 $stmt = sqlsrv_prepare($conn, $sql, $params);
+
+// $sql = "EXEC sp_Upload_Sorek_With_Check @UserID = ?, @Original_Filename = ?, @Filename = ?, @Filesize = ?, @Row_Count = ?, @Col_Count = ? ";
+// $stmt = sqlsrv_prepare($conn, $sql, $params);
 
 if(sqlsrv_execute($stmt)){
     $row = sqlsrv_fetch_array($stmt, SQLSRV_FETCH_ASSOC);

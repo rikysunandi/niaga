@@ -8,8 +8,8 @@ $(document).ready(function () {
         applyClass: 'btn-danger',
         cancelClass: 'btn-inverse',
         opens: 'left',
-        startDate: '20/03/2022',
-        endDate: moment(),
+        startDate: '01/01/1990',
+        endDate: '31/12/9999',
         locale: {
           format: 'DD/MM/YYYY'
         }

@@ -13,8 +13,8 @@
         addRemoveLinks: true,
         clickable: true,
         maxFiles: 5,
-        timeout: 240000,
-        maxFilesize: 50,
+        timeout: 300000,
+        maxFilesize: 20,
         parallelUploads: 2,
         autoProcessQueue: false,
         init: function() {
