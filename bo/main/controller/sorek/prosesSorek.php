@@ -29,7 +29,7 @@ $params = array(
         // array($colcount, SQLSRV_PARAM_IN),
     );
 
-$sql = "EXEC sp_Upload_Sorek @UserID = ?, @Original_Filename = ?, @Filename = ?, @Filesize = ?, @Row_Count = ?, @Col_Count = ? ";
+$sql = "EXEC sp_Upload_Sorek @UserID = ?, @Filename = ? ";
 $stmt = sqlsrv_prepare($conn, $sql, $params);
 
 // $sql = "EXEC sp_Upload_Sorek_With_Check @UserID = ?, @Original_Filename = ?, @Filename = ?, @Filesize = ?, @Row_Count = ?, @Col_Count = ? ";
