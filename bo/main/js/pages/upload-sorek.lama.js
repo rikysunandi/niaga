@@ -7,51 +7,6 @@
     // drEvent.resetPreview();
     // drEvent.clearElement();
     $('#btn_upload').prop('disabled', true);
-    var queueUpload = new Array();
-
-    function prosesUpload(idx){
-
-        //var progress = $( ".progress-upload:first" ).clone().appendTo( ".container-fluid" );
-        //console.log($(progress).find('.msg')[0]);
-
-        if(idx<queueUpload.length){
-
-            var progress = queueUpload[idx];
-            var filename = $(progress).data('filename');
-            var ori_filename = $(progress).data('ori_filename');
-            console.log(progress);
-            console.log('$(progress)', $(progress));
-            console.log('filename', filename);
-
-            $($(progress).find('.msg')[0]).html('Mengupdate Sorek dari File '+ori_filename+', mohon menunggu...');
-            $($(progress).find('.progress-bar')[0]).removeClass('bg-light');
-            $($(progress).find('.progress-bar')[0]).addClass('bg-warning');
-            $($(progress).find('.progress-bar')[0]).addClass('progress-bar-striped');
-            $($(progress).find('.progress-bar')[0]).addClass('progress-bar-animated');
-            $($(progress).find('.progress-bar')[0]).css('width', '100%').attr('aria-valuenow', 100);
-
-            $.post('../controller/sorek/prosesSorek.php', { filename: filename, ori_filename: ori_filename}, function(res){
-                //progress-bar progress-bar-striped progress-bar-animated bg-warning
-               $($(progress).find('.progress-bar')[0]).removeClass('progress-bar-striped');
-               $($(progress).find('.progress-bar')[0]).removeClass('progress-bar-animated');
-               $($(progress).find('.progress-bar')[0]).removeClass('bg-warning');
-               res = JSON.parse(res);
-               console.log(res);
-               if(res.success=='true' || res.success==true){
-                    console.log('sukses', res.msg);
-                    $($(progress).find('.progress-bar')[0]).addClass('bg-success');
-                    $($(progress).find('.msg')[0]).html(res.msg+', silahkan cek di <a href="mon-upload-sorek.php" class="badge badge-primary" target="_blank">di sini</a> &nbsp;<i class="fa fa-check-circle text-success"></i>');
-               }else{
-                    $($(progress).find('.progress-bar')[0]).addClass('bg-danger');
-                    $($(progress).find('.msg')[0]).html(res.msg);
-               }
-               idx = idx+1;
-               prosesUpload(idx);
-
-            });
-        }
-
-    }
 
     Dropzone.options.uploadSorek = {
         acceptedFiles: '.xls,.csv',
@@ -94,8 +49,8 @@
             // });
 
             this.on("success", function (file, response) {
-                // console.log(file);
-                // console.log(response);
+                console.log(file);
+                console.log(response);
                 if (response === "") {
                     if (file.status === Dropzone.UPLOADING) {
                       this.cancelUpload(file);
@@ -107,21 +62,25 @@
                     var data = JSON.parse(response);
                     if(data.success){
                         var progress = $( ".progress-upload:first" ).clone().appendTo( ".container-fluid" );
-                        //console.log($(progress).find('.msg')[0]);
-
-                        $($(progress).find('.msg')[0]).html(file.name+', menunggu antrian...');
+                        console.log($(progress).find('.msg')[0]);
+                        $($(progress).find('.msg')[0]).html('Mengupdate Sorek dari File '+file.name+', mohon menunggu...');
                         $(progress).removeClass('d-none');
-                        $(progress).data('filename', data.filename);
-                        $(progress).data('ori_filename', file.name);
+                        $.post('../controller/sorek/prosesSorek.php', { filename: data.filename, ori_filename: file.name, filesize: data.filesize, rowcount: data.rowcount, colcount: data.colcount }, function(res){
+                            //progress-bar progress-bar-striped progress-bar-animated bg-warning
+                           $($(progress).find('.progress-bar')[0]).removeClass('progress-bar-striped');
+                           $($(progress).find('.progress-bar')[0]).removeClass('progress-bar-animated');
+                           $($(progress).find('.progress-bar')[0]).removeClass('bg-warning');
+                           res = JSON.parse(res);
+                           console.log(res);
+                           if(res.success=='true' || res.success==true){
+                                $($(progress).find('.progress-bar')[0]).addClass('bg-success');
+                                $($(progress).find('.msg')[0]).html('Update data Sorek sudah berhasil dari File '+file.name+', silahkan cek di <a href="mon-upload-sorek.php" class="badge badge-primary" target="_blank">di sini</a> &nbsp;<i class="fa fa-check-circle text-success"></i>');
+                           }else{
+                                $($(progress).find('.progress-bar')[0]).addClass('bg-danger');
+                                $($(progress).find('.msg')[0]).html(res.msg);
+                           }
 
-                        if(queueUpload.length==0){
-                            queueUpload.push(progress);
-                            console.log('queueUpload', queueUpload);
-                            prosesUpload(0);
-                        }else{
-                            queueUpload.push(progress);
-                            console.log('queueUpload', queueUpload);
-                        }
+                        });
                     }else{
                         alert(response.msg);
                     }

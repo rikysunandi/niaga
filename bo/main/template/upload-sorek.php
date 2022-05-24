@@ -61,7 +61,7 @@
                                     <p>Langkah-langkah:
                                         <ul>
                                             <li>1. Download Detail Sorek dari Menu Monitoring Tagihan Listrik (OLAP) AP2T ke dalam format <b>xls</b></li>
-                                            <li>2. Browse/Drag satu atau beberapa File Sorek (tanpa diedit) ke Panel di bawah ini <span class="text-warning">(maks 5 File maks ukuran 20Mb per File)</span></li>
+                                            <li>2. Browse/Drag satu atau beberapa File Sorek (tanpa diedit) ke Panel di bawah ini <span class="text-warning">(maks 15 File maks ukuran 20Mb per File)</span></li>
                                             <li>3. Klik tombol Upload, tunggu sampai File berhasil diupload ke Server</li>
                                             <li>4. Silahkan tunggu Progress Update Data yang sedang berjalan sampai <span class="text-success">sukses (hijau)</span></li>
                                         </ul>
@@ -98,7 +98,7 @@
                                     <span class="msg">Mengupdate Sorek dari File </span>
                                 </div>
                                 <div class="progress progress--medium">
-                                  <div class="progress-bar progress-bar-striped progress-bar-animated bg-warning" role="progressbar" aria-valuenow="75" aria-valuemin="0" aria-valuemax="100" style="width: 100%"></div>
+                                  <div class="progress-bar progress-bar-striped progress-bar-animated bg-light" role="progressbar" aria-valuenow="0" aria-valuemin="0" aria-valuemax="100" style="width: 0%"></div>
                                 </div>
                             </div>
                         </div>

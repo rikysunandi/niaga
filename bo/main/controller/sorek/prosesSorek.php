@@ -15,9 +15,9 @@ require_once '../../../config/database.php';
 
 $filename = $_POST['filename'];
 $ori_filename = $_POST['ori_filename'];
-$filesize = $_POST['filesize'];
-$rowcount = $_POST['rowcount'];
-$colcount = $_POST['colcount'];
+// $filesize = $_POST['filesize'];
+// $rowcount = $_POST['rowcount'];
+// $colcount = $_POST['colcount'];
 $user = 'SYSTEM';
 
 $params = array(
@@ -36,10 +36,10 @@ $stmt = sqlsrv_prepare($conn, $sql, $params);
 // $stmt = sqlsrv_prepare($conn, $sql, $params);
 if(!sqlsrv_execute($stmt)){
     $response['success'] = false;
-    $response['msg'] = 'Upload sorek gagal';
+    $response['msg'] = 'Update data sorek gagal!';
 }else{
     $response['success'] = true;
-    $response['msg'] = 'Upload sorek berhasil';
+    $response['msg'] = 'Update data sorek dari File '.$ori_filename.' telah selesai';
 }
 
 
