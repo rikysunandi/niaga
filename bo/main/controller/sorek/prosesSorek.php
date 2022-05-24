@@ -22,11 +22,11 @@ $user = 'SYSTEM';
 
 $params = array(
         array($user, SQLSRV_PARAM_IN),
-        array($ori_filename, SQLSRV_PARAM_IN),
+        // array($ori_filename, SQLSRV_PARAM_IN),
         array($filename, SQLSRV_PARAM_IN),
-        array($filesize, SQLSRV_PARAM_IN),
-        array($rowcount, SQLSRV_PARAM_IN),
-        array($colcount, SQLSRV_PARAM_IN),
+        // array($filesize, SQLSRV_PARAM_IN),
+        // array($rowcount, SQLSRV_PARAM_IN),
+        // array($colcount, SQLSRV_PARAM_IN),
     );
 
 $sql = "EXEC sp_Upload_Sorek @UserID = ?, @Filename = ? ";
