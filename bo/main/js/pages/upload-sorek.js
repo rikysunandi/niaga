@@ -12,7 +12,7 @@
         acceptedFiles: '.xls,.csv',
         addRemoveLinks: true,
         clickable: true,
-        maxFiles: 5,
+        maxFiles: 15,
         timeout: 300000,
         maxFilesize: 20,
         parallelUploads: 2,

@@ -29,18 +29,17 @@ $params = array(
         array($colcount, SQLSRV_PARAM_IN),
     );
 
-// $sql = "EXEC sp_Upload_Sorek_DEV @UserID = ?, @Filename = ? ";
-// $stmt = sqlsrv_prepare($conn, $sql, $params);
-
-$sql = "EXEC sp_Upload_Sorek_With_Check @UserID = ?, @Original_Filename = ?, @Filename = ?, @Filesize = ?, @Row_Count = ?, @Col_Count = ? ";
+$sql = "EXEC sp_Upload_Sorek @UserID = ?, @Filename = ? ";
 $stmt = sqlsrv_prepare($conn, $sql, $params);
 
-if(sqlsrv_execute($stmt)){
-    $row = sqlsrv_fetch_array($stmt, SQLSRV_FETCH_ASSOC);
-    $response = $row;
-}else{
+// $sql = "EXEC sp_Upload_Sorek_With_Check @UserID = ?, @Original_Filename = ?, @Filename = ?, @Filesize = ?, @Row_Count = ?, @Col_Count = ? ";
+// $stmt = sqlsrv_prepare($conn, $sql, $params);
+if(!sqlsrv_execute($stmt)){
     $response['success'] = false;
-    $response['msg'] = 'Eksekusi Procedure Database gagal: '.print_r( sqlsrv_errors(), true);
+    $response['msg'] = 'Upload sorek gagal';
+}else{
+    $response['success'] = true;
+    $response['msg'] = 'Upload sorek berhasil';
 }
 
 
