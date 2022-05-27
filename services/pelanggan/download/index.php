@@ -4,6 +4,7 @@ require_once '../../../bo/config/config.php';
 require_once '../../../bo/config/database.php';
 
 ini_set('max_execution_time', 300);
+ini_set('memory_limit', '-1');
 set_time_limit(300);
 
 $unitupi = $_GET['unitupi'];
