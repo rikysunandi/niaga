@@ -9,7 +9,7 @@ set_time_limit(300);
 $unitupi = $_GET['unitupi'];
 $unitap = $_GET['unitap'];
 $unitup = $_GET['unitup'];
-$user = 'SYSTEM';
+$user = isset($_GET['user'])?$_GET['user']:'SYSTEM';
 
 $params = array(
         array($user, SQLSRV_PARAM_IN),
