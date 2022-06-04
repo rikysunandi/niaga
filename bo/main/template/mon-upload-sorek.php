@@ -108,9 +108,10 @@
                     <div class="col-12">
                         <div class="card">
                             <div class="card-header">
-                                <h4 class="card-title">Monitoring Upload Sorek (OLAP AP2T)</h4>
+                                <h4 class="card-title">Monitoring Upload Sorek semua Kogol (OLAP AP2T)</h4>
                             </div>
                             <div class="card-body">
+                                <p><span class="text-warning">Jika terdapat selisih beberapa pelanggan, hal tersebut dimungkinkan oleh pelanggan yang mutasi unit setelah proses billing</span></p>
                                 <p>Untuk menetapkan WO Intimasi dan agar dapat didownload di HP Petugas, silahkan lakukan prosesnya <a href="wo-intimasi.php" class="badge badge-primary" target="_blank">di sini</a>
                                 </p>
                                 <div class="table-responsive">
