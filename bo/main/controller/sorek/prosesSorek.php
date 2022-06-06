@@ -36,7 +36,7 @@ $stmt = sqlsrv_prepare($conn, $sql, $params);
 // $stmt = sqlsrv_prepare($conn, $sql, $params);
 if(!sqlsrv_execute($stmt)){
     $response['success'] = false;
-    $response['msg'] = 'Update data sorek gagal!';
+    $response['msg'] = 'Update data sorek dari File '.$ori_filename.' gagal!';
 }else{
     $response['success'] = true;
     $response['msg'] = 'Update data sorek dari File '.$ori_filename.' telah selesai';

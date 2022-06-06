@@ -8,6 +8,7 @@
     // drEvent.clearElement();
     $('#btn_upload').prop('disabled', true);
     var queueUpload = new Array();
+    var finishUpload;
 
     function prosesUpload(idx){
 
@@ -45,7 +46,9 @@
                     $($(progress).find('.progress-bar')[0]).addClass('bg-danger');
                     $($(progress).find('.msg')[0]).html(res.msg);
                }
-               idx = idx+1;
+               queueUpload.splice(0, 1);
+               //idx = idx+1;
+               console.log('queueUpload after splice', queueUpload);
                prosesUpload(idx);
 
             });

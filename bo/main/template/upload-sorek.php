@@ -56,7 +56,7 @@
                     <div class="col-12">
                         <div class="card">
                             <div class="card-body">
-                                <h4 class="card-title mb-4">Upload data</h4>
+                                <h4 class="card-title mb-4">Upload data (Semua Kogol)</h4>
                                 <div class="basic-form">
                                     <p>Langkah-langkah:
                                         <ul>
