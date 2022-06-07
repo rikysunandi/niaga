@@ -18,8 +18,13 @@
         if(idx<queueUpload.length){
 
             var progress = queueUpload[idx];
+            var blth = $(progress).data('blth');
+            var unitupi = $(progress).data('unitupi');
+            var unitap = $(progress).data('unitap');
+            var unitup = $(progress).data('unitup');
             var filename = $(progress).data('filename');
             var ori_filename = $(progress).data('ori_filename');
+            var rowcount = $(progress).data('rowcount');
             console.log(progress);
             console.log('$(progress)', $(progress));
             console.log('filename', filename);
@@ -31,7 +36,15 @@
             $($(progress).find('.progress-bar')[0]).addClass('progress-bar-animated');
             $($(progress).find('.progress-bar')[0]).css('width', '100%').attr('aria-valuenow', 100);
 
-            $.post('../controller/sorek/prosesSorek.php', { filename: filename, ori_filename: ori_filename}, function(res){
+            $.post('../controller/sorek/prosesSorek.php', { 
+                    blth: blth, 
+                    unitupi: unitupi, 
+                    unitap: unitap, 
+                    unitup: unitup, 
+                    filename: filename, 
+                    ori_filename: ori_filename,
+                    rowcount: rowcount
+                }, function(res){
                 //progress-bar progress-bar-striped progress-bar-animated bg-warning
                $($(progress).find('.progress-bar')[0]).removeClass('progress-bar-striped');
                $($(progress).find('.progress-bar')[0]).removeClass('progress-bar-animated');
@@ -60,7 +73,7 @@
         acceptedFiles: '.xls,.csv',
         addRemoveLinks: true,
         clickable: true,
-        maxFiles: 15,
+        maxFiles: 5,
         timeout: 300000,
         maxFilesize: 20,
         parallelUploads: 2,
@@ -78,6 +91,11 @@
                 console.log(file);
                 console.log(this);
                 var dz = this;
+
+                formData.append("unitupi", $('#sel_unitupi').val()); 
+                formData.append("unitap", $('#sel_unitap').val()); 
+                formData.append("unitup", $('#sel_unitup').val()); 
+                formData.append("blth", $('#sel_blth').val()); 
 
                 xhr.ontimeout = function (e) {
                   if (file.status === Dropzone.UPLOADING) {
@@ -114,8 +132,13 @@
 
                         $($(progress).find('.msg')[0]).html(file.name+', menunggu antrian...');
                         $(progress).removeClass('d-none');
+                        $(progress).data('blth', data.blth);
+                        $(progress).data('unitupi', data.unitupi);
+                        $(progress).data('unitap', data.unitap);
+                        $(progress).data('unitup', data.unitup);
                         $(progress).data('filename', data.filename);
                         $(progress).data('ori_filename', file.name);
+                        $(progress).data('rowcount', data.rowcount);
 
                         if(queueUpload.length==0){
                             queueUpload.push(progress);
@@ -149,8 +172,18 @@
     });
 
     $('#btn_upload').click(function(){
-        var myDropzone = Dropzone.forElement(".dropzone");
-        myDropzone.processQueue();
+        console.log($('#sel_unitupi').val());
+        if(
+            $('#sel_unitupi').val()!=null && 
+            $('#sel_unitap').val()!=null && 
+            $('#sel_unitup').val()!=null && 
+            $('#sel_blth').val()!=null
+        ){
+            var myDropzone = Dropzone.forElement(".dropzone");
+            myDropzone.processQueue();
+        }else{
+            alert('Silahkan pilih unit dan blth yang akan diupload!!'); //, 'warning');
+        }
     });
 
 

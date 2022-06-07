@@ -22,6 +22,10 @@ set_time_limit(180);
 
 
 
+$unitupi = $_REQUEST['unitupi'];
+$unitap = $_REQUEST['unitap'];
+$unitup = $_REQUEST['unitup'];
+$blth = $_REQUEST['blth'];
 $user = 'SYSTEM';
 
 $ext = pathinfo($_FILES['file']['name'], PATHINFO_EXTENSION);
@@ -43,29 +47,47 @@ else {
 			
 			if(substr(preg_replace("/[^a-zA-Z0-9]+/", "", $xls->val(1,1,0)),0,3)=='THB' && $xls->colcount($sheet_index=0)==73){
 
+				$xls_blth = $xls->val(2,1,0);
+				$xls_unitupi = substr($xls->val(2,15,0),0,2);
+				$xls_unitap = $xls->val(2,15,0);
+				$xls_unitup = $xls->val(2,16,0);
 
-				$filename = 'SOREK_'.date('mdHi').'_'.preg_replace("/[^a-zA-Z0-9]+/", "", $_FILES['file']['name']).'_'.substr(bin2hex( random_bytes(12) ), 0, 6).'.xls';
-				// upload file
-				if (ftp_put($ftp_conn, '/uploads_sorek/'.$filename, $_FILES['file']['tmp_name'])){
+				if($unitupi==$xls_unitupi && $unitap==$xls_unitap && $unitup==$xls_unitup && $blth==$xls_blth){
 
-					$response['success'] = true;
-					$response['msg'] = 'Upload Sorek berhasil';
-					$response['filename'] = $filename;
-					$response['filesize'] = $filesize;
-					$response['rowcount'] = $xls->rowcount($sheet_index=0);
-					$response['colcount'] = $xls->colcount($sheet_index=0);
+					$filename = 'SOREK_'.date('mdHi').'_'.preg_replace("/[^a-zA-Z0-9]+/", "", $_FILES['file']['name']).'_'.substr(bin2hex( random_bytes(12) ), 0, 6).'_'.$xls_blth.$xls_unitap.$xls_unitup.'.xls';
+					// upload file
+					if (ftp_put($ftp_conn, '/uploads_sorek/'.$filename, $_FILES['file']['tmp_name'])){
 
-					echo json_encode($response);
-				}
-				else{
+						$response['success'] = true;
+						$response['msg'] = 'Upload Sorek berhasil';
+						$response['filename'] = $filename;
+						$response['filesize'] = $filesize;
+						$response['blth'] = $xls_blth;
+						$response['unitupi'] = $xls_unitupi;
+						$response['unitap'] = $xls_unitap;
+						$response['unitup'] = $xls_unitup;
+						$response['rowcount'] = $xls->rowcount($sheet_index=0);
+						$response['colcount'] = $xls->colcount($sheet_index=0);
+
+						echo json_encode($response);
+					}
+					else{
+						$response['success'] = false;
+						$response['msg'] = 'Upload Sorek ke Server gagal';
+						header("HTTP/1.0 400 Bad Request");
+						echo 'Upload Sorek ke Server gagal';
+					 }
+
+					// close connection
+					ftp_close($ftp_conn);
+
+				}else{
 					$response['success'] = false;
-					$response['msg'] = 'Upload Sorek gagal';
+					$response['msg'] = 'Gagal, data tidak sesuai dengan Unit yang dipilih!';
 					header("HTTP/1.0 400 Bad Request");
-					echo 'Upload Sorek gagal';
-				 }
-
-				// close connection
-				ftp_close($ftp_conn);
+					echo 'Gagal, data tidak sesuai dengan Unit yang dipilih (data: '.$xls_unitupi.'-'.$xls_unitap.'-'.$xls_unitup.'-'.$xls_blth.')';
+				}
+				
 			}else{
 				$response['success'] = false;
 				$response['msg'] = 'Format File yang diupload tidak dikenali, pastikan download xls';

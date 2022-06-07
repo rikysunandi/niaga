@@ -61,7 +61,7 @@
                                     <p>Langkah-langkah:
                                         <ul>
                                             <li>1. Download Detail Sorek dari Menu Monitoring Tagihan Listrik (OLAP) AP2T ke dalam format <b>xls</b></li>
-                                            <li>2. Browse/Drag satu atau beberapa File Sorek (tanpa diedit) ke Panel di bawah ini <span class="text-warning">(maks 15 File maks ukuran 20Mb per File)</span></li>
+                                            <li>2. Browse/Drag satu atau beberapa File Sorek (tanpa diedit) ke Panel di bawah ini <span class="text-warning">(maks 5 File maks ukuran 20Mb per File)</span></li>
                                             <li>3. Klik tombol Upload, tunggu sampai File berhasil diupload ke Server</li>
                                             <li>4. Silahkan tunggu Progress Update Data yang sedang berjalan sampai <span class="text-success">sukses (hijau)</span></li>
                                         </ul>
@@ -71,7 +71,40 @@
                                         <span class="text-warning">*Silahkan gunakan Web Browser (Firefox/Chrome) versi terbaru</span>
                                     </p>
 
-
+                                    <div class="mb-0">
+                                        <form action="#">
+                                            <div class="form-row">
+                                                <div class="form-group mb-2 mr-4">
+                                                    <label class="text-label d-block">UID</label>
+                                                    <select id="sel_unitupi" class="selectpicker show-tick" data-size="5" data-inc-semua="T" >
+                                                        <option disabled>Pilih Unit Induk</option>
+                                                    </select>
+                                                </div>
+                                                <div class="form-group mb-2 mr-4">
+                                                    <label class="text-label d-block">UP3</label>
+                                                    <select id="sel_unitap" class="selectpicker show-tick" data-size="5" data-inc-semua="T">
+                                                        <option disabled>Pilih UP3</option>
+                                                    </select>
+                                                </div>
+                                                <div class="form-group mb-2 mr-4">
+                                                    <label class="text-label d-block">ULP</label>
+                                                    <select id="sel_unitup" class="selectpicker show-tick" data-size="5" data-inc-semua="T">
+                                                        <option disabled>Pilih ULP</option>
+                                                    </select>
+                                                </div>
+                                                <div class="form-group mb-2 mr-4">
+                                                    <label class="text-label d-block">BLTH REK</label>
+                                                    <select id="sel_blth" class="selectpicker select-sm show-tick" data-size="5" data-width="fit">
+                                                        <option value="<?php echo date('Ym') ?>" selected="selected"><?php echo date('Ym') ?></option>
+                                                        <option data-divider="true"></option>
+                                                        <option value='<?php echo date('Ym', strtotime("-".cal_days_in_month(CAL_GREGORIAN,date('m'),date('Y'))." day")) ?>'><?php echo date('Ym', strtotime("-".cal_days_in_month(CAL_GREGORIAN,date('m'),date('Y'))." day")) ?></option>
+                                                        <option value='<?php echo date('Ym', strtotime("-2 month")) ?>'><?php echo date('Ym', strtotime("-2 month")) ?></option>
+                                                        <option value='<?php echo date('Ym', strtotime("-3 month")) ?>'><?php echo date('Ym', strtotime("-3 month")) ?></option>
+                                                    </select>
+                                                </div>
+                                            </div>
+                                        </form>
+                                    </div>
 
                                     <form action="../controller/sorek/uploadFileSorek.php" id="upload-sorek" class="dropzone mt-4">
                                         <div class="fallback">
@@ -131,12 +164,13 @@
     <script src="../js/gleek.js"></script>
     <script src="../../assets/plugins/block-ui/jquery.blockUI.js"></script>
     <script src="../../assets/plugins/moment/moment.min.js"></script>
+    <script src="../../assets/plugins/bootstrap4-notify/bootstrap-notify.min.js"></script>
 
     <!-- <script src="../../assets/plugins/dropzone/js/dropzone.min.js"></script> -->
     <script src="../../assets/plugins/dropify/dist/js/dropify.min.js"></script>
     <script src="../../assets/plugins/dropzone/js/dropzone.min.js"></script>
 
-    <script src="../js/pages/apps.js"></script>
+    <script src="../js/pages/apps.js?time=112"></script>
     <script src="../js/pages/upload-sorek.js?time=<?php echo time() ?>"></script>
 </body>
 </html>
