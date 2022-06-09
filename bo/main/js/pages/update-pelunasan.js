@@ -30,7 +30,12 @@
                 console.log(file);
                 console.log(this);
                 var dz = this;
+
+                formData.append("unitupi", $('#sel_unitupi').val()); 
+                formData.append("unitap", $('#sel_unitap').val()); 
+                formData.append("unitup", $('#sel_unitup').val()); 
                 formData.append("kodegerak", $('#sel_kodegerak').val());
+
                 xhr.ontimeout = function (e) {
                   if (file.status === Dropzone.UPLOADING) {
                       dz.cancelUpload(file);
@@ -65,7 +70,14 @@
                         console.log($(progress).find('.msg')[0]);
                         $($(progress).find('.msg')[0]).html('Mengupdate Pelunasan dari File '+file.name+', mohon menunggu...');
                         $(progress).removeClass('d-none');
-                        $.post('../controller/pelunasan/prosesPelunasan.php', { filename: data.filename, kodegerak: $('#sel_kodegerak').val() }, function(res){
+                        $.post('../controller/pelunasan/prosesPelunasan.php', 
+                            { 
+                                filename: data.filename, 
+                                unitupi: data.unitupi,
+                                unitap: data.unitap,
+                                unitup: data.unitup,
+                                kodegerak: data.kodegerak,
+                            }, function(res){
                             //progress-bar progress-bar-striped progress-bar-animated bg-warning
                            $($(progress).find('.progress-bar')[0]).removeClass('progress-bar-striped');
                            $($(progress).find('.progress-bar')[0]).removeClass('progress-bar-animated');

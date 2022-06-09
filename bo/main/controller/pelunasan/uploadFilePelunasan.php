@@ -19,6 +19,9 @@ set_time_limit(180);
 
 
 $user = 'SYSTEM';
+$unitupi = $_REQUEST['unitupi'];
+$unitap = $_REQUEST['unitap'];
+$unitup = $_REQUEST['unitup'];
 $kodegerak = $_REQUEST['kodegerak'];
 
 $ext = pathinfo($_FILES['file']['name'], PATHINFO_EXTENSION);
@@ -90,6 +93,10 @@ else {
 				$response['success'] = true;
 				$response['msg'] = 'Upload pelunasan berhasil';
 				$response['filename'] = $filename;
+				$response['unitupi'] = $unitupi;
+				$response['unitap'] = $unitap;
+				$response['unitup'] = $unitup;
+				$response['kodegerak'] = $kodegerak;
 
 				echo json_encode($response);
 			}

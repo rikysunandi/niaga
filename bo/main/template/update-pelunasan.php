@@ -83,12 +83,30 @@
                                     <p>
                                         <!-- <div>Pemantauan data pelunasan yang belum diupload dapat dilakukan <a href="mon-blm-upload-pelunasan.php" class="badge badge-primary" target="_blank">di sini</a></div> -->
                                         <span class="text-warning">*Silahkan gunakan Web Browser (Firefox/Chrome) versi terbaru</span>
-                                    </p>
-                                    <form action="#">
-                                        <div class="form-row">
-                                            <div class="form-group mb-2 mr-2 col-12">
+                                    </p><div class="mb-0">
+                                        <form action="#">
+                                            <div class="form-row">
+                                                <div class="form-group mb-2 mr-4">
+                                                    <label class="text-label d-block">UID</label>
+                                                    <select id="sel_unitupi" class="selectpicker show-tick" data-size="5" data-inc-semua="T" >
+                                                        <option disabled>Pilih Unit Induk</option>
+                                                    </select>
+                                                </div>
+                                                <div class="form-group mb-2 mr-4">
+                                                    <label class="text-label d-block">UP3</label>
+                                                    <select id="sel_unitap" class="selectpicker show-tick" data-size="5" data-inc-semua="T">
+                                                        <option disabled>Pilih UP3</option>
+                                                    </select>
+                                                </div>
+                                                <div class="form-group mb-2 mr-4">
+                                                    <label class="text-label d-block">ULP</label>
+                                                    <select id="sel_unitup" class="selectpicker show-tick" data-size="5" data-inc-semua="T">
+                                                        <option disabled>Pilih ULP</option>
+                                                    </select>
+                                                </div>
+                                                <div class="form-group mb-2 mr-4">
                                                 <label class="text-label d-block"><small>KODE GERAK</small></label>
-                                                <select id="sel_kodegerak" title="KODE GERAK" class="selectpicker show-tick col-4" data-size="5" style="width: auto;" >
+                                                <select id="sel_kodegerak" title="KODE GERAK" class="selectpicker show-tick" data-size="5" style="width: auto;" >
                                                     <option value="22" selected="selected">22 - LUNAS ONLINE</option>
                                                     <option value="23">23 - LUNAS NOTABUKU</option>
                                                     <option value="24">24 - LUNAS BEBAN KANTOR</option>
@@ -96,8 +114,9 @@
                                                     <option value="41">41 - PINDAH KE PRR</option>
                                                 </select>
                                             </div>
-                                        </div>
-                                    </form>
+                                            </div>
+                                        </form>
+                                    </div>
 
 
 
