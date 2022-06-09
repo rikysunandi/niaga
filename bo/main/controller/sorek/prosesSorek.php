@@ -8,7 +8,7 @@ ini_set('sqlsrv.timeout', 3600);
 ini_set('sqlsrv.connect_timeout', 3600);
 
 require_once '../../../config/database.php';
-//require_once '../../../config/ftp.php';
+require_once '../../../config/ftp.php';
 
 $unitupi = $_POST['unitupi'];
 $unitap = $_POST['unitap'];
@@ -40,14 +40,18 @@ $stmt = sqlsrv_prepare($conn, $sql, $params);
 if(!sqlsrv_execute($stmt)){
     $response['success'] = false;
     $response['msg'] = 'Update data sorek dari File '.$ori_filename.' gagal!';
-}else{
+}
+// else{
+//     $response['success'] = true;
+//     $response['msg'] = 'Update data sorek dari File '.$ori_filename.' telah selesai ('.($rowcount-1).')';
+// }
+
+while(sqlsrv_next_result($stmt))
+{ 
     $response['success'] = true;
     $response['msg'] = 'Update data sorek dari File '.$ori_filename.' telah selesai ('.($rowcount-1).')';
 }
 
-
-// $response['success'] = true;
-// $response['msg'] = 'Upload pelunasan berhasil';
 
 sqlsrv_free_stmt($stmt);
 sqlsrv_close($conn);
