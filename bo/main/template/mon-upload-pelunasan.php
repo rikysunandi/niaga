@@ -162,7 +162,7 @@
                         <div class="card">
                             <div class="card-body">
                                 <h4 class="card-title mb-2">Sample 100 data belum diupload / belum lunas</h4>
-                                <p>Silahkan periksa info rekening pelanggan di bawah pada EIS-AP2T, dan pastikan tanggal bayar atau kode gerak pelanggan tersebut termasuk yang sudah diupload, jika belum silahkan segera upload</p>
+                                <p>Silahkan periksa pelanggan berikut pada menu Info Rekening EIS-AP2T, dan pastikan tanggal bayar atau kode gerak rekening pelanggan tersebut termasuk yang sudah diupload, jika belum silahkan segera upload</p>
                                 <div class="table-responsive">
                                     <table id="tbl_detail_blm_upload_pelunasan" class="table table-striped table-bordered nowrap" style="width: 100%">
                                     <thead>

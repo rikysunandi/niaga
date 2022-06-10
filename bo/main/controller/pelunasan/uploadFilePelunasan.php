@@ -86,7 +86,7 @@ else {
 		if($xls->val(1,1)=='TglTransaksi'){
 
 
-			$filename = date('mdHi').'_'.$kodegerak.'_'.preg_replace("/[^a-zA-Z0-9]+/", "", $_FILES['file']['name']).'_'.substr(bin2hex( random_bytes(12) ), 0, 6).'.xls';
+			$filename = date('mdHi').'_'.$kodegerak.'_'.preg_replace("/[^a-zA-Z0-9]+/", "", $_FILES['file']['name']).'_'.substr(bin2hex( random_bytes(12) ), 0, 6).'_'.$unitap.$unitup.'.xls';
 			// upload file
 			if (ftp_put($ftp_conn, '/uploads/'.$filename, $_FILES['file']['tmp_name'])){
 
