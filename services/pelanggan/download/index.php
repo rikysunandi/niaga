@@ -39,6 +39,7 @@ if(sqlsrv_execute($stmt)){
 			$response['pelanggan'][$i]['daya'] = $row['DAYA'];
 			$response['pelanggan'][$i]['gardu'] = $row['NAMA_GARDU'];
 			$response['pelanggan'][$i]['kddk'] = $row['KDDK'];
+			$response['pelanggan'][$i]['alamat'] = $row['ALAMAT'];
 			$response['pelanggan'][$i]['jnsMutasi'] = $row['JNS_MUTASI'];
 			$response['pelanggan'][$i]['blthMutasi'] = $row['BLTH_MUTASI'];
 			$response['pelanggan'][$i]['nomorMeterKwh'] = $row['NOMOR_METER_KWH'];
