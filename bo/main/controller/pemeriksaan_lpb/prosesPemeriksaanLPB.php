@@ -58,7 +58,7 @@ if($blth>='202202'){
       $response['msg'] = 'Gagal query ke Database';
   }else{
     $row = sqlsrv_fetch_array($stmt, SQLSRV_FETCH_ASSOC);
-    if(strlen($row['IDPEL'])>=11 && $row['USER_INPUT']!=$user_input){
+    if(1==0 && strlen($row['IDPEL'])>=11 && $row['USER_INPUT']!=$user_input){
       $response['success'] = false;
       $response['msg'] = 'Data Idpel '.$idpel.' tidak disimpan karena sudah pernah ditagging oleh '.$row['USER_INPUT'].' !';
     }else{
