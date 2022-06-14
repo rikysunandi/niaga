@@ -108,7 +108,7 @@
                                             </div>
                                             <div class="form-group mb-4 col-3">
                                                 <label class="text-label d-block"><small>PETUGAS</small></label>
-                                                <select id="sel_petugas" title="PETUGAS" class="selectpicker show-tick" data-size="5" data-inc-semua="T" >
+                                                <select id="sel_petugas" title="PETUGAS" class="selectpicker show-tick" data-size="5" data-inc-semua="Y" >
                                                     <option value="00">SEMUA PETUGAS</option>
                                                 </select>
                                             </div>
