@@ -166,6 +166,8 @@
                                             <th class="text-center bg-primary-lighten-2">NIK</th>
                                             <th class="text-center bg-primary-lighten-2">KONDISI<br/>METER</th>
                                             <th class="text-center bg-primary-lighten-2">SISA KWH</th>
+                                            <th class="text-center bg-primary-lighten-2">RPP</th>
+                                            <th class="text-center bg-primary-lighten-2">TGL INPUT</th>
                                             <th class="text-center bg-primary-lighten-2">LAT</th>
                                             <th class="text-center bg-primary-lighten-2">LONG</th>
                                             <th class="text-center bg-primary-lighten-2">AKURASI (m)</th>
@@ -271,6 +273,6 @@
     <script src="https://unpkg.com/@googlemaps/markerclustererplus/dist/index.min.js"></script>
 
     <script src="../js/pages/apps.js"></script>
-    <script src="../js/pages/mon-pemeriksaan-lpb.js"></script>
+    <script src="../js/pages/mon-pemeriksaan-lpb.js?time=22"></script>
 </body>
 </html>

@@ -34,7 +34,7 @@ if(!sqlsrv_execute($stmt)){
 $table = 'NIAGA.dbo.vw_Create_Pemeriksaan_LPB_Unit_'.$unitup;
  
 // Table's primary key
-$primaryKey = 'IDPEL';
+$primaryKey = 'TGL_INPUT';
  
 // Array of database columns which should be read and sent back to DataTables.
 // The `db` parameter represents the column name in the database, while the `dt`
@@ -50,6 +50,7 @@ $columns = array(
     array( 'db' => 'TARIF',  'dt' => 'TARIF' ),
     array( 'db' => 'DAYA',  'dt' => 'DAYA' ),
     array( 'db' => 'PERUNTUKAN',  'dt' => 'PERUNTUKAN' ),
+    array( 'db' => 'TGL_INPUT',  'dt' => 'TGL_INPUT' ),
     array( 'db' => 'NIK',  'dt' => 'NIK' ),
     array( 'db' => 'EMAIL',  'dt' => 'EMAIL' ),
     array( 'db' => 'SISA_KWH',  'dt' => 'SISA_KWH' ),

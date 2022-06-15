@@ -112,6 +112,13 @@ $(document).ready(function () {
             visible: true,
             "sClass" : "text-right" , render: $.fn.dataTable.render.number(",", ".", 0, '')
           },
+          { data: "PERUNTUKAN", visible: true},
+          {
+            data: "TGL_INPUT",
+            render: function ( data, type, row ) {
+                    return data.substring(11,19);
+                },
+          },
           // {
           //   data: "STATUS_PROSES",
           //   render: function ( data, type, row ) {
