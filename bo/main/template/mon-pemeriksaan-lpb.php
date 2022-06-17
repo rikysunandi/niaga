@@ -167,7 +167,7 @@
                                             <th class="text-center bg-primary-lighten-2">NIK</th>
                                             <th class="text-center bg-primary-lighten-2">KONDISI<br/>METER</th>
                                             <th class="text-center bg-primary-lighten-2">SISA KWH</th>
-                                            <th class="text-center bg-primary-lighten-2">RPP</th>
+                                            <th class="text-center bg-primary-lighten-2">RPP<br/>ONSITE</th>
                                             <th class="text-center bg-primary-lighten-2">TGL INPUT</th>
                                             <th class="text-center bg-primary-lighten-2">LAT</th>
                                             <th class="text-center bg-primary-lighten-2">LONG</th>

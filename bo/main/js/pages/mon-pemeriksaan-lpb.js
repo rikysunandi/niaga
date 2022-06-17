@@ -119,9 +119,9 @@ $(document).ready(function () {
           { data: "PERUNTUKAN", visible: true},
           {
             data: "TGL_INPUT",
-            render: function ( data, type, row ) {
-                    return data.substring(11,19);
-                },
+            // render: function ( data, type, row ) {
+            //         return data; //.substring(8,19);
+            //     },
           },
           // {
           //   data: "STATUS_PROSES",

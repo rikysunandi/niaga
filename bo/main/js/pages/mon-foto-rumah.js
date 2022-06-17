@@ -10,8 +10,8 @@ $(document).ready(function () {
         applyClass: 'btn-danger',
         cancelClass: 'btn-inverse',
         opens: 'left',
-        startDate: moment().subtract(1, 'months').format('DD/MM/YYYY'),
-        endDate: moment(),
+        startDate: '01/01/1990',
+        endDate: '31/12/9999',
         locale: {
           format: 'DD/MM/YYYY'
         }
@@ -83,9 +83,12 @@ $(document).ready(function () {
           },
           {
             data: "TGL_PEMERIKSAAN",
-            render: function ( data, type, row ) {
-                    return data.substring(0,10);
-                },
+            // render: function ( data, type, row ) {
+            //       console.log(data);
+            //       if(data!=null && data.length>=10)
+            //         return data.substring(0,10);
+            //       //return data;
+            //     },
           },
           {
             data: "NOMOR_METER_KWH",
