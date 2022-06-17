@@ -233,10 +233,10 @@ $(document).ready(function () {
                                         lat: parseFloat(tagging.latitude), 
                                         lng: parseFloat(tagging.longitude)
                                       },
-                            label: ''+i,
                             map: map,
+                            zIndex: 999,
                             icon: {
-                              url: "https://maps.google.com/mapfiles/ms/icons/green-dot.png"
+                              url: "../controller/getMarkerIcon.php?color=green-darker&text="+(i+1),
                             },
                             title: tagging.idpel+' | '+tagging.tgl_pemeriksaan+' | '+tagging.user_input+' | '+tagging.latitude+', '+tagging.longitude,
                           });
@@ -246,10 +246,10 @@ $(document).ready(function () {
                                         lat: parseFloat(tagging.latitude), 
                                         lng: parseFloat(tagging.longitude)
                                       },
-                            label: ''+i,
                             map: map,
+                            zIndex: 998,
                             icon: {
-                              url: "https://maps.google.com/mapfiles/ms/icons/blue-dot.png"
+                              url: "../controller/getMarkerIcon.php?color=green-darker&text="+(i+1),
                             },
                             title: tagging.idpel+' | '+tagging.tgl_pemeriksaan+' | '+tagging.user_input+' | '+tagging.latitude+', '+tagging.longitude,
                           });
@@ -259,8 +259,11 @@ $(document).ready(function () {
                                         lat: parseFloat(tagging.latitude), 
                                         lng: parseFloat(tagging.longitude)
                                       },
-                            label: ''+i,
                             map: map,
+                            zIndex: data.rows.length - i,
+                            icon: {
+                              url: "../controller/getMarkerIcon.php?color=green&text="+(i+1),
+                            },
                             title: tagging.idpel+' | '+tagging.tgl_pemeriksaan+' | '+tagging.user_input+' | '+tagging.latitude+', '+tagging.longitude,
                           });
                         }
@@ -275,10 +278,12 @@ $(document).ready(function () {
                                         <dl>
                                           <dt>Idpel</dt>
                                           <dd>`+tagging.idpel+`</dd>
-                                          <dt>No Meter</dt>
-                                          <dd>`+tagging.nomor_meter_kwh+`</dd>
+                                          <dt>Nama</dt>
+                                          <dd>`+tagging.nama+`</dd>
                                           <dt>Tgl Pemeriksaan</dt>
                                           <dd>`+tagging.tgl_pemeriksaan+`</dd>
+                                          <dt>Tgl Input</dt>
+                                          <dd>`+tagging.tgl_input+`</dd>
                                           <dt>Petugas</dt>
                                           <dd>`+tagging.user_input+`</dd>
                                           <dt>Koordinat</dt>
