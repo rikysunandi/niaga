@@ -63,6 +63,10 @@ $(document).ready(function () {
         //responsive: true,
         columns: [
           {
+            data: "NO",
+            visible: true
+          },
+          {
             data: "UNITAP",
             visible: false
           },
@@ -227,80 +231,82 @@ $(document).ready(function () {
                         var bounds = new google.maps.LatLngBounds();
 
                       const markers = data.rows.map((tagging, i) => {
-                        if(i==0 ){
-                          marker = new google.maps.Marker({
-                            position: {
-                                        lat: parseFloat(tagging.latitude), 
-                                        lng: parseFloat(tagging.longitude)
-                                      },
-                            map: map,
-                            zIndex: 999,
-                            icon: {
-                              url: "../controller/getMarkerIcon.php?color=green-darker&text="+(i+1),
-                            },
-                            title: tagging.idpel+' | '+tagging.tgl_pemeriksaan+' | '+tagging.user_input+' | '+tagging.latitude+', '+tagging.longitude,
-                          });
-                        }else if(i==data.rows.length-1){
-                          marker = new google.maps.Marker({
-                            position: {
-                                        lat: parseFloat(tagging.latitude), 
-                                        lng: parseFloat(tagging.longitude)
-                                      },
-                            map: map,
-                            zIndex: 998,
-                            icon: {
-                              url: "../controller/getMarkerIcon.php?color=green-darker&text="+(i+1),
-                            },
-                            title: tagging.idpel+' | '+tagging.tgl_pemeriksaan+' | '+tagging.user_input+' | '+tagging.latitude+', '+tagging.longitude,
-                          });
-                        }else{
-                          marker = new google.maps.Marker({
-                            position: {
-                                        lat: parseFloat(tagging.latitude), 
-                                        lng: parseFloat(tagging.longitude)
-                                      },
-                            map: map,
-                            zIndex: data.rows.length - i,
-                            icon: {
-                              url: "../controller/getMarkerIcon.php?color=green&text="+(i+1),
-                            },
-                            title: tagging.idpel+' | '+tagging.tgl_pemeriksaan+' | '+tagging.user_input+' | '+tagging.latitude+', '+tagging.longitude,
-                          });
-                        }
-
-                        bounds.extend(new google.maps.LatLng(parseFloat(tagging.latitude), parseFloat(tagging.longitude)));
-
-                        google.maps.event.addListener(marker, 'click', (function (marker, i) {
-                            return function () {
-                                infowindow.setContent(
-                                  ` <div class="row">
-                                      <div class="col-6">
-                                        <dl>
-                                          <dt>Idpel</dt>
-                                          <dd>`+tagging.idpel+`</dd>
-                                          <dt>Nama</dt>
-                                          <dd>`+tagging.nama+`</dd>
-                                          <dt>Tgl Pemeriksaan</dt>
-                                          <dd>`+tagging.tgl_pemeriksaan+`</dd>
-                                          <dt>Tgl Input</dt>
-                                          <dd>`+tagging.tgl_input+`</dd>
-                                          <dt>Petugas</dt>
-                                          <dd>`+tagging.user_input+`</dd>
-                                          <dt>Koordinat</dt>
-                                          <dd>`+tagging.latitude+`, `+tagging.longitude+`</dd>
-                                        </dl>
-                                      </div>
-                                      <div class="col-6">
-                                        <img src="`+tagging.fotopath+`" width="300px" height="400px"/></dd>
-                                      </div>
-                                    </div>
-                                  `
-                                  );
-                                infowindow.open(map, marker);
+                        if(tagging.latitude.length>4 && tagging.longitude>4){
+                            if(i==0 ){
+                              marker = new google.maps.Marker({
+                                position: {
+                                            lat: parseFloat(tagging.latitude), 
+                                            lng: parseFloat(tagging.longitude)
+                                          },
+                                map: map,
+                                zIndex: 999,
+                                icon: {
+                                  url: "../controller/getMarkerIcon.php?color=green-darker&text="+(i+1),
+                                },
+                                title: tagging.idpel+' | '+tagging.tgl_pemeriksaan+' | '+tagging.user_input+' | '+tagging.latitude+', '+tagging.longitude,
+                              });
+                            }else if(i==data.rows.length-1){
+                              marker = new google.maps.Marker({
+                                position: {
+                                            lat: parseFloat(tagging.latitude), 
+                                            lng: parseFloat(tagging.longitude)
+                                          },
+                                map: map,
+                                zIndex: 998,
+                                icon: {
+                                  url: "../controller/getMarkerIcon.php?color=green-darker&text="+(i+1),
+                                },
+                                title: tagging.idpel+' | '+tagging.tgl_pemeriksaan+' | '+tagging.user_input+' | '+tagging.latitude+', '+tagging.longitude,
+                              });
+                            }else{
+                              marker = new google.maps.Marker({
+                                position: {
+                                            lat: parseFloat(tagging.latitude), 
+                                            lng: parseFloat(tagging.longitude)
+                                          },
+                                map: map,
+                                zIndex: data.rows.length - i,
+                                icon: {
+                                  url: "../controller/getMarkerIcon.php?color=green&text="+(i+1),
+                                },
+                                title: tagging.idpel+' | '+tagging.tgl_pemeriksaan+' | '+tagging.user_input+' | '+tagging.latitude+', '+tagging.longitude,
+                              });
                             }
-                        })(marker, i)); 
 
-                        return marker;
+                            bounds.extend(new google.maps.LatLng(parseFloat(tagging.latitude), parseFloat(tagging.longitude)));
+
+                            google.maps.event.addListener(marker, 'click', (function (marker, i) {
+                                return function () {
+                                    infowindow.setContent(
+                                      ` <div class="row">
+                                          <div class="col-6">
+                                            <dl>
+                                              <dt>Idpel</dt>
+                                              <dd>`+tagging.idpel+`</dd>
+                                              <dt>Nama</dt>
+                                              <dd>`+tagging.nama+`</dd>
+                                              <dt>Tgl Pemeriksaan</dt>
+                                              <dd>`+tagging.tgl_pemeriksaan+`</dd>
+                                              <dt>Tgl Input</dt>
+                                              <dd>`+tagging.tgl_input+`</dd>
+                                              <dt>Petugas</dt>
+                                              <dd>`+tagging.user_input+`</dd>
+                                              <dt>Koordinat</dt>
+                                              <dd>`+tagging.latitude+`, `+tagging.longitude+`</dd>
+                                            </dl>
+                                          </div>
+                                          <div class="col-6">
+                                            <img src="`+tagging.fotopath+`" width="300px" height="400px"/></dd>
+                                          </div>
+                                        </div>
+                                      `
+                                      );
+                                    infowindow.open(map, marker);
+                                }
+                            })(marker, i)); 
+
+                            return marker;
+                          }
                       });
 
                       map.fitBounds(bounds);
@@ -439,7 +445,7 @@ $(document).ready(function () {
         "scrollX": true,
         "paging": true,
         pageLength: 25,
-        "order": [[3, 'desc'],[0, 'asc'],[1, 'asc'],],
+        "order": [13, 'asc'],
         
     });
 

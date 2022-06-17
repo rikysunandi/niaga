@@ -41,6 +41,7 @@ $primaryKey = 'TGL_INPUT';
 // parameter represents the DataTables column identifier. In this case simple
 // indexes
 $columns = array(
+    array( 'db' => 'NO', 'dt' => 'NO' ),
     array( 'db' => 'UNITAP', 'dt' => 'UNITAP' ),
     array( 'db' => 'UNITUP', 'dt' => 'UNITUP' ),
     array( 'db' => 'IDPEL', 'dt' => 'IDPEL' ),

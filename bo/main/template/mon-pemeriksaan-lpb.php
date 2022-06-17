@@ -155,6 +155,7 @@
                                     <table id="tbl_mon_pemeriksaan_lpb" class="table table-striped table-bordered nowrap" style="width: 100%">
                                     <thead>
                                         <tr>
+                                            <th class="text-center bg-primary-lighten-2">NO</th>
                                             <th class="text-center bg-primary-lighten-2">UNITAP</th>
                                             <th class="text-center bg-primary-lighten-2">UNITUP</th>
                                             <th class="text-center bg-primary-lighten-2">IDPEL</th>
@@ -200,7 +201,7 @@
                     <div class="col-12">
                         <div class="card">
                             <div class="card-body">
-                                <div style="height:480px; width:860px;">
+                                <div style="height:480px; width:920px;">
                                     <div id="map"></div>
                                 </div>
                             </div>
