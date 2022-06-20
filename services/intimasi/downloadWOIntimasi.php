@@ -60,5 +60,6 @@ sqlsrv_free_stmt($stmt);
 sqlsrv_close($conn);
 
 echo json_encode($response, JSON_UNESCAPED_UNICODE);
+fastcgi_finish_request();
 
 ?>

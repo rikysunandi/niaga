@@ -188,6 +188,7 @@ function utf8ize($d) {
     }
     return $d;
 }
+fastcgi_finish_request();
 
 
 

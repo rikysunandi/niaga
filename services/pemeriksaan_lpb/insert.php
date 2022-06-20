@@ -74,6 +74,7 @@ sqlsrv_close($conn);
 
 header('Content-Type: application/json');
 echo json_encode($response);
+fastcgi_finish_request();
 // echo '{"NOAGENDA_INDIVIDU":"99", "JENIS": "KABEL BARU", "KEBUTUHAN": "0", "ID_KEBUTUHAN": "220", "HARGA_SATUAN": "SR 2X10", "VOLUME": "20", "HARGA_SATUAN": "213123", "HARGA_TOTAL": "12312"}';
 
 ?>

@@ -49,5 +49,6 @@ sqlsrv_free_stmt($stmt);
 sqlsrv_close($conn);
 
 echo json_encode($response);
+fastcgi_finish_request();
 
 ?>

@@ -42,5 +42,6 @@ if(!file_exists($path)){
 
 
 echo json_encode($response);
+fastcgi_finish_request();
 ?>
 
