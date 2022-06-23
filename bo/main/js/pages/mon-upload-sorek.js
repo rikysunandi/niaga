@@ -91,9 +91,58 @@ $(document).ready(function () {
                     return '<span class="text-success">'+
                         $.fn.dataTable.render.number(".", ",", 0, '').display(data)+'</span>';
                 else
-                    return $.fn.dataTable.render.number(".", ",", 0, '').display(data);
+                    return '<span class="text-warning">'+
+                      $.fn.dataTable.render.number(".", ",", 0, '').display(data)+'</span>';
 
             },
+          },
+          {
+            data: "A",
+            type: 'number',
+            visible: true,
+            "sClass" : "text-right" , render: $.fn.dataTable.render.number(",", ".", 0, '')
+          },
+          {
+            data: "A1",
+            type: 'number',
+            visible: true,
+            "sClass" : "text-right" , render: $.fn.dataTable.render.number(",", ".", 0, '')
+          },
+          {
+            data: "T",
+            type: 'number',
+            visible: true,
+            "sClass" : "text-right" , render: $.fn.dataTable.render.number(",", ".", 0, '')
+          },
+          {
+            data: "T1",
+            type: 'number',
+            visible: true,
+            "sClass" : "text-right" , render: $.fn.dataTable.render.number(",", ".", 0, '')
+          },
+          {
+            data: "T2",
+            type: 'number',
+            visible: true,
+            "sClass" : "text-right" , render: $.fn.dataTable.render.number(",", ".", 0, '')
+          },
+          {
+            data: "T3",
+            type: 'number',
+            visible: true,
+            "sClass" : "text-right" , render: $.fn.dataTable.render.number(",", ".", 0, '')
+          },
+          {
+            data: "T4",
+            type: 'number',
+            visible: true,
+            "sClass" : "text-right" , render: $.fn.dataTable.render.number(",", ".", 0, '')
+          },
+          {
+            data: "T5",
+            type: 'number',
+            visible: true,
+            "sClass" : "text-right" , render: $.fn.dataTable.render.number(",", ".", 0, '')
           },
         ],
         dom:

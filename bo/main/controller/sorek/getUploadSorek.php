@@ -49,6 +49,14 @@ $columns = array(
     array( 'db' => 'EIS_PEMKWH', 'dt' => 'EIS_PEMKWH' ),
     array( 'db' => 'EIS_RPPTL', 'dt' => 'EIS_RPPTL' ),
     array( 'db' => 'SELISIH', 'dt' => 'SELISIH' ),
+    array( 'db' => 'A', 'dt' => 'A' ),
+    array( 'db' => 'A1', 'dt' => 'A1' ),
+    array( 'db' => 'T', 'dt' => 'T' ),
+    array( 'db' => 'T1', 'dt' => 'T1' ),
+    array( 'db' => 'T2', 'dt' => 'T2' ),
+    array( 'db' => 'T3', 'dt' => 'T3' ),
+    array( 'db' => 'T4', 'dt' => 'T4' ),
+    array( 'db' => 'T5', 'dt' => 'T5' ),
 );
  
 // SQL server connection information
