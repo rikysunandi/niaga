@@ -37,10 +37,11 @@ $stmt = sqlsrv_prepare($conn, $sql, $params);
 //sqlsrv_execute($stmt);
 if(sqlsrv_execute($stmt)){
 
-    
+    $i=0;    
     do{ 
         $row = sqlsrv_fetch_array( $stmt, SQLSRV_FETCH_ASSOC);
-    }while(sqlsrv_next_result($stmt));
+        $i++;
+    }while(sqlsrv_next_result($stmt) && $i<5);
 
     if($row['MSG']=='SUKSES'){
         $response['success'] = true;
