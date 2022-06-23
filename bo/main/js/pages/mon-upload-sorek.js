@@ -91,7 +91,7 @@ $(document).ready(function () {
                     return '<span class="text-success">'+
                         $.fn.dataTable.render.number(".", ",", 0, '').display(data)+'</span>';
                 else
-                    return '<span class="text-warning">'+
+                    return '<span class="text-danger">'+
                       $.fn.dataTable.render.number(".", ",", 0, '').display(data)+'</span>';
 
             },
