@@ -41,7 +41,7 @@ if(sqlsrv_execute($stmt)){
     do{ 
         $row = sqlsrv_fetch_array( $stmt, SQLSRV_FETCH_ASSOC);
         $i++;
-    }while(sqlsrv_next_result($stmt) && $i<=5);
+    }while(sqlsrv_next_result($stmt));
 
     if($row['MSG']=='SUKSES'){
         $response['success'] = true;
