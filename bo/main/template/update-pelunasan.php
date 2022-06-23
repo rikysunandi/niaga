@@ -86,19 +86,19 @@
                                     </p><div class="mb-0">
                                         <form action="#">
                                             <div class="form-row">
-                                                <div class="form-group mb-2 mr-4">
+                                                <div class="form-group mb-2 mr-4 d-none">
                                                     <label class="text-label d-block">UID</label>
                                                     <select id="sel_unitupi" class="selectpicker show-tick" data-size="5" data-inc-semua="T" >
                                                         <option disabled>Pilih Unit Induk</option>
                                                     </select>
                                                 </div>
-                                                <div class="form-group mb-2 mr-4">
+                                                <div class="form-group mb-2 mr-4 d-none">
                                                     <label class="text-label d-block">UP3</label>
                                                     <select id="sel_unitap" class="selectpicker show-tick" data-size="5" data-inc-semua="T">
                                                         <option disabled>Pilih UP3</option>
                                                     </select>
                                                 </div>
-                                                <div class="form-group mb-2 mr-4">
+                                                <div class="form-group mb-2 mr-4 d-none">
                                                     <label class="text-label d-block">ULP</label>
                                                     <select id="sel_unitup" class="selectpicker show-tick" data-size="5" data-inc-semua="T">
                                                         <option disabled>Pilih ULP</option>
@@ -145,7 +145,9 @@
                                     <span class="msg">Mengupdate Pelunasan dari File </span>
                                 </div>
                                 <div class="progress progress--medium">
-                                  <div class="progress-bar progress-bar-striped progress-bar-animated bg-warning" role="progressbar" aria-valuenow="75" aria-valuemin="0" aria-valuemax="100" style="width: 100%"></div>
+                                  
+                                  <div class="progress-bar progress-bar-striped progress-bar-animated bg-light" role="progressbar" aria-valuenow="0" aria-valuemin="0" aria-valuemax="100" style="width: 0%"></div>
+                                  
                                 </div>
                             </div>
                         </div>

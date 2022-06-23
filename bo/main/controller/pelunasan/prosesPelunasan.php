@@ -16,6 +16,7 @@ require_once '../../../config/database.php';
 $unitupi = $_POST['unitupi'];
 $unitap = $_POST['unitap'];
 $unitup = $_POST['unitup'];
+$ori_filename = $_POST['ori_filename'];
 $filename = $_POST['filename'];
 $kodegerak = $_POST['kodegerak'];
 $user = 'SYSTEM';
@@ -34,20 +35,29 @@ $sql = "EXEC sp_Upload_Pelunasan @UserID = ?, @KDGERAKKELUAR = ?, @Filename = ? 
 $stmt = sqlsrv_prepare($conn, $sql, $params);
 
 //sqlsrv_execute($stmt);
-if(!sqlsrv_execute($stmt)){
-	$response['success'] = false;
-	$response['msg'] = 'Upload pelunasan gagal';
-}
-// else{
-// 	$response['success'] = true;
-// 	$response['msg'] = 'Upload pelunasan berhasil';
-// }
+if(sqlsrv_execute($stmt)){
 
-while(sqlsrv_next_result($stmt))
-{ 
-    $response['success'] = true;
-    $response['msg'] = 'Update data Pelunasan telah selesai';
+    
+    do{ 
+        $row = sqlsrv_fetch_array( $stmt, SQLSRV_FETCH_ASSOC);
+    }while(sqlsrv_next_result($stmt));
+
+    if($row['MSG']=='SUKSES'){
+        $response['success'] = true;
+        $response['msg'] = 'Update data Pelunasan dari File '.$ori_filename.' telah berhasil';
+    }else{
+        $response['success'] = false;
+        $response['msg'] = 'Upload File '.$ori_filename.' gagal, '.$row['MSG'];
+    }
+
+	
 }
+else{
+	$response['success'] = false;
+	$response['msg'] = 'Upload File '.$ori_filename.' gagal, '.' gagal eksekusi procedure simpan!';
+}
+
+
 
 
 // $response['success'] = true;

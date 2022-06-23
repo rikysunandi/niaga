@@ -7,6 +7,70 @@
     // drEvent.resetPreview();
     // drEvent.clearElement();
     $('#btn_upload').prop('disabled', true);
+    var queueUpload = new Array();
+    var finishUpload;
+
+    function prosesUpload(idx){
+
+        //var progress = $( ".progress-upload:first" ).clone().appendTo( ".container-fluid" );
+        //console.log($(progress).find('.msg')[0]);
+
+        if(idx<queueUpload.length){
+
+            var progress = queueUpload[idx];
+            // var blth = $(progress).data('blth');
+            var unitupi = $(progress).data('unitupi');
+            var unitap = $(progress).data('unitap');
+            var unitup = $(progress).data('unitup');
+            var filename = $(progress).data('filename');
+            var ori_filename = $(progress).data('ori_filename');
+            var kodegerak = $(progress).data('kodegerak');
+            // var rowcount = $(progress).data('rowcount');
+            console.log(progress);
+            console.log('$(progress)', $(progress));
+            console.log('filename', filename);
+
+            $($(progress).find('.msg')[0]).html('Mengupdate Pelunasan dari File '+ori_filename+', mohon menunggu...');
+            
+            //$($(progress).find('.msg')[0]).html('Mengupdate Sorek dari File '+ori_filename+', mohon menunggu...');
+            $($(progress).find('.progress-bar')[0]).removeClass('bg-light');
+            $($(progress).find('.progress-bar')[0]).addClass('bg-warning');
+            $($(progress).find('.progress-bar')[0]).addClass('progress-bar-striped');
+            $($(progress).find('.progress-bar')[0]).addClass('progress-bar-animated');
+            $($(progress).find('.progress-bar')[0]).css('width', '100%').attr('aria-valuenow', 100);
+            
+            $.post('../controller/pelunasan/prosesPelunasan.php', 
+                { 
+                    ori_filename: ori_filename, 
+                    filename: filename, 
+                    unitupi: unitupi,
+                    unitap: unitap,
+                    unitup: unitup,
+                    kodegerak: kodegerak,
+                }, function(res){
+                //progress-bar progress-bar-striped progress-bar-animated bg-warning
+               $($(progress).find('.progress-bar')[0]).removeClass('progress-bar-striped');
+               $($(progress).find('.progress-bar')[0]).removeClass('progress-bar-animated');
+               $($(progress).find('.progress-bar')[0]).removeClass('bg-warning');
+               res = JSON.parse(res);
+               console.log(res);
+               if(res.success=='true' || res.success){
+                    $($(progress).find('.progress-bar')[0]).addClass('bg-success');
+                    $($(progress).find('.msg')[0]).html(res.msg+', silahkan cek di <a href="rekap-tgl-bayar.php" class="badge badge-primary" target="_blank">di sini</a> &nbsp;<i class="fa fa-check-circle text-success"></i>');
+               }else{
+                    $($(progress).find('.progress-bar')[0]).addClass('bg-danger');
+                    $($(progress).find('.msg')[0]).html(res.msg);
+               }
+               queueUpload.splice(0, 1);
+               //idx = idx+1;
+               console.log('queueUpload after splice', queueUpload);
+               prosesUpload(idx);
+
+            });
+        }
+
+    }
+
 
     Dropzone.options.uploadPelunasan = {
         acceptedFiles: '.xls',
@@ -15,7 +79,7 @@
         maxFiles: 5,
         timeout: 180000,
         maxFilesize: 20,
-        parallelUploads: 2,
+        parallelUploads: 1,
         autoProcessQueue: false,
         init: function() {
 
@@ -66,33 +130,29 @@
                     this.removeFile(file);
                     var data = JSON.parse(response);
                     if(data.success){
-                        var progress = $( ".progress-upload:first" ).clone().appendTo( ".container-fluid" );
-                        console.log($(progress).find('.msg')[0]);
-                        $($(progress).find('.msg')[0]).html('Mengupdate Pelunasan dari File '+file.name+', mohon menunggu...');
-                        $(progress).removeClass('d-none');
-                        $.post('../controller/pelunasan/prosesPelunasan.php', 
-                            { 
-                                filename: data.filename, 
-                                unitupi: data.unitupi,
-                                unitap: data.unitap,
-                                unitup: data.unitup,
-                                kodegerak: data.kodegerak,
-                            }, function(res){
-                            //progress-bar progress-bar-striped progress-bar-animated bg-warning
-                           $($(progress).find('.progress-bar')[0]).removeClass('progress-bar-striped');
-                           $($(progress).find('.progress-bar')[0]).removeClass('progress-bar-animated');
-                           $($(progress).find('.progress-bar')[0]).removeClass('bg-warning');
-                           res = JSON.parse(res);
-                           console.log(res);
-                           if(res.success=='true' || res.success){
-                                $($(progress).find('.progress-bar')[0]).addClass('bg-success');
-                                $($(progress).find('.msg')[0]).html('Update data pelunasan sudah berhasil dari File '+file.name+', silahkan cek di <a href="rekap-tgl-bayar.php" class="badge badge-primary" target="_blank">di sini</a> &nbsp;<i class="fa fa-check-circle text-success"></i>');
-                           }else{
-                                $($(progress).find('.progress-bar')[0]).addClass('bg-danger');
-                                $($(progress).find('.msg')[0]).html('Update gagal dari File '+file.name);
-                           }
 
-                        });
+                        var progress = $( ".progress-upload:first" ).clone().appendTo( ".container-fluid" );
+                        //console.log($(progress).find('.msg')[0]);
+
+                        $($(progress).find('.msg')[0]).html(file.name+', menunggu antrian...');
+                        $(progress).removeClass('d-none');
+                        $(progress).data('kodegerak', data.kodegerak);
+                        $(progress).data('unitupi', data.unitupi);
+                        $(progress).data('unitap', data.unitap);
+                        $(progress).data('unitup', data.unitup);
+                        $(progress).data('filename', data.filename);
+                        $(progress).data('ori_filename', file.name);
+                        // $(progress).data('rowcount', data.rowcount);
+
+                        if(queueUpload.length==0){
+                            queueUpload.push(progress);
+                            console.log('queueUpload', queueUpload);
+                            prosesUpload(0);
+                        }else{
+                            queueUpload.push(progress);
+                            console.log('queueUpload', queueUpload);
+                        }
+
                     }else{
                         alert(response.msg);
                     }
