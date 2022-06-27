@@ -5,7 +5,7 @@ $(document).ready(function () {
     const queryString = window.location.search;
     const urlParams = new URLSearchParams(queryString);
 
-    var unitupi, unitap, unitup, petugas, blth, tgl_intimasi_from, tgl_intimasi_to;
+    var unitupi, unitap, unitup, petugas, keterangan, blth, tgl_intimasi_from, tgl_intimasi_to;
 
     if(urlParams.has('tgl_intimasi_from')){
       tgl_intimasi_from = moment(urlParams.get('tgl_intimasi_from')).format('DD/MM/YYYY');
@@ -158,7 +158,7 @@ $(document).ready(function () {
                   // //this.disable(); // disable button
                   // console.log('dt', dt);
                   // console.log('node', node);
-                  window.open('../controller/intimasi/expCSVIntimasi.php?unitupi='+unitupi+'&unitap='+unitap+'&unitup='+unitup+'&petugas='+petugas+'&blth='+blth+'&tgl_intimasi_from='+tgl_intimasi_from+'&tgl_intimasi_to='+tgl_intimasi_to );
+                  window.open('../controller/intimasi/expCSVIntimasi.php?unitupi='+unitupi+'&unitap='+unitap+'&unitup='+unitup+'&petugas='+petugas+'&keterangan='+keterangan+'&blth='+blth+'&tgl_intimasi_from='+tgl_intimasi_from+'&tgl_intimasi_to='+tgl_intimasi_to );
               }
             },
             {
@@ -309,6 +309,7 @@ $(document).ready(function () {
         unitap = $('#sel_unitap').val();
         unitup = $('#sel_unitup').val();
         petugas = $('#sel_petugas').val();
+        keterangan = $('#sel_keterangan').val();
         blth = $('#sel_blth').val();
         tgl_intimasi_from = $('#tgl_intimasi_range')
                                 .data('daterangepicker')
@@ -323,7 +324,7 @@ $(document).ready(function () {
         $('#map').remove();
         container.append('<div id="map"></div>');
 
-        table.ajax.url( '../controller/intimasi/getDataIntimasi.php?unitupi='+unitupi+'&unitap='+unitap+'&unitup='+unitup+'&petugas='+petugas+'&blth='+blth+'&tgl_intimasi_from='+tgl_intimasi_from+'&tgl_intimasi_to='+tgl_intimasi_to ).load();
+        table.ajax.url( '../controller/intimasi/getDataIntimasi.php?unitupi='+unitupi+'&unitap='+unitap+'&unitup='+unitup+'&petugas='+petugas+'&keterangan='+keterangan+'&blth='+blth+'&tgl_intimasi_from='+tgl_intimasi_from+'&tgl_intimasi_to='+tgl_intimasi_to ).load();
         //table.ajax.url( '../controller/intimasi/getDataIntimasi.php?unitupi='+$('#sel_unitupi').val()+'&unitap='+$('#sel_unitap').val()+'&unitup='+$('#sel_unitup').val()+'&blth='+$('#sel_blth').val() ).load();
     });
 

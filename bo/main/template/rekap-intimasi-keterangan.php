@@ -121,7 +121,7 @@
                                             <th rowspan="3" class="text-center bg-primary-lighten-2">UNITUP</th>
                                             <th rowspan="3" class="text-center bg-primary-lighten-2">ULP</th>
                                             <th rowspan="3" class="text-center bg-primary-lighten-2">PETUGAS</th>
-                                            <th colspan="3" class="text-center bg-warning-lighten-2">WORK ORDER</th>
+                                            <th colspan="5" class="text-center bg-warning-lighten-2">WORK ORDER</th>
                                             <th colspan="16" class="text-center bg-success-lighten-2">HASIL INTIMASI</th>
                                         </tr>
                                         <tr>
@@ -129,6 +129,8 @@
                                             <th rowspan="2" class="text-center bg-warning-lighten-2">BARU</th>
                                             <!-- <th rowspan="2" class="text-center bg-success-lighten-2">LANCAR</th> -->
                                             <th rowspan="2" class="text-center bg-secondary-lighten-2">TOTAL</th>
+                                            <th rowspan="2" class="text-center bg-success-lighten-2">LUNAS<br/>BY SYSTEM</th>
+                                            <th rowspan="2" class="text-center bg-secondary-lighten-2">SISA WO</th>
                                             <th colspan="2" class="text-center bg-success-lighten-2">LUNAS MANDIRI</th>
                                             <th colspan="2" class="text-center bg-success-lighten-2">LUNAS PPOB PETUGAS</th>
                                             <th colspan="2" class="text-center bg-success-lighten-2">KOLEKTIF</th>
@@ -163,6 +165,8 @@
                                             <th class="bg-danger-lighten-2"></th>
                                             <th class="bg-warning-lighten-2"></th>
                                             <!-- <th class="bg-success-lighten-2"></th> -->
+                                            <th class="bg-secondary-lighten-2"></th>
+                                            <th class="bg-success-lighten-2"></th>
                                             <th class="bg-secondary-lighten-2"></th>
                                             <th class="bg-success-lighten-2"></th>
                                             <th class="bg-success-lighten-2"></th>
@@ -233,6 +237,6 @@
     <script src="../../assets/plugins/block-ui/jquery.blockUI.js"></script>
 
     <script src="../js/pages/apps.js"></script>
-    <script src="../js/pages/rekap-intimasi-keterangan.js?time=123"></script>
+    <script src="../js/pages/rekap-intimasi-keterangan.js?time=223"></script>
 </body>
 </html>

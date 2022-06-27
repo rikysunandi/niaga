@@ -75,7 +75,7 @@
                                             </div>
                                             <div class="form-group mb-2 col-3">
                                                 <label class="text-label d-block">ULP</label>
-                                                <select id="sel_unitup" class="selectpicker show-tick" data-size="5" data-inc-semua="Y" >
+                                                <select id="sel_unitup" class="selectpicker show-tick" data-size="5" data-inc-semua="T" >
                                                     <option disabled>Pilih ULP</option>
                                                 </select>
                                             </div>

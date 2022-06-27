@@ -8,6 +8,7 @@ $unitupi = $_REQUEST['unitupi'];
 $unitap = $_REQUEST['unitap'];
 $unitup = $_REQUEST['unitup'];
 $petugas = $_REQUEST['petugas'];
+$keterangan = $_REQUEST['keterangan'];
 $blth = $_REQUEST['blth'];
 $tgl_intimasi_from = $_REQUEST['tgl_intimasi_from'];
 $tgl_intimasi_to = $_REQUEST['tgl_intimasi_to'];
@@ -19,12 +20,13 @@ $params = array(
         array($unitap, SQLSRV_PARAM_IN),
         array($unitup, SQLSRV_PARAM_IN),
         array($petugas, SQLSRV_PARAM_IN),
+        array($keterangan, SQLSRV_PARAM_IN),
         array($blth, SQLSRV_PARAM_IN),
         array($tgl_intimasi_from, SQLSRV_PARAM_IN),
         array($tgl_intimasi_to, SQLSRV_PARAM_IN),
     );
 
-$sql = "EXEC sp_vw_Create_Data_Intimasi @UserID = ?, @Unitupi = ?, @Unitap = ?, @Unitup = ?, @KODEPETUGAS = ?, @BLTH = ?, @Tgl_Intimasi_From = ?, @Tgl_Intimasi_To = ? ";
+$sql = "EXEC sp_vw_Create_Data_Intimasi @UserID = ?, @Unitupi = ?, @Unitap = ?, @Unitup = ?, @KODEPETUGAS = ?, @KETERANGAN = ?, @BLTH = ?, @Tgl_Intimasi_From = ?, @Tgl_Intimasi_To = ? ";
 $stmt = sqlsrv_prepare($conn, $sql, $params);
 
 

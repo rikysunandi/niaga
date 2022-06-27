@@ -80,6 +80,18 @@ $(document).ready(function () {
             "sClass" : "text-right" , render: $.fn.dataTable.render.number(".", ",", 0, '')
           },
           {
+            data: "LUNAS_BY_SYSTEM",
+            type: 'number',
+            visible: true,
+            "sClass" : "text-right" , render: $.fn.dataTable.render.number(".", ",", 0, '')
+          },
+          {
+            data: "WO_SISA",
+            type: 'number',
+            visible: true,
+            "sClass" : "text-right" , render: $.fn.dataTable.render.number(".", ",", 0, '')
+          },
+          {
             data: "LUNAS_MANDIRI_INTI",
             type: 'number',
             visible: true,
@@ -240,7 +252,7 @@ $(document).ready(function () {
         "paging": true,
         lengthMenu: [[25, 100, -1], [25, 100, "All"]],
         pageLength: 100,
-        "order": [[20, 'desc']],
+        "order": [[22, 'desc']],
         footerCallback: function ( row, data, start, end, display ) {
           var api = this.api();
           //console.log('footerCallback', api);
@@ -248,7 +260,7 @@ $(document).ready(function () {
           var persen, cls, wo, jml, lunas, l_irisan, l_baru;
           var j = 3;
           while(j < nb_cols){
-            if(j==20){
+            if(j==22){
                 persen = (jml/wo)*100;
 
                 if (persen < 50) {
@@ -263,7 +275,7 @@ $(document).ready(function () {
 
               //$( api.column( j ).footer() ).html($.fn.dataTable.render.number(".", ",", 2, '').display(persen)+'%');
             }
-            else if(j==22){
+            else if(j==24){
                 persen = (lunas/wo)*100;
 
                 if (persen < 50) {
@@ -285,11 +297,11 @@ $(document).ready(function () {
                         return Number(a) + Number(b);
                     }, 0 );
 
-              if(j==6)
+              if(j==8)
                 wo=pageTotal;
-              if(j==19)
-                jml=pageTotal;
               if(j==21)
+                jml=pageTotal;
+              if(j==23)
                 lunas=pageTotal;
               // Update footer
               $( api.column( j ).footer() ).html($.fn.dataTable.render.number(".", ",", 0, '').display(pageTotal));

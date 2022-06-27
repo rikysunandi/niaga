@@ -50,6 +50,8 @@ $columns = array(
     array( 'db' => 'WO_BARU', 'dt' => 'WO_BARU' ),
     array( 'db' => 'WO_LANCAR', 'dt' => 'WO_LANCAR' ),
     array( 'db' => 'WO_TOTAL', 'dt' => 'WO_TOTAL' ),
+    array( 'db' => 'LUNAS_BY_SYSTEM', 'dt' => 'LUNAS_BY_SYSTEM' ),
+    array( 'db' => 'WO_SISA', 'dt' => 'WO_SISA' ),
     array( 'db' => 'LUNAS_MANDIRI_INTI', 'dt' => 'LUNAS_MANDIRI_INTI' ),
     array( 'db' => 'LUNAS_MANDIRI_LUNAS', 'dt' => 'LUNAS_MANDIRI_LUNAS' ),
     array( 'db' => 'LUNAS_PPOB_INTI', 'dt' => 'LUNAS_PPOB_INTI' ),
