@@ -110,7 +110,7 @@ $(document).ready(function () {
                 //console.log('row', row);
                 var efektivitas = data;
                 //window.open("urut-langkah-rpp.php?unitupi="+unitupi+"&unitap="+unitap+"&unitup="+unitup+"&petugas="+petugas_dipilih+"&rpp="+rpp, "_blank");
-                return '<a class="text-primary" href="mon-intimasi.php?unitupi='+row.UNITUPI+'&unitap='+row.UNITAP+'&unitup='+row.UNITUP+'&petugas='+row.KODEPETUGAS+'&blth='+row.BLTH+'&tgl_intimasi_from='+row.TGL_INTIMASI+'&tgl_intimasi_to='+row.TGL_INTIMASI+'" target="_blank" role="button">'+$.fn.dataTable.render.number(".", ",", 0, '').display(data)+'</a>';
+                return '<a class="text-primary" href="mon-intimasi.php?unitupi='+row.UNITUPI+'&unitap='+row.UNITAP+'&unitup='+row.UNITUP+'&petugas='+row.KODEPETUGAS+'&keterangan=NOT_LUNAS_BY_SYSTEM'+'&blth='+row.BLTH+'&tgl_intimasi_from='+row.TGL_INTIMASI+'&tgl_intimasi_to='+row.TGL_INTIMASI+'" target="_blank" role="button">'+$.fn.dataTable.render.number(".", ",", 0, '').display(data)+'</a>';
                 //return rpp;
             },
           },

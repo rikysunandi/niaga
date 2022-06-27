@@ -19,9 +19,15 @@ $(document).ready(function () {
       tgl_intimasi_to = moment();
     }
 
+    if(urlParams.has('keterangan')){
+      //$('#sel_keterangan').val(urlParams.get('keterangan'));
+      $('#sel_keterangan').selectpicker('val', urlParams.get('keterangan'));
+    }
+
     if(urlParams.has('blth')){
       $('#sel_blth').val(urlParams.get('blth'));
     }
+
 
     $('.input-daterange-datepicker').daterangepicker({
         buttonClasses: ['btn', 'btn-sm'],
