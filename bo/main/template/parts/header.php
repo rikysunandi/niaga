@@ -1,7 +1,7 @@
 <?php
 
-header("Location: system_maintenance.php");
-exit();
+// header("Location: system_maintenance.php");
+// exit();
 
 ?>    <!--**********************************
             Nav header start
