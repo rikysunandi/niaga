@@ -28,9 +28,10 @@ $params = array(
         // array($unitup, SQLSRV_PARAM_IN),
         array($kodegerak, SQLSRV_PARAM_IN),
         array($filename, SQLSRV_PARAM_IN),
+        array($ori_filename, SQLSRV_PARAM_IN),
     );
 
-$sql = "EXEC sp_Upload_Pelunasan @UserID = ?, @KDGERAKKELUAR = ?, @Filename = ? ";
+$sql = "EXEC sp_Upload_Pelunasan @UserID = ?, @KDGERAKKELUAR = ?, @Filename = ?, @Ori_Filename = ? ";
 //$sql = "EXEC sp_Upload_Pelunasan_Dev @UserID = ?, @Unitupi = ?, @Unitap = ?, @Unitup = ?, @KDGERAKKELUAR = ?, @Filename = ? ";
 $stmt = sqlsrv_prepare($conn, $sql, $params);
 
