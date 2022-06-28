@@ -103,7 +103,7 @@ $(document).ready(function () {
             "sClass" : "text-right" , render: $.fn.dataTable.render.number(",", ".", 0, '')
           },
           {
-            data: "A1",
+            data: "AI",
             type: 'number',
             visible: true,
             "sClass" : "text-right" , render: $.fn.dataTable.render.number(",", ".", 0, '')

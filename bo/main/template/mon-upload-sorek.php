@@ -135,7 +135,7 @@
                                             <th class="text-center bg-success-lighten-2">PEMKWH</th>
                                             <th class="text-center bg-success-lighten-2">RPPTL</th>
                                             <th class="text-center bg-success-lighten-2">A</th>
-                                            <th class="text-center bg-success-lighten-2">A1</th>
+                                            <th class="text-center bg-success-lighten-2">AI</th>
                                             <th class="text-center bg-success-lighten-2">T</th>
                                             <th class="text-center bg-success-lighten-2">T1</th>
                                             <th class="text-center bg-success-lighten-2">T2</th>
