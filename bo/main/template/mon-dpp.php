@@ -59,19 +59,19 @@
                                         <div class="form-row">
                                             <div class="form-group mb-2 mr-4">
                                                 <label class="text-label d-block"><small>UID</small></label>
-                                                <select id="sel_unitupi" class="selectpicker show-tick" data-size="5" >
+                                                <select id="sel_unitupi" class="selectpicker show-tick" data-size="5" data-inc-semua="T" >
                                                     <option disabled>Pilih Unit Induk</option>
                                                 </select>
                                             </div>
                                             <div class="form-group mb-2 mr-4">
                                                 <label class="text-label d-block"><small>UP3</small></label>
-                                                <select id="sel_unitap" class="selectpicker show-tick" data-size="5" >
+                                                <select id="sel_unitap" class="selectpicker show-tick" data-size="5" data-inc-semua="T" >
                                                     <option disabled>Pilih UP3</option>
                                                 </select>
                                             </div>
                                             <div class="form-group mb-2 mr-4">
                                                 <label class="text-label d-block"><small>ULP</small></label>
-                                                <select id="sel_unitup" class="selectpicker show-tick" data-size="5" >
+                                                <select id="sel_unitup" class="selectpicker show-tick" data-size="5" data-inc-semua="T" >
                                                     <option disabled>Pilih ULP</option>
                                                 </select>
                                             </div>
