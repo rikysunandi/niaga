@@ -30,7 +30,7 @@ if(!sqlsrv_execute($stmt)){
     die(print_r( sqlsrv_errors(), true));
 }else{
 
-    $sql = "select UNITUPI, UNITAP, UNITUP, IDPEL, NAMA, TARIF, DAYA, NIK, CONVERT(VARCHAR, TGL_PEMERIKSAAN, 120), PERUNTUKAN, EMAIL, SISA_KWH,  CONVERT(VARCHAR, TGL_INPUT, 120), LATITUDE, LONGITUDE, AKURASI_KOORDINAT, ADA_FOTO_METER, ADA_FOTO_RUMAH, USER_INPUT from vw_Create_Pemeriksaan_LPB_Unit_".$unitup;
+    $sql = "select NO, UNITUPI, UNITAP, UNITUP, IDPEL, NAMA, TARIF, DAYA, NIK, CONVERT(VARCHAR, TGL_PEMERIKSAAN, 120), PERUNTUKAN, EMAIL, SISA_KWH,  CONVERT(VARCHAR, TGL_INPUT, 120), LATITUDE, LONGITUDE, AKURASI_KOORDINAT, ADA_FOTO_METER, ADA_FOTO_RUMAH, USER_INPUT from vw_Create_Pemeriksaan_LPB_Unit_".$unitup." ORDER BY TGL_INPUT ";
     $stmt = sqlsrv_prepare($conn, $sql);
 
     if(!sqlsrv_execute($stmt)){
@@ -40,7 +40,7 @@ if(!sqlsrv_execute($stmt)){
         header('Content-Disposition: attachment; filename="PEMERIKSAAN_LPB_'.$unitap.'_'.$unitup.'_'.date('Ymdhis').'.csv"');
 
         $fp = fopen('php://output', 'wb');
-        $columns = array( "UNITUPI", "UNITAP", "UNITUP", "IDPEL", "NAMA", "TARIF", "DAYA", "NIK", "TGL_PEMERIKSAAN", "RPP_DIPILIH", "KONDISI METER", "SISA_KWH", "JAM INPUT", "LATITUDE", "LONGITUDE", "AKURASI_KOORDINAT", "FOTO METER", "FOTO RUMAH", "USER_INPUT");
+        $columns = array( "NO", "UNITUPI", "UNITAP", "UNITUP", "IDPEL", "NAMA", "TARIF", "DAYA", "NIK", "TGL_PEMERIKSAAN", "RPP_DIPILIH", "KONDISI METER", "SISA_KWH", "JAM INPUT", "LATITUDE", "LONGITUDE", "AKURASI_KOORDINAT", "FOTO METER", "FOTO RUMAH", "USER_INPUT");
         fputcsv($fp, $columns, chr(9));
         while( $row = sqlsrv_fetch_array( $stmt, SQLSRV_FETCH_NUMERIC) ) {
             fputcsv($fp, $row, chr(9));
