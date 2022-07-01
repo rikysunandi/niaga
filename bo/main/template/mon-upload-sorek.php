@@ -122,7 +122,7 @@
                                             <th rowspan="2" class="text-center bg-primary-lighten-2">UP3</th>
                                             <th rowspan="2" class="text-center bg-primary-lighten-2">UNITUP</th>
                                             <th rowspan="2" class="text-center bg-primary-lighten-2">ULP</th>
-                                            <th colspan="3" class="text-center bg-success-lighten-2">VERSI REKAP EIS</th>
+                                            <th colspan="3" class="text-center bg-success-lighten-2">VERSI REKAP EIS (SETELAH CLOSING)</th>
                                             <th colspan="3" class="text-center bg-success-lighten-2">SOREK YANG DIUPLOAD</th>
                                             <th rowspan="2" class="text-center bg-warning-lighten-2">SELISIH<br/>LEMBAR</th>
                                             <th colspan="8" class="text-center bg-success-lighten-2">KDPROSESKLP YANG DIUPLOAD</th>
