@@ -29,7 +29,7 @@ if(!sqlsrv_execute($stmt)){
 	while( $row = sqlsrv_fetch_array( $stmt, SQLSRV_FETCH_ASSOC) ) {
 		$thbl = date('mY');
 		$response['rbm'][$i]['i'] = $row['IDPEL']; 
-		$response['rbm'][$i]['idpiu'] = $thbl.$row['IDPEL']; 
+		$response['rbm'][$i]['idpiu'] = $row['THBL'].$row['IDPEL']; 
 		$response['rbm'][$i]['idpel'] = $row['IDPEL']; 
 		$response['rbm'][$i]['nama'] = $row['NAMA']; 
 		$response['rbm'][$i]['alamat'] = $row['ALAMAT']; 
