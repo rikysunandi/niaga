@@ -107,6 +107,9 @@
                                 <p>
                                     Sebelum petugas dapat melakukan Download WO Intimasi di HP, silahkan lakukan penetapan terlebih dahulu dengan mengklik tombol di bawah
                                 </p>
+                                <p class="text-warning">
+                                    Pastikan sudah melakukan upload semua data Pelunasan bulan sebelumnya dan Sorek bulan berjalan!
+                                </p>
                                 <div class="table-responsive">
                                     <table id="tbl_wo_intimasi" class="table table-striped table-bordered nowrap" style="width: 100%">
                                     <thead>

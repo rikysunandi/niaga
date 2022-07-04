@@ -110,7 +110,7 @@
                                 <h4 class="card-title mb-4">Rekap Pemutusan per UP3</h4>
                                 <div>
                                     <p>
-                                        Periode Pemutusan: Tanggal 21-Akhir Bulan pada Bulan Berjalan.
+                                        Periode Pemutusan: Diatas Tanggal 21 pada Bulan Berjalan.
                                     </p>
                                     <p>
                                         <span class="text-success">LUNAS BY SYSTEM: </span>WO Pemutusan sudah lunas terlebih dahulu secara AP2T sebelum ditindaklanjuti di Lapangan dan belum diakui sebagai perolehan petugas.
