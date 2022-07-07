@@ -49,19 +49,19 @@ if($blth>='202202'){
   }
 
   //$sql = 'SELECT * FROM m_pemeriksaan_lpb WHERE LEFT(IDPEL,11) = \''.substr($idpel,0,11).'\' ';
-  $sql = 'SELECT * FROM m_pemeriksaan_lpb WHERE IDPEL = \''.$idpel.'\' AND FOTO_RUMAH IS NOT NULL ';
-  //$params = array(1, substr($idpel,0,11));
+  // $sql = 'SELECT * FROM m_pemeriksaan_lpb WHERE IDPEL = \''.$idpel.'\' AND FOTO_RUMAH IS NOT NULL ';
+  // //$params = array(1, substr($idpel,0,11));
 
-  $stmt = sqlsrv_query( $conn, $sql );
-  if( $stmt === false ) {
-      $response['success'] = false;
-      $response['msg'] = 'Gagal query ke Database';
-  }else{
-    $row = sqlsrv_fetch_array($stmt, SQLSRV_FETCH_ASSOC);
-    if(1==0 && strlen($row['IDPEL'])>=11 && $row['USER_INPUT']!=$user_input){
-      $response['success'] = false;
-      $response['msg'] = 'Data Idpel '.$idpel.' tidak disimpan karena sudah pernah ditagging oleh '.$row['USER_INPUT'].' !';
-    }else{
+  // $stmt = sqlsrv_query( $conn, $sql );
+  // if( $stmt === false ) {
+  //     $response['success'] = false;
+  //     $response['msg'] = 'Gagal query ke Database';
+  // }else{
+  //   $row = sqlsrv_fetch_array($stmt, SQLSRV_FETCH_ASSOC);
+  //   if(1==0 && strlen($row['IDPEL'])>=11 && $row['USER_INPUT']!=$user_input){
+  //     $response['success'] = false;
+  //     $response['msg'] = 'Data Idpel '.$idpel.' tidak disimpan karena sudah pernah ditagging oleh '.$row['USER_INPUT'].' !';
+  //   }else{
       $response['msg'] = $idpel.': ';
 
       //if (ftp_put($ftp_conn, '/uploads_sorek/'.$filename, $_FILES['file']['tmp_name']))
@@ -181,8 +181,8 @@ if($blth>='202202'){
           $response['msg'] .= 'Data gagal disimpan'.$sql;
       }
 
-    }
-  }
+  //   }
+  // }
 
 }else{
   $response['success'] = false;
