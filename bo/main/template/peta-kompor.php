@@ -1,0 +1,275 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="utf-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width,initial-scale=1">
+    <title>Backoffice Niaga | Peta Pembentukan RPP</title>
+    <!-- Favicon icon -->
+    <link rel="icon" type="image/png" sizes="16x16" href="../../assets/images/favicon.png">
+    <link href="../css/style.css?time=<?php echo time() ?>" rel="stylesheet">
+    <link href="../css/custom.css?time=<?php echo time() ?>" rel="stylesheet">
+    <link href="../../assets/plugins/bootstrap-daterangepicker/daterangepicker.css" rel="stylesheet">
+    <link href="../../assets/plugins/sweetalert2/dist/sweetalert2.min.css" rel="stylesheet">
+
+    <style type="text/css">
+        #map {
+            width:100%;
+            height: 100%;
+        }
+        .cluster{
+          color: #FFFFFF;
+          text-align:center;
+          font-family: 'Arial, Helvetica';
+          font-size:10px;
+          font-weight:bold;
+          cursor: pointer;
+          padding-left: 6px;
+          padding-top: 2px;
+        }
+        .cluster-1{
+          background-image:url(../../assets/images/m1.png);
+          line-height:53px;
+          width: 53px;
+          height: 52px;
+        }
+        .cluster-2{
+          background-image:url(../../assets/images/m2.png);
+          line-height:55px;
+          width: 55px;
+          height: 54px;
+        }
+        .cluster-3{
+          background-image:url(../../assets/images/m3.png);
+          line-height:57px;
+          width: 57px;
+          height: 56px;
+        }
+    </style>
+</head>
+
+<body>
+    
+    <?php include 'parts/preloader.php'; ?>
+    
+    <!--**********************************
+        Main wrapper start
+    ***********************************-->
+    <div id="main-wrapper">
+
+        <?php include 'parts/header.php'; ?>
+        <?php include 'parts/sidebar.php'; ?>
+
+        <!--**********************************
+            Content body start
+        ***********************************-->
+        <div class="content-body">
+            <div class="container-fluid">
+                <div class="row page-titles">
+                    <div class="col p-md-0">
+                        <h4>Peta Calon Pelanggan Kompor Induksi</h4>
+                    </div>
+                    <div class="col p-md-0">
+                        <ol class="breadcrumb">
+                            <li class="breadcrumb-item"><a href="javascript:void(0)">Utilitas</a>
+                            </li>
+                            <li class="breadcrumb-item active">Peta Calon Pelanggan Kompor Induksi</li>
+                        </ol>
+                    </div>
+                </div>
+                <!-- row -->
+
+                <div class="row">
+                    <div class="col-12">
+                        <div class="card">
+                            <div class="card-body">
+                                <div class="mb-4">
+                                    <form action="#">
+                                        <div class="form-row">
+                                            <div class="form-group mb-2 mr-4">
+                                                <label class="text-label d-block"><small>UNIT INDUK</small></label>
+                                                <select id="sel_unitupi" title="PILIH UNIT INDUK" class="selectpicker show-tick" data-size="5" data-inc-semua="T" >
+                                                    <option value="00" selected>SEMUA UNIT</option>
+                                                </select>
+                                            </div>
+                                            <div class="form-group mb-2 mr-4">
+                                                <label class="text-label d-block"><small>UP3</small></label>
+                                                <select id="sel_unitap" title="PILIH UP3" class="selectpicker show-tick" data-size="5" data-inc-semua="Y" >
+                                                    <option value="00" selected>SEMUA UNIT</option>
+                                                </select>
+                                            </div>
+                                            <div class="form-group mb-2 mr-4">
+                                                <label class="text-label d-block"><small>ULP</small></label>
+                                                <select id="sel_unitup" title="PILIH ULP" class="selectpicker show-tick" data-size="5" data-inc-semua="Y" >
+                                                    <option value="00" selected>SEMUA UNIT</option>
+                                                </select>
+                                            </div>
+                                            <!-- <div class="form-group mb-4 col-3">
+                                                <label class="text-label d-block"><small>PETUGAS</small></label>
+                                                <select id="sel_petugas" title="PETUGAS" class="selectpicker show-tick" data-size="5" data-inc-semua="T" >
+                                                    <option value="00">SEMUA PETUGAS</option>
+                                                </select>
+                                            </div>
+                                            <div class="form-group mb-4 col-3">
+                                                <label class="text-label">TGL PEMERIKSAAN</label>
+                                                <input id="tgl_pemeriksaan_range" class="form-control input-daterange-datepicker" type="text" name="daterange">
+                                            </div> -->
+                                        </div>
+                                    </form>
+                                </div>
+                            </div>
+                            <div class="card-footer">
+                                <div class="text-right mt-2">
+                                    <button id="btn_cari" type="button" class="btn btn-sm btn-primary waves-effect waves-light">Cari <span class="btn-icon-right"><i
+                                        class="fa fa-search"></i></span></button>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+
+                <div class="row">
+                    <div class="col-12">
+                        <div class="card">
+                            <div class="card-header">
+                                <h4 class="card-title">Peta Calon Pelanggan Kompor Induksi</h4>
+                            </div>
+                            <div class="card-body">
+                                <div style="height:500px;">
+                                    <div id="map"></div>
+                                </div>
+                            </div>
+                            <div class="card-footer text-muted">
+                                <div class="align-middle d-inline">
+                                    <span class="fa fa-info-circle"></span> Ada sebanyak <span id="plg_dipilih" class="text-success">0</span> Pelanggan dipilih dari total <span id="total_plg" class="text-primary">0</span> Pelanggan
+                                </div>
+                                <button id="btn_create" class="btn btn-primary waves-effect waves-light btn-sm pull-right mr-2">Ambil Plg <span class="btn-icon-right"><i class="fa fa-check-circle"></i></span></button>
+                                <button id="btn_reset" class="btn btn-secondary waves-effect waves-light btn-sm pull-right mr-2">Bersihkan Pilihan <span class="btn-icon-right"><i class="fa fa-refresh"></i></span></button>
+                                <button id="btn_remove" class="btn btn-danger waves-effect waves-light btn-sm pull-right mr-2">Hilangkan <span class="btn-icon-right"><i class="fa fa-times-circle"></i></span></button>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+
+                <div class="row">
+                    <div class="col-4">
+                        <div class="card">
+                            <div class="card-header">
+                                <h5 class="card-title">Rekap per Desa</h5>
+                            </div>
+                            <div class="card-body">
+                                <div class="basic-list-group">
+                                    <ul id="petugas-selected" class="list-group">
+                                        <!-- <li class="list-group-item d-flex justify-content-between align-items-center">Cras
+                                            justo odio <span class="badge badge-primary badge-pill">14</span>
+                                        </li> -->
+                                    </ul>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="col-4">
+                        <div class="card">
+                            <div class="card-header">
+                                <h5 class="card-title">Rekap per RBM</h5>
+                            </div>
+                            <div class="card-body">
+                                <div class="basic-list-group">
+                                    <ul id="rbm-paska-selected" class="list-group">
+                                        
+                                    </ul>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="col-4">
+                        <div class="card">
+                            <div class="card-header">
+                                <h5 class="card-title">Rekap per Gardu</h5>
+                            </div>
+                            <div class="card-body">
+                                <div class="basic-list-group">
+                                    <ul id="gardu-selected" class="list-group">
+                                        
+                                    </ul>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                    <!-- <div class="col-8">
+                        <div class="card">
+                            <div class="card-header">
+                                <h5 class="card-title">Detail Pelanggan</h5>
+                            </div>
+                            <div class="card-body">
+                                <div class="basic-list-group">
+                                    <ul id="plg-selected" class="list-group">
+                                        
+                                    </ul>
+                                </div>
+                            </div>
+                        </div>
+                    </div> -->
+                </div>
+
+
+            </div>
+            <!-- #/ container -->
+        </div>
+                
+        <!--**********************************
+            Content body end
+        ***********************************-->
+        <!-- <div id="confirm_modal" class="modal" tabindex="-1" role="dialog">
+          <div class="modal-dialog" role="document">
+            <div class="modal-content">
+              <div class="modal-header">
+                <h5 class="modal-title">Konfirmasi</h5>
+                <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                  <span aria-hidden="true">&times;</span>
+                </button>
+              </div>
+              <div class="modal-body">
+                <p>Apakah anda yakin akan menghapus koordinat dari Map?</p>
+              </div>
+              <div class="modal-footer">
+                <button type="button" class="btn btn-secondary" data-dismiss="modal">Batal</button>
+                <button type="button" class="btn btn-primary">Ya</button>
+              </div>
+            </div>
+          </div>
+        </div> -->
+        
+
+    </div>
+    <!--**********************************
+        Main wrapper end
+    ***********************************-->
+
+    <?php include 'parts/footer.php'; ?>
+
+    <!--**********************************
+        Scripts
+    ***********************************-->
+    <script src="../../assets/plugins/common/common.min.js"></script>
+    <script src="../js/custom.min.js"></script>
+    <script src="../js/settings.js"></script>
+    <script src="../js/gleek.js"></script>
+    
+    <script src="../../assets/plugins/moment/moment.min.js"></script>
+    <script src="../../assets/plugins/bootstrap-daterangepicker/daterangepicker.js"></script>
+    <script src="https://maps.googleapis.com/maps/api/js?key=AIzaSyD0TuTeVzIMdevT3Rfc0BrVDKy466Tdsnc"></script>
+
+    <script src="../../assets/plugins/gmaps/gmap3.js"></script>
+    <script src="../../assets/plugins/keydragzoom/keydragzoom.js"></script>
+    <!-- <script src="https://unpkg.com/@googlemaps/markerclustererplus/dist/index.min.js"></script> -->
+    <script src="../../assets/plugins/sweetalert2/dist/sweetalert2.min.js"></script>
+    <script src="../../assets/plugins/block-ui/jquery.blockUI.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/bootbox.js/5.5.2/bootbox.min.js" integrity="sha512-RdSPYh1WA6BF0RhpisYJVYkOyTzK4HwofJ3Q7ivt/jkpW6Vc8AurL1R+4AUcvn9IwEKAPm/fk7qFZW3OuiUDeg==" crossorigin="anonymous" referrerpolicy="no-referrer"></script>
+
+    <script src="../js/pages/apps.js"></script>
+    <script src="../js/pages/peta-kompor.js?time=1"></script>
+
+</body>
+</html>
