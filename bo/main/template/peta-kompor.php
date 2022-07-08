@@ -136,6 +136,19 @@
                                 <h4 class="card-title">Peta Calon Pelanggan Kompor Induksi</h4>
                             </div>
                             <div class="card-body">
+                                <div class="mb-4">
+                                    <p>Pastikan sudah tidak ada cluster (lingkaran besar) pada tampilan Peta, lalu silahkan pilih pelanggan-pelanggan yang akan dijadikan target kompor induksi dengan cara memblok sekumpulan titik koordinat (tahan tombol <span class="text-primary">SHIFT + blok area</span>) atau <span class="text-primary">KLIK</span> pada masing-masing titik koordinat.
+                                    </p>
+                                    <p>Lalu tentukan aksi apa yang akan dilakukan terhadap titik-titik yang sudah dipilih dengan tombol-tombol berikut:
+                                        <ul>
+                                            <li><span class="text-primary">Hilangkan:</span> untuk menghilangkan titik-titik yang dipilih dari Peta, jika dirasa titik yang ditampilkan melenceng</li>
+                                            <li><span class="text-primary">Bersihkan Pilihan:</span> untuk membatalkan pilihan dari titik-titik yang sudah dipilih (reset pilihan)</li>
+                                            <li><span class="text-primary">Buat Target:</span> untuk menjadikan pelanggan dipilih menjadi target kompor induksi</li>
+                                        </ul>
+                                    </p>
+                                    <p>Penambahan target bisa dilakukan berkali-kali sampai sesuai dengan kebutuhan.
+                                    </p>
+                                </div>
                                 <div style="height:500px;">
                                     <div id="map"></div>
                                 </div>
