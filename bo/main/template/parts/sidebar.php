@@ -122,19 +122,28 @@
                     <li><a href="mon-foto-rumah.php">Detail Data Foto Rumah</a></li>
                 </ul>
             </li>
-            <li><a class="has-arrow" href="javascript:void()" aria-expanded="false"><i class="mdi mdi-map"></i> <span class="nav-text">RPP</span></a>
+            <li><a class="has-arrow" href="javascript:void()" aria-expanded="false"><i class="mdi mdi-map"></i> <span class="nav-text">RPP On Desk</span></a>
                 <ul aria-expanded="false">
                     <li><a href="pembentukan-rpp.php">Peta Pembentukan RPP</a></li>
                     <li><a href="urut-langkah-rpp.php">Pembentukan Urut Langkah RPP</a></li>
                     <li><a href="rekap-rpp-up.php">Rekap RPP per ULP</a></li>
                     <li><a href="rekap-rpp.php">Rekap RPP per Petugas</a></li>
-                    <li><a href="daftar-rpp.php">Daftar RPP</a></li>
+                    <li><a href="daftar-rpp.php">Daftar RPP On Desk</a></li>
                     <li><a href="rekomendasi-rpp.php">Rekomendasi RPP</a></li>
                 </ul>
             </li>
-            <li><a class="has-arrow" href="javascript:void()" aria-expanded="false"><i class="mdi mdi-file-document-box"></i> <span class="nav-text">Pendukung Baca Meter</span></a>
+            <li><a class="has-arrow" href="javascript:void()" aria-expanded="false"><i class="mdi mdi-map"></i> <span class="nav-text">RPP On Site</span></a>
                 <ul aria-expanded="false">
-                    <li><a href="verifikasi-foto-cater.php">Sampling Foto Baca Meter</a></li>
+                    <li><a href="pelaksanaan-rpp-onsite.php">Pelaksanaan RPP On Site</a></li>
+                    <li><a href="urut-langkah-rpp.php">Pembentukan Urut Langkah RPP</a></li>
+                    <li><a href="rekap-rpp-up.php">Rekap RPP On Site  per ULP</a></li>
+                    <li><a href="rekap-rpp.php">Rekap RPP On Site per Petugas</a></li>
+                    <li><a href="daftar-rpp.php">Daftar RPP On Site</a></li>
+                </ul>
+            </li>
+            <li><a class="has-arrow" href="javascript:void()" aria-expanded="false"><i class="mdi mdi-file-document-box"></i> <span class="nav-text">Utilitas</span></a>
+                <ul aria-expanded="false">
+                    <li><a href="peta-kompor.php">Peta Calon Pelanggan Kompor Induksi</a></li>
                 </ul>
             </li>
             <li class="nav-label">Pemasaran</li>
