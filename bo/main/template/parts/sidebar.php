@@ -143,7 +143,8 @@
             </li>
             <li><a class="has-arrow" href="javascript:void()" aria-expanded="false"><i class="mdi mdi-file-document-box"></i> <span class="nav-text">Kompor Induksi</span></a>
                 <ul aria-expanded="false">
-                    <li><a href="peta-kompor.php">Peta Calon Pelanggan Kompor Induksi</a></li>
+                    <li><a href="peta-kompor.php">Peta Target Kompor Induksi</a></li>
+                    <li><a href="target-kompor.php">Target Kompor Induksi</a></li>
                 </ul>
             </li>
             <li class="nav-label">Pemasaran</li>
