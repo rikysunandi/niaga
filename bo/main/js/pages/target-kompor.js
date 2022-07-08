@@ -134,7 +134,7 @@ $(document).ready(function () {
           },
           {
             data: "NAMA",
-            visible: false
+            visible: true
           },
           {
             data: "TARIF",
