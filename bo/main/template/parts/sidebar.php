@@ -141,7 +141,7 @@
                     <li><a href="daftar-rpp.php">Daftar RPP On Site</a></li>
                 </ul>
             </li>
-            <li><a class="has-arrow" href="javascript:void()" aria-expanded="false"><i class="mdi mdi-file-document-box"></i> <span class="nav-text">Utilitas</span></a>
+            <li><a class="has-arrow" href="javascript:void()" aria-expanded="false"><i class="mdi mdi-file-document-box"></i> <span class="nav-text">Kompor Induksi</span></a>
                 <ul aria-expanded="false">
                     <li><a href="peta-kompor.php">Peta Calon Pelanggan Kompor Induksi</a></li>
                 </ul>
