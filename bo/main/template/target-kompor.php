@@ -181,16 +181,17 @@
                                     <div id="map"></div>
                                 </div>
                             </div>
-                            <div class="card-footer text-muted d-none">
+                            <div class="card-footer text-muted ">
                                 <div class="row">
-                                    <div class="align-middle d-inline col-6">
-                                        <span class="fa fa-info-circle"></span> Urut Langkah <span id="total_plg" class="text-primary"></span>: dari <span id="plg_start" class="text-success">Pelanggan X</span> ke <span id="plg_end" class="text-success">Pelanggan Y</span>
-                                        <div id="plg_dipilih"></div>
+                                    <div class="align-middle d-inline col-6 d-none text-white">
+                                        <span class="fa fa-info-circle d-none"></span> Urut Langkah <span id="total_plg" class="text-primary d-none"></span>: dari <span id="plg_start" class="text-success d-none">Pelanggan X</span> ke <span id="plg_end" class="text-success d-none">Pelanggan Y</span>
+                                        <div id="plg_dipilih" class="d-none"></div>
                                     </div>
                                     <div class="col-6">
-                                        <button id="btn_create" class="btn btn-primary waves-effect waves-light btn-sm pull-right mr-2">Simpan <span class="btn-icon-right"><i class="fa fa-check-circle"></i></span></button>
-                                        <button id="btn_simulasi" class="btn btn-secondary waves-effect waves-light btn-sm pull-right mr-2">Simulasikan <span class="btn-icon-right"><i class="fa fa-gears"></i></span></button>
-                                        <button id="btn_generate" class="btn btn-secondary waves-effect waves-light btn-sm pull-right mr-2">Generate <span class="btn-icon-right"><i class="fa fa-gear"></i></span></button>
+                                        <button id="btn_reset" class="btn btn-primary waves-effect waves-light btn-sm pull-right mr-2">Reset Target <span class="btn-icon-right"><i class="fa fa-refresh"></i></span></button>
+                                        <button id="btn_create" class="btn btn-primary waves-effect waves-light btn-sm pull-right mr-2  d-none">Simpan <span class="btn-icon-right"><i class="fa fa-check-circle"></i></span></button>
+                                        <button id="btn_simulasi" class="btn btn-secondary waves-effect waves-light btn-sm pull-right mr-2  d-none">Simulasikan <span class="btn-icon-right"><i class="fa fa-gears"></i></span></button>
+                                        <button id="btn_generate" class="btn btn-secondary waves-effect waves-light btn-sm pull-right mr-2  d-none">Generate <span class="btn-icon-right"><i class="fa fa-gear"></i></span></button>
                                     </div>
                                 </div>
                             </div>
@@ -269,7 +270,7 @@
     <script src="https://cdnjs.cloudflare.com/ajax/libs/bootbox.js/5.5.2/bootbox.min.js" integrity="sha512-RdSPYh1WA6BF0RhpisYJVYkOyTzK4HwofJ3Q7ivt/jkpW6Vc8AurL1R+4AUcvn9IwEKAPm/fk7qFZW3OuiUDeg==" crossorigin="anonymous" referrerpolicy="no-referrer"></script>
 
     <script src="../js/pages/apps.js"></script>
-    <script src="../js/pages/target-kompor.js?time=2"></script>
+    <script src="../js/pages/target-kompor.js?time=3"></script>
 
 </body>
 </html>

@@ -214,12 +214,86 @@ $(document).ready(function () {
 
     $('#btn_cari').click(function(){
 
+        var unitupi=$('#sel_unitupi').val();
+        var unitap=$('#sel_unitap').val();
+        var unitup=$('#sel_unitup').val();
+
         $('div.content-body').block({ message: 'Mengambil target kompor induksi...' });
         console.log('cari!!');
-        // console.log($("#tgl_baca_to").datepicker("getFormattedDate"));
-        // console.log($("#tgl_baca_from").datepicker("getFormattedDate"));
+        
+        table.ajax.url( '../controller/getTargetKompor.php?unitupi='+unitupi+'&unitap='+unitap+'&unitup='+unitup ).load();
 
-        table.ajax.url( '../controller/getTargetKompor.php?unitupi='+$('#sel_unitupi').val()+'&unitap='+$('#sel_unitap').val()+'&unitup='+$('#sel_unitup').val() ).load();
+    });
+
+
+    $('#btn_reset').click(function(){
+        console.log('RESET');
+
+        bootbox.confirm({
+            title: "Reset Target?",
+            message: "Apakah anda yakin akan mereset seluruh target dari unit yang dipilih?", 
+            buttons: {
+                cancel: {
+                    className: 'btn-light',
+                    label: '<i class="fa fa-times"></i> Batal'
+                },
+                confirm: {
+                    className: 'btn-primary',
+                    label: '<i class="fa fa-check"></i> Ya, Reset'
+                }
+            },
+            callback: function (result) {
+                if(result){
+
+                  var unitupi=$('#sel_unitupi').val();
+                  var unitap=$('#sel_unitap').val();
+                  var unitup=$('#sel_unitup').val();
+
+                  var dialog = bootbox.dialog({ 
+                      message: '<div class="text-center"><i class="fa fa-spin fa-spinner"></i> Menghapus data target...</div>', 
+                      closeButton: false 
+                  });
+
+                  $.post('../controller/resetKompor.php', 
+                  { 
+                    unitupi:unitupi,
+                    unitap:unitap,
+                    unitup:unitup,
+                  }, 
+                  function(res){
+                      dialog.modal('hide');
+
+                      table.ajax.url( '../controller/getTargetKompor.php?unitupi='+unitupi+'&unitap='+unitap+'&unitup='+unitup ).load();
+                      // if(res.success=='true' || res.success){
+
+                      //     bootbox.alert({
+                      //         message: res.msg,
+                      //         backdrop: true,
+                      //         callback: function (result) {
+                      //           table.ajax.url( '../controller/getTargetKompor.php?unitupi='+unitupi+'&unitap='+unitap+'&unitup='+unitup ).load();
+                      //         }
+                      //     });
+                          
+                      // }else{
+                      //     bootbox.alert({
+                      //         message: res.msg,
+                      //         backdrop: true
+                      //     });
+                      // }
+
+                      
+
+                  }).fail(function() { 
+                      dialog.modal('hide');
+                      bootbox.alert({
+                          message: "Gagal mereset data!",
+                          backdrop: true
+                      });
+                  });
+                }
+
+              }
+          });
 
 
     });
