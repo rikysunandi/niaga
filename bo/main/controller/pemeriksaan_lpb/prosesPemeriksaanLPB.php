@@ -172,13 +172,13 @@ if($blth>='202202'){
           // sqlsrv_next_result($stmt);
           // $row = sqlsrv_fetch_array($stmt, SQLSRV_FETCH_ASSOC);
 
-          $response['msg'] .= 'Data berhasil disimpan';
+          $response['msg'] .= 'Data berhasil disimpan ('.date("h:i:s").') ';
           $response['success'] = true;
 
       }else{
           $response['success'] = false;
           //$response['row'] = print_r($data);
-          $response['msg'] .= 'Data gagal disimpan'.$sql;
+          $response['msg'] .= 'Data gagal disimpan ('.date("h:i:s").')'.$sql;
       }
 
   //   }
