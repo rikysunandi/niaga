@@ -62,7 +62,7 @@ if($blth>='202202'){
   //     $response['success'] = false;
   //     $response['msg'] = 'Data Idpel '.$idpel.' tidak disimpan karena sudah pernah ditagging oleh '.$row['USER_INPUT'].' !';
   //   }else{
-      $response['msg'] = $idpel.': ';
+      $response['msg'] = $idpel.'('.date("h:i:s").'): ';
 
       //if (ftp_put($ftp_conn, '/uploads_sorek/'.$filename, $_FILES['file']['tmp_name']))
       $dir = ($filepath);
@@ -88,13 +88,13 @@ if($blth>='202202'){
             ftp_pasv ( $ftp_conn, true ) ;
             if(ftp_put($ftp_conn, $file_name, $dir.'/'.$file_name)){
               $foto = $file_name;
-              $response['msg'] .= 'Berhasil upload file foto meter, '; 
+              $response['msg'] .= 'Berhasil upload file foto meter ('.date("h:i:s").'), '; 
             }else{
-              $response['msg'] .= 'gagal menyalin file foto meter, '; 
+              $response['msg'] .= 'gagal menyalin file foto meter ('.date("h:i:s").'), '; 
             }
 
           }else{
-            $response['msg'] .= 'gagal mengakses folder foto meter, '; 
+            $response['msg'] .= 'gagal mengakses folder foto meter ('.date("h:i:s").'), '; 
           }
 
       }
@@ -117,13 +117,13 @@ if($blth>='202202'){
             ftp_pasv ( $ftp_conn, true ) ;
             if(ftp_put($ftp_conn, $file_name, $dir.'/'.$file_name)){
               $foto_rumah = $file_name;
-              $response['msg'] .= 'Berhasil upload file foto rumah, '; 
+              $response['msg'] .= 'Berhasil upload file foto rumah ('.date("h:i:s").'), '; 
             }else{
-              $response['msg'] .= 'gagal menyalin file foto rumah, '; 
+              $response['msg'] .= 'gagal menyalin file foto rumah ('.date("h:i:s").'), '; 
             }
 
           }else{
-            $response['msg'] .= 'gagal mengakses folder foto rumah '.$file_path.', '; 
+            $response['msg'] .= 'gagal mengakses folder foto rumah '.$file_path.', ('.date("h:i:s").') '; 
           }
       }
 
