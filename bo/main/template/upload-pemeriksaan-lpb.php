@@ -46,6 +46,29 @@
                         </ol>
                     </div>
                 </div>
+
+                <?php ini_set('date.timezone', 'Asia/Jakarta'); ?>
+                <?php if(date('H')<'16' && date('H')>'06'): ?>
+                    <div class="row">
+                        <div class="col-xl-12">
+                            <div class="card forms-card">
+                                <div class="card-body">
+                                <!-- <h4 class="card-title mb-4">Pemeliharaan</h4> -->
+                                    <div class="row">
+                                        <img src="../../assets/images/time.svg" class="col-4" />
+                                        <div class="col-8">
+                                            <p>Dengan mempertimbangkan beban kinerja server, serta untuk memprioritaskan pekerjaan di lapangan. </p>
+                                            <p>Menu upload zip hasil pemeriksaan LPB hanya dapat diakses pada pukul 16.00 - 06.00 WIB setiap hari.</p>
+
+                                            <p>Kami mohon maaf atas ketidaknyamanannya.</p>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                    
+                <?php else: ?>
                 <!-- row -->
                 <div class="row">
                     <div class="col-12">
@@ -118,6 +141,8 @@
                         </div>
                     </div>
                 </div>
+
+                <?php endif; ?>
 
             </div>
             <!-- #/ container -->
