@@ -130,7 +130,7 @@
         acceptedFiles: '.zip',
         addRemoveLinks: true,
         clickable: true,
-        maxFiles: 10,
+        maxFiles: 50,
         timeout: 180000,
         maxFilesize: 15,
         parallelUploads: 2,
