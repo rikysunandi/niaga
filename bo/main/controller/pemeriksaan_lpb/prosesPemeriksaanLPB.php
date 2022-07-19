@@ -62,7 +62,7 @@ if($blth>='202202'){
   //     $response['success'] = false;
   //     $response['msg'] = 'Data Idpel '.$idpel.' tidak disimpan karena sudah pernah ditagging oleh '.$row['USER_INPUT'].' !';
   //   }else{
-      $response['msg'] = $idpel.'('.date("h:i:s").'): ';
+      $response['msg'] = $idpel.' ('.date("i:s").'): ';
 
       //if (ftp_put($ftp_conn, '/uploads_sorek/'.$filename, $_FILES['file']['tmp_name']))
       $dir = ($filepath);
@@ -88,13 +88,13 @@ if($blth>='202202'){
             ftp_pasv ( $ftp_conn, true ) ;
             if(ftp_put($ftp_conn, $file_name, $dir.'/'.$file_name)){
               $foto = $file_name;
-              $response['msg'] .= 'Berhasil upload file foto meter ('.date("h:i:s").'), '; 
+              $response['msg'] .= 'Berhasil upload file foto meter ('.date("i:s").'), '; 
             }else{
-              $response['msg'] .= 'gagal menyalin file foto meter ('.date("h:i:s").'), '; 
+              $response['msg'] .= 'gagal menyalin file foto meter ('.date("i:s").'), '; 
             }
 
           }else{
-            $response['msg'] .= 'gagal mengakses folder foto meter ('.date("h:i:s").'), '; 
+            $response['msg'] .= 'gagal mengakses folder foto meter ('.date("i:s").'), '; 
           }
 
       }
@@ -117,13 +117,13 @@ if($blth>='202202'){
             ftp_pasv ( $ftp_conn, true ) ;
             if(ftp_put($ftp_conn, $file_name, $dir.'/'.$file_name)){
               $foto_rumah = $file_name;
-              $response['msg'] .= 'Berhasil upload file foto rumah ('.date("h:i:s").'), '; 
+              $response['msg'] .= 'Berhasil upload file foto rumah ('.date("i:s").'), '; 
             }else{
-              $response['msg'] .= 'gagal menyalin file foto rumah ('.date("h:i:s").'), '; 
+              $response['msg'] .= 'gagal menyalin file foto rumah ('.date("i:s").'), '; 
             }
 
           }else{
-            $response['msg'] .= 'gagal mengakses folder foto rumah '.$file_path.', ('.date("h:i:s").') '; 
+            $response['msg'] .= 'gagal mengakses folder foto rumah '.$file_path.', ('.date("i:s").') '; 
           }
       }
 
@@ -172,13 +172,13 @@ if($blth>='202202'){
           // sqlsrv_next_result($stmt);
           // $row = sqlsrv_fetch_array($stmt, SQLSRV_FETCH_ASSOC);
 
-          $response['msg'] .= 'Data berhasil disimpan ('.date("h:i:s").') ';
+          $response['msg'] .= 'Data berhasil disimpan ('.date("i:s").') ';
           $response['success'] = true;
 
       }else{
           $response['success'] = false;
           //$response['row'] = print_r($data);
-          $response['msg'] .= 'Data gagal disimpan ('.date("h:i:s").')'.$sql;
+          $response['msg'] .= 'Data gagal disimpan ('.date("i:s").')'.$sql;
       }
 
   //   }
