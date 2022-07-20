@@ -85,6 +85,7 @@ if($blth>='202202'){
           else
             $file_path = "uploads/PRIANGAN/tagging/".$blth_folder."/53XXX/";
 
+          ftp_mkdir($ftp_conn, $file_path);
           if(ftp_chdir($ftp_conn, $file_path)){
 
             ftp_pasv ( $ftp_conn, true ) ;
@@ -114,6 +115,7 @@ if($blth>='202202'){
           $ftp_conn = ftp_connect($ftp_server) or die("Could not connect to $ftp_server");
           $login = ftp_login($ftp_conn, 'ftpniaga', '123');
           
+          ftp_mkdir($ftp_conn, $file_path);
           if(ftp_chdir($ftp_conn, $file_path)){
 
             ftp_pasv ( $ftp_conn, true ) ;
