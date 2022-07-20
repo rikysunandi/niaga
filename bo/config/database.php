@@ -7,7 +7,7 @@ $connectionOptions = array(
     "pwd" => "sqlsvr1q2w3e@@",
     "CharacterSet" => "UTF-8",
     "Encrypt"=>true,
-    "TrustServerCertificate"=>false
+    "TrustServerCertificate"=>true
 
 );
 
