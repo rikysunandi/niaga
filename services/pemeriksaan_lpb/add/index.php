@@ -194,7 +194,9 @@ if(isset($_FILES['image'])){
     else
       $file_path = "/media/nas/uploads/PRIANGAN/tagging/".$blth_folder."/53XXX";
     if (!file_exists($file_path)) {
+        $old_umask = umask(0);
         mkdir($file_path, 0777, true);
+        umask($old_umask);
     }
     if(move_uploaded_file($file_tmp, $file_path."/".$file_name))
       $foto = $file_name;
@@ -224,7 +226,9 @@ if(isset($_FILES['image2'])){
     else
       $file_path = "/media/nas/uploads/PRIANGAN/rumah/".$blth_folder."/53XXX";
     if (!file_exists($file_path)) {
+        $old_umask = umask(0);
         mkdir($file_path, 0777, true);
+        umask($old_umask);
     }
     if(move_uploaded_file($file_tmp, $file_path."/".$file_name))
       $foto_rumah = $file_name;
