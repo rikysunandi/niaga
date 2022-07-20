@@ -30,10 +30,10 @@ function delete_files($target) {
 //../../../assets/uploads/PRIANGAN_53533.DEDEN.ARRY_20220713132124
 //../../../assets/uploads/07191651_PRIANGAN_53533.DEDEN.ARRY_20220713132124+2.zip_556a2b.zip
 
-if(strlen($filepath)>24){
-    delete_files(($filepath));
-    delete_files($zipfile);
-}
+// if(strlen($filepath)>24){
+//     delete_files(($filepath));
+//     delete_files($zipfile);
+// }
 
 $response['msg'] .= 'Clear File berhasil';
 $response['success'] = true;
