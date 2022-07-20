@@ -186,12 +186,13 @@ if(isset($_FILES['image'])){
   if($file_size > 2097152){
      $response['error'][]='File size must be excately 2 MB';
   }
+  $blth_folder=date('Ym');
 
   if(empty($response['error'])==true){
     if(strlen($unitup)==5)
-      $file_path = "/media/nas/uploads/PRIANGAN/tagging/".$unitap."/".$unitup;
+      $file_path = "/media/nas/uploads/PRIANGAN/tagging/".$blth_folder."/".$unitap."/".$unitup;
     else
-      $file_path = "/media/nas/uploads/PRIANGAN/tagging/53XXX";
+      $file_path = "/media/nas/uploads/PRIANGAN/tagging/".$blth_folder."/53XXX";
     if (!file_exists($file_path)) {
         mkdir($file_path, 0777, true);
     }
@@ -219,9 +220,9 @@ if(isset($_FILES['image2'])){
 
   if(empty($response['error'])==true){
     if(strlen($unitup)==5)
-      $file_path = "/media/nas/uploads/PRIANGAN/rumah/".$unitap."/".$unitup;
+      $file_path = "/media/nas/uploads/PRIANGAN/rumah/".$blth_folder."/".$unitap."/".$unitup;
     else
-      $file_path = "/media/nas/uploads/PRIANGAN/rumah/53XXX";
+      $file_path = "/media/nas/uploads/PRIANGAN/rumah/".$blth_folder."/53XXX";
     if (!file_exists($file_path)) {
         mkdir($file_path, 0777, true);
     }

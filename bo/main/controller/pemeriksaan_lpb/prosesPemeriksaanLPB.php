@@ -72,6 +72,8 @@ if($blth>='202202'){
 
       $file_name = $idpel.'_'.$tgl_pemeriksaan.'.jpg';
 
+      $blth_folder=date('Ym');
+
 
       //if($zip->extractTo($dir."/".$file_name, $file_name)){
       //if(copy('zip://'. $zipfile .'#'. $file_name , $dir."/".$file_name)){
@@ -79,9 +81,9 @@ if($blth>='202202'){
       if(file_exists($dir.'/'.$file_name)){
 
           if(strlen($unitap)==5)
-            $file_path = "uploads/PRIANGAN/tagging/".$unitap."/".$unitup."/";
+            $file_path = "uploads/PRIANGAN/tagging/".$blth_folder."/".$unitap."/".$unitup."/";
           else
-            $file_path = "uploads/PRIANGAN/tagging/53XXX/";
+            $file_path = "uploads/PRIANGAN/tagging/".$blth_folder."/53XXX/";
 
           if(ftp_chdir($ftp_conn, $file_path)){
 
@@ -105,9 +107,9 @@ if($blth>='202202'){
       //if(copy('zip://'. $zipfile .'#'. $file_name , $dir."/".$file_name)){
       if(file_exists($dir.'/'.$file_name)){
           if(strlen($unitap)==5)
-            $file_path = "uploads/PRIANGAN/rumah/".$unitap."/".$unitup."/";
+            $file_path = "uploads/PRIANGAN/rumah/".$blth_folder."/".$unitap."/".$unitup."/";
           else
-            $file_path = "uploads/PRIANGAN/rumah/53XXX/";
+            $file_path = "uploads/PRIANGAN/rumah/".$blth_folder."/53XXX/";
 
           $ftp_conn = ftp_connect($ftp_server) or die("Could not connect to $ftp_server");
           $login = ftp_login($ftp_conn, 'ftpniaga', '123');
