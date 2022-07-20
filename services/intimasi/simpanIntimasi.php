@@ -47,7 +47,11 @@ $path = "/media/nas/uploads/INTIMASI/".$blth."/".$area."/".$nama_foto;
 $dir = "/media/nas/uploads/INTIMASI/".$blth."/".$area."/";
 
 if(!file_exists($path)){
-    if(!file_exists($dir)){ mkdir($dir, 0777, true); }
+    if(!file_exists($dir)){ 
+        $old_umask = umask(0);
+        mkdir($dir, 0777, true);
+        umask($old_umask); 
+    }
     //$fotoGet = $foto;
     $bin =base64_decode($foto);
     $im = imageCreateFromString($bin);
