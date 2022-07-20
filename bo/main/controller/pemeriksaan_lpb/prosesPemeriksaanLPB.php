@@ -80,7 +80,7 @@ if($blth>='202202'){
          foreach($parts as $part){
             if(!@ftp_chdir($ftpcon, $part)){
                ftp_mkdir($ftpcon, $part);
-               //ftp_chmod($ftpcon, 0775, $part);
+               ftp_chmod($ftpcon, 0777, $part);
                ftp_chdir($ftpcon, $part);
             }
          }
