@@ -5,7 +5,10 @@ $connectionOptions = array(
     "database" => "NIAGA",
     "uid" => "sa",
     "pwd" => "sqlsvr1q2w3e@@",
-    "CharacterSet" => "UTF-8"
+    "CharacterSet" => "UTF-8",
+    "Encrypt"=>true,
+    "TrustServerCertificate"=>true);
+
 );
 
 	$conn = sqlsrv_connect($serverName, $connectionOptions);
