@@ -37,6 +37,11 @@ $blth = substr(str_replace('-','',$tgl_pemeriksaan),0,6);
 
 $response = array();
 
+if(strlen($unitap)<>5){
+  $key = array_search($unitup, array_column($unitups, 'unitup'));
+  $unitap = $unitups[$key]['unitap'];
+}
+
 if($blth>='202202'){
 
   if(substr($idpel, 0, 11)=='99999999999'){
