@@ -6,7 +6,7 @@ $connectionOptions = array(
     "uid" => "sa",
     "pwd" => "sqlsvr1q2w3e@@",
     "CharacterSet" => "UTF-8",
-    "Encrypt"=>false,
+    "Encrypt"=>true,
     "TrustServerCertificate"=>true
 
 );
