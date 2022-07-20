@@ -74,18 +74,36 @@ if($blth>='202202'){
 
       $blth_folder=date('Ym');
 
+      function ftp_mksubdirs($ftpcon,$ftpbasedir,$ftpath){
+         @ftp_chdir($ftpcon, $ftpbasedir); // /var/www/uploads
+         $parts = array_filter(explode('/',$ftpath)); // 2013/06/11/username
+         foreach($parts as $part){
+            if(!@ftp_chdir($ftpcon, $part)){
+               ftp_mkdir($ftpcon, $part);
+               //ftp_chmod($ftpcon, 0775, $part);
+               ftp_chdir($ftpcon, $part);
+            }
+         }
+      }
+
+
 
       //if($zip->extractTo($dir."/".$file_name, $file_name)){
       //if(copy('zip://'. $zipfile .'#'. $file_name , $dir."/".$file_name)){
 
       if(file_exists($dir.'/'.$file_name)){
 
-          if(strlen($unitap)==5)
+          $base_file_path = "uploads/PRIANGAN/tagging/";
+          if(strlen($unitap)==5){
             $file_path = "uploads/PRIANGAN/tagging/".$blth_folder."/".$unitap."/".$unitup."/";
-          else
+            $newftpdir=$blth_folder."/".$unitap."/".$unitup."/";
+          }
+          else{
             $file_path = "uploads/PRIANGAN/tagging/".$blth_folder."/53XXX/";
+            $newftpdir="53XXX/";
+          }
 
-          ftp_mkdir($ftp_conn, $file_path);
+          ftp_mksubdirs($ftp_conn,$base_file_path, $newftpdir);
           if(ftp_chdir($ftp_conn, $file_path)){
 
             ftp_pasv ( $ftp_conn, true ) ;
@@ -107,10 +125,15 @@ if($blth>='202202'){
       //if($zip->extractTo($dir."/".$file_name, $file_name)){
       //if(copy('zip://'. $zipfile .'#'. $file_name , $dir."/".$file_name)){
       if(file_exists($dir.'/'.$file_name)){
-          if(strlen($unitap)==5)
+          $base_file_path = "uploads/PRIANGAN/rumah/";
+          if(strlen($unitap)==5){
             $file_path = "uploads/PRIANGAN/rumah/".$blth_folder."/".$unitap."/".$unitup."/";
-          else
+            $newftpdir=$blth_folder."/".$unitap."/".$unitup."/";
+          }
+          else{
             $file_path = "uploads/PRIANGAN/rumah/".$blth_folder."/53XXX/";
+            $newftpdir="53XXX/";
+          }
 
           $ftp_conn = ftp_connect($ftp_server) or die("Could not connect to $ftp_server");
           $login = ftp_login($ftp_conn, 'ftpniaga', '123');
