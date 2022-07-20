@@ -104,7 +104,7 @@ if($blth>='202202'){
           }
 
           ftp_mksubdirs($ftp_conn,$base_file_path, $newftpdir);
-          if(ftp_chdir($ftp_conn, $file_path)){
+          if(1==1){
 
             ftp_pasv ( $ftp_conn, true ) ;
             if(ftp_put($ftp_conn, $file_name, $dir.'/'.$file_name)){
@@ -139,7 +139,7 @@ if($blth>='202202'){
           $login = ftp_login($ftp_conn, 'ftpniaga', '123');
           
           ftp_mkdir($ftp_conn, $file_path);
-          if(ftp_chdir($ftp_conn, $file_path)){
+          if(1==1){
 
             ftp_pasv ( $ftp_conn, true ) ;
             if(ftp_put($ftp_conn, $file_name, $dir.'/'.$file_name)){
