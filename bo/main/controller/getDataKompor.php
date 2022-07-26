@@ -39,16 +39,16 @@ if(!sqlsrv_execute($stmt)){
 if($stmt){
 	$i=0;
 	while( $row = sqlsrv_fetch_array( $stmt, SQLSRV_FETCH_ASSOC) ) {
-		$response['plg'][$i]['idpel'] = $row['idpel']; 
-		$response['plg'][$i]['nama'] = $row['nama']; 
+		$response['plg'][$i]['idpel'] = $row['IDPEL']; 
+		$response['plg'][$i]['nama'] = $row['NAMA']; 
 		// $response['plg'][$i]['tarif'] = $row['TARIF']; 
 		// $response['plg'][$i]['daya'] = intval($row['DAYA']);
-		$response['plg'][$i]['latitude'] = ($row['koordinat_x']); 
-		$response['plg'][$i]['longitude'] = ($row['koordinat_y']); 
-		$response['plg'][$i]['tarif'] = ($row['tarif']); 
-		$response['plg'][$i]['nama_kelurahan'] = ($row['nama_kelurahan']); 
-		$response['plg'][$i]['gardu'] = ($row['gardu']); 
-		$response['plg'][$i]['rbm'] = ($row['rbm']); 
+		$response['plg'][$i]['latitude'] = ($row['KOORDINAT_X']); 
+		$response['plg'][$i]['longitude'] = ($row['KOORDINAT_Y']); 
+		$response['plg'][$i]['tarif'] = ($row['TARIF']); 
+		$response['plg'][$i]['nama_kelurahan'] = ($row['NAMA_KELURAHAN']); 
+		$response['plg'][$i]['gardu'] = ($row['NAMA_GARDU']); 
+		$response['plg'][$i]['rbm'] = ($row['RBM']); 
 		// $response['plg'][$i]['foto'] = ($row['FOTO']); 
 
 		$i++;
