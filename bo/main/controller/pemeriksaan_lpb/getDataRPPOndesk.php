@@ -21,7 +21,7 @@ $params = array(
         array($rpp, SQLSRV_PARAM_IN),
     );
 
-$sql = "EXEC sp_vw_Create_Detail_RPP @UserID = ?, @Unitupi = ?, @Unitap = ?, @Unitup = ?, @Petugas = ?, @RPP = ? ";
+$sql = "EXEC sp_vw_Create_RPP_On_Desk @UserID = ?, @Unitupi = ?, @Unitap = ?, @Unitup = ?, @Petugas = ?, @RPP = ? ";
 $stmt = sqlsrv_prepare($conn, $sql, $params);
 
 //sqlsrv_execute($stmt);
@@ -30,16 +30,17 @@ if(!sqlsrv_execute($stmt)){
 }
 
 // DB table to use
-$table = 'NIAGA.dbo.vw_Create_Detail_RPP_'.$unitup;
+$table = 'NIAGA.dbo.vw_Create_RPP_On_Desk_'.$unitup;
  
 // Table's primary key
-$primaryKey = 'IDPEL';
+$primaryKey = 'RPP_KDDK';
  
 // Array of database columns which should be read and sent back to DataTables.
 // The `db` parameter represents the column name in the database, while the `dt`
 // parameter represents the DataTables column identifier. In this case simple
 // indexes
 $columns = array(
+    array( 'db' => 'NO', 'dt' => 'NO' ),
     array( 'db' => 'UNITAP', 'dt' => 'UNITAP' ),
     array( 'db' => 'UNITUP', 'dt' => 'UNITUP' ),
     array( 'db' => 'IDPEL', 'dt' => 'IDPEL' ),
@@ -54,6 +55,9 @@ $columns = array(
     array( 'db' => 'RPP_PETUGAS',  'dt' => 'RPP_PETUGAS' ),
     array( 'db' => 'LATITUDE',  'dt' => 'LATITUDE' ),
     array( 'db' => 'LONGITUDE',  'dt' => 'LONGITUDE' ),
+    array( 'db' => 'STATUS_ONSITE',  'dt' => 'STATUS_ONSITE' ),
+    array( 'db' => 'RPP_ONSITE',  'dt' => 'RPP_ONSITE' ),
+    array( 'db' => 'PETUGAS_ONSITE',  'dt' => 'PETUGAS_ONSITE' ),
     array( 'db' => 'IDPEL',  'dt' => 'MARKER_TITLE' ),
 );
  

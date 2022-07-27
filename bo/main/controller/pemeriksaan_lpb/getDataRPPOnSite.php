@@ -3,13 +3,15 @@
 set_time_limit(-1);
 require_once '../../../config/config.php';
 require_once '../../../config/database.php';
+
 $unitupi = $_GET['unitupi'];
 $unitap = $_GET['unitap'];
 $unitup = $_GET['unitup'];
 $petugas = $_GET['petugas'];
 $rpp = $_GET['rpp'];
-//$tgl_pemeriksaan_from = $_GET['tgl_pemeriksaan_from'];
-//$tgl_pemeriksaan_to = $_GET['tgl_pemeriksaan_to'];
+$tgl_pemeriksaan_from = $_GET['tgl_pemeriksaan_from'];
+$tgl_pemeriksaan_to = $_GET['tgl_pemeriksaan_to'];
+$urut_rpp = ($_GET['urut_rpp']=='on')?'Y':'T';
 $user = 'SYSTEM';
 
 $params = array(
@@ -19,9 +21,12 @@ $params = array(
         array($unitup, SQLSRV_PARAM_IN),
         array($petugas, SQLSRV_PARAM_IN),
         array($rpp, SQLSRV_PARAM_IN),
+        array($tgl_pemeriksaan_from, SQLSRV_PARAM_IN),
+        array($tgl_pemeriksaan_to, SQLSRV_PARAM_IN),
+        array($urut_rpp, SQLSRV_PARAM_IN),
     );
 
-$sql = "EXEC sp_vw_Create_Detail_RPP @UserID = ?, @Unitupi = ?, @Unitap = ?, @Unitup = ?, @Petugas = ?, @RPP = ? ";
+$sql = "EXEC sp_vw_Create_RPP_On_Site @UserID = ?, @Unitupi = ?, @Unitap = ?, @Unitup = ?, @User_Input = ?, @RPP = ?, @Tgl_Pemeriksaan_From = ?, @Tgl_Pemeriksaan_To = ?, @Urut_RPP = ?  ";
 $stmt = sqlsrv_prepare($conn, $sql, $params);
 
 //sqlsrv_execute($stmt);
@@ -30,30 +35,38 @@ if(!sqlsrv_execute($stmt)){
 }
 
 // DB table to use
-$table = 'NIAGA.dbo.vw_Create_Detail_RPP_'.$unitup;
+$table = 'NIAGA.dbo.vw_Create_RPP_On_Site_'.$unitup;
  
 // Table's primary key
-$primaryKey = 'IDPEL';
+$primaryKey = 'TGL_INPUT';
  
 // Array of database columns which should be read and sent back to DataTables.
 // The `db` parameter represents the column name in the database, while the `dt`
 // parameter represents the DataTables column identifier. In this case simple
 // indexes
 $columns = array(
+    array( 'db' => 'NO', 'dt' => 'NO' ),
     array( 'db' => 'UNITAP', 'dt' => 'UNITAP' ),
     array( 'db' => 'UNITUP', 'dt' => 'UNITUP' ),
     array( 'db' => 'IDPEL', 'dt' => 'IDPEL' ),
+    array( 'db' => 'TGL_PEMERIKSAAN',  'dt' => 'TGL_PEMERIKSAAN' ),
     array( 'db' => 'NOMOR_METER_KWH',  'dt' => 'NOMOR_METER_KWH' ),
     array( 'db' => 'NAMA',  'dt' => 'NAMA' ),
     array( 'db' => 'TARIF',  'dt' => 'TARIF' ),
     array( 'db' => 'DAYA',  'dt' => 'DAYA' ),
-    array( 'db' => 'KOGOL',  'dt' => 'KOGOL' ),
-    array( 'db' => 'NAMA_GARDU',  'dt' => 'NAMA_GARDU' ),
-    array( 'db' => 'NOMOR_JURUSAN_TIANG',  'dt' => 'NOMOR_JURUSAN_TIANG' ),
-    array( 'db' => 'RPP_KDDK',  'dt' => 'RPP_KDDK' ),
-    array( 'db' => 'RPP_PETUGAS',  'dt' => 'RPP_PETUGAS' ),
+    array( 'db' => 'PERUNTUKAN',  'dt' => 'PERUNTUKAN' ),
+    array( 'db' => 'TGL_INPUT',  'dt' => 'TGL_INPUT' ),
+    array( 'db' => 'NIK',  'dt' => 'NIK' ),
+    array( 'db' => 'EMAIL',  'dt' => 'EMAIL' ),
+    array( 'db' => 'SISA_KWH',  'dt' => 'SISA_KWH' ),
     array( 'db' => 'LATITUDE',  'dt' => 'LATITUDE' ),
     array( 'db' => 'LONGITUDE',  'dt' => 'LONGITUDE' ),
+    array( 'db' => 'AKURASI_KOORDINAT',  'dt' => 'AKURASI_KOORDINAT' ),
+    array( 'db' => 'USER_INPUT',  'dt' => 'USER_INPUT' ),
+    array( 'db' => 'FOTOPATH',  'dt' => 'FOTOPATH' ),
+    array( 'db' => 'FOTORUMAH',  'dt' => 'FOTORUMAH' ),
+    array( 'db' => 'SISIPAN',  'dt' => 'SISIPAN' ),
+    array( 'db' => 'RPP_KDDK',  'dt' => 'RPP_KDDK' ),
     array( 'db' => 'IDPEL',  'dt' => 'MARKER_TITLE' ),
 );
  

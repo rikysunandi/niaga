@@ -132,15 +132,15 @@
                     <li><a href="rekomendasi-rpp.php">Rekomendasi RPP</a></li>
                 </ul>
             </li>
-            <!-- <li><a class="has-arrow" href="javascript:void()" aria-expanded="false"><i class="mdi mdi-map"></i> <span class="nav-text">RPP On Site</span></a>
+            <li><a class="has-arrow" href="javascript:void()" aria-expanded="false"><i class="mdi mdi-map"></i> <span class="nav-text">RPP On Site</span></a>
                 <ul aria-expanded="false">
-                    <li><a href="pelaksanaan-rpp-onsite.php">Pelaksanaan RPP On Site</a></li>
-                    <li><a href="urut-langkah-rpp.php">Pembentukan Urut Langkah RPP</a></li>
-                    <li><a href="rekap-rpp-up.php">Rekap RPP On Site  per ULP</a></li>
+                    <li><a href="pelaksanaan-rpp-onsite.php">Review RPP On Site</a></li>
+                    <!-- <li><a href="urut-langkah-rpp.php">Pembentukan Urut Langkah RPP</a></li>
+                    <li><a href="rekap-rpp-onsite.php">Rekap RPP On Site  per ULP</a></li>
                     <li><a href="rekap-rpp.php">Rekap RPP On Site per Petugas</a></li>
-                    <li><a href="daftar-rpp.php">Daftar RPP On Site</a></li>
+                    <li><a href="daftar-rpp.php">Daftar RPP On Site</a></li> -->
                 </ul>
-            </li> -->
+            </li>
             <li><a class="has-arrow" href="javascript:void()" aria-expanded="false"><i class="mdi mdi-file-document-box"></i> <span class="nav-text">Kompor Induksi</span></a>
                 <ul aria-expanded="false">
                     <li><a href="peta-kompor.php">Peta Pemilihan Target</a></li>

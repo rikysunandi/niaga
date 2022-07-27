@@ -7670,6 +7670,12 @@ a.text-secondary:hover {
 .text-success {
     color: #4caf50 !important;
 }
+.text-success-dark {
+    color: #1D7620 !important;
+}
+.text-success-light {
+    color: #89EA8C !important;
+}
 a.text-success:focus,
 a.text-success:hover {
     color: #3d8b40 !important;
