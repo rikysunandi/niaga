@@ -145,6 +145,7 @@
                 <ul aria-expanded="false">
                     <li><a href="peta-kompor.php">Peta Pemilihan Target</a></li>
                     <li><a href="target-kompor.php">Target Kompor Induksi</a></li>
+                    <li><a href="rpt-kompor.php">Progress Survey CKPM</a></li>
                 </ul>
             </li>
             <li class="nav-label">Pemasaran</li>
