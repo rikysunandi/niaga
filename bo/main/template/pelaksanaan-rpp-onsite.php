@@ -229,7 +229,7 @@
                                     <div id="map_on_desk" class="map"></div>
                                 </div>
                             </div>
-                            <div class="card-footer text-muted">
+                            <div class="card-footer text-muted d-none">
                                 <div class="row ml-4">
                                     <div class="form-check col-3">
                                         <input class="form-check-input" type="checkbox" class="filled-in chk-col-primary" id="cb_sudah_onsite" checked>
@@ -237,7 +237,7 @@
                                     </div>
                                     <div class="form-check col-6">
                                         <input class="form-check-input" type="checkbox" class="filled-in chk-col-primary" id="cb_sudah_onsite_beda_rpp_petugas" checked>
-                                        <label class="form-check-label" for="cb_sudah_onsite_beda_rpp_petugas" style="color:orange">Sudah Onsite Beda RPP/Petugas</label>
+                                        <label class="form-check-label" for="cb_sudah_onsite_beda_rpp_petugas" style="color:orange">Sdh Onsite Beda RPP/Petugas</label>
                                     </div>
                                     <div class="form-check col-3">
                                         <input class="form-check-input" type="checkbox" class="filled-in chk-col-primary" id="cb_belum_onsite" checked>
@@ -254,7 +254,7 @@
                                     <div id="map_on_site" class="map"></div>
                                 </div>
                             </div>
-                            <div class="card-footer text-muted">
+                            <div class="card-footer text-muted d-none">
                                <div class="row ml-4">
                                     <div class="form-check col-6">
                                         <input class="form-check-input" type="checkbox" class="filled-in chk-col-primary" id="cb_onsite" checked>
