@@ -194,6 +194,7 @@
                                     <thead>
                                         <tr>
                                             <!-- <th class="text-center bg-primary-lighten-2">KDDK</th> -->
+                                            <th class="text-center bg-primary-lighten-2">NO</th>
                                             <th class="text-center bg-primary-lighten-2">TGL INPUT</th>
                                             <th class="text-center bg-primary-lighten-2">RPP ONSITE</th>
                                             <th class="text-center bg-primary-lighten-2">KDDK ONDESK</th>

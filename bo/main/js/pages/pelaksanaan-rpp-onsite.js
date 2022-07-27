@@ -369,7 +369,7 @@ $(document).ready(function () {
            // "<'row'<'col-sm-12 col-md-9 mb-2'B>>" +
             "<'row'<'col-sm-12 col-md-4'f>>" +
             "<'row'<'col-sm-12 mb-2'tr>>" +
-            "<'row'<'col-sm-12 col-md-5 mb-2'i><'col-sm-12 col-md-7'p>>",
+            "<'row'<'col-sm-12 col-md-8 mb-2'i><'col-sm-12 col-md-4'p>>",
         //lengthMenu: [[25, 50, 100], [25, 50, 100]],
         // lengthChange: false,
         "scrollY": 520,
@@ -395,7 +395,74 @@ $(document).ready(function () {
         $('#card_map_on_site .card-footer :checkbox').each(function(c){
           this.checked=true;
         });
-        initMap('map_on_site', rows);
+
+        var container = $('#map_on_site').parent();
+        $('#map_on_site').remove();
+        container.append('<div id="map_on_site"></div>');
+
+        map_on_site = new google.maps.Map(document.getElementById("map_on_site"), {
+          zoom: 10,
+          center: { lat: -6.3487933, lng: 107.6809901 },
+        });
+
+        var icon;
+        var infowindow = new google.maps.InfoWindow();
+        var marker = new google.maps.Marker();
+        var bounds = new google.maps.LatLngBounds();
+
+        markers_on_site = rows.map((tagging, i) => {
+          if(tagging.LATITUDE && tagging.LONGITUDE ){
+
+            if(tagging.SISIPAN=='Y')
+              icon= "../controller/getMarkerIcon.php?color=orange&text="+(i+1);
+            else
+              icon= "../controller/getMarkerIcon.php?color=green&text="+(i+1);
+
+            marker = new google.maps.Marker({
+              position: {
+                          lat: parseFloat(tagging.LATITUDE), 
+                          lng: parseFloat(tagging.LONGITUDE)
+                        },
+              map: map_on_site,
+              zIndex: rows.length - i,
+              icon: {
+                url: icon,
+              },
+              title: tagging.MARKER_TITLE,
+              status: (tagging.SISIPAN=='Y')?'SISIPAN':'ONSITE'
+            });
+          }
+
+          bounds.extend(new google.maps.LatLng(parseFloat(tagging.LATITUDE), parseFloat(tagging.LONGITUDE)));
+
+          google.maps.event.addListener(marker, 'click', (function (marker, i) {
+              return function () {
+                  infowindow.setContent(
+                    ` <div class="row">
+                        <div class="col-12">
+                          <dl>
+                            <dt>KDDK</dt>
+                            <dd>`+tagging.TGL_INPUT+`</dd>
+                            <dt>Idpel</dt>
+                            <dd>`+tagging.IDPEL+`</dd>
+                            <dt>Nama</dt>
+                            <dd>`+tagging.NAMA+`</dd>
+                          </dl>
+                        </div>
+                      </div>
+                    `
+                    );
+                  infowindow.open(map_on_site, marker);
+              }
+          })(marker, i)); 
+
+          return marker;
+          
+        });
+
+        map_on_site.fitBounds(bounds);
+
+        //initMap('map_on_site', rows);
 
         // var container = $('#map_on_site').parent();
         // $('#map_on_site').remove();
@@ -405,7 +472,7 @@ $(document).ready(function () {
         "processing": true,
         "serverSide": true,
         "ajax": {
-            "url": '../controller/pemeriksaan_lpb/getDataPemeriksaanLPB.php',
+            "url": '../controller/pemeriksaan_lpb/getDataRPPOnSite.php',
             "type": "POST",
             "timeout": 360000
         },
@@ -414,11 +481,23 @@ $(document).ready(function () {
         //responsive: true,
         columns: [
           {
+            data: "NO",
+            render: function ( data, type, row ) {
+                
+                  
+                  if(row.SISIPAN=='Y')
+                    return '<span class="text-warning">'+data+'</span>';
+                  else
+                    return '<span class="text-success">'+data+'</span>';
+              },
+          },
+          {
             data: "TGL_INPUT",
             render: function ( data, type, row ) {
                 
+                  
                   if(row.SISIPAN=='Y')
-                    return '<span class="text-success">'+data+'</span>';
+                    return '<span class="text-warning">'+data+'</span>';
                   else
                     return '<span class="text-success">'+data+'</span>';
               },
@@ -427,8 +506,9 @@ $(document).ready(function () {
             data: "PERUNTUKAN",
             render: function ( data, type, row ) {
                 
+                  
                   if(row.SISIPAN=='Y')
-                    return '<span class="text-success">'+data+'</span>';
+                    return '<span class="text-warning">'+data+'</span>';
                   else
                     return '<span class="text-success">'+data+'</span>';
               },
@@ -470,7 +550,7 @@ $(document).ready(function () {
            // "<'row'<'col-sm-12 col-md-9 mb-2'B>>" +
             "<'row'<'col-sm-12 col-md-4'f>>" +
             "<'row'<'col-sm-12 mb-2'tr>>" +
-            "<'row'<'col-sm-12 col-md-5 mb-2'i><'col-sm-12 col-md-7'p>>",
+            "<'row'<'col-sm-12 col-md-8 mb-2'i><'col-sm-12 col-md-4'p>>",
         // lengthMenu: [[25, 50, 100], [25, 50, 100]],
         lengthChange: false,
         // buttons: [
@@ -542,6 +622,19 @@ $(document).ready(function () {
     });
 
     
+    $('#card_map_on_site .card-footer :checkbox').click(function(e){
+        //console.log('klik checkbox',$(this).next('label').text());
+        var status=$(this).next('label').text().toUpperCase();
+        var checked=this.checked;
+        $('div#card_map_on_site').block({ message: 'Menyesuaikan peta...' });
+        asyncForEach(markers_on_site, function(marker) {
+            if(marker.status==status){
+              marker.setVisible(checked);
+            }
+        },function() {
+            $('div#card_map_on_site').unblock();
+        });
+    });
 
     $('#btn_cari').click(function(btn){
         console.log('Klikk 2');
