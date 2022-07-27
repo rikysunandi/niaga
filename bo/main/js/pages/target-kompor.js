@@ -206,9 +206,9 @@ $(document).ready(function () {
         ],
         "scrollY": 520,
         "scrollX": true,
-        "paging": false,
+        "paging": true,
         lengthMenu: [[25, 100, -1], [25, 100, "All"]],
-        pageLength: -1,
+        pageLength: 25,
         "order": [[10, 'asc']],
     });
 

@@ -157,7 +157,7 @@
                                 <div class="align-middle d-inline">
                                     <span class="fa fa-info-circle"></span> Ada sebanyak <span id="plg_dipilih" class="text-success">0</span> Pelanggan dipilih dari total <span id="total_plg" class="text-primary">0</span> Pelanggan
                                 </div>
-                                <button id="btn_create" class="btn btn-primary waves-effect waves-light btn-sm pull-right mr-2">Buat Target <span class="btn-icon-right"><i class="fa fa-check-circle"></i></span></button>
+                                <button id="btn_create" class="btn btn-primary waves-effect waves-light btn-sm pull-right mr-2">Keluarkan <span class="btn-icon-right"><i class="fa fa-check-circle"></i></span></button>
                                 <button id="btn_reset" class="btn btn-secondary waves-effect waves-light btn-sm pull-right mr-2">Bersihkan Pilihan <span class="btn-icon-right"><i class="fa fa-refresh"></i></span></button>
                                 <button id="btn_remove" class="btn btn-danger waves-effect waves-light btn-sm pull-right mr-2">Hilangkan <span class="btn-icon-right"><i class="fa fa-times-circle"></i></span></button>
                             </div>
