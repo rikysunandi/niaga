@@ -226,6 +226,7 @@
                     <div class="col-6">
                         <div id="card_map_on_desk" class="card card-map">
                             <div class="card-body">
+                            <h4 class="card-title mb-4">Peta On Desk</h4>
                                 <div id="wrapper_map" style="height:480px; width:420px;">
                                     <div id="map_on_desk" class="map"></div>
                                 </div>
@@ -251,6 +252,7 @@
                     <div class="col-6">
                         <div id="card_map_on_site" class="card card-map">
                             <div class="card-body">
+                            <h4 class="card-title mb-4">Peta On Site</h4>
                                 <div id="wrapper_map_uji_rpp" style="height:480px; width:420px;">
                                     <div id="map_on_site" class="map"></div>
                                 </div>
