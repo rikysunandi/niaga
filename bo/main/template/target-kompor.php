@@ -166,9 +166,9 @@
                     </div>
                 </div>
 
-                <div class="row">
+                <div class="row d-none">
                     <div class="col-12">
-                        <div class="card">
+                        <div class="card ">
                             <div class="card-header">
                                 <h4 class="card-title">Peta Target Kompor Induksi</h4>
                             </div>
