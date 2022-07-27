@@ -367,11 +367,13 @@ $(document).ready(function () {
         // },
         dom:
            // "<'row'<'col-sm-12 col-md-9 mb-2'B>>" +
-            "<'row'<'col-sm-12 col-md-4'f>>" +
+           "<'row'<'col-sm-12 col-md-4 mb-2'B><'col-sm-12 col-md-8 mb-2'f>>" +
+            //"<'row'<'col-sm-12 col-md-4'f>>" +
             "<'row'<'col-sm-12 mb-2'tr>>" +
             "<'row'<'col-sm-12 col-md-8 mb-2'i><'col-sm-12 col-md-4'p>>",
         //lengthMenu: [[25, 50, 100], [25, 50, 100]],
         // lengthChange: false,
+        buttons:['excel'],
         "scrollY": 520,
         "scrollX": true,
         "paging": false,
@@ -547,28 +549,13 @@ $(document).ready(function () {
           },
         ],
         dom:
-           // "<'row'<'col-sm-12 col-md-9 mb-2'B>>" +
-            "<'row'<'col-sm-12 col-md-4'f>>" +
+           "<'row'<'col-sm-12 col-md-4 mb-2'B><'col-sm-12 col-md-8 mb-2'f>>" +
+           // "<'row'<'col-sm-12 col-md-4'f>>" +
             "<'row'<'col-sm-12 mb-2'tr>>" +
             "<'row'<'col-sm-12 col-md-8 mb-2'i><'col-sm-12 col-md-4'p>>",
         // lengthMenu: [[25, 50, 100], [25, 50, 100]],
         lengthChange: false,
-        // buttons: [
-        //     { 
-        //       text: '<i class="fa fa-file-text-o"></i>&nbsp;&nbsp;Export Semua', 
-        //       titleAttr: 'Download CSV',
-        //       //"sTooltip": "My CSV button's tooltip",
-        //       action: function ( e, dt, node, config ) {
-        //           // alert( 'Download!' );
-        //           // //this.disable(); // disable button
-        //           // console.log('dt', dt);
-        //           // console.log('node', node);
-        //           window.open('../controller/pemeriksaan_lpb/expCSVPemeriksaanLPB.php?unitupi='+$('#sel_unitupi').val()+'&unitap='+$('#sel_unitap').val()+'&unitup='+$('#sel_unitup').val()+'&tgl_pemeriksaan_from='+$('#tgl_pemeriksaan_range').data('daterangepicker').startDate.format('YYYY-MM-DD')+'&tgl_pemeriksaan_to='+$('#tgl_pemeriksaan_range').data('daterangepicker').endDate.format('YYYY-MM-DD')+'&petugas='+$('#sel_petugas').val() );
-        //       }
-
-        //     },
-        //     { extend: 'colvis', text: 'Columns' }
-        // ],
+        buttons: ['excel'],
         "scrollY": 520,
         "scrollX": true,
         "paging": false,
