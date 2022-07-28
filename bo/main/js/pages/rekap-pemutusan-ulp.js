@@ -594,7 +594,7 @@ $(document).ready(function () {
           var nb_cols = api.columns().nodes().length;
           var j = 3;
           
-          var wo, eksekusi, putus, lunas, lunas_eksekusi;
+          var wo, petugas, eksekusi, putus, lunas, lunas_eksekusi;
           while(j < nb_cols){
             if(j==22){
 
@@ -664,6 +664,8 @@ $(document).ready(function () {
                         return Number(a) + Number(b);
                     }, 0 );
 
+                if(j==3)
+                  petugas=pageTotal;
                 if(j==7)
                   wo=pageTotal;
                 if(j==21)
@@ -675,10 +677,15 @@ $(document).ready(function () {
                 if(j==30)
                   lunas_eksekusi=pageTotal;
                 // Update footer
-                
-                // if(j==14)
-                //   $( api.column( j ).footer() ).html($.fn.dataTable.render.number(".", ",", 0, '').display(pageTotal/data.length));
-                // else
+                if(j==23)
+                  $( api.column( j ).footer() ).html($.fn.dataTable.render.number(".", ",", 0, '').display(Math.round(eksekusi/petugas)));
+                else if(j==26)
+                  $( api.column( j ).footer() ).html($.fn.dataTable.render.number(".", ",", 0, '').display(Math.round(putus/petugas)));
+                else if(j==29)
+                  $( api.column( j ).footer() ).html($.fn.dataTable.render.number(".", ",", 0, '').display(Math.round(lunas/petugas)));
+                else if(j==32)
+                  $( api.column( j ).footer() ).html($.fn.dataTable.render.number(".", ",", 0, '').display(Math.round(lunas_eksekusi/petugas)));
+                else
                   $( api.column( j ).footer() ).html($.fn.dataTable.render.number(".", ",", 0, '').display(pageTotal));
             }
             
@@ -718,7 +725,7 @@ $(document).ready(function () {
         columns: [
           {
             data: "UNITAP",
-            visible: true
+            visible: false
           },
           {
             data: "UNITUP",
@@ -735,61 +742,115 @@ $(document).ready(function () {
             "sClass" : "text-right" , render: $.fn.dataTable.render.number(".", ",", 0, '')
           },
           {
-            data: "JML_WO",
+            data: "WO_IRISAN",
             type: 'number',
             visible: true,
             "sClass" : "text-right" , render: $.fn.dataTable.render.number(".", ",", 0, '')
           },
           {
-            data: "JML_LUNAS_BY_SYSTEM",
+            data: "WO_BARU",
             type: 'number',
             visible: true,
             "sClass" : "text-right" , render: $.fn.dataTable.render.number(".", ",", 0, '')
           },
           {
-            data: "JML_LUNAS_MANDIRI",
+            data: "WO_LANCAR",
             type: 'number',
             visible: true,
             "sClass" : "text-right" , render: $.fn.dataTable.render.number(".", ",", 0, '')
           },
           {
-            data: "JML_LUNAS_DITEMPAT",
+            data: "WO_TOTAL",
             type: 'number',
             visible: true,
             "sClass" : "text-right" , render: $.fn.dataTable.render.number(".", ",", 0, '')
           },
           {
-            data: "JML_SEGEL_MCB",
+            data: "LUNAS_BY_SYSTEM",
             type: 'number',
             visible: true,
             "sClass" : "text-right" , render: $.fn.dataTable.render.number(".", ",", 0, '')
           },
           {
-            data: "JML_CABUT_MCB",
+            data: "LUNAS_MANDIRI_PUTUS",
             type: 'number',
             visible: true,
             "sClass" : "text-right" , render: $.fn.dataTable.render.number(".", ",", 0, '')
           },
           {
-            data: "JML_CABUT_APP",
+            data: "LUNAS_MANDIRI_LUNAS",
             type: 'number',
             visible: true,
             "sClass" : "text-right" , render: $.fn.dataTable.render.number(".", ",", 0, '')
           },
           {
-            data: "JML_RUMAH_KOSONG",
+            data: "LUNAS_DITEMPAT_PUTUS",
             type: 'number',
             visible: true,
             "sClass" : "text-right" , render: $.fn.dataTable.render.number(".", ",", 0, '')
           },
           {
-            data: "JML_PLG",
+            data: "LUNAS_DITEMPAT_LUNAS",
             type: 'number',
             visible: true,
             "sClass" : "text-right" , render: $.fn.dataTable.render.number(".", ",", 0, '')
           },
           {
-            data: "PERSEN_TOTAL",
+            data: "SEGEL_MCB_PUTUS",
+            type: 'number',
+            visible: true,
+            "sClass" : "text-right" , render: $.fn.dataTable.render.number(".", ",", 0, '')
+          },
+          {
+            data: "SEGEL_MCB_LUNAS",
+            type: 'number',
+            visible: true,
+            "sClass" : "text-right" , render: $.fn.dataTable.render.number(".", ",", 0, '')
+          },
+          {
+            data: "CABUT_MCB_PUTUS",
+            type: 'number',
+            visible: true,
+            "sClass" : "text-right" , render: $.fn.dataTable.render.number(".", ",", 0, '')
+          },
+          {
+            data: "CABUT_MCB_LUNAS",
+            type: 'number',
+            visible: true,
+            "sClass" : "text-right" , render: $.fn.dataTable.render.number(".", ",", 0, '')
+          },
+          {
+            data: "CABUT_APP_PUTUS",
+            type: 'number',
+            visible: true,
+            "sClass" : "text-right" , render: $.fn.dataTable.render.number(".", ",", 0, '')
+          },
+          {
+            data: "CABUT_APP_LUNAS",
+            type: 'number',
+            visible: true,
+            "sClass" : "text-right" , render: $.fn.dataTable.render.number(".", ",", 0, '')
+          },
+          {
+            data: "RUMAH_KOSONG_PUTUS",
+            type: 'number',
+            visible: true,
+            "sClass" : "text-right" , render: $.fn.dataTable.render.number(".", ",", 0, '')
+          },
+          {
+            data: "RUMAH_KOSONG_LUNAS",
+            type: 'number',
+            visible: true,
+            "sClass" : "text-right" , render: $.fn.dataTable.render.number(".", ",", 0, '')
+          },
+          {
+            data: "TOTAL_EKSEKUSI",
+            type: 'number',
+            visible: true,
+            "sClass" : "text-right" , render: $.fn.dataTable.render.number(".", ",", 0, '')
+          },
+          {
+            data: "PERSEN_EKSEKUSI",
             visible: true,
             "sClass" : "text-right" , 
             render: function ( data, type, row ) {
@@ -808,7 +869,100 @@ $(document).ready(function () {
             },
           },
           {
-            data: "RATA_PLG_PER_PETUGAS",
+            data: "RATA_EKSEKUSI",
+            type: 'number',
+            visible: true,
+            "sClass" : "text-right" , render: $.fn.dataTable.render.number(".", ",", 0, '')
+          },
+          {
+            data: "TOTAL_PUTUS",
+            type: 'number',
+            visible: true,
+            "sClass" : "text-right" , render: $.fn.dataTable.render.number(".", ",", 0, '')
+          },
+          {
+            data: "PERSEN_PUTUS",
+            visible: true,
+            "sClass" : "text-right" , 
+            render: function ( data, type, row ) {
+                var cls;
+                //console.log($(this));
+                if (data < 50) {
+                    cls='danger';
+                  }else if (data < 80) {
+                    cls='warning';
+                  }else {
+                    cls='success';
+                  }
+              return '<span class="text-'+cls+'">'+
+                $.fn.dataTable.render.number(".", ",", 2, '').display(data)+'%</span>';
+
+            },
+          },
+          {
+            data: "RATA_PUTUS",
+            type: 'number',
+            visible: true,
+            "sClass" : "text-right" , render: $.fn.dataTable.render.number(".", ",", 0, '')
+          },
+          {
+            data: "TOTAL_LUNAS",
+            type: 'number',
+            visible: true,
+            "sClass" : "text-right" , render: $.fn.dataTable.render.number(".", ",", 0, '')
+          },
+          {
+            data: "PERSEN_LUNAS",
+            visible: true,
+            "sClass" : "text-right" , 
+            render: function ( data, type, row ) {
+                var cls;
+                //console.log($(this));
+                if (data < 50) {
+                    cls='danger';
+                  }else if (data < 80) {
+                    cls='warning';
+                  }else {
+                    cls='success';
+                  }
+              return '<span class="text-'+cls+'">'+
+                $.fn.dataTable.render.number(".", ",", 2, '').display(data)+'%</span>';
+
+            },
+          },
+          {
+            data: "RATA_LUNAS",
+            type: 'number',
+            visible: true,
+            "sClass" : "text-right" , render: $.fn.dataTable.render.number(".", ",", 0, '')
+          },
+          {
+            data: "TOTAL_LUNAS_EKSEKUSI",
+            type: 'number',
+            visible: true,
+            "sClass" : "text-right" , render: $.fn.dataTable.render.number(".", ",", 0, '')
+          },
+          {
+            data: "PERSEN_LUNAS_EKSEKUSI",
+            visible: true,
+            "sClass" : "text-right" , 
+            render: function ( data, type, row ) {
+                var cls;
+                //console.log($(this));
+                if (data < 50) {
+                    cls='danger';
+                  }else if (data < 80) {
+                    cls='warning';
+                  }else {
+                    cls='success';
+                  }
+              return '<span class="text-'+cls+'">'+
+                $.fn.dataTable.render.number(".", ",", 2, '').display(data)+'%</span>';
+
+            },
+          },
+          {
+            data: "RATA_LUNAS_EKSEKUSI",
             type: 'number',
             visible: true,
             "sClass" : "text-right" , render: $.fn.dataTable.render.number(".", ",", 0, '')
@@ -1130,13 +1284,15 @@ $(document).ready(function () {
         "paging": false,
         lengthMenu: [[25, 100, -1], [25, 100, "All"]],
         pageLength: 100,
-        "order": [[22, 'desc']],
+        "order": [[31, 'desc']],
+        
         footerCallback: function ( row, data, start, end, display ) {
           var api = this.api();
           //console.log('footerCallback', api);
           var nb_cols = api.columns().nodes().length;
           var j = 3;
-          var wo, eksekusi, putus, lunas;
+          
+          var wo, petugas, eksekusi, putus, lunas, lunas_eksekusi;
           while(j < nb_cols){
             if(j==22){
 
@@ -1183,6 +1339,21 @@ $(document).ready(function () {
                   }
 
                 $( api.column( j ).footer() ).html('<span class="text-'+cls+'">'+$.fn.dataTable.render.number(".", ",", 2, '').display(persen)+'%</span>');
+            }else if(j==31){
+
+                var persen;
+                persen = ((lunas_eksekusi/wo))*100;
+                var cls;
+
+                if (persen < 50) {
+                    cls='danger';
+                  }else if (persen < 80) {
+                    cls='warning';
+                  }else {
+                    cls='success';
+                  }
+
+                $( api.column( j ).footer() ).html('<span class="text-'+cls+'">'+$.fn.dataTable.render.number(".", ",", 2, '').display(persen)+'%</span>');
             }else{
                 var pageTotal = api
                     .column( j, { page: 'current'} )
@@ -1191,6 +1362,8 @@ $(document).ready(function () {
                         return Number(a) + Number(b);
                     }, 0 );
 
+                if(j==3)
+                  petugas=pageTotal;
                 if(j==7)
                   wo=pageTotal;
                 if(j==21)
@@ -1199,11 +1372,19 @@ $(document).ready(function () {
                   putus=pageTotal;
                 if(j==27)
                   lunas=pageTotal;
+                if(j==30)
+                  lunas_eksekusi=pageTotal;
                 // Update footer
                 
-                // if(j==14)
-                //   $( api.column( j ).footer() ).html($.fn.dataTable.render.number(".", ",", 0, '').display(pageTotal/data.length));
-                // else
+                if(j==23)
+                  $( api.column( j ).footer() ).html($.fn.dataTable.render.number(".", ",", 0, '').display(Math.round(eksekusi/petugas)));
+                else if(j==26)
+                  $( api.column( j ).footer() ).html($.fn.dataTable.render.number(".", ",", 0, '').display(Math.round(putus/petugas)));
+                else if(j==29)
+                  $( api.column( j ).footer() ).html($.fn.dataTable.render.number(".", ",", 0, '').display(Math.round(lunas/petugas)));
+                else if(j==32)
+                  $( api.column( j ).footer() ).html($.fn.dataTable.render.number(".", ",", 0, '').display(Math.round(lunas_eksekusi/petugas)));
+                else
                   $( api.column( j ).footer() ).html($.fn.dataTable.render.number(".", ",", 0, '').display(pageTotal));
             }
             
