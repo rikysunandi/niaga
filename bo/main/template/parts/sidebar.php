@@ -48,7 +48,7 @@
                     <li><a href="mon-pola-bayar.php">Monitoring Pola Bayar</a></li>
                     <li><a href="rekap-pola-bayar-lunas.php">Rekap Pelunasan Berdasarkan Pola Bayar</a>
                     <li><a href="rekap-tgl-bayar.php">Rekap Pelunasan per Tgl Bayar</a>
-                    <li><a href="4dx-piutang.php">4DX Piutang Pelanggan</a>
+                    <!-- <li><a href="4dx-piutang.php">4DX Piutang Pelanggan</a> -->
                     <!-- <li><a href="rekap-pola-bayar-tarif-daya.php">Rekap Pola Bayar per Tarif Daya</a></li> -->
                     <!-- <li><a href="input-va.php">Input Virtual Account</a></li> -->
                 </ul>
