@@ -38,13 +38,13 @@
             <div class="container-fluid">
                 <div class="row page-titles">
                     <div class="col p-md-0">
-                        <h4>Penetapan Workorder Intimasi</h4>
+                        <h4>Penetapan Workorder Pemutusan</h4>
                     </div>
                     <div class="col p-md-0">
                         <ol class="breadcrumb">
-                            <li class="breadcrumb-item"><a href="javascript:void(0)">Tunggakan</a>
+                            <li class="breadcrumb-item"><a href="javascript:void(0)">Pemutusan</a>
                             </li>
-                            <li class="breadcrumb-item active">Penetapan Workorder Intimasi</li>
+                            <li class="breadcrumb-item active">Penetapan Workorder Pemutusan</li>
                         </ol>
                     </div>
                 </div>
@@ -105,17 +105,17 @@
                     <div class="col-12">
                         <div class="card">
                             <div class="card-header">
-                                <h4 class="card-title">Draft Data WO Intimasi</h4>
+                                <h4 class="card-title">Draft Data WO Pemutusan</h4>
                             </div>
                             <div class="card-body">
                                 <p>
-                                    Sebelum petugas dapat melakukan Download WO Intimasi di HP, silahkan lakukan penetapan terlebih dahulu dengan mengklik tombol di bawah
+                                    Sebelum petugas dapat melakukan Download WO Pemutusan di HP, silahkan lakukan penetapan terlebih dahulu dengan mengklik tombol di bawah
                                 </p>
                                 <p class="text-warning">
-                                    Pastikan sudah melakukan upload semua data Pelunasan bulan sebelumnya dan Sorek bulan berjalan!
+                                    Pastikan sudah melakukan upload semua data Pelunasan s.d Tanggal 20 bulan berjalan!
                                 </p>
                                 <div class="table-responsive">
-                                    <table id="tbl_wo_intimasi" class="table table-striped table-bordered nowrap" style="width: 100%">
+                                    <table id="tbl_wo_pemutusan" class="table table-striped table-bordered nowrap" style="width: 100%">
                                     <thead>
                                         <tr>
                                             <th rowspan="2" class="text-center bg-primary-lighten-2">UNITAP</th>
@@ -123,17 +123,25 @@
                                             <th rowspan="2" class="text-center bg-primary-lighten-2">ULP</th>
                                             <th rowspan="2" class="text-center bg-primary-lighten-2">KODEPETUGAS</th>
                                             <th rowspan="2" class="text-center bg-primary-lighten-2">JML<br/>RBM</th>
-                                            <th class="text-center bg-primary-lighten-2" colspan="3">WORKORDER INTIMASI (PLG)</th>
+                                            <th class="text-center bg-primary-lighten-2" colspan="7">WORKORDER PEMUTUSAN</th>
                                         </tr>
                                         <tr>
-                                            <th class="text-center bg-primary-lighten-2">JML BARU</th>
-                                            <th class="text-center bg-primary-lighten-2">JML IRISAN</th>
-                                            <th class="text-center bg-primary-lighten-2">TOTAL</th>
+                                            <th class="text-center bg-success-lighten-2">JML LANCAR</th>
+                                            <th class="text-center bg-warning-lighten-2">JML BARU</th>
+                                            <th class="text-center bg-danger-lighten-2">JML IRISAN</th>
+                                            <th class="text-center bg-primary-lighten-2">TOTAL PLG</th>
+                                            <th class="text-center bg-primary-lighten-2">RPPTL</th>
+                                            <th class="text-center bg-primary-lighten-2">RPTAG</th>
+                                            <th class="text-center bg-primary-lighten-2">RPBK</th>
                                         </tr>
                                     </thead>
                                     <tfoot>
                                         <tr>
                                             <th class="bg-primary-lighten-2" colspan="4">TOTAL</th>
+                                            <th class="bg-primary-lighten-2"></th>
+                                            <th class="bg-success-lighten-2"></th>
+                                            <th class="bg-warning-lighten-2"></th>
+                                            <th class="bg-danger-lighten-2"></th>
                                             <th class="bg-primary-lighten-2"></th>
                                             <th class="bg-primary-lighten-2"></th>
                                             <th class="bg-primary-lighten-2"></th>
@@ -198,6 +206,6 @@
     <script src="../../assets/plugins/block-ui/jquery.blockUI.js"></script>
 
     <script src="../js/pages/apps.js"></script>
-    <script src="../js/pages/wo-intimasi.js"></script>
+    <script src="../js/pages/wo-pemutusan.js"></script>
 </body>
 </html>

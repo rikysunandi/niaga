@@ -7,7 +7,7 @@ $(document).ready(function () {
     var unitupi, unitap, unitup, blth;
 
     //$.blockUI({ message: '<h1 class="p-3">Mengambil data...</h1>' }); 
-    var table = $('#tbl_wo_intimasi')
+    var table = $('#tbl_wo_pemutusan')
       .on('preXhr.dt', function ( e, settings, data ) {
         console.log('preXhr!');
         $('div.content-body').block({ message: 'Mengambil data...' });
@@ -19,9 +19,9 @@ $(document).ready(function () {
       .DataTable( {
         "processing": true,
         "serverSide": true,
-        "deferLoading": 1000,
+        "deferLoading": 0,
         "ajax": {
-            "url": '../controller/intimasi/getWOIntimasi.php',
+            "url": '../controller/pemutusan/getWOPemutusan.php',
             "type": "POST",
             "timeout": 60000
         },
@@ -51,6 +51,12 @@ $(document).ready(function () {
           
           },
           {
+            data: "JML_LANCAR",
+            type: 'number',
+            visible: true,
+            "sClass" : "text-right" , render: $.fn.dataTable.render.number(".", ",", 0, '')
+          },
+          {
             data: "JML_BARU",
             type: 'number',
             visible: true,
@@ -64,6 +70,24 @@ $(document).ready(function () {
           },
           {
             data: "TOTAL_WO",
+            type: 'number',
+            visible: true,
+            "sClass" : "text-right" , render: $.fn.dataTable.render.number(".", ",", 0, '')
+          },
+          {
+            data: "TOTAL_RPPTL",
+            type: 'number',
+            visible: true,
+            "sClass" : "text-right" , render: $.fn.dataTable.render.number(".", ",", 0, '')
+          },
+          {
+            data: "TOTAL_RPTAG",
+            type: 'number',
+            visible: true,
+            "sClass" : "text-right" , render: $.fn.dataTable.render.number(".", ",", 0, '')
+          },
+          {
+            data: "TOTAL_RPBK",
             type: 'number',
             visible: true,
             "sClass" : "text-right" , render: $.fn.dataTable.render.number(".", ",", 0, '')
@@ -88,7 +112,7 @@ $(document).ready(function () {
                   // //this.disable(); // disable button
                   // console.log('dt', dt);
                   // console.log('node', node);
-                  window.open('../controller/intimasi/expCSVWOIntimasi.php?unitupi='+$('#sel_unitupi').val()+'&unitap='+$('#sel_unitap').val()+'&unitup='+$('#sel_unitup').val()+'&blth='+$('#sel_blth').val() );
+                  window.open('../controller/pemutusan/expCSVWOPemutusan.php?unitupi='+$('#sel_unitupi').val()+'&unitap='+$('#sel_unitap').val()+'&unitup='+$('#sel_unitup').val()+'&blth='+$('#sel_blth').val() );
               }
 
             },
@@ -170,13 +194,13 @@ $(document).ready(function () {
         unitap = $('#sel_unitap').val();
         unitup = $('#sel_unitup').val();
         blth = $('#sel_blth').val();
-        table.ajax.url( '../controller/intimasi/getWOIntimasi.php?unitupi='+$('#sel_unitupi').val()+'&unitap='+$('#sel_unitap').val()+'&unitup='+$('#sel_unitup').val()+'&blth='+$('#sel_blth').val() ).load();
+        table.ajax.url( '../controller/pemutusan/getWOPemutusan.php?unitupi='+$('#sel_unitupi').val()+'&unitap='+$('#sel_unitap').val()+'&unitup='+$('#sel_unitup').val()+'&blth='+$('#sel_blth').val() ).load();
     });
 
     $( 'body' ).on( 'click', '#btn_wo', function(btn) {
 
-        $('div.content-body').block({ message: 'Menetapkan WO Intimasi...' });
-        $.post( '../controller/intimasi/tetapkanWOIntimasi.php',{ 
+        $('div.content-body').block({ message: 'Menetapkan WO Pemutusan...' });
+        $.post( '../controller/pemutusan/tetapkanWOPemutusan.php',{ 
             unitupi: unitupi, 
             unitap: unitap, 
             unitup: unitup, 

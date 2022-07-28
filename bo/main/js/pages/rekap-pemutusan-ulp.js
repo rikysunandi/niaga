@@ -36,6 +36,8 @@ $(document).ready(function () {
           },
           {
             data: "UP3",
+            // ariaTitle: 'NAMA UP3',
+            // title: 'TITLE UP3',
             visible: true
           },
           {
@@ -46,18 +48,21 @@ $(document).ready(function () {
           },
           {
             data: "WO_IRISAN",
+            ariaTitle: 'WO IRISAN',
             type: 'number',
             visible: true,
             "sClass" : "text-right" , render: $.fn.dataTable.render.number(".", ",", 0, '')
           },
           {
             data: "WO_BARU",
+            ariaTitle: 'WO BARU',
             type: 'number',
             visible: true,
             "sClass" : "text-right" , render: $.fn.dataTable.render.number(".", ",", 0, '')
           },
           {
             data: "WO_LANCAR",
+            ariaTitle: 'WO LANCAR',
             type: 'number',
             visible: true,
             "sClass" : "text-right" , render: $.fn.dataTable.render.number(".", ",", 0, '')
@@ -574,13 +579,35 @@ $(document).ready(function () {
             { extend: 'excelHtml5', 
               text: '<i class="fa fa-file-excel-o"></i>&nbsp;&nbsp;Excel', 
               titleAttr: 'Download ke Excel',
-              footer: true
+              footer: true,
+              exportOptions: {
+                  columns: ':visible',
+                  format: {
+                      header: function ( html, index, node ) {
+                        console.log('header', node);
+                        return index + ' [' + html +']';
+                      },
+                      body: function(data, row, column, node) {
+                        //console.log('body', data);
+                        data = $('<p>' + data + '</p>').text();
+                        return $.isNumeric(data.replace('.', '')) ? data.replace('.', '') : data;
+                      },
+                      footer: function(data, row, column, node) {
+                        //console.log('footer', data);
+                        data = $('<p>' + data + '</p>').text();
+                        return $.isNumeric(data.replace('.', '')) ? data.replace('.', '') : data;
+                      }
+                  }
+                },
+                filename: function(){
+                    return 'REKAP_PEMUTUSAN_UP3_' +  moment().format('YYYYMMDDHHmmss');
+                },
             },
-            { extend: 'pdfHtml5', 
-              text: '<i class="fa fa-file-pdf-o"></i>&nbsp;&nbsp;PDF', 
-              titleAttr: 'Download ke PDF',
-              footer: true
-            },
+            // { extend: 'pdfHtml5', 
+            //   text: '<i class="fa fa-file-pdf-o"></i>&nbsp;&nbsp;PDF', 
+            //   titleAttr: 'Download ke PDF',
+            //   footer: true
+            // },
         ],
         //"scrollY": 370,
         "scrollX": true,
@@ -1271,13 +1298,35 @@ $(document).ready(function () {
             { extend: 'excelHtml5', 
               text: '<i class="fa fa-file-excel-o"></i>&nbsp;&nbsp;Excel', 
               titleAttr: 'Download ke Excel',
-              footer: true
+              footer: true,
+              exportOptions: {
+                  columns: ':visible',
+                  format: {
+                      header: function ( html, index, node ) {
+                        console.log('header', node);
+                        return index + ' [' + html +']';
+                      },
+                      body: function(data, row, column, node) {
+                        //console.log('body', data);
+                        data = $('<p>' + data + '</p>').text();
+                        return $.isNumeric(data.replace('.', '')) ? data.replace('.', '') : data;
+                      },
+                      footer: function(data, row, column, node) {
+                        //console.log('footer', data);
+                        data = $('<p>' + data + '</p>').text();
+                        return $.isNumeric(data.replace('.', '')) ? data.replace('.', '') : data;
+                      }
+                  }
+                },
+                filename: function(){
+                    return 'REKAP_PEMUTUSAN_UP3_' +  moment().format('YYYYMMDDHHmmss');
+                },
             },
-            { extend: 'pdfHtml5', 
-              text: '<i class="fa fa-file-pdf-o"></i>&nbsp;&nbsp;PDF', 
-              titleAttr: 'Download ke PDF',
-              footer: true
-            },
+            // { extend: 'pdfHtml5', 
+            //   text: '<i class="fa fa-file-pdf-o"></i>&nbsp;&nbsp;PDF', 
+            //   titleAttr: 'Download ke PDF',
+            //   footer: true
+            // },
         ],
         "scrollY": 260,
         "scrollX": true,

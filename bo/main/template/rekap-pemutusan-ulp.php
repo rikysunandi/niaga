@@ -548,6 +548,7 @@
     <script src="../js/settings.js"></script>
     <script src="../js/gleek.js"></script>
 
+    <script src="../../assets/plugins/moment/moment.min.js"></script>
     <script src="../../assets/plugins/datatables/js/jquery.dataTables.min.js"></script>
     <script src="../../assets/plugins/datatables/js/dataTables.buttons.min.js" ></script>
     <script src="https://cdn.datatables.net/1.10.21/js/dataTables.bootstrap4.min.js "></script>
