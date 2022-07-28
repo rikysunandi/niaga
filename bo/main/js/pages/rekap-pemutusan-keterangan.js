@@ -80,6 +80,12 @@ $(document).ready(function () {
             "sClass" : "text-right" , render: $.fn.dataTable.render.number(".", ",", 0, '')
           },
           {
+            data: "LUNAS_BY_SYSTEM",
+            type: 'number',
+            visible: true,
+            "sClass" : "text-right" , render: $.fn.dataTable.render.number(".", ",", 0, '')
+          },
+          {
             data: "LUNAS_MANDIRI_PUTUS",
             type: 'number',
             visible: true,
@@ -150,6 +156,31 @@ $(document).ready(function () {
             type: 'number',
             visible: true,
             "sClass" : "text-right" , render: $.fn.dataTable.render.number(".", ",", 0, '')
+          },
+          {
+            data: "TOTAL_EKSEKUSI",
+            type: 'number',
+            visible: true,
+            "sClass" : "text-right" , render: $.fn.dataTable.render.number(".", ",", 0, '')
+          },
+          {
+            data: "PERSEN_EKSEKUSI",
+            visible: true,
+            "sClass" : "text-right" , 
+            render: function ( data, type, row ) {
+                var cls;
+                //console.log($(this));
+                if (data < 50) {
+                    cls='danger';
+                  }else if (data < 80) {
+                    cls='warning';
+                  }else {
+                    cls='success';
+                  }
+              return '<span class="text-'+cls+'">'+
+                $.fn.dataTable.render.number(".", ",", 2, '').display(data)+'%</span>';
+
+            },
           },
           {
             data: "TOTAL_PUTUS",
@@ -240,16 +271,16 @@ $(document).ready(function () {
         "paging": true,
         lengthMenu: [[25, 100, -1], [25, 100, "All"]],
         pageLength: 100,
-        "order": [[0, 'asc'],[1, 'asc'],[21, 'desc']],
+        "order": [[0, 'asc'],[1, 'asc'],[22, 'desc']],
         footerCallback: function ( row, data, start, end, display ) {
           var api = this.api();
           //console.log('footerCallback', api);
           var nb_cols = api.columns().nodes().length;
-          var persen, cls, wo, jml, lunas, l_irisan, l_baru;
+          var persen, cls, wo, putus, eksekusi, lunas, l_irisan, l_baru;
           var j = 3;
           while(j < nb_cols){
-            if(j==21){
-                persen = (jml/wo)*100;
+            if(j==22){
+                persen = (eksekusi/wo)*100;
 
                 if (persen < 50) {
                     cls='danger';
@@ -263,7 +294,22 @@ $(document).ready(function () {
 
               //$( api.column( j ).footer() ).html($.fn.dataTable.render.number(".", ",", 2, '').display(persen)+'%');
             }
-            else if(j==23){
+            else if(j==24){
+                persen = (putus/wo)*100;
+
+                if (persen < 50) {
+                    cls='danger';
+                  }else if (persen < 80) {
+                    cls='warning';
+                  }else {
+                    cls='success';
+                  }
+
+                $( api.column( j ).footer() ).html('<span class="text-'+cls+'">'+$.fn.dataTable.render.number(".", ",", 2, '').display(persen)+'%</span>');
+
+              //$( api.column( j ).footer() ).html($.fn.dataTable.render.number(".", ",", 2, '').display(persen)+'%');
+            }
+            else if(j==26){
                 persen = (lunas/wo)*100;
 
                 if (persen < 50) {
@@ -287,9 +333,11 @@ $(document).ready(function () {
 
               if(j==7)
                 wo=pageTotal;
-              if(j==20)
-                jml=pageTotal;
-              if(j==22)
+              if(j==21)
+                eksekusi=pageTotal;
+              if(j==23)
+                putus=pageTotal;
+              if(j==25)
                 lunas=pageTotal;
               // Update footer
               $( api.column( j ).footer() ).html($.fn.dataTable.render.number(".", ",", 0, '').display(pageTotal));

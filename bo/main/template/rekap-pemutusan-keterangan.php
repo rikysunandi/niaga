@@ -122,7 +122,8 @@
                                             <th rowspan="3" class="text-center bg-primary-lighten-2">ULP</th>
                                             <th rowspan="3" class="text-center bg-primary-lighten-2">PETUGAS</th>
                                             <th colspan="4" class="text-center bg-warning-lighten-2">WORK ORDER</th>
-                                            <th colspan="16" class="text-center bg-success-lighten-2">HASIL PEMUTUSAN</th>
+                                            <th rowspan="3" class="text-center bg-secondary-lighten-2">LUNAS BY SYSTEM</th>
+                                            <th colspan="18" class="text-center bg-success-lighten-2">HASIL EKSEKUSI LAPANGAN</th>
                                         </tr>
                                         <tr>
                                             <th rowspan="2" class="text-center bg-danger-lighten-2">IRISAN</th>
@@ -135,6 +136,7 @@
                                             <th colspan="2" class="text-center bg-warning-lighten-2">CABUT MCB</th>
                                             <th colspan="2" class="text-center bg-warning-lighten-2">CABUT APP</th>
                                             <th colspan="2" class="text-center bg-danger-lighten-2">RUMAH KOSONG</th>
+                                            <th colspan="2" class="text-center bg-secondary-lighten-2">TOTAL EKSEKUSI</th>
                                             <th colspan="2" class="text-center bg-secondary-lighten-2">TOTAL PEMUTUSAN</th>
                                             <th colspan="2" class="text-center bg-secondary-lighten-2">TOTAL LUNAS</th>
                                         </tr>
@@ -153,6 +155,8 @@
                                             <th class="text-center bg-danger-lighten-2">LNS</th>
                                             <th class="text-center bg-secondary-lighten-2">JML</th>
                                             <th class="text-center bg-secondary-lighten-2">PERSEN</th>
+                                            <th class="text-center bg-secondary-lighten-2">JML</th>
+                                            <th class="text-center bg-secondary-lighten-2">PERSEN</th>
                                             <th class="text-center bg-secondary-lighten-2">LUNAS</th>
                                             <th class="text-center bg-secondary-lighten-2">PERSEN</th>
                                         </tr>
@@ -163,6 +167,7 @@
                                             <th class="bg-danger-lighten-2"></th>
                                             <th class="bg-warning-lighten-2"></th>
                                             <th class="bg-success-lighten-2"></th>
+                                            <th class="bg-secondary-lighten-2"></th>
                                             <th class="bg-secondary-lighten-2"></th>
                                             <th class="bg-success-lighten-2"></th>
                                             <th class="bg-success-lighten-2"></th>
@@ -176,6 +181,8 @@
                                             <th class="bg-warning-lighten-2"></th>
                                             <th class="bg-danger-lighten-2"></th>
                                             <th class="bg-danger-lighten-2"></th>
+                                            <th class="bg-secondary-lighten-2"></th>
+                                            <th class="bg-secondary-lighten-2"></th>
                                             <th class="bg-secondary-lighten-2"></th>
                                             <th class="bg-secondary-lighten-2"></th>
                                             <th class="bg-secondary-lighten-2"></th>
@@ -233,6 +240,6 @@
     <script src="../../assets/plugins/block-ui/jquery.blockUI.js"></script>
 
     <script src="../js/pages/apps.js"></script>
-    <script src="../js/pages/rekap-pemutusan-keterangan.js?time=123"></script>
+    <script src="../js/pages/rekap-pemutusan-keterangan.js?time=3"></script>
 </body>
 </html>

@@ -50,6 +50,7 @@ $columns = array(
     array( 'db' => 'WO_BARU', 'dt' => 'WO_BARU' ),
     array( 'db' => 'WO_LANCAR', 'dt' => 'WO_LANCAR' ),
     array( 'db' => 'WO_TOTAL', 'dt' => 'WO_TOTAL' ),
+    array( 'db' => 'LUNAS_BY_SYSTEM', 'dt' => 'LUNAS_BY_SYSTEM' ),
     array( 'db' => 'LUNAS_MANDIRI_PUTUS', 'dt' => 'LUNAS_MANDIRI_PUTUS' ),
     array( 'db' => 'LUNAS_MANDIRI_LUNAS', 'dt' => 'LUNAS_MANDIRI_LUNAS' ),
     array( 'db' => 'LUNAS_DITEMPAT_PUTUS', 'dt' => 'LUNAS_DITEMPAT_PUTUS' ),
@@ -62,8 +63,10 @@ $columns = array(
     array( 'db' => 'CABUT_APP_LUNAS', 'dt' => 'CABUT_APP_LUNAS' ),
     array( 'db' => 'RUMAH_KOSONG_PUTUS', 'dt' => 'RUMAH_KOSONG_PUTUS' ),
     array( 'db' => 'RUMAH_KOSONG_LUNAS', 'dt' => 'RUMAH_KOSONG_LUNAS' ),
+    array( 'db' => 'TOTAL_EKSEKUSI', 'dt' => 'TOTAL_EKSEKUSI' ),
     array( 'db' => 'TOTAL_PUTUS', 'dt' => 'TOTAL_PUTUS' ),
     array( 'db' => 'TOTAL_LUNAS', 'dt' => 'TOTAL_LUNAS' ),
+    array( 'db' => 'PERSEN_EKSEKUSI', 'dt' => 'PERSEN_EKSEKUSI' ),
     array( 'db' => 'PERSEN_PUTUS', 'dt' => 'PERSEN_PUTUS' ),
     array( 'db' => 'PERSEN_LUNAS', 'dt' => 'PERSEN_LUNAS' ),
 );
