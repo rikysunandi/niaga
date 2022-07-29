@@ -416,6 +416,9 @@ $(document).ready(function () {
           this.checked=true;
         });
 
+        $('#cb_onsite').next('label').html("Onsite");
+        $('#cb_sisipan').next('label').html("Sisipan");
+
         var container = $('#map_on_site').parent();
         $('#map_on_site').remove();
         container.append('<div id="map_on_site"></div>');
@@ -429,14 +432,19 @@ $(document).ready(function () {
         var infowindow = new google.maps.InfoWindow();
         var marker = new google.maps.Marker();
         var bounds = new google.maps.LatLngBounds();
+        var cb_onsite=0, cb_sisipan=0;
 
         markers_on_site = rows.map((tagging, i) => {
           if(tagging.LATITUDE && tagging.LONGITUDE ){
 
-            if(tagging.SISIPAN=='Y')
+            if(tagging.SISIPAN=='Y'){
               icon= "../controller/getMarkerIcon.php?color=orange&text="+(i+1);
-            else
+              cb_sisipan++;
+            }
+            else{
               icon= "../controller/getMarkerIcon.php?color=green&text="+(i+1);
+              cb_onsite++;
+            }
 
             marker = new google.maps.Marker({
               position: {
@@ -479,6 +487,11 @@ $(document).ready(function () {
           return marker;
           
         });
+
+        $('#cb_onsite').next('label').html(
+          $('#cb_onsite').next('label').html()+"("+cb_onsite+")");
+        $('#cb_sisipan').next('label').html(
+          $('#cb_sisipan').next('label').html()+"("+cb_sisipan+")");
 
         map_on_site.fitBounds(bounds);
 
