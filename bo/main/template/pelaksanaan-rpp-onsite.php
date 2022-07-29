@@ -233,16 +233,16 @@
                             </div>
                             <div class="card-footer text-muted d-none">
                                 <div class="row ml-4">
-                                    <div class="form-check col-3">
-                                        <input class="form-check-input" type="checkbox" class="filled-in chk-col-primary" id="cb_sudah_onsite" checked>
+                                    <div class="form-check col-4">
+                                        <input class="form-check-input" type="checkbox" class="filled-in chk-col-primary" id="cb_sudah_onsite" value="SUDAH ONSITE" checked>
                                         <label class="form-check-label" for="cb_sudah_onsite" style="color:green">Sudah Onsite</label>
                                     </div>
-                                    <div class="form-check col-6">
-                                        <input class="form-check-input" type="checkbox" class="filled-in chk-col-primary" id="cb_sudah_onsite_beda_rpp_petugas" checked>
-                                        <label class="form-check-label" for="cb_sudah_onsite_beda_rpp_petugas" style="color:orange">Sdh Onsite Beda RPP/Petugas</label>
+                                    <div class="form-check col-4">
+                                        <input class="form-check-input" type="checkbox" class="filled-in chk-col-primary" id="cb_sisipan_rpp_lain" value="SISIPAN RPP LAIN" checked>
+                                        <label class="form-check-label" for="cb_sisipan_rpp_lain" style="color:orange">Sisipan RPP Lain</label>
                                     </div>
-                                    <div class="form-check col-3">
-                                        <input class="form-check-input" type="checkbox" class="filled-in chk-col-primary" id="cb_belum_onsite" checked>
+                                    <div class="form-check col-4">
+                                        <input class="form-check-input" type="checkbox" class="filled-in chk-col-primary" id="cb_belum_onsite" value="BELUM ONSITE"checked>
                                         <label class="form-check-label" for="cb_belum_onsite" style="color:gray">Belum Onsite</label>
                                     </div>
                                 </div>
@@ -260,11 +260,11 @@
                             <div class="card-footer text-muted d-none">
                                <div class="row ml-4">
                                     <div class="form-check col-6">
-                                        <input class="form-check-input" type="checkbox" class="filled-in chk-col-primary" id="cb_onsite" checked>
+                                        <input class="form-check-input" type="checkbox" class="filled-in chk-col-primary" id="cb_onsite" value="ONSITE" checked>
                                         <label class="form-check-label" for="cb_onsite" style="color:green">Onsite</label>
                                     </div>
                                     <div class="form-check col-6">
-                                        <input class="form-check-input" type="checkbox" class="filled-in chk-col-primary" id="cb_sisipan" checked>
+                                        <input class="form-check-input" type="checkbox" class="filled-in chk-col-primary" id="cb_sisipan" value="SISIPAN"  checked>
                                         <label class="form-check-label" for="cb_sisipan" style="color:orange">Sisipan</label>
                                     </div>
                                 </div>
@@ -328,6 +328,6 @@
     <script src="https://unpkg.com/@googlemaps/markerclustererplus/dist/index.min.js"></script>
 
     <script src="../js/pages/apps.js"></script>
-    <script src="../js/pages/pelaksanaan-rpp-onsite.js?time=2"></script>
+    <script src="../js/pages/pelaksanaan-rpp-onsite.js?time=4"></script>
 </body>
 </html>

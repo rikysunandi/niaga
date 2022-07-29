@@ -184,6 +184,10 @@ $(document).ready(function () {
         var rows = data.data;
         //initMap('map_on_desk', rows);
 
+        $('#cb_sudah_onsite').next('label').html("Sudah Onsite");
+        $('#cb_sisipan_rpp_lain').next('label').html("Sisipan RPP Lain");
+        $('#cb_belum_onsite').next('label').html("Belum Onsite");
+
         $('#card_map_on_desk .card-footer').removeClass('d-none');
         $('#card_map_on_desk .card-footer :checkbox').each(function(c){
           this.checked=true;
@@ -202,16 +206,23 @@ $(document).ready(function () {
         var infowindow = new google.maps.InfoWindow();
         var marker = new google.maps.Marker();
         var bounds = new google.maps.LatLngBounds();
+        var cb_sudah_onsite=0, cb_sisipan_rpp_lain=0, cb_belum_onsite=0;
 
         markers_on_desk = rows.map((tagging, i) => {
           if(tagging.LATITUDE && tagging.LONGITUDE ){
 
-            if(tagging.STATUS_ONSITE=='BELUM ONSITE')
+            if(tagging.STATUS_ONSITE=='BELUM ONSITE'){
               icon= "../controller/getMarkerIcon.php?color=dark&text="+(i+1);
-            else if(tagging.STATUS_ONSITE=='SUDAH ONSITE')
+              cb_belum_onsite++;
+            }
+            else if(tagging.STATUS_ONSITE=='SUDAH ONSITE'){
               icon= "../controller/getMarkerIcon.php?color=green&text="+(i+1);
-            else if(tagging.STATUS_ONSITE=='SDH ONSITE BEDA RPP/PETUGAS')
+              cb_sudah_onsite++;
+            }
+            else if(tagging.STATUS_ONSITE=='SISIPAN RPP LAIN'){
               icon= "../controller/getMarkerIcon.php?color=orange&text="+(i+1);
+              cb_sisipan_rpp_lain++;
+            }
             else
               icon= "../controller/getMarkerIcon.php?color=green&text="+(i+1);
 
@@ -257,6 +268,13 @@ $(document).ready(function () {
           
         });
 
+        $('#cb_sudah_onsite').next('label').html(
+          $('#cb_sudah_onsite').next('label').html()+"("+cb_sudah_onsite+")");
+        $('#cb_sisipan_rpp_lain').next('label').html(
+          $('#cb_sisipan_rpp_lain').next('label').html()+"("+cb_sisipan_rpp_lain+")");
+        $('#cb_belum_onsite').next('label').html(
+          $('#cb_belum_onsite').next('label').html()+"("+cb_belum_onsite+")");
+
         map_on_desk.fitBounds(bounds);
 
       })
@@ -278,7 +296,7 @@ $(document).ready(function () {
                 
                   if(row.STATUS_ONSITE=='SUDAH ONSITE')
                     return '<span class="text-success">'+data+'</span>';
-                  else if(row.STATUS_ONSITE=='SDH ONSITE BEDA RPP/PETUGAS' )
+                  else if(row.STATUS_ONSITE=='SISIPAN RPP LAIN' )
                     return '<span class="text-warning">'+data+'</span>';
                     return data;
               },
@@ -289,7 +307,7 @@ $(document).ready(function () {
                 
                   if(row.STATUS_ONSITE=='SUDAH ONSITE')
                     return '<span class="text-success">'+data+'</span>';
-                  else if(row.STATUS_ONSITE=='SDH ONSITE BEDA RPP/PETUGAS' )
+                  else if(row.STATUS_ONSITE=='SISIPAN RPP LAIN' )
                     return '<span class="text-warning">'+data+'</span>';
                     return data;
               },
@@ -300,7 +318,7 @@ $(document).ready(function () {
                 
                   if(row.STATUS_ONSITE=='SUDAH ONSITE')
                     return '<span class="text-success">'+data+'</span>';
-                  else if(row.STATUS_ONSITE=='SDH ONSITE BEDA RPP/PETUGAS' )
+                  else if(row.STATUS_ONSITE=='SISIPAN RPP LAIN' )
                     return '<span class="text-warning">'+data+'</span>';
                     return data;
               },
@@ -312,7 +330,7 @@ $(document).ready(function () {
                 
                   if(row.STATUS_ONSITE=='SUDAH ONSITE')
                     return '<span class="text-success">'+data+'</span>';
-                  else if(row.STATUS_ONSITE=='SDH ONSITE BEDA RPP/PETUGAS' )
+                  else if(row.STATUS_ONSITE=='SISIPAN RPP LAIN' )
                     return '<span class="text-warning">'+data+'</span>';
                     return data;
               },
@@ -323,7 +341,7 @@ $(document).ready(function () {
                 
                   if(row.STATUS_ONSITE=='SUDAH ONSITE')
                     return '<span class="text-success">'+data+'</span>';
-                  else if(row.STATUS_ONSITE=='SDH ONSITE BEDA RPP/PETUGAS' )
+                  else if(row.STATUS_ONSITE=='SISIPAN RPP LAIN' )
                     return '<span class="text-warning">'+data+'</span>';
                     return data;
               },
@@ -334,7 +352,7 @@ $(document).ready(function () {
                 
                   if(row.STATUS_ONSITE=='SUDAH ONSITE')
                     return '<span class="text-success">'+data+'</span>';
-                  else if(row.STATUS_ONSITE=='SDH ONSITE BEDA RPP/PETUGAS' )
+                  else if(row.STATUS_ONSITE=='SISIPAN RPP LAIN' )
                     return '<span class="text-warning">'+data+'</span>';
                     return data;
               },
@@ -345,7 +363,7 @@ $(document).ready(function () {
                 
                   if(row.STATUS_ONSITE=='SUDAH ONSITE')
                     return '<span class="text-success">'+data+'</span>';
-                  else if(row.STATUS_ONSITE=='SDH ONSITE BEDA RPP/PETUGAS' )
+                  else if(row.STATUS_ONSITE=='SISIPAN RPP LAIN' )
                     return '<span class="text-warning">'+data+'</span>';
                     return data;
               },
@@ -356,7 +374,7 @@ $(document).ready(function () {
                 
                   if(row.STATUS_ONSITE=='SUDAH ONSITE')
                     return '<span class="text-success">'+data+'</span>';
-                  else if(row.STATUS_ONSITE=='SDH ONSITE BEDA RPP/PETUGAS' )
+                  else if(row.STATUS_ONSITE=='SISIPAN RPP LAIN' )
                     return '<span class="text-warning">'+data+'</span>';
                     return data;
               },
@@ -596,7 +614,8 @@ $(document).ready(function () {
 
     $('#card_map_on_desk .card-footer :checkbox').click(function(e){
         //console.log('klik checkbox',$(this).next('label').text());
-        var status=$(this).next('label').text().toUpperCase();
+        //var status=$(this).next('label').text().toUpperCase();
+        var status=$(this).val();
         var checked=this.checked;
         $('div#card_map_on_desk').block({ message: 'Menyesuaikan peta...' });
         asyncForEach(markers_on_desk, function(marker) {
@@ -611,7 +630,8 @@ $(document).ready(function () {
     
     $('#card_map_on_site .card-footer :checkbox').click(function(e){
         //console.log('klik checkbox',$(this).next('label').text());
-        var status=$(this).next('label').text().toUpperCase();
+        //var status=$(this).next('label').text().toUpperCase();
+        var status=$(this).val();
         var checked=this.checked;
         $('div#card_map_on_site').block({ message: 'Menyesuaikan peta...' });
         asyncForEach(markers_on_site, function(marker) {
