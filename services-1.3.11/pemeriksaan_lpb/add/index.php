@@ -9,8 +9,8 @@ set_time_limit(60);
 $file = $_FILES['image']['tmp_name'];
 $foto_rumah = $_FILES['image2']['tmp_name'];
 $data = $_REQUEST['params'];
-$app_version = $_REQUEST['app_version'];
-$os_version = $_REQUEST['os_version'];
+$app_version = str_replace('"','',$_REQUEST['app_version']);
+$os_version = str_replace('"','',$_REQUEST['os_version']);
 
 $json_data = json_decode($data , true);
 

@@ -126,8 +126,8 @@
                                             <th class="text-center bg-primary-lighten-2" colspan="3">WORKORDER INTIMASI (PLG)</th>
                                         </tr>
                                         <tr>
-                                            <th class="text-center bg-primary-lighten-2">JML BARU</th>
-                                            <th class="text-center bg-primary-lighten-2">JML IRISAN</th>
+                                            <th class="text-center bg-warning-lighten-2">JML BARU</th>
+                                            <th class="text-center bg-danger-lighten-2">JML IRISAN</th>
                                             <th class="text-center bg-primary-lighten-2">TOTAL</th>
                                         </tr>
                                     </thead>
@@ -135,8 +135,8 @@
                                         <tr>
                                             <th class="bg-primary-lighten-2" colspan="4">TOTAL</th>
                                             <th class="bg-primary-lighten-2"></th>
-                                            <th class="bg-primary-lighten-2"></th>
-                                            <th class="bg-primary-lighten-2"></th>
+                                            <th class="bg-warning-lighten-2"></th>
+                                            <th class="bg-danger-lighten-2"></th>
                                             <th class="bg-primary-lighten-2"></th>
                                         </tr>
                                     </tfoot>
