@@ -19,7 +19,7 @@ $params = array(
         array($unitup, SQLSRV_PARAM_IN),
     );
 
-$sql = "EXEC sp_WS_Get_DIL_Unit @UserID = ?, @Unitupi = ?, @Unitap = ?, @Unitup = ? ";
+$sql = "EXEC sp_WS_Get_DIL_Unit_1311 @UserID = ?, @Unitupi = ?, @Unitap = ?, @Unitup = ? ";
 $stmt = sqlsrv_prepare($conn, $sql, $params);
 
 //sqlsrv_execute($stmt);
@@ -49,6 +49,9 @@ if(sqlsrv_execute($stmt)){
 			$response['pelanggan'][$i]['string_1'] = $row['STRING_1'];
 			$response['pelanggan'][$i]['string_2'] = $row['STRING_2'];
 			$response['pelanggan'][$i]['string_3'] = $row['STRING_3'];
+			$response['pelanggan'][$i]['info'] = $row['INFO'];
+			$response['pelanggan'][$i]['keterangan'] = $row['KETERANGAN'];
+			$response['pelanggan'][$i]['status'] = $row['STATUS'];
 		}
 
 		$i++;
