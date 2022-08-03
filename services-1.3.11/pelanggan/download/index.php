@@ -12,6 +12,9 @@ $unitap = $_GET['unitap'];
 $unitup = $_GET['unitup'];
 $user = isset($_GET['user'])?$_GET['user']:'SYSTEM';
 
+$app_version = str_replace('"','',$_REQUEST['app_version']);
+$os_version = str_replace('"','',$_REQUEST['os_version']);
+
 $params = array(
         array($user, SQLSRV_PARAM_IN),
         array($unitupi, SQLSRV_PARAM_IN),
@@ -78,9 +81,21 @@ function utf8ize($d) {
             $d[$k] = utf8ize($v);
         }
     } else if (is_string ($d)) {
-        return utf8_encode($d);
+        return remove_bs(utf8_encode($d));
     }
     return $d;
+}
+
+function remove_bs($Str) {  
+  $StrArr = str_split($Str); $NewStr = '';
+  foreach ($StrArr as $Char) {    
+    $CharNo = ord($Char);
+    if ($CharNo == 163) { $NewStr .= $Char; continue; } // keep £ 
+    if ($CharNo > 31 && $CharNo < 127) {
+      $NewStr .= $Char;    
+    }
+  }  
+  return $NewStr;
 }
 
 ?>
