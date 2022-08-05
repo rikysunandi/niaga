@@ -37,17 +37,17 @@ $tgl_input = $json_data['tglInsert'];
 
 $response = array();
 
-// if(strlen($unitap)<>5){
-//   $key = array_search($unitup, array_column($unitups, 'unitup'));
-//   $unitap = $unitups[$key]['unitap'];
-// }
+if(strlen($unitap)<>5){
+  $key = array_search(substr($user_input,0,5), array_column($unitups, 'unitup'));
+  $unitap = $unitups[$key]['unitap'];
+}
 
 if(substr($idpel, 0, 11)=='99999999999'){
   // if(strlen($latitude)>5)
   //   $idpel = '99'.substr($user_input, 0, 5).substr($latitude, -2).substr($longitude, -3);
   // else
   //   $idpel = '99'.substr($user_input, 0, 5).substr($latitude, -2).substr($longitude, -3);
-  $idpel = '99'.substr($user_input, 0, 5).substr(str_replace(':','',substr($tgl_input, -8)),0,5);
+  $idpel = '999'.substr($user_input, 2, 5).substr(str_replace(':','',substr($tgl_input, -8)),0,6);
   //210429
 }
 
