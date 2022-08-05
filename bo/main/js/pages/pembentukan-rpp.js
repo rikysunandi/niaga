@@ -19,7 +19,7 @@ $(document).ready(function () {
     $('#sel_unitup').change(function(){
 
         opsi_petugas = new Array();
-        $.getJSON('../controller/referensi/getPetugasPriangan.php?unitup='+$('#sel_unitup').val(), function(data){
+        $.getJSON('../controller/referensi/getUserPriangan.php?unitup='+$('#sel_unitup').val(), function(data){
           
           $.each(data.rows,function(i,v){
               opsi_petugas.push(

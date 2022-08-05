@@ -25,7 +25,7 @@ $(document).ready(function () {
 
         if($('#sel_unitup').val()!=null){
             $('#sel_petugas').empty();
-            $.getJSON('../controller/referensi/getPetugasPriangan.php?unitup='+$('#sel_unitup').val(), function(data){
+            $.getJSON('../controller/referensi/getUserPriangan.php?unitup='+$('#sel_unitup').val(), function(data){
               
                 $.each(data.rows,function(i,v){
                   $('#sel_petugas').append('<option value="'+v.kode+'">'+v.nama+'</option>');
