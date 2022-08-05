@@ -12,6 +12,7 @@ $unitap = $_GET['unitap'];
 $unitup = $_GET['unitup'];
 $user = isset($_GET['user'])?$_GET['user']:'SYSTEM';
 
+$response = array();
 
 $response['success'] = false;
 $response['msg'] = 'Silahkan update priangan ke versi 1.3.11!';

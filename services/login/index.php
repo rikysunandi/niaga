@@ -13,47 +13,50 @@ $jam_client = $_REQUEST['jam_client'];
 
 $response = array();
 
-$params = array(
-        array($username, SQLSRV_PARAM_IN),
-        array($password, SQLSRV_PARAM_IN),
-        array($device_id, SQLSRV_PARAM_IN),
-        array($device_name, SQLSRV_PARAM_IN),
-        array($os_version, SQLSRV_PARAM_IN),
-        array($app_version, SQLSRV_PARAM_IN),
-        array($jam_client, SQLSRV_PARAM_IN),
-    );
+$response['success'] = false;
+$response['msg'] = 'Silahkan update priangan ke versi 1.3.11!';
 
-$sql = "EXEC SP_WS_LOGIN_PRIANGAN @USERNAME = ?, @PASSWORD = ?, @DEVICE_ID = ?, @DEVICE_NAME = ?, @OS_VERSION = ?, @APP_VERSION = ?, @JAM_CLIENT = ?  ";
-$stmt = sqlsrv_prepare($conn, $sql, $params);
+// $params = array(
+//         array($username, SQLSRV_PARAM_IN),
+//         array($password, SQLSRV_PARAM_IN),
+//         array($device_id, SQLSRV_PARAM_IN),
+//         array($device_name, SQLSRV_PARAM_IN),
+//         array($os_version, SQLSRV_PARAM_IN),
+//         array($app_version, SQLSRV_PARAM_IN),
+//         array($jam_client, SQLSRV_PARAM_IN),
+//     );
 
-if(sqlsrv_execute($stmt)){
-    $row = sqlsrv_fetch_array( $stmt, SQLSRV_FETCH_ASSOC);
-    if(!isset($row['msg'])){
-      $response['user']['unitupi'] = $row['UNITUPI']; 
-      $response['user']['unitap'] = $row['UNITAP']; 
-      $response['user']['unitup'] = $row['UNITUP']; 
-      $response['user']['username'] = $row['USERNAME']; 
-      $response['user']['nama'] = $row['NAMA']; 
-      $response['user']['password'] = $row['PASSWORD']; 
-      $response['user']['rbm'] = $row['RBM']; 
+// $sql = "EXEC SP_WS_LOGIN_PRIANGAN @USERNAME = ?, @PASSWORD = ?, @DEVICE_ID = ?, @DEVICE_NAME = ?, @OS_VERSION = ?, @APP_VERSION = ?, @JAM_CLIENT = ?  ";
+// $stmt = sqlsrv_prepare($conn, $sql, $params);
 
-      $response['success'] = true;
-      $response['msg'] = 'Login berhasil';
-    }else{
-      $response['success'] = false;
-      $response['user'] = null;
-      $response['msg'] = $row['msg'];
-    }
+// if(sqlsrv_execute($stmt)){
+//     $row = sqlsrv_fetch_array( $stmt, SQLSRV_FETCH_ASSOC);
+//     if(!isset($row['msg'])){
+//       $response['user']['unitupi'] = $row['UNITUPI']; 
+//       $response['user']['unitap'] = $row['UNITAP']; 
+//       $response['user']['unitup'] = $row['UNITUP']; 
+//       $response['user']['username'] = $row['USERNAME']; 
+//       $response['user']['nama'] = $row['NAMA']; 
+//       $response['user']['password'] = $row['PASSWORD']; 
+//       $response['user']['rbm'] = $row['RBM']; 
 
-    sqlsrv_free_stmt($stmt);
+//       $response['success'] = true;
+//       $response['msg'] = 'Login berhasil';
+//     }else{
+//       $response['success'] = false;
+//       $response['user'] = null;
+//       $response['msg'] = $row['msg'];
+//     }
 
-}else{
-    $response['success'] = false;
-    $response['msg'] = 'Login gagal';
-}
+//     sqlsrv_free_stmt($stmt);
 
-sqlsrv_free_stmt($stmt);  
-sqlsrv_close($conn);  
+// }else{
+//     $response['success'] = false;
+//     $response['msg'] = 'Login gagal';
+// }
+
+// sqlsrv_free_stmt($stmt);  
+// sqlsrv_close($conn);  
 
 
 header('Content-Type: application/json');

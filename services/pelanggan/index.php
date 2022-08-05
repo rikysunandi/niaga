@@ -14,6 +14,8 @@ $latitude = $_GET['latitude'];
 $longitude = $_GET['longitude'];
 $user = 'SYSTEM';
 
+$response = array();
+
 $response['success'] = false;
 $response['msg'] = 'Silahkan update priangan ke versi 1.3.11!';
 // if($param <> ''){
