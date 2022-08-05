@@ -37,10 +37,10 @@ $tgl_input = $json_data['tglInsert'];
 
 $response = array();
 
-if(strlen($unitap)<>5){
-  $key = array_search($unitup, array_column($unitups, 'unitup'));
-  $unitap = $unitups[$key]['unitap'];
-}
+// if(strlen($unitap)<>5){
+//   $key = array_search($unitup, array_column($unitups, 'unitup'));
+//   $unitap = $unitups[$key]['unitap'];
+// }
 
 if(substr($idpel, 0, 11)=='99999999999'){
   // if(strlen($latitude)>5)
