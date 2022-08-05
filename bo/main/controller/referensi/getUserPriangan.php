@@ -7,7 +7,7 @@ require_once '../../../config/database.php';
 $response = array();
 $unitup = $_GET['unitup'];
 
-$stmt = sqlsrv_query($conn, "select DISTINCT UPPER(USERNAME) KODEPETUGAS from m_user_priangan where unitup='$unitup' AND USERNAME IS NOT NULL AND USERNAME NOT LIKE '%.PLN%' order by USERNAME");
+$stmt = sqlsrv_query($conn, "select DISTINCT UPPER(USERNAME) KODEPETUGAS from m_user_priangan where unitup='$unitup' AND USERNAME IS NOT NULL AND USERNAME NOT LIKE '%.PLN%' order by KODEPETUGAS ");
 if($stmt){
 	$i=0;
 	while( $row = sqlsrv_fetch_array( $stmt, SQLSRV_FETCH_ASSOC) ) {
