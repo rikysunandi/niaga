@@ -9,7 +9,7 @@ $unitap = $_GET['unitap'];
 $unitup = $_GET['unitup'];
 $tgl_upload_from = $_GET['tgl_upload_from'];
 $tgl_upload_to = $_GET['tgl_upload_to'];
-$user = 'SYSTEM';
+$user = rand (1,10);
 
 $params = array(
         array($user, SQLSRV_PARAM_IN),
@@ -29,7 +29,7 @@ if(!sqlsrv_execute($stmt)){
 }
 
 // DB table to use
-$table = 'NIAGA.dbo.vw_Create_Rekap_RPP_On_Site_Petugas';
+$table = 'NIAGA.dbo.vw_Create_Rekap_RPP_On_Site_Petugas_'.$user;
  
 // Table's primary key
 $primaryKey = 'TGL_INPUT';

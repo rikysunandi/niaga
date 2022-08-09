@@ -9,7 +9,7 @@ $unitap = $_GET['unitap'];
 $unitup = $_GET['unitup'];
 $tgl_upload_from = $_GET['tgl_upload_from'];
 $tgl_upload_to = $_GET['tgl_upload_to'];
-$user = 'SYSTEM';
+$user = rand (1,10);
 
 $params = array(
         array($user, SQLSRV_PARAM_IN),
@@ -28,7 +28,7 @@ if(!sqlsrv_execute($stmt)){
     die(print_r( sqlsrv_errors(), true));
 }else{
 
-    $sql = "select UNITAP, UNITUP, ULP, USER_INPUT, TGL_INPUT, RPP, JML_ON_DESK, JML_ON_SITE from vw_Create_Rekap_RPP_On_Site_Petugas ORDER BY UNITAP, UNITUP, USER_INPUT, TGL_INPUT DESC ";
+    $sql = "select UNITAP, UNITUP, ULP, USER_INPUT, TGL_INPUT, RPP, JML_ON_DESK, JML_ON_SITE from vw_Create_Rekap_RPP_On_Site_Petugas_".$user." ORDER BY UNITAP, UNITUP, USER_INPUT, TGL_INPUT DESC ";
     $stmt = sqlsrv_prepare($conn, $sql);
 
     if(!sqlsrv_execute($stmt)){
