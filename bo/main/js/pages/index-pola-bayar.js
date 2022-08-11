@@ -2342,8 +2342,12 @@ $(function() {
             chart_mom_akumulasi_per_tanggal.data.labels= data.tanggal;
             chart_mom_akumulasi_per_tanggal.data.datasets[0].label = 'REK '+data.blth;
             chart_mom_akumulasi_per_tanggal.data.datasets[0].data = data.jml_plg;
-            chart_mom_akumulasi_per_tanggal.data.datasets[1].label = 'REK '+data.blth_n1;
-            chart_mom_akumulasi_per_tanggal.data.datasets[1].data = data.jml_plg_n1;
+            chart_mom_akumulasi_per_tanggal.data.datasets[1].label = 'RPPTL '+data.blth;
+            chart_mom_akumulasi_per_tanggal.data.datasets[1].data = data.rpptl;
+            chart_mom_akumulasi_per_tanggal.data.datasets[2].label = 'REK '+data.blth_n1;
+            chart_mom_akumulasi_per_tanggal.data.datasets[2].data = data.jml_plg_n1;
+            chart_mom_akumulasi_per_tanggal.data.datasets[3].label = 'RPPTL '+data.blth_n1;
+            chart_mom_akumulasi_per_tanggal.data.datasets[3].data = data.rpptl_n1;
             chart_mom_akumulasi_per_tanggal.update();
 
             $('div#mom_akumulasi_per_tanggal').unblock();
@@ -2354,10 +2358,14 @@ $(function() {
         $.getJSON('../controller/getDashboardMOMPerTanggal.php?unitap='+unitap+'&kogol=X&pic=X&blth='+blth, function(data){
 
             chart_mom_per_tanggal.data.labels= data.tanggal;
-            chart_mom_per_tanggal.data.datasets[0].label = 'REK '+data.blth;
-            chart_mom_per_tanggal.data.datasets[0].data = data.jml_plg;
-            chart_mom_per_tanggal.data.datasets[1].label = 'REK '+data.blth_n1;
-            chart_mom_per_tanggal.data.datasets[1].data = data.jml_plg_n1;
+            chart_mom_akumulasi_per_tanggal.data.datasets[0].label = 'REK '+data.blth;
+            chart_mom_akumulasi_per_tanggal.data.datasets[0].data = data.jml_plg;
+            chart_mom_akumulasi_per_tanggal.data.datasets[1].label = 'RPPTL '+data.blth;
+            chart_mom_akumulasi_per_tanggal.data.datasets[1].data = data.rpptl;
+            chart_mom_akumulasi_per_tanggal.data.datasets[2].label = 'REK '+data.blth_n1;
+            chart_mom_akumulasi_per_tanggal.data.datasets[2].data = data.jml_plg_n1;
+            chart_mom_akumulasi_per_tanggal.data.datasets[3].label = 'RPPTL '+data.blth_n1;
+            chart_mom_akumulasi_per_tanggal.data.datasets[3].data = data.rpptl_n1;
             chart_mom_per_tanggal.update();
 
             $('div#mom_per_tanggal').unblock();
