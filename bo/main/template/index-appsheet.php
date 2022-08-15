@@ -36,7 +36,7 @@
                 
 
                 <div class="row">
-                    <div class="col-6 col-sm-6 col-lg-4 col-xl-3">
+                    <div class="col-12 col-sm-12 col-lg-4 col-xl-3">
                         <div class="card">
                             <div class="card-body">
                                 <div class="text-center">
@@ -56,7 +56,7 @@
                                         </a>
                                     </div>
                                     <div class="col-4 pt-3"><a class="link text-center d-block text-muted" href="javascript:void()"><i class="ti-bar-chart"></i>
-                                            <p class="text-muted">Rpt</p>
+                                            <p class="text-muted">Report</p>
                                         </a>
                                     </div>
                                 </div>
@@ -64,7 +64,7 @@
                         </div>
                     </div>
 
-                    <div class="col-6 col-sm-6 col-lg-4 col-xl-3">
+                    <div class="col-12 col-sm-12 col-lg-4 col-xl-3">
                         <div class="card">
                             <div class="card-body">
                                 <div class="text-center">
@@ -84,7 +84,7 @@
                                         </a>
                                     </div>
                                     <div class="col-4 pt-3"><a class="link text-center d-block text-muted" href="javascript:void()"><i class="ti-bar-chart"></i>
-                                            <p class="text-muted">Rpt</p>
+                                            <p class="text-muted">Report</p>
                                         </a>
                                     </div>
                                 </div>
@@ -92,7 +92,7 @@
                         </div>
                     </div>
 
-                    <div class="col-6 col-sm-6 col-lg-4 col-xl-3">
+                    <div class="col-12 col-sm-12 col-lg-4 col-xl-3">
                         <div class="card">
                             <div class="card-body">
                                 <div class="text-center">
@@ -112,7 +112,7 @@
                                         </a>
                                     </div>
                                     <div class="col-4 pt-3"><a class="link text-center d-block text-muted" href="javascript:void()"><i class="ti-bar-chart"></i>
-                                            <p class="text-muted">Rpt</p>
+                                            <p class="text-muted">Report</p>
                                         </a>
                                     </div>
                                 </div>
@@ -120,7 +120,7 @@
                         </div>
                     </div>
 
-                    <div class="col-6 col-sm-6 col-lg-4 col-xl-3">
+                    <div class="col-12 col-sm-12 col-lg-4 col-xl-3">
                         <div class="card">
                             <div class="card-body">
                                 <div class="text-center">
@@ -140,7 +140,7 @@
                                         </a>
                                     </div>
                                     <div class="col-4 pt-3"><a class="link text-center d-block text-muted" href="javascript:void()"><i class="ti-bar-chart"></i>
-                                            <p class="text-muted">Rpt</p>
+                                            <p class="text-muted">Report</p>
                                         </a>
                                     </div>
                                 </div>
@@ -148,7 +148,7 @@
                         </div>
                     </div>
 
-                    <div class="col-6 col-sm-6 col-lg-4 col-xl-3">
+                    <div class="col-12 col-sm-12 col-lg-4 col-xl-3">
                         <div class="card">
                             <div class="card-body">
                                 <div class="text-center">
@@ -168,7 +168,7 @@
                                         </a>
                                     </div>
                                     <div class="col-4 pt-3"><a class="link text-center d-block text-muted" href="https://datastudio.google.com/reporting/e6222609-41ea-447f-9270-68b7a71fe377"><i class="ti-bar-chart"></i>
-                                            <p class="">Rpt</p>
+                                            <p class="">Report</p>
                                         </a>
                                     </div>
                                 </div>
