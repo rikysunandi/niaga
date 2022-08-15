@@ -108,6 +108,26 @@ $(document).ready(function () {
             type: 'number', 
             "sClass" : "text-right" , render: $.fn.dataTable.render.number(",", ".", 0, '')
           },
+          {
+            data: "REAL_PETUGAS",
+            type: 'number', 
+            "sClass" : "text-right" , render: $.fn.dataTable.render.number(",", ".", 0, '')
+          },
+          {
+            data: "REAL_RPP",
+            type: 'number', 
+            "sClass" : "text-right" , render: $.fn.dataTable.render.number(",", ".", 0, '')
+          },
+          {
+            data: "REAL_TARGET",
+            type: 'number', 
+            "sClass" : "text-right" , render: $.fn.dataTable.render.number(",", ".", 0, '')
+          },
+          {
+            data: "SISA_WO",
+            type: 'number', 
+            "sClass" : "text-right" , render: $.fn.dataTable.render.number(",", ".", 0, '')
+          },
         ],
         dom:
             "<'row'<'col-sm-12 col-md-6'B><'col-sm-12 col-md-6'f>>" +

@@ -140,7 +140,7 @@
                         <div class="card">
                             <div class="card-body">
                                 <p>
-                                    Keterangan data Onsite:
+                                    <strong>Keterangan Data Onsite:</strong>
                                     <ul>
                                         <li><strong>Sesuai WO:</strong> Inputan Onsite dari Pelanggan-pelanggan yang ada di WO RPP terkait</li>
                                         <li><strong>Sisipan:</strong> Inputan Onsite dari Pelanggan-pelanggan yang ada diluar WO RPP terkait</li>
@@ -148,6 +148,15 @@
                                         <li><strong>Tidak Ditemukan:</strong> Inputan Onsite dengan kondisi pelanggan tidak ditemukan dan belum masuk realisasi</li>
                                         <li><strong>Double:</strong> Inputan Onsite dengan kondisi pelanggan sudah diinput sebelumnya selama periode Onsite</li>
                                         <li><strong>Sisipan RPP Lain:</strong> Inputan Onsite dari Pekerjaan RPP Lain yang menemukan pelanggan sesuai WO RPP terkait</li>
+                                    </ul>
+                                </p>
+                                <p>
+                                    <strong>Keterangan Realisasi:</strong>
+                                    <ul>
+                                        <li><strong>Realisasi Petugas:</strong> Jumlah Inputan Petugas dalam pekerjaan onsite dari RPP terkait (Sesuai WO+Sisipan+Pagar Kunci+Tidak Ditemukan+Double)</li>
+                                        <li><strong>Realisasi RPP:</strong> Jumlah Inputan sesuai WO dari RPP terkait (Sesuai WO+Sisipan Rpp Lain)</li>
+                                        <li><strong>Realisasi Target:</strong> Jumlah Inputan sesuai WO dari RPP terkait ditambah Sisipan (Sesuai WO+Sisipan+Sisipan Rpp Lain)</li>
+                                        <li><strong>Sisa WO:</strong> Jumlah sisa WO (Jml On Desk-Sesuai WO-Sisipan RPP Lain)</li>
                                     </ul>
                                 </p>
                                 <div class="table-responsive">
@@ -163,6 +172,10 @@
                                             <th rowspan="2" class="text-center bg-primary-lighten-2">WAKTU<br/>PEKERJAAN</th>
                                             <th rowspan="2" class="text-center bg-primary-lighten-2">JML<br/>ON DESK</th>
                                             <th colspan="6" class="text-center bg-primary-lighten-2">ON SITE</th>
+                                            <th rowspan="2" class="text-center bg-success-lighten-2">REALISASI<br/>PETUGAS</th>
+                                            <th rowspan="2" class="text-center bg-success-lighten-2">REALISASI<br/>RPP</th>
+                                            <th rowspan="2" class="text-center bg-success-lighten-2">REALISASI<br/>THD TARGET</th>
+                                            <th rowspan="2" class="text-center bg-warning-lighten-2">SISA<br/>WO RPP</th>
                                         </tr>
                                         <tr>
                                             <th class="text-center bg-success-lighten-2">SESUAI<br/>WO</th>

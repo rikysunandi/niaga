@@ -49,6 +49,10 @@ $columns = array(
     array( 'db' => 'JML_TIDAK_DITEMUKAN',  'dt' => 'JML_TIDAK_DITEMUKAN' ),
     array( 'db' => 'JML_SISIPAN_RPP_LAIN',  'dt' => 'JML_SISIPAN_RPP_LAIN' ),
     array( 'db' => 'JML_DOUBLE',  'dt' => 'JML_DOUBLE' ),
+    array( 'db' => 'REAL_PETUGAS',  'dt' => 'REAL_PETUGAS' ),
+    array( 'db' => 'REAL_RPP',  'dt' => 'REAL_RPP' ),
+    array( 'db' => 'REAL_TARGET',  'dt' => 'REAL_TARGET' ),
+    array( 'db' => 'SISA_WO',  'dt' => 'SISA_WO' ),
 );
  
 // SQL server connection information
