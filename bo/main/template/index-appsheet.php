@@ -47,8 +47,8 @@
                             </div>
                             <div class="card-footer">
                                 <div class="row">
-                                    <div class="col-4 border-right-1 pt-3"><a class="link text-center d-block text-muted" href="https://www.appsheet.com/start/fbb0e370-2f96-4e95-a1cf-b64aeead8bba"><i class="ti-mobile"></i>
-                                            <p class="">App</p>
+                                    <div class="col-4 border-right-1 pt-3"><a class="link text-center d-block text-muted" href="https://www.appsheet.com/start/fbb0e370-2f96-4e95-a1cf-b64aeead8bba"><i class="text-primary ti-mobile"></i>
+                                            <p class="text-primary">App</p>
                                         </a>
                                     </div>
                                     <div class="col-4 border-right-1 pt-3"><a class="link text-center d-block text-muted" href="javascript:void()"><i class="ti-list"></i>
@@ -75,8 +75,8 @@
                             </div>
                             <div class="card-footer">
                                 <div class="row">
-                                    <div class="col-4 border-right-1 pt-3"><a class="link text-center d-block text-muted" href="https://www.appsheet.com/start/6426fa19-e2ab-4cdc-8525-3e89f8b5b9ed"><i class="ti-mobile"></i>
-                                            <p class="">App</p>
+                                    <div class="col-4 border-right-1 pt-3"><a class="link text-center d-block text-muted" href="https://www.appsheet.com/start/6426fa19-e2ab-4cdc-8525-3e89f8b5b9ed"><i class="text-primary ti-mobile"></i>
+                                            <p class="text-primary">App</p>
                                         </a>
                                     </div>
                                     <div class="col-4 border-right-1 pt-3"><a class="link text-center d-block text-muted" href="javascript:void()"><i class="ti-list"></i>
@@ -103,12 +103,12 @@
                             </div>
                             <div class="card-footer">
                                 <div class="row">
-                                    <div class="col-4 border-right-1 pt-3"><a class="link text-center d-block text-muted" href="https://www.appsheet.com/start/7692e1e3-36e3-46d3-8ea6-2dcc03713397"><i class="ti-mobile"></i>
-                                            <p class="">App</p>
+                                    <div class="col-4 border-right-1 pt-3"><a class="link text-center d-block text-muted" href="https://www.appsheet.com/start/7692e1e3-36e3-46d3-8ea6-2dcc03713397"><i class="text-primary ti-mobile"></i>
+                                            <p class="text-primary">App</p>
                                         </a>
                                     </div>
-                                    <div class="col-4 border-right-1 pt-3"><a class="link text-center d-block text-muted" href="https://docs.google.com/spreadsheets/d/1tuBqLzuAI3hEY0aQF1f_dVqBc6GAFWrS08nyb99cpIU/edit?usp=sharing"><i class="ti-list"></i>
-                                            <p class="">Data</p>
+                                    <div class="col-4 border-right-1 pt-3"><a class="link text-center d-block text-muted" href="https://docs.google.com/spreadsheets/d/1tuBqLzuAI3hEY0aQF1f_dVqBc6GAFWrS08nyb99cpIU/edit?usp=sharing"><i class="text-primary ti-list"></i>
+                                            <p class="text-primary">Data</p>
                                         </a>
                                     </div>
                                     <div class="col-4 pt-3"><a class="link text-center d-block text-muted" href="javascript:void()"><i class="ti-bar-chart"></i>
@@ -131,12 +131,12 @@
                             </div>
                             <div class="card-footer">
                                 <div class="row">
-                                    <div class="col-4 border-right-1 pt-3"><a class="link text-center d-block text-muted" href="https://www.appsheet.com/start/a6b9078c-a7ac-43ab-b732-0042370a400a"><i class="ti-mobile"></i>
-                                            <p class="">App</p>
+                                    <div class="col-4 border-right-1 pt-3"><a class="link text-center d-block text-muted" href="https://www.appsheet.com/start/a6b9078c-a7ac-43ab-b732-0042370a400a"><i class="text-primary ti-mobile"></i>
+                                            <p class="text-primary">App</p>
                                         </a>
                                     </div>
-                                    <div class="col-4 border-right-1 pt-3"><a class="link text-center d-block text-muted" href="https://docs.google.com/spreadsheets/d/1Hv3-72gGxG6fYc5raLGP6n0maxUgmrmZON3iGQNVpnc/edit?usp=sharing"><i class="ti-list"></i>
-                                            <p class="">Data</p>
+                                    <div class="col-4 border-right-1 pt-3"><a class="link text-center d-block text-muted" href="https://docs.google.com/spreadsheets/d/1Hv3-72gGxG6fYc5raLGP6n0maxUgmrmZON3iGQNVpnc/edit?usp=sharing"><i class="text-primary ti-list"></i>
+                                            <p class="text-primary">Data</p>
                                         </a>
                                     </div>
                                     <div class="col-4 pt-3"><a class="link text-center d-block text-muted" href="javascript:void()"><i class="ti-bar-chart"></i>
@@ -159,16 +159,16 @@
                             </div>
                             <div class="card-footer">
                                 <div class="row">
-                                    <div class="col-4 border-right-1 pt-3"><a class="link text-center d-block text-muted" href="https://www.appsheet.com/start/ba62a2bf-dfe1-411b-918e-109861956af8"><i class="ti-mobile"></i>
-                                            <p class="">App</p>
+                                    <div class="col-4 border-right-1 pt-3"><a class="link text-center d-block text-muted" href="https://www.appsheet.com/start/ba62a2bf-dfe1-411b-918e-109861956af8"><i class="text-primary ti-mobile"></i>
+                                            <p class="text-primary">App</p>
                                         </a>
                                     </div>
-                                    <div class="col-4 border-right-1 pt-3"><a class="link text-center d-block text-muted" href="https://docs.google.com/spreadsheets/d/1t8VmSrNa_vn5dTv1jJlqZSK3jyJR4chFf9ENCpPtBGI/edit?usp=sharing"><i class="ti-list"></i>
-                                            <p class="">Data</p>
+                                    <div class="col-4 border-right-1 pt-3"><a class="link text-center d-block text-muted" href="https://docs.google.com/spreadsheets/d/1t8VmSrNa_vn5dTv1jJlqZSK3jyJR4chFf9ENCpPtBGI/edit?usp=sharing"><i class="text-primary ti-list"></i>
+                                            <p class="text-primary">Data</p>
                                         </a>
                                     </div>
-                                    <div class="col-4 pt-3"><a class="link text-center d-block text-muted" href="https://datastudio.google.com/reporting/e6222609-41ea-447f-9270-68b7a71fe377"><i class="ti-bar-chart"></i>
-                                            <p class="">Report</p>
+                                    <div class="col-4 pt-3"><a class="link text-center d-block text-muted" href="https://datastudio.google.com/reporting/e6222609-41ea-447f-9270-68b7a71fe377"><i class="text-primary ti-bar-chart"></i>
+                                            <p class="text-primary">Report</p>
                                         </a>
                                     </div>
                                 </div>
