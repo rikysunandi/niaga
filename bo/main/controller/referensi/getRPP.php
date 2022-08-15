@@ -7,7 +7,7 @@ require_once '../../../config/database.php';
 $response = array();
 $petugas = $_GET['petugas'];
 
-$stmt = sqlsrv_query($conn, "select RPP from vw_petugas_rpp where PETUGAS='$petugas' ");
+$stmt = sqlsrv_query($conn, "select RPP from vw_petugas_rpp where PETUGAS='$petugas' ORDER BY RPP ");
 if($stmt){
 	$i=0;
 	while( $row = sqlsrv_fetch_array( $stmt, SQLSRV_FETCH_ASSOC) ) {
