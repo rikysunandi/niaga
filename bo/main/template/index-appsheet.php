@@ -56,7 +56,7 @@
                                         </a>
                                     </div>
                                     <div class="col-4 pt-3"><a class="link text-center d-block text-muted" href="javascript:void()"><i class="ti-bar-chart"></i>
-                                            <p class="text-muted">Report</p>
+                                            <p class="text-muted">Rpt</p>
                                         </a>
                                     </div>
                                 </div>
@@ -84,7 +84,7 @@
                                         </a>
                                     </div>
                                     <div class="col-4 pt-3"><a class="link text-center d-block text-muted" href="javascript:void()"><i class="ti-bar-chart"></i>
-                                            <p class="text-muted">Report</p>
+                                            <p class="text-muted">Rpt</p>
                                         </a>
                                     </div>
                                 </div>
@@ -112,7 +112,7 @@
                                         </a>
                                     </div>
                                     <div class="col-4 pt-3"><a class="link text-center d-block text-muted" href="javascript:void()"><i class="ti-bar-chart"></i>
-                                            <p class="text-muted">Report</p>
+                                            <p class="text-muted">Rpt</p>
                                         </a>
                                     </div>
                                 </div>
@@ -125,8 +125,8 @@
                             <div class="card-body">
                                 <div class="text-center">
                                     <span class="display-4"><i class="icon-anchor text-warning"></i></span>
-                                    <h2 class="mt-4">TS P2TL - Belum Realisasi</h2>
-                                    <p>Appsheet untuk melakukan penagihan TS P2TL Belum Realisasi diluar Ex DG</p>
+                                    <h2 class="mt-4">TS P2TL Belum Realisasi</h2>
+                                    <p>Appsheet untuk penagihan TS P2TL Belum Realisasi diluar Ex DG</p>
                                 </div>
                             </div>
                             <div class="card-footer">
@@ -140,7 +140,7 @@
                                         </a>
                                     </div>
                                     <div class="col-4 pt-3"><a class="link text-center d-block text-muted" href="javascript:void()"><i class="ti-bar-chart"></i>
-                                            <p class="text-muted">Report</p>
+                                            <p class="text-muted">Rpt</p>
                                         </a>
                                     </div>
                                 </div>
@@ -168,7 +168,7 @@
                                         </a>
                                     </div>
                                     <div class="col-4 pt-3"><a class="link text-center d-block text-muted" href="https://datastudio.google.com/reporting/e6222609-41ea-447f-9270-68b7a71fe377"><i class="ti-bar-chart"></i>
-                                            <p class="">Report</p>
+                                            <p class="">Rpt</p>
                                         </a>
                                     </div>
                                 </div>
