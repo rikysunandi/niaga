@@ -118,11 +118,11 @@ $(document).ready(function () {
             type: 'number', 
             "sClass" : "text-right" , render: $.fn.dataTable.render.number(",", ".", 0, '')
           },
-          {
-            data: "REAL_TARGET",
-            type: 'number', 
-            "sClass" : "text-right" , render: $.fn.dataTable.render.number(",", ".", 0, '')
-          },
+          // {
+          //   data: "REAL_TARGET",
+          //   type: 'number', 
+          //   "sClass" : "text-right" , render: $.fn.dataTable.render.number(",", ".", 0, '')
+          // },
           {
             data: "SISA_WO",
             type: 'number', 

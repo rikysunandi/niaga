@@ -155,7 +155,7 @@
                                     <ul>
                                         <li><strong>Realisasi Petugas:</strong> Jumlah Inputan Petugas dalam pekerjaan onsite dari RPP terkait (Sesuai WO+Sisipan+Pagar Kunci+Tidak Ditemukan+Double)</li>
                                         <li><strong>Realisasi RPP:</strong> Jumlah Inputan sesuai WO dari RPP terkait (Sesuai WO+Sisipan Rpp Lain)</li>
-                                        <li><strong>Realisasi Target:</strong> Jumlah Inputan sesuai WO dari RPP terkait ditambah Sisipan (Sesuai WO+Sisipan+Sisipan Rpp Lain)</li>
+                                        <!-- <li><strong>Realisasi Target:</strong> Jumlah Inputan sesuai WO dari RPP terkait ditambah Sisipan (Sesuai WO+Sisipan+Sisipan Rpp Lain)</li> -->
                                         <li><strong>Sisa WO:</strong> Jumlah sisa WO (Jml On Desk-Sesuai WO-Sisipan RPP Lain)</li>
                                     </ul>
                                 </p>
@@ -174,7 +174,7 @@
                                             <th colspan="6" class="text-center bg-primary-lighten-2">ON SITE</th>
                                             <th rowspan="2" class="text-center bg-success-lighten-2">REALISASI<br/>PETUGAS</th>
                                             <th rowspan="2" class="text-center bg-success-lighten-2">REALISASI<br/>RPP</th>
-                                            <th rowspan="2" class="text-center bg-success-lighten-2">REALISASI<br/>THD TARGET</th>
+                                            <!-- <th rowspan="2" class="text-center bg-success-lighten-2">REALISASI<br/>THD TARGET</th> -->
                                             <th rowspan="2" class="text-center bg-warning-lighten-2">SISA<br/>WO RPP</th>
                                         </tr>
                                         <tr>
@@ -239,6 +239,6 @@
     <script src="../../assets/plugins/moment/moment.min.js"></script>
     <script src="../../assets/plugins/bootstrap-daterangepicker/daterangepicker.js"></script>
     <script src="../js/pages/apps.js"></script>
-    <script src="../js/pages/rekap-rpp-onsite.js?time=2"></script>
+    <script src="../js/pages/rekap-rpp-onsite.js?time=3"></script>
 </body>
 </html>

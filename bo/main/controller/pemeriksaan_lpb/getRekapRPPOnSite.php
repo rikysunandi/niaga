@@ -51,7 +51,7 @@ $columns = array(
     array( 'db' => 'JML_DOUBLE',  'dt' => 'JML_DOUBLE' ),
     array( 'db' => 'REAL_PETUGAS',  'dt' => 'REAL_PETUGAS' ),
     array( 'db' => 'REAL_RPP',  'dt' => 'REAL_RPP' ),
-    array( 'db' => 'REAL_TARGET',  'dt' => 'REAL_TARGET' ),
+    // array( 'db' => 'REAL_TARGET',  'dt' => 'REAL_TARGET' ),
     array( 'db' => 'SISA_WO',  'dt' => 'SISA_WO' ),
 );
  
