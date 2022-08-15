@@ -53,6 +53,7 @@ $(document).ready(function () {
           },
           {
             data: "ULP",
+            visible: false,
             // render: function ( data, type, row ) {
             //     return '<a href="info-agenda.php?noagenda='+data+'" target="_blank">'+data+'</a>';
             // }
