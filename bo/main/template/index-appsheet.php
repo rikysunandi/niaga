@@ -36,6 +36,35 @@
                 
 
                 <div class="row">
+
+                    <div class="col-12 col-sm-12 col-lg-4 col-xl-3">
+                        <div class="card">
+                            <div class="card-body">
+                                <div class="text-center">
+                                    <span class="display-4"><i class="icon-target text-danger"></i></span>
+                                    <h2 class="mt-4">PRR - Tahap II</h2>
+                                    <p>Appsheet untuk melakukan penagihan PRR Tahap II</p>
+                                </div>
+                            </div>
+                            <div class="card-footer">
+                                <div class="row">
+                                    <div class="col-4 border-right-1 pt-3"><a class="link text-center d-block text-muted" href="https://www.appsheet.com/start/fbb0e370-2f96-4e95-a1cf-b64aeead8bba"><i class="text-primary ti-mobile"></i>
+                                            <p class="text-primary">App</p>
+                                        </a>
+                                    </div>
+                                    <div class="col-4 border-right-1 pt-3"><a class="link text-center d-block text-muted" href="javascript:void()"><i class="ti-list"></i>
+                                            <p class="text-muted">Data</p>
+                                        </a>
+                                    </div>
+                                    <div class="col-4 pt-3"><a class="link text-center d-block text-muted" href="javascript:void()"><i class="ti-bar-chart"></i>
+                                            <p class="text-muted">Report</p>
+                                        </a>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+
                     <div class="col-12 col-sm-12 col-lg-4 col-xl-3">
                         <div class="card">
                             <div class="card-body">
@@ -68,7 +97,7 @@
                         <div class="card">
                             <div class="card-body">
                                 <div class="text-center">
-                                    <span class="display-4"><i class="icon-directions text-danger"></i></span>
+                                    <span class="display-4"><i class="icon-target text-danger"></i></span>
                                     <h2 class="mt-4">PRR - Cek Anomali</h2>
                                     <p>Appsheet untuk melakukan pengecekan Anomali PRR</p>
                                 </div>
