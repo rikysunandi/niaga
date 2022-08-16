@@ -37,9 +37,10 @@ $blth = substr(str_replace('-','',$tgl_pemeriksaan),0,6);
 
 $response = array();
 
-if(strlen($unitap)<>5){
-  $key = array_search($unitup, array_column($unitups, 'unitup'));
+if(strlen($unitap)<>5 || strlen($unitup)<>5){
+  $key = array_search(substr($user_input,0,5), array_column($unitups, 'unitup'));
   $unitap = $unitups[$key]['unitap'];
+  $unitup = substr($user_input,0,5);
 }
 
 if($blth>='202202'){

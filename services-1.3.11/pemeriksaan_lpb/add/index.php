@@ -37,9 +37,10 @@ $tgl_input = $json_data['tglInsert'];
 
 $response = array();
 
-if(strlen($unitap)<>5){
+if(strlen($unitap)<>5 || strlen($unitup)<>5){
   $key = array_search(substr($user_input,0,5), array_column($unitups, 'unitup'));
   $unitap = $unitups[$key]['unitap'];
+  $unitup = substr($user_input,0,5);
 }
 
 if(substr($idpel, 0, 11)=='99999999999'){
