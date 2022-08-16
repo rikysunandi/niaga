@@ -125,6 +125,34 @@
                         <div class="card">
                             <div class="card-body">
                                 <div class="text-center">
+                                    <span class="display-4"><i class="icon-target text-danger"></i></span>
+                                    <h2 class="mt-4">PRR - Daya 6600 VA</h2>
+                                    <p>Appsheet untuk melakukan pengecekan PRR Pelanggan Daya 6600 Ke Atas</p>
+                                </div>
+                            </div>
+                            <div class="card-footer">
+                                <div class="row">
+                                    <div class="col-4 border-right-1 pt-3"><a class="link text-center d-block text-muted" href="https://www.appsheet.com/start/c90224e3-80bf-445f-ba3d-fa7064964a03"><i class="text-primary ti-mobile"></i>
+                                            <p class="text-primary">App</p>
+                                        </a>
+                                    </div>
+                                    <div class="col-4 border-right-1 pt-3"><a class="link text-center d-block text-muted" href="https://docs.google.com/spreadsheets/d/1st2Z9I8sWV_qlGm3qFwNkj6Z60nvOYogFTJK9e7v-48/edit?usp=sharing"><i class="ti-list"></i>
+                                            <p class="text-primary">Data</p>
+                                        </a>
+                                    </div>
+                                    <div class="col-4 pt-3"><a class="link text-center d-block text-muted" href="javascript:void()"><i class="ti-bar-chart"></i>
+                                            <p class="text-muted">Report</p>
+                                        </a>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+
+                    <div class="col-12 col-sm-12 col-lg-4 col-xl-3">
+                        <div class="card">
+                            <div class="card-body">
+                                <div class="text-center">
                                     <span class="display-4"><i class="icon-anchor text-warning"></i></span>
                                     <h2 class="mt-4">TS P2TL - Tahap IV</h2>
                                     <p>Appsheet untuk melakukan penagihan/pemutusan TS P2TL Tahap IV</p>
@@ -188,7 +216,7 @@
                             </div>
                             <div class="card-footer">
                                 <div class="row">
-                                    <div class="col-4 border-right-1 pt-3"><a class="link text-center d-block text-muted" href="https://s.id/WOTS6600"><i class="text-primary ti-mobile"></i>
+                                    <div class="col-4 border-right-1 pt-3"><a class="link text-center d-block text-muted" href="https://www.appsheet.com/start/a6cdcc01-6dee-4d44-aa62-30c32e715672"><i class="text-primary ti-mobile"></i>
                                             <p class="text-primary">App</p>
                                         </a>
                                     </div>
