@@ -373,7 +373,7 @@ $(document).ready(function () {
           var wo, jml;
           var j = 2;
           while(j < nb_cols){
-            if(j==nb_cols-2){
+            if(j==nb_cols-6){
 
                 var persen;
                 persen = (1-(jml/wo))*100;

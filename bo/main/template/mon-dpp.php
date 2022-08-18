@@ -115,7 +115,7 @@
                                                 <label class="text-label d-block"><small>STATUS BAYAR BLN INI</label></small>
                                                 <select id="sel_status_bayar" title="BAYAR BULAN INI" class="selectpicker show-tick" data-size="5" >
                                                     <option value="00">SEMUA DATA</option>
-                                                    <option value="LUNAS">SEMUA LUNAS</option>
+                                                    <option value="LUNAS">LUNAS</option>
                                                     <option value="LANCAR">&nbsp; &nbsp; LUNAS LANCAR</option>
                                                     <option value="BARU">&nbsp; &nbsp; LUNAS BARU</option>
                                                     <option value="IRISAN">&nbsp; &nbsp; LUNAS IRISAN</option>
