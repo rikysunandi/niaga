@@ -168,6 +168,8 @@
                                             <th class="text-center bg-primary-lighten-2">STATUS BAYAR<br/>BLN INI</th>
                                             <th class="text-center bg-primary-lighten-2">KODESTATUS</th>
                                             <th class="text-center bg-primary-lighten-2">SUMBER<br/>SOREK</th>
+                                            <th class="text-center bg-primary-lighten-2">TGL UPLOAD<br/>SOREK</th>
+                                            <th class="text-center bg-primary-lighten-2">TGL UPDATE</th>
                                         </tr>
                                     </thead>
                                     <!-- <tfoot>

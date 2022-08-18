@@ -34,7 +34,7 @@ if(!sqlsrv_execute($stmt)){
     die(print_r( sqlsrv_errors(), true));
 }else{
 
-    $sql = "select BLTH, UNITUPI, UNITAP, UNITUP, IDPEL, NAMA, KOGOL, TARIF, DAYA, PIC, KODEPETUGAS, RBM, STATUS_LALU, PEMKWH, RPPTL, TGLBAYAR, UMUR_PIUTANG, PERCEPATAN, JML_TUNGGAKAN, STATUS_BAYAR, KDPP, KDPEMBAYAR, KODESTATUS from vw_Create_DPP_".$user." Order by IDPEL ASC";
+    $sql = "select BLTH, UNITUPI, UNITAP, UNITUP, IDPEL, NAMA, KOGOL, TARIF, DAYA, PIC, KODEPETUGAS, RBM, STATUS_LALU, PEMKWH, RPPTL, TGLBAYAR, UMUR_PIUTANG, PERCEPATAN, JML_TUNGGAKAN, STATUS_BAYAR, KDPP, KDPEMBAYAR, KODESTATUS, CONVERT(VARCHAR,TGL_INPUT,112), CONVERT(VARCHAR,TGL_UPDATE,112) from vw_Create_DPP_".$user." Order by IDPEL ASC";
     $stmt = sqlsrv_prepare($conn, $sql);
 
     if(!sqlsrv_execute($stmt)){
@@ -44,7 +44,7 @@ if(!sqlsrv_execute($stmt)){
         header('Content-Disposition: attachment; filename="DPP_'.$unitap.'_'.$unitup.'_'.date('Ymdhis').'.csv"');
 
         $fp = fopen('php://output', 'wb');
-        $columns = array("BLTH", "UNITUPI", "UNITAP", "UNITUP", "IDPEL", "NAMA", "KOGOL", "TARIF", "DAYA", "PIC",  "KODEPETUGAS", "RBM", "STATUS_LALU", "PEMKWH", "RPPTL", "TGLBAYAR", "UMUR_PIUTANG", "PERCEPATAN", "JML_TUNGGAKAN", "STATUS BLN INI", "KDPP", "KDPEMBAYAR", "KODESTATUS");
+        $columns = array("BLTH", "UNITUPI", "UNITAP", "UNITUP", "IDPEL", "NAMA", "KOGOL", "TARIF", "DAYA", "PIC",  "KODEPETUGAS", "RBM", "STATUS_LALU", "PEMKWH", "RPPTL", "TGLBAYAR", "UMUR_PIUTANG", "PERCEPATAN", "JML_TUNGGAKAN", "STATUS BLN INI", "KDPP", "KDPEMBAYAR", "KODESTATUS","TGL UPLOAD SOREK", "TGL UPDATE");
         fputcsv($fp, $columns, chr(9));
         while( $row = sqlsrv_fetch_array( $stmt, SQLSRV_FETCH_NUMERIC) ) {
             fputcsv($fp, $row, chr(9));

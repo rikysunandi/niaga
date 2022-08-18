@@ -176,6 +176,14 @@ $(document).ready(function () {
             data: "SUMBER_SOREK",
             visible: true
           },
+          {
+            data: "TGL_INPUT",
+            visible: true
+          },
+          {
+            data: "TGL_UPDATE",
+            visible: true
+          },
         ],
         dom:
            // "<'row'<'col-sm-12 col-md-9 mb-2'B>>" +

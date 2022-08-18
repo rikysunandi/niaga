@@ -65,6 +65,8 @@ $columns = array(
     array( 'db' => 'KODESTATUS',  'dt' => 'KODESTATUS' ),
     array( 'db' => 'KODEPETUGAS',  'dt' => 'KODEPETUGAS' ),
     array( 'db' => 'SUMBER_SOREK',  'dt' => 'SUMBER_SOREK' ),
+    array( 'db' => 'TGL_INPUT',  'dt' => 'TGL_INPUT' ),
+    array( 'db' => 'TGL_UPDATE',  'dt' => 'TGL_UPDATE' ),
 );
  
 // SQL server connection information
