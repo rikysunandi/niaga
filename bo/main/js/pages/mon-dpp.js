@@ -29,10 +29,10 @@ $(document).ready(function () {
       $('#sel_rbm').empty();
       $.getJSON('../controller/referensi/getRBM.php?unitup='+$('#sel_unitup').val(), function(data){
           console.log('LOAD RBM 1');
-          $('#sel_rbm').append('<option value="00">SEMUA RBM</option>');
           $.each(data.rows,function(i,v){
               $('#sel_rbm').append('<option value="'+v.kode+'">'+v.nama+'</option>');
           });
+          $('#sel_rbm').append('<option value="00">SEMUA RBM</option>');
           $('#sel_rbm').selectpicker('refresh');
           
           if(urlParams.has('rbm')){
