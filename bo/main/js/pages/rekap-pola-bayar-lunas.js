@@ -46,7 +46,11 @@ $(document).ready(function () {
             ariaTitle: "WO IRISAN",
             type: 'number',
             visible: true,
-            "sClass" : "text-right" , render: $.fn.dataTable.render.number(".", ",", 0, '')
+            "sClass" : "text-right" , 
+            render: function ( data, type, row ) {
+                var cls;
+                return '<a href="mon-dpp.php?unitupi='+row.UNITUPI+'&unitap='+row.UNITAP+'&unitup='+row.UNITUP+'&rbm=00&status_lalu=IRISAN'+'&blth='+row.BLTH+'&pic=00&status_bayar=00" target="_blank" role="button">'+$.fn.dataTable.render.number(".", ",", 0, '').display(data)+'</a>';
+            },
           },
           {
             data: "TARGET_BARU",
@@ -54,7 +58,11 @@ $(document).ready(function () {
             ariaTitle: "WO BARU",
             type: 'number',
             visible: true,
-            "sClass" : "text-right" , render: $.fn.dataTable.render.number(".", ",", 0, '')
+            "sClass" : "text-right",
+            render: function ( data, type, row ) {
+                var cls;
+                return '<a href="mon-dpp.php?unitupi='+row.UNITUPI+'&unitap='+row.UNITAP+'&unitup='+row.UNITUP+'&rbm=00&status_lalu=BARU'+'&blth='+row.BLTH+'&pic=00&status_bayar=00" target="_blank" role="button">'+$.fn.dataTable.render.number(".", ",", 0, '').display(data)+'</a>';
+            },
           },
           {
             data: "TARGET_WO",
@@ -62,7 +70,11 @@ $(document).ready(function () {
             ariaTitle: "WO TOTAL",
             type: 'number',
             visible: true,
-            "sClass" : "text-right" , render: $.fn.dataTable.render.number(".", ",", 0, '')
+            "sClass" : "text-right",
+            render: function ( data, type, row ) {
+                var cls;
+                return '<a href="mon-dpp.php?unitupi='+row.UNITUPI+'&unitap='+row.UNITAP+'&unitup='+row.UNITUP+'&rbm=00&status_lalu=BARU_IRISAN'+'&blth='+row.BLTH+'&pic=00&status_bayar=00" target="_blank" role="button">'+$.fn.dataTable.render.number(".", ",", 0, '').display(data)+'</a>';
+            },
           },
           {
             data: "TARGET_WO_RP",
@@ -70,52 +82,75 @@ $(document).ready(function () {
             ariaTitle: "RP WO TOTAL",
             type: 'number',
             visible: true,
-            "sClass" : "text-right" , render: $.fn.dataTable.render.number(".", ",", 0, '')
+            "sClass" : "text-right",
+            render: function ( data, type, row ) {
+                var cls;
+                return '<a href="mon-dpp.php?unitupi='+row.UNITUPI+'&unitap='+row.UNITAP+'&unitup='+row.UNITUP+'&rbm=00&status_lalu=BARU_IRISAN'+'&blth='+row.BLTH+'&pic=00&status_bayar=00" target="_blank" role="button">'+$.fn.dataTable.render.number(".", ",", 0, '').display(data)+'</a>';
+            },
           },
           {
             data: "MUTASI",
             type: 'number',
             visible: false,
-            "sClass" : "text-right" , render: $.fn.dataTable.render.number(".", ",", 0, '')
+            "sClass" : "text-right",
+            render: $.fn.dataTable.render.number(".", ",", 0, '')
           },
           {
             data: "LUNAS_IRISAN",
             type: 'number',
             visible: false,
-            "sClass" : "text-right" , render: $.fn.dataTable.render.number(".", ",", 0, '')
+            "sClass" : "text-right",
+            render: function ( data, type, row ) {
+                var cls;
+                return '<a href="mon-dpp.php?unitupi='+row.UNITUPI+'&unitap='+row.UNITAP+'&unitup='+row.UNITUP+'&rbm=00&status_lalu=IRISAN'+'&blth='+row.BLTH+'&pic=00&status_bayar=LUNAS" target="_blank" role="button">'+$.fn.dataTable.render.number(".", ",", 0, '').display(data)+'</a>';
+            },
           },
           {
             data: "LUNAS_BARU",
             type: 'number',
             visible: false,
-            "sClass" : "text-right" , render: $.fn.dataTable.render.number(".", ",", 0, '')
+            "sClass" : "text-right",
+            render: function ( data, type, row ) {
+                var cls;
+                return '<a href="mon-dpp.php?unitupi='+row.UNITUPI+'&unitap='+row.UNITAP+'&unitup='+row.UNITUP+'&rbm=00&status_lalu=BARU'+'&blth='+row.BLTH+'&pic=00&status_bayar=LUNAS" target="_blank" role="button">'+$.fn.dataTable.render.number(".", ",", 0, '').display(data)+'</a>';
+            },
           },
           {
             data: "LUNAS_WO",
             type: 'number',
             visible: false,
-            "sClass" : "text-right" , render: $.fn.dataTable.render.number(".", ",", 0, '')
+            "sClass" : "text-right",
+            render: function ( data, type, row ) {
+                var cls;
+                return '<a href="mon-dpp.php?unitupi='+row.UNITUPI+'&unitap='+row.UNITAP+'&unitup='+row.UNITUP+'&rbm=00&status_lalu=BARU_IRISAN'+'&blth='+row.BLTH+'&pic=00&status_bayar=LUNAS" target="_blank" role="button">'+$.fn.dataTable.render.number(".", ",", 0, '').display(data)+'</a>';
+            },
           },
           {
             data: "LUNAS_WO_RP",
             type: 'number',
             visible: false,
-            "sClass" : "text-right" , render: $.fn.dataTable.render.number(".", ",", 0, '')
+            "sClass" : "text-right", 
+            render: function ( data, type, row ) {
+                var cls;
+                return '<a href="mon-dpp.php?unitupi='+row.UNITUPI+'&unitap='+row.UNITAP+'&unitup='+row.UNITUP+'&rbm=00&status_lalu=BARU_IRISAN'+'&blth='+row.BLTH+'&pic=00&status_bayar=LUNAS" target="_blank" role="button">'+$.fn.dataTable.render.number(".", ",", 0, '').display(data)+'</a>';
+            },
           },
           {
             data: "SALDO_IRISAN",
             type: 'number',
             visible: true,
-            "sClass" : "text-right" , 
+            "sClass" : "text-right", 
             render: function ( data, type, row ) {
                 var cls;
-                //console.log($(this));
+                //console.log('row', row);
+                var efektivitas = data;
+                //window.open("urut-langkah-rpp.php?unitupi="+unitupi+"&unitap="+unitap+"&unitup="+unitup+"&petugas="+petugas_dipilih+"&rpp="+rpp, "_blank");
+                
                 if (data == 0) 
-                    return '<span class="text-success">'+
-                        $.fn.dataTable.render.number(".", ",", 0, '').display(data)+'</span>';
+                  return '<a class="text-success" href="mon-dpp.php?unitupi='+row.UNITUPI+'&unitap='+row.UNITAP+'&unitup='+row.UNITUP+'&rbm=00&status_lalu=IRISAN'+'&blth='+row.BLTH+'&pic=00&status_bayar=BLM_LUNAS" target="_blank" role="button">'+$.fn.dataTable.render.number(".", ",", 0, '').display(data)+'</a>';
                 else
-                    return $.fn.dataTable.render.number(".", ",", 0, '').display(data);
-
+                  return '<a href="mon-dpp.php?unitupi='+row.UNITUPI+'&unitap='+row.UNITAP+'&unitup='+row.UNITUP+'&rbm=00&status_lalu=IRISAN'+'&blth='+row.BLTH+'&pic=00&status_bayar=BLM_LUNAS" target="_blank" role="button">'+$.fn.dataTable.render.number(".", ",", 0, '').display(data)+'</a>';
+                //return rpp;
             },
           },
           {
@@ -125,13 +160,15 @@ $(document).ready(function () {
             "sClass" : "text-right" , 
             render: function ( data, type, row ) {
                 var cls;
-                //console.log($(this));
+                //console.log('row', row);
+                var efektivitas = data;
+                //window.open("urut-langkah-rpp.php?unitupi="+unitupi+"&unitap="+unitap+"&unitup="+unitup+"&petugas="+petugas_dipilih+"&rpp="+rpp, "_blank");
+                
                 if (data == 0) 
-                    return '<span class="text-success">'+
-                        $.fn.dataTable.render.number(".", ",", 0, '').display(data)+'</span>';
+                  return '<a class="text-success" href="mon-dpp.php?unitupi='+row.UNITUPI+'&unitap='+row.UNITAP+'&unitup='+row.UNITUP+'&rbm=00&status_lalu=BARU'+'&blth='+row.BLTH+'&pic=00&status_bayar=BLM_LUNAS" target="_blank" role="button">'+$.fn.dataTable.render.number(".", ",", 0, '').display(data)+'</a>';
                 else
-                    return $.fn.dataTable.render.number(".", ",", 0, '').display(data);
-
+                  return '<a href="mon-dpp.php?unitupi='+row.UNITUPI+'&unitap='+row.UNITAP+'&unitup='+row.UNITUP+'&rbm=00&status_lalu=BARU'+'&blth='+row.BLTH+'&pic=00&status_bayar=BLM_LUNAS" target="_blank" role="button">'+$.fn.dataTable.render.number(".", ",", 0, '').display(data)+'</a>';
+                //return rpp;
             },
           },
           {
@@ -141,13 +178,15 @@ $(document).ready(function () {
             "sClass" : "text-right" , 
             render: function ( data, type, row ) {
                 var cls;
-                //console.log($(this));
+                //console.log('row', row);
+                var efektivitas = data;
+                //window.open("urut-langkah-rpp.php?unitupi="+unitupi+"&unitap="+unitap+"&unitup="+unitup+"&petugas="+petugas_dipilih+"&rpp="+rpp, "_blank");
+                
                 if (data == 0) 
-                    return '<span class="text-success">'+
-                        $.fn.dataTable.render.number(".", ",", 0, '').display(data)+'</span>';
+                  return '<a class="text-success" href="mon-dpp.php?unitupi='+row.UNITUPI+'&unitap='+row.UNITAP+'&unitup='+row.UNITUP+'&rbm=00&status_lalu=BARU_IRISAN'+'&blth='+row.BLTH+'&pic=00&status_bayar=BLM_LUNAS" target="_blank" role="button">'+$.fn.dataTable.render.number(".", ",", 0, '').display(data)+'</a>';
                 else
-                    return $.fn.dataTable.render.number(".", ",", 0, '').display(data);
-
+                  return '<a href="mon-dpp.php?unitupi='+row.UNITUPI+'&unitap='+row.UNITAP+'&unitup='+row.UNITUP+'&rbm=00&status_lalu=BARU_IRISAN'+'&blth='+row.BLTH+'&pic=00&status_bayar=BLM_LUNAS" target="_blank" role="button">'+$.fn.dataTable.render.number(".", ",", 0, '').display(data)+'</a>';
+                //return rpp;
             },
           },
           {
@@ -157,13 +196,15 @@ $(document).ready(function () {
             "sClass" : "text-right" , 
             render: function ( data, type, row ) {
                 var cls;
-                //console.log($(this));
+                //console.log('row', row);
+                var efektivitas = data;
+                //window.open("urut-langkah-rpp.php?unitupi="+unitupi+"&unitap="+unitap+"&unitup="+unitup+"&petugas="+petugas_dipilih+"&rpp="+rpp, "_blank");
+                
                 if (data == 0) 
-                    return '<span class="text-success">'+
-                        $.fn.dataTable.render.number(".", ",", 0, '').display(data)+'</span>';
+                  return '<a class="text-success" href="mon-dpp.php?unitupi='+row.UNITUPI+'&unitap='+row.UNITAP+'&unitup='+row.UNITUP+'&rbm=00&status_lalu=BARU_IRISAN'+'&blth='+row.BLTH+'&pic=00&status_bayar=BLM_LUNAS" target="_blank" role="button">'+$.fn.dataTable.render.number(".", ",", 0, '').display(data)+'</a>';
                 else
-                    return $.fn.dataTable.render.number(".", ",", 0, '').display(data);
-
+                  return '<a href="mon-dpp.php?unitupi='+row.UNITUPI+'&unitap='+row.UNITAP+'&unitup='+row.UNITUP+'&rbm=00&status_lalu=BARU_IRISAN'+'&blth='+row.BLTH+'&pic=00&status_bayar=BLM_LUNAS" target="_blank" role="button">'+$.fn.dataTable.render.number(".", ",", 0, '').display(data)+'</a>';
+                //return rpp;
             },
           },
           {
@@ -171,15 +212,17 @@ $(document).ready(function () {
             type: 'number',
             visible: true,
             "sClass" : "text-right" , 
-            render: function ( data, type, row ) {
+             render: function ( data, type, row ) {
                 var cls;
-                //console.log($(this));
+                //console.log('row', row);
+                var efektivitas = data;
+                //window.open("urut-langkah-rpp.php?unitupi="+unitupi+"&unitap="+unitap+"&unitup="+unitup+"&petugas="+petugas_dipilih+"&rpp="+rpp, "_blank");
+                
                 if (data == 0) 
-                    return '<span class="text-success">'+
-                        $.fn.dataTable.render.number(".", ",", 0, '').display(data)+'</span>';
+                  return '<a class="text-success" href="mon-dpp.php?unitupi='+row.UNITUPI+'&unitap='+row.UNITAP+'&unitup='+row.UNITUP+'&rbm=00&status_lalu=BARU_IRISAN'+'&blth='+row.BLTH+'&pic=MUP3&status_bayar=BLM_LUNAS" target="_blank" role="button">'+$.fn.dataTable.render.number(".", ",", 0, '').display(data)+'</a>';
                 else
-                    return $.fn.dataTable.render.number(".", ",", 0, '').display(data);
-
+                  return '<a href="mon-dpp.php?unitupi='+row.UNITUPI+'&unitap='+row.UNITAP+'&unitup='+row.UNITUP+'&rbm=00&status_lalu=BARU_IRISAN'+'&blth='+row.BLTH+'&pic=MUP3&status_bayar=BLM_LUNAS" target="_blank" role="button">'+$.fn.dataTable.render.number(".", ",", 0, '').display(data)+'</a>';
+                //return rpp;
             },
           },
           {
@@ -189,13 +232,15 @@ $(document).ready(function () {
             "sClass" : "text-right" , 
             render: function ( data, type, row ) {
                 var cls;
-                //console.log($(this));
+                //console.log('row', row);
+                var efektivitas = data;
+                //window.open("urut-langkah-rpp.php?unitupi="+unitupi+"&unitap="+unitap+"&unitup="+unitup+"&petugas="+petugas_dipilih+"&rpp="+rpp, "_blank");
+                
                 if (data == 0) 
-                    return '<span class="text-success">'+
-                        $.fn.dataTable.render.number(".", ",", 0, '').display(data)+'</span>';
+                  return '<a class="text-success" href="mon-dpp.php?unitupi='+row.UNITUPI+'&unitap='+row.UNITAP+'&unitup='+row.UNITUP+'&rbm=00&status_lalu=BARU_IRISAN'+'&blth='+row.BLTH+'&pic=MBSAR&status_bayar=BLM_LUNAS" target="_blank" role="button">'+$.fn.dataTable.render.number(".", ",", 0, '').display(data)+'</a>';
                 else
-                    return $.fn.dataTable.render.number(".", ",", 0, '').display(data);
-
+                  return '<a href="mon-dpp.php?unitupi='+row.UNITUPI+'&unitap='+row.UNITAP+'&unitup='+row.UNITUP+'&rbm=00&status_lalu=BARU_IRISAN'+'&blth='+row.BLTH+'&pic=MBSAR&status_bayar=BLM_LUNAS" target="_blank" role="button">'+$.fn.dataTable.render.number(".", ",", 0, '').display(data)+'</a>';
+                //return rpp;
             },
           },
           {
@@ -205,13 +250,15 @@ $(document).ready(function () {
             "sClass" : "text-right" , 
             render: function ( data, type, row ) {
                 var cls;
-                //console.log($(this));
+                //console.log('row', row);
+                var efektivitas = data;
+                //window.open("urut-langkah-rpp.php?unitupi="+unitupi+"&unitap="+unitap+"&unitup="+unitup+"&petugas="+petugas_dipilih+"&rpp="+rpp, "_blank");
+                
                 if (data == 0) 
-                    return '<span class="text-success">'+
-                        $.fn.dataTable.render.number(".", ",", 0, '').display(data)+'</span>';
+                  return '<a class="text-success" href="mon-dpp.php?unitupi='+row.UNITUPI+'&unitap='+row.UNITAP+'&unitup='+row.UNITUP+'&rbm=00&status_lalu=BARU_IRISAN'+'&blth='+row.BLTH+'&pic=MULP&status_bayar=BLM_LUNAS" target="_blank" role="button">'+$.fn.dataTable.render.number(".", ",", 0, '').display(data)+'</a>';
                 else
-                    return $.fn.dataTable.render.number(".", ",", 0, '').display(data);
-
+                  return '<a href="mon-dpp.php?unitupi='+row.UNITUPI+'&unitap='+row.UNITAP+'&unitup='+row.UNITUP+'&rbm=00&status_lalu=BARU_IRISAN'+'&blth='+row.BLTH+'&pic=MULP&status_bayar=BLM_LUNAS" target="_blank" role="button">'+$.fn.dataTable.render.number(".", ",", 0, '').display(data)+'</a>';
+                //return rpp;
             },
           },
           {
@@ -221,13 +268,15 @@ $(document).ready(function () {
             "sClass" : "text-right" , 
             render: function ( data, type, row ) {
                 var cls;
-                //console.log($(this));
+                //console.log('row', row);
+                var efektivitas = data;
+                //window.open("urut-langkah-rpp.php?unitupi="+unitupi+"&unitap="+unitap+"&unitup="+unitup+"&petugas="+petugas_dipilih+"&rpp="+rpp, "_blank");
+                
                 if (data == 0) 
-                    return '<span class="text-success">'+
-                        $.fn.dataTable.render.number(".", ",", 0, '').display(data)+'</span>';
+                  return '<a class="text-success" href="mon-dpp.php?unitupi='+row.UNITUPI+'&unitap='+row.UNITAP+'&unitup='+row.UNITUP+'&rbm=00&status_lalu=BARU_IRISAN'+'&blth='+row.BLTH+'&pic=BILLER&status_bayar=BLM_LUNAS" target="_blank" role="button">'+$.fn.dataTable.render.number(".", ",", 0, '').display(data)+'</a>';
                 else
-                    return $.fn.dataTable.render.number(".", ",", 0, '').display(data);
-
+                  return '<a href="mon-dpp.php?unitupi='+row.UNITUPI+'&unitap='+row.UNITAP+'&unitup='+row.UNITUP+'&rbm=00&status_lalu=BARU_IRISAN'+'&blth='+row.BLTH+'&pic=BILLER&status_bayar=BLM_LUNAS" target="_blank" role="button">'+$.fn.dataTable.render.number(".", ",", 0, '').display(data)+'</a>';
+                //return rpp;
             },
           },
           {
@@ -251,6 +300,22 @@ $(document).ready(function () {
           },
           {
             data: "LATEST_TGLBAYAR",
+            visible: false
+          },
+          {
+            data: "UNITUPI",
+            visible: false
+          },
+          {
+            data: "UNITAP",
+            visible: false
+          },
+          {
+            data: "UNITUP",
+            visible: false
+          },
+          {
+            data: "BLTH",
             visible: false
           },
         ],
