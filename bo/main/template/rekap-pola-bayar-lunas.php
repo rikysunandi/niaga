@@ -510,6 +510,6 @@
     <script src="../../assets/plugins/block-ui/jquery.blockUI.js"></script>
 
     <script src="../js/pages/apps.js"></script>
-    <script src="../js/pages/rekap-pola-bayar-lunas.js?time=24"></script>
+    <script src="../js/pages/rekap-pola-bayar-lunas.js?time=27"></script>
 </body>
 </html>
