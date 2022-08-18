@@ -185,6 +185,9 @@
                                 </table>
                                 </div>
                             </div>
+                            <div class="card-footer">
+                                <p><small class="float-right text-small text-primary">*Update Status Bayar dijadwalkan pada H+1 dari tanggal upload lunas</small></p>
+                            </div>
                         </div>
                     </div>
                 </div>
@@ -232,6 +235,6 @@
     <script src="../../assets/plugins/block-ui/jquery.blockUI.js"></script>
 
     <script src="../js/pages/apps.js"></script>
-    <script src="../js/pages/mon-dpp.js?time=2"></script>
+    <script src="../js/pages/mon-dpp.js?time=3"></script>
 </body>
 </html>

@@ -4,7 +4,9 @@ $(document).ready(function () {
 
     const queryString = window.location.search;
     const urlParams = new URLSearchParams(queryString);
-    var unitupi, unitap, unitup, rbm, status_lalu, blth, pic, status_bayar;
+    var unitupi, unitap, unitup, rbm, status_lalu, blth, pic, status_bayar, is_first;
+
+    is_first=true;
 
     if(urlParams.has('status_lalu')){
       $('#sel_status_lalu').selectpicker('val', urlParams.get('status_lalu'));
@@ -37,7 +39,10 @@ $(document).ready(function () {
             $('#sel_rbm').selectpicker('val', urlParams.get('rbm'));
             console.log('rbm', urlParams.get('rbm'));
 
-            setTimeout(function(){ $('#btn_cari').trigger('click'); }, 800);
+            if(is_first){
+              setTimeout(function(){ $('#btn_cari').trigger('click'); }, 800);
+              is_first=false;
+            }
           }
           else{
             $('#sel_rbm').selectpicker('val', "00");
