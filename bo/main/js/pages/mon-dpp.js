@@ -37,7 +37,7 @@ $(document).ready(function () {
             $('#sel_rbm').selectpicker('val', urlParams.get('rbm'));
             console.log('rbm', urlParams.get('rbm'));
 
-            setTimeout(function(){ $('#btn_cari').trigger('click'); }, 500);
+            setTimeout(function(){ $('#btn_cari').trigger('click'); }, 800);
           }
           else{
             $('#sel_rbm').selectpicker('val', "00");

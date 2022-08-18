@@ -112,12 +112,13 @@
                                                 </select>
                                             </div>
                                             <div class="form-group col-3">
-                                                <label class="text-label d-block"><small>STATUS BAYAR</label></small>
+                                                <label class="text-label d-block"><small>STATUS BAYAR BLN INI</label></small>
                                                 <select id="sel_status_bayar" title="BAYAR BULAN INI" class="selectpicker show-tick" data-size="5" >
                                                     <option value="00">SEMUA DATA</option>
-                                                    <option value="LANCAR">LANCAR</option>
-                                                    <option value="BARU">BARU</option>
-                                                    <option value="IRISAN">IRISAN</option>
+                                                    <option value="LUNAS">SEMUA LUNAS</option>
+                                                    <option value="LANCAR">&nbsp; &nbsp; LUNAS LANCAR</option>
+                                                    <option value="BARU">&nbsp; &nbsp; LUNAS BARU</option>
+                                                    <option value="IRISAN">&nbsp; &nbsp; LUNAS IRISAN</option>
                                                     <option value="BLM_LUNAS">BELUM LUNAS</option>
                                                 </select>
                                             </div>
@@ -164,7 +165,7 @@
                                             <th class="text-center bg-primary-lighten-2">TGLBAYAR</th>
                                             <th class="text-center bg-primary-lighten-2">PERCEPATAN<br/>(HARI)</th>
                                             <th class="text-center bg-primary-lighten-2">KALI<br/>MENUNGGAK</th>
-                                            <th class="text-center bg-primary-lighten-2">STATUS<br/>BLN INI</th>
+                                            <th class="text-center bg-primary-lighten-2">STATUS BAYAR<br/>BLN INI</th>
                                             <th class="text-center bg-primary-lighten-2">KODESTATUS</th>
                                             <th class="text-center bg-primary-lighten-2">SUMBER<br/>SOREK</th>
                                         </tr>

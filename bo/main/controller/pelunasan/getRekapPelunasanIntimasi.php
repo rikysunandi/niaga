@@ -58,6 +58,10 @@ $columns = array(
     array( 'db' => 'SALDO_BILLER', 'dt' => 'SALDO_BILLER' ),
     array( 'db' => 'PERSEN_TOTAL', 'dt' => 'PERSEN_TOTAL' ),
     array( 'db' => 'LATEST_TGLBAYAR', 'dt' => 'LATEST_TGLBAYAR' ),
+    array( 'db' => 'UNITUPI', 'dt' => 'UNITUPI' ),
+    array( 'db' => 'UNITAP', 'dt' => 'UNITAP' ),
+    array( 'db' => 'UNITUP', 'dt' => 'UNITUP' ),
+    array( 'db' => 'BLTH', 'dt' => 'BLTH' ),
 );
  
 // SQL server connection information

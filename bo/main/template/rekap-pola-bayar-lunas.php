@@ -190,6 +190,9 @@
                                 </table>
                                 </div>
                             </div>
+                            <div class="card-footer">
+                                <p><small class="float-right text-small text-primary">*Klik pada angka-angka diatas untuk melihat detail data</small></p>
+                            </div>
                         </div>
                     </div>
                 </div>
@@ -212,7 +215,7 @@
                                             <th rowspan="2" class="text-center bg-primary-lighten-2">MUTASI</th>
                                             <th colspan="3" class="text-center bg-primary-lighten-2">LUNAS</th>
                                             <th colspan="3" class="text-center bg-primary-lighten-2">SALDO</th>
-                                            <th colspan="4" class="text-center bg-primary-lighten-2">MONITORING JUMLAH PLG IRISAN PER PIC</th>
+                                            <th colspan="4" class="text-center bg-primary-lighten-2">MONITORING SALDO PLG IRISAN PER PIC</th>
                                             <th rowspan="2" class="text-center bg-primary-lighten-2">% PELUNASAN<br/>PLG IRISAN</th>
                                             <th rowspan="2" class="text-center bg-primary-lighten-2">TGLBAYAR<br/>TERAKHIR</th>
                                         </tr>
@@ -507,6 +510,6 @@
     <script src="../../assets/plugins/block-ui/jquery.blockUI.js"></script>
 
     <script src="../js/pages/apps.js"></script>
-    <script src="../js/pages/rekap-pola-bayar-lunas.js?time=124"></script>
+    <script src="../js/pages/rekap-pola-bayar-lunas.js?time=24"></script>
 </body>
 </html>
