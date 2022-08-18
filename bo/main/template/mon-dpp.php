@@ -57,40 +57,31 @@
                                 <div class="mb-4">
                                     <form action="#">
                                         <div class="form-row">
-                                            <div class="form-group mb-2 mr-4">
+                                            <div class="form-group col-3">
                                                 <label class="text-label d-block"><small>UID</small></label>
                                                 <select id="sel_unitupi" class="selectpicker show-tick" data-size="5" data-inc-semua="T" >
                                                     <option disabled>Pilih Unit Induk</option>
                                                 </select>
                                             </div>
-                                            <div class="form-group mb-2 mr-4">
+                                            <div class="form-group col-3">
                                                 <label class="text-label d-block"><small>UP3</small></label>
                                                 <select id="sel_unitap" class="selectpicker show-tick" data-size="5" data-inc-semua="T" >
                                                     <option disabled>Pilih UP3</option>
                                                 </select>
                                             </div>
-                                            <div class="form-group mb-2 mr-4">
+                                            <div class="form-group col-3">
                                                 <label class="text-label d-block"><small>ULP</small></label>
-                                                <select id="sel_unitup" class="selectpicker show-tick" data-size="5" data-inc-semua="T" >
+                                                <select id="sel_unitup" class="selectpicker show-tick" data-size="5" data-inc-semua="Y" >
                                                     <option disabled>Pilih ULP</option>
                                                 </select>
                                             </div>
-                                            <div class="form-group mb-2 mr-4">
+                                            <div class="form-group col-3">
                                                 <label class="text-label d-block"><small>RBM</small></label>
                                                 <select id="sel_rbm" title="RBM" class="selectpicker show-tick" data-size="5" >
                                                     <option value="00">SEMUA DATA</option>
                                                 </select>
                                             </div>
-                                            <div class="form-group mb-2 mr-4">
-                                                <label class="text-label d-block"><small>STATUS LALU</label></small>
-                                                <select id="sel_status_lalu" title="POLA BAYAR" class="selectpicker show-tick" data-size="5" >
-                                                    <option value="00">SEMUA DATA</option>
-                                                    <option value="LANCAR">LANCAR</option>
-                                                    <option value="BARU">BARU</option>
-                                                    <option value="IRISAN">IRISAN</option>
-                                                </select>
-                                            </div>
-                                            <div class="form-group mb-2 mr-4">
+                                            <div class="form-group col-3">
                                                 <label class="text-label d-block"><small>BLTH</label></small>
                                                 <select id="sel_blth" class="selectpicker select-sm show-tick" data-size="5" data-width="fit">
                                                     <option value="<?php echo date('Ym') ?>" selected="selected"><?php echo date('Ym') ?></option>
@@ -98,6 +89,36 @@
                                                     <option value='<?php echo date('Ym', strtotime("-1 month")) ?>'><?php echo date('Ym', strtotime("-1 month")) ?></option>
                                                     <option value='<?php echo date('Ym', strtotime("-2 month")) ?>'><?php echo date('Ym', strtotime("-2 month")) ?></option>
                                                     <option value='<?php echo date('Ym', strtotime("-3 month")) ?>'><?php echo date('Ym', strtotime("-3 month")) ?></option>
+                                                </select>
+                                            </div>
+                                            <div class="form-group col-3">
+                                                <label class="text-label d-block"><small>JENIS WO</label></small>
+                                                <select id="sel_status_lalu" title="JENIS WO" class="selectpicker show-tick" data-size="5" >
+                                                    <option value="00">SEMUA DATA</option>
+                                                    <option value="LANCAR">LANCAR</option>
+                                                    <option value="BARU">BARU</option>
+                                                    <option value="IRISAN">IRISAN</option>
+                                                    <option value="BARU_IRISAN">BARU+IRISAN</option>
+                                                </select>
+                                            </div>
+                                            <div class="form-group col-3">
+                                                <label class="text-label d-block"><small>PIC</label></small>
+                                                <select id="sel_pic" title="PIC" class="selectpicker show-tick" data-size="5" >
+                                                    <option value="00">SEMUA DATA</option>
+                                                    <option value="MUP3">MUP3</option>
+                                                    <option value="MBSAR">MBSAR</option>
+                                                    <option value="MULP">MULP</option>
+                                                    <option value="BILLER">BILLER</option>
+                                                </select>
+                                            </div>
+                                            <div class="form-group col-3">
+                                                <label class="text-label d-block"><small>STATUS BAYAR</label></small>
+                                                <select id="sel_status_bayar" title="BAYAR BULAN INI" class="selectpicker show-tick" data-size="5" >
+                                                    <option value="00">SEMUA DATA</option>
+                                                    <option value="LANCAR">LANCAR</option>
+                                                    <option value="BARU">BARU</option>
+                                                    <option value="IRISAN">IRISAN</option>
+                                                    <option value="BLM_LUNAS">BELUM LUNAS</option>
                                                 </select>
                                             </div>
                                         </div>
@@ -137,13 +158,13 @@
                                             <th class="text-center bg-primary-lighten-2">PIC</th>
                                             <th class="text-center bg-primary-lighten-2">PETUGAS</th>
                                             <th class="text-center bg-primary-lighten-2">RBM</th>
-                                            <th class="text-center bg-primary-lighten-2">STATUS LALU</th>
+                                            <th class="text-center bg-primary-lighten-2">STATUS<br/>LALU</th>
                                             <th class="text-center bg-primary-lighten-2">PEMKWH</th>
                                             <th class="text-center bg-primary-lighten-2">RPPTL</th>
                                             <th class="text-center bg-primary-lighten-2">TGLBAYAR</th>
-                                            <th class="text-center bg-primary-lighten-2">PERCEPATAN</th>
+                                            <th class="text-center bg-primary-lighten-2">PERCEPATAN<br/>(HARI)</th>
                                             <th class="text-center bg-primary-lighten-2">KALI<br/>MENUNGGAK</th>
-                                            <th class="text-center bg-primary-lighten-2">STATUS</th>
+                                            <th class="text-center bg-primary-lighten-2">STATUS<br/>BLN INI</th>
                                             <th class="text-center bg-primary-lighten-2">KODESTATUS</th>
                                             <th class="text-center bg-primary-lighten-2">SUMBER<br/>SOREK</th>
                                         </tr>
@@ -208,6 +229,6 @@
     <script src="../../assets/plugins/block-ui/jquery.blockUI.js"></script>
 
     <script src="../js/pages/apps.js"></script>
-    <script src="../js/pages/mon-dpp.js"></script>
+    <script src="../js/pages/mon-dpp.js?time=2"></script>
 </body>
 </html>

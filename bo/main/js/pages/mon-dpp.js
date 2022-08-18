@@ -4,6 +4,23 @@ $(document).ready(function () {
 
     const queryString = window.location.search;
     const urlParams = new URLSearchParams(queryString);
+    var unitupi, unitap, unitup, rbm, status_lalu, blth, pic, status_bayar;
+
+    if(urlParams.has('status_lalu')){
+      $('#sel_status_lalu').selectpicker('val', urlParams.get('status_lalu'));
+    }
+
+    if(urlParams.has('pic')){
+      $('#sel_pic').selectpicker('val', urlParams.get('pic'));
+    }
+
+    if(urlParams.has('status_bayar')){
+      $('#sel_status_bayar').selectpicker('val', urlParams.get('status_bayar'));
+    }
+
+    if(urlParams.has('blth')){
+      $('#sel_blth').val(urlParams.get('blth'));
+    }
     
     $('#sel_unitup').change(function(){
 
@@ -15,10 +32,12 @@ $(document).ready(function () {
               $('#sel_rbm').append('<option value="'+v.kode+'">'+v.nama+'</option>');
           });
           $('#sel_rbm').selectpicker('refresh');
-
+          
           if(urlParams.has('rbm')){
             $('#sel_rbm').selectpicker('val', urlParams.get('rbm'));
             console.log('rbm', urlParams.get('rbm'));
+
+            setTimeout(function(){ $('#btn_cari').trigger('click'); }, 500);
           }
           else{
             $('#sel_rbm').selectpicker('val', "00");
@@ -177,7 +196,7 @@ $(document).ready(function () {
                   // //this.disable(); // disable button
                   // console.log('dt', dt);
                   // console.log('node', node);
-                  window.open('../controller/sorek/expCSVDetailDPP.php?unitupi='+$('#sel_unitupi').val()+'&unitap='+$('#sel_unitap').val()+'&unitup='+$('#sel_unitup').val()+'&rbm='+$('#sel_rbm').val()+'&blth='+$('#sel_blth').val() );
+                  window.open('../controller/sorek/expCSVDetailDPP.php?unitupi='+unitupi+'&unitap='+unitap+'&unitup='+unitup+'&rbm='+rbm+'&blth='+blth+'&status_lalu='+status_lalu+'&pic='+pic+'&status_bayar='+status_bayar );
               }
 
             },
@@ -193,7 +212,16 @@ $(document).ready(function () {
 
     $( 'body' ).on( 'click', '#btn_cari', function(btn) {
         console.log('Klikk');
-        table.ajax.url( '../controller/sorek/getDetailDPP.php?unitupi='+$('#sel_unitupi').val()+'&unitap='+$('#sel_unitap').val()+'&unitup='+$('#sel_unitup').val()+'&rbm='+$('#sel_rbm').val()+'&blth='+$('#sel_blth').val()+'&status_lalu='+$('#sel_status_lalu').val() ).load();
+        unitupi=$('#sel_unitupi').val();
+        unitap=$('#sel_unitap').val();
+        unitup=$('#sel_unitup').val();
+        rbm=$('#sel_rbm').val();
+        status_lalu=$('#sel_status_lalu').val();
+        blth=$('#sel_blth').val();
+        pic=$('#sel_pic').val();
+        status_bayar=$('#sel_status_bayar').val();
+
+        table.ajax.url( '../controller/sorek/getDetailDPP.php?unitupi='+unitupi+'&unitap='+unitap+'&unitup='+unitup+'&rbm='+rbm+'&blth='+blth+'&status_lalu='+status_lalu+'&pic='+pic+'&status_bayar='+status_bayar ).load();
     });
     
     if(urlParams.has('unitap')){

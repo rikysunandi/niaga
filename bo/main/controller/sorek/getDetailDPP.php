@@ -10,7 +10,9 @@ $unitup = $_REQUEST['unitup'];
 $rbm = $_REQUEST['rbm'];
 $blth = $_REQUEST['blth'];
 $status_lalu = $_REQUEST['status_lalu'];
-$user = 'SYSTEM';
+$pic = $_REQUEST['pic'];
+$status_bayar = $_REQUEST['status_bayar'];
+$user = rand (1,10);
 
 $params = array(
         array($user, SQLSRV_PARAM_IN),
@@ -20,9 +22,11 @@ $params = array(
         array($rbm, SQLSRV_PARAM_IN),
         array($blth, SQLSRV_PARAM_IN),
         array($status_lalu, SQLSRV_PARAM_IN),
+        array($pic, SQLSRV_PARAM_IN),
+        array($status_bayar, SQLSRV_PARAM_IN),
     );
 
-$sql = "EXEC sp_vw_Create_Detail_DPP @UserID = ?, @Unitupi = ?, @Unitap = ?, @Unitup = ?, @RBM = ?, @BLTH = ?, @Status_Lalu = ? ";
+$sql = "EXEC sp_vw_Create_DPP @UserID = ?, @Unitupi = ?, @Unitap = ?, @Unitup = ?, @RBM = ?, @BLTH = ?, @Status_Lalu = ?, @PIC = ?, @Status_Bayar = ? ";
 $stmt = sqlsrv_prepare($conn, $sql, $params);
 
 //sqlsrv_execute($stmt);
@@ -31,7 +35,7 @@ if(!sqlsrv_execute($stmt)){
 }
 
 // DB table to use
-$table = 'NIAGA.dbo.vw_Create_Detail_DPP';
+$table = 'NIAGA.dbo.vw_Create_DPP_'.$user;
  
 // Table's primary key
 $primaryKey = 'IDPEL';

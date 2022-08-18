@@ -82,8 +82,8 @@
                                                 </select>
                                             </div>
                                             <div class="form-group mb-2 mr-4">
-                                                <label class="text-label d-block"><small>POLA BAYAR</label></small>
-                                                <select id="sel_status" title="POLA BAYAR BULAN INI" class="selectpicker show-tick" data-size="5" >
+                                                <label class="text-label d-block"><small>STATUS BAYAR</label></small>
+                                                <select id="sel_status" title="STATUS BAYAR BULAN INI" class="selectpicker show-tick" data-size="5" >
                                                     <option value="00">SEMUA DATA</option>
                                                     <option value="LANCAR">LANCAR</option>
                                                     <option value="BARU">BARU</option>

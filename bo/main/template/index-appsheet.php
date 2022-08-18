@@ -48,7 +48,7 @@
                             </div>
                             <div class="card-footer">
                                 <div class="row">
-                                    <div class="col-4 border-right-1 pt-3"><a class="link text-center d-block text-muted" href="https://www.appsheet.com/start/fbb0e370-2f96-4e95-a1cf-b64aeead8bba"><i class="text-primary ti-mobile"></i>
+                                    <div class="col-4 border-right-1 pt-3"><a class="link text-center d-block text-muted" href="https://www.appsheet.com/newshortcut/fbb0e370-2f96-4e95-a1cf-b64aeead8bba"><i class="text-primary ti-mobile"></i>
                                             <p class="text-primary">App</p>
                                         </a>
                                     </div>
@@ -76,7 +76,7 @@
                             </div>
                             <div class="card-footer">
                                 <div class="row">
-                                    <div class="col-4 border-right-1 pt-3"><a class="link text-center d-block text-muted" href="https://www.appsheet.com/start/fbb0e370-2f96-4e95-a1cf-b64aeead8bba"><i class="text-primary ti-mobile"></i>
+                                    <div class="col-4 border-right-1 pt-3"><a class="link text-center d-block text-muted" href="https://www.appsheet.com/newshortcut/fbb0e370-2f96-4e95-a1cf-b64aeead8bba"><i class="text-primary ti-mobile"></i>
                                             <p class="text-primary">App</p>
                                         </a>
                                     </div>
@@ -104,7 +104,7 @@
                             </div>
                             <div class="card-footer">
                                 <div class="row">
-                                    <div class="col-4 border-right-1 pt-3"><a class="link text-center d-block text-muted" href="https://www.appsheet.com/start/6426fa19-e2ab-4cdc-8525-3e89f8b5b9ed"><i class="text-primary ti-mobile"></i>
+                                    <div class="col-4 border-right-1 pt-3"><a class="link text-center d-block text-muted" href="https://www.appsheet.com/newshortcut/6426fa19-e2ab-4cdc-8525-3e89f8b5b9ed"><i class="text-primary ti-mobile"></i>
                                             <p class="text-primary">App</p>
                                         </a>
                                     </div>
@@ -132,7 +132,7 @@
                             </div>
                             <div class="card-footer">
                                 <div class="row">
-                                    <div class="col-4 border-right-1 pt-3"><a class="link text-center d-block text-muted" href="https://www.appsheet.com/start/c90224e3-80bf-445f-ba3d-fa7064964a03"><i class="text-primary ti-mobile"></i>
+                                    <div class="col-4 border-right-1 pt-3"><a class="link text-center d-block text-muted" href="https://www.appsheet.com/newshortcut/c90224e3-80bf-445f-ba3d-fa7064964a03"><i class="text-primary ti-mobile"></i>
                                             <p class="text-primary">App</p>
                                         </a>
                                     </div>
@@ -160,7 +160,7 @@
                             </div>
                             <div class="card-footer">
                                 <div class="row">
-                                    <div class="col-4 border-right-1 pt-3"><a class="link text-center d-block text-muted" href="https://www.appsheet.com/start/7692e1e3-36e3-46d3-8ea6-2dcc03713397"><i class="text-primary ti-mobile"></i>
+                                    <div class="col-4 border-right-1 pt-3"><a class="link text-center d-block text-muted" href="https://www.appsheet.com/newshortcut/7692e1e3-36e3-46d3-8ea6-2dcc03713397"><i class="text-primary ti-mobile"></i>
                                             <p class="text-primary">App</p>
                                         </a>
                                     </div>
@@ -188,7 +188,7 @@
                             </div>
                             <div class="card-footer">
                                 <div class="row">
-                                    <div class="col-4 border-right-1 pt-3"><a class="link text-center d-block text-muted" href="https://www.appsheet.com/start/a6b9078c-a7ac-43ab-b732-0042370a400a"><i class="text-primary ti-mobile"></i>
+                                    <div class="col-4 border-right-1 pt-3"><a class="link text-center d-block text-muted" href="https://www.appsheet.com/newshortcut/a6b9078c-a7ac-43ab-b732-0042370a400a"><i class="text-primary ti-mobile"></i>
                                             <p class="text-primary">App</p>
                                         </a>
                                     </div>
@@ -216,7 +216,7 @@
                             </div>
                             <div class="card-footer">
                                 <div class="row">
-                                    <div class="col-4 border-right-1 pt-3"><a class="link text-center d-block text-muted" href="https://www.appsheet.com/start/a6cdcc01-6dee-4d44-aa62-30c32e715672"><i class="text-primary ti-mobile"></i>
+                                    <div class="col-4 border-right-1 pt-3"><a class="link text-center d-block text-muted" href="https://www.appsheet.com/newshortcut/a6cdcc01-6dee-4d44-aa62-30c32e715672"><i class="text-primary ti-mobile"></i>
                                             <p class="text-primary">App</p>
                                         </a>
                                     </div>
@@ -244,7 +244,7 @@
                             </div>
                             <div class="card-footer">
                                 <div class="row">
-                                    <div class="col-4 border-right-1 pt-3"><a class="link text-center d-block text-muted" href="https://www.appsheet.com/start/ba62a2bf-dfe1-411b-918e-109861956af8"><i class="text-primary ti-mobile"></i>
+                                    <div class="col-4 border-right-1 pt-3"><a class="link text-center d-block text-muted" href="https://www.appsheet.com/newshortcut/ba62a2bf-dfe1-411b-918e-109861956af8"><i class="text-primary ti-mobile"></i>
                                             <p class="text-primary">App</p>
                                         </a>
                                     </div>
