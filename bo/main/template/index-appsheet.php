@@ -140,8 +140,8 @@
                                             <p class="text-primary">Data</p>
                                         </a>
                                     </div>
-                                    <div class="col-4 pt-3"><a class="link text-center d-block text-muted" href="javascript:void()"><i class="ti-bar-chart"></i>
-                                            <p class="text-muted">Report</p>
+                                    <div class="col-4 pt-3"><a class="link text-center d-block text-muted" href="https://datastudio.google.com/reporting/c6a9405f-cfe7-4d2d-8116-14537184129a"><i class="ti-bar-chart"></i>
+                                            <p class="text-primary">Report</p>
                                         </a>
                                     </div>
                                 </div>

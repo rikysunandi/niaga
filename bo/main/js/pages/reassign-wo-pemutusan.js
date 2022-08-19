@@ -100,7 +100,7 @@ $(document).ready(function () {
           {
             data: null,
             visible: true,
-            defaultContent: `<div class="d-none"><span class="spinner-grow spinner-grow-sm text-primary"></span> &nbsp;Mengupdate...</div>`
+            defaultContent: `<div class="loading d-none"><span class="spinner-grow spinner-grow-sm text-primary"></span> &nbsp;Mengupdate...</div><div class="msg"></div>`
           },
         ],
         dom:
@@ -245,9 +245,28 @@ $(document).ready(function () {
 
     });
 
-    $('.pilih-petugas').change(function () {
+    $('select.pilih-petugas').change(function () {
       console.log('change petugas..');
       $('tr.selected').children().eq(9).text('1234');
+    });
+
+    $('#tbl_wo_pemutusan').on('change', 'select', function () {
+      console.log('click change petugas..', $(this).val() ) ;
+      var data = table.row($(this).parents('tr')).data();
+      //console.log($(this).parents('tr').find( ".d-none" )[0]);
+      var loading = $(this).parents('tr').find( ".loading" )[0];
+      var msg = $(this).parents('tr').find( ".msg" )[0];
+      $(msg).addClass('d-none');
+      $(loading).removeClass('d-none');
+      console.log(data);
+      setTimeout(function(){
+          $(loading).addClass('d-none');
+          $(msg).html('<span class="text-success">Berhasil diupdate</span>').removeClass('d-none');
+        }, 3000);
+    });
+
+    $( "select.pilih-petugas" ).select(function() {
+      console.log('select petugas..');
     });
 
 

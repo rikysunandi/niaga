@@ -38,7 +38,7 @@
             <div class="container-fluid">
                 <div class="row page-titles">
                     <div class="col p-md-0">
-                        <h4>Re-Assign Workorder Pemutusan</h4>
+                        <h4>Re-Assign / Crossing Workorder Pemutusan</h4>
                     </div>
                     <div class="col p-md-0">
                         <ol class="breadcrumb">
@@ -144,13 +144,13 @@
                                 </table>
                                 </div>
                             </div>
-                            <div class="card-footer">
+                            <!-- <div class="card-footer">
                                 <div class="text-right mt-2">
                                     <button id="btn_wo" type="button" class="btn btn-sm btn-primary waves-effect waves-light">Re-Assign WO <span class="btn-icon-right"><i
                                         class="fa fa-gear"></i></span>
                                     </button>
                                 </div>
-                            </div>
+                            </div> -->
                         </div>
                     </div>
                 </div>
