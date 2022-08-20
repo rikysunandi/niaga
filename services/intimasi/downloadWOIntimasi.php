@@ -4,8 +4,13 @@ require_once '../../bo/config/config.php';
 require_once '../../bo/config/database.php';
 
 $menu = explode("_", $_GET['l']);
-$unitup = $menu[2];
-$kodepetugas = str_replace('-', '.', $menu[1]);
+if($menu[2]<>'53' and size($menu)>3){
+	$unitup = $menu[3];
+	$kodepetugas = str_replace('-', '.', $menu[1]).'_'.$menu[2];
+}else{
+	$unitup = $menu[2];
+	$kodepetugas = str_replace('-', '.', $menu[1]);
+}
 $user = 'SYSTEM';
 
 $params = array(
