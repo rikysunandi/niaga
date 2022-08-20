@@ -63,7 +63,7 @@ if(!sqlsrv_execute($stmt)){
 	}
 
 	$response['success'] = true;
-	//$response['petugas'] = $kodepetugas;
+	$response['petugas'] = $kodepetugas;
 
 }
 
