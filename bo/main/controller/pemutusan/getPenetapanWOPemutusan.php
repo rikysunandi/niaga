@@ -37,6 +37,8 @@ $primaryKey = 'KODEPETUGAS';
 // parameter represents the DataTables column identifier. In this case simple
 // indexes
 $columns = array(
+    array( 'db' => 'BLTH', 'dt' => 'BLTH' ),
+    array( 'db' => 'UNITUPI', 'dt' => 'UNITUPI' ),
     array( 'db' => 'UNITAP', 'dt' => 'UNITAP' ),
     array( 'db' => 'UNITUP', 'dt' => 'UNITUP' ),
     array( 'db' => 'ULP', 'dt' => 'ULP' ),
@@ -45,6 +47,8 @@ $columns = array(
     array( 'db' => 'JML_BARU',  'dt' => 'JML_BARU' ),
     array( 'db' => 'JML_IRISAN',  'dt' => 'JML_IRISAN' ),
     array( 'db' => 'JML_LANCAR',  'dt' => 'JML_LANCAR' ),
+    array( 'db' => 'JML_PUTUS_LUNAS',  'dt' => 'JML_PUTUS_LUNAS' ),
+    array( 'db' => 'SISA_WO',  'dt' => 'SISA_WO' ),
     array( 'db' => 'TOTAL_WO',  'dt' => 'TOTAL_WO' ),
 );
  

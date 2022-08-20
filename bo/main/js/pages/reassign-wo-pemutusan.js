@@ -53,6 +53,14 @@ $(document).ready(function () {
         //responsive: true,
         columns: [
           {
+            data: "BLTH",
+            visible: false
+          },
+          {
+            data: "UNITUPI",
+            visible: false
+          },
+          {
             data: "UNITAP",
             visible: true
           },
@@ -88,6 +96,18 @@ $(document).ready(function () {
           },
           {
             data: "TOTAL_WO",
+            type: 'number',
+            visible: true,
+            "sClass" : "text-right" , render: $.fn.dataTable.render.number(".", ",", 0, '')
+          },
+          {
+            data: "JML_PUTUS_LUNAS",
+            type: 'number',
+            visible: true,
+            "sClass" : "text-right" , render: $.fn.dataTable.render.number(".", ",", 0, '')
+          },
+          {
+            data: "SISA_WO",
             type: 'number',
             visible: true,
             "sClass" : "text-right" , render: $.fn.dataTable.render.number(".", ",", 0, '')
@@ -133,13 +153,13 @@ $(document).ready(function () {
         "paging": false,
         lengthMenu: [[50, 100, -1], [50, 100, "All"]],
         pageLength: 100,
-        order: [[0, 'asc'],[1, 'asc']],
+        order: [[12, 'asc'],[5, 'asc']],
 
         footerCallback: function ( row, data, start, end, display ) {
           var api = this.api();
           //console.log('footerCallback', api);
           var nb_cols = api.columns().nodes().length;
-          var j = 4;
+          var j = 6;
           while(j < nb_cols){
             var pageTotal = api
                   .column( j, { page: 'current'} )
@@ -245,24 +265,70 @@ $(document).ready(function () {
 
     });
 
-    $('select.pilih-petugas').change(function () {
-      console.log('change petugas..');
-      $('tr.selected').children().eq(9).text('1234');
-    });
+    // $('select.pilih-petugas').change(function () {
+    //   console.log('change petugas..');
+    //   $('tr.selected').children().eq(9).text('1234');
+    // });
 
     $('#tbl_wo_pemutusan').on('change', 'select', function () {
       console.log('click change petugas..', $(this).val() ) ;
-      var data = table.row($(this).parents('tr')).data();
+      var kodepetugas_baru = $(this).val();
+      var row = table.row($(this).parents('tr'));
+      var data = row.data();
       //console.log($(this).parents('tr').find( ".d-none" )[0]);
       var loading = $(this).parents('tr').find( ".loading" )[0];
       var msg = $(this).parents('tr').find( ".msg" )[0];
       $(msg).addClass('d-none');
       $(loading).removeClass('d-none');
       console.log(data);
-      setTimeout(function(){
+      $.post( '../controller/pemutusan/updateWOPemutusan.php',{ 
+            unitupi: data.UNITUPI, 
+            unitap: data.UNITAP, 
+            unitup: data.UNITUP, 
+            blth: data.BLTH, 
+            kodepetugas: kodepetugas_baru, 
+            rbm: data.RBM, 
+        })
+        .done(function( data ) {
+          //$('div.content-body').unblock();
+          // $.notify({
+          //       message: data.msg 
+          //   },{
+          //       // settings
+          //     type: (data.success)?'success':'warning', 
+          //     offset: {
+          //         y: 20, 
+          //         x: 320
+          //     },
+          //     spacing: 5,
+          //     z_index: 1031,
+          //     delay: 5000,
+          //     timer: 1000,
+          //     placement: {
+          //         from: 'top', 
+          //         align: 'right'
+          //     },
+          //     animate: {
+          //         enter: 'animated fadeInDown',
+          //         exit: 'animated fadeOutUp'
+          //     }
+          // });
+
           $(loading).addClass('d-none');
-          $(msg).html('<span class="text-success">Berhasil diupdate</span>').removeClass('d-none');
-        }, 3000);
+          if(data.success){
+            $(msg).html('<span class="text-success">'+data.msg+'</span>').removeClass('d-none');
+            // data.KODEPETUGAS=kodepetugas_baru;
+            // row.data(data).draw();
+          }
+          else
+            $(msg).html('<span class="text-warning">'+data.msg+'</span>').removeClass('d-none');
+       
+        
+        });
+      // setTimeout(function(){
+      //     $(loading).addClass('d-none');
+      //     $(msg).html('<span class="text-success">Berhasil diupdate</span>').removeClass('d-none');
+      //   }, 3000);
     });
 
     $( "select.pilih-petugas" ).select(function() {

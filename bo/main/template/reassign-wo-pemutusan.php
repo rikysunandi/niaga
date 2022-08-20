@@ -109,17 +109,21 @@
                             </div>
                             <div class="card-body">
                                 <p>
-                                    Sebelum melakukan Re-Assign WO Pemutusan, silahkan tetapkan terlebih dahulu WO Pemutusan default sesuai Petugas dan RBM masing-masing Pelanggan
+                                    Sebelum melakukan Re-Assign Sisa WO Pemutusan, silahkan tetapkan terlebih dahulu WO Pemutusan default sesuai Petugas dan RBM masing-masing Pelanggan
                                 </p>
                                 <div class="table-responsive">
                                     <table id="tbl_wo_pemutusan" class="table table-striped table-bordered nowrap" style="width: 100%">
                                     <thead>
                                         <tr>
+                                            <th rowspan="2" class="text-center bg-primary-lighten-2">BLTH</th>
+                                            <th rowspan="2" class="text-center bg-primary-lighten-2">UNITUPI</th>
                                             <th rowspan="2" class="text-center bg-primary-lighten-2">UNITAP</th>
                                             <th rowspan="2" class="text-center bg-primary-lighten-2">UNITUP</th>
                                             <th rowspan="2" class="text-center bg-primary-lighten-2">ULP</th>
                                             <th rowspan="2" class="text-center bg-primary-lighten-2">RBM</th>
                                             <th class="text-center bg-primary-lighten-2" colspan="4">WORKORDER PEMUTUSAN</th>
+                                            <th rowspan="2" class="text-center bg-primary-lighten-2">SDH LUNAS /<br/>SDH PUTUS</th>
+                                            <th rowspan="2" class="text-center bg-primary-lighten-2">SISA WO</th>
                                             <th rowspan="2" class="text-center bg-primary-lighten-2">PETUGAS</th>
                                             <th rowspan="2" class="text-center bg-primary-lighten-2">KETERANGAN</th>
                                         </tr>
@@ -132,10 +136,12 @@
                                     </thead>
                                     <tfoot>
                                         <tr>
-                                            <th class="bg-primary-lighten-2" colspan="4">TOTAL</th>
+                                            <th class="bg-primary-lighten-2" colspan="6">TOTAL</th>
                                             <th class="bg-success-lighten-2"></th>
                                             <th class="bg-warning-lighten-2"></th>
                                             <th class="bg-danger-lighten-2"></th>
+                                            <th class="bg-primary-lighten-2"></th>
+                                            <th class="bg-primary-lighten-2"></th>
                                             <th class="bg-primary-lighten-2"></th>
                                             <th class="bg-primary-lighten-2"></th>
                                             <th class="bg-primary-lighten-2"></th>
