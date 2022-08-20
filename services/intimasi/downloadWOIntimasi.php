@@ -5,8 +5,13 @@ require_once '../../bo/config/database.php';
 
 $menu = explode("_", $_GET['l']);
 if($menu[2]<>'53' and count($menu)>3){
-	$unitup = $menu[3];
-	$kodepetugas = str_replace('-', '.', $menu[1]).'_'.$menu[2];
+	$unitup = $menu[count($menu)-1];
+	if(count($menu)==4)
+		$kodepetugas = str_replace('-', '.', $menu[1]).'_'.$menu[2];
+	if(count($menu)==5)
+		$kodepetugas = str_replace('-', '.', $menu[1]).'_'.$menu[2].'_'.$menu[3];
+	if(count($menu)==6)
+		$kodepetugas = str_replace('-', '.', $menu[1]).'_'.$menu[2].'_'.$menu[3].'_'.$menu[4];
 }else{
 	$unitup = $menu[2];
 	$kodepetugas = str_replace('-', '.', $menu[1]);
