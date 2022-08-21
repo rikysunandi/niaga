@@ -8,7 +8,7 @@ $(document).ready(function () {
     
     $('#sel_unitup').change(function(){
 
-      $('#sel_rbm').empty();
+      //$('#sel_rbm').empty();
       $.getJSON('../controller/referensi/getPetugas.php?unitup='+$('#sel_unitup').val(), function(data){
           
           list_petugas = data.rows;
@@ -19,14 +19,18 @@ $(document).ready(function () {
     function createSelect(selItem){
         //console.log('list_petugas',list_petugas);
         var sel = '<select class="pilih-petugas text-dark">' ;
+        var ketemu=false;
         for(var i = 0; i < list_petugas.length; ++i){
             if(list_petugas[i].kode == selItem){
                 sel += "<option selected value = '"+list_petugas[i].kode+"' >" + list_petugas[i].nama + "</option>";
+                ketemu = true;
             }
             else{
-                sel += "<option  value = '"+list_petugas[i].kode+"' >" + list_petugas[i].nama + "</option>";
+                sel += "<option value = '"+list_petugas[i].kode+"' >" + list_petugas[i].nama + "</option>";
             }
         }
+        if(!ketemu)
+          sel += '<option value = "XX" selected >Belum Ada Petugas</option>';
         sel += "</select>";
         return sel;
     }
@@ -273,62 +277,61 @@ $(document).ready(function () {
     $('#tbl_wo_pemutusan').on('change', 'select', function () {
       console.log('click change petugas..', $(this).val() ) ;
       var kodepetugas_baru = $(this).val();
-      var row = table.row($(this).parents('tr'));
-      var data = row.data();
-      //console.log($(this).parents('tr').find( ".d-none" )[0]);
-      var loading = $(this).parents('tr').find( ".loading" )[0];
-      var msg = $(this).parents('tr').find( ".msg" )[0];
-      $(msg).addClass('d-none');
-      $(loading).removeClass('d-none');
-      console.log(data);
-      $.post( '../controller/pemutusan/updateWOPemutusan.php',{ 
-            unitupi: data.UNITUPI, 
-            unitap: data.UNITAP, 
-            unitup: data.UNITUP, 
-            blth: data.BLTH, 
-            kodepetugas: kodepetugas_baru, 
-            rbm: data.RBM, 
-        })
-        .done(function( data ) {
-          //$('div.content-body').unblock();
-          // $.notify({
-          //       message: data.msg 
-          //   },{
-          //       // settings
-          //     type: (data.success)?'success':'warning', 
-          //     offset: {
-          //         y: 20, 
-          //         x: 320
-          //     },
-          //     spacing: 5,
-          //     z_index: 1031,
-          //     delay: 5000,
-          //     timer: 1000,
-          //     placement: {
-          //         from: 'top', 
-          //         align: 'right'
-          //     },
-          //     animate: {
-          //         enter: 'animated fadeInDown',
-          //         exit: 'animated fadeOutUp'
-          //     }
-          // });
+      if(kodepetugas_baru != 'XX'){
+        var row = table.row($(this).parents('tr'));
+        var data = row.data();
+        //console.log($(this).parents('tr').find( ".d-none" )[0]);
+        var loading = $(this).parents('tr').find( ".loading" )[0];
+        var msg = $(this).parents('tr').find( ".msg" )[0];
+        $(msg).addClass('d-none');
+        $(loading).removeClass('d-none');
+        console.log(data);
+        $.post( '../controller/pemutusan/updateWOPemutusan.php',{ 
+              unitupi: data.UNITUPI, 
+              unitap: data.UNITAP, 
+              unitup: data.UNITUP, 
+              blth: data.BLTH, 
+              kodepetugas: kodepetugas_baru, 
+              rbm: data.RBM, 
+          })
+          .done(function( data ) {
+            //$('div.content-body').unblock();
+            // $.notify({
+            //       message: data.msg 
+            //   },{
+            //       // settings
+            //     type: (data.success)?'success':'warning', 
+            //     offset: {
+            //         y: 20, 
+            //         x: 320
+            //     },
+            //     spacing: 5,
+            //     z_index: 1031,
+            //     delay: 5000,
+            //     timer: 1000,
+            //     placement: {
+            //         from: 'top', 
+            //         align: 'right'
+            //     },
+            //     animate: {
+            //         enter: 'animated fadeInDown',
+            //         exit: 'animated fadeOutUp'
+            //     }
+            // });
 
-          $(loading).addClass('d-none');
-          if(data.success){
-            $(msg).html('<span class="text-success">'+data.msg+'</span>').removeClass('d-none');
-            // data.KODEPETUGAS=kodepetugas_baru;
-            // row.data(data).draw();
-          }
-          else
-            $(msg).html('<span class="text-warning">'+data.msg+'</span>').removeClass('d-none');
-       
-        
-        });
-      // setTimeout(function(){
-      //     $(loading).addClass('d-none');
-      //     $(msg).html('<span class="text-success">Berhasil diupdate</span>').removeClass('d-none');
-      //   }, 3000);
+            $(loading).addClass('d-none');
+            if(data.success){
+              $(msg).html('<span class="text-success">'+data.msg+'</span>').removeClass('d-none');
+              // data.KODEPETUGAS=kodepetugas_baru;
+              // row.data(data).draw();
+            }
+            else
+              $(msg).html('<span class="text-warning">'+data.msg+'</span>').removeClass('d-none');
+         
+          
+          });
+        }
+
     });
 
     $( "select.pilih-petugas" ).select(function() {

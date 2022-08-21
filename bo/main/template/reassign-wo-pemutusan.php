@@ -205,6 +205,6 @@
     <script src="../../assets/plugins/block-ui/jquery.blockUI.js"></script>
 
     <script src="../js/pages/apps.js"></script>
-    <script src="../js/pages/reassign-wo-pemutusan.js"></script>
+    <script src="../js/pages/reassign-wo-pemutusan.js?time=2"></script>
 </body>
 </html>

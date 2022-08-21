@@ -123,7 +123,7 @@ $(document).ready(function () {
         "paging": false,
         lengthMenu: [[50, 100, -1], [50, 100, "All"]],
         pageLength: 100,
-        order: [[0, 'asc'],[1, 'asc']],
+        order: [[1, 'asc'],[3, 'asc']],
 
         footerCallback: function ( row, data, start, end, display ) {
           var api = this.api();

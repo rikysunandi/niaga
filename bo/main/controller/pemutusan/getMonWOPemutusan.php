@@ -8,17 +8,23 @@ $unitupi = $_REQUEST['unitupi'];
 $unitap = $_REQUEST['unitap'];
 $unitup = $_REQUEST['unitup'];
 $blth = $_REQUEST['blth'];
-$user = 'SYSTEM';
+$petugas = $_REQUEST['petugas'];
+$status = $_REQUEST['status'];
+$rbm = '00';
+$user = rand(0,5);
 
 $params = array(
         array($user, SQLSRV_PARAM_IN),
+        array($blth, SQLSRV_PARAM_IN),
         array($unitupi, SQLSRV_PARAM_IN),
         array($unitap, SQLSRV_PARAM_IN),
         array($unitup, SQLSRV_PARAM_IN),
-        array($blth, SQLSRV_PARAM_IN),
+        array($petugas, SQLSRV_PARAM_IN),
+        array($rbm, SQLSRV_PARAM_IN),
+        array($status, SQLSRV_PARAM_IN),
     );
 
-$sql = "EXEC sp_vw_Create_Penetapan_WO_Pemutusan @UserID = ?, @Unitupi = ?, @Unitap = ?, @Unitup = ?, @BLTH = ? ";
+$sql = "EXEC sp_vw_Create_Mon_WO_Pemutusan @UserID = ?, @BLTH = ?, @Unitupi = ?, @Unitap = ?, @Unitup = ?, @KODEPETUGAS = ?, @RBM = ?, @Status = ? ";
 $stmt = sqlsrv_prepare($conn, $sql, $params);
 
 //sqlsrv_execute($stmt);
@@ -27,29 +33,32 @@ if(!sqlsrv_execute($stmt)){
 }
 
 // DB table to use
-$table = 'NIAGA.dbo.vw_Create_Penetapan_WO_Pemutusan';
+$table = 'NIAGA.dbo.vw_Create_Mon_WO_Pemutusan_'.$user;
  
 // Table's primary key
-$primaryKey = 'UNITUP';
+$primaryKey = 'IDPEL';
  
 // Array of database columns which should be read and sent back to DataTables.
 // The `db` parameter represents the column name in the database, while the `dt`
 // parameter represents the DataTables column identifier. In this case simple
 // indexes
 $columns = array(
-    array( 'db' => 'BLTH', 'dt' => 'BLTH' ),
-    array( 'db' => 'UNITUPI', 'dt' => 'UNITUPI' ),
     array( 'db' => 'UNITAP', 'dt' => 'UNITAP' ),
     array( 'db' => 'UNITUP', 'dt' => 'UNITUP' ),
-    array( 'db' => 'ULP', 'dt' => 'ULP' ),
+    array( 'db' => 'IDPEL', 'dt' => 'IDPEL' ),
+    array( 'db' => 'NAMA', 'dt' => 'NAMA' ),
+    array( 'db' => 'TARIF', 'dt' => 'TARIF' ),
+    array( 'db' => 'DAYA', 'dt' => 'DAYA' ),
+    array( 'db' => 'RPTAG', 'dt' => 'RPTAG' ),
+    array( 'db' => 'RPBK', 'dt' => 'RPBK' ),
+    array( 'db' => 'STATUS', 'dt' => 'STATUS' ),
     array( 'db' => 'KODEPETUGAS', 'dt' => 'KODEPETUGAS' ),
     array( 'db' => 'RBM',  'dt' => 'RBM' ),
-    array( 'db' => 'JML_BARU',  'dt' => 'JML_BARU' ),
-    array( 'db' => 'JML_IRISAN',  'dt' => 'JML_IRISAN' ),
-    array( 'db' => 'JML_LANCAR',  'dt' => 'JML_LANCAR' ),
-    array( 'db' => 'JML_PUTUS_LUNAS',  'dt' => 'JML_PUTUS_LUNAS' ),
-    array( 'db' => 'SISA_WO',  'dt' => 'SISA_WO' ),
-    array( 'db' => 'TOTAL_WO',  'dt' => 'TOTAL_WO' ),
+    array( 'db' => 'LANGKAH',  'dt' => 'LANGKAH' ),
+    array( 'db' => 'GARDU',  'dt' => 'GARDU' ),
+    array( 'db' => 'TIANG',  'dt' => 'TIANG' ),
+    array( 'db' => 'TGL_PEMUTUSAN',  'dt' => 'TGL_PUTUS' ),
+    array( 'db' => 'KET',  'dt' => 'KET' ),
 );
  
 // SQL server connection information
