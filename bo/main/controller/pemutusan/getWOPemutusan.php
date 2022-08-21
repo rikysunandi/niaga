@@ -18,7 +18,7 @@ $params = array(
         array($blth, SQLSRV_PARAM_IN),
     );
 
-$sql = "EXEC sp_vw_Create_WO_Pemutusan @UserID = ?, @Unitupi = ?, @Unitap = ?, @Unitup = ?, @BLTH = ? ";
+$sql = "EXEC sp_vw_Create_Rekap_Draft_WO_Pemutusan @UserID = ?, @Unitupi = ?, @Unitap = ?, @Unitup = ?, @BLTH = ? ";
 $stmt = sqlsrv_prepare($conn, $sql, $params);
 
 //sqlsrv_execute($stmt);
@@ -27,7 +27,7 @@ if(!sqlsrv_execute($stmt)){
 }
 
 // DB table to use
-$table = 'NIAGA.dbo.vw_Create_WO_Pemutusan';
+$table = 'NIAGA.dbo.vw_Create_Rekap_Draft_WO_Pemutusan';
  
 // Table's primary key
 $primaryKey = 'KODEPETUGAS';
