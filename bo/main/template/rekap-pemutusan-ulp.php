@@ -17,6 +17,17 @@
     <link href="../css/style.css?time=<?php echo time() ?>" rel="stylesheet">
     <link href="../css/custom.css?time=<?php echo time() ?>" rel="stylesheet">
 
+    <style type="text/css">
+        table.dataTable tbody td {
+          color: #000 !important;
+        }
+        table.dataTable thead td {
+          color: #000 !important;
+        }
+        table.dataTable tfoot td {
+          color: #000 !important;
+        }
+    </style>
 </head>
 
 <body>
@@ -117,7 +128,7 @@
                                     </p>
                                 </div>
                                 <div class="table-responsive">
-                                    <table id="tbl_rekap_pemutusan_up3" class="table table-striped table-bordered nowrap" style="width: 100%">
+                                    <table id="tbl_rekap_pemutusan_up3" class="table table-striped table-bordered nowrap" style="width: 100%;">
                                     <thead>
                                         <tr>
                                             <th rowspan="3" class="text-center bg-primary-lighten-2">UNITUPI</th>
