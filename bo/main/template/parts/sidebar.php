@@ -73,6 +73,7 @@
                             </li> -->
                     <li><a href="wo-pemutusan.php">Penetapan WO Pemutusan</a></li>
                     <li><a href="reassign-wo-pemutusan.php">Re-Assign WO Pemutusan</a></li>
+                    <li><a href="reassign-wo-pemutusan-plg.php">Re-Assign WO Pemutusan per Pelanggan</a></li>
                     <li><a href="mon-wo-pemutusan.php">Monitoring WO Pemutusan</a></li>
                     <li><a href="efektivitas-pemutusan.php">Efektivitas Pemutusan</a></li>
                     <li><a href="rekap-pemutusan-ulp.php">Rekap Pemutusan per Unit</a></li>

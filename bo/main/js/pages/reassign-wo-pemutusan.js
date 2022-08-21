@@ -4,7 +4,7 @@ $(document).ready(function () {
 
     const queryString = window.location.search;
     const urlParams = new URLSearchParams(queryString);
-    var unitupi, unitap, unitup, blth, list_petugas;
+    var unitupi, unitap, unitup, blth, list_petugas, status;
     
     $('#sel_unitup').change(function(){
 

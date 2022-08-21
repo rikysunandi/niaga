@@ -5,7 +5,7 @@ $(document).ready(function () {
     const queryString = window.location.search;
     const urlParams = new URLSearchParams(queryString);
 
-    var unitupi, unitap, unitup, petugas, blth, tgl_pemutusan_from, tgl_pemutusan_to;
+    var unitupi, unitap, unitup, petugas, blth, rbm, status;
 
     if(urlParams.has('blth')){
       $('#sel_blth').val(urlParams.get('blth'));

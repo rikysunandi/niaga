@@ -9,7 +9,6 @@ $unitap = $_REQUEST['unitap'];
 $unitup = $_REQUEST['unitup'];
 $blth = $_REQUEST['blth'];
 $petugas = $_REQUEST['petugas'];
-$status = $_REQUEST['status'];
 $rbm = isset($_REQUEST['rbm'])?$_REQUEST['rbm']:'00';
 $user = rand(0,5);
 
@@ -21,10 +20,9 @@ $params = array(
         array($unitup, SQLSRV_PARAM_IN),
         array($petugas, SQLSRV_PARAM_IN),
         array($rbm, SQLSRV_PARAM_IN),
-        array($status, SQLSRV_PARAM_IN),
     );
 
-$sql = "EXEC sp_vw_Create_Mon_WO_Pemutusan @UserID = ?, @BLTH = ?, @Unitupi = ?, @Unitap = ?, @Unitup = ?, @KODEPETUGAS = ?, @RBM = ?, @Status = ? ";
+$sql = "EXEC sp_vw_Create_Reassign_WO_Pemutusan @UserID = ?, @BLTH = ?, @Unitupi = ?, @Unitap = ?, @Unitup = ?, @KODEPETUGAS = ?, @RBM = ? ";
 $stmt = sqlsrv_prepare($conn, $sql, $params);
 
 //sqlsrv_execute($stmt);
@@ -33,7 +31,7 @@ if(!sqlsrv_execute($stmt)){
 }
 
 // DB table to use
-$table = 'NIAGA.dbo.vw_Create_Mon_WO_Pemutusan_'.$user;
+$table = 'NIAGA.dbo.vw_Create_Reassign_WO_Pemutusan_'.$user;
  
 // Table's primary key
 $primaryKey = 'IDPEL';
@@ -57,8 +55,6 @@ $columns = array(
     array( 'db' => 'LANGKAH',  'dt' => 'LANGKAH' ),
     array( 'db' => 'GARDU',  'dt' => 'GARDU' ),
     array( 'db' => 'TIANG',  'dt' => 'TIANG' ),
-    array( 'db' => 'TGL_PEMUTUSAN',  'dt' => 'TGL_PUTUS' ),
-    array( 'db' => 'KET',  'dt' => 'KET' ),
 );
  
 // SQL server connection information
