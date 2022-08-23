@@ -134,6 +134,9 @@
                             <div class="card-body">
 
                                 <h4 class="card-title mb-4">Reassign WO Pemutusan per Pelanggan</h4>
+                                <p>
+                                    Silahkan pilih baris data yang akan dipilih, tahan SHIFT jika ingin memblok pilihan.
+                                </p>
                                 <div class="table-responsive">
                                     <table id="tbl_mon_wo_pemutusan" class="table table-striped table-bordered nowrap" style="width: 100%">
                                     <thead>
