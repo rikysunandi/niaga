@@ -237,7 +237,7 @@
     <script src="../../assets/plugins/datatables-lib/plug-ins/api/sum().js"></script>
     <script src="../../assets/plugins/datatables-lib/plug-ins/dataRender/datetime.js"></script>
     <script src="../../assets/plugins/datatables-lib/DateTime-1.1.1/js/dataTables.dateTime.min.js"></script>
-    <script src="../../assets/plugins/datatables-lib/Select-1.3.4/js/dataTables.Select.min.js"></script>
+    <script src="../../assets/plugins/datatables-lib/Select-1.3.4/js/dataTables.select.min.js"></script>
     <script src="../../assets/plugins/bootstrap-daterangepicker/daterangepicker.js"></script>
     <script src="../../assets/plugins/viewer/viewer.js"></script>
 
