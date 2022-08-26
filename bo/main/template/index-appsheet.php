@@ -237,6 +237,34 @@
                         <div class="card">
                             <div class="card-body">
                                 <div class="text-center">
+                                    <span class="display-4"><i class="icon-anchor text-warning"></i></span>
+                                    <h2 class="mt-4">BA P2TL Belum Penetapan TS</h2>
+                                    <p>Appsheet untuk melakukan tindak lanjut dari BA P2TL Belum Penetapan TS</p>
+                                </div>
+                            </div>
+                            <div class="card-footer">
+                                <div class="row">
+                                    <div class="col-4 border-right-1 pt-3"><a class="link text-center d-block text-muted" href="https://www.appsheet.com/start/6795b0a0-5614-4606-ac08-d5b1333f1c67"><i class="text-primary ti-mobile"></i>
+                                            <p class="text-primary">App</p>
+                                        </a>
+                                    </div>
+                                    <div class="col-4 border-right-1 pt-3"><a class="link text-center d-block text-muted" href="https://s.id/MonWOBlmPenetapanTS"><i class="text-primary ti-list"></i>
+                                            <p class="text-primary">Data</p>
+                                        </a>
+                                    </div>
+                                    <div class="col-4 pt-3"><a class="link text-center d-block text-muted" href="javascript:void()"><i class="ti-bar-chart"></i>
+                                            <p class="text-muted">Report</p>
+                                        </a>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+
+                    <div class="col-12 col-sm-12 col-lg-4 col-xl-3">
+                        <div class="card">
+                            <div class="card-body">
+                                <div class="text-center">
                                     <span class="display-4"><i class="icon-note text-success"></i></span>
                                     <h2 class="mt-4">Kompor Induksi - Survey CKPM</h2>
                                     <p>Appsheet untuk melakukan Survey CKPM Kompor Induksi</p>
