@@ -108,6 +108,7 @@
                                                     <option value="MUP3">MUP3</option>
                                                     <option value="MBSAR">MBSAR</option>
                                                     <option value="MULP">MULP</option>
+                                                    <option value="SPV">SPV</option>
                                                     <option value="BILLER">BILLER</option>
                                                 </select>
                                             </div>

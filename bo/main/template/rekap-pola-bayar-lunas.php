@@ -135,7 +135,7 @@
                                             <th rowspan="3" class="text-center bg-primary-lighten-2">MUTASI</th>
                                             <th colspan="4" class="text-center bg-primary-lighten-2">LUNAS</th>
                                             <th colspan="4" class="text-center bg-primary-lighten-2">SALDO</th>
-                                            <th colspan="4" class="text-center bg-primary-lighten-2">MONITORING JUMLAH PLG IRISAN PER PIC</th>
+                                            <th colspan="5" class="text-center bg-primary-lighten-2">MONITORING JUMLAH PLG IRISAN PER PIC</th>
                                             <th rowspan="3" class="text-center bg-primary-lighten-2">% PELUNASAN<br/>PLG IRISAN</th>
                                             <th rowspan="3" class="text-center bg-primary-lighten-2">TGLBAYAR<br/>TERAKHIR</th>
                                         </tr>
@@ -152,6 +152,7 @@
                                             <th rowspan="2" class="text-center bg-primary-lighten-2">MUP3</th>
                                             <th rowspan="2" class="text-center bg-primary-lighten-2">MBSAR</th>
                                             <th rowspan="2" class="text-center bg-primary-lighten-2">MULP</th>
+                                            <th rowspan="2" class="text-center bg-primary-lighten-2">SPV</th>
                                             <th rowspan="2" class="text-center bg-primary-lighten-2">BILLER</th>
                                         </tr>
                                         <tr>
@@ -179,6 +180,7 @@
                                             <th class="bg-warning-lighten-2"></th>
                                             <th class="bg-secondary-lighten-2"></th>
                                             <th class="bg-secondary-lighten-2"></th>
+                                            <th class="bg-primary-lighten-2"></th>
                                             <th class="bg-primary-lighten-2"></th>
                                             <th class="bg-primary-lighten-2"></th>
                                             <th class="bg-primary-lighten-2"></th>
@@ -215,7 +217,7 @@
                                             <th rowspan="2" class="text-center bg-primary-lighten-2">MUTASI</th>
                                             <th colspan="3" class="text-center bg-primary-lighten-2">LUNAS</th>
                                             <th colspan="3" class="text-center bg-primary-lighten-2">SALDO</th>
-                                            <th colspan="4" class="text-center bg-primary-lighten-2">MONITORING SALDO PLG IRISAN PER PIC</th>
+                                            <th colspan="5" class="text-center bg-primary-lighten-2">MONITORING SALDO PLG IRISAN PER PIC</th>
                                             <th rowspan="2" class="text-center bg-primary-lighten-2">% PELUNASAN<br/>PLG IRISAN</th>
                                             <th rowspan="2" class="text-center bg-primary-lighten-2">TGLBAYAR<br/>TERAKHIR</th>
                                         </tr>
@@ -232,6 +234,7 @@
                                             <th class="text-center bg-primary-lighten-2">MUP3</th>
                                             <th class="text-center bg-primary-lighten-2">MBSAR</th>
                                             <th class="text-center bg-primary-lighten-2">MULP</th>
+                                            <th class="text-center bg-primary-lighten-2">SPV</th>
                                             <th class="text-center bg-primary-lighten-2">BILLER</th>
                                         </tr>
                                     </thead>
@@ -248,6 +251,7 @@
                                             <th class="bg-danger-lighten-2"></th>
                                             <th class="bg-warning-lighten-2"></th>
                                             <th class="bg-secondary-lighten-2"></th>
+                                            <th class="bg-primary-lighten-2"></th>
                                             <th class="bg-primary-lighten-2"></th>
                                             <th class="bg-primary-lighten-2"></th>
                                             <th class="bg-primary-lighten-2"></th>
@@ -510,6 +514,6 @@
     <script src="../../assets/plugins/block-ui/jquery.blockUI.js"></script>
 
     <script src="../js/pages/apps.js"></script>
-    <script src="../js/pages/rekap-pola-bayar-lunas.js?time=27"></script>
+    <script src="../js/pages/rekap-pola-bayar-lunas.js?time=28"></script>
 </body>
 </html>

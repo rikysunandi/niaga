@@ -55,6 +55,7 @@ $columns = array(
     array( 'db' => 'SALDO_MUP3', 'dt' => 'SALDO_MUP3' ),
     array( 'db' => 'SALDO_MBSAR', 'dt' => 'SALDO_MBSAR' ),
     array( 'db' => 'SALDO_MULP', 'dt' => 'SALDO_MULP' ),
+    array( 'db' => 'SALDO_SPV', 'dt' => 'SALDO_SPV' ),
     array( 'db' => 'SALDO_BILLER', 'dt' => 'SALDO_BILLER' ),
     array( 'db' => 'PERSEN_TOTAL', 'dt' => 'PERSEN_TOTAL' ),
     array( 'db' => 'LATEST_TGLBAYAR', 'dt' => 'LATEST_TGLBAYAR' ),

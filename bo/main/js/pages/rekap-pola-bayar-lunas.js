@@ -262,6 +262,24 @@ $(document).ready(function () {
             },
           },
           {
+            data: "SALDO_SPV",
+            type: 'number',
+            visible: true,
+            "sClass" : "text-right" , 
+            render: function ( data, type, row ) {
+                var cls;
+                //console.log('row', row);
+                var efektivitas = data;
+                //window.open("urut-langkah-rpp.php?unitupi="+unitupi+"&unitap="+unitap+"&unitup="+unitup+"&petugas="+petugas_dipilih+"&rpp="+rpp, "_blank");
+                
+                if (data == 0) 
+                  return '<a class="text-success" href="mon-dpp.php?unitupi='+row.UNITUPI+'&unitap='+row.UNITAP+'&unitup='+row.UNITUP+'&rbm=00&status_lalu=BARU_IRISAN'+'&blth='+row.BLTH+'&pic=SPV&status_bayar=BLM_LUNAS" target="_blank" role="button">'+$.fn.dataTable.render.number(".", ",", 0, '').display(data)+'</a>';
+                else
+                  return '<a href="mon-dpp.php?unitupi='+row.UNITUPI+'&unitap='+row.UNITAP+'&unitup='+row.UNITUP+'&rbm=00&status_lalu=BARU_IRISAN'+'&blth='+row.BLTH+'&pic=SPV&status_bayar=BLM_LUNAS" target="_blank" role="button">'+$.fn.dataTable.render.number(".", ",", 0, '').display(data)+'</a>';
+                //return rpp;
+            },
+          },
+          {
             data: "SALDO_BILLER",
             type: 'number',
             visible: true,
@@ -365,7 +383,7 @@ $(document).ready(function () {
         "paging": false,
         lengthMenu: [[25, 100, -1], [25, 100, "All"]],
         pageLength: 100,
-        "order": [[19, 'desc'],[20, 'asc']],
+        "order": [[20, 'desc'],[21, 'asc']],
         footerCallback: function ( row, data, start, end, display ) {
           var api = this.api();
           //console.log('footerCallback', api);
@@ -589,6 +607,21 @@ $(document).ready(function () {
             },
           },
           {
+            data: "SALDO_SPV",
+            type: 'number',
+            visible: false,
+            "sClass" : "text-right" , 
+            render: function ( data, type, row ) {
+                var cls;
+                //console.log($(this));
+                if (data == 0) 
+                    return '<span class="text-success">'+
+                        $.fn.dataTable.render.number(".", ",", 0, '').display(data)+'</span>';
+                else
+                    return $.fn.dataTable.render.number(".", ",", 0, '').display(data);
+            },
+          },
+          {
             data: "SALDO_BILLER",
             type: 'number',
             visible: false,
@@ -674,7 +707,7 @@ $(document).ready(function () {
         "paging": false,
         lengthMenu: [[25, 100, -1], [25, 100, "All"]],
         pageLength: 100,
-        "order": [[17, 'desc'],[18,'asc']],
+        "order": [[18, 'desc'],[19,'asc']],
         footerCallback: function ( row, data, start, end, display ) {
           var api = this.api();
           //console.log('footerCallback', api);
