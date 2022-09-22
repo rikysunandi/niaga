@@ -98,6 +98,10 @@ $(document).ready(function () {
 
     $('#btn_cari').click(function(){
 
+        // $.getScript("../../../assets/plugins/keydragzoom/keydragzoom.js", function(){
+        
+        // });
+
         $('div.content-body').block({ message: 'Mengambil data pelanggan pada RPP '+$('#sel_rpp').val()+'...' });
         //console.log('cari!!');
         // //console.log($("#tgl_baca_to").datepicker("getFormattedDate"));

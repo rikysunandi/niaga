@@ -4,7 +4,7 @@ require_once '../../../config/database.php';
 
 $petugas = $_POST['petugas'];
 $rpp = $_POST['rpp'];
-$urutan = str_pad($_POST['urutan'], 3, "0", STR_PAD_LEFT);
+$urutan = str_pad($_POST['urutan'], 4, "0", STR_PAD_LEFT);
 $idpel = $_POST['idpel'];
 $user = 'SYSTEM';
 
