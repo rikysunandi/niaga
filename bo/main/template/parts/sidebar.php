@@ -153,7 +153,7 @@
                 <ul aria-expanded="false">
                     <li><a href="pembentukan-rpp-final.php">Peta Pembentukan RPP</a></li>
                     <li><a href="urut-langkah-rpp-final.php">Pembentukan Urut Langkah RPP</a></li>
-                    <li><a href="rekap-rpp-up-final.php">Rekap RPP per ULP</a></li>
+                    <!-- <li><a href="rekap-rpp-up-final.php">Rekap RPP per ULP</a></li> -->
                 </ul>
             </li>
             <li><a class="has-arrow" href="javascript:void()" aria-expanded="false"><i class="mdi mdi-file-document-box"></i> <span class="nav-text">Kompor Induksi</span></a>
