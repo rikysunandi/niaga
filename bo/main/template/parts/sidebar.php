@@ -47,8 +47,9 @@
                     <li><a href="mon-dpp.php">Monitoring Data Piutang</a></li>
                     <li><a href="mon-pola-bayar.php">Monitoring Pola Bayar</a></li>
                     <li><a href="rekap-pola-bayar-lunas.php">Rekap Pelunasan Berdasarkan Pola Bayar</a>
+                    <!-- <li><a href="mon-saldo-tunggakan.php">Monitoring Saldo Tunggakan</a></li> -->
                     <li><a href="rekap-tgl-bayar.php">Rekap Pelunasan per Tgl Bayar</a>
-                    <li><a href="4dx-piutang.php">4DX Piutang Pelanggan</a>
+                    <!-- <li><a href="4dx-piutang.php">4DX Piutang Pelanggan</a> -->
                     <!-- <li><a href="rekap-pola-bayar-tarif-daya.php">Rekap Pola Bayar per Tarif Daya</a></li> -->
                     <!-- <li><a href="input-va.php">Input Virtual Account</a></li> -->
                 </ul>
@@ -79,6 +80,7 @@
                     <li><a href="rekap-pemutusan-ulp.php">Rekap Pemutusan per Unit</a></li>
                     <li><a href="rekap-pemutusan-keterangan.php">Rekap Pemutusan per Petugas</a></li>
                     <li><a href="mon-pemutusan.php">Monitoring Pemutusan</a></li>
+                    <li><a href="mon-shunttrip.php">Monitoring Shunt Trip</a></li>
                     <!-- <li><a href="input-va.php">Input Virtual Account</a></li> -->
                 </ul>
             </li>
@@ -145,6 +147,13 @@
                     <li><a href="rekap-rpp-onsite.php">Rekap RPP On Site  per ULP</a></li>
                     <li><a href="rekap-rpp.php">Rekap RPP On Site per Petugas</a></li>
                     <li><a href="daftar-rpp.php">Daftar RPP On Site</a></li> -->
+                </ul>
+            </li>
+            <li><a class="has-arrow" href="javascript:void()" aria-expanded="false"><i class="mdi mdi-map"></i> <span class="nav-text">RPP Final</span></a>
+                <ul aria-expanded="false">
+                    <li><a href="pembentukan-rpp-final.php">Peta Pembentukan RPP</a></li>
+                    <li><a href="urut-langkah-rpp-final.php">Pembentukan Urut Langkah RPP</a></li>
+                    <li><a href="rekap-rpp-up-final.php">Rekap RPP per ULP</a></li>
                 </ul>
             </li>
             <li><a class="has-arrow" href="javascript:void()" aria-expanded="false"><i class="mdi mdi-file-document-box"></i> <span class="nav-text">Kompor Induksi</span></a>
