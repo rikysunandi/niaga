@@ -173,7 +173,7 @@
                     <div class="col-4">
                         <div class="card">
                             <div class="card-header">
-                                <h5 class="card-title">Summary Petugas Tagging</h5>
+                                <h5 class="card-title">Summary Petugas Onsite</h5>
                             </div>
                             <div class="card-body">
                                 <div class="basic-list-group">
@@ -189,7 +189,7 @@
                     <div class="col-4">
                         <div class="card">
                             <div class="card-header">
-                                <h5 class="card-title">Summary RBM Paska</h5>
+                                <h5 class="card-title">Summary RPP Onsite</h5>
                             </div>
                             <div class="card-body">
                                 <div class="basic-list-group">

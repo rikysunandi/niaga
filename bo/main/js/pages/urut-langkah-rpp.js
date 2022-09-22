@@ -53,7 +53,7 @@ $(document).ready(function () {
 
         if($('#sel_petugas').val()!=null){
             $('#sel_rpp').empty();
-            $.getJSON('../controller/referensi/getRPP.php?petugas='+$('#sel_petugas').val(), function(data){
+            $.getJSON('../controller/referensi/getRPPFinal.php?petugas='+$('#sel_petugas').val(), function(data){
                   
                 $.each(data.rows,function(i,v){
                   $('#sel_rpp').append('<option value="'+v.kode+'">'+v.nama+'</option>');
