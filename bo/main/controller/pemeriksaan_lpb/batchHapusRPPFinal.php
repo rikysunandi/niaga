@@ -4,26 +4,28 @@ require_once '../../../config/database.php';
 
 $petugas = $_POST['petugas'];
 $rpp = $_POST['rpp'];
-$urutan = str_pad($_POST['urutan'], 3, "0", STR_PAD_LEFT);
-$idpel = $_POST['idpel'];
+$idpels = $_POST['idpels'];
 $user = 'SYSTEM';
 
 $params = array(
     array($petugas, SQLSRV_PARAM_IN),
     array($rpp, SQLSRV_PARAM_IN),
-    array($urutan, SQLSRV_PARAM_IN),
-    array($idpel, SQLSRV_PARAM_IN),
+    array($idpels, SQLSRV_PARAM_IN),
     array($user, SQLSRV_PARAM_IN),
 );
 
-$sql = "EXEC SP_RPP_SIMPAN @PETUGAS = ?, @RPP = ?, @URUTAN = ?, @IDPEL = ?, @USER_INPUT = ? ";
+$sql = "EXEC SP_BATCH_RPP_FINAL_HAPUS @PETUGAS = ?, @RPP = ?, @IDPELS = ?, @USER_INPUT = ? ";
 $stmt = sqlsrv_prepare($conn, $sql, $params);
 
 if(sqlsrv_execute($stmt)){
   sqlsrv_next_result($stmt);
-  $row = sqlsrv_fetch_array( $stmt, SQLSRV_FETCH_ASSOC);
+  $i=0;
+  while($row = sqlsrv_fetch_array( $stmt, SQLSRV_FETCH_ASSOC)){
+    $response['idpels'][$i] = $row['IDPEL'];
+    $i++;
+  }
   
-  if($row['RPP']==$rpp && $row['URUTAN']==$urutan){
+  if(count($response['idpels'])>0){
   	$response['success'] = true;
   }else
   	$response['success'] = false;

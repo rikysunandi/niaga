@@ -246,7 +246,7 @@
     <script src="https://cdnjs.cloudflare.com/ajax/libs/bootbox.js/5.5.2/bootbox.min.js" integrity="sha512-RdSPYh1WA6BF0RhpisYJVYkOyTzK4HwofJ3Q7ivt/jkpW6Vc8AurL1R+4AUcvn9IwEKAPm/fk7qFZW3OuiUDeg==" crossorigin="anonymous" referrerpolicy="no-referrer"></script>
 
     <script src="../js/pages/apps.js"></script>
-    <script src="../js/pages/urut-langkah-rpp.js?time=19"></script>
+    <script src="../js/pages/urut-langkah-rpp-final.js?time=16"></script>
 
 </body>
 </html>

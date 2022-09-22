@@ -4,7 +4,7 @@ require_once '../../../config/database.php';
 
 $petugas = $_POST['petugas'];
 $rpp = $_POST['rpp'];
-$urutan = str_pad($_POST['urutan'], 3, "0", STR_PAD_LEFT);
+$urutan = str_pad($_POST['urutan'], 4, "0", STR_PAD_LEFT);
 $idpel = $_POST['idpel'];
 $user = 'SYSTEM';
 
@@ -16,7 +16,7 @@ $params = array(
     array($user, SQLSRV_PARAM_IN),
 );
 
-$sql = "EXEC SP_RPP_SIMPAN @PETUGAS = ?, @RPP = ?, @URUTAN = ?, @IDPEL = ?, @USER_INPUT = ? ";
+$sql = "EXEC SP_RPP_FINAL_SIMPAN @PETUGAS = ?, @RPP = ?, @URUTAN = ?, @IDPEL = ?, @USER_INPUT = ? ";
 $stmt = sqlsrv_prepare($conn, $sql, $params);
 
 if(sqlsrv_execute($stmt)){

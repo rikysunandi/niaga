@@ -25,7 +25,7 @@ $params = array(
         //array($tgl_pemeriksaan_to, SQLSRV_PARAM_IN),
     );
 
-$sql = "EXEC sp_vw_Create_DIL_LPB_Koordinat_Unit @UserID = ?, @Unitupi = ?, @Unitap = ?, @Unitup = ? ";
+$sql = "EXEC sp_vw_Create_Pembentukan_RPP_Final @UserID = ?, @Unitupi = ?, @Unitap = ?, @Unitup = ? ";
 $stmt = sqlsrv_prepare($conn, $sql, $params);
 
 
@@ -46,8 +46,8 @@ if($stmt){
 		$response['plg'][$i]['latitude'] = ($row['LATITUDE']); 
 		$response['plg'][$i]['longitude'] = ($row['LONGITUDE']); 
 		$response['plg'][$i]['petugas_priangan'] = ($row['PETUGAS_PRIANGAN']); 
-		$response['plg'][$i]['nama_gardu'] = ($row['NAMA_GARDU']); 
-		$response['plg'][$i]['rbm_paska'] = ($row['RBM_PASKA']); 
+		$response['plg'][$i]['nama_gardu'] = ($row['REKOMENDASI']); 
+		$response['plg'][$i]['rbm_paska'] = ($row['RPP_ONSITE']); 
 		// $response['plg'][$i]['foto'] = ($row['FOTO']); 
 
 		$i++;
@@ -67,9 +67,8 @@ if($stmt){
 
 		$i++;
 	}
-
 	$response['gardu']=null;
-	
+
 	sqlsrv_next_result($stmt);
 
 	$i=0;

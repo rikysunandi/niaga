@@ -53,7 +53,7 @@ $(document).ready(function () {
 
         if($('#sel_petugas').val()!=null){
             $('#sel_rpp').empty();
-            $.getJSON('../controller/referensi/getRPP.php?petugas='+$('#sel_petugas').val(), function(data){
+            $.getJSON('../controller/referensi/getRPPFinal.php?petugas='+$('#sel_petugas').val(), function(data){
                   
                 $.each(data.rows,function(i,v){
                   $('#sel_rpp').append('<option value="'+v.kode+'">'+v.nama+'</option>');
@@ -98,6 +98,10 @@ $(document).ready(function () {
 
     $('#btn_cari').click(function(){
 
+        // $.getScript("../../../assets/plugins/keydragzoom/keydragzoom.js", function(){
+        
+        // });
+
         $('div.content-body').block({ message: 'Mengambil data pelanggan pada RPP '+$('#sel_rpp').val()+'...' });
         //console.log('cari!!');
         // //console.log($("#tgl_baca_to").datepicker("getFormattedDate"));
@@ -123,7 +127,7 @@ $(document).ready(function () {
         $('#map').remove();
         container.append('<div id="map"></div>');
 
-        $.getJSON( "../controller/pemeriksaan_lpb/getDataRPP.php", 
+        $.getJSON( "../controller/pemeriksaan_lpb/getDataRPPFinal.php", 
         { 
             unitupi: $('#sel_unitupi').val(),
             unitap: $('#sel_unitap').val(),
@@ -663,7 +667,7 @@ $(document).ready(function () {
                                                         $($(progress).find('.progress-bar')[0]).css('width', valeur+'%').attr('aria-valuenow', valeur);
                                                         $($(progress).find('.msg')[0]).html('Menyimpan idpel '+marker.idpel+' ke RPP <span class="text-success">'+rpp+'</span> Urut Langkah ke-<span class="text-success">'+marker.urutan+'</span>...');
 
-                                                        $.post('../controller/pemeriksaan_lpb/simpanRPP.php', 
+                                                        $.post('../controller/pemeriksaan_lpb/simpanRPPFinal.php', 
                                                         { petugas: petugas, rpp: rpp, urutan: urutan, idpel:marker.idpel }, 
                                                         function(res){
                                                             //console.log('res',res);
@@ -705,7 +709,7 @@ $(document).ready(function () {
                                                             });
                                                             console.log('deleted', deleted);
 
-                                                            $.post('../controller/pemeriksaan_lpb/batchHapusRPP.php', 
+                                                            $.post('../controller/pemeriksaan_lpb/batchHapusRPPFinal.php', 
                                                             { petugas: petugas, rpp: rpp, idpels:deleted.join(',') }, 
                                                             function(res){
 

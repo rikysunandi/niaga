@@ -5,12 +5,13 @@
     <meta charset="utf-8">
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <meta name="viewport" content="width=device-width,initial-scale=1">
-    <title>Backoffice Niaga | Pembentukan Urut Langkah RPP</title>
+    <title>Backoffice Niaga | Peta Pembentukan RPP</title>
     <!-- Favicon icon -->
     <link rel="icon" type="image/png" sizes="16x16" href="../../assets/images/favicon.png">
     <link href="../css/style.css?time=<?php echo time() ?>" rel="stylesheet">
-    <!-- <link href="../css/custom.css?time=<?php echo time() ?>" rel="stylesheet"> -->
-    <!-- <link href="../../assets/plugins/gmaps/gmap-context-menu.css" rel="stylesheet"> -->
+    <link href="../css/custom.css?time=<?php echo time() ?>" rel="stylesheet">
+    <link href="../../assets/plugins/bootstrap-daterangepicker/daterangepicker.css" rel="stylesheet">
+    <link href="../../assets/plugins/sweetalert2/dist/sweetalert2.min.css" rel="stylesheet">
 
     <style type="text/css">
         #map {
@@ -21,9 +22,11 @@
           color: #FFFFFF;
           text-align:center;
           font-family: 'Arial, Helvetica';
-          font-size:11px;
+          font-size:10px;
           font-weight:bold;
           cursor: pointer;
+          padding-left: 6px;
+          padding-top: 2px;
         }
         .cluster-1{
           background-image:url(../../assets/images/m1.png);
@@ -65,13 +68,13 @@
             <div class="container-fluid">
                 <div class="row page-titles">
                     <div class="col p-md-0">
-                        <h4>Pembentukan Urut Langkah RPP</h4>
+                        <h4>Peta Pembentukan RPP</h4>
                     </div>
                     <div class="col p-md-0">
                         <ol class="breadcrumb">
                             <li class="breadcrumb-item"><a href="javascript:void(0)">Pembentukan RPP</a>
                             </li>
-                            <li class="breadcrumb-item active">Pembentukan Urut Langkah RPP</li>
+                            <li class="breadcrumb-item active">Peta Pembentukan RPP</li>
                         </ol>
                     </div>
                 </div>
@@ -102,19 +105,12 @@
                                                     <option value="00" selected>SEMUA UNIT</option>
                                                 </select>
                                             </div>
-                                            <div class="form-group mb-4 col-3">
+                                            <!-- <div class="form-group mb-4 col-3">
                                                 <label class="text-label d-block"><small>PETUGAS</small></label>
                                                 <select id="sel_petugas" title="PETUGAS" class="selectpicker show-tick" data-size="5" data-inc-semua="T" >
                                                     <option value="00">SEMUA PETUGAS</option>
                                                 </select>
                                             </div>
-                                            <div class="form-group mb-4 col-3">
-                                                <label class="text-label d-block"><small>RPP</small></label>
-                                                <select id="sel_rpp" title="RPP" class="selectpicker show-tick" data-size="5" data-inc-semua="T" >
-                                                    <option value="00">SEMUA RPP</option>
-                                                </select>
-                                            </div>
-                                            <!-- 
                                             <div class="form-group mb-4 col-3">
                                                 <label class="text-label">TGL PEMERIKSAAN</label>
                                                 <input id="tgl_pemeriksaan_range" class="form-control input-daterange-datepicker" type="text" name="daterange">
@@ -137,13 +133,24 @@
                     <div class="col-12">
                         <div class="card">
                             <div class="card-header">
-                                <h4 class="card-title">Peta Urut Langkah RPP</h4>
+                                <h4 class="card-title">Peta Pembentukan RPP</h4>
                             </div>
                             <div class="card-body">
-                                <div>
-                                    <p>Untuk memberikan urut langkah berdasarkan jarak terdekat <span class="text-primary">(GENERATE)</span>, silahkan pilih pelanggan pertama (start) dan pelanggan terakhir (end)
+                                <div class="mb-4">
+                                    <p>Pastikan sudah tidak ada cluster pada tampilan Peta, lalu silahkan pilih pelanggan-pelanggan yang akan dibentuk RPP dengan cara memblok sekumpulan titik koordinat (tahan tombol <span class="text-primary">SHIFT + blok area</span>) atau <span class="text-primary">KLIK</span> pada masing-masing titik koordinat.
                                     </p>
-                                    <p><span class="text-danger">Untuk menghapus titik koordinat</span>, silahkan blok pelanggan yang akan dihapus dengan menekan tombol <span class="text-danger">SHIFT</span>. Data yang dihapus akan muncul kembali di Menu Pembentukan RPP.
+                                    <p>Lalu tentukan aksi apa yang akan dilakukan terhadap titik-titik yang sudah dipilih dengan tombol-tombol berikut:
+                                        <ul>
+                                            <li><span class="text-primary">Hilangkan:</span> untuk menghilangkan titik-titik yang dipilih dari Peta, jika dirasa titik yang ditampilkan melenceng</li>
+                                            <li><span class="text-primary">Bersihkan Pilihan:</span> untuk membatalkan pilihan dari titik-titik yang sudah dipilih (reset pilihan)</li>
+                                            <li><span class="text-primary">Buat RPP:</span> untuk membuat RPP dari titik-titik yang dipilih</li>
+                                        </ul>
+                                    </p>
+                                    <p>Aturan pembentukan RPP:
+                                        <ul>
+                                            <li>Satu RPP berisi kurang lebih <span class="text-primary">250 pelanggan</span></li>
+                                            <li>Penamaan RPP: mengikuti 6 karakter RBM Paska Petugas terkait, dimana karakter terakhir diisi kode hari baca yang <span class="text-primary">dimulai dari huruf H</span></li>
+                                        </ul>
                                     </p>
                                 </div>
                                 <div style="height:500px;">
@@ -151,40 +158,59 @@
                                 </div>
                             </div>
                             <div class="card-footer text-muted">
-                                <div class="row">
-                                    <div class="align-middle d-inline col-6">
-                                        <span class="fa fa-info-circle"></span> Urut Langkah <span id="total_plg" class="text-primary"></span>: dari <span id="plg_start" class="text-success">Pelanggan X</span> ke <span id="plg_end" class="text-success">Pelanggan Y</span>
-                                        <div id="jml_plg_dihapus"></div>
-                                        <div id="plg_dipilih"></div>
-                                        <div id="info_tagging"></div>
-                                    </div>
-                                    <div class="col-6">
-                                        <button id="btn_create" class="btn btn-primary waves-effect waves-light btn-sm pull-right mr-2">Simpan <span class="btn-icon-right"><i class="fa fa-check-circle"></i></span></button>
-                                        <button id="btn_simulasi" class="btn btn-secondary waves-effect waves-light btn-sm pull-right mr-2">Simulasikan <span class="btn-icon-right"><i class="fa fa-gears"></i></span></button>
-                                        <button id="btn_generate" class="btn btn-secondary waves-effect waves-light btn-sm pull-right mr-2">Generate <span class="btn-icon-right"><i class="fa fa-gear"></i></span></button>
-                                    </div>
+                                <div class="align-middle d-inline">
+                                    <span class="fa fa-info-circle"></span> Ada sebanyak <span id="plg_dipilih" class="text-success">0</span> Pelanggan dipilih dari total <span id="total_plg" class="text-primary">0</span> Pelanggan
                                 </div>
+                                <button id="btn_create" class="btn btn-primary waves-effect waves-light btn-sm pull-right mr-2">Buat RPP <span class="btn-icon-right"><i class="fa fa-check-circle"></i></span></button>
+                                <button id="btn_reset" class="btn btn-secondary waves-effect waves-light btn-sm pull-right mr-2">Bersihkan Pilihan <span class="btn-icon-right"><i class="fa fa-refresh"></i></span></button>
+                                <button id="btn_remove" class="btn btn-danger waves-effect waves-light btn-sm pull-right mr-2">Hilangkan <span class="btn-icon-right"><i class="fa fa-times-circle"></i></span></button>
                             </div>
                         </div>
                     </div>
                 </div>
 
-                <div class="row d-none">
-                    <div class="col-12">
+                <div class="row">
+                    <div class="col-4">
                         <div class="card">
                             <div class="card-header">
-                                <h5 class="card-title">Urutan Langkah</h5>
+                                <h5 class="card-title">Summary Petugas Priangan</h5>
                             </div>
                             <div class="card-body">
-                                <div class="urut-langkah">
-                                </div>
-                                <!-- <div class="basic-list-group">
+                                <div class="basic-list-group">
                                     <ul id="petugas-selected" class="list-group">
-                                        <li class="list-group-item d-flex justify-content-between align-items-center">Cras
+                                        <!-- <li class="list-group-item d-flex justify-content-between align-items-center">Cras
                                             justo odio <span class="badge badge-primary badge-pill">14</span>
-                                        </li>
+                                        </li> -->
                                     </ul>
-                                </div> -->
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="col-4">
+                        <div class="card">
+                            <div class="card-header">
+                                <h5 class="card-title">Summary RPP Onsite</h5>
+                            </div>
+                            <div class="card-body">
+                                <div class="basic-list-group">
+                                    <ul id="rbm-paska-selected" class="list-group">
+                                        
+                                    </ul>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="col-4">
+                        <div class="card">
+                            <div class="card-header">
+                                <h5 class="card-title">Summary RPP Terdekat</h5>
+                            </div>
+                            <div class="card-body">
+                                <div class="basic-list-group">
+                                    <ul id="gardu-selected" class="list-group">
+                                        
+                                    </ul>
+                                </div>
                             </div>
                         </div>
                     </div>
@@ -239,14 +265,14 @@
     <script src="https://maps.googleapis.com/maps/api/js?key=AIzaSyD0TuTeVzIMdevT3Rfc0BrVDKy466Tdsnc"></script>
 
     <script src="../../assets/plugins/gmaps/gmap3.js"></script>
-    <!-- <script src="../../assets/plugins/gmaps/gmap-context-menu.js"></script> -->
     <script src="../../assets/plugins/keydragzoom/keydragzoom.js"></script>
     <!-- <script src="https://unpkg.com/@googlemaps/markerclustererplus/dist/index.min.js"></script> -->
+    <script src="../../assets/plugins/sweetalert2/dist/sweetalert2.min.js"></script>
     <script src="../../assets/plugins/block-ui/jquery.blockUI.js"></script>
     <script src="https://cdnjs.cloudflare.com/ajax/libs/bootbox.js/5.5.2/bootbox.min.js" integrity="sha512-RdSPYh1WA6BF0RhpisYJVYkOyTzK4HwofJ3Q7ivt/jkpW6Vc8AurL1R+4AUcvn9IwEKAPm/fk7qFZW3OuiUDeg==" crossorigin="anonymous" referrerpolicy="no-referrer"></script>
 
     <script src="../js/pages/apps.js"></script>
-    <script src="../js/pages/urut-langkah-rpp.js?time=19"></script>
+    <script src="../js/pages/pembentukan-rpp-final.js?time=22"></script>
 
 </body>
 </html>
