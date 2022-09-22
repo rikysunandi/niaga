@@ -123,7 +123,7 @@ $(document).ready(function () {
         $('#map').remove();
         container.append('<div id="map"></div>');
 
-        $.getJSON( "../controller/pemeriksaan_lpb/getDataRPP.php", 
+        $.getJSON( "../controller/pemeriksaan_lpb/getDataRPPFinal.php", 
         { 
             unitupi: $('#sel_unitupi').val(),
             unitap: $('#sel_unitap').val(),
