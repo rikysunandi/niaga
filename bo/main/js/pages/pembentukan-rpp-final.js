@@ -273,7 +273,7 @@ $(document).ready(function () {
                                 var petugas_list = groupBy(selected, 'petugas');
                                 var petugas_sort = [];
                                 for (var petugas in petugas_list) {
-                                    if(petugas!='DIL' && petugas!='')
+                                    if(petugas!='KOSONG' && petugas!='')
                                         petugas_sort.push([petugas, petugas_list[petugas].length]);
                                 }
 
@@ -286,7 +286,7 @@ $(document).ready(function () {
                                     petugas_init = petugas_sort[0][0];
                                 }
 
-                                // if($('ul#petugas-selected li.list-group-item:first span').html()=='DIL')
+                                // if($('ul#petugas-selected li.list-group-item:first span').html()=='KOSONG')
                                 //     var petugas =  $('ul#petugas-selected li.list-group-item:first').next().children('span').html();
                                 // else
                                 //     var petugas =  $('ul#petugas-selected li.list-group-item:first span').html();
