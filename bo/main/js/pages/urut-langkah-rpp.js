@@ -939,6 +939,154 @@ $(document).ready(function () {
                             });
                         
                             is_first=false;
+                        }else{
+
+                            map.enableKeyDragZoom({
+                                noZoom: true,
+                                visualEnabled: false,
+                            });
+                            var dz = map.getDragZoomObject();
+
+                            google.maps.event.addListener(dz, 'dragstart', function (latlng) {
+                                //console.log('KeyDragZoom Started: ' + latlng);
+                            });
+
+                            google.maps.event.addListener(dz, 'dragend', function (bnds) {
+                                //console.log('KeyDragZoom Ended: ' + bnds);
+                                //console.log(bnds);
+                                //console.log(bnds.getSouthWest());
+
+                                var GLOBE_WIDTH = 256; // a constant in Google's map projection
+                                var west = bnds.getSouthWest().lng();
+                                var east = bnds.getNorthEast().lng();
+                                var angle = east - west;
+                                if (angle < 0) {
+                                  angle += 360;
+                                }
+                                var pixelWidth = $('div#map').width();
+                                var zoom = Math.round(Math.log(pixelWidth * 360 / angle / GLOBE_WIDTH) / Math.LN2);
+
+                                //console.log('zoom', zoom);
+
+                                if(zoom>=10){
+
+                                    $('div.content-body').block({ message: 'Memilih koordinat...' });
+                                    var urutan, urutan_txt, color;
+                                    var i=0;
+                                    asyncForEach(markers, function(marker) {
+
+                                        if(marker.getPosition()){
+                                            if (bnds.contains(marker.getPosition())) {
+                                                ////console.log('marker dalam pilihan', marker);
+                                                
+                                                //if(!marker.selected){
+                                                if(!marker.selected){
+
+                                                    if(marker.urutan>0){
+                                                        urutan = i+1;
+                                                        urutan_txt = i+1;
+                                                        color = 'blue';
+                                                    }else{
+                                                        urutan = null;
+                                                        urutan_txt = '..';
+                                                        color = 'blue';
+                                                    }
+
+                                                    marker.setIcon("../controller/getMarkerIcon.php?color="+color+"&text="+urutan_txt);
+                                                    marker.urutan = urutan;
+                                                    marker.selected = true;
+                                                    selected.push(marker);
+                                                    // $('#jml_plg_dipilih').html("Jumlah Pelanggan dipilih: <span class='text-primary'>"+selected.length+'</span>');
+                                                }
+
+                                                // }else{
+                                                //     marker.setIcon(red_house);
+                                                //     marker.selected = false;
+                                                //     $('#plg_dipilih').html(selected.length);
+
+                                                // }
+                                            }
+                                        }
+
+                                        i++;
+                                      //marker.setIcon("http://maps.google.com/mapfiles/marker_green.png");
+                                    },function(){
+                                        if(selected.length>0){
+
+                                            bootbox.confirm({
+                                                title: "Hapus Koordinat?",
+                                                message: "Apakah anda yakin akan menghapus "+selected.length+" titik koordinat dari Peta?", 
+                                                scrollable: true,
+                                                buttons: {
+                                                    cancel: {
+                                                        className: 'btn-light',
+                                                        label: '<i class="fa fa-times"></i> Batal'
+                                                    },
+                                                    confirm: {
+                                                        className: 'btn-danger',
+                                                        label: '<i class="fa fa-check"></i> Ya, Hapus'
+                                                    }
+                                                },
+                                                callback: function (result) {
+                                                    if(result){
+                                                        $('div.content-body').block({ message: 'Menghapus koordinat pelanggan yang dipilih...' });
+                                                        asyncForEach(selected, function(marker) {
+                                                            if(marker.selected){
+
+                                                                marker.selected = false;
+                                                                marker.setMap(null);
+                                                                //selected = $.grep(selected, function(e) { return e.idpel!=marker.idpel });
+                                                                selected = $.grep(selected, function(e) { return e.idpel!=marker.idpel });
+                                                                markers = $.grep(markers, function(e) { return e.idpel!=marker.idpel });
+                                                                
+                                                                deleted.push(marker.idpel);
+                                                                $('#jml_plg_dihapus').html("Jumlah Pelanggan dihapus: "+deleted.length);
+                                                                $('#total_plg').html("("+markers.length+" plg)");
+                                                            }
+                                                        },function() {
+                                                            
+                                                            $('div.content-body').unblock();
+                                                            refreshUrutanMarker(markers);
+
+                                                        });
+                                                    }else{
+                                                        var urutan, urutan_txt, color;
+                                                        var i=0;
+                                                        asyncForEach(selected, function(marker) {
+                                                            //if(marker.selected){
+                                                                //console.log(marker);
+                                                                if(marker.urutan>0){
+                                                                    urutan = marker.urutan;
+                                                                    urutan_txt = marker.urutan;
+                                                                    color = 'green-darker';
+                                                                }else{
+                                                                    urutan = 0;
+                                                                    urutan_txt = '..';
+                                                                    color = 'red';
+                                                                }
+                                                                
+                                                                marker.setIcon("../controller/getMarkerIcon.php?color="+color+"&text="+urutan_txt);
+                                                                marker.selected = false;
+                                                                selected = $.grep(selected, function(e) { return e.idpel!=marker.idpel });
+                                                                
+                                                            //}
+                                                        },function() {
+
+                                                        });
+                                                    }
+                                                }
+                                            });
+
+                                        }
+                                        $('div.content-body').unblock();
+                    
+                                    });
+                                }else{
+                                    bootbox.alert("Rentang pilihan terlalu jauh!");
+                                    return false;
+                                }
+
+                            });
                         }
 
                         $('div.content-body').unblock();
