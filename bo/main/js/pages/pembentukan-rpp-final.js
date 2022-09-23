@@ -306,7 +306,7 @@ $(document).ready(function () {
                                             var petugas_dipilih = result;
                                             console.log('wilker', wilker);
                                             var wil = $.grep(wilker, function(e) { return e.kodepetugas==petugas_dipilih });
-                                            //console.log(wil);
+                                            console.log(wil);
                                             var rbm_prefill='';
                                             if(wil.length>0)
                                                 rbm_prefill=wil[0].rbm;
