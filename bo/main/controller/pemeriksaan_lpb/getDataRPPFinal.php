@@ -47,6 +47,7 @@ if($stmt){
 		$response['rpp'][$i]['rpp_kddk'] = ($row['RPP_KDDK']); 
 		$response['rpp'][$i]['rpp'] = ($row['RPP']); 
 		$response['rpp'][$i]['nama_gardu'] = ($row['NAMA_GARDU']); 
+		$response['rpp'][$i]['nomor_jurusan_tiang'] = ($row['NOMOR_JURUSAN_TIANG']); 
 		$response['rpp'][$i]['petugas_priangan'] = ($row['PETUGAS_PRIANGAN']); 
 		$response['rpp'][$i]['tgl_tagging'] = ($row['TGL_TAGGING']); 
 		if(strlen($row['TGL_TAGGING'])==19)

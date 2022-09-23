@@ -163,7 +163,7 @@ $(document).ready(function () {
                             rpp: obj.rpp,
                             petugas: obj.petugas,
                             urutan: urutan,
-                            info_tagging: obj.petugas_priangan+" ( Tgl "+obj.tgl_tagging+" ) ",
+                            info_tagging: obj.petugas_priangan+" ( Tgl "+obj.tgl_tagging+" ) <br/>GARDU: "+obj.nama_gardu+"/"+obj.nomor_jurusan_tiang,
                             start_end: false
                         });
                 });
