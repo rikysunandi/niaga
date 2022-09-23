@@ -304,7 +304,7 @@ $(document).ready(function () {
                                     callback: function (result) {
                                         if(result){
                                             var petugas_dipilih = result;
-                                            //console.log('wilker', wilker);
+                                            console.log('wilker', wilker);
                                             var wil = $.grep(wilker, function(e) { return e.kodepetugas==petugas_dipilih });
                                             //console.log(wil);
                                             var rbm_prefill='';
