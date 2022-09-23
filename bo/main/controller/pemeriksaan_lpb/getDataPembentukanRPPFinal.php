@@ -46,8 +46,8 @@ if($stmt){
 		$response['plg'][$i]['latitude'] = ($row['LATITUDE']); 
 		$response['plg'][$i]['longitude'] = ($row['LONGITUDE']); 
 		$response['plg'][$i]['petugas_priangan'] = ($row['PETUGAS_PRIANGAN']); 
-		$response['plg'][$i]['nama_gardu'] = ($row['REKOMENDASI']); 
-		$response['plg'][$i]['rbm_paska'] = ($row['RPP_ONSITE']); 
+		$response['plg'][$i]['nama_gardu'] = ($row['NAMA_GARDU']); 
+		$response['plg'][$i]['rbm_paska'] = ($row['REKOMENDASI']); 
 		// $response['plg'][$i]['foto'] = ($row['FOTO']); 
 
 		$i++;

@@ -173,7 +173,7 @@
                     <div class="col-4">
                         <div class="card">
                             <div class="card-header">
-                                <h5 class="card-title">Summary Petugas Priangan</h5>
+                                <h5 class="card-title">Summary Petugas</h5>
                             </div>
                             <div class="card-body">
                                 <div class="basic-list-group">
@@ -189,7 +189,7 @@
                     <div class="col-4">
                         <div class="card">
                             <div class="card-header">
-                                <h5 class="card-title">Summary RPP Onsite</h5>
+                                <h5 class="card-title">Summary RPP Terdekat</h5>
                             </div>
                             <div class="card-body">
                                 <div class="basic-list-group">
@@ -203,7 +203,7 @@
                     <div class="col-4">
                         <div class="card">
                             <div class="card-header">
-                                <h5 class="card-title">Summary RPP Terdekat</h5>
+                                <h5 class="card-title">Summary Gardu</h5>
                             </div>
                             <div class="card-body">
                                 <div class="basic-list-group">
