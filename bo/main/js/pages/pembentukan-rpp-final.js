@@ -137,40 +137,40 @@ $(document).ready(function () {
                 scrollwheel: true,
                 streetViewControl: true
               })
-              //.marker(gardu_markers)
-              .cluster({
-                //radius: 10,
-                //size: 300,
-                markers: markers,
-                cb: function (markers) {
-                  markers_obj = markers;
+              .marker(markers)
+              // .cluster({
+              //   //radius: 10,
+              //   //size: 300,
+              //   markers: markers,
+              //   cb: function (markers) {
+              //     markers_obj = markers;
 
-                  var jml_plg = $.grep(markers, function(e) { return e.idpel!="X" }).length;
+              //     var jml_plg = $.grep(markers, function(e) { return e.idpel!="X" }).length;
 
-                  if (jml_plg > 400) { // 1 marker stay unchanged (because cb returns nothing)
-                    if (jml_plg > 10000) {
-                      return {
-                        content: "<div class='cluster cluster-3'>" + jml_plg + "</div>",
-                        x: -26,
-                        y: -26,
-                      };
-                    }
-                    else if (jml_plg > 1000) {
-                      return {
-                        content: "<div class='cluster cluster-2'>" + jml_plg + "</div>",
-                        x: -26,
-                        y: -26,
-                      };
-                    }else{
-                      return {
-                        content: "<div class='cluster cluster-1'>" + jml_plg + "</div>",
-                        x: -26,
-                        y: -26,
-                      };
-                    }
-                  }
-                }
-              })
+              //     if (jml_plg > 400) { // 1 marker stay unchanged (because cb returns nothing)
+              //       if (jml_plg > 10000) {
+              //         return {
+              //           content: "<div class='cluster cluster-3'>" + jml_plg + "</div>",
+              //           x: -26,
+              //           y: -26,
+              //         };
+              //       }
+              //       else if (jml_plg > 1000) {
+              //         return {
+              //           content: "<div class='cluster cluster-2'>" + jml_plg + "</div>",
+              //           x: -26,
+              //           y: -26,
+              //         };
+              //       }else{
+              //         return {
+              //           content: "<div class='cluster cluster-1'>" + jml_plg + "</div>",
+              //           x: -26,
+              //           y: -26,
+              //         };
+              //       }
+              //     }
+              //   }
+              // })
               .then(function (cluster) {
 
                     var map = this.get()[0];
