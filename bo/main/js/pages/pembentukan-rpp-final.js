@@ -171,13 +171,13 @@ $(document).ready(function () {
               //     }
               //   }
               // })
-              .then(function (cluster) {
+              .then(function (markers) {
 
                     var map = this.get()[0];
                     //console.log('map', map);
                     //console.log("cluster", cluster);
 
-                    $('#total_plg').html(cluster.markers().filter(function(e) { return e.idpel!="X" }).length);
+                    $('#total_plg').html(markers.filter(function(e) { return e.idpel!="X" }).length);
                     $('#plg_dipilih').html('0');
                       
                     map.enableKeyDragZoom({
@@ -211,7 +211,7 @@ $(document).ready(function () {
                         if(zoom>=10){
 
                             $('div.content-body').block({ message: 'Memilih koordinat...' });
-                            asyncForEach(cluster.markers(), function(marker) {
+                            asyncForEach(markers, function(marker) {
                                 var petugas = new Array(); 
                                 var gardu = new Array(); 
 
@@ -347,10 +347,10 @@ $(document).ready(function () {
                                                         //                 marker.setIcon(red_house);
                                                         //                 marker.selected = false;
                                                         //                 marker.setMap(null);
-                                                        //                 cluster.remove(marker);
+                                                        //                 //cluster.remove(marker);
                                                         //                 selected = $.grep(selected, function(e) { return e.idpel!=marker.idpel });
                                                         //                 $('#plg_dipilih').html(selected.length);
-                                                        //                 $('#total_plg').html(cluster.markers().filter(function(e) { return e.idpel!="X" }).length);
+                                                        //                 $('#total_plg').html(markers.filter(function(e) { return e.idpel!="X" }).length);
                                                         //             }
                                                         //             simpanRPP(datas, i+1, dialog, petugas, rpp, berhasil);
 
@@ -432,10 +432,10 @@ $(document).ready(function () {
                                                                         marker.setIcon(red_house);
                                                                         marker.selected = false;
                                                                         marker.setMap(null);
-                                                                        cluster.remove(marker);
+                                                                        //cluster.remove(marker);
                                                                         selected = $.grep(selected, function(e) { return e.idpel!=marker.idpel });
                                                                         $('#plg_dipilih').html(selected.length);
-                                                                        $('#total_plg').html(cluster.markers().filter(function(e) { return e.idpel!="X" }).length);
+                                                                        $('#total_plg').html(markers.filter(function(e) { return e.idpel!="X" }).length);
                                                                     }
                                                                 },function(){
 
@@ -576,11 +576,11 @@ $(document).ready(function () {
                                                     marker.setIcon(red_house);
                                                     marker.selected = false;
                                                     marker.setMap(null);
-                                                    cluster.remove(marker);
+                                                    //cluster.remove(marker);
                                                     //selected = $.grep(selected, function(e) { return e.idpel!=marker.idpel });
                                                     selected = $.grep(selected, function(e) { return e.idpel!=marker.idpel });
                                                     $('#plg_dipilih').html(selected.length);
-                                                    $('#total_plg').html(cluster.markers().filter(function(e) { return e.idpel!="X" }).length);
+                                                    $('#total_plg').html(markers.filter(function(e) { return e.idpel!="X" }).length);
                                                 }
                                             },function() {
                                                 populateList(selected);

@@ -262,7 +262,7 @@
     
     <script src="../../assets/plugins/moment/moment.min.js"></script>
     <script src="../../assets/plugins/bootstrap-daterangepicker/daterangepicker.js"></script>
-    <script src="https://maps.googleapis.com/maps/api/js?key=AIzaSyD0TuTeVzIMdevT3Rfc0BrVDKy466Tdsnc"></script>
+    <script src="https://maps.googleapis.com/maps/api/js?key=AIzaSyCmTOVYVndxhvTkvCx8eBYBadsM1iYQrv8"></script>
 
     <script src="../../assets/plugins/gmaps/gmap3.js"></script>
     <script src="../../assets/plugins/keydragzoom/keydragzoom.js"></script>
@@ -272,7 +272,7 @@
     <script src="https://cdnjs.cloudflare.com/ajax/libs/bootbox.js/5.5.2/bootbox.min.js" integrity="sha512-RdSPYh1WA6BF0RhpisYJVYkOyTzK4HwofJ3Q7ivt/jkpW6Vc8AurL1R+4AUcvn9IwEKAPm/fk7qFZW3OuiUDeg==" crossorigin="anonymous" referrerpolicy="no-referrer"></script>
 
     <script src="../js/pages/apps.js"></script>
-    <script src="../js/pages/pembentukan-rpp-final.js?time=25"></script>
+    <script src="../js/pages/pembentukan-rpp-final.js?time=27"></script>
 
 </body>
 </html>
