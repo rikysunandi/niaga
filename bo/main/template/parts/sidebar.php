@@ -30,6 +30,7 @@
                 </ul>
             </li>
             <li class="nav-label">ADM NIAGA</li>
+            <li><a href="rpt-daily-admaga.php"><i class="mdi mdi-chart-bar"></i> <span class="nav-text">Daily Report</span></a>
             <li><a class="has-arrow" href="javascript:void()" aria-expanded="false"><i class="mdi mdi-cloud-upload"></i> <span class="nav-text">Upload Data</span></a>
                 <ul aria-expanded="false">
                     <li class="d-none"><a href="upload-sorek.php">Upload Sorek OLAP AP2T <span class="badge badge-warning">Development</span></a></li>
@@ -49,7 +50,6 @@
                     <li><a href="rekap-pola-bayar-lunas.php">Rekap Pelunasan Berdasarkan Pola Bayar</a>
                     <!-- <li><a href="mon-saldo-tunggakan.php">Monitoring Saldo Tunggakan</a></li> -->
                     <li><a href="rekap-tgl-bayar.php">Rekap Pelunasan per Tgl Bayar</a>
-                    <li><a href="rpt-daily-admaga.php">Daily Report Admaga</a>
                     <!-- <li><a href="4dx-piutang.php">4DX Piutang Pelanggan</a> -->
                     <!-- <li><a href="rekap-pola-bayar-tarif-daya.php">Rekap Pola Bayar per Tarif Daya</a></li> -->
                     <!-- <li><a href="input-va.php">Input Virtual Account</a></li> -->
