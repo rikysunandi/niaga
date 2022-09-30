@@ -49,6 +49,7 @@
                     <li><a href="rekap-pola-bayar-lunas.php">Rekap Pelunasan Berdasarkan Pola Bayar</a>
                     <!-- <li><a href="mon-saldo-tunggakan.php">Monitoring Saldo Tunggakan</a></li> -->
                     <li><a href="rekap-tgl-bayar.php">Rekap Pelunasan per Tgl Bayar</a>
+                    <li><a href="rpt-daily-admaga.php">Daily Report Admaga</a>
                     <!-- <li><a href="4dx-piutang.php">4DX Piutang Pelanggan</a> -->
                     <!-- <li><a href="rekap-pola-bayar-tarif-daya.php">Rekap Pola Bayar per Tarif Daya</a></li> -->
                     <!-- <li><a href="input-va.php">Input Virtual Account</a></li> -->
@@ -143,6 +144,7 @@
                     <li><a href="pelaksanaan-rpp-onsite.php">Review RPP On Site</a></li>
                     <li><a href="rekap-rpp-onsite.php">Rekap RPP On Site</a></li>
                     <li><a href="rekap-rpp-onsite-petugas.php">Rekap Realisasi per Petugas</a></li>
+                    <li><a href="mon-rpp-onsite.php">Detail RPP On Site</a></li>
                     <!-- <li><a href="urut-langkah-rpp.php">Pembentukan Urut Langkah RPP</a></li>
                     <li><a href="rekap-rpp-onsite.php">Rekap RPP On Site  per ULP</a></li>
                     <li><a href="rekap-rpp.php">Rekap RPP On Site per Petugas</a></li>
