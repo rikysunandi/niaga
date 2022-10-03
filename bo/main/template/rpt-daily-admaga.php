@@ -35,7 +35,7 @@
                     </div>
                     <div class="col p-md-0">
                         <ol class="breadcrumb">
-                            <li class="breadcrumb-item"><a href="javascript:void(0)">Piutang Pelanggan</a>
+                            <li class="breadcrumb-item"><a href="javascript:void(0)">ADM NIAGA</a>
                             </li>
                             <li class="breadcrumb-item active">Daily Report Administrasi Niaga</li>
                         </ol>
