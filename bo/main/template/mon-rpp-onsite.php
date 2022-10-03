@@ -104,34 +104,50 @@
                                 <div class="mb-4">
                                     <form action="#">
                                         <div class="form-row">
+                                            
+                                        <div class="form-row">
                                             <div class="form-group mb-4 col-3">
-                                                <label class="text-label">UNIT INDUK</label>
+                                                <label class="text-label"><small>UNIT INDUK</small></label>
                                                 <select id="sel_unitupi" title="PILIH UNIT INDUK" class="selectpicker show-tick" data-size="5" data-inc-semua="T" >
                                                     <option value="00" selected>SEMUA UNIT</option>
                                                 </select>
                                             </div>
                                             <div class="form-group mb-4 col-3">
-                                                <label class="text-label">UP3</label>
+                                                <label class="text-label"><small>UP3</small></label>
                                                 <select id="sel_unitap" title="PILIH UP3" class="selectpicker show-tick" data-size="5" data-inc-semua="T" >
                                                     <option value="00" selected>SEMUA UNIT</option>
                                                 </select>
                                             </div>
                                             <div class="form-group mb-4 col-3">
-                                                <label class="text-label">ULP</label>
-                                                <select id="sel_unitup" title="PILIH ULP" class="selectpicker show-tick" data-size="5" >
+                                                <label class="text-label"><small>ULP</small></label></label>
+                                                <select id="sel_unitup" title="PILIH ULP" class="selectpicker show-tick" data-size="5" data-inc-semua="T">
                                                     <option value="00" selected>SEMUA UNIT</option>
                                                 </select>
                                             </div>
                                             <div class="form-group mb-4 col-3">
                                                 <label class="text-label d-block"><small>PETUGAS</small></label>
-                                                <select id="sel_petugas" title="PETUGAS" class="selectpicker show-tick" data-size="5" >
+                                                <select id="sel_petugas" title="PETUGAS" class="selectpicker show-tick" data-size="5" data-inc-semua="Y" >
                                                     <option value="00">SEMUA PETUGAS</option>
                                                 </select>
                                             </div>
                                             <div class="form-group mb-4 col-3">
-                                                <label class="text-label">TGL PEMERIKSAAN</label>
-                                                <input id="tgl_pemeriksaan_range" class="form-control input-daterange-datepicker" type="text" name="daterange">
+                                                <label class="text-label d-block"><small>RPP ON SITE</small></label>
+                                                <select id="sel_rpp" title="RPP" class="selectpicker show-tick" data-size="5" data-inc-semua="Y" >
+                                                    <option value="00">SEMUA RPP</option>
+                                                </select>
                                             </div>
+                                            <div class="form-group col-3">
+                                                <label class="text-label d-block"><small>STATUS ONSITE</label></small>
+                                                <select id="sel_status" title="STATUS ONSITE" class="selectpicker show-tick" data-size="5" >
+                                                    <option value="00">SEMUA DATA</option>
+                                                    <option value="SESUAI WO">SESUAI WO</option>
+                                                    <option value="SISIPAN">SISIPAN</option>
+                                                    <option value="PAGAR KUNCI">PAGAR KUNCI</option>
+                                                    <option value="DOUBLE">DOUBLE</option>
+                                                    <option value="TIDAK DITEMUKAN">TIDAK DITEMUKAN</option>
+                                                </select>
+                                            </div>
+                                        </div>
                                         </div>
                                     </form>
                                     <div class="text-right">
@@ -155,7 +171,7 @@
                                     <table id="tbl_mon_pemeriksaan_lpb" class="table table-striped table-bordered nowrap" style="width: 100%">
                                     <thead>
                                         <tr>
-                                            <th class="text-center bg-primary-lighten-2">NO</th>
+                                            <!-- <th class="text-center bg-primary-lighten-2">NO</th> -->
                                             <th class="text-center bg-primary-lighten-2">UNITAP</th>
                                             <th class="text-center bg-primary-lighten-2">UNITUP</th>
                                             <th class="text-center bg-primary-lighten-2">IDPEL</th>
@@ -164,10 +180,13 @@
                                             <th class="text-center bg-primary-lighten-2">NAMA</th>
                                             <th class="text-center bg-primary-lighten-2">TARIF</th>
                                             <th class="text-center bg-primary-lighten-2">DAYA</th>
+                                            <th class="text-center bg-primary-lighten-2">PETUGAS<br/>ONDESK</th>
+                                            <th class="text-center bg-primary-lighten-2">KDDK<br/>ONDESK</th>
+                                            <th class="text-center bg-primary-lighten-2">RPP<br/>ONSITE</th>
+                                            <th class="text-center bg-primary-lighten-2">STATUS<br/>ONSITE</th>
                                             <th class="text-center bg-primary-lighten-2">NIK</th>
                                             <th class="text-center bg-primary-lighten-2">KONDISI<br/>METER</th>
                                             <th class="text-center bg-primary-lighten-2">SISA KWH</th>
-                                            <th class="text-center bg-primary-lighten-2">RPP<br/>ONSITE</th>
                                             <th class="text-center bg-primary-lighten-2">TGL INPUT</th>
                                             <th class="text-center bg-primary-lighten-2">LAT</th>
                                             <th class="text-center bg-primary-lighten-2">LONG</th>
@@ -197,7 +216,7 @@
                 </div>
 
 
-                <div class="row">
+                <div class="row d-none">
                     <div class="col-12">
                         <div class="card">
                             <div class="card-body">
@@ -274,6 +293,6 @@
     <script src="https://unpkg.com/@googlemaps/markerclustererplus/dist/index.min.js"></script>
 
     <script src="../js/pages/apps.js"></script>
-    <script src="../js/pages/mon-pemeriksaan-lpb.js?time=22"></script>
+    <script src="../js/pages/mon-rpp-onsite.js?time=22"></script>
 </body>
 </html>

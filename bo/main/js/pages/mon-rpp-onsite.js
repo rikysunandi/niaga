@@ -3,41 +3,45 @@ $(document).ready(function () {
     "use strict";
 
 
-    $('.input-daterange-datepicker').daterangepicker({
-        buttonClasses: ['btn', 'btn-sm'],
-        applyClass: 'btn-danger',
-        cancelClass: 'btn-inverse',
-        opens: 'left',
-        startDate: moment().subtract(1, 'months').format('DD/MM/YYYY'),
-        endDate: moment(),
-        locale: {
-          format: 'DD/MM/YYYY'
+    $('#sel_unitup').change(function(){
+
+        if($('#sel_unitup').val()!=null && $('#sel_unitup').val()!=''){
+            console.log('pilih petugas', $('#sel_unitup').val());
+            $('#sel_petugas').empty();
+            $('#sel_rpp').empty();
+            $.getJSON('../controller/referensi/getPetugasPriangan.php?unitup='+$('#sel_unitup').val(), function(data){
+              
+                $.each(data.rows,function(i,v){
+                  $('#sel_petugas').append('<option value="'+v.kode+'">'+v.nama+'</option>');
+                });
+            
+                if($('#sel_petugas').data('inc-semua')!='T')
+                  $('#sel_petugas').append('<option value="00">SEMUA PETUGAS</option>');
+
+                $('#sel_petugas').selectpicker('refresh');
+
+            });
         }
     });
 
+    $('#sel_petugas').change(function(){
 
-    $('#sel_unitup').change(function(){
+        if($('#sel_petugas').val()!=null && $('#sel_petugas').val()!=''){
+            console.log('pilih rpp', $('#sel_petugas').val());
+            $('#sel_rpp').empty();
+            $.getJSON('../controller/referensi/getRPP.php?petugas='+$('#sel_petugas').val(), function(data){
+                  
+                $.each(data.rows,function(i,v){
+                  $('#sel_rpp').append('<option value="'+v.kode+'">'+v.nama+'</option>');
+                });
 
-      $('#sel_petugas').empty();
-      $.getJSON('../controller/referensi/getPetugasPriangan.php?unitup='+$('#sel_unitup').val(), function(data){
-          
-          $.each(data.rows,function(i,v){
-              $('#sel_petugas').append('<option value="'+v.kode+'">'+v.nama+'</option>');
-          });
-          $('#sel_petugas').append('<option value="00">SEMUA PETUGAS</option>');
-          $('#sel_petugas').selectpicker('refresh');
+                if($('#sel_rpp').data('inc-semua')!='T')
+                  $('#sel_rpp').append('<option value="00">SEMUA RPP</option>');
+                  
+                $('#sel_rpp').selectpicker('refresh');
 
-          if(urlParams.has('petugas')){
-            $('#sel_petugas').selectpicker('val', urlParams.get('petugas'));
-            console.log('petugas', urlParams.get('petugas'));
-          }
-          else{
-            $('#sel_petugas').selectpicker('val', "00");
-            console.log('semua petugas');
-          }
-
-          //$('#sel_rbm').selectpicker('refresh');
-        });
+            });
+        }
     });
 
     //$.blockUI({ message: '<h1 class="p-3">Mengambil data...</h1>' }); 
@@ -54,7 +58,7 @@ $(document).ready(function () {
         "processing": true,
         "serverSide": true,
         "ajax": {
-            "url": '../controller/pemeriksaan_lpb/getDataPemeriksaanLPB.php',
+            "url": '../controller/pemeriksaan_lpb/getDetailRPPOnsite.php',
             "type": "POST",
             "timeout": 360000
         },
@@ -62,10 +66,10 @@ $(document).ready(function () {
         deferLoading: 0,
         //responsive: true,
         columns: [
-          {
-            data: "NO",
-            visible: true
-          },
+          // {
+          //   data: "NO",
+          //   visible: true
+          // },
           {
             data: "UNITAP",
             visible: false
@@ -108,15 +112,22 @@ $(document).ready(function () {
             type: 'number',
             "sClass" : "text-right" , render: $.fn.dataTable.render.number(",", ".", 0, '')
           },
+          {
+            data: "PETUGAS_ONDESK",
+          },
+          {
+            data: "KDDK_ONDESK",
+          },
+          { data: "RPP_ONSITE", visible: true},
+          { data: "STATUS_ONSITE", visible: true},
           { data: "NIK", visible: true},
-          { data: "EMAIL", visible: true},
+          { data: "KODEBACA", visible: true},
           {
             data: "SISA_KWH",
             type: 'number', 
             visible: true,
             "sClass" : "text-right" , render: $.fn.dataTable.render.number(",", ".", 0, '')
           },
-          { data: "PERUNTUKAN", visible: true},
           {
             data: "TGL_INPUT",
             // render: function ( data, type, row ) {
@@ -179,253 +190,253 @@ $(document).ready(function () {
         lengthMenu: [[25, 50, 100], [25, 50, 100]],
         lengthChange: true,
         buttons: [
-            { 
-              text: '<span><i class="fa fa-map-o"></i>&nbsp;&nbsp;Peta</span>',
-              titleAttr: 'Tampilkan Peta',
-              action: function ( e, dt, node, config ) {
+            // { 
+            //   text: '<span><i class="fa fa-map-o"></i>&nbsp;&nbsp;Peta</span>',
+            //   titleAttr: 'Tampilkan Peta',
+            //   action: function ( e, dt, node, config ) {
 
-                  var unitupi = $('#sel_unitupi').val();
-                  var unitap = $('#sel_unitap').val();
-                  var unitup = $('#sel_unitup').val();
-                  var petugas = $('#sel_petugas').val();
-                  var tgl_pemeriksaan_from = $('#tgl_pemeriksaan_range')
-                                              .data('daterangepicker')
-                                              .startDate.format('YYYY-MM-DD');
-                  var tgl_pemeriksaan_to = $('#tgl_pemeriksaan_range')
-                                              .data('daterangepicker')
-                                              .endDate.format('YYYY-MM-DD');
+            //       var unitupi = $('#sel_unitupi').val();
+            //       var unitap = $('#sel_unitap').val();
+            //       var unitup = $('#sel_unitup').val();
+            //       var petugas = $('#sel_petugas').val();
+            //       var tgl_pemeriksaan_from = $('#tgl_pemeriksaan_range')
+            //                                   .data('daterangepicker')
+            //                                   .startDate.format('YYYY-MM-DD');
+            //       var tgl_pemeriksaan_to = $('#tgl_pemeriksaan_range')
+            //                                   .data('daterangepicker')
+            //                                   .endDate.format('YYYY-MM-DD');
 
-                  $('div.content-body').block({ message: 'Mengambil data...' });
+            //       $('div.content-body').block({ message: 'Mengambil data...' });
                   
-                  $.ajax({
-                    url: "../controller/pemeriksaan_lpb/getKoordinatPemeriksaan.php",
-                    method: "GET",
-                    data: { 
-                      unitupi : unitupi,
-                      unitap : unitap,
-                      unitup : unitup,
-                      unitup : unitup,
-                      petugas : petugas,
-                      tgl_pemeriksaan_from : tgl_pemeriksaan_from,
-                      tgl_pemeriksaan_to : tgl_pemeriksaan_to,
-                    },
-                  }).done(function(data) {
-                    var data  = $.parseJSON(data);
-                    // console.log( "success", data );
+            //       $.ajax({
+            //         url: "../controller/pemeriksaan_lpb/getKoordinatPemeriksaan.php",
+            //         method: "GET",
+            //         data: { 
+            //           unitupi : unitupi,
+            //           unitap : unitap,
+            //           unitup : unitup,
+            //           unitup : unitup,
+            //           petugas : petugas,
+            //           tgl_pemeriksaan_from : tgl_pemeriksaan_from,
+            //           tgl_pemeriksaan_to : tgl_pemeriksaan_to,
+            //         },
+            //       }).done(function(data) {
+            //         var data  = $.parseJSON(data);
+            //         // console.log( "success", data );
 
-                    var container = $('#map').parent();
-                    $('#map').remove();
-                    container.append('<div id="map"></div>');
+            //         var container = $('#map').parent();
+            //         $('#map').remove();
+            //         container.append('<div id="map"></div>');
 
                     
 
-                    function initMap() {
-                      const map = new google.maps.Map(document.getElementById("map"), {
-                        zoom: 10,
-                        center: { lat: -6.3487933, lng: 107.6809901 },
-                      });
+            //         function initMap() {
+            //           const map = new google.maps.Map(document.getElementById("map"), {
+            //             zoom: 10,
+            //             center: { lat: -6.3487933, lng: 107.6809901 },
+            //           });
 
                         
-                      var infowindow = new google.maps.InfoWindow();
-                      var marker = new google.maps.Marker();
-                        var bounds = new google.maps.LatLngBounds();
+            //           var infowindow = new google.maps.InfoWindow();
+            //           var marker = new google.maps.Marker();
+            //             var bounds = new google.maps.LatLngBounds();
 
-                      const markers = data.rows.map((tagging, i) => {
-                        if(tagging.latitude.length>4 && tagging.longitude>4){
-                            if(i==0 ){
-                              marker = new google.maps.Marker({
-                                position: {
-                                            lat: parseFloat(tagging.latitude), 
-                                            lng: parseFloat(tagging.longitude)
-                                          },
-                                map: map,
-                                zIndex: 999,
-                                icon: {
-                                  url: "../controller/getMarkerIcon.php?color=green-darker&text="+(i+1),
-                                },
-                                title: tagging.idpel+' | '+tagging.tgl_pemeriksaan+' | '+tagging.user_input+' | '+tagging.latitude+', '+tagging.longitude,
-                              });
-                            }else if(i==data.rows.length-1){
-                              marker = new google.maps.Marker({
-                                position: {
-                                            lat: parseFloat(tagging.latitude), 
-                                            lng: parseFloat(tagging.longitude)
-                                          },
-                                map: map,
-                                zIndex: 998,
-                                icon: {
-                                  url: "../controller/getMarkerIcon.php?color=green-darker&text="+(i+1),
-                                },
-                                title: tagging.idpel+' | '+tagging.tgl_pemeriksaan+' | '+tagging.user_input+' | '+tagging.latitude+', '+tagging.longitude,
-                              });
-                            }else{
-                              marker = new google.maps.Marker({
-                                position: {
-                                            lat: parseFloat(tagging.latitude), 
-                                            lng: parseFloat(tagging.longitude)
-                                          },
-                                map: map,
-                                zIndex: data.rows.length - i,
-                                icon: {
-                                  url: "../controller/getMarkerIcon.php?color=green&text="+(i+1),
-                                },
-                                title: tagging.idpel+' | '+tagging.tgl_pemeriksaan+' | '+tagging.user_input+' | '+tagging.latitude+', '+tagging.longitude,
-                              });
-                            }
+            //           const markers = data.rows.map((tagging, i) => {
+            //             if(tagging.latitude.length>4 && tagging.longitude>4){
+            //                 if(i==0 ){
+            //                   marker = new google.maps.Marker({
+            //                     position: {
+            //                                 lat: parseFloat(tagging.latitude), 
+            //                                 lng: parseFloat(tagging.longitude)
+            //                               },
+            //                     map: map,
+            //                     zIndex: 999,
+            //                     icon: {
+            //                       url: "../controller/getMarkerIcon.php?color=green-darker&text="+(i+1),
+            //                     },
+            //                     title: tagging.idpel+' | '+tagging.tgl_pemeriksaan+' | '+tagging.user_input+' | '+tagging.latitude+', '+tagging.longitude,
+            //                   });
+            //                 }else if(i==data.rows.length-1){
+            //                   marker = new google.maps.Marker({
+            //                     position: {
+            //                                 lat: parseFloat(tagging.latitude), 
+            //                                 lng: parseFloat(tagging.longitude)
+            //                               },
+            //                     map: map,
+            //                     zIndex: 998,
+            //                     icon: {
+            //                       url: "../controller/getMarkerIcon.php?color=green-darker&text="+(i+1),
+            //                     },
+            //                     title: tagging.idpel+' | '+tagging.tgl_pemeriksaan+' | '+tagging.user_input+' | '+tagging.latitude+', '+tagging.longitude,
+            //                   });
+            //                 }else{
+            //                   marker = new google.maps.Marker({
+            //                     position: {
+            //                                 lat: parseFloat(tagging.latitude), 
+            //                                 lng: parseFloat(tagging.longitude)
+            //                               },
+            //                     map: map,
+            //                     zIndex: data.rows.length - i,
+            //                     icon: {
+            //                       url: "../controller/getMarkerIcon.php?color=green&text="+(i+1),
+            //                     },
+            //                     title: tagging.idpel+' | '+tagging.tgl_pemeriksaan+' | '+tagging.user_input+' | '+tagging.latitude+', '+tagging.longitude,
+            //                   });
+            //                 }
 
-                            bounds.extend(new google.maps.LatLng(parseFloat(tagging.latitude), parseFloat(tagging.longitude)));
+            //                 bounds.extend(new google.maps.LatLng(parseFloat(tagging.latitude), parseFloat(tagging.longitude)));
 
-                            google.maps.event.addListener(marker, 'click', (function (marker, i) {
-                                return function () {
-                                    infowindow.setContent(
-                                      ` <div class="row">
-                                          <div class="col-6">
-                                            <dl>
-                                              <dt>Idpel</dt>
-                                              <dd>`+tagging.idpel+`</dd>
-                                              <dt>Nama</dt>
-                                              <dd>`+tagging.nama+`</dd>
-                                              <dt>Tgl Pemeriksaan</dt>
-                                              <dd>`+tagging.tgl_pemeriksaan+`</dd>
-                                              <dt>Tgl Input</dt>
-                                              <dd>`+tagging.tgl_input+`</dd>
-                                              <dt>Petugas</dt>
-                                              <dd>`+tagging.user_input+`</dd>
-                                              <dt>Koordinat</dt>
-                                              <dd>`+tagging.latitude+`, `+tagging.longitude+`</dd>
-                                            </dl>
-                                          </div>
-                                          <div class="col-6">
-                                            <img src="`+tagging.fotopath+`" width="300px" height="400px"/></dd>
-                                          </div>
-                                        </div>
-                                      `
-                                      );
-                                    infowindow.open(map, marker);
-                                }
-                            })(marker, i)); 
+            //                 google.maps.event.addListener(marker, 'click', (function (marker, i) {
+            //                     return function () {
+            //                         infowindow.setContent(
+            //                           ` <div class="row">
+            //                               <div class="col-6">
+            //                                 <dl>
+            //                                   <dt>Idpel</dt>
+            //                                   <dd>`+tagging.idpel+`</dd>
+            //                                   <dt>Nama</dt>
+            //                                   <dd>`+tagging.nama+`</dd>
+            //                                   <dt>Tgl Pemeriksaan</dt>
+            //                                   <dd>`+tagging.tgl_pemeriksaan+`</dd>
+            //                                   <dt>Tgl Input</dt>
+            //                                   <dd>`+tagging.tgl_input+`</dd>
+            //                                   <dt>Petugas</dt>
+            //                                   <dd>`+tagging.user_input+`</dd>
+            //                                   <dt>Koordinat</dt>
+            //                                   <dd>`+tagging.latitude+`, `+tagging.longitude+`</dd>
+            //                                 </dl>
+            //                               </div>
+            //                               <div class="col-6">
+            //                                 <img src="`+tagging.fotopath+`" width="300px" height="400px"/></dd>
+            //                               </div>
+            //                             </div>
+            //                           `
+            //                           );
+            //                         infowindow.open(map, marker);
+            //                     }
+            //                 })(marker, i)); 
 
-                            return marker;
-                          }
-                      });
+            //                 return marker;
+            //               }
+            //           });
 
-                      map.fitBounds(bounds);
-                      // Add a marker clusterer to manage the markers.
-                      // var markerCluster = new MarkerClusterer(map, markers, {
-                      //   imagePath:
-                      //     "https://developers.google.com/maps/documentation/javascript/examples/markerclusterer/m",
-                      //   maxZoom: 20,
-                      //   //averageCenter: true,
-                      // });
+            //           map.fitBounds(bounds);
+            //           // Add a marker clusterer to manage the markers.
+            //           // var markerCluster = new MarkerClusterer(map, markers, {
+            //           //   imagePath:
+            //           //     "https://developers.google.com/maps/documentation/javascript/examples/markerclusterer/m",
+            //           //   maxZoom: 20,
+            //           //   //averageCenter: true,
+            //           // });
 
-                      // google.maps.event.addListener(markerCluster, "click", function (c) {
-                      //   var html = "";
-                      //   html += ("<strong>Info Cluster: </strong> <span class='text-right'>("+moment().format('YYYY-MM-DD HH:mm:ss')+")</span><br/>");
-                      //   html += ("&mdash;Titik Tengah Cluster: " + c.getCenter()+"<br/>");
-                      //   html += ("&mdash;Jumlah Tagging: " + c.getSize()+"<br/>");
-                      //   var m = c.getMarkers();
-                      //   var p = [];
-                      //   for (var i = 0; i < m.length; i++) {
-                      //     p.push(m[i].getTitle());
-                      //   }
-                      //   if(m.length<100)
-                      //     log(html + "&mdash;Tagging pada Cluster: <br/>" + p.join("<br/> "));
-                      //   else
-                      //     log(html + '&mdash;Tagging pada Cluster: <br/>Tidak ditampilkan karena lebih dari 20 tagging')
-                      // });
+            //           // google.maps.event.addListener(markerCluster, "click", function (c) {
+            //           //   var html = "";
+            //           //   html += ("<strong>Info Cluster: </strong> <span class='text-right'>("+moment().format('YYYY-MM-DD HH:mm:ss')+")</span><br/>");
+            //           //   html += ("&mdash;Titik Tengah Cluster: " + c.getCenter()+"<br/>");
+            //           //   html += ("&mdash;Jumlah Tagging: " + c.getSize()+"<br/>");
+            //           //   var m = c.getMarkers();
+            //           //   var p = [];
+            //           //   for (var i = 0; i < m.length; i++) {
+            //           //     p.push(m[i].getTitle());
+            //           //   }
+            //           //   if(m.length<100)
+            //           //     log(html + "&mdash;Tagging pada Cluster: <br/>" + p.join("<br/> "));
+            //           //   else
+            //           //     log(html + '&mdash;Tagging pada Cluster: <br/>Tidak ditampilkan karena lebih dari 20 tagging')
+            //           // });
 
-                      // google.maps.event.addListener(markerCluster, "mouseover", function (c) {
-                      //   log("<strong>mouseover: </strong>");
-                      //   log("&mdash;Center of cluster: " + c.getCenter());
-                      //   log("&mdash;Number of managed markers in cluster: " + c.getSize());
-                      // });
-                      // google.maps.event.addListener(markerCluster, "mouseout", function (c) {
-                      //   log("<strong>mouseout: </strong>");
-                      //   log("&mdash;Center of cluster: " + c.getCenter());
-                      //   log("&mdash;Number of managed markers in cluster: " + c.getSize());
-                      // });
+            //           // google.maps.event.addListener(markerCluster, "mouseover", function (c) {
+            //           //   log("<strong>mouseover: </strong>");
+            //           //   log("&mdash;Center of cluster: " + c.getCenter());
+            //           //   log("&mdash;Number of managed markers in cluster: " + c.getSize());
+            //           // });
+            //           // google.maps.event.addListener(markerCluster, "mouseout", function (c) {
+            //           //   log("<strong>mouseout: </strong>");
+            //           //   log("&mdash;Center of cluster: " + c.getCenter());
+            //           //   log("&mdash;Number of managed markers in cluster: " + c.getSize());
+            //           // });
 
-                    }
+            //         }
 
-                    function log(h) {
-                      // document.getElementById("log").innerHTML += h + "<br />";
-                      $('#log').prepend(h+'<hr/>');
-                    }
+            //         function log(h) {
+            //           // document.getElementById("log").innerHTML += h + "<br />";
+            //           $('#log').prepend(h+'<hr/>');
+            //         }
 
-                    initMap();
+            //         initMap();
 
 
 
-                    // var red_house = "../../assets/images/markers/red/house.png";
-                    // var blue_house = "../../assets/images/markers/blue/house.png";
+            //         // var red_house = "../../assets/images/markers/red/house.png";
+            //         // var blue_house = "../../assets/images/markers/blue/house.png";
 
-                    // var markers = new Array(); 
+            //         // var markers = new Array(); 
 
-                    // $(data.rows).each(function(key, obj){
-                    //     // console.log('key', key);
-                    //     // console.log('obj', obj);
-                    //     markers.push(
-                    //         {
-                    //             title: obj.idpel+" ( "+obj.tgl_pemeriksaan+" ) ", 
-                    //             position:[obj.latitude, obj.longitude], 
-                    //             icon:red_house
-                    //         });
-                    // });
+            //         // $(data.rows).each(function(key, obj){
+            //         //     // console.log('key', key);
+            //         //     // console.log('obj', obj);
+            //         //     markers.push(
+            //         //         {
+            //         //             title: obj.idpel+" ( "+obj.tgl_pemeriksaan+" ) ", 
+            //         //             position:[obj.latitude, obj.longitude], 
+            //         //             icon:red_house
+            //         //         });
+            //         // });
 
-                    // console.log('markers', markers);
+            //         // console.log('markers', markers);
 
-                    // var map = $('#map')
-                    //   .gmap3({
-                    //     center: [-6.3487933,107.6809901],
-                    //     zoom:8
-                    //   });
+            //         // var map = $('#map')
+            //         //   .gmap3({
+            //         //     center: [-6.3487933,107.6809901],
+            //         //     zoom:8
+            //         //   });
 
-                    //   new MarkerClusterer(map, markers, {
-                    //     imagePath:
-                    //       "https://developers.google.com/maps/documentation/javascript/examples/markerclusterer/m",
-                    //   });
+            //         //   new MarkerClusterer(map, markers, {
+            //         //     imagePath:
+            //         //       "https://developers.google.com/maps/documentation/javascript/examples/markerclusterer/m",
+            //         //   });
 
-                      //.marker(markers)
-                      // .cluster({
-                      //   size: 500,
-                      //   markers: markers,
-                      //   cb: function (markers) {
-                      //     if (markers.length > 200) { // 1 marker stay unchanged (because cb returns nothing)
-                      //       if (markers.length < 6000) {
-                      //         return {
-                      //           content: "<div class='cluster cluster-1'>" + markers.length + "</div>",
-                      //           x: -26,
-                      //           y: -26
-                      //         };
-                      //       }
-                      //     }
-                      //   }
-                      // })
-                      // .wait(2000) // to let you appreciate the current zoom & center
-                      // .fit();
+            //           //.marker(markers)
+            //           // .cluster({
+            //           //   size: 500,
+            //           //   markers: markers,
+            //           //   cb: function (markers) {
+            //           //     if (markers.length > 200) { // 1 marker stay unchanged (because cb returns nothing)
+            //           //       if (markers.length < 6000) {
+            //           //         return {
+            //           //           content: "<div class='cluster cluster-1'>" + markers.length + "</div>",
+            //           //           x: -26,
+            //           //           y: -26
+            //           //         };
+            //           //       }
+            //           //     }
+            //           //   }
+            //           // })
+            //           // .wait(2000) // to let you appreciate the current zoom & center
+            //           // .fit();
 
-                    // var map = $('#map')
-                    //   .gmap3({
-                    //     address:"Bandung, Indonesia",
-                    //     zoom:14
-                    //   })
-                    //   .wait(2000) // to let you appreciate the current zoom & center
-                    //   .fit();
+            //         // var map = $('#map')
+            //         //   .gmap3({
+            //         //     address:"Bandung, Indonesia",
+            //         //     zoom:14
+            //         //   })
+            //         //   .wait(2000) // to let you appreciate the current zoom & center
+            //         //   .fit();
 
                       
-                    var mapTag = $("div#map");
-                    $('html,body').animate({scrollTop: mapTag.offset().top},'slow');
+            //         var mapTag = $("div#map");
+            //         $('html,body').animate({scrollTop: mapTag.offset().top},'slow');
 
-                  })
-                  .fail(function() {
-                    console.log( "error" );
-                  })
-                  .always(function() {
-                    $('div.content-body').unblock();
-                    console.log( "complete" );
-                  });
-              }
-            },
+            //       })
+            //       .fail(function() {
+            //         console.log( "error" );
+            //       })
+            //       .always(function() {
+            //         $('div.content-body').unblock();
+            //         console.log( "complete" );
+            //       });
+            //   }
+            // },
             { 
               text: '<i class="fa fa-file-text-o"></i>&nbsp;&nbsp;Export Semua', 
               titleAttr: 'Download CSV',
@@ -435,7 +446,7 @@ $(document).ready(function () {
                   // //this.disable(); // disable button
                   // console.log('dt', dt);
                   // console.log('node', node);
-                  window.open('../controller/pemeriksaan_lpb/expCSVPemeriksaanLPB.php?unitupi='+$('#sel_unitupi').val()+'&unitap='+$('#sel_unitap').val()+'&unitup='+$('#sel_unitup').val()+'&tgl_pemeriksaan_from='+$('#tgl_pemeriksaan_range').data('daterangepicker').startDate.format('YYYY-MM-DD')+'&tgl_pemeriksaan_to='+$('#tgl_pemeriksaan_range').data('daterangepicker').endDate.format('YYYY-MM-DD')+'&petugas='+$('#sel_petugas').val() );
+                  window.open('../controller/pemeriksaan_lpb/expCSVDetailRPPOnsite.php?unitupi='+$('#sel_unitupi').val()+'&unitap='+$('#sel_unitap').val()+'&unitup='+$('#sel_unitup').val()+'&petugas='+$('#sel_petugas').val()+'&rpp='+$('#sel_rpp').val()+'&status='+$('#sel_status').val() );
               }
 
             },
@@ -481,7 +492,7 @@ $(document).ready(function () {
         var container = $('#map').parent();
         $('#map').remove();
         container.append('<div id="map"></div>');
-        table.ajax.url( '../controller/pemeriksaan_lpb/getDataPemeriksaanLPB.php?unitupi='+$('#sel_unitupi').val()+'&unitap='+$('#sel_unitap').val()+'&unitup='+$('#sel_unitup').val()+'&tgl_pemeriksaan_from='+$('#tgl_pemeriksaan_range').data('daterangepicker').startDate.format('YYYY-MM-DD')+'&tgl_pemeriksaan_to='+$('#tgl_pemeriksaan_range').data('daterangepicker').endDate.format('YYYY-MM-DD')+'&petugas='+$('#sel_petugas').val() ).load();
+        table.ajax.url( '../controller/pemeriksaan_lpb/getDetailRPPOnsite.php?unitupi='+$('#sel_unitupi').val()+'&unitap='+$('#sel_unitap').val()+'&unitup='+$('#sel_unitup').val()+'&petugas='+$('#sel_petugas').val()+'&rpp='+$('#sel_rpp').val()+'&status='+$('#sel_status').val() ).load();
     });
 
 });

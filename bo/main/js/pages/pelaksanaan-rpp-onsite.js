@@ -64,31 +64,6 @@ $(document).ready(function () {
         }
     });
 
-
-    $('#sel_unitup').change(function(){
-
-      $('#sel_petugas').empty();
-      $.getJSON('../controller/referensi/getPetugasPriangan.php?unitup='+$('#sel_unitup').val(), function(data){
-          
-          $.each(data.rows,function(i,v){
-              $('#sel_petugas').append('<option value="'+v.kode+'">'+v.nama+'</option>');
-          });
-          //$('#sel_petugas').append('<option value="00">SEMUA PETUGAS</option>');
-          $('#sel_petugas').selectpicker('refresh');
-
-          if(urlParams.has('petugas')){
-            $('#sel_petugas').selectpicker('val', urlParams.get('petugas'));
-            console.log('petugas', urlParams.get('petugas'));
-          }
-          else{
-            $('#sel_petugas').selectpicker('val', "00");
-            console.log('semua petugas');
-          }
-
-          //$('#sel_rbm').selectpicker('refresh');
-        });
-    });
-
     function initMap(mapid, rows) {
 
       var container = $('#'+mapid).parent();
