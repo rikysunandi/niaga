@@ -153,8 +153,9 @@
             </li>
             <li><a class="has-arrow" href="javascript:void()" aria-expanded="false"><i class="mdi mdi-map"></i> <span class="nav-text">RPP Final</span></a>
                 <ul aria-expanded="false">
-                    <li><a href="pembentukan-rpp-final.php">Peta Pembentukan RPP</a></li>
+                    <li><a href="rekap-rpp-final.php">Rekap RPP Final</a></li>
                     <li><a href="urut-langkah-rpp-final.php">Pembentukan Urut Langkah RPP</a></li>
+                    <li><a href="pembentukan-rpp-final.php">Peta Pembentukan RPP</a></li>
                     <!-- <li><a href="rekap-rpp-up-final.php">Rekap RPP per ULP</a></li> -->
                 </ul>
             </li>

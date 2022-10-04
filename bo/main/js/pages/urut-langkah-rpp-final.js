@@ -12,6 +12,8 @@ $(document).ready(function () {
     var deleted = new Array();
     var start, end;
     var stop_simulasi = false;
+    var first = true;
+    var stop = new Array();
 
     $('#btn_generate').prop('disabled', true);
     $('#btn_simulasi').prop('disabled', true);
@@ -25,7 +27,8 @@ $(document).ready(function () {
 
         if($('#sel_unitup').val()!=null){
             $('#sel_petugas').empty();
-            $.getJSON('../controller/referensi/getUserPriangan.php?unitup='+$('#sel_unitup').val(), function(data){
+            $('#sel_rpp').empty();
+            $.getJSON('../controller/referensi/getPetugasFinal.php?unitup='+$('#sel_unitup').val(), function(data){
               
                 $.each(data.rows,function(i,v){
                   $('#sel_petugas').append('<option value="'+v.kode+'">'+v.nama+'</option>');
@@ -36,11 +39,13 @@ $(document).ready(function () {
 
                 $('#sel_petugas').selectpicker('refresh');
 
-                if(urlParams.has('petugas')){
+                if(first && urlParams.has('petugas')){
                     $('#sel_petugas').selectpicker('val', urlParams.get('petugas'));
+                    //first=false;
                 }
                 else{
                     $('#sel_petugas').selectpicker('val', "00");
+                    $('#sel_rpp').selectpicker('refresh');
                     //console.log('semua petugas');
                 }
 
@@ -64,8 +69,9 @@ $(document).ready(function () {
                   
                 $('#sel_rpp').selectpicker('refresh');
 
-                if(urlParams.has('rpp')){
+                if(first && urlParams.has('rpp')){
                     $('#sel_rpp').selectpicker('val', urlParams.get('rpp'));
+                    first = false;
                     //console.log('rpp', urlParams.get('rpp'));
 
                     setTimeout(function(){ $('#btn_cari').trigger('click'); }, 500);
