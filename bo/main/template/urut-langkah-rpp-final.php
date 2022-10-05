@@ -150,16 +150,17 @@
                                     <div id="map"></div>
                                 </div>
                             </div>
+
                             <div class="card-footer text-muted">
                                 
-                                <div class="row mb-3">
+                                <!-- <div class="row mb-3">
                                     <div class="align-middle d-inline col-9">
                                         <span class="fa fa-info-circle"></span> Urut Langkah <span id="total_plg" class="text-primary"></span>: dari <span id="plg_start" class="text-success">Pelanggan X</span> ke <span id="plg_end" class="text-success">Pelanggan Y</span>
                                         <div id="jml_plg_dihapus"></div>
                                         <div id="plg_dipilih"></div>
                                         <div id="info_tagging"></div>
                                     </div>
-                                </div>
+                                </div> -->
 
                                 <div class="row">
                                     <!-- <div class="align-middle d-inline col-6">
@@ -168,19 +169,25 @@
                                         <div id="plg_dipilih"></div>
                                         <div id="info_tagging"></div>
                                     </div> -->
-                                    <div class="col-6">
+                                   <!--  <div class="col-6">
                                         <div class="input-group">
                                           <input id="input_param" type="text" class="form-control" placeholder="No Urut / Idpel" aria-label="No Urut / Idpel" aria-describedby="basic-addon2">
                                           <div class="input-group-append">
                                             <button id="btn_cari_param" class="btn btn-primary waves-effect waves-light btn-sm pull-right mr-2" type="button">Cari</button>
                                           </div>
                                         </div>
+                                    </div> -->
+                                    <div class="align-middle d-inline col-6">
+                                        <span class="fa fa-info-circle"></span> Urut Langkah <span id="total_plg" class="text-primary"></span>: dari <span id="plg_start" class="text-success">Pelanggan X</span> ke <span id="plg_end" class="text-success">Pelanggan Y</span>
+                                        <div id="jml_plg_dihapus"></div>
+                                        <div id="plg_dipilih"></div>
+                                        <div id="info_tagging"></div>
                                     </div>
                                     <div class="col-6">
                                         <div class="input-group">
-                                            <button id="btn_create" class="btn btn-primary waves-effect waves-light btn-sm pull-right mr-2">Simpan <span class="btn-icon-right"><i class="fa fa-check-circle"></i></span></button>
-                                            <button id="btn_simulasi" class="btn btn-secondary waves-effect waves-light btn-sm pull-right mr-2">Simulasikan <span class="btn-icon-right"><i class="fa fa-gears"></i></span></button>
                                             <button id="btn_generate" class="btn btn-secondary waves-effect waves-light btn-sm pull-right mr-2">Generate <span class="btn-icon-right"><i class="fa fa-gear"></i></span></button>
+                                            <button id="btn_simulasi" class="btn btn-secondary waves-effect waves-light btn-sm pull-right mr-2">Simulasikan <span class="btn-icon-right"><i class="fa fa-gears"></i></span></button>
+                                            <button id="btn_create" class="btn btn-primary waves-effect waves-light btn-sm pull-right mr-2">Simpan <span class="btn-icon-right"><i class="fa fa-check-circle"></i></span></button>
                                         </div>
                                     </div>
                                 </div>
@@ -266,7 +273,7 @@
     <script src="https://cdnjs.cloudflare.com/ajax/libs/bootbox.js/5.5.2/bootbox.min.js" integrity="sha512-RdSPYh1WA6BF0RhpisYJVYkOyTzK4HwofJ3Q7ivt/jkpW6Vc8AurL1R+4AUcvn9IwEKAPm/fk7qFZW3OuiUDeg==" crossorigin="anonymous" referrerpolicy="no-referrer"></script>
 
     <script src="../js/pages/apps.js"></script>
-    <script src="../js/pages/urut-langkah-rpp-final.js?time=24"></script>
+    <script src="../js/pages/urut-langkah-rpp-final.js?time=26"></script>
 
 </body>
 </html>
