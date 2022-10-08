@@ -964,6 +964,40 @@ $(document).ready(function () {
 
     });
 
+    $('.card-map .card-footer :checkbox').each(function(c){
+      this.checked=true;
+    });
+
+    $('#card_map_on_desk .card-footer :checkbox').click(function(e){
+        //console.log('klik checkbox',$(this).next('label').text());
+        //var status=$(this).next('label').text().toUpperCase();
+        var status=$(this).val();
+        var checked=this.checked;
+        $('div#card_map_on_desk').block({ message: 'Menyesuaikan peta...' });
+        asyncForEach(markers_on_desk, function(marker) {
+            if(marker.status==status){
+              marker.setVisible(checked);
+            }
+        },function() {
+            $('div#card_map_on_desk').unblock();
+        });
+    });
+
+    
+    $('#card_map_on_site .card-footer :checkbox').click(function(e){
+        //console.log('klik checkbox',$(this).next('label').text());
+        //var status=$(this).next('label').text().toUpperCase();
+        var status=$(this).val();
+        var checked=this.checked;
+        $('div#card_map_on_site').block({ message: 'Menyesuaikan peta...' });
+        asyncForEach(markers_on_site, function(marker) {
+            if(marker.status==status){
+              marker.setVisible(checked);
+            }
+        },function() {
+            $('div#card_map_on_site').unblock();
+        });
+    });
 
     function asyncForEach(arr, cb, done) {
       (function next(i) {
@@ -977,6 +1011,5 @@ $(document).ready(function () {
           cb(arr[i], i++, arr);
       })(0);
     }
-
 
 });

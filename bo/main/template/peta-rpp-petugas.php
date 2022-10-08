@@ -194,15 +194,10 @@
                                 </div>
                             </div>
                             <div class="card-footer text-muted d-none">
-                                <div class="row">
-                                    <div class="align-middle d-inline col-6">
-                                        <span class="fa fa-info-circle"></span> Urut Langkah <span id="total_plg" class="text-primary"></span>: dari <span id="plg_start" class="text-success">Pelanggan X</span> ke <span id="plg_end" class="text-success">Pelanggan Y</span>
-                                        <div id="plg_dipilih"></div>
-                                    </div>
-                                    <div class="col-6">
-                                        <button id="btn_create" class="btn btn-primary waves-effect waves-light btn-sm pull-right mr-2">Simpan <span class="btn-icon-right"><i class="fa fa-check-circle"></i></span></button>
-                                        <button id="btn_simulasi" class="btn btn-secondary waves-effect waves-light btn-sm pull-right mr-2">Simulasikan <span class="btn-icon-right"><i class="fa fa-gears"></i></span></button>
-                                        <button id="btn_generate" class="btn btn-secondary waves-effect waves-light btn-sm pull-right mr-2">Generate <span class="btn-icon-right"><i class="fa fa-gear"></i></span></button>
+                                <div class="row ml-4">
+                                    <div class="form-check col-6">
+                                        <input class="form-check-input" type="checkbox" class="filled-in chk-col-primary" id="cb_onsite" value="ONSITE" checked>
+                                        <label class="form-check-label" for="cb_onsite" style="color:green">Onsite</label>
                                     </div>
                                 </div>
                             </div>
