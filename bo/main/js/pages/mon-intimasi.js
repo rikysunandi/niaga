@@ -101,6 +101,14 @@ $(document).ready(function () {
             visible: true
           },
           {
+            data: "PIC",
+            visible: true
+          },
+          {
+            data: "STATUS_LALU",
+            visible: true
+          },
+          {
             data: "TGL_INTIMASI",
             visible: true,
             render: $.fn.dataTable.render.moment( 'YYYY-MM-DD HH:mm:ss.SSS', 'YYYY-MM-DD HH:mm' )
@@ -285,7 +293,7 @@ $(document).ready(function () {
         "paging": true,
         lengthMenu: [[25, 100, -1], [25, 100, "All"]],
         pageLength: 100,
-        "order": [[3, 'asc']],
+        "order": [[5, 'asc']],
     });
 
     $('#tbl_mon_intimasi').on('click', 'td a.foto', function (e) {

@@ -105,7 +105,6 @@
                                                     <option value="KOLEKTIF">KOLEKTIF</option>
                                                     <option value="JANJI BAYAR">JANJI BAYAR</option>
                                                     <option value="RUMAH KOSONG">RUMAH KOSONG</option>
-                                                    <option value="KOLEKTIF">KOLEKTIF</option>
                                                     <option value="TIDAK KOOPERATIF">TIDAK KOOPERATIF</option>
                                                     <option value="NOT_LUNAS_BY_SYSTEM">SELAIN LUNAS BY SYSTEM</option>
                                                 </select>
@@ -189,6 +188,8 @@
                                             <th class="text-center bg-primary-lighten-2">UNITAP</th>
                                             <th class="text-center bg-primary-lighten-2">UNITUP</th>
                                             <th class="text-center bg-primary-lighten-2">IDPEL</th>
+                                            <th class="text-center bg-primary-lighten-2">PIC</th>
+                                            <th class="text-center bg-primary-lighten-2">STATUS</th>
                                             <th class="text-center bg-primary-lighten-2">TGL <br/>INTIMASI</th>
                                             <th class="text-center bg-primary-lighten-2">KET</th>
                                             <th class="text-center bg-primary-lighten-2">TGL <br/>JANJI</th>
@@ -272,7 +273,7 @@
     <script src="../../assets/plugins/bootstrap-daterangepicker/daterangepicker.js"></script>
     <script src="../../assets/plugins/viewer/viewer.js"></script>
 
-    <script src="https://maps.googleapis.com/maps/api/js?key=AIzaSyD0TuTeVzIMdevT3Rfc0BrVDKy466Tdsnc"></script>
+    <script src="https://maps.googleapis.com/maps/api/js?key=AIzaSyCmTOVYVndxhvTkvCx8eBYBadsM1iYQrv8"></script>
     
     <!-- <script src="https://cdn.jsdelivr.net/gmap3/7.2.0/gmap3.min.js"></script> -->
     <!-- <script src="https://unpkg.com/@googlemaps/markerclustererplus/dist/index.min.js"></script> -->
@@ -280,6 +281,6 @@
     <script src="../../assets/plugins/block-ui/jquery.blockUI.js"></script>
 
     <script src="../js/pages/apps.js"></script>
-    <script src="../js/pages/mon-intimasi.js?time=2"></script>
+    <script src="../js/pages/mon-intimasi.js?time=3"></script>
 </body>
 </html>

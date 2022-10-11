@@ -35,17 +35,17 @@ if(!sqlsrv_execute($stmt)){
     die(print_r( sqlsrv_errors(), true));
 }else{
 
-    $sql = "select BLTH, UNITUPI, UNITAP, UNITUP, IDPEL, CONVERT(VARCHAR, TGL_INTIMASI, 120), KET, CONVERT(VARCHAR, TGL_JANJI, 120), NOHP, EMAIL, PAHAM, PUTUS, LATITUDE, LONGITUDE, USER_APP from vw_Create_Data_Intimasi_".$user." Order by TGL_INTIMASI DESC ";
+    $sql = "select BLTH, UNITUPI, UNITAP, UNITUP, IDPEL, PIC, STATUS_LALU, CONVERT(VARCHAR, TGL_INTIMASI, 120), KET, CONVERT(VARCHAR, TGL_JANJI, 120), NOHP, EMAIL, PAHAM, PUTUS, LATITUDE, LONGITUDE, USER_APP from vw_Create_Data_Intimasi_".$user." Order by TGL_INTIMASI DESC ";
     $stmt = sqlsrv_prepare($conn, $sql);
 
     if(!sqlsrv_execute($stmt)){
         die(print_r( sqlsrv_errors(), true));
     }else{
         header('Content-Type: text/csv');
-        header('Content-Disposition: attachment; filename="INTIMASI_'.$unitap.'_'.$unitup.'_'.date('Ymdhis').'.csv"');
+        header('Content-Disposition: attachment; filename="DETAIL_INTIMASI_'.$unitap.'_'.$unitup.'_'.date('Ymdhis').'.csv"');
 
         $fp = fopen('php://output', 'wb');
-        $columns = array("BLTH", "UNITUPI", "UNITAP", "UNITUP", "IDPEL", "TGL_INTIMASI", "KET", "TGL_JANJI", "NOHP", "EMAIL", "PAHAM", "PUTUS", "LATITUDE", "LONGITUDE", "USER");
+        $columns = array("BLTH", "UNITUPI", "UNITAP", "UNITUP", "IDPEL", "PIC", "STATUS", "TGL_INTIMASI", "KET", "TGL_JANJI", "NOHP", "EMAIL", "PAHAM", "PUTUS", "LATITUDE", "LONGITUDE", "USER");
         fputcsv($fp, $columns, chr(9));
         while( $row = sqlsrv_fetch_array( $stmt, SQLSRV_FETCH_NUMERIC) ) {
             fputcsv($fp, $row, chr(9));

@@ -65,6 +65,10 @@ $columns = array(
     array( 'db' => 'USER_APP', 'dt' => 'USER_APP' ),
     array( 'db' => 'TGL', 'dt' => 'TGL' ),
     array( 'db' => 'FOTOPATH', 'dt' => 'FOTOPATH' ),
+    // array( 'db' => 'TARIF', 'dt' => 'TARIF' ),
+    // array( 'db' => 'DAYA', 'dt' => 'DAYA' ),
+    array( 'db' => 'PIC', 'dt' => 'PIC' ),
+    array( 'db' => 'STATUS_LALU', 'dt' => 'STATUS_LALU' ),
 );
  
 // SQL server connection information
