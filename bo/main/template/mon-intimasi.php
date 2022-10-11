@@ -281,6 +281,6 @@
     <script src="../../assets/plugins/block-ui/jquery.blockUI.js"></script>
 
     <script src="../js/pages/apps.js"></script>
-    <script src="../js/pages/mon-intimasi.js?time=3"></script>
+    <script src="../js/pages/mon-intimasi.js?time=4"></script>
 </body>
 </html>
