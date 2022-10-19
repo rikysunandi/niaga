@@ -6,14 +6,13 @@ require_once '../../bo/config/database.php';
 ini_set('max_execution_time', 60);
 set_time_limit(60);
 
-$nama = isset($_GET['nama'])?$_GET['nama']:'FULAN';
-$umur = isset($_GET['umur'])?$_GET['umur']:30;
+$id = isset($_GET['id'])?$_GET['id']:'53671*****';
 $user = 'SYSTEM';
 
 $response = array();
 
 $response['success'] = true;
-$response['msg'] = 'HALLO '.$nama.'! anda berusia '.$umur.' tahun';
+$response['msg'] = '#PADAMKAN#'.$id.'#';
 
 
 header('Content-Type: application/json; charset=utf-8');
