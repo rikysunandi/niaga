@@ -18,18 +18,18 @@
     <div class="container-fluid">
         <div class="row no-gutter">
             <!-- The image half -->
-            <div class="col-md-6 d-none d-md-flex bg-image"></div>
+            <div class="col-md-8 d-none d-md-flex bg-image"></div>
 
 
             <!-- The content half -->
-            <div class="col-md-6 bg-light">
+            <div class="col-md-4 bg-light">
                 <div class="login d-flex align-items-center py-5">
 
                     <div class="container">
                         <div class="row">
-                            <div class="col-lg-10 col-xl-7 mx-auto">
-                                <h3 class="display-4">Back Office</h3>
-                                <p class="text-muted mb-4">Back Office untuk memantau beberapa kegiatan Probis Niaga</p>
+                            <div class="col-lg-9 col-xl-9 mx-auto">
+                                <h3 class="display-5">ROC (Report Online Commerce)</h3>
+                                <p class="text-muted mb-4">Back Office untuk memantau dan mengelola hasil pekerjaan pendukung pada Bidang Niaga dan Manajemen Pelanggan</p>
                                 <form>
                                     <div class="form-group mb-3">
                                         <input id="xusername" type="text" placeholder="Username" required="" autofocus="" class="form-control rounded-pill border-0 shadow-sm px-4">
@@ -56,7 +56,7 @@
     <script src="../../assets/plugins/common/common.min.js"></script>
     <script src="../../assets/plugins/block-ui/jquery.blockUI.js"></script>
     <script src="../../assets/plugins/moment/moment.min.js"></script>
-    <script src="../js/pages/login.js"></script>
+    <script src="../js/pages/login.js?time=1"></script>
 
 </body>
 

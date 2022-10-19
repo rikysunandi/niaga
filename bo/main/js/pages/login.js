@@ -13,11 +13,13 @@ $(function() {
             $.ajax
             ({
                 type:'post',
-                url:'../controller/login.php',
+                url:'../controller/auth.php',
                 data:{
                     do_login: sha256( moment().format('YYYYMMDDHH') ),
                     date: moment().format('YYYYMMDDHH'),
-                    access: access
+                    access: access,
+                    username: username,
+                    password: password,
                 },
                 success:function(response) {
                     $('div.login').parent().unblock();

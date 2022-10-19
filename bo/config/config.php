@@ -9,11 +9,25 @@ ini_set('post_max_size', '15M');
 ini_set('allow_call_time_pass_reference', 'On');
 
 // Development setting
-ini_set('error_reporting', 'E_ERROR | E_PARSE');
+ini_set('error_reporting', 'E_ALL');
 ini_set('display_errors', 'On');
 ini_set('session.gc_maxlifetime', 8*60*60);
-error_reporting(E_ERROR | E_PARSE);
+error_reporting(E_ALL);
 
+//LDAP Pusat
+$AD_Server     = "10.1.8.20";
+//$AD_Server     = "10.1.8.22";
+//$AD_Server     = "10.1.8.190";
+//$AD_Server     = '10.2.1.52';
+
+$AD_DomainName = 'DC=pusat,DC=corp,DC=pln,DC=co,DC=id';           // Domain DN
+$AD_UsnPostfix = '@pusat.corp.pln.co.id';                         // username with read access
+//$AD_DomainName = 'DC=jabar,DC=corp,DC=pln,DC=co,DC=id';
+//$AD_UsnPostfix = '@jabar.corp.pln.co.id';
+
+$ldapconn = ldap_connect($AD_Server);
+ldap_set_option($ldapconn, LDAP_OPT_PROTOCOL_VERSION, 3);
+ldap_set_option($ldapconn, LDAP_OPT_REFERRALS, 0);
 
 FUNCTION format_unit($unit) {
     // strip any commas 
