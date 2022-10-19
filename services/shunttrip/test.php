@@ -12,11 +12,11 @@ $user = 'SYSTEM';
 $response = array();
 
 $response['success'] = true;
-$response['msg'] = '#PADAMKAN#'.$id.'#';
+$msg = '#PADAMKAN#'.$id.'#';
 
 
-header('Content-Type: application/json; charset=utf-8');
-echo json_encode(utf8ize($response));
+//header('Content-Type: application/json; charset=utf-8');
+echo (utf8ize($msg));
 
 fastcgi_finish_request();
 
