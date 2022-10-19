@@ -9,10 +9,10 @@ ini_set('post_max_size', '15M');
 ini_set('allow_call_time_pass_reference', 'On');
 
 // Development setting
-ini_set('error_reporting', 'E_ALL');
+ini_set('error_reporting', 'E_ERROR | E_PARSE');
 ini_set('display_errors', 'On');
 ini_set('session.gc_maxlifetime', 8*60*60);
-error_reporting(E_ALL);
+error_reporting(E_ERROR | E_PARSE);
 
 
 FUNCTION format_unit($unit) {
