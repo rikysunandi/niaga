@@ -2,7 +2,8 @@
 (function($) {
     "use strict"
     
-    
+    window.location.href = "system_maintenance.php";
+
     new quixSettings({
         version: "light", //2 options "light" and "dark"
         layout: "vertical", //2 options, "vertical" and "horizontal"

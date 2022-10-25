@@ -1,6 +1,9 @@
 $(function() {
     "use strict";
 
+
+window.location.href = "system_maintenance.php";
+
     var chart_dapot_daya, chart_dapot_daya_unit, chart_dapot_bp, chart_dapot_bp_unit, 
         chart_dapot_rab, chart_dapot_rab_unit, chart_cluster, chart_cluster_unit, chart_jenis, chart_jenis_unit, 
         chart_tmp, chart_tmp_unit, chart_alasan, chart_alasan_unit;
