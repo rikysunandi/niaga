@@ -70,6 +70,7 @@
                 <div class="card forms-card">
                     <div class="card-body">
                     <!-- <h4 class="card-title mb-4">Pemeliharaan</h4> -->
+                        <h4 class="text-info text-center">Saat ini aplikasi ROC hanya bisa diakses melalui alamat intranet di <a href="http://10.2.1.58/niaga">sini</a></h4>
                         <img src="../../assets/images/maintenance.svg" style="width:100%;" />
                     </div>
                 </div>
