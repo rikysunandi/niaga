@@ -13,7 +13,13 @@ ini_set('error_reporting', 'E_ERROR | E_PARSE');
 ini_set('display_errors', 'On');
 ini_set('session.gc_maxlifetime', 8*60*60);
 error_reporting(E_ERROR | E_PARSE);
+//Set the session timeout for 2 seconds
 
+// $timeout = (15*60);
+// //Set the maxlifetime of the session
+// ini_set( "session.gc_maxlifetime", $timeout );
+// //Set the cookie lifetime of the session
+// ini_set( "session.cookie_lifetime", $timeout );
 
 FUNCTION format_unit($unit) {
     // strip any commas 
@@ -48,17 +54,17 @@ FUNCTION format_cash($cash) {
  
     // filter and format it 
     IF($cash>1000000000000){ 
-		RETURN ROUND(($cash/1000000000000),1).' T';
+        RETURN ROUND(($cash/1000000000000),1).' T';
     }ELSEIF($cash>1000000000){ 
-		RETURN ROUND(($cash/1000000000),1).' M';
+        RETURN ROUND(($cash/1000000000),1).' M';
     }ELSEIF($cash>1000000){ 
-		RETURN ROUND(($cash/1000000),1).' Jt';
+        RETURN ROUND(($cash/1000000),1).' Jt';
     }ELSEIF($cash>1000){ 
         RETURN ROUND(($cash/1000),0).' Rb';
     }
  //    ELSEIF($cash>1000){ 
-	// 	RETURN ROUND(($cash/1000),2).' thousand';
-	// }
+    //  RETURN ROUND(($cash/1000),2).' thousand';
+    // }
  
     RETURN NUMBER_FORMAT($cash);
 }
