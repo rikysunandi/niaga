@@ -4,6 +4,7 @@
 ini_set('error_reporting', 'E_ALL');
 ini_set('display_errors', 'On');
 //LDAP Pusat
+	echo 'test LDAP<br/>';
 $AD_Server     = "10.1.8.20";
 //$AD_Server     = "10.1.8.22";
 //$AD_Server     = "10.1.8.190";
