@@ -13508,7 +13508,7 @@ button {
     position: relative;
 }
 .photo-content .cover-photo {
-    background: url(../../assets/images/profile/cover.jpg);
+    background: url(../../assets/images/bg.jpg);
     background-size: cover;
     background-position: center;
     min-height: 25rem;

@@ -11,11 +11,14 @@
 }
 
 .bg-image {
-  background-image: url('https://images.unsplash.com/photo-1610028290816-5d937a395a49?ixid=MnwxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8&ixlib=rb-1.2.1&auto=format&fit=crop&w=1502&q=80');
+  background-image: url('../../assets/images/bg.jpg');
   background-size: cover;
   background-position: center center;
 }
 
+.bg-transparent2 {
+    background-color: rgba(255, 255, 255, 0.8);
+}
 
 .btn-primary {
     background-color: #00838f;

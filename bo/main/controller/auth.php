@@ -12,35 +12,103 @@ $password = ($_POST['password']);
 $response = array();
 
 
-//LDAP Pusat
-$AD_Server     = "10.1.8.20";
-//$AD_Server     = "10.1.8.22";
-//$AD_Server     = "10.1.8.190";
-//$AD_Server     = '10.2.1.52';
+$stmt = sqlsrv_query($conn, "select TOP 1 * from m_user where username='$username' order by NAMA");
+if($stmt){
+    $row = sqlsrv_fetch_array( $stmt, SQLSRV_FETCH_ASSOC);
+    $userid = $row['userid']; 
+    $unitupi = $row['unitupi']; 
+    $unitap = $row['unitap']; 
+    $unitup = $row['unitup']; 
+    $nama = $row['nama']; 
+    $keterangan = $row['keterangan']; 
+    $email = $row['email']; 
+    $nohp = $row['nohp']; 
+    $avatar = $row['avatar']; 
+    $hashpassword = $row['password']; 
+    $active_directory = $row['active_directory']; 
 
-$AD_DomainName = 'DC=pusat,DC=corp,DC=pln,DC=co,DC=id';           // Domain DN
-$AD_UsnPostfix = '@pusat.corp.pln.co.id';                         // username with read access
-//$AD_DomainName = 'DC=jabar,DC=corp,DC=pln,DC=co,DC=id';
-//$AD_UsnPostfix = '@jabar.corp.pln.co.id';
+    if($active_directory=='Y'){
+        $AD_Server     = "10.1.8.20";
+        $AD_DomainName = 'DC=pusat,DC=corp,DC=pln,DC=co,DC=id';           // Domain DN
+        $AD_UsnPostfix = '@pusat.corp.pln.co.id';                  
+        $ldapconn = ldap_connect($AD_Server);
+        ldap_set_option($ldapconn, LDAP_OPT_PROTOCOL_VERSION, 3);
+        ldap_set_option($ldapconn, LDAP_OPT_REFERRALS, 0);
 
-$ldapconn = ldap_connect($AD_Server);
-ldap_set_option($ldapconn, LDAP_OPT_PROTOCOL_VERSION, 3);
-ldap_set_option($ldapconn, LDAP_OPT_REFERRALS, 0);
+        if ($ldapconn) 
+        {
+            $ldapbind = ldap_bind($ldapconn, $username, $password);
+            if ($ldapbind) 
+            {
+                $response['success'] = true;
+                $response['msg'] = "Login Active Directory berhasil";
+                
+                $timeout = (15*60);
+                //Set the maxlifetime of the session
+                ini_set( "session.gc_maxlifetime", $timeout );
+                //Set the cookie lifetime of the session
+                ini_set( "session.cookie_lifetime", $timeout );
+                session_start();
+                $_SESSION['userid'] = $userid;
+                $_SESSION['username'] = $username;
+                $_SESSION['unitupi'] = $unitupi;
+                $_SESSION['unitap'] = $unitap;
+                $_SESSION['unitup'] = $unitup;
+                $_SESSION['nama'] = $nama;
+                $_SESSION['keterangan'] = $keterangan;
+                $_SESSION['email'] = $email;
+                $_SESSION['nohp'] = $nohp;
+                $_SESSION['avatar'] = $avatar;
+                $_SESSION['active_directory'] = $active_directory;
+            }
+            else 
+            {
+                $response['success'] = false;
+                $response['msg'] = "Login gagal, silahkan masukan password email anda dengan benar";
+            }
+        }else 
+        {
+            $response['success'] = false;
+            $response['msg'] = "Gagal melakukan koneksi ke Server Email";
+        }
 
-if ($ldapconn) 
-{
-    $ldapbind = ldap_bind($ldapconn, $username, $password);
-    if ($ldapbind) 
-    {
-        $response['success'] = true;
-		$response['msg'] = "LDAP bind successful...";
+    }else{
+
+        if(password_verify($password, $hashpassword)){
+            $response['success'] = true;
+            $response['msg'] = "Login berhasil";
+            
+            $timeout = (15*60);
+            //Set the maxlifetime of the session
+            ini_set( "session.gc_maxlifetime", $timeout );
+            //Set the cookie lifetime of the session
+            ini_set( "session.cookie_lifetime", $timeout );
+            session_start();
+            $_SESSION['userid'] = $userid;
+            $_SESSION['username'] = $username;
+            $_SESSION['unitupi'] = $unitupi;
+            $_SESSION['unitap'] = $unitap;
+            $_SESSION['unitup'] = $unitup;
+            $_SESSION['nama'] = $nama;
+            $_SESSION['keterangan'] = $keterangan;
+            $_SESSION['email'] = $email;
+            $_SESSION['nohp'] = $nohp;
+            $_SESSION['avatar'] = $avatar;
+            $_SESSION['active_directory'] = $active_directory;
+        }
+        else 
+        {
+            $response['success'] = false;
+            $response['msg'] = "Login gagal, silahkan masukan password anda dengan benar";
+        }
     }
-    else 
-    {
-        $response['success'] = false;
-        $response['msg'] = "LDAP bind failed...";
-    }
+
+}else{
+    $response['success'] = false;
+    $response['msg'] = 'Gagal mengambil data User';
 }
+
+
 // $Result = ldap_search($ldapconn, AD_DomainName, "(samaccountname=$username)", array("dn"));
 // $data = ldap_get_entries($ldapconn, $Result);
 

@@ -1,13 +1,22 @@
 <?php
 
+session_start();
 require_once '../../../config/config.php';
 require_once '../../../config/database.php';
 
-
-$response = array();
 $unitap = $_GET['unitap'];
+$show_all = isset($_GET['show_all'])? $_GET['show_all']:'T';
+$unitup=$_SESSION['unitup'];
+$response = array();
 
-$stmt = sqlsrv_query($conn, "select * from m_unitup where unitap='$unitap' order by NAMA");
+if($show_all=='Y')
+	$stmt = sqlsrv_query($conn, "select * from m_unitup where unitap='$unitap' order by NAMA");
+else{
+	if($unitup!='')
+		$stmt = sqlsrv_query($conn, "select * from m_unitup where unitap='$unitap' and unitup='$unitup' order by NAMA");
+	else
+		$stmt = sqlsrv_query($conn, "select * from m_unitup where unitap='$unitap' order by NAMA");
+}
 if($stmt){
 	$i=0;
 	while( $row = sqlsrv_fetch_array( $stmt, SQLSRV_FETCH_ASSOC) ) {

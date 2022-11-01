@@ -190,13 +190,13 @@ $(document).ready(function () {
             data: "PERSEN_HARI",
             type: 'number',
             visible: true,
-            "sClass" : "text-right" , render: $.fn.dataTable.render.number(".", ",", 0, '')
+            "sClass" : "text-right" , render: $.fn.dataTable.render.number(".", ",", 2, '')
           },
           {
             data: "PERSEN_BULAN",
             type: 'number',
             visible: true,
-            "sClass" : "text-right" , render: $.fn.dataTable.render.number(".", ",", 0, '')
+            "sClass" : "text-right" , render: $.fn.dataTable.render.number(".", ",", 2, '')
           },
           {
             data: "WAKTU_UPDATE",
@@ -230,7 +230,7 @@ $(document).ready(function () {
         "paging": false,
         lengthMenu: [[25, 100, -1], [25, 100, "All"]],
         pageLength: 100,
-        "order": [[0, 'asc']],
+        "order": [[20, 'desc'],[22, 'asc'],[21, 'asc']],
         footerCallback: function ( row, data, start, end, display ) {
           var api = this.api();
           //console.log('footerCallback', api);
@@ -386,13 +386,13 @@ $(document).ready(function () {
             data: "PERSEN_HARI",
             type: 'number',
             visible: true,
-            "sClass" : "text-right" , render: $.fn.dataTable.render.number(".", ",", 0, '')
+            "sClass" : "text-right" , render: $.fn.dataTable.render.number(".", ",", 2, '')
           },
           {
             data: "PERSEN_BULAN",
             type: 'number',
             visible: true,
-            "sClass" : "text-right" , render: $.fn.dataTable.render.number(".", ",", 0, '')
+            "sClass" : "text-right" , render: $.fn.dataTable.render.number(".", ",", 2, '')
           },
           {
             data: "WAKTU_UPDATE",
@@ -426,7 +426,7 @@ $(document).ready(function () {
         "paging": false,
         lengthMenu: [[25, 100, -1], [25, 100, "All"]],
         pageLength: 100,
-        "order": [[0, 'asc']],
+        "order": [[20, 'desc'],[22, 'asc'],[21, 'asc']],
         footerCallback: function ( row, data, start, end, display ) {
           var api = this.api();
           //console.log('footerCallback', api);

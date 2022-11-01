@@ -1,9 +1,7 @@
-<?php
+<?php // session_start(); 
 
-// header("Location: system_maintenance.php");
-// exit();
-
-?>    <!--**********************************
+?>    
+        <!--**********************************
             Nav header start
         ***********************************-->
         <div class="nav-header">
@@ -46,7 +44,7 @@
                 </div>
                 <div class="header-right">
                     <ul>
-                        <li class="icons">
+                        <!-- <li class="icons">
                             <a href="javascript:void(0)">
                                 <i class="mdi mdi-comment"></i>
                                 <div class="pulse-css"></div>
@@ -58,7 +56,7 @@
                                     <div class="clearfix"></div>
                                 </div>
                                 <div class="dropdown-content-body">
-                                    <!-- <ul>
+                                    <ul>
                                         <li class="notification-unread">
                                             <a href="javascript:void()">
                                                 <img class="pull-left mr-3 avatar-img" src="../../assets/images/avatar/1.jpg" alt="">
@@ -95,7 +93,7 @@
                                                 </div>
                                             </a><span class="notify-close"><i class="ti-close"></i></span>
                                         </li>
-                                    </ul> -->
+                                    </ul>
                                 </div>
                             </div>
                         </li>
@@ -106,7 +104,7 @@
                             </a>
                             <div class="drop-down animated bounceInDown dropdown-notfication">
                                 <div class="dropdown-content-body">
-                                    <!-- <ul>
+                                    <ul>
                                         <li>
                                             <a href="javascript:void()">
                                                 <span class="mr-3 avatar-icon bg-success-lighten-2"><i class="fa fa-check"></i></span>
@@ -133,18 +131,18 @@
                                         </li>
                                         <li class="text-left"><a href="javascript:void()" class="more-link">Show All Notifications</a>  <span class="pull-right"><i class="fa fa-angle-right"></i></span>
                                         </li>
-                                    </ul> -->
+                                    </ul>
                                 </div>
                             </div>
-                        </li>
+                        </li> -->
                         <li class="icons">
                             <a href="javascript:void(0)" class="log-user">
-                                <img src="../../assets/images/avatar/1.jpg" alt=""> <span>User Backoffice</span>  <i class="fa fa-caret-down f-s-14" aria-hidden="true"></i>
+                                <img src="../../assets/images/avatar/<?php echo $_SESSION['avatar'] ?>" alt="<?php echo $_SESSION['nama'] ?>"> <span><?php echo $_SESSION['nama'] ?></span>  <i class="fa fa-caret-down f-s-14" aria-hidden="true"></i>
                             </a>
                             <div class="drop-down dropdown-profile animated bounceInDown">
                                 <div class="dropdown-content-body">
                                     <ul>
-                                        <li><a href="javascript:void()"><i class="icon-user"></i> <span>My Profile</span></a>
+                                        <li><a href="profile.php"><i class="icon-user"></i> <span>My Profile</span></a>
                                         </li>
                                         <!-- <li><a href="javascript:void()"><i class="icon-wallet"></i> <span>My Wallet</span></a>
                                         </li>
@@ -154,7 +152,7 @@
                                         </li>
                                         <li><a href="javascript:void()"><i class="icon-lock"></i> <span>Lock Screen</span></a>
                                         </li> -->
-                                        <li><a href="javascript:void()"><i class="icon-power"></i> <span>Logout</span></a>
+                                        <li><a href="#" onclick="doLogout();return false;"><i class="icon-power"></i> <span>Logout</span></a>
                                         </li>
                                     </ul>
                                 </div>
@@ -167,3 +165,19 @@
         <!--**********************************
             Header end
         ***********************************-->
+
+        <script type="text/javascript">
+            
+            function doLogout(){
+
+                console.log('logout...');
+                $('div.content-body').block({ message: 'Keluar dari aplikasi...' });
+                $.getJSON('../controller/logout.php', function(data){
+                    $('div.content-body').unblock();
+                    if(data.success){ window.location.href="login.php"; }
+
+                });
+
+            }
+
+        </script>

@@ -1,5 +1,5 @@
 <?php
-
+session_start();
 set_time_limit(-1);
 require_once '../../../config/config.php';
 require_once '../../../config/database.php';
@@ -8,7 +8,8 @@ $unitupi = $_REQUEST['unitupi'];
 $unitap = $_REQUEST['unitap'];
 $unitup = $_REQUEST['unitup'];
 $blth = $_REQUEST['blth'];
-$user = rand (1,5);
+$user = $_SESSION['username'];
+$userid = $_SESSION['userid'];
 
 $params = array(
         array($user, SQLSRV_PARAM_IN),
@@ -27,7 +28,7 @@ if(!sqlsrv_execute($stmt)){
 }
 
 // DB table to use
-$table = 'NIAGA.dbo.vw_Create_Mon_Upload_Pelunasan_'.$user;
+$table = 'NIAGA.dbo.vw_Create_Mon_Upload_Pelunasan_'.$userid;
  
 // Table's primary key
 $primaryKey = 'UNITUP';

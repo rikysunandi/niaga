@@ -1,5 +1,5 @@
 <?php
-
+session_start();
 set_time_limit(-1);
 require_once '../../../config/config.php';
 require_once '../../../config/database.php';
@@ -12,7 +12,8 @@ $blth = $_REQUEST['blth'];
 $status_lalu = $_REQUEST['status_lalu'];
 $pic = $_REQUEST['pic'];
 $status_bayar = $_REQUEST['status_bayar'];
-$user = rand (1,10);
+$user = $_SESSION['username'];
+$userid=$_SESSION['userid'];
 
 $params = array(
         array($user, SQLSRV_PARAM_IN),
@@ -35,7 +36,7 @@ if(!sqlsrv_execute($stmt)){
 }
 
 // DB table to use
-$table = 'NIAGA.dbo.vw_Create_DPP_'.$user;
+$table = 'NIAGA.dbo.vw_Create_DPP_'.$userid;
  
 // Table's primary key
 $primaryKey = 'IDPEL';

@@ -1,4 +1,7 @@
-
+<?php session_start()?>
+<?php if(empty($_SESSION['username'])): ?>
+    <?php header('Location: login.php'); ?>
+<?php endif; ?>
 
 <!DOCTYPE html>
 <html lang="en">
@@ -901,6 +904,7 @@
     <script src="../js/custom.min.js"></script>
     <script src="../js/settings.js"></script>
     <script src="../js/gleek.js"></script>
+    <script src="../js/pages/apps.js?time=3"></script>
     
     <script src="../../assets/plugins/block-ui/jquery.blockUI.js"></script>
     <script src="../../assets/plugins/chart.js/Chart.bundle.min.js"></script>

@@ -1,3 +1,8 @@
+<?php session_start()?>
+<?php if(empty($_SESSION['username'])): ?>
+    <?php header('Location: login.php'); ?>
+<?php endif; ?>
+
 <!DOCTYPE html>
 <html lang="en">
 
@@ -83,7 +88,7 @@
                                                 <select id="sel_blth" class="selectpicker select-sm show-tick" data-size="5" data-width="fit">
                                                     <option value="<?php echo date('Ym') ?>" selected="selected"><?php echo date('Ym') ?></option>
                                                     <option data-divider="true"></option>
-                                                    <option value='<?php echo date('Ym', strtotime("-1 month")) ?>'><?php echo date('Ym', strtotime("-1 month")) ?></option>
+                                                    <option value='<?php echo date('Ym', strtotime("last day of previous month")) ?>'><?php echo date('Ym', strtotime("last day of previous month")) ?></option>
                                                     <option value='<?php echo date('Ym', strtotime("-2 month")) ?>'><?php echo date('Ym', strtotime("-2 month")) ?></option>
                                                     <option value='<?php echo date('Ym', strtotime("-3 month")) ?>'><?php echo date('Ym', strtotime("-3 month")) ?></option>
                                                 </select>
@@ -111,7 +116,7 @@
                                 <h4 class="card-title">Monitoring Upload Sorek semua Kogol (OLAP AP2T)</h4>
                             </div>
                             <div class="card-body">
-                                <p><span class="text-warning">Jika terdapat selisih beberapa pelanggan, hal tersebut dimungkinkan oleh pelanggan yang mutasi unit setelah proses billing</span></p>
+                                <p><span class="text-warning">Jika terdapat selisih beberapa pelanggan, hal tersebut dimungkinkan mutasi unit setelah proses billing atau data EIS belum closing</span></p>
                                 <p>Untuk menetapkan WO Intimasi dan agar dapat didownload di HP Petugas, silahkan lakukan prosesnya <a href="wo-intimasi.php" class="badge badge-primary" target="_blank">di sini</a>
                                 </p>
                                 <div class="table-responsive">
@@ -122,7 +127,7 @@
                                             <th rowspan="2" class="text-center bg-primary-lighten-2">UP3</th>
                                             <th rowspan="2" class="text-center bg-primary-lighten-2">UNITUP</th>
                                             <th rowspan="2" class="text-center bg-primary-lighten-2">ULP</th>
-                                            <th colspan="3" class="text-center bg-success-lighten-2">VERSI REKAP EIS (SETELAH CLOSING)</th>
+                                            <th colspan="3" class="text-center bg-success-lighten-2">VERSI REKAP EIS</th>
                                             <th colspan="3" class="text-center bg-success-lighten-2">SOREK YANG DIUPLOAD</th>
                                             <th rowspan="2" class="text-center bg-warning-lighten-2">SELISIH<br/>LEMBAR</th>
                                             <th colspan="8" class="text-center bg-success-lighten-2">KDPROSESKLP YANG DIUPLOAD</th>

@@ -1,3 +1,8 @@
+<?php session_start()?>
+<?php if(empty($_SESSION['username'])): ?>
+    <?php header('Location: login.php'); ?>
+<?php endif; ?>
+
 <!DOCTYPE html>
 <html lang="en">
 
@@ -100,7 +105,7 @@
                                                 <select id="sel_blth" class="selectpicker select-sm show-tick" data-size="5" data-width="fit">
                                                     <option value="<?php echo date('Ym') ?>" selected="selected"><?php echo date('Ym') ?></option>
                                                     <option data-divider="true"></option>
-                                                    <option value='<?php echo date('Ym', strtotime("-1 month")) ?>'><?php echo date('Ym', strtotime("-1 month")) ?></option>
+                                                    <option value='<?php echo date('Ym', strtotime("last day of previous month")) ?>'><?php echo date('Ym', strtotime("last day of previous month")) ?></option>
                                                     <option value='<?php echo date('Ym', strtotime("-2 month")) ?>'><?php echo date('Ym', strtotime("-2 month")) ?></option>
                                                     <option value='<?php echo date('Ym', strtotime("-3 month")) ?>'><?php echo date('Ym', strtotime("-3 month")) ?></option>
                                                 </select>
