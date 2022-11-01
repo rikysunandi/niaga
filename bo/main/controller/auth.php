@@ -37,11 +37,28 @@ if($stmt){
 
         if ($ldapconn) 
         {
-            $ldapbind = ldap_bind($ldapconn, $username, $password);
+            $ldap_userdomain = 'pusat\\'.$username;
+            $ldapbind = ldap_bind($ldapconn, $ldap_userdomain, $password);
             if ($ldapbind) 
             {
+
                 $response['success'] = true;
                 $response['msg'] = "Login Active Directory berhasil";
+
+                $attributes = array("displayname", "mail", "samaccountname");
+                $result = ldap_search($ldap_conn, $AD_DomainName, "(samaccountname=".$username.")");                         
+                $entries = ldap_get_entries($ldapconn, $result);                        
+                if(count($entries) > 0){
+                    $givenname = $entries[0]['givenname'][0];
+                    $displayname = $entries[0]['displayname'][0];
+                    $samaccountname =  $entries[0]['samaccountname'][0];
+                    $company =  $entries[0]['company'][0];
+                    $department =  $entries[0]['department'][0];
+                    $mail =  $entries[0]['mail'][0];
+                    $telephonenumber =  $entries[0]['telephonenumber'][0];
+                    $description =  $entries[0]['description'][0];
+                    $response['success'] = true;
+                }
                 
                 $timeout = (15*60);
                 //Set the maxlifetime of the session
