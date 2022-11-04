@@ -9,7 +9,7 @@ $unitap = $_REQUEST['unitap'];
 $unitup = $_REQUEST['unitup'];
 $blth = $_REQUEST['blth'];
 $user = $_SESSION['username'];
-$userid = $_SESSION['userid'];
+$id = $_SESSION['userid']%5;
 
 $params = array(
         array($user, SQLSRV_PARAM_IN),
@@ -28,7 +28,7 @@ if(!sqlsrv_execute($stmt)){
 }
 
 // DB table to use
-$table = 'NIAGA.dbo._vw_Create_Rekap_Pelunasan_Intimasi_'.$userid;
+$table = 'NIAGA.dbo._vw_Create_Rekap_Pelunasan_Intimasi_'.$id;
  
 // Table's primary key
 $primaryKey = 'UNIT';

@@ -8,6 +8,7 @@ $unitupi = $_REQUEST['unitupi'];
 $unitap = $_REQUEST['unitap'];
 $unitup = $_REQUEST['unitup'];
 $blth = $_REQUEST['blth'];
+$id = $_SESSION['userid']%5;
 $user = rand (1,5);
 
 $params = array(
@@ -27,7 +28,7 @@ if(!sqlsrv_execute($stmt)){
 }
 
 // DB table to use
-$table = 'NIAGA.dbo._vw_Create_Rekap_Pelunasan_Intimasi_UP_'.$user;
+$table = 'NIAGA.dbo._vw_Create_Rekap_Pelunasan_Intimasi_UP_'.$id;
  
 // Table's primary key
 $primaryKey = 'UNIT';
