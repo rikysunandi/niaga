@@ -8,7 +8,8 @@ $unitupi = $_REQUEST['unitupi'];
 $unitap = $_REQUEST['unitap'];
 $unitup = $_REQUEST['unitup'];
 $blth = $_REQUEST['blth'];
-$user = 'SYSTEM';
+$user = $_SESSION['username'];
+$id = $_SESSION['userid']%5;
 
 $params = array(
         array($user, SQLSRV_PARAM_IN),

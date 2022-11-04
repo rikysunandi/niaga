@@ -9,7 +9,7 @@ $unitap = $_REQUEST['unitap'];
 $unitup = $_REQUEST['unitup'];
 $blth = $_REQUEST['blth'];
 $id = $_SESSION['userid']%5;
-$user = rand (1,5);
+$user = $_SESSION['username'];
 
 $params = array(
         array($user, SQLSRV_PARAM_IN),
