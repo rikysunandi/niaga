@@ -1,5 +1,6 @@
 <?php
 
+session_start();
 set_time_limit(-1);
 require_once '../../../config/config.php';
 require_once '../../../config/database.php';
