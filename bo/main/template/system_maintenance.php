@@ -1,5 +1,4 @@
-
-
+<?php include 'parts/session.php'; ?>
 <!DOCTYPE html>
 <html lang="en">
 

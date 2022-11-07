@@ -1,3 +1,4 @@
+<?php include 'parts/session.php'; ?>
 <?php require_once '../../config/config.php'; ?>
 <!DOCTYPE html>
 <html lang="en">

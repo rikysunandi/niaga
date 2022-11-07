@@ -1,8 +1,4 @@
-<?php session_start()?>
-<?php if(empty($_SESSION['username'])): ?>
-	<?php header('Location: login.php'); ?>
-<?php endif; ?>
-
+<?php include 'parts/session.php'; ?>
 <!DOCTYPE html>
 <html lang="en">
 
