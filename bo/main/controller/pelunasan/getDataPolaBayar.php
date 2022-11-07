@@ -11,7 +11,7 @@ $rbm = $_REQUEST['rbm'];
 $status = $_REQUEST['status'];
 $blth = $_REQUEST['blth'];
 $user = $_SESSION['username'];
-$userid = $_SESSION['userid'];
+$id = $_SESSION['userid']%5;
 
 $params = array(
         array($user, SQLSRV_PARAM_IN),
@@ -32,7 +32,7 @@ if(!sqlsrv_execute($stmt)){
 }
 
 // DB table to use
-$table = 'NIAGA.dbo.vw_Create_Pola_Bayar_'.$userid;
+$table = 'NIAGA.dbo.vw_Create_Pola_Bayar_'.$id;
  
 // Table's primary key
 $primaryKey = 'IDPEL';

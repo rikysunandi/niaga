@@ -10,7 +10,8 @@ $unitup = $_REQUEST['unitup'];
 $rbm = $_REQUEST['rbm'];
 $status = $_REQUEST['status'];
 $blth = $_REQUEST['blth'];
-$user = rand(0,5);
+$user = $_SESSION['username'];
+$id = $_SESSION['userid']%5;
 
 $params = array(
         array($user, SQLSRV_PARAM_IN),
@@ -30,7 +31,7 @@ if(!sqlsrv_execute($stmt)){
     die(print_r( sqlsrv_errors(), true));
 }else{
 
-    $sql = "select BLTH, UNITUPI, UNITAP, UNITUP, IDPEL, KOGOL, TARIF, DAYA, STATUS_LALU, RBM, TGLBAYAR, UMUR_PIUTANG, PERCEPATAN, JML_TUNGGAKAN, STATUS_BAYAR, RPPTL, KDPP, KDPEMBAYAR, KODEPETUGAS, PIC, KODESTATUS from vw_Create_Pola_Bayar_".$user." Order by KODESTATUS ASC, JML_TUNGGAKAN DESC ";
+    $sql = "select BLTH, UNITUPI, UNITAP, UNITUP, IDPEL, KOGOL, TARIF, DAYA, STATUS_LALU, RBM, TGLBAYAR, UMUR_PIUTANG, PERCEPATAN, JML_TUNGGAKAN, STATUS_BAYAR, RPPTL, KDPP, KDPEMBAYAR, KODEPETUGAS, PIC, KODESTATUS from vw_Create_Pola_Bayar_".$id." Order by KODESTATUS ASC, JML_TUNGGAKAN DESC ";
     $stmt = sqlsrv_prepare($conn, $sql);
 
     if(!sqlsrv_execute($stmt)){
