@@ -12,7 +12,8 @@ $blth = $_REQUEST['blth'];
 $status_lalu = $_REQUEST['status_lalu'];
 $pic = $_REQUEST['pic'];
 $status_bayar = $_REQUEST['status_bayar'];
-$user = rand (1,10);
+$user = $_SESSION['username'];
+$id = $_SESSION['userid']%5;
 
 $params = array(
         array($user, SQLSRV_PARAM_IN),
@@ -34,7 +35,7 @@ if(!sqlsrv_execute($stmt)){
     die(print_r( sqlsrv_errors(), true));
 }else{
 
-    $sql = "select BLTH, UNITUPI, UNITAP, UNITUP, IDPEL, NAMA, KOGOL, TARIF, DAYA, PIC, KODEPETUGAS, RBM, STATUS_LALU, PEMKWH, RPPTL, TGLBAYAR, UMUR_PIUTANG, PERCEPATAN, JML_TUNGGAKAN, STATUS_BAYAR, KDPP, KDPEMBAYAR, KODESTATUS, CONVERT(VARCHAR,TGL_INPUT,112), CONVERT(VARCHAR,TGL_UPDATE,112) from vw_Create_DPP_".$user." Order by IDPEL ASC";
+    $sql = "select BLTH, UNITUPI, UNITAP, UNITUP, IDPEL, NAMA, KOGOL, TARIF, DAYA, PIC, KODEPETUGAS, RBM, STATUS_LALU, PEMKWH, RPPTL, TGLBAYAR, UMUR_PIUTANG, PERCEPATAN, JML_TUNGGAKAN, STATUS_BAYAR, KDPP, KDPEMBAYAR, KODESTATUS, CONVERT(VARCHAR,TGL_INPUT,112), CONVERT(VARCHAR,TGL_UPDATE,112) from vw_Create_DPP_".$id." Order by IDPEL ASC";
     $stmt = sqlsrv_prepare($conn, $sql);
 
     if(!sqlsrv_execute($stmt)){

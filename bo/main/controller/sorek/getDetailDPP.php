@@ -13,7 +13,7 @@ $status_lalu = $_REQUEST['status_lalu'];
 $pic = $_REQUEST['pic'];
 $status_bayar = $_REQUEST['status_bayar'];
 $user = $_SESSION['username'];
-$userid=$_SESSION['userid'];
+$id = $_SESSION['userid']%5;
 
 $params = array(
         array($user, SQLSRV_PARAM_IN),
@@ -36,7 +36,7 @@ if(!sqlsrv_execute($stmt)){
 }
 
 // DB table to use
-$table = 'NIAGA.dbo.vw_Create_DPP_'.$userid;
+$table = 'NIAGA.dbo.vw_Create_DPP_'.$id;
  
 // Table's primary key
 $primaryKey = 'IDPEL';
