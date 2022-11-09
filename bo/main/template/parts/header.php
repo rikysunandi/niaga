@@ -109,7 +109,7 @@
                                                 <span class="mr-3 avatar-icon bg-success-lighten-2"><i class="fa fa-check"></i></span>
                                                 <div class="notification-content">
                                                     <div class="notification-heading">Admin</div>
-                                                    <span class="notification-text">Selamat menggunakan ROC Jabar.</span> 
+                                                    <span class="notification-text">Selamat menggunakan ROC Jabar &#x1F609;</span> 
                                                     <small class="notification-timestamp"><?php echo date('d M Y H:i'); ?></small>
                                                 </div>
                                             </a>
