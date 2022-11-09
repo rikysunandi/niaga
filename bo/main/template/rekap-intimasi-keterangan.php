@@ -237,7 +237,7 @@
 
     <script src="../../assets/plugins/block-ui/jquery.blockUI.js"></script>
 
-    <script src="../js/pages/apps.js"></script>
+    <script src="../js/pages/apps.js?time=5"></script>
     <script src="../js/pages/rekap-intimasi-keterangan.js?time=223"></script>
 </body>
 </html>

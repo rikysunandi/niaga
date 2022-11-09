@@ -274,7 +274,7 @@
     <script src="../../assets/plugins/dropzone/js/dropzone.min.js"></script>
 
 
-    <script src="../js/pages/apps.js"></script>
+    <script src="../js/pages/apps.js?time=5"></script>
     <script src="../js/pages/input-target-lag.js"></script>
 </body>
 </html>

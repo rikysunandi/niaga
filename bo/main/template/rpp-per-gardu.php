@@ -187,7 +187,7 @@
     <script src="https://unpkg.com/@googlemaps/markerclustererplus/dist/index.min.js"></script>
     <script src="../../assets/plugins/sweetalert2/dist/sweetalert2.min.js"></script>
 
-    <script src="../js/pages/apps.js"></script>
+    <script src="../js/pages/apps.js?time=5"></script>
     <script src="../js/pages/rpp-per-gardu.js"></script>
 
 </body>

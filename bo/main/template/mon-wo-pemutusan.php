@@ -273,7 +273,7 @@
 
     <script src="../../assets/plugins/block-ui/jquery.blockUI.js"></script>
 
-    <script src="../js/pages/apps.js"></script>
+    <script src="../js/pages/apps.js?time=5"></script>
     <script src="../js/pages/mon-wo-pemutusan.js"></script>
 </body>
 </html>

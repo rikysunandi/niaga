@@ -227,7 +227,7 @@
     <script src="https://cdn.datatables.net/fixedcolumns/3.3.1/js/dataTables.fixedColumns.min.js"></script>
     <script src="//cdn.datatables.net/plug-ins/1.10.21/dataRender/percentageBars.js"></script>
 
-    <script src="../js/pages/apps.js"></script>
+    <script src="../js/pages/apps.js?time=5"></script>
     <script src="../js/pages/detail-skai-evaluasi.js"></script>
 </body>
 </html>

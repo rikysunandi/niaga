@@ -258,7 +258,7 @@
     <script src="../../assets/plugins/viewer/viewer.js"></script>
 
     <!-- <script src="../../assets/plugins/jquery-zoom/jquery.zoom.min.js"></script> -->
-    <script src="../js/pages/apps.js"></script>
+    <script src="../js/pages/apps.js?time=5"></script>
     <script src="../js/pages/info-pemeriksaan-lpb.js"></script>
 </body>
 </html>

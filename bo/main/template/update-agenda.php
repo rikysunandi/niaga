@@ -143,6 +143,6 @@
     <script src="https://cdn.datatables.net/rowgroup/1.1.2/js/dataTables.rowGroup.min.js"></script>
     <script src="../../assets/plugins/moment/moment.min.js"></script>
 
-    <script src="../js/pages/apps.js"></script>
+    <script src="../js/pages/apps.js?time=5"></script>
 </body>
 </html>

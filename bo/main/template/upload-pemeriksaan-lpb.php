@@ -176,7 +176,7 @@
     <script src="../../assets/plugins/dropzone/js/dropzone.min.js"></script>
     <!-- <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery-csv/0.71/jquery.csv-0.71.min.js"></script> -->
 
-    <script src="../js/pages/apps.js"></script>
+    <script src="../js/pages/apps.js?time=5"></script>
     <script src="../js/pages/upload-pemeriksaan-lpb.js?time=<?php echo time() ?>"></script>
 </body>
 </html>

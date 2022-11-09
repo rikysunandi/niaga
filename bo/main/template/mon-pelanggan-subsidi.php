@@ -236,7 +236,7 @@
     <!-- <script src="../../assets/plugins/keydragzoom/keydragzoom.js"></script> -->
     <script src="https://unpkg.com/@googlemaps/markerclustererplus/dist/index.min.js"></script>
 
-    <script src="../js/pages/apps.js"></script>
+    <script src="../js/pages/apps.js?time=5"></script>
     <script src="../js/pages/mon-pelanggan-subsidi.js"></script>
 </body>
 </html>

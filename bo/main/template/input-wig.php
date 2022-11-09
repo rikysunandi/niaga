@@ -292,7 +292,7 @@
     <script src="../../assets/plugins/jquery-validation/jquery.validate.min.js"></script>
     <script src="../../assets/plugins/bootstrap4-notify/bootstrap-notify.min.js"></script>
 
-    <script src="../js/pages/apps.js"></script>
+    <script src="../js/pages/apps.js?time=5"></script>
     <script src="../js/pages/input-wig.js"></script>
 </body>
 </html>

@@ -178,7 +178,7 @@
     <script type="text/javascript" src="//cdnjs.cloudflare.com/ajax/libs/jquery.lazy/1.7.9/jquery.lazy.min.js"></script>
     <script src="../../assets/plugins/pagination/pagination.min.js"></script>
 
-    <script src="../js/pages/apps.js"></script>
+    <script src="../js/pages/apps.js?time=5"></script>
     <!-- <script src="../js/pages/sampling-foto-cater.js"></script> -->
 
     <script type="text/javascript">

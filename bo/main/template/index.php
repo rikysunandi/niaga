@@ -8,7 +8,7 @@
     <meta name="viewport" content="width=device-width,initial-scale=1">
     <title>Backoffice Niaga</title>
     
-    
+
     <link href="../css/style.css?time=<?php echo time() ?>" rel="stylesheet">
     <link href="../css/custom.css?time=<?php echo time() ?>" rel="stylesheet">
     
@@ -900,7 +900,7 @@
     <script src="../js/custom.min.js"></script>
     <script src="../js/settings.js"></script>
     <script src="../js/gleek.js"></script>
-    <script src="../js/pages/apps.js?time=3"></script>
+    <script src="../js/pages/apps.js?time=5"></script>
     
     <script src="../../assets/plugins/block-ui/jquery.blockUI.js"></script>
     <script src="../../assets/plugins/chart.js/Chart.bundle.min.js"></script>

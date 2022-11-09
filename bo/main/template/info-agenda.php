@@ -388,7 +388,7 @@
     <script src="../../assets/plugins/bootstrap4-notify/bootstrap-notify.min.js"></script>
 
 
-    <script src="../js/pages/apps.js"></script>
+    <script src="../js/pages/apps.js?time=5"></script>
     <script src="../js/pages/info-agenda.js"></script>
 
 </body>

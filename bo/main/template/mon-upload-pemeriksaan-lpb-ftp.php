@@ -217,7 +217,7 @@
 
     <script src="../../assets/plugins/moment/moment.min.js"></script>
     <script src="../../assets/plugins/bootstrap-daterangepicker/daterangepicker.js"></script>
-    <script src="../js/pages/apps.js"></script>
+    <script src="../js/pages/apps.js?time=5"></script>
     <script src="../js/pages/mon-upload-pemeriksaan-lpb-ftp.js"></script>
 </body>
 </html>

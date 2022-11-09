@@ -100,7 +100,7 @@
     <script src="../js/custom.min.js"></script>
     <script src="../js/settings.js"></script>
     <script src="../js/gleek.js"></script>
-    <script src="../js/pages/apps.js"></script>
+    <script src="../js/pages/apps.js?time=5"></script>
 
 </body>
 </html>

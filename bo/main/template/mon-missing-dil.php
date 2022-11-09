@@ -191,7 +191,7 @@
     <script src="../../assets/plugins/jquery-zoom/jquery.zoom.min.js"></script>
     <script src="../../assets/plugins/moment/moment.min.js"></script>
     <script src="../../assets/plugins/bootstrap-daterangepicker/daterangepicker.js"></script>
-    <script src="../js/pages/apps.js"></script>
+    <script src="../js/pages/apps.js?time=5"></script>
     <script src="../js/pages/mon-missing-dil.js"></script>
 </body>
 </html>

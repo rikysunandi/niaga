@@ -465,7 +465,7 @@
     <script src="https://cdn.datatables.net/responsive/2.2.5/js/dataTables.responsive.min.js"></script>
     <script src="https://cdn.datatables.net/select/1.3.3/js/dataTables.select.min.js"></script>
 
-    <script src="../js/pages/apps.js"></script>
+    <script src="../js/pages/apps.js?time=5"></script>
     <script src="../js/pages/input-rab.js"></script>
 
 </body>

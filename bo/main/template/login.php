@@ -59,7 +59,7 @@
     <script src="../../assets/plugins/block-ui/jquery.blockUI.js"></script>
     <script src="../../assets/plugins/moment/moment.min.js"></script>
     <script src="../../assets/plugins/bootstrap4-notify/bootstrap-notify.min.js"></script>
-    <script src="../js/pages/apps.js?time=4"></script>
+    <script src="../js/pages/apps.js?time=6"></script>
     <script src="../js/pages/login.js?time=2"></script>
 
 </body>

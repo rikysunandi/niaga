@@ -1,4 +1,3 @@
-<?php include 'parts/session.php'; ?>
 <!DOCTYPE html>
 <html lang="en">
 
@@ -32,13 +31,13 @@
             <div class="container-fluid">
                 <div class="row page-titles">
                     <div class="col p-md-0">
-                        <h4>Daily Report Administrasi Niaga</h4>
+                        <h4>Wrapper</h4>
                     </div>
                     <div class="col p-md-0">
                         <ol class="breadcrumb">
-                            <li class="breadcrumb-item"><a href="javascript:void(0)">ADM NIAGA</a>
+                            <li class="breadcrumb-item"><a href="javascript:void(0)">Wrapper</a>
                             </li>
-                            <li class="breadcrumb-item active">Daily Report Administrasi Niaga</li>
+                            <li class="breadcrumb-item active">External Resources</li>
                         </ol>
                     </div>
                 </div>
@@ -47,18 +46,14 @@
 
                 <div class="row">
                     <div class="col-12">
-                        <div class="card">
-                            <!-- <div class="card-header">
-                                <h4 class="card-title">Report </h4>
-                            </div> -->
-                            <div class="card-body">
+                        <!-- <div class="card">
+                            <div class="card-body"> -->
 								<!-- 21:9 aspect ratio -->
-								<!-- <iframe width="00" height="450" src="https://datastudio.google.com/embed/reporting/e6222609-41ea-447f-9270-68b7a71fe377/page/zK1xC" frameborder="0" style="border:0" allowfullscreen></iframe> -->
-                                <div class="embed-responsive embed-responsive-4by3">
-                                  <iframe class="embed-responsive-item" src="https://datastudio.google.com/embed/reporting/ab14ef48-189d-4b36-9978-1f46141c0d74/page/WSq3C" style="position:absolute;"></iframe>
-                                </div>
-                            </div>
-                        </div>
+								<div class="embed-responsive embed-responsive-16by9">
+								  <iframe class="embed-responsive-item" src="<?php echo $_GET['url'] ?>" style="position:absolute;"></iframe>
+								</div>
+                           <!--  </div>
+                        </div> -->
                     </div>
                 </div>
 
@@ -104,7 +99,7 @@
     <script src="../js/custom.min.js"></script>
     <script src="../js/settings.js"></script>
     <script src="../js/gleek.js"></script>
-    <script src="../js/pages/apps.js?time=5"></script>
+    <script src="../js/pages/apps.js"></script>
 
 </body>
 </html>

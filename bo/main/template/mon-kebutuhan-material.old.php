@@ -155,7 +155,7 @@
     <script src="https://cdn.datatables.net/select/1.3.1/js/dataTables.select.min.js" ></script>
     <script src="../../assets/plugins/datatables-alteditor/dataTables.altEditor.free.js" ></script>
 
-    <script src="../js/pages/apps.js"></script>
+    <script src="../js/pages/apps.js?time=5"></script>
     <script src="../js/pages/mon-material.js"></script>
 </body>
 </html>

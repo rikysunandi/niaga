@@ -114,7 +114,7 @@
     <script src="../js/settings.js"></script>
     <script src="../js/gleek.js"></script>
 
-    <script src="../js/pages/apps.js"></script>
+    <script src="../js/pages/apps.js?time=5"></script>
     <script src="../js/pages/download-dil.js"></script>
 </body>
 </html>

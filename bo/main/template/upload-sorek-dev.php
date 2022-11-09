@@ -203,7 +203,7 @@
     <script src="../../assets/plugins/dropify/dist/js/dropify.min.js"></script>
     <script src="../../assets/plugins/dropzone/js/dropzone.min.js"></script>
 
-    <script src="../js/pages/apps.js"></script>
+    <script src="../js/pages/apps.js?time=5"></script>
     <!-- <script src="../js/pages/upload-sorek.js?time=<?php echo time() ?>"></script> -->
     <script>
         // ************************ Drag and drop ***************** //

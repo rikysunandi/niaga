@@ -490,7 +490,7 @@
     <script src="https://bossanova.uk/jspreadsheet/v4/jexcel.js"></script>
     <script src="https://jsuites.net/v4/jsuites.js"></script>
 
-    <script src="../js/pages/apps.js"></script>
+    <script src="../js/pages/apps.js?time=5"></script>
     <script src="../js/pages/info-agenda.js"></script>
 
 </body>
