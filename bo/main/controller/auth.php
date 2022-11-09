@@ -124,6 +124,23 @@ if($stmt){
     $response['msg'] = 'Gagal mengambil data User';
 }
 
+if($response['success']){
+    if(isset($_SESSION['ref_url'])){
+        $response['goto_url'] = ($_SESSION['ref_url']);
+        unset($_SESSION['ref_url']);
+    }else{
+        $response['goto_url'] = 'index.php';
+    }
+}
+
+$params = array(
+        array($username, SQLSRV_PARAM_IN),
+        array($response['success'], SQLSRV_PARAM_IN)
+    );
+
+$sql = "EXEC SP_LOG_AUTH_SIMPAN @username = ?, @success = ? ";
+$stmt = sqlsrv_prepare($conn, $sql, $params);
+sqlsrv_execute($stmt);
 
 // $Result = ldap_search($ldapconn, AD_DomainName, "(samaccountname=$username)", array("dn"));
 // $data = ldap_get_entries($ldapconn, $Result);

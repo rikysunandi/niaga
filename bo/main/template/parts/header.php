@@ -95,6 +95,7 @@
                                 </div>
                             </div>
                         </li>
+                    -->
                         <li class="icons">
                             <a href="javascript:void(0)">
                                 <i class="mdi mdi-bell"></i>
@@ -132,10 +133,10 @@
                                     </ul>
                                 </div>
                             </div>
-                        </li> -->
+                        </li> 
                         <li class="icons">
                             <a href="javascript:void(0)" class="log-user">
-                                <img src="../../assets/images/avatar/<?php echo $_SESSION['avatar'] ?>" alt="<?php echo $_SESSION['nama'] ?>"> <span><?php echo $_SESSION['nama'] ?></span>  <i class="fa fa-caret-down f-s-14" aria-hidden="true"></i>
+                                <img src="../../assets/images/avatar/<?php echo $_SESSION['avatar'] ?>" alt="<?php echo $_SESSION['nama'] ?>" class="avatar"> <span><?php echo ucwords(strtolower($_SESSION['nama'])) ?></span>  <i class="fa fa-caret-down f-s-14" aria-hidden="true"></i>
                             </a>
                             <div class="drop-down dropdown-profile animated bounceInDown">
                                 <div class="dropdown-content-body">

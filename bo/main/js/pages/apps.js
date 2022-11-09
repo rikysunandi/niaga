@@ -154,7 +154,7 @@
       return item ? (num / item.value).toFixed(digits).replace(rx, "Rp1") + item.symbol : "0";
     };
 
-    var showMsg = function showMsg(msg, status){
+    window.showMsg = function(msg, status){
 
         $.notify({
             message: msg

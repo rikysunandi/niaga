@@ -43,7 +43,7 @@
                                     </div>
                                     <button type="button" id="btn_login" class="btn btn-primary btn-block text-uppercase mb-2 rounded-pill shadow-sm">Sign in</button>
                                     <div class="text-center d-flex justify-content-between mt-4">
-                                        <small>*untuk user internal PLN, silahkan gunakan login email korporat (tanpa pusat)</small>
+                                        <small>*untuk internal PLN, silahkan menggunakan username login email korporat (tanpa pusat)</small>
                                     </div>
                                 </form>
                             </div>
@@ -58,7 +58,9 @@
     <script src="../../assets/plugins/common/common.min.js"></script>
     <script src="../../assets/plugins/block-ui/jquery.blockUI.js"></script>
     <script src="../../assets/plugins/moment/moment.min.js"></script>
-    <script src="../js/pages/login.js?time=1"></script>
+    <script src="../../assets/plugins/bootstrap4-notify/bootstrap-notify.min.js"></script>
+    <script src="../js/pages/apps.js?time=4"></script>
+    <script src="../js/pages/login.js?time=2"></script>
 
 </body>
 

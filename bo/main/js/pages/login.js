@@ -28,18 +28,30 @@ $(function() {
                     
                     if(data.success)
                     {
-                        window.location.href="index.php";
+                        $('div.container').block({ message: 'Autentikasi berhasil...' });
+                        window.location.href=data.goto_url;
+                        $('div.container').unblock();
                     }
                     else
                     {
-                        
+                        // $.notify(data.msg, {
+                        //     type:'warning',
+                        //     placement: {
+                        //         from: 'bottom', 
+                        //         align: 'center'
+                        //     },
+                        //     animate: {
+                        //         enter: 'animated slideInDown',
+                        //         exit: 'animated slideOutUp'
+                        //     }
+                        // });
                         alert(data.msg);
                     }
                 }
             });
         }else
         {
-            alert("Please Fill All The Details");
+            alert("Silahkan isi username dan password");
         }
 
         return false;
