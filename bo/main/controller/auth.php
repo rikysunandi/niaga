@@ -2,6 +2,7 @@
 
 require_once '../../config/config.php';
 require_once '../../config/database.php';
+require_once 'UserInfo.php';
 
 $do_login = ($_POST['do_login']);
 $access = ($_POST['access']);
@@ -76,6 +77,10 @@ if($stmt){
                 $_SESSION['nohp'] = $nohp;
                 $_SESSION['avatar'] = $avatar;
                 $_SESSION['active_directory'] = $active_directory;
+                $_SESSION['user_ip'] = UserInfo::get_ip();
+                $_SESSION['user_device'] = UserInfo::get_device();
+                $_SESSION['user_os'] = UserInfo::get_os();
+                $_SESSION['user_browser'] = UserInfo::get_browser();
             }
             else 
             {
@@ -111,6 +116,10 @@ if($stmt){
             $_SESSION['nohp'] = $nohp;
             $_SESSION['avatar'] = $avatar;
             $_SESSION['active_directory'] = $active_directory;
+            $_SESSION['user_ip'] = UserInfo::get_ip();
+            $_SESSION['user_device'] = UserInfo::get_device();
+            $_SESSION['user_os'] = UserInfo::get_os();
+            $_SESSION['user_browser'] = UserInfo::get_browser();
         }
         else 
         {
@@ -135,10 +144,14 @@ if($response['success']){
 
 $params = array(
         array($username, SQLSRV_PARAM_IN),
-        array($response['success'], SQLSRV_PARAM_IN)
+        array($response['success'], SQLSRV_PARAM_IN),
+        array(UserInfo::get_ip(), SQLSRV_PARAM_IN),
+        array(UserInfo::get_device(), SQLSRV_PARAM_IN),
+        array(UserInfo::get_os(), SQLSRV_PARAM_IN),
+        array(UserInfo::get_browser(), SQLSRV_PARAM_IN),
     );
 
-$sql = "EXEC SP_LOG_AUTH_SIMPAN @username = ?, @success = ? ";
+$sql = "EXEC SP_LOG_AUTH_SIMPAN @username = ?, @success = ?, @ip = ?, @device = ?, @os = ?, @browser = ? ";
 $stmt = sqlsrv_prepare($conn, $sql, $params);
 sqlsrv_execute($stmt);
 

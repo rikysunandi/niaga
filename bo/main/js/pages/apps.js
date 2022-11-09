@@ -3,6 +3,17 @@
 
     console.log($('.card'));
 
+    $('head').append(`
+
+    <link rel="apple-touch-icon" sizes="180x180" href="../../assets/images/icon/apple-touch-icon.png">
+    <link rel="icon" type="image/png" sizes="32x32" href="../../assets/images/icon/favicon-32x32.png">
+    <link rel="icon" type="image/png" sizes="16x16" href="../../assets/images/icon/favicon-16x16.png">
+   
+    <link rel="manifest" href="../../assets/images/icon/site.webmanifest">
+
+        `);
+  
+
  //    $("#sel_unitupi").selectpicker({
 	//     style: "btn-default btn-sm"
 	// });
@@ -30,7 +41,11 @@
     //     });
     //     return o;
     // };
-
+    if($('div.page-titles h4').html().length>0){
+        $(document).prop('title', 'ROC Jabar | '+$('div.page-titles h4').html() );
+    
+        $.post( "../controller/logAkses.php", { page: $('div.page-titles h4').html() } );
+    }
     
     const queryString = window.location.search;
     const urlParams = new URLSearchParams(queryString);
