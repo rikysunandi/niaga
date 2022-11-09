@@ -1,4 +1,4 @@
-
+<?php ini_set('date.timezone', 'Asia/Jakarta'); ?>
         <!--**********************************
             Nav header start
         ***********************************-->
@@ -108,23 +108,11 @@
                                             <a href="javascript:void()">
                                                 <span class="mr-3 avatar-icon bg-success-lighten-2"><i class="fa fa-check"></i></span>
                                                 <div class="notification-content">
-                                                    <div class="notification-heading">Druid Wensleydale</div>
-                                                    <span class="notification-text">A wonderful serenit of my entire soul.</span> 
-                                                    <small class="notification-timestamp">20 May 2018, 15:32</small>
+                                                    <div class="notification-heading">Admin</div>
+                                                    <span class="notification-text">Selamat menggunakan ROC Jabar.</span> 
+                                                    <small class="notification-timestamp"><?php echo date('d M Y H:i'); ?></small>
                                                 </div>
                                             </a>
-                                            <span class="notify-close"><i class="ti-close"></i>
-                                                </span>
-                                        </li>
-                                        <li><a href="javascript:void()"><span class="mr-3 avatar-icon bg-danger-lighten-2"><i class="fa fa-close"></i></span><div class="notification-content"><div class="notification-heading">Inverness McKenzie</div><span class="notification-text">A wonderful serenit of my entire soul.</span> <small class="notification-timestamp">20 May 2018, 15:32</small></div></a>
-                                            <span class="notify-close"><i class="ti-close"></i>
-                                                </span>
-                                        </li>
-                                        <li><a href="javascript:void()"><span class="mr-3 avatar-icon bg-success-lighten-2"><i class="fa fa-check"></i></span><div class="notification-content"><div class="notification-heading">McKenzie Inverness</div><span class="notification-text">A wonderful serenit of my entire soul.</span> <small class="notification-timestamp">20 May 2018, 15:32</small></div></a>
-                                            <span class="notify-close"><i class="ti-close"></i>
-                                                </span>
-                                        </li>
-                                        <li><a href="javascript:void()"><span class="mr-3 avatar-icon bg-danger-lighten-2"><i class="fa fa-close"></i></span><div class="notification-content"><div class="notification-heading">Inverness McKenzie</div><span class="notification-text">A wonderful serenit of my entire soul.</span> <small class="notification-timestamp">20 May 2018, 15:32</small></div></a>
                                             <span class="notify-close"><i class="ti-close"></i>
                                                 </span>
                                         </li>
