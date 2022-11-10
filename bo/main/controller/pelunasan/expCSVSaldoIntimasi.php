@@ -1,5 +1,6 @@
 <?php
 
+session_start();
 set_time_limit(-1);
 require_once '../../../config/config.php';
 require_once '../../../config/database.php';
@@ -9,7 +10,8 @@ $unitap = $_REQUEST['unitap'];
 $unitup = $_REQUEST['unitup'];
 $blth = $_REQUEST['blth'];
 $status = strtoupper($_REQUEST['status']);
-$user = 'SYSTEM';
+$id = $_SESSION['userid']%5;
+$user = $_SESSION['username'];
 
 $params = array(
         array($user, SQLSRV_PARAM_IN),
