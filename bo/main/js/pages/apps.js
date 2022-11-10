@@ -5,11 +5,11 @@
 
     $('head').append(`
 
-    <link rel="apple-touch-icon" sizes="180x180" href="../../assets/images/icon/apple-touch-icon.png">
-    <link rel="icon" type="image/png" sizes="32x32" href="../../assets/images/icon/favicon-32x32.png">
-    <link rel="icon" type="image/png" sizes="16x16" href="../../assets/images/icon/favicon-16x16.png">
+    <link rel="apple-touch-icon" sizes="180x180" href="../../assets/images/icon/apple-touch-icon.png?time=23">
+    <link rel="icon" type="image/png" sizes="32x32" href="../../assets/images/icon/favicon-32x32.png?time=23">
+    <link rel="icon" type="image/png" sizes="16x16" href="../../assets/images/icon/favicon-16x16.png?time=23">
    
-    <link rel="manifest" href="../../assets/images/icon/site.webmanifest">
+    <link rel="manifest" href="../../assets/images/icon/site.webmanifest?time=23">
 
         `);
   

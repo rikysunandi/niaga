@@ -5,7 +5,7 @@
         <div class="nav-header">
             <!-- <div class="brand-logo"><a href="index.html"><b><img src="../../assets/images/logo.png" alt=""> </b><span class="brand-title"><img src="../../assets/images/logo-text.png" alt=""></span></a>
             </div> -->
-            <div class="brand-logo"><a href="index.php"><b><!-- <img src="../../assets/images/logo.png" alt=""> --> </b><span class="brand-title text-white"><i class="mdi mdi-flash"></i>&nbsp;ROC JABAR</span></a>
+            <div class="brand-logo"><a href="index.php"><b><img src="../../assets/images/logo_roc.png" alt="" width="32" height="32"> </b><span class="brand-title text-white">ROC JABAR</span></a>
             </div>
             <div class="nav-control">
                 <div class="hamburger"><span class="line"></span>  <span class="line"></span>  <span class="line"></span>
