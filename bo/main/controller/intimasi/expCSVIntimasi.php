@@ -1,5 +1,6 @@
 <?php
 
+session_start();
 set_time_limit(-1);
 require_once '../../../config/config.php';
 require_once '../../../config/database.php';
@@ -12,7 +13,8 @@ $keterangan = $_REQUEST['keterangan'];
 $blth = $_REQUEST['blth'];
 $tgl_intimasi_from = $_REQUEST['tgl_intimasi_from'];
 $tgl_intimasi_to = $_REQUEST['tgl_intimasi_to'];
-$user = rand (1,5);
+$id = $_SESSION['userid']%5;
+$user = $_SESSION['username'];
 
 $params = array(
         array($user, SQLSRV_PARAM_IN),
@@ -35,7 +37,7 @@ if(!sqlsrv_execute($stmt)){
     die(print_r( sqlsrv_errors(), true));
 }else{
 
-    $sql = "select BLTH, UNITUPI, UNITAP, UNITUP, IDPEL, PIC, STATUS_LALU, CONVERT(VARCHAR, TGL_INTIMASI, 120), KET, CONVERT(VARCHAR, TGL_JANJI, 120), NOHP, EMAIL, PAHAM, PUTUS, LATITUDE, LONGITUDE, USER_APP from vw_Create_Data_Intimasi_".$user." Order by TGL_INTIMASI DESC ";
+    $sql = "select BLTH, UNITUPI, UNITAP, UNITUP, IDPEL, PIC, STATUS_LALU, CONVERT(VARCHAR, TGL_INTIMASI, 120), KET, CONVERT(VARCHAR, TGL_JANJI, 120), NOHP, EMAIL, PAHAM, PUTUS, LATITUDE, LONGITUDE, USER_APP from vw_Create_Data_Intimasi_".$id." Order by TGL_INTIMASI DESC ";
     $stmt = sqlsrv_prepare($conn, $sql);
 
     if(!sqlsrv_execute($stmt)){

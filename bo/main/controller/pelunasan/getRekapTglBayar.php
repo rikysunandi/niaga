@@ -1,5 +1,6 @@
 <?php
 
+session_start();
 set_time_limit(-1);
 require_once '../../../config/config.php';
 require_once '../../../config/database.php';
@@ -8,7 +9,8 @@ $unitupi = $_REQUEST['unitupi'];
 $unitap = $_REQUEST['unitap'];
 $unitup = $_REQUEST['unitup'];
 $blth = $_REQUEST['blth'];
-$user = rand (1,5);
+$id = $_SESSION['userid']%5;
+$user = $_SESSION['username'];
 
 $params = array(
         array($user, SQLSRV_PARAM_IN),
@@ -27,7 +29,7 @@ if(!sqlsrv_execute($stmt)){
 }
 
 // DB table to use
-$table = 'NIAGA.dbo._vw_Create_Rekap_Lunas_Tgl_Bayar_'.$user;
+$table = 'NIAGA.dbo._vw_Create_Rekap_Lunas_Tgl_Bayar_'.$id;
  
 // Table's primary key
 $primaryKey = 'TGLBAYAR';

@@ -1,5 +1,6 @@
 <?php
 
+session_start();
 set_time_limit(-1);
 require_once '../../../config/config.php';
 require_once '../../../config/database.php';
@@ -12,7 +13,8 @@ $keterangan = $_REQUEST['keterangan'];
 $blth = $_REQUEST['blth'];
 $tgl_intimasi_from = $_REQUEST['tgl_intimasi_from'];
 $tgl_intimasi_to = $_REQUEST['tgl_intimasi_to'];
-$user = rand (1,5);
+$id = $_SESSION['userid']%5;
+$user = $_SESSION['username'];
 
 $params = array(
         array($user, SQLSRV_PARAM_IN),
@@ -35,7 +37,7 @@ if(!sqlsrv_execute($stmt)){
 }
 
 // DB table to use
-$table = 'NIAGA.dbo.vw_Create_Data_Intimasi_'.$user;
+$table = 'NIAGA.dbo.vw_Create_Data_Intimasi_'.$id;
  
 // Table's primary key
 $primaryKey = 'IDPEL';

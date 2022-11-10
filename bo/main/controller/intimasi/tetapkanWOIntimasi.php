@@ -1,6 +1,6 @@
 <?php
 
-
+session_start();
 require_once '../../../config/database.php';
 require_once '../../../config/config.php';
 //require_once '../../../config/ftp.php';
@@ -9,7 +9,8 @@ $blth = $_POST['blth'];
 $unitupi = $_POST['unitupi'];
 $unitap = $_POST['unitap'];
 $unitup = $_POST['unitup'];
-$user = 'SYSTEM';
+$id = $_SESSION['userid']%5;
+$user = $_SESSION['username'];
 
 $params = array(
         array($blth, SQLSRV_PARAM_IN),
