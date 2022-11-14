@@ -144,6 +144,7 @@ if($response['success']){
             $response['goto_url'] = (!empty($_SERVER['HTTPS']) ? 'https' : 'http') . '://103.94.6.138/niaga/bo/main/template/'.($_SESSION['ref_url']);
         }
         else{
+        $response['st_url'] = 'ref_url2';
             $response['goto_url'] = ($_SESSION['ref_url']);
         }
 
