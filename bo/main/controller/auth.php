@@ -140,7 +140,7 @@ if($response['success']){
         unset($_SESSION['ref_url']);
     }else{
         $response['st_url'] = 'default_index';
-        $response['goto_url'] = (!empty($_SERVER['HTTPS']) ? 'https' : 'http') . '://' . $_SERVER['HTTP_HOST'] . '/niaga/bo/main/template/index.php';
+        $response['goto_url'] = (!empty($_SERVER['HTTPS']) ? 'https' : 'http') . '://' . $_SERVER['SERVER_NAME'] . '/niaga/bo/main/template/index.php';
     }
 }
 
