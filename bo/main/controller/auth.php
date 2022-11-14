@@ -134,27 +134,13 @@ if($stmt){
 }
 
 if($response['success']){
-
-    $response['host'] = $_SERVER['HTTP_HOST'];
-
     if(isset($_SESSION['ref_url'])){
         $response['st_url'] = 'ref_url';
-
-        if($_SERVER['HTTP_HOST']=='_' || empty($_SERVER['HTTP_HOST'])){
-            $response['goto_url'] = (!empty($_SERVER['HTTPS']) ? 'https' : 'http') . '://103.94.6.138/niaga/bo/main/template/'.($_SESSION['ref_url']);
-        }
-        else{
-        $response['st_url'] = 'ref_url2';
-            $response['goto_url'] = (!empty($_SERVER['HTTPS']) ? 'https' : 'http') . '://' . $_SERVER['HTTP_HOST'] . '/niaga/bo/main/template/'.($_SESSION['ref_url']);
-        }
-
+        $response['goto_url'] = str_replace('http://_/', 'http://103.94.6.138/', $_SESSION['ref_url']);
         unset($_SESSION['ref_url']);
     }else{
         $response['st_url'] = 'default_index';
-        if($_SERVER['HTTP_HOST']=='_' || empty($_SERVER['HTTP_HOST']))
-            $response['goto_url'] = (!empty($_SERVER['HTTPS']) ? 'https' : 'http') . '://103.94.6.138/niaga/bo/main/template/index.php';
-        else
-            $response['goto_url'] = (!empty($_SERVER['HTTPS']) ? 'https' : 'http') . '://' . $_SERVER['HTTP_HOST'] . '/niaga/bo/main/template/index.php';
+        $response['goto_url'] = 'index.php';
     }
 }
 
