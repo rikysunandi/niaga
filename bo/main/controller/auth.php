@@ -135,9 +135,11 @@ if($stmt){
 
 if($response['success']){
     if(isset($_SESSION['ref_url'])){
+        $response['st_url'] = 'ref_url';
         $response['goto_url'] = ($_SESSION['ref_url']);
         unset($_SESSION['ref_url']);
     }else{
+        $response['st_url'] = 'default_index';
         $response['goto_url'] = 'index.php';
     }
 }
