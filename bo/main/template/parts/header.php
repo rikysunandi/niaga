@@ -29,7 +29,7 @@
                                     <div class="header-search" id="header-search">
                                         <form action="#">
                                             <div class="input-group">
-                                                <input type="text" class="form-control" placeholder="Search">
+                                                <input id="param" type="text" class="form-control basicAutoComplete" autocomplete="off" placeholder="Idpel/No meter/Nama">
                                                 <div class="input-group-append"><span class="input-group-text"><i class="icon-magnifier"></i></span>
                                                 </div>
                                             </div>
@@ -152,19 +152,4 @@
         <!--**********************************
             Header end
         ***********************************-->
-
-        <script type="text/javascript">
-            
-            function doLogout(){
-
-                console.log('logout...');
-                $('div.content-body').block({ message: 'Keluar dari aplikasi...' });
-                $.getJSON('../controller/logout.php', function(data){
-                    $('div.content-body').unblock();
-                    if(data.success){ window.location.href="login.php"; }
-
-                });
-
-            }
-
-        </script>
+        

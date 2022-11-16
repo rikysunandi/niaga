@@ -389,8 +389,6 @@
         Main wrapper end
     ***********************************-->
 
-    <?php include 'parts/footer.php'; ?>
-
     <!--**********************************
         Scripts
     ***********************************-->
@@ -398,6 +396,10 @@
     <script src="../js/custom.min.js"></script>
     <script src="../js/settings.js"></script>
     <script src="../js/gleek.js"></script>
+
+    <?php include 'parts/footer.php'; ?>
+
+    
     <script src="../../assets/plugins/block-ui/jquery.blockUI.js"></script>
     <script src="../../assets/plugins/easy-number-separator/easy-number-separator.js"></script>
     <script src="../../assets/plugins/bootstrap4-notify/bootstrap-notify.min.js"></script>
