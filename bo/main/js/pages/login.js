@@ -62,7 +62,7 @@ $(function() {
                     if(data.success){
                         $('div.container').block({ message: 'Autentikasi berhasil...' });
                         //alert(data.goto_url);
-                        //window.location.href=data.goto_url;
+                        window.location.href=data.goto_url;
                         $('div.container').unblock();
                     }
                     else{
