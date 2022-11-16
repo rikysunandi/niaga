@@ -87,7 +87,7 @@
             </li>
             <li><a class="has-arrow" href="javascript:void()" aria-expanded="false"><i class="mdi mdi-tag-multiple"></i> <span class="nav-text">TS P2TL</span></a>
                 <ul aria-expanded="false">
-                    <li><a href="index-admaga.php">Dashboard TS P2TL LPB</a></li>
+                    <li><a href="index-tsp2tl.php">Dashboard TS P2TL LPB Anomali</a></li>
                     <li><a href="ts-p2tl-paska.php">Dashboard TS P2TL Paskabayar</a></li>
                     <li><a href="mon-ts-p2tl.php">Data TS P2TL</a></li>
                     <!-- <li><a href="mon-ts-p2tl-idpel.php">TS P2TL per Pelanggan</a>

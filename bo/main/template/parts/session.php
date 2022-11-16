@@ -3,6 +3,12 @@
 ob_start();
 
 if (session_status() == PHP_SESSION_NONE  || session_id() == '') {
+    
+    $timeout = (15*60);
+    //Set the maxlifetime of the session
+    ini_set( "session.gc_maxlifetime", $timeout );
+    //Set the cookie lifetime of the session
+    ini_set( "session.cookie_lifetime", $timeout );
     session_start();
 }
 $_SESSION['ref_url'] = curPageURL();
