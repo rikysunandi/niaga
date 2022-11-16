@@ -14,7 +14,7 @@ $total_characters_on_image = 6;
 //avoid all confusing characters and numbers (For example: l, 1 and i)
 $possible_captcha_letters = 'bcdfghjkmnpqrstvwxyz23456789';
 $captcha_font = './monofont.ttf';
-$captcha_font = __DIR__."/../../assets/fonts/monofont.ttf"
+//$captcha_font = __DIR__."/../../assets/fonts/monofont.ttf"
 
 $random_captcha_dots = 50;
 $random_captcha_lines = 25;
