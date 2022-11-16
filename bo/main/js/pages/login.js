@@ -24,14 +24,23 @@ $(function() {
     //      label: '<p>Please draw the shape in the box to submit the form:</p>'
     //  });
 
-    $('button#btn_login').click(function(){
+    $('#refresh_captcha').click(function(){
+        var img = document.images['captcha_image'];
+        img.src = img.src.substring(
+            0,img.src.lastIndexOf("?")
+            )+"?rand="+Math.random()*1000;
+        $('input#captcha').focus();
+    });
 
-        $('div.login').parent().block({ message: 'Proses Autentikasi...' });
+    $('button#btn_login').click(function(){
         var username=$("#xusername").val();
         var password=$("#xpassword").val();
+        var captcha=$("#captcha").val();
 
-        if(username!="" && password!="")
+        if(username!="" && password!=""  && captcha!="")
         {
+
+            $('div.login').parent().block({ message: 'Proses Autentikasi...' });
             var access = sha256( username+password );
             $.ajax
             ({
@@ -43,6 +52,7 @@ $(function() {
                     access: access,
                     username: username,
                     password: password,
+                    captcha: captcha,
                 },
                 success:function(response) {
                     $('div.login').parent().unblock();
@@ -52,7 +62,7 @@ $(function() {
                     if(data.success){
                         $('div.container').block({ message: 'Autentikasi berhasil...' });
                         //alert(data.goto_url);
-                        window.location.href=data.goto_url;
+                        //window.location.href=data.goto_url;
                         $('div.container').unblock();
                     }
                     else{
@@ -75,7 +85,14 @@ $(function() {
             });
         }else
         {
-            alert("Silahkan isi username dan password");
+            console.log('error');
+            if($('input#xusername').val().trim()=='')
+                $('input#xusername').addClass("is-invalid");
+            if($('input#xpassword').val().trim()=='')
+                $('input#xpassword').addClass("is-invalid");
+            if($('input#captcha').val().trim()=='')
+                $('input#captcha').addClass("is-invalid");
+            alert("Silahkan lengkapi isian form login!");
         }
 
         return false;
