@@ -75,6 +75,16 @@
                                     <form action="#">
                                         <div class="form-row">
                                             <div class="form-group mb-2 col-3">
+                                                <label class="text-label d-block">BLTH REK</label>
+                                                <select id="sel_blth" class="selectpicker select-sm show-tick" data-size="5">
+                                                    <option value="<?php echo date('Ym') ?>" selected="selected"><?php echo date('Ym') ?></option>
+                                                    <option data-divider="true"></option>
+                                                    <option value='<?php echo date('Ym', strtotime("-1 month")) ?>'><?php echo date('Ym', strtotime("-1 month")) ?></option>
+                                                    <option value='<?php echo date('Ym', strtotime("-2 month")) ?>'><?php echo date('Ym', strtotime("-2 month")) ?></option>
+                                                    <option value='<?php echo date('Ym', strtotime("-3 month")) ?>'><?php echo date('Ym', strtotime("-3 month")) ?></option>
+                                                </select>
+                                            </div>
+                                            <div class="form-group mb-2 col-3">
                                                 <label class="text-label d-block">UID</label>
                                                 <select id="sel_unitupi" class="selectpicker show-tick" data-size="5" data-inc-semua="T" >
                                                     <option disabled>Pilih Unit Induk</option>
@@ -102,16 +112,6 @@
                                                 <label class="text-label d-block"><small>RBM</small></label>
                                                 <select id="sel_rbm" title="RBM" class="selectpicker show-tick" data-size="5" >
                                                     <!-- <option value="00">SEMUA RBM</option> -->
-                                                </select>
-                                            </div>
-                                            <div class="form-group mb-2 col-3">
-                                                <label class="text-label d-block">BLTH REK</label>
-                                                <select id="sel_blth" class="selectpicker select-sm show-tick" data-size="5">
-                                                    <option value="<?php echo date('Ym') ?>" selected="selected"><?php echo date('Ym') ?></option>
-                                                    <option data-divider="true"></option>
-                                                    <option value='<?php echo date('Ym', strtotime("-1 month")) ?>'><?php echo date('Ym', strtotime("-1 month")) ?></option>
-                                                    <option value='<?php echo date('Ym', strtotime("-2 month")) ?>'><?php echo date('Ym', strtotime("-2 month")) ?></option>
-                                                    <option value='<?php echo date('Ym', strtotime("-3 month")) ?>'><?php echo date('Ym', strtotime("-3 month")) ?></option>
                                                 </select>
                                             </div>
                                         </div>

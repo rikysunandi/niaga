@@ -42,7 +42,7 @@ $(document).ready(function () {
 
       $('#sel_petugas').empty();
       $('#sel_rbm').empty();
-      $.getJSON('../controller/referensi/getPetugas.php?unitup='+$('#sel_unitup').val()+'&blth='+$('#sel_blth').val(), function(data){
+      $.getJSON('../controller/referensi/getPetugasPemutusan.php?unitup='+$('#sel_unitup').val()+'&blth='+$('#sel_blth').val(), function(data){
           
           $.each(data.rows,function(i,v){
               $('#sel_petugas').append('<option value="'+v.kode+'">'+v.nama+'</option>');
