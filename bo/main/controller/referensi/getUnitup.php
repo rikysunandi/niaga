@@ -10,7 +10,7 @@ $unitup=$_SESSION['unitup'];
 $response = array();
 
 if($show_all=='Y')
-	$stmt = sqlsrv_query($conn, "select * from m_unitup where unitap='$unitap' order by NAMA");
+	$stmt = sqlsrv_query($conn, " select * from m_unitup where unitap='$unitap' order by NAMA");
 else{
 	if($unitup!='')
 		$stmt = sqlsrv_query($conn, "select * from m_unitup where unitap='$unitap' and unitup='$unitup' order by NAMA");
