@@ -145,6 +145,7 @@
                     <li><a href="rekap-rpp-onsite.php">Rekap RPP On Site</a></li>
                     <li><a href="rekap-rpp-onsite-petugas.php">Rekap Realisasi per Petugas</a></li>
                     <li><a href="mon-rpp-onsite.php">Detail RPP On Site</a></li>
+                    <li><a href="mon-rpp-onsite-sisa.php">Detail Sisa WO</a></li>
                     <!-- <li><a href="urut-langkah-rpp.php">Pembentukan Urut Langkah RPP</a></li>
                     <li><a href="rekap-rpp-onsite.php">Rekap RPP On Site  per ULP</a></li>
                     <li><a href="rekap-rpp.php">Rekap RPP On Site per Petugas</a></li>
