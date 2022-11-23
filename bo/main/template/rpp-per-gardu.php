@@ -180,7 +180,7 @@
     
     <!-- <script src="../../assets/plugins/moment/moment.min.js"></script>
     <script src="../../assets/plugins/bootstrap-daterangepicker/daterangepicker.js"></script> -->
-    <script src="https://maps.googleapis.com/maps/api/js?key=AIzaSyD0TuTeVzIMdevT3Rfc0BrVDKy466Tdsnc"></script>
+    <script src="https://maps.googleapis.com/maps/api/js?key=AIzaSyCmTOVYVndxhvTkvCx8eBYBadsM1iYQrv8"></script>
 
     <script src="../../assets/plugins/block-ui/jquery.blockUI.js"></script>
     <script src="./../../assets/plugins/jstree/dist/jstree.min.js"></script>

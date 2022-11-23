@@ -269,7 +269,7 @@
     <script src="../../assets/plugins/bootstrap-daterangepicker/daterangepicker.js"></script>
     <script src="../../assets/plugins/viewer/viewer.js"></script>
 
-    <script src="https://maps.googleapis.com/maps/api/js?key=AIzaSyD0TuTeVzIMdevT3Rfc0BrVDKy466Tdsnc"></script>
+    <script src="https://maps.googleapis.com/maps/api/js?key=AIzaSyCmTOVYVndxhvTkvCx8eBYBadsM1iYQrv8"></script>
     <!-- <script src="https://cdn.jsdelivr.net/gmap3/7.2.0/gmap3.min.js"></script> -->
     <!-- <script src="https://unpkg.com/@googlemaps/markerclustererplus/dist/index.min.js"></script> -->
 

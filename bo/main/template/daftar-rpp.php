@@ -259,7 +259,7 @@
     
     <script src="../../assets/plugins/moment/moment.min.js"></script>
     <script src="../../assets/plugins/bootstrap-daterangepicker/daterangepicker.js"></script>
-    <script src="https://maps.googleapis.com/maps/api/js?key=AIzaSyD0TuTeVzIMdevT3Rfc0BrVDKy466Tdsnc"></script>
+    <script src="https://maps.googleapis.com/maps/api/js?key=AIzaSyCmTOVYVndxhvTkvCx8eBYBadsM1iYQrv8"></script>
 
     <script src="../../assets/plugins/gmaps/gmap3.js"></script>
     <!-- <script src="../../assets/plugins/gmaps/gmap-context-menu.js"></script> -->
