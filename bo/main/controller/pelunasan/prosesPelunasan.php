@@ -1,5 +1,5 @@
 <?php
-
+session_start();
 ini_set('upload_max_filesize', '20M');
 ini_set('post_max_size', '20M');
 ini_set('max_execution_time', 0);
@@ -19,7 +19,8 @@ $unitup = $_POST['unitup'];
 $ori_filename = $_POST['ori_filename'];
 $filename = $_POST['filename'];
 $kodegerak = $_POST['kodegerak'];
-$user = 'SYSTEM';
+//$user = 'SYSTEM';
+$user = $_SESSION['username'];
 
 $params = array(
         array($user, SQLSRV_PARAM_IN),
