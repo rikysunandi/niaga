@@ -9,6 +9,16 @@ $(function() {
         decimals: 1
     });
 
+    var colours="";
+    var alignments="";
+    var panel_width = $('.content-body').width();
+
+    $('#sel_unit').selectpicker('val', '00');
+    $('#sel_blth').selectpicker('refresh');
+
+    var unitap=$('#sel_unit').selectpicker('val');
+    var blth=$('#sel_blth').selectpicker('val');
+
     $('div.card').block({ message: '...' });
     $('div#card_ts_p2tl').block({ message: 'Mengambil data...' });
     $('div#card_ts_p2tl_akhir').block({ message: 'Mengambil data...' });
@@ -21,6 +31,54 @@ $(function() {
     $('div#card_saldo_detail').block({ message: 'Mengambil data...' });
     $('div#card_rekap_blocking table tbody').empty();
 
+
+    $('div#peta_rata_rata_saldo_tunggakan').block({ message: 'Mengambil data...' });
+    $.getJSON('../controller/getRataRataSaldoTunggakan.php?unitap='+unitap+'&blth='+blth, function(data){
+        var tr = '';
+        $.each(data.rows, function(k,v){
+
+            $('#'+v.unitap+' path').removeClass('default');
+            if(v.realisasi>=110){
+                $('#'+v.unitap+' path').addClass('os');
+                tr += '<tr class="tr-os">';
+            }else if(v.realisasi>=100){
+                $('#'+v.unitap+' path').addClass('mr');
+                tr += '<tr class="tr-mr">';
+            }else if(v.realisasi>=80){
+                $('#'+v.unitap+' path').addClass('ur');
+                tr += '<tr class="tr-ur">';
+            }else if(v.realisasi>=0){
+                $('#'+v.unitap+' path').addClass('ni');
+                tr += '<tr class="tr-ni">';
+            }
+            $('#'+v.unitap+' path').attr('title', v.nama+' ('+v.realisasi+'%)')
+                                    .attr('data-original-title', v.nama+' ('+v.realisasi+'%)')
+                                    .tooltip('update');
+
+            tr += '<td class="text-center">'+v.unitap+'</td>';
+            tr += '<td class="text-right">'+v.pal_tagsus+'</td>';
+            tr += '<td class="text-right">'+v.rata2_saldo_tunggakan+'</td>';
+            tr += '<td class="text-right">'+v.target+'</td>';
+            tr += '<td class="text-right">'+v.realisasi+'%</td>';
+            tr += '<td class="text-right">'+v.kali_nihil+'</td>';
+            tr += '</tr>';
+
+        });
+
+        var tfoot = '<tr>';
+        tfoot += '<td class="text-center">TOTAL</td>';
+        tfoot += '<td class="text-right">'+(data.uid.pal_tagsus)+'</td>';
+        tfoot += '<td class="text-right">'+(data.uid.rata2_saldo_tunggakan)+'</td>';
+        tfoot += '<td class="text-right">'+(data.uid.target)+'</td>';
+        tfoot += '<td class="text-right">'+(data.uid.realisasi)+'%</td>';
+        tfoot += '<td class="text-right">'+(data.uid.kali_nihil)+'</td>';
+        tfoot += '</tr>';
+
+        $('div#peta_rata_rata_saldo_tunggakan table tbody').append(tr);
+        $('div#peta_rata_rata_saldo_tunggakan table tfoot').append(tfoot);
+        $('div#peta_rata_rata_saldo_tunggakan').unblock();
+
+    });
 
     $.getJSON('../controller/ts_p2tl/getDashboardTSP2TLUnit.php', function(data){
         $('#tgl_data').html('tanggal data: '+data.tgl_data);
@@ -545,32 +603,6 @@ $(function() {
 
         $('div#card_blocking_token').unblock();
 
-
-        var tr = '';
-        $.each(data.rows, function(k,v){
-            tr += '<tr>';
-            tr += '<td>'+v.unit+'</td>';
-            tr += '<td>'+v.nama+'</td>';
-            tr += '<td>'+v.jml_plg+'</td>';
-            tr += '<td>'+v.jml_harus_diblock+'</td>';
-            tr += '<td>'+v.jml_blocking+'</td>';
-            tr += '<td>'+v.jml_blm_blocking+'</td>';
-            tr += '<td>'+v.persen_blocking+'%</td>';
-            tr += '</tr>';
-        });
-
-        tr += '<tr>';
-        tr += '<td></td>';
-        tr += '<td><strong>TOTAL</strong></td>';
-        tr += '<td><strong>'+Format.to(data.total_jml_plg)+'</strong></td>';
-        tr += '<td><strong>'+Format.to(data.total_jml_harus_diblock)+'</strong></td>';
-        tr += '<td><strong>'+Format.to(data.total_jml_blocking)+'</strong></td>';
-        tr += '<td><strong>'+Format.to(data.total_jml_blm_blocking)+'</strong></td>';
-        tr += '<td><strong>'+data.total_persen_blocking+'%</strong></td>';
-        tr += '</tr>';
-
-        $('div#card_rekap_blocking table tbody').append(tr);
-        $('div#card_rekap_blocking').unblock();
 
 
 
