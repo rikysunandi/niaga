@@ -65,8 +65,11 @@
                                     </div>
  -->
                                     <button type="button" id="btn_login" class="btn btn-primary btn-block text-uppercase mb-2 rounded-pill shadow-sm">Sign in</button>
-                                    <div class="text-center text-info d-flex justify-content-between mt-4">
+                                    <div class="text-center text-info d-flex justify-content-between mt-4 mb-4">
                                         <small>*untuk internal PLN, silahkan menggunakan username login email korporat (tanpa pusat)</small>
+                                    </div>
+                                    <div class="mt-4 float-right">
+                                        <a href="https://forms.gle/JBRkgumCz1p8kSi86" target="_blank" class="btn btn-link" ><small>Daftar atau Update User</small></a>
                                     </div>
                                 </form>
                             </div>
