@@ -227,6 +227,6 @@
     <script src="../../assets/plugins/block-ui/jquery.blockUI.js"></script>
 
     <script src="../js/pages/apps.js?time=5"></script>
-    <script src="../js/pages/efektivitas-pemutusan.js"></script>
+    <script src="../js/pages/efektivitas-pemutusan.js?time=3"></script>
 </body>
 </html>

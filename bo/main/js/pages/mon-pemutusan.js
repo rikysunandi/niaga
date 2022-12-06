@@ -5,7 +5,7 @@ $(document).ready(function () {
     const queryString = window.location.search;
     const urlParams = new URLSearchParams(queryString);
 
-    var unitupi, unitap, unitup, petugas, blth, tgl_pemutusan_from, tgl_pemutusan_to;
+    var unitupi, unitap, unitup, petugas, blth, tgl_pemutusan_from, tgl_pemutusan_to, keterangan;
 
     if(urlParams.has('tgl_pemutusan_from')){
       tgl_pemutusan_from = moment(urlParams.get('tgl_pemutusan_from')).format('DD/MM/YYYY');
@@ -18,11 +18,7 @@ $(document).ready(function () {
     }else{
       tgl_pemutusan_to = moment();
     }
-
-    if(urlParams.has('blth')){
-      $('#sel_blth').val(urlParams.get('blth'));
-    }
-
+    
     $('.input-daterange-datepicker').daterangepicker({
         buttonClasses: ['btn', 'btn-sm'],
         applyClass: 'btn-danger',
@@ -34,6 +30,17 @@ $(document).ready(function () {
           format: 'DD/MM/YYYY'
         }
     });
+
+    if(urlParams.has('blth')){
+      blth=urlParams.get('blth');
+      //$('#sel_blth').val(urlParams.get('blth'));
+      $('#sel_blth').selectpicker('val', blth);
+    }
+    if(urlParams.has('keterangan')){
+      keterangan=urlParams.get('keterangan');
+      //$('#sel_keterangan').val(urlParams.get('keterangan'));
+      $('#sel_keterangan').selectpicker('val', keterangan);
+    }
 
     $('#sel_unitup').change(function(){
 
@@ -50,7 +57,7 @@ $(document).ready(function () {
             $('#sel_petugas').selectpicker('val', urlParams.get('petugas'));
             console.log('petugas', urlParams.get('petugas'));
 
-            setTimeout(function(){ $('#btn_cari').trigger('click'); }, 500);
+            setTimeout(function(){ $('#btn_cari').trigger('click'); }, 1000);
           }
           else{
             $('#sel_petugas').selectpicker('val', "00");
@@ -149,7 +156,7 @@ $(document).ready(function () {
                   // //this.disable(); // disable button
                   // console.log('dt', dt);
                   // console.log('node', node);
-                  window.open('../controller/pemutusan/expCSVpemutusan.php?unitupi='+unitupi+'&unitap='+unitap+'&unitup='+unitup+'&petugas='+petugas+'&blth='+blth+'&tgl_pemutusan_from='+tgl_pemutusan_from+'&tgl_pemutusan_to='+tgl_pemutusan_to );
+                  window.open('../controller/pemutusan/expCSVpemutusan.php?unitupi='+unitupi+'&unitap='+unitap+'&unitup='+unitup+'&petugas='+petugas+'&blth='+blth+'&tgl_pemutusan_from='+tgl_pemutusan_from+'&tgl_pemutusan_to='+tgl_pemutusan_to+'&keterangan='+keterangan );
               }
             },
             {
@@ -304,6 +311,7 @@ $(document).ready(function () {
         unitap = $('#sel_unitap').val();
         unitup = $('#sel_unitup').val();
         petugas = $('#sel_petugas').val();
+        keterangan = $('#sel_keterangan').val();
         blth = $('#sel_blth').val();
         tgl_pemutusan_from = $('#tgl_pemutusan_range')
                                 .data('daterangepicker')
@@ -318,7 +326,7 @@ $(document).ready(function () {
         $('#map').remove();
         container.append('<div id="map"></div>');
 
-        table.ajax.url( '../controller/pemutusan/getDataPemutusan.php?unitupi='+unitupi+'&unitap='+unitap+'&unitup='+unitup+'&petugas='+petugas+'&blth='+blth+'&tgl_pemutusan_from='+tgl_pemutusan_from+'&tgl_pemutusan_to='+tgl_pemutusan_to ).load();
+        table.ajax.url( '../controller/pemutusan/getDataPemutusan.php?unitupi='+unitupi+'&unitap='+unitap+'&unitup='+unitup+'&petugas='+petugas+'&blth='+blth+'&tgl_pemutusan_from='+tgl_pemutusan_from+'&tgl_pemutusan_to='+tgl_pemutusan_to+'&keterangan='+keterangan ).load();
         //table.ajax.url( '../controller/pemutusan/getDatapemutusan.php?unitupi='+$('#sel_unitupi').val()+'&unitap='+$('#sel_unitap').val()+'&unitup='+$('#sel_unitup').val()+'&blth='+$('#sel_blth').val() ).load();
     });
 

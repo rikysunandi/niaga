@@ -110,7 +110,7 @@ $(document).ready(function () {
                 //console.log('row', row);
                 var efektivitas = data;
                 //window.open("urut-langkah-rpp.php?unitupi="+unitupi+"&unitap="+unitap+"&unitup="+unitup+"&petugas="+petugas_dipilih+"&rpp="+rpp, "_blank");
-                return '<a class="text-primary" href="mon-pemutusan.php?unitupi='+row.UNITUPI+'&unitap='+row.UNITAP+'&unitup='+row.UNITUP+'&petugas='+row.KODEPETUGAS+'&blth='+row.BLTH+'&tgl_pemutusan_from='+row.TGL_PEMUTUSAN+'&tgl_pemutusan_to='+row.TGL_PEMUTUSAN+'" target="_blank" role="button">'+$.fn.dataTable.render.number(".", ",", 0, '').display(data)+'</a>';
+                return '<a class="text-primary" href="mon-pemutusan.php?unitupi='+row.UNITUPI+'&unitap='+row.UNITAP+'&unitup='+row.UNITUP+'&petugas='+row.KODEPETUGAS+'&blth='+row.BLTH+'&tgl_pemutusan_from='+row.TGL_PEMUTUSAN+'&tgl_pemutusan_to='+row.TGL_PEMUTUSAN+'&keterangan=NOT_LUNAS_BY_SYSTEM'+'" target="_blank" role="button">'+$.fn.dataTable.render.number(".", ",", 0, '').display(data)+'</a>';
                 //return rpp;
             },
           },
@@ -269,7 +269,8 @@ $(document).ready(function () {
         tgl_pemutusan_to = $('#tgl_pemutusan_range')
                                 .data('daterangepicker')
                                 .endDate.format('YYYY-MM-DD');
-        table.ajax.url( '../controller/pemutusan/getEfektivitasPemutusan.php?unitupi='+unitupi+'&unitap='+unitap+'&unitup='+unitup+'&blth='+blth+'&tgl_pemutusan_from='+tgl_pemutusan_from+'&tgl_pemutusan_to='+tgl_pemutusan_to ).load();
+
+        table.ajax.url( '../controller/pemutusan/getEfektivitasPemutusan.php?unitupi='+unitupi+'&unitap='+unitap+'&unitup='+unitup+'&blth='+blth+'&tgl_pemutusan_from='+tgl_pemutusan_from+'&tgl_pemutusan_to='+tgl_pemutusan_to+'&keterangan=NOT_LUNAS_BY_SYSTEM' ).load();
     });
 
 

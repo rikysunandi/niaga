@@ -97,6 +97,20 @@
                                                     <option value="00">SEMUA PETUGAS</option>
                                                 </select>
                                             </div>
+                                            <div class="form-group mb-2 mr-4">
+                                                <label class="text-label d-block"><small>KETERANGAN</label></small>
+                                                <select id="sel_keterangan" title="KETERANGAN" class="selectpicker show-tick" data-size="5" >
+                                                    <option value="00">SEMUA DATA</option>
+                                                    <option value="LUNAS BY SYSTEM">LUNAS BY SYSTEM</option>
+                                                    <option value="LUNAS MANDIRI">LUNAS MANDIRI</option>
+                                                    <option value="LUNAS DITEMPAT">LUNAS DITEMPAT</option>
+                                                    <option value="SEGEL MCB">SEGEL MCB</option>
+                                                    <option value="CABUT MCB">CABUT MCB</option>
+                                                    <option value="CABUT APP">CABUT APP</option>
+                                                    <option value="RUMAH KOSONG">RUMAH KOSONG</option>
+                                                    <option value="NOT_LUNAS_BY_SYSTEM">SELAIN LUNAS BY SYSTEM</option>
+                                                </select>
+                                            </div>
                                             <div class="form-group mb-2 col-3">
                                                 <label class="text-label d-block">BLTH REK</label>
                                                 <select id="sel_blth" class="selectpicker select-sm show-tick" data-size="5">
@@ -266,6 +280,6 @@
     <script src="../../assets/plugins/block-ui/jquery.blockUI.js"></script>
 
     <script src="../js/pages/apps.js?time=5"></script>
-    <script src="../js/pages/mon-pemutusan.js"></script>
+    <script src="../js/pages/mon-pemutusan.js?time=3"></script>
 </body>
 </html>

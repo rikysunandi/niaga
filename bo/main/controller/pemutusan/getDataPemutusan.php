@@ -11,6 +11,7 @@ $petugas = $_REQUEST['petugas'];
 $blth = $_REQUEST['blth'];
 $tgl_pemutusan_from = $_REQUEST['tgl_pemutusan_from'];
 $tgl_pemutusan_to = $_REQUEST['tgl_pemutusan_to'];
+$keterangan = $_REQUEST['keterangan'];
 $user = rand (1,5);
 
 $params = array(
@@ -22,9 +23,10 @@ $params = array(
         array($blth, SQLSRV_PARAM_IN),
         array($tgl_pemutusan_from, SQLSRV_PARAM_IN),
         array($tgl_pemutusan_to, SQLSRV_PARAM_IN),
+        array($keterangan, SQLSRV_PARAM_IN),
     );
 
-$sql = "EXEC sp_vw_Create_Data_Pemutusan @UserID = ?, @Unitupi = ?, @Unitap = ?, @Unitup = ?, @KODEPETUGAS = ?, @BLTH = ?, @Tgl_Pemutusan_From = ?, @Tgl_Pemutusan_To = ? ";
+$sql = "EXEC sp_vw_Create_Data_Pemutusan @UserID = ?, @Unitupi = ?, @Unitap = ?, @Unitup = ?, @KODEPETUGAS = ?, @BLTH = ?, @Tgl_Pemutusan_From = ?, @Tgl_Pemutusan_To = ?, @Keterangan = ? ";
 $stmt = sqlsrv_prepare($conn, $sql, $params);
 
 //sqlsrv_execute($stmt);
