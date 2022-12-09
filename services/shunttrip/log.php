@@ -49,7 +49,7 @@ if($key=='338ef7d4-0368-5aa0-9c0b-4aae493f7eb7'){
     }
 }else{
     $response['success'] = false;
-    $msg = '#0#Key tidak valid!';
+    $msg = '#0#Api key tidak valid!';
 }
 
 
