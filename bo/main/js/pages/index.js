@@ -1,1798 +1,705 @@
 $(function() {
     "use strict";
 
-    var chart_dapot_daya, chart_dapot_daya_unit, chart_dapot_bp, chart_dapot_bp_unit, 
-        chart_dapot_rab, chart_dapot_rab_unit, chart_cluster, chart_cluster_unit, chart_jenis, chart_jenis_unit, 
-        chart_tmp, chart_tmp_unit, chart_alasan, chart_alasan_unit;
+    var chart_unit, chart_akhir_unit, chart_akhir_tetap_unit, chart_blocking, chart_segmen_tegangan, chart_alasan, chart_ket_transaksi;
+
+        // Parsing miss-matches and typo's
+    var Format = wNumb({
+        thousand: '.',
+        decimals: 1
+    });
+
+    var colours="";
+    var alignments="";
+    var panel_width = $('.content-body').width();
 
     $('#sel_unit').selectpicker('val', '00');
+    $('#sel_blth').selectpicker('refresh');
+
+    var unitap=$('#sel_unit').selectpicker('val');
+    var blth=$('#sel_blth').selectpicker('val');
+
+    $('div.card').block({ message: '...' });
+    $('div#card_ts_p2tl').block({ message: 'Mengambil data...' });
+    $('div#card_ts_p2tl_akhir').block({ message: 'Mengambil data...' });
+    $('div#card_ts_p2tl_akhir_tetap').block({ message: 'Mengambil data...' });
+    $('div#card_blocking_token').block({ message: 'Mengambil data...' });
+    $('div#card_saldo_awal').block({ message: 'Mengambil data...' });
+    $('div#card_pengurangan').block({ message: 'Mengambil data...' });
+    $('div#card_saldo_akhir').block({ message: 'Mengambil data...' });
+    $('div#card_saldo_akhir_tetap').block({ message: 'Mengambil data...' });
+    $('div#card_saldo_detail').block({ message: 'Mengambil data...' });
+    $('div#card_rekap_blocking table tbody').empty();
 
 
-    $('div#pasang_baru').block({ message: 'Mengambil data...' });
-    $.getJSON('../controller/getDashboardPotensiJenisTransaksi.php?jenis_transaksi=pasang baru', function(data){
-        $('#dapot_jenis_transaksi #pasang_baru #jml_agenda').html(data.jml_agenda);
-        $('#dapot_jenis_transaksi #pasang_baru #jml_daya').html(data.jml_daya);
-        $('#dapot_jenis_transaksi #pasang_baru #jml_rpbp').html(data.jml_rpbp);
-        $('#dapot_jenis_transaksi #pasang_baru #jml_rprab').html(data.jml_rprab);
-        $('div#pasang_baru').unblock();
-    });
-    $('div#perubahan_daya').block({ message: 'Mengambil data...' });
-    $.getJSON('../controller/getDashboardPotensiJenisTransaksi.php?jenis_transaksi=perubahan daya', function(data){
-        $('#dapot_jenis_transaksi #perubahan_daya #jml_agenda').html(data.jml_agenda);
-        $('#dapot_jenis_transaksi #perubahan_daya #jml_daya').html(data.jml_daya);
-        $('#dapot_jenis_transaksi #perubahan_daya #jml_rpbp').html(data.jml_rpbp);
-        $('#dapot_jenis_transaksi #perubahan_daya #jml_rprab').html(data.jml_rprab);
-        $('div#perubahan_daya').unblock();
-    });
-    $('div#sambung_kembali').block({ message: 'Mengambil data...' });
-    $.getJSON('../controller/getDashboardPotensiJenisTransaksi.php?jenis_transaksi=sambung kembali', function(data){
-        $('#dapot_jenis_transaksi #sambung_kembali #jml_agenda').html(data.jml_agenda);
-        $('#dapot_jenis_transaksi #sambung_kembali #jml_daya').html(data.jml_daya);
-        $('#dapot_jenis_transaksi #sambung_kembali #jml_rpbp').html(data.jml_rpbp);
-        $('#dapot_jenis_transaksi #sambung_kembali #jml_rprab').html(data.jml_rprab);
-        $('div#sambung_kembali').unblock();
-    });
-
-    $('div#non_ge').block({ message: 'Mengambil data...' });
-    $.getJSON('../controller/getDashboardPotensi.php?klp_plg=NON_GE', function(data){
-        $('#dapot #non_ge #jml_agenda').html(data.jml_agenda);
-        $('#dapot #non_ge #jml_daya').html(data.jml_daya);
-        $('#dapot #non_ge #jml_rpbp').html(data.jml_rpbp);
-        $('#dapot #non_ge #jml_rprab').html(data.jml_rprab);
-        $('div#non_ge').unblock();
-    });
-    $('div#ge').block({ message: 'Mengambil data...' });
-    $.getJSON('../controller/getDashboardPotensi.php?klp_plg=GE', function(data){
-        $('#dapot #ge #jml_agenda').html(data.jml_agenda);
-        $('#dapot #ge #jml_daya').html(data.jml_daya);
-        $('#dapot #ge #jml_rpbp').html(data.jml_rpbp);
-        $('#dapot #ge #jml_rprab').html(data.jml_rprab);
-        $('div#ge').unblock();
-    });
-    $('div#tm').block({ message: 'Mengambil data...' });
-    $.getJSON('../controller/getDashboardPotensi.php?klp_plg=TM', function(data){
-        $('#dapot #tm #jml_agenda').html(data.jml_agenda);
-        $('#dapot #tm #jml_daya').html(data.jml_daya);
-        $('#dapot #tm #jml_rpbp').html(data.jml_rpbp);
-        $('#dapot #tm #jml_rprab').html(data.jml_rprab);
-        $('div#tm').unblock();
-    });
-
-    $('div#dapot_daya').block({ message: 'Mengambil data...' });
-    $.getJSON('../controller/getDashboardPotensiDaya.php', function(data){
-        var ctx = document.getElementById("chart_dapot_daya");
-        ctx.width = 220;
-        ctx.height = 220;
-        chart_dapot_daya = new Chart(ctx, {
-            type: 'pie',
-            data: {
-                datasets: [{
-                    data: data.jml_daya,
-                    backgroundColor: [
-                        '#135470',
-                        '#74BCC7',
-                        '#F2C36B',
-                        '#EC5B43',
-                        '#7F63F4',
-                        '#3D494A',
-                        '#9DA6AB',
-                    ],
-                    hoverBorderColor: [
-                        '#135470',
-                        '#74BCC7',
-                        '#F2C36B',
-                        '#EC5B43',
-                        '#7F63F4',
-                        '#3D494A',
-                        '#9DA6AB',
-                    ],
-                    hoverBorderWidth: 8,
-                    label: 'Daya'
-                }],
-                labels: data.klp_plg
-            },
-            options: {
-                responsive: true,
-                maintainAspectRatio: false,
-                elements: {
-                    arc: {
-                        borderWidth: 0
-                    }
-                },
-                legend: {
-                    position: 'bottom',
-                    display: 0,
-                    labels: {
-                        // fontFamily: 'CircularStdBook',
-                        fontSize: 8,
-                    },
-                },
-                tooltips:{
-                    titleFontSize: 8,
-                    bodyFontSize: 8,
-                    footerFontSize: 8,
-                },
-                hover: {
-                    onHover: (event, chartElement) => {
-                        event.target.style.cursor = chartElement[0] ? 'pointer' : 'default';
-                    }
-                },
-                plugins: {
-                    labels: [
-                        {
-                          render: 'label',
-                          fontSize: 7,
-                          fontColor:  [
-                                '#135470',
-                                '#74BCC7',
-                                '#F2C36B',
-                                '#EC5B43',
-                                '#7F63F4',
-                                '#3D494A',
-                                '#9DA6AB',
-                            ],
-                          precision: 0,
-                          position: 'outside',
-                          arc: true,
-                          textMargin: 2,
-                        },
-                        {
-                          render: 'value',
-                          fontSize: 9,
-                          fontColor: 'white',
-                          precision: 1,
-                          position: 'border'
-                        },
-                        {
-                          render: 'percentage',
-                          fontSize: 9,
-                          fontColor: 'white',
-                          precision: 0,
-                          position: 'default'
-                        }
-                    ]
-                },
-            }
-        });
-
-        $('div#dapot_daya').unblock();
-
-    });
-
-    $('div#dapot_daya_unit').block({ message: 'Mengambil data...' });
-    $.getJSON('../controller/getDashboardPotensiDayaUnit.php', function(data){
-
-        var ctx = document.getElementById("chart_dapot_daya_unit");
-        ctx.height = 220;
-        chart_dapot_daya_unit = new Chart(ctx, {
-            type: 'bar',
-            data: {
-                labels: data.singkatan,
-                datasets: [
-                    {
-                        label: "NON GE",
-                        type: "bar",
-                        backgroundColor: "#135470",
-                        backgroundColorHover: "#135470",
-                        data: data.jml_daya_non_ge,
-                    },
-                    {
-                        label: "GE",
-                        type: "bar",
-                        backgroundColor: "#74BCC7",
-                        backgroundColorHover: "#74BCC7",
-                        data: data.jml_daya_ge,
-                    },
-                    {
-                        label: "TM",
-                        type: "bar",
-                        backgroundColor: "#F2C36B",
-                        backgroundColorHover: "#F2C36B",
-                        data: data.jml_daya_tm,
-                    },
-                ]
-            },
-            options: {
-                responsive: true, 
-                maintainAspectRatio: false, 
-                barRadius: 2,
-                title: {
-                    display: false,
-                    text: 'Rekap Potensi'
-                },
-                tooltips: {
-                   mode: 'label',
-                   bodyFontSize: 10,
-                   callbacks: {
-                      label: function(t, d) {
-                         var dstLabel = d.datasets[t.datasetIndex].label;
-                         var yLabel = t.yLabel;
-                         return dstLabel + ': ' + yLabel + ' mVA';
-                      }
-                   }
-                },
-                legend: {
-                    position: 'bottom',
-                    display: true,
-                    labels: {
-                        fontSize: 10,
-                    },
-                },
-                plugins: {
-                    labels: []
-                },
-                scales: {
-                    yAxes: [{
-                        display: false,
-                        stacked: true,
-                        gridLines: {
-                            display: false,
-                            drawBorder: false
-                        },
-                        ticks: {
-                            beginAtZero: true
-                        }
-                    }],
-                    xAxes: [{
-                        stacked: true,
-                        gridLines: {
-                            display: false,
-                            drawBorder: false
-                        },
-                    }]
-                }
-            }
-        });
-
-        $('div#dapot_daya_unit').unblock();
-
-    });
-
-    $('div#dapot_bp').block({ message: 'Mengambil data...' });
-    $.getJSON('../controller/getDashboardPotensiBP.php', function(data){
-        var ctx = document.getElementById("chart_dapot_bp");
-        ctx.width = 220;
-        ctx.height = 220;
-        chart_dapot_bp = new Chart(ctx, {
-            type: 'pie',
-            data: {
-                datasets: [{
-                    data: data.jml_rpbp,
-                    backgroundColor: [
-                        '#135470',
-                        '#74BCC7',
-                        '#F2C36B',
-                        '#EC5B43',
-                        '#7F63F4',
-                        '#3D494A',
-                        '#9DA6AB',
-                    ],
-                    hoverBorderColor: [
-                        '#135470',
-                        '#74BCC7',
-                        '#F2C36B',
-                        '#EC5B43',
-                        '#7F63F4',
-                        '#3D494A',
-                        '#9DA6AB',
-                    ],
-                    hoverBorderWidth: 8,
-                    label: 'bp'
-                }],
-                labels: data.klp_plg
-            },
-            options: {
-                responsive: true,
-                maintainAspectRatio: false,
-                elements: {
-                    arc: {
-                        borderWidth: 0
-                    }
-                },
-                legend: {
-                    position: 'bottom',
-                    display: 0,
-                    labels: {
-                        // fontFamily: 'CircularStdBook',
-                        fontSize: 8,
-                    },
-                },
-                tooltips:{
-                    titleFontSize: 8,
-                    bodyFontSize: 8,
-                    footerFontSize: 8,
-                },
-                hover: {
-                    onHover: (event, chartElement) => {
-                        event.target.style.cursor = chartElement[0] ? 'pointer' : 'default';
-                    }
-                },
-                plugins: {
-                    labels: [
-                        {
-                          render: 'label',
-                          fontSize: 7,
-                          fontColor:  [
-                                '#135470',
-                                '#74BCC7',
-                                '#F2C36B',
-                                '#EC5B43',
-                                '#7F63F4',
-                                '#3D494A',
-                                '#9DA6AB',
-                            ],
-                          precision: 0,
-                          position: 'outside',
-                          arc: true,
-                          textMargin: 2,
-                        },
-                        {
-                          render: 'value',
-                          fontSize: 9,
-                          fontColor: 'white',
-                          precision: 1,
-                          position: 'border'
-                        },
-                        {
-                          render: 'percentage',
-                          fontSize: 9,
-                          fontColor: 'white',
-                          precision: 0,
-                          position: 'default'
-                        }
-                    ]
-                },
-            }
-        });
-
-        $('div#dapot_bp').unblock();
-
-    });
-
-    $('div#dapot_bp_unit').block({ message: 'Mengambil data...' });
-    $.getJSON('../controller/getDashboardPotensiBPUnit.php', function(data){
-
-        var ctx = document.getElementById("chart_dapot_bp_unit");
-        ctx.height = 220;
-        chart_dapot_bp_unit = new Chart(ctx, {
-            type: 'bar',
-            data: {
-                labels: data.singkatan,
-                datasets: [
-                    {
-                        label: "NON GE",
-                        type: "bar",
-                        backgroundColor: "#135470",
-                        backgroundColorHover: "#135470",
-                        data: data.jml_rpbp_non_ge,
-                    },
-                    {
-                        label: "GE",
-                        type: "bar",
-                        backgroundColor: "#74BCC7",
-                        backgroundColorHover: "#74BCC7",
-                        data: data.jml_rpbp_ge,
-                    },
-                    {
-                        label: "TM",
-                        type: "bar",
-                        backgroundColor: "#F2C36B",
-                        backgroundColorHover: "#F2C36B",
-                        data: data.jml_rpbp_tm,
-                    },
-                ]
-            },
-            options: {
-                responsive: true, 
-                maintainAspectRatio: false, 
-                barRadius: 2,
-                title: {
-                    display: false,
-                    text: 'Rekap Potensi BP'
-                },
-                tooltips: {
-                   mode: 'label',
-                   bodyFontSize: 10,
-                   callbacks: {
-                      label: function(t, d) {
-                         var dstLabel = d.datasets[t.datasetIndex].label;
-                         var yLabel = t.yLabel;
-                         return dstLabel + ': ' + yLabel + ' mVA';
-                      }
-                   }
-                },
-                legend: {
-                    position: 'bottom',
-                    display: true,
-                    labels: {
-                        fontSize: 10,
-                    },
-                },
-                plugins: {
-                    labels: []
-                },
-                scales: {
-                    yAxes: [{
-                        display: false,
-                        stacked: true,
-                        gridLines: {
-                            display: false,
-                            drawBorder: false
-                        },
-                        ticks: {
-                            beginAtZero: true
-                        }
-                    }],
-                    xAxes: [{
-                        stacked: true,
-                        gridLines: {
-                            display: false,
-                            drawBorder: false
-                        },
-                    }]
-                }
-            }
-        });
-
-        $('div#dapot_bp_unit').unblock();
-
-    });
-
-    $('div#dapot_rab').block({ message: 'Mengambil data...' });
-    $.getJSON('../controller/getDashboardPotensiRAB.php', function(data){
-        var ctx = document.getElementById("chart_dapot_rab");
-        ctx.width = 220;
-        ctx.height = 220;
-        chart_dapot_rab = new Chart(ctx, {
-            type: 'pie',
-            data: {
-                datasets: [{
-                    data: data.jml_rprab,
-                    backgroundColor: [
-                        '#135470',
-                        '#74BCC7',
-                        '#F2C36B',
-                        '#EC5B43',
-                        '#7F63F4',
-                        '#3D494A',
-                        '#9DA6AB',
-                    ],
-                    hoverBorderColor: [
-                        '#135470',
-                        '#74BCC7',
-                        '#F2C36B',
-                        '#EC5B43',
-                        '#7F63F4',
-                        '#3D494A',
-                        '#9DA6AB',
-                    ],
-                    hoverBorderWidth: 8,
-                    label: 'rab'
-                }],
-                labels: data.klp_plg
-            },
-            options: {
-                responsive: true,
-                maintainAspectRatio: false,
-                elements: {
-                    arc: {
-                        borderWidth: 0
-                    }
-                },
-                legend: {
-                    position: 'bottom',
-                    display: 0,
-                    labels: {
-                        // fontFamily: 'CircularStdBook',
-                        fontSize: 8,
-                    },
-                },
-                tooltips:{
-                    titleFontSize: 8,
-                    bodyFontSize: 8,
-                    footerFontSize: 8,
-                },
-                hover: {
-                    onHover: (event, chartElement) => {
-                        event.target.style.cursor = chartElement[0] ? 'pointer' : 'default';
-                    }
-                },
-                plugins: {
-                    labels: [
-                        {
-                          render: 'label',
-                          fontSize: 7,
-                          fontColor:  [
-                                '#135470',
-                                '#74BCC7',
-                                '#F2C36B',
-                                '#EC5B43',
-                                '#7F63F4',
-                                '#3D494A',
-                                '#9DA6AB',
-                            ],
-                          precision: 0,
-                          position: 'outside',
-                          arc: true,
-                          textMargin: 2,
-                        },
-                        {
-                          render: 'value',
-                          fontSize: 9,
-                          fontColor: 'white',
-                          precision: 1,
-                          position: 'border'
-                        },
-                        {
-                          render: 'percentage',
-                          fontSize: 9,
-                          fontColor: 'white',
-                          precision: 0,
-                          position: 'default'
-                        }
-                    ]
-                },
-            }
-        });
-
-        $('div#dapot_rab').unblock();
-
-    });
-
-    $('div#dapot_rab_unit').block({ message: 'Mengambil data...' });
-    $.getJSON('../controller/getDashboardPotensiRABUnit.php', function(data){
-
-        var ctx = document.getElementById("chart_dapot_rab_unit");
-        ctx.height = 220;
-        chart_dapot_rab_unit = new Chart(ctx, {
-            type: 'bar',
-            data: {
-                labels: data.singkatan,
-                datasets: [
-                    {
-                        label: "NON GE",
-                        type: "bar",
-                        backgroundColor: "#135470",
-                        backgroundColorHover: "#135470",
-                        data: data.jml_rprab_non_ge,
-                    },
-                    {
-                        label: "GE",
-                        type: "bar",
-                        backgroundColor: "#74BCC7",
-                        backgroundColorHover: "#74BCC7",
-                        data: data.jml_rprab_ge,
-                    },
-                    {
-                        label: "TM",
-                        type: "bar",
-                        backgroundColor: "#F2C36B",
-                        backgroundColorHover: "#F2C36B",
-                        data: data.jml_rprab_tm,
-                    },
-                ]
-            },
-            options: {
-                responsive: true, 
-                maintainAspectRatio: false, 
-                barRadius: 2,
-                title: {
-                    display: false,
-                    text: 'Rekap Potensi RAB'
-                },
-                tooltips: {
-                   mode: 'label',
-                   bodyFontSize: 10,
-                   callbacks: {
-                      label: function(t, d) {
-                         var dstLabel = d.datasets[t.datasetIndex].label;
-                         var yLabel = t.yLabel;
-                         return dstLabel + ': ' + yLabel + ' mVA';
-                      }
-                   }
-                },
-                legend: {
-                    position: 'bottom',
-                    display: true,
-                    labels: {
-                        fontSize: 10,
-                    },
-                },
-                plugins: {
-                    labels: []
-                },
-                scales: {
-                    yAxes: [{
-                        display: false,
-                        stacked: true,
-                        gridLines: {
-                            display: false,
-                            drawBorder: false
-                        },
-                        ticks: {
-                            beginAtZero: true
-                        }
-                    }],
-                    xAxes: [{
-                        stacked: true,
-                        gridLines: {
-                            display: false,
-                            drawBorder: false
-                        },
-                    }]
-                }
-            }
-        });
-
-        $('div#dapot_rab_unit').unblock();
-
-    });
-
-    $('div#overview_daftung .card').block({ message: 'Mengambil data...' });
-    $.getJSON('../controller/getDashboardPermohonan.php', function(data){
-        $('#total_agenda').html(data.total_agenda);
-        $('#total_agenda_rab').html(data.total_agenda_rab);
-        $('#total_agenda_non_rab').html(data.total_agenda_non_rab);
-        $('#total_proses').html(data.total_proses);
-        $('#total_evaluasi').html(data.total_evaluasi);
-        $('#total_klasifikasi_rab_1').html(data.total_klasifikasi_rab_1);
-        $('#total_klasifikasi_rab_2').html(data.total_klasifikasi_rab_2);
-        $('#total_klasifikasi_rab_3').html(data.total_klasifikasi_rab_3);
-        $('#total_klasifikasi_rab_4').html(data.total_klasifikasi_rab_4);
-        $('#total_klasifikasi_rab_5').html(data.total_klasifikasi_rab_5);
-        $('#total_klasifikasi_rab_6').html(data.total_klasifikasi_rab_6);
-        $('#jam_upload_daftung').html('Jam upload: '+data.jam_upload_daftung);
-        $('div#overview_daftung .card').unblock();
-
-    });
-
-    $('div#card_permohonan_cluster').block({ message: 'Mengambil data...' });
-    $.getJSON('../controller/getDashboardPermohonanCluster.php', function(data){
-        var ctx = document.getElementById("chart_permohonan_cluster");
-        ctx.width = 220;
-        ctx.height = 220;
-        chart_cluster = new Chart(ctx, {
-            type: 'pie',
-            data: {
-                datasets: [{
-                    data: data.rupiah,
-                    backgroundColor: [
-                        '#135470',
-                        '#EC5B43',
-                        '#00838f',
-                        '#3D494A',
-                        '#9DA6AB',
-                    ],
-                    label: 'Rupiah'
-                }],
-                labels: data.jenis_rupiah
-            },
-            options: {
-                responsive: true,
-                maintainAspectRatio: false,
-                elements: {
-                    arc: {
-                        borderWidth: 0
-                    }
-                },
-                legend: {
-                    position: 'bottom',
-                    display: 0,
-                    labels: {
-                        // fontFamily: 'CircularStdBook',
-                        fontSize: 8,
-                    },
-                },
-                tooltips:{
-                    titleFontSize: 8,
-                    bodyFontSize: 8,
-                    footerFontSize: 8,
-                },
-                plugins: {
-                    labels: [
-                        {
-                          render: 'label',
-                          fontSize: 7,
-                          fontColor:  [
-                                '#135470',
-                                '#EC5B43',
-                                '#7F63F4',
-                                '#3D494A',
-                                '#9DA6AB',
-                            ],
-                          precision: 0,
-                          position: 'outside',
-                          arc: true,
-                          textMargin: 2,
-                        },
-                        {
-                          render: 'value',
-                          fontSize: 9,
-                          fontColor: 'white',
-                          precision: 1,
-                          position: 'border'
-                        },
-                        {
-                          render: 'percentage',
-                          fontSize: 9,
-                          fontColor: 'white',
-                          precision: 0,
-                          position: 'default'
-                        }
-                    ]
-                },
-            }
-        });
-
-        $('div#card_permohonan_cluster').unblock();
-
-    });
-
-    $('div#card_permohonan_cluster_unit').block({ message: 'Mengambil data...' });
-    $.getJSON('../controller/getDashboardPermohonanClusterUnit.php', function(data){
-
-        var ctx = document.getElementById("chart_permohonan_cluster_unit");
-        ctx.height = 220;
-        chart_cluster_unit = new Chart(ctx, {
-            type: 'bar',
-            data: {
-                labels: data.singkatan,
-                datasets: [
-                    {
-                        label: "RUPIAH BP",
-                        type: "bar",
-                        backgroundColor: "#135470",
-                        backgroundColorHover: "#135470",
-                        data: data.rp_bp,
-                    },
-                    {
-                        label: "KEKURANGAN BP",
-                        type: "bar",
-                        backgroundColor: "#EC5B43",
-                        backgroundColorHover: "#EC5B43",
-                        data: data.kurang_bp,
-                    },
-                    {
-                        label: "KELEBIHAN BP",
-                        type: "bar",
-                        backgroundColor: "#00838f",
-                        backgroundColorHover: "#00838f",
-                        data: data.lebih_bp,
-                    },
-                ]
-            },
-            options: {
-                responsive: true, 
-                maintainAspectRatio: false, 
-                barRadius: 2,
-                title: {
-                    display: false,
-                    text: 'Rekap Cluster'
-                },
-                tooltips: {
-                   mode: 'label',
-                   bodyFontSize: 10,
-                   callbacks: {
-                      label: function(t, d) {
-                         var dstLabel = d.datasets[t.datasetIndex].label;
-                         var yLabel = t.yLabel;
-                         return dstLabel + ': Rp ' + yLabel + ' M';
-                      }
-                   }
-                },
-                legend: {
-                    position: 'bottom',
-                    display: true,
-                    labels: {
-                        fontSize: 10,
-                    },
-                },
-                plugins: {
-                    labels: []
-                },
-                scales: {
-                    yAxes: [{
-                        display: false,
-                        stacked: true,
-                        gridLines: {
-                            display: false,
-                            drawBorder: false
-                        },
-                        ticks: {
-                            beginAtZero: true
-                        }
-                    }],
-                    xAxes: [{
-                        stacked: true,
-                        gridLines: {
-                            display: false,
-                            drawBorder: false
-                        },
-                    }]
-                }
-            }
-        });
-
-        $('div#card_permohonan_cluster_unit').unblock();
-
-    });
-
-    $('div#card_permohonan_jenis').block({ message: 'Mengambil data...' });
-    $.getJSON('../controller/getDashboardPermohonanJenis.php', function(data){
-        var ctx = document.getElementById("chart_permohonan_jenis");
-        ctx.width = 220;
-        ctx.height = 220;
-        chart_jenis = new Chart(ctx, {
-            type: 'pie',
-            data: {
-                datasets: [{
-                    data: data.jml_permohonan,
-                    backgroundColor: [
-                        '#135470',
-                        '#74BCC7',
-                        '#F2C36B',
-                        '#EC5B43',
-                        '#7F63F4',
-                        '#3D494A',
-                        '#9DA6AB',
-                    ],
-                    label: 'Jenis Transaksi'
-                }],
-                labels: data.ket_transaksi
-            },
-            options: {
-                responsive: true,
-                maintainAspectRatio: false,
-                elements: {
-                    arc: {
-                        borderWidth: 0
-                    }
-                },
-                legend: {
-                    position: 'bottom',
-                    display: 0,
-                    labels: {
-                        // fontFamily: 'CircularStdBook',
-                        fontSize: 8,
-                    },
-                },
-                tooltips:{
-                    titleFontSize: 8,
-                    bodyFontSize: 8,
-                    footerFontSize: 8,
-                },
-                plugins: {
-                    labels: [
-                        {
-                          render: 'label',
-                          fontSize: 7,
-                          fontColor:  [
-                                '#135470',
-                                '#74BCC7',
-                                '#F2C36B',
-                                '#EC5B43',
-                                '#7F63F4',
-                                '#3D494A',
-                                '#9DA6AB',
-                            ],
-                          precision: 0,
-                          position: 'outside',
-                          arc: true,
-                          textMargin: 2,
-                        },
-                        {
-                          render: 'value',
-                          fontSize: 9,
-                          fontColor: 'white',
-                          precision: 1,
-                          position: 'border'
-                        },
-                        {
-                          render: 'percentage',
-                          fontSize: 9,
-                          fontColor: 'white',
-                          precision: 0,
-                          position: 'default'
-                        }
-                    ]
-                },
-            }
-        });
-
-        $('div#card_permohonan_jenis').unblock();
-
-    });
-
-    $('div#card_permohonan_jenis_unit').block({ message: 'Mengambil data...' });
-    $.getJSON('../controller/getDashboardPermohonanJenisUnit.php', function(data){
-
-        var ctx = document.getElementById("chart_permohonan_jenis_unit");
-        ctx.height = 220;
-        chart_jenis_unit = new Chart(ctx, {
-            type: 'bar',
-            data: {
-                labels: data.singkatan,
-                datasets: [
-                    {
-                        label: "LAIN-LAIN (SAMBUNG KEMBALI, TURUN DAYA, UBAH TARIF, MIGRASI PASKA)",
-                        type: "bar",
-                        backgroundColor: "#EC5B43",
-                        backgroundColorHover: "#EC5B43",
-                        data: data.jml_agenda_jenis_lain,
-                    },
-                    {
-                        label: "MIGRASI KE PRABAYAR",
-                        type: "bar",
-                        backgroundColor: "#F2C36B",
-                        backgroundColorHover: "#F2C36B",
-                        data: data.jml_agenda_jenis_migrasi_lpb,
-                    },
-                    {
-                        label: "PASANG BARU",
-                        type: "bar",
-                        backgroundColor: "#74BCC7",
-                        backgroundColorHover: "#74BCC7",
-                        data: data.jml_agenda_jenis_pasang_baru,
-                    },
-                    {
-                        label: "TAMBAH DAYA",
-                        type: "bar",
-                        backgroundColor: "#135470",
-                        backgroundColorHover: "#135470",
-                        data: data.jml_agenda_jenis_tambah_daya,
-                    },
-                ]
-            },
-            options: {
-                responsive: true, 
-                maintainAspectRatio: false, 
-                barRadius: 2,
-                title: {
-                    display: false,
-                    text: 'Rekap Permohonan'
-                },
-                tooltips: {
-                   mode: 'label',
-                   bodyFontSize: 10,
-                   callbacks: {
-                      label: function(t, d) {
-                         var dstLabel = d.datasets[t.datasetIndex].label;
-                         var yLabel = t.yLabel;
-                         return dstLabel + ': ' + yLabel + ' Agenda';
-                      }
-                   }
-                },
-                legend: {
-                    position: 'bottom',
-                    display: true,
-                    labels: {
-                        fontSize: 10,
-                    },
-                },
-                plugins: {
-                    labels: []
-                },
-                scales: {
-                    yAxes: [{
-                        display: false,
-                        stacked: true,
-                        gridLines: {
-                            display: false,
-                            drawBorder: false
-                        },
-                        ticks: {
-                            beginAtZero: true
-                        }
-                    }],
-                    xAxes: [{
-                        stacked: true,
-                        gridLines: {
-                            display: false,
-                            drawBorder: false
-                        },
-                    }]
-                }
-            }
-        });
-
-        $('div#card_permohonan_jenis_unit').unblock();
-
-    });
-
-    $('div#card_permohonan_tmp').block({ message: 'Mengambil data...' });
-    $.getJSON('../controller/getDashboardPermohonanTMP.php', function(data){
-        var ctx = document.getElementById("chart_permohonan_tmp");
-
-        ctx.width = 220;
-        ctx.height = 220;
-        chart_tmp = new Chart(ctx, {
-            type: 'pie',
-            data: {
-                datasets: [{
-                    data: data.jml_permohonan,
-                    backgroundColor: [
-                        '#00838f',
-                        '#F2C36B',
-                        '#EC5B43',
-                        '#7F63F4',
-                        '#3D494A',
-                        '#9DA6AB',
-                    ],
-                    label: 'Status TMP'
-                }],
-                labels: data.status_tmp
-            },
-            options: {
-                responsive: true,
-                maintainAspectRatio: false,
-                elements: {
-                    arc: {
-                        borderWidth: 0
-                    }
-                },
-                legend: {
-                    position: 'bottom',
-                    display: 0,
-                    labels: {
-                        // fontFamily: 'CircularStdBook',
-                        fontSize: 8,
-                    },
-                },
-                tooltips:{
-                    titleFontSize: 8,
-                    bodyFontSize: 8,
-                    footerFontSize: 8,
-                },
-                plugins: {
-                    labels: [
-                        {
-                          render: 'label',
-                          fontSize: 7,
-                          fontColor:  [
-                                '#00838f',
-                                '#F2C36B',
-                                '#EC5B43',
-                                '#7F63F4',
-                                '#3D494A',
-                                '#9DA6AB',
-                            ],
-                          precision: 0,
-                          position: 'outside',
-                          arc: true,
-                          textMargin: 2,
-                        },
-                        {
-                          render: 'value',
-                          fontSize: 9,
-                          fontColor: 'white',
-                          precision: 1,
-                          position: 'border'
-                        },
-                        {
-                          render: 'percentage',
-                          fontSize: 9,
-                          fontColor: 'white',
-                          precision: 0,
-                          position: 'default'
-                        }
-                    ]
-                },
-            }
-        });
-
-        $('div#card_permohonan_tmp').unblock();
-    });
-
-    $('div#card_permohonan_tmp_unit').block({ message: 'Mengambil data...' });
-    $.getJSON('../controller/getDashboardPermohonanTMPUnit.php', function(data){
-
-        var ctx = document.getElementById("chart_permohonan");
-        ctx.height = 220;
-        chart_tmp_unit = new Chart(ctx, {
-            type: 'bar',
-            data: {
-                labels: data.singkatan,
-                datasets: [
-                   
-                    {
-                        label: "MELEBIHI TMP",
-                        type: "bar",
-                        stack: 'Agenda per Status TMP',
-                        backgroundColor: "#EC5B43",
-                        backgroundColorHover: "#EC5B43",
-                        data: data.jml_agenda_melebihi_tmp,
-                    },
-                    {
-                        label: "MENDEKATI TMP",
-                        type: "bar",
-                        stack: 'Agenda per Status TMP',
-                        backgroundColor: "#F2C36B",
-                        backgroundColorHover: "#F2C36B",
-                        data: data.jml_agenda_mendekati_tmp,
-                    },
-                    {
-                        label: "DALAM TMP",
-                        type: "bar",
-                        stack: 'Agenda per Status TMP',
-                        backgroundColor: "#00838f",
-                        backgroundColorHover: "#00838f",
-                        data: data.jml_agenda_dalam_tmp,
-                    },
-                ]
-            },
-            options: {
-                responsive: true, 
-                maintainAspectRatio: false, 
-                barRadius: 2,
-                title: {
-                    display: false,
-                    text: 'Rekap Permohonan'
-                },
-                tooltips: {
-                   mode: 'label',
-                   bodyFontSize: 10,
-                   callbacks: {
-                      label: function(t, d) {
-                         var dstLabel = d.datasets[t.datasetIndex].label;
-                         var yLabel = t.yLabel;
-                         return dstLabel + ': ' + yLabel + ' Agenda';
-                      }
-                   }
-                },
-                legend: {
-                    position: 'bottom',
-                    display: true,
-                    labels: {
-                        fontSize: 10,
-                    },
-                },
-                plugins: {
-                    labels: []
-                },
-                scales: {
-                    yAxes: [{
-                        display: false,
-                        stacked: true,
-                        gridLines: {
-                            display: false,
-                            drawBorder: false
-                        },
-                        ticks: {
-                            beginAtZero: true
-                        }
-                    }],
-                    xAxes: [{
-                        stacked: true,
-                        gridLines: {
-                            display: false,
-                            drawBorder: false
-                        },
-                    }]
-                }
-            }
-        });
-
-        $('div#card_permohonan_tmp_unit').unblock();
-
-    });
-
-    $('div#card_permohonan_alasan_kriteria').block({ message: 'Mengambil data...' });
-    $.getJSON('../controller/getDashboardPermohonanAlasan.php', function(data){
-        var ctx = document.getElementById("chart_permohonan_alasan_kriteria");
-        ctx.width = 220;
-        ctx.height = 220;
-        chart_alasan = new Chart(ctx, {
-            type: 'pie',
-            data: {
-                datasets: [{
-                    data: data.jml_permohonan,
-                    backgroundColor: [
-                        '#135470',
-                        '#74BCC7',
-                        '#F2C36B',
-                        '#EC5B43',
-                        '#7F63F4',
-                        '#3D494A',
-                        '#9DA6AB',
-                    ],
-                    label: 'Alasan Kriteria TMP'
-                }],
-                labels: data.alasan_kriteria_tmp
-            },
-            options: {
-                responsive: true,
-                maintainAspectRatio: false,
-                elements: {
-                    arc: {
-                        borderWidth: 0
-                    }
-                },
-                legend: {
-                    position: 'bottom',
-                    display: 0,
-                    labels: {
-                        // fontFamily: 'CircularStdBook',
-                        fontSize: 8,
-                    },
-                },
-                tooltips:{
-                    titleFontSize: 8,
-                    bodyFontSize: 8,
-                    footerFontSize: 8,
-                    tooltipCaretSize: 0,
-                    percentageInnerCutout : 70
-                },
-                plugins: {
-                    labels: [
-                        {
-                          render: 'label',
-                          fontSize: 7,
-                          fontColor:   [
-                                '#135470',
-                                '#74BCC7',
-                                '#F2C36B',
-                                '#EC5B43',
-                                '#7F63F4',
-                                '#3D494A',
-                                '#9DA6AB',
-                            ],
-                          precision: 0,
-                          position: 'outside',
-                          arc: true,
-                          textMargin: 2,
-                        },
-                        {
-                          render: 'value',
-                          fontSize: 9,
-                          fontColor: 'white',
-                          precision: 1,
-                          position: 'border'
-                        },
-                        {
-                          render: 'percentage',
-                          fontSize: 9,
-                          fontColor: 'white',
-                          precision: 0,
-                          position: 'default'
-                        }
-                    ]
-                },
-            }
-        });
-
-        $('div#card_permohonan_alasan_kriteria').unblock();
-
-    });
-
-    $('div#card_permohonan_alasan_kriteria_unit').block({ message: 'Mengambil data...' });
-    $.getJSON('../controller/getDashboardPermohonanAlasanUnit.php', function(data){
-
-        var ctx = document.getElementById("chart_permohonan_alasan_kriteria_unit");
-        ctx.height = 220;
-        chart_alasan_unit = new Chart(ctx, {
-            type: 'bar',
-            data: {
-                labels: data.singkatan,
-                datasets: [
-                    {
-                        label: "LAIN-LAIN",
-                        type: "bar",
-                        backgroundColor: "#EC5B43",
-                        backgroundColorHover: "#EC5B43",
-                        data: data.jml_agenda_alasan_lain,
-                    },
-                    {
-                        label: "PERLU PEMBANGUNAN JTM S.D 3 GAWANG & TRAFO DISTRIBUSI",
-                        type: "bar",
-                        backgroundColor: "#F2C36B",
-                        backgroundColorHover: "#F2C36B",
-                        data: data.jml_agenda_alasan_perluasan_jtm,
-                    },
-                    {
-                        label: "PERLU PERLUASAN JTR",
-                        type: "bar",
-                        backgroundColor: "#74BCC7",
-                        backgroundColorHover: "#74BCC7",
-                        data: data.jml_agenda_alasan_perluasan_jtr,
-                    },
-                    {
-                        label: "TANPA PERLUASAN",
-                        type: "bar",
-                        backgroundColor: "#135470",
-                        backgroundColorHover: "#135470",
-                        data: data.jml_agenda_alasan_tanpa_perluasan,
-                    },
-                ]
-            },
-            options: {
-                responsive: true, 
-                maintainAspectRatio: false, 
-                barRadius: 2,
-                title: {
-                    display: false,
-                    text: 'Rekap Permohonan'
-                },
-                tooltips: {
-                   mode: 'label',
-                   bodyFontSize: 10,
-                   callbacks: {
-                      label: function(t, d) {
-                         var dstLabel = d.datasets[t.datasetIndex].label;
-                         var yLabel = t.yLabel;
-                         return dstLabel + ': ' + yLabel + ' Agenda';
-                      }
-                   }
-                },
-                legend: {
-                    position: 'bottom',
-                    display: true,
-                    labels: {
-                        fontSize: 10,
-                    },
-                },
-                plugins: {
-                    labels: []
-                },
-                scales: {
-                    yAxes: [{
-                        display: false,
-                        stacked: true,
-                        gridLines: {
-                            display: false,
-                            drawBorder: false
-                        },
-                        ticks: {
-                            beginAtZero: true
-                        }
-                    }],
-                    xAxes: [{
-                        stacked: true,
-                        gridLines: {
-                            display: false,
-                            drawBorder: false
-                        },
-                    }]
-                }
-            }
-        });
-
-        $('div#card_permohonan_alasan_kriteria_unit').unblock();
-
-    });
-
-    $('div#card_oldest_agenda_non_ge table tbody').empty();
-    $('div#card_oldest_agenda_non_ge').block({ message: 'Mengambil data...' });
-    $.getJSON('../controller/getDashboardPermohonanTerlama.php?klp_plg=NON_GE', function(data){
-
+    $('div#peta_rata_rata_saldo_tunggakan').block({ message: 'Mengambil data...' });
+    $.getJSON('../controller/getRataRataSaldoTunggakan.php?unitap='+unitap+'&blth='+blth, function(data){
         var tr = '';
         $.each(data.rows, function(k,v){
-            tr += '<tr data-noagenda="'+v.noagenda+'" >';
-            tr += '<td style="line-height:1.2rem;"><p><small>'+v.noagenda+'</small></p><p><small>'+v.tglmohon+'</small></p>';
-            tr += '<p><small>'+v.jenis_transaksi+'</small></p><p><small>';
-            if(v.jenis_transaksi=='PERUBAHAN DAYA')
-                tr += '<small>'+v.tarif_daya_lama+'</small> - ';
-            tr += '<small>'+v.tarif_daya_baru+'</small></small></p></td>';
-            tr += '<td class="text-right" style="line-height:1.2rem;"><p><small>BP '+v.rp_bp+'</small></p><p><small>RAB '+v.rp_rab+'</small></p><p><small><span class="badge badge-pill '+v.label_status+'">'+v.status+'</span></small></p></td>';
+
+            $('#'+v.unitap+' path').removeClass('default');
+            if(v.realisasi>=110){
+                $('#'+v.unitap+' path').addClass('os');
+                tr += '<tr class="tr-os">';
+            }else if(v.realisasi>=100){
+                $('#'+v.unitap+' path').addClass('mr');
+                tr += '<tr class="tr-mr">';
+            }else if(v.realisasi>=80){
+                $('#'+v.unitap+' path').addClass('ur');
+                tr += '<tr class="tr-ur">';
+            }else if(v.realisasi>=0){
+                $('#'+v.unitap+' path').addClass('ni');
+                tr += '<tr class="tr-ni">';
+            }
+            $('#'+v.unitap+' path').attr('title', v.nama+' ('+v.realisasi+'%)')
+                                    .attr('data-original-title', v.nama+' ('+v.realisasi+'%)')
+                                    .tooltip('update');
+
+            tr += '<td class="text-center">'+v.unitap+'</td>';
+            tr += '<td class="text-right">'+v.pal_tagsus+'</td>';
+            tr += '<td class="text-right">'+v.rata2_saldo_tunggakan+'</td>';
+            tr += '<td class="text-right">'+v.target+'</td>';
+            tr += '<td class="text-right">'+v.realisasi+'%</td>';
+            tr += '<td class="text-right">'+v.kali_nihil+'</td>';
+            tr += '<td class="text-right">'+v.batas_saldo_bulan_depan+'</td>';
+            tr += '<td class="text-right">'+v.max_realisasi_bulan_depan+'%</td>';
+            tr += '<td class="text-right">'+v.batas_saldo_bulan_sisa+'</td>';
+            tr += '<td class="text-right">'+v.max_realisasi_bulan_sisa+'%</td>';
             tr += '</tr>';
+
         });
-        $('div#card_oldest_agenda_non_ge table tbody').append(tr);
-        $('div#card_oldest_agenda_non_ge').unblock();
+
+        var tfoot = '';
+        if(data.uid.realisasi>=110){
+            tfoot += '<tr class="tr-os">';
+        }else if(data.uid.realisasi>=100){
+            tfoot += '<tr class="tr-mr">';
+        }else if(data.uid.realisasi>=80){
+            tfoot += '<tr class="tr-ur">';
+        }else if(data.uid.realisasi>=0){
+            tfoot += '<tr class="tr-ni">';
+        }
+
+        tfoot += '<td class="text-center">TOTAL</td>';
+        tfoot += '<td class="text-right">'+(data.uid.pal_tagsus)+'</td>';
+        tfoot += '<td class="text-right">'+(data.uid.rata2_saldo_tunggakan)+'</td>';
+        tfoot += '<td class="text-right">'+(data.uid.target)+'</td>';
+        tfoot += '<td class="text-right">'+(data.uid.realisasi)+'%</td>';
+        tfoot += '<td class="text-right">'+(data.uid.kali_nihil)+'</td>';
+        tfoot += '<td class="text-right">'+(data.uid.batas_saldo_bulan_depan)+'</td>';
+        tfoot += '<td class="text-right">'+(data.uid.max_realisasi_bulan_depan)+'%</td>';
+        tfoot += '<td class="text-right">'+(data.uid.batas_saldo_bulan_sisa)+'</td>';
+        tfoot += '<td class="text-right">'+(data.uid.max_realisasi_bulan_sisa)+'%</td>';
+        tfoot += '</tr>';
+
+        $('div#peta_rata_rata_saldo_tunggakan table tbody').append(tr);
+        $('div#peta_rata_rata_saldo_tunggakan table tfoot').append(tfoot);
+        $('div#peta_rata_rata_saldo_tunggakan').unblock();
+
     });
 
-    $('div#card_oldest_agenda_ge table tbody').empty();
-    $('div#card_oldest_agenda_ge').block({ message: 'Mengambil data...' });
-    $.getJSON('../controller/getDashboardPermohonanTerlama.php?klp_plg=GE', function(data){
+    $.getJSON('../controller/ts_p2tl/getDashboardTSP2TLUnit.php', function(data){
+        $('#tgl_data').html('tanggal data: '+data.tgl_data);
 
-        var tr = '';
-        $.each(data.rows, function(k,v){
-            tr += '<tr data-noagenda="'+v.noagenda+'" >';
-            tr += '<td style="line-height:1.2rem;"><p><small>'+v.noagenda+'</small></p><p><small>'+v.tglmohon+'</small></p>';
-            tr += '<p><small>'+v.jenis_transaksi+'</small></p><p><small>';
-            if(v.jenis_transaksi=='PERUBAHAN DAYA')
-                tr += '<small>'+v.tarif_daya_lama+'</small> - ';
-            tr += '<small>'+v.tarif_daya_baru+'</small></small></p></td>';
-            tr += '<td class="text-right" style="line-height:1.2rem;"><p><small>BP '+v.rp_bp+'</small></p><p><small>RAB '+v.rp_rab+'</small></p><p><small><span class="badge badge-pill '+v.label_status+'">'+v.status+'</span></small></p></td>';
-            tr += '</tr>';
+        $('#total_jml_plg').html(Format.to(data.total_jml_plg)+'<small> PLG</small>');
+        $('#total_jml_agenda').html(Format.to(data.total_jml_agenda)+'<small> AGENDA</small>');
+        $('#total_rpts').html('Rp. '+Format.to(data.total_rpts/1000000000)+'<small> M</small>');
+        $('#total_pengurangan_jml_plg').html(Format.to(data.total_pengurangan_jml_plg)+'<small> PLG</small>');
+        $('#total_pengurangan_jml_agenda').html(Format.to(data.total_pengurangan_jml_agenda)+'<small> AGENDA</small>');
+        $('#total_pengurangan_rpts').html('Rp. '+Format.to(data.total_pengurangan_rpts/1000000000)+'<small> M</small>');
+        $('#total_saldo_akhir_jml_plg').html(Format.to(data.total_saldo_akhir_jml_plg)+'<small> PLG</small>');
+        $('#total_saldo_akhir_jml_agenda').html(Format.to(data.total_saldo_akhir_jml_agenda)+'<small> AGENDA</small>');
+        $('#total_saldo_akhir_rpts').html('Rp. '+Format.to(data.total_saldo_akhir_rpts/1000000000)+'<small> M</small>');
+        $('#total_saldo_akhir_jml_plg2').html(Format.to(data.total_saldo_akhir_jml_plg)+'<small> PLG</small>');
+        $('#total_saldo_akhir_rpts2').html('Rp. '+Format.to(data.total_saldo_akhir_rpts/1000000000)+'<small> M</small>');
+        $('#total_saldo_akhir_prabayar_jml_plg').html(Format.to(data.total_saldo_akhir_prabayar_jml_plg)+'<small> PLG</small>');
+        $('#total_saldo_akhir_prabayar_rpts').html('Rp. '+Format.to(data.total_saldo_akhir_prabayar_rpts/1000000000)+'<small> M</small>');
+        $('#total_saldo_akhir_paskabayar_jml_plg').html(Format.to(data.total_saldo_akhir_paskabayar_jml_plg)+'<small> PLG</small>');
+        $('#total_saldo_akhir_paskabayar_rpts').html('Rp. '+Format.to(data.total_saldo_akhir_paskabayar_rpts/1000000000)+'<small> M</small>');
+        
+        $('#total_sesuai_rpts').html('Rp. '+Format.to(data.total_sesuai_rpts/1000000000)+'<small> M</small>');
+        $('#total_sesuai_jml_agenda').html(Format.to(data.total_sesuai_jml_agenda)+'<small> AGENDA</small>');
+        $('#total_tdk_sesuai_rpts').html('Rp. '+Format.to(data.total_tdk_sesuai_rpts/1000000000)+'<small> M</small>');
+        $('#total_tdk_sesuai_jml_agenda').html(Format.to(data.total_tdk_sesuai_jml_agenda)+'<small> AGENDA</small>');
+        $('#total_pengurangan_sesuai_rpts').html('Rp. '+Format.to(data.total_pengurangan_sesuai_rpts/1000000000)+'<small> M</small>');
+        $('#total_pengurangan_sesuai_jml_agenda').html(Format.to(data.total_pengurangan_sesuai_jml_agenda)+'<small> AGENDA</small>');
+        $('#total_pengurangan_tdk_sesuai_rpts').html('Rp. '+Format.to(data.total_pengurangan_tdk_sesuai_rpts/1000000000)+'<small> M</small>');
+        $('#total_pengurangan_tdk_sesuai_jml_agenda').html(Format.to(data.total_pengurangan_tdk_sesuai_jml_agenda)+'<small> AGENDA</small>');
+        $('#total_saldo_akhir_sesuai_rpts').html('Rp. '+Format.to(data.total_saldo_akhir_sesuai_rpts/1000000000)+'<small> M</small>');
+        $('#total_saldo_akhir_sesuai_jml_agenda').html(Format.to(data.total_saldo_akhir_sesuai_jml_agenda)+'<small> AGENDA</small>');
+        $('#total_saldo_akhir_tdk_sesuai_rpts').html('Rp. '+Format.to(data.total_saldo_akhir_tdk_sesuai_rpts/1000000000)+'<small> M</small>');
+        $('#total_saldo_akhir_tdk_sesuai_jml_agenda').html(Format.to(data.total_saldo_akhir_tdk_sesuai_jml_agenda)+'<small> AGENDA</small>');
+
+        $('#total_saldo_akhir_tetap_rpts').html('Rp. '+Format.to((data.total_saldo_akhir_tetap_sesuai_rpts+data.total_saldo_akhir_tetap_tdk_sesuai_rpts)/1000000000)+'<small> M</small>');
+        $('#total_saldo_akhir_tetap_jml_agenda').html(Format.to((data.total_saldo_akhir_tetap_sesuai_jml_agenda+data.total_saldo_akhir_tetap_tdk_sesuai_jml_agenda))+'<small> AGENDA</small>');
+        $('#total_saldo_akhir_tetap_sesuai_rpts').html('Rp. '+Format.to(data.total_saldo_akhir_tetap_sesuai_rpts/1000000000)+'<small> M</small>');
+        $('#total_saldo_akhir_tetap_sesuai_jml_agenda').html(Format.to(data.total_saldo_akhir_tetap_sesuai_jml_agenda)+'<small> AGENDA</small>');
+        $('#total_saldo_akhir_tetap_tdk_sesuai_rpts').html('Rp. '+Format.to(data.total_saldo_akhir_tetap_tdk_sesuai_rpts/1000000000)+'<small> M</small>');
+        $('#total_saldo_akhir_tetap_tdk_sesuai_jml_agenda').html(Format.to(data.total_saldo_akhir_tetap_tdk_sesuai_jml_agenda)+'<small> AGENDA</small>');
+
+        $('#total_saldo_akhir_single_agenda_rpts').html('Rp. '+Format.to(data.total_saldo_akhir_single_agenda_rpts/1000000000)+'<small> M</small>');
+        $('#total_saldo_akhir_single_agenda_jml_plg').html(Format.to(data.total_saldo_akhir_single_agenda_jml_plg)+'<small> PLG</small>');
+        $('#total_saldo_akhir_multi_agenda_rpts').html('Rp. '+Format.to(data.total_saldo_akhir_multi_agenda_rpts/1000000000)+'<small> M</small>');
+        $('#total_saldo_akhir_multi_agenda_jml_plg').html(Format.to(data.total_saldo_akhir_multi_agenda_jml_plg)+'<small> PLG</small>');
+        
+        $('#progress_blocking').css('width', data.total_persen_blocking+'%').attr('aria-valuenow', data.total_persen_blocking);  
+        $('#text_persen_blocking').html(data.total_persen_blocking+'%');
+        $('#text_blocking').html(Format.to(data.total_jml_blocking)+' dari '+Format.to(data.total_jml_harus_diblock)+' plg');
+
+        $('#total_sesuai').html(Format.to(data.total_sesuai)+'<small> PLG</small>');
+        $('#rp_sesuai').html('Rp. '+Format.to(data.rp_sesuai/1000000000)+'<small> M</small>');
+        $('#total_ba_penetapan_sph_sesuai').html(Format.to(data.total_ba_penetapan_sph_sesuai)+'<small> PLG</small>');
+        $('#total_ba_penetapan_sesuai').html(Format.to(data.total_ba_penetapan_sesuai)+'<small> PLG</small>');
+        $('#total_ba_sesuai').html(Format.to(data.total_ba_sesuai)+'<small> PLG</small>');
+        $('#total_tidak_sesuai').html(Format.to(data.total_tidak_sesuai)+'<small> PLG</small>');
+        $('#total_semua_tidak_sesuai').html(Format.to(data.total_semua_tidak_sesuai)+'<small> PLG</small>');
+        $('#rp_semua_tidak_sesuai').html('Rp. '+Format.to(data.rp_semua_tidak_sesuai/1000000000)+'<small> M</small>');
+        $('#jml_sesuai_prabayar').html(Format.to(data.jml_sesuai_prabayar)+'<small> PLG</small>');
+        $('#rp_sesuai_prabayar').html('Rp. '+Format.to(data.rp_sesuai_prabayar/1000000000)+'<small> M</small>');
+        $('#jml_sesuai_paskabayar').html(Format.to(data.jml_sesuai_paskabayar)+'<small> PLG</small>');
+        $('#rp_sesuai_paskabayar').html('Rp. '+Format.to(data.rp_sesuai_paskabayar/1000000000)+'<small> M</small>');
+
+
+        $('#breakdown_jml_plg').html(Format.to(data.total_saldo_akhir_jml_plg)+'<small> PLG</small>');
+        $('#breakdown_jml_agenda').html(Format.to(data.total_saldo_akhir_jml_agenda)+'<small> AGENDA</small>');
+        $('#breakdown_rpts').html('Rp. '+Format.to(data.total_saldo_akhir_rpts/1000000000)+'<small> M</small>');
+        $('#breakdown_sesuai_jml_plg').html(Format.to(data.total_saldo_akhir_sesuai_jml_plg)+'<small> PLG</small>');
+        $('#breakdown_sesuai_jml_agenda').html(Format.to(data.total_saldo_akhir_sesuai_jml_agenda)+'<small> AGENDA</small>');
+        $('#breakdown_sesuai_rpts').html('Rp. '+Format.to(data.total_saldo_akhir_sesuai_rpts/1000000000)+'<small> M</small>');
+        $('#breakdown_sesuai_lancar_jml_plg').html(Format.to(data.breakdown_sesuai_lancar_jml_plg)+'<small> PLG</small>');
+        $('#breakdown_sesuai_lancar_jml_agenda').html(Format.to(data.breakdown_sesuai_lancar_jml_agenda)+'<small> AGENDA</small>');
+        $('#breakdown_sesuai_lancar_rpts').html('Rp.'+Format.to(data.breakdown_sesuai_lancar_rpts/1000000000)+'<small> M</small>');
+        $('#breakdown_sesuai_tdk_lancar_jml_plg').html(Format.to(data.breakdown_sesuai_tdk_lancar_jml_plg)+'<small> PLG</small>');
+        $('#breakdown_sesuai_tdk_lancar_jml_agenda').html(Format.to(data.breakdown_sesuai_tdk_lancar_jml_agenda)+'<small> AGENDA</small>');
+        $('#breakdown_sesuai_tdk_lancar_rpts').html('Rp.'+Format.to(data.breakdown_sesuai_tdk_lancar_rpts/1000000000)+'<small> M</small>');
+        $('#breakdown_sesuai_tdk_lancar_blocking_jml_plg').html(Format.to(data.breakdown_sesuai_tdk_lancar_blocking_jml_plg)+'<small> PLG</small>');
+        $('#breakdown_sesuai_tdk_lancar_blocking_jml_agenda').html(Format.to(data.breakdown_sesuai_tdk_lancar_blocking_jml_agenda)+'<small> AG</small>');
+        $('#breakdown_sesuai_tdk_lancar_blocking_rpts').html('Rp.'+Format.to(data.breakdown_sesuai_tdk_lancar_blocking_rpts/1000000000)+'<small> M</small>');
+        $('#breakdown_sesuai_tdk_lancar_blm_blocking_jml_plg').html(Format.to(data.breakdown_sesuai_tdk_lancar_blm_blocking_jml_plg)+'<small> PLG</small>');
+        $('#breakdown_sesuai_tdk_lancar_blm_blocking_jml_agenda').html(Format.to(data.breakdown_sesuai_tdk_lancar_blm_blocking_jml_agenda)+'<small> AG</small>');
+        $('#breakdown_sesuai_tdk_lancar_blm_blocking_rpts').html('Rp.'+Format.to(data.breakdown_sesuai_tdk_lancar_blm_blocking_rpts/1000000000)+'<small> M</small>');
+        $('#breakdown_tdk_sesuai_jml_plg').html(Format.to(data.total_saldo_akhir_tdk_sesuai_jml_plg)+'<small> PLG</small>');
+        $('#breakdown_tdk_sesuai_jml_agenda').html(Format.to(data.total_saldo_akhir_tdk_sesuai_jml_agenda)+'<small> AGENDA</small>');
+        $('#breakdown_tdk_sesuai_rpts').html('Rp.'+Format.to(data.total_saldo_akhir_tdk_sesuai_rpts/1000000000)+'<small> M</small>');
+        $('#breakdown_tdk_sesuai_lancar_jml_plg').html(Format.to(data.breakdown_tdk_sesuai_lancar_jml_plg)+'<small> PLG</small>');
+        $('#breakdown_tdk_sesuai_lancar_jml_agenda').html(Format.to(data.breakdown_tdk_sesuai_lancar_jml_agenda)+'<small> AGENDA</small>');
+        $('#breakdown_tdk_sesuai_lancar_rpts').html('Rp.'+Format.to(data.breakdown_tdk_sesuai_lancar_rpts/1000000000)+'<small> M</small>');
+        $('#breakdown_tdk_sesuai_tdk_lancar_jml_plg').html(Format.to(data.breakdown_tdk_sesuai_tdk_lancar_jml_plg)+'<small> PLG</small>');
+        $('#breakdown_tdk_sesuai_tdk_lancar_jml_agenda').html(Format.to(data.breakdown_tdk_sesuai_tdk_lancar_jml_agenda)+'<small> AGENDA</small>');
+        $('#breakdown_tdk_sesuai_tdk_lancar_rpts').html('Rp.'+Format.to(data.breakdown_tdk_sesuai_tdk_lancar_rpts/1000000000)+'<small> M</small>');
+        $('#breakdown_tdk_sesuai_tdk_lancar_blocking_jml_plg').html(Format.to(data.breakdown_tdk_sesuai_tdk_lancar_blocking_jml_plg)+'<small> PLG</small>');
+        $('#breakdown_tdk_sesuai_tdk_lancar_blocking_jml_agenda').html(Format.to(data.breakdown_tdk_sesuai_tdk_lancar_blocking_jml_agenda)+'<small> AG</small>');
+        $('#breakdown_tdk_sesuai_tdk_lancar_blocking_rpts').html('Rp.'+Format.to(data.breakdown_tdk_sesuai_tdk_lancar_blocking_rpts/1000000000)+'<small> M</small>');
+        $('#breakdown_tdk_sesuai_tdk_lancar_blm_blocking_jml_plg').html(Format.to(data.breakdown_tdk_sesuai_tdk_lancar_blm_blocking_jml_plg)+'<small> PLG</small>');
+        $('#breakdown_tdk_sesuai_tdk_lancar_blm_blocking_jml_agenda').html(Format.to(data.breakdown_tdk_sesuai_tdk_lancar_blm_blocking_jml_agenda)+'<small> AG</small>');
+        $('#breakdown_tdk_sesuai_tdk_lancar_blm_blocking_rpts').html('Rp.'+Format.to(data.breakdown_tdk_sesuai_tdk_lancar_blm_blocking_rpts/1000000000)+'<small> M</small>');
+
+
+        $('#breakdown_sesuai_lancar_beli_token_jml_plg').html(Format.to(data.breakdown_sesuai_lancar_beli_token_jml_plg)+'<small> PLG</small>');
+        $('#breakdown_sesuai_lancar_beli_token_jml_agenda').html(Format.to(data.breakdown_sesuai_lancar_beli_token_jml_agenda)+'<small> AG</small>');
+        $('#breakdown_sesuai_lancar_beli_token_rpts').html('Rp.'+Format.to(data.breakdown_sesuai_lancar_beli_token_rpts/1000000000)+'<small> M</small>');
+        $('#breakdown_sesuai_lancar_tdk_beli_token_jml_plg').html(Format.to(data.breakdown_sesuai_lancar_tdk_beli_token_jml_plg)+'<small> PLG</small>');
+        $('#breakdown_sesuai_lancar_tdk_beli_token_jml_agenda').html(Format.to(data.breakdown_sesuai_lancar_tdk_beli_token_jml_agenda)+'<small> AG</small>');
+        $('#breakdown_sesuai_lancar_tdk_beli_token_rpts').html('Rp.'+Format.to(data.breakdown_sesuai_lancar_tdk_beli_token_rpts/1000000000)+'<small> M</small>');
+
+        $('#breakdown_tdk_sesuai_lancar_beli_token_jml_plg').html(Format.to(data.breakdown_tdk_sesuai_lancar_beli_token_jml_plg)+'<small> PLG</small>');
+        $('#breakdown_tdk_sesuai_lancar_beli_token_jml_agenda').html(Format.to(data.breakdown_tdk_sesuai_lancar_beli_token_jml_agenda)+'<small> AG</small>');
+        $('#breakdown_tdk_sesuai_lancar_beli_token_rpts').html('Rp.'+Format.to(data.breakdown_tdk_sesuai_lancar_beli_token_rpts/1000000000)+'<small> M</small>');
+        $('#breakdown_tdk_sesuai_lancar_tdk_beli_token_jml_plg').html(Format.to(data.breakdown_tdk_sesuai_lancar_tdk_beli_token_jml_plg)+'<small> PLG</small>');
+        $('#breakdown_tdk_sesuai_lancar_tdk_beli_token_jml_agenda').html(Format.to(data.breakdown_tdk_sesuai_lancar_tdk_beli_token_jml_agenda)+'<small> AG</small>');
+        $('#breakdown_tdk_sesuai_lancar_tdk_beli_token_rpts').html('Rp.'+Format.to(data.breakdown_tdk_sesuai_lancar_tdk_beli_token_rpts/1000000000.0)+'<small> M</small>');
+
+        $('#breakdown_sesuai_lancar_beli_token_koordinat_jml_plg').html(Format.to(data.breakdown_sesuai_lancar_beli_token_koordinat_jml_plg)+'<small> PLG</small>');
+        $('#breakdown_sesuai_lancar_tdk_beli_token_koordinat_jml_plg').html(Format.to(data.breakdown_sesuai_lancar_tdk_beli_token_koordinat_jml_plg)+'<small> PLG</small>');
+        $('#breakdown_tdk_sesuai_lancar_beli_token_koordinat_jml_plg').html(Format.to(data.breakdown_tdk_sesuai_lancar_beli_token_koordinat_jml_plg)+'<small> PLG</small>');
+        $('#breakdown_tdk_sesuai_lancar_tdk_beli_token_koordinat_jml_plg').html(Format.to(data.breakdown_tdk_sesuai_lancar_tdk_beli_token_koordinat_jml_plg)+'<small> PLG</small>');
+
+        $('#breakdown_sesuai_tdk_lancar_blocking_koordinat_jml_plg').html(Format.to(data.breakdown_sesuai_tdk_lancar_blocking_koordinat_jml_plg)+'<small> PLG</small>');
+        $('#breakdown_sesuai_tdk_lancar_blm_blocking_koordinat_jml_plg').html(Format.to(data.breakdown_sesuai_tdk_lancar_blm_blocking_koordinat_jml_plg)+'<small> PLG</small>');
+        $('#breakdown_tdk_sesuai_tdk_lancar_blocking_koordinat_jml_plg').html(Format.to(data.breakdown_tdk_sesuai_tdk_lancar_blocking_koordinat_jml_plg)+'<small> PLG</small>');
+        $('#breakdown_tdk_sesuai_tdk_lancar_blm_blocking_koordinat_jml_plg').html(Format.to(data.breakdown_tdk_sesuai_tdk_lancar_blm_blocking_koordinat_jml_plg)+'<small> PLG</small>');
+        
+        $('#breakdown_sesuai_lancar_beli_token_koordinat_jml_agenda').html(Format.to(data.breakdown_sesuai_lancar_beli_token_koordinat_jml_agenda)+'<small> AG</small>');
+        $('#breakdown_sesuai_lancar_tdk_beli_token_koordinat_jml_agenda').html(Format.to(data.breakdown_sesuai_lancar_tdk_beli_token_koordinat_jml_agenda)+'<small> AG</small>');
+        $('#breakdown_tdk_sesuai_lancar_beli_token_koordinat_jml_agenda').html(Format.to(data.breakdown_tdk_sesuai_lancar_beli_token_koordinat_jml_agenda)+'<small> AG</small>');
+        $('#breakdown_tdk_sesuai_lancar_tdk_beli_token_koordinat_jml_agenda').html(Format.to(data.breakdown_tdk_sesuai_lancar_tdk_beli_token_koordinat_jml_agenda)+'<small> AG</small>');
+
+        $('#breakdown_sesuai_tdk_lancar_blocking_koordinat_jml_agenda').html(Format.to(data.breakdown_sesuai_tdk_lancar_blocking_koordinat_jml_agenda)+'<small> AG</small>');
+        $('#breakdown_sesuai_tdk_lancar_blm_blocking_koordinat_jml_agenda').html(Format.to(data.breakdown_sesuai_tdk_lancar_blm_blocking_koordinat_jml_agenda)+'<small> AG</small>');
+        $('#breakdown_tdk_sesuai_tdk_lancar_blocking_koordinat_jml_agenda').html(Format.to(data.breakdown_tdk_sesuai_tdk_lancar_blocking_koordinat_jml_agenda)+'<small> AG</small>');
+        $('#breakdown_tdk_sesuai_tdk_lancar_blm_blocking_koordinat_jml_agenda').html(Format.to(data.breakdown_tdk_sesuai_tdk_lancar_blm_blocking_koordinat_jml_agenda)+'<small> AG</small>');
+
+        $('#breakdown_sesuai_lancar_beli_token_koordinat_rpts').html('Rp.'+Format.to(data.breakdown_sesuai_lancar_beli_token_koordinat_rpts/1000000000)+'<small> M</small>');
+        $('#breakdown_sesuai_lancar_tdk_beli_token_koordinat_rpts').html('Rp.'+Format.to(data.breakdown_sesuai_lancar_tdk_beli_token_koordinat_rpts/1000000000)+'<small> M</small>');
+        $('#breakdown_tdk_sesuai_lancar_beli_token_koordinat_rpts').html('Rp.'+Format.to(data.breakdown_tdk_sesuai_lancar_beli_token_koordinat_rpts/1000000000)+'<small> M</small>');
+        $('#breakdown_tdk_sesuai_lancar_tdk_beli_token_koordinat_rpts').html('Rp.'+Format.to(data.breakdown_tdk_sesuai_lancar_tdk_beli_token_koordinat_rpts/1000000000)+'<small> M</small>');
+
+        $('#breakdown_sesuai_tdk_lancar_blocking_koordinat_rpts').html('Rp.'+Format.to(data.breakdown_sesuai_tdk_lancar_blocking_koordinat_rpts/1000000000)+'<small> M</small>');
+        $('#breakdown_sesuai_tdk_lancar_blm_blocking_koordinat_rpts').html('Rp.'+Format.to(data.breakdown_sesuai_tdk_lancar_blm_blocking_koordinat_rpts/1000000000)+'<small> M</small>');
+        $('#breakdown_tdk_sesuai_tdk_lancar_blocking_koordinat_rpts').html('Rp.'+Format.to(data.breakdown_tdk_sesuai_tdk_lancar_blocking_koordinat_rpts/1000000000)+'<small> M</small>');
+        $('#breakdown_tdk_sesuai_tdk_lancar_blm_blocking_koordinat_rpts').html('Rp.'+Format.to(data.breakdown_tdk_sesuai_tdk_lancar_blm_blocking_koordinat_rpts/1000000000)+'<small> M</small>');
+        
+
+        $('div#card_saldo_awal').unblock();
+        $('div#card_pengurangan').unblock();
+        $('div#card_saldo_akhir').unblock();
+        $('div#card_saldo_detail').unblock();
+        $('div#card_saldo_akhir_tetap').unblock();
+        $('div.card').unblock();
+
+        var ctx = document.getElementById("chart_ts_p2tl_unit");
+        ctx.height = 240;
+        chart_unit = new Chart(ctx, {
+            type: 'bar',
+            data: {
+                labels: data.singkatan,
+                datasets: [
+                    {
+                        label: "Prabayar",
+                        type: "bar",
+                        stack: 'TS P2TL',
+                        backgroundColor: "#135470",
+                        backgroundColorHover: "#135470",
+                        data: data.jml_prabayar,
+                    },
+                    {
+                        label: "Paskabayar",
+                        type: "bar",
+                        stack: 'TS P2TL',
+                        backgroundColor: "#74BCA7",
+                        backgroundColorHover: "#74BCA7",
+                        data: data.jml_paskabayar,
+                    },
+                    {
+                        label: "Agenda Sesuai",
+                        type: "bar",
+                        stack: 'TS P2TL per Kelengkapan',
+                        backgroundColor: "#135450",
+                        backgroundColorHover: "#135450",
+                        data: data.sesuai_jml_agenda,
+                    },
+                    {
+                        label: "Agenda Tidak Sesuai",
+                        type: "bar",
+                        stack: 'TS P2TL per Kelengkapan',
+                        backgroundColor: "#EC5B43",
+                        backgroundColorHover: "#EC5B43",
+                        data: data.tdk_sesuai_jml_agenda,
+                    },
+                ]
+            },
+            options: {
+                responsive: true, 
+                maintainAspectRatio: false, 
+                barRadius: 2,
+                title: {
+                    display: false,
+                    text: 'Rekap TS P2TL'
+                },
+                // tooltips: {
+                //     mode: 'index',
+                //     intersect: false,
+                //     callbacks: {
+                //     }
+                // },
+                tooltips: {
+                   mode: 'label',
+                   callbacks: {
+                      label: function(t, d) {
+                         var dstLabel = d.datasets[t.datasetIndex].label;
+                         var yLabel = t.yLabel;
+                         return dstLabel + ': ' + Format.to(yLabel) ;
+                      }
+                   }
+                },
+                legend: {
+                    position: 'bottom',
+                    display: true,
+                    stacked: true,
+                    labels: {
+                        // fontFamily: 'CircularStdBook',
+                    },
+                },
+                plugins: {
+                    labels: []
+                },
+                scales: {
+                    yAxes: [{
+                        display: false,
+                        stacked: true,
+                        gridLines: {
+                            display: false,
+                            drawBorder: false
+                        },
+                        ticks: {
+                            beginAtZero: true
+                        }
+                    }],
+                    xAxes: [{
+                        stacked: true,
+                        gridLines: {
+                            display: false,
+                            drawBorder: false
+                        },
+                    }]
+                }
+            }
         });
-        $('div#card_oldest_agenda_ge table tbody').append(tr);
-        $('div#card_oldest_agenda_ge').unblock();
-    });
 
-    $('div#card_oldest_agenda_tm table tbody').empty();
-    $('div#card_oldest_agenda_tm').block({ message: 'Mengambil data...' });
-    $.getJSON('../controller/getDashboardPermohonanTerlama.php?klp_plg=TM', function(data){
+        $('div#card_ts_p2tl').unblock();
 
-        var tr = '';
-        $.each(data.rows, function(k,v){
-            tr += '<tr data-noagenda="'+v.noagenda+'" >';
-            tr += '<td style="line-height:1.2rem;"><p><small>'+v.noagenda+'</small></p><p><small>'+v.tglmohon+'</small></p>';
-            tr += '<p><small>'+v.jenis_transaksi+'</small></p><p><small>';
-            if(v.jenis_transaksi=='PERUBAHAN DAYA')
-                tr += '<small>'+v.tarif_daya_lama+'</small> - ';
-            tr += '<small>'+v.tarif_daya_baru+'</small></small></p></td>';
-            tr += '<td class="text-right" style="line-height:1.2rem;"><p><small>BP '+v.rp_bp+'</small></p><p><small>RAB '+v.rp_rab+'</small></p><p><small><span class="badge badge-pill '+v.label_status+'">'+v.status+'</span></small></p></td>';
-            tr += '</tr>';
+        var ctx2 = document.getElementById("chart_ts_p2tl_akhir_unit");
+        ctx2.height = 240;
+        chart_akhir_unit = new Chart(ctx2, {
+            type: 'bar',
+            data: {
+                labels: data.singkatan,
+                datasets: [
+                    {
+                        label: "Prabayar",
+                        type: "bar",
+                        stack: 'TS P2TL',
+                        backgroundColor: "#135470",
+                        backgroundColorHover: "#135470",
+                        data: data.saldo_akhir_prabayar_jml_plg,
+                    },
+                    {
+                        label: "Paskabayar",
+                        type: "bar",
+                        stack: 'TS P2TL',
+                        backgroundColor: "#74BCA7",
+                        backgroundColorHover: "#74BCA7",
+                        data: data.saldo_akhir_paskabayar_jml_plg,
+                    },
+                    {
+                        label: "Agenda Sesuai",
+                        type: "bar",
+                        stack: 'TS P2TL per Kelengkapan',
+                        backgroundColor: "#135450",
+                        backgroundColorHover: "#135450",
+                        data: data.saldo_akhir_sesuai_jml_agenda,
+                    },
+                    {
+                        label: "Agenda Tidak Sesuai",
+                        type: "bar",
+                        stack: 'TS P2TL per Kelengkapan',
+                        backgroundColor: "#EC5B43",
+                        backgroundColorHover: "#EC5B43",
+                        data: data.saldo_akhir_tdk_sesuai_jml_agenda,
+                    },
+                ]
+            },
+            options: {
+                responsive: true, 
+                maintainAspectRatio: false, 
+                barRadius: 2,
+                title: {
+                    display: false,
+                    text: 'Rekap TS P2TL'
+                },
+                // tooltips: {
+                //     mode: 'index',
+                //     intersect: false,
+                //     callbacks: {
+                //     }
+                // },
+                tooltips: {
+                   mode: 'label',
+                   callbacks: {
+                      label: function(t, d) {
+                         var dstLabel = d.datasets[t.datasetIndex].label;
+                         var yLabel = t.yLabel;
+                         return dstLabel + ': ' + Format.to(yLabel) ;
+                      }
+                   }
+                },
+                legend: {
+                    position: 'bottom',
+                    display: true,
+                    stacked: true,
+                    labels: {
+                        // fontFamily: 'CircularStdBook',
+                    },
+                },
+                plugins: {
+                    labels: []
+                },
+                scales: {
+                    yAxes: [{
+                        display: false,
+                        stacked: true,
+                        gridLines: {
+                            display: false,
+                            drawBorder: false
+                        },
+                        ticks: {
+                            beginAtZero: true
+                        }
+                    }],
+                    xAxes: [{
+                        stacked: true,
+                        gridLines: {
+                            display: false,
+                            drawBorder: false
+                        },
+                    }]
+                }
+            }
         });
-        $('div#card_oldest_agenda_tm table tbody').append(tr);
-        $('div#card_oldest_agenda_tm').unblock();
+
+        $('div#card_ts_p2tl_akhir').unblock();
+
+
+        var ctx3 = document.getElementById("chart_ts_p2tl_akhir_tetap_unit");
+        ctx3.height = 240;
+        chart_akhir_tetap_unit = new Chart(ctx3, {
+            type: 'bar',
+            data: {
+                labels: data.singkatan,
+                datasets: [
+                    {
+                        label: "Agenda Sesuai",
+                        type: "bar",
+                        stack: 'TS P2TL per Kelengkapan',
+                        backgroundColor: "#135450",
+                        backgroundColorHover: "#135450",
+                        data: data.saldo_akhir_tetap_sesuai_jml_agenda,
+                    },
+                    {
+                        label: "Agenda Tidak Sesuai",
+                        type: "bar",
+                        stack: 'TS P2TL per Kelengkapan',
+                        backgroundColor: "#EC5B43",
+                        backgroundColorHover: "#EC5B43",
+                        data: data.saldo_akhir_tetap_tdk_sesuai_jml_agenda,
+                    },
+                ]
+            },
+            options: {
+                responsive: true, 
+                maintainAspectRatio: false, 
+                barRadius: 2,
+                title: {
+                    display: false,
+                    text: 'Rekap TS P2TL'
+                },
+                // tooltips: {
+                //     mode: 'index',
+                //     intersect: false,
+                //     callbacks: {
+                //     }
+                // },
+                tooltips: {
+                   mode: 'label',
+                   callbacks: {
+                      label: function(t, d) {
+                         var dstLabel = d.datasets[t.datasetIndex].label;
+                         var yLabel = t.yLabel;
+                         return dstLabel + ': ' + Format.to(yLabel) ;
+                      }
+                   }
+                },
+                legend: {
+                    position: 'bottom',
+                    display: true,
+                    stacked: true,
+                    labels: {
+                        // fontFamily: 'CircularStdBook',
+                    },
+                },
+                plugins: {
+                    labels: []
+                },
+                scales: {
+                    yAxes: [{
+                        display: false,
+                        stacked: true,
+                        gridLines: {
+                            display: false,
+                            drawBorder: false
+                        },
+                        ticks: {
+                            beginAtZero: true
+                        }
+                    }],
+                    xAxes: [{
+                        stacked: true,
+                        gridLines: {
+                            display: false,
+                            drawBorder: false
+                        },
+                    }]
+                }
+            }
+        });
+
+        $('div#card_ts_p2tl_akhir_tetap').unblock();
+
+
+        var ctx4 = document.getElementById("chart_blocking_unit");
+        ctx4.height = 240;
+        chart_blocking_unit = new Chart(ctx4, {
+            type: 'bar',
+            data: {
+                labels: data.singkatan,
+                datasets: [
+                    {
+                        label: "Sudah Blocking Token",
+                        type: "bar",
+                        stack: 'Status Blocking',
+                        backgroundColor: "#135450",
+                        backgroundColorHover: "#135450",
+                        data: data.jml_blocking,
+                    },
+                    {
+                        label: "Belum Blocking Token",
+                        type: "bar",
+                        stack: 'Status Blocking',
+                        backgroundColor: "#EC5B43",
+                        backgroundColorHover: "#EC5B43",
+                        data: data.jml_blm_blocking,
+                    },
+                ]
+            },
+            options: {
+                responsive: true, 
+                maintainAspectRatio: false, 
+                barRadius: 2,
+                title: {
+                    display: false,
+                    text: 'Rekap TS P2TL'
+                },
+                // tooltips: {
+                //     mode: 'index',
+                //     intersect: false,
+                //     callbacks: {
+                //     }
+                // },
+                tooltips: {
+                   mode: 'label',
+                   callbacks: {
+                      label: function(t, d) {
+                         var dstLabel = d.datasets[t.datasetIndex].label;
+                         var yLabel = t.yLabel;
+                         return dstLabel + ': ' + Format.to(yLabel) ;
+                      }
+                   }
+                },
+                legend: {
+                    position: 'bottom',
+                    display: true,
+                    stacked: true,
+                    labels: {
+                        // fontFamily: 'CircularStdBook',
+                    },
+                },
+                plugins: {
+                    labels: []
+                },
+                scales: {
+                    yAxes: [{
+                        display: false,
+                        stacked: true,
+                        gridLines: {
+                            display: false,
+                            drawBorder: false
+                        },
+                        ticks: {
+                            beginAtZero: true
+                        }
+                    }],
+                    xAxes: [{
+                        stacked: true,
+                        gridLines: {
+                            display: false,
+                            drawBorder: false
+                        },
+                    }]
+                }
+            }
+        });
+
+        $('div#card_blocking_token').unblock();
+
+
+
+
+
     });
 
     $('#sel_unit').change(function(){
         var unitap=this.value;
 
+        $('div#card_ts_p2tl').block({ message: 'Mengambil data...' });
+        $('div#card_ts_p2tl_akhir').block({ message: 'Mengambil data...' });
+        $('div#card_blocking_token').block({ message: 'Mengambil data...' });
+        $('div#card_saldo_awal').block({ message: 'Mengambil data...' });
+        $('div#card_pengurangan').block({ message: 'Mengambil data...' });
+        $('div#card_saldo_akhir').block({ message: 'Mengambil data...' });
+        $('div#card_saldo_detail').block({ message: 'Mengambil data...' });
+        $('div#card_rekap_blocking table tbody').empty();
 
-        $('div#pasang_baru').block({ message: 'Mengambil data...' });
-        $.getJSON('../controller/getDashboardPotensiJenisTransaksi.php?jenis_transaksi=pasang baru&unitap='+unitap, function(data){
-            $('#dapot_jenis_transaksi #pasang_baru #jml_agenda').html(data.jml_agenda);
-            $('#dapot_jenis_transaksi #pasang_baru #jml_daya').html(data.jml_daya);
-            $('#dapot_jenis_transaksi #pasang_baru #jml_rpbp').html(data.jml_rpbp);
-            $('#dapot_jenis_transaksi #pasang_baru #jml_rprab').html(data.jml_rprab);
-            $('div#pasang_baru').unblock();
-        });
-        $('div#perubahan_daya').block({ message: 'Mengambil data...' });
-        $.getJSON('../controller/getDashboardPotensiJenisTransaksi.php?jenis_transaksi=perubahan daya&unitap='+unitap, function(data){
-            $('#dapot_jenis_transaksi #perubahan_daya #jml_agenda').html(data.jml_agenda);
-            $('#dapot_jenis_transaksi #perubahan_daya #jml_daya').html(data.jml_daya);
-            $('#dapot_jenis_transaksi #perubahan_daya #jml_rpbp').html(data.jml_rpbp);
-            $('#dapot_jenis_transaksi #perubahan_daya #jml_rprab').html(data.jml_rprab);
-            $('div#perubahan_daya').unblock();
-        });
-        $('div#sambung_kembali').block({ message: 'Mengambil data...' });
-        $.getJSON('../controller/getDashboardPotensiJenisTransaksi.php?jenis_transaksi=sambung kembali&unitap='+unitap, function(data){
-            $('#dapot_jenis_transaksi #sambung_kembali #jml_agenda').html(data.jml_agenda);
-            $('#dapot_jenis_transaksi #sambung_kembali #jml_daya').html(data.jml_daya);
-            $('#dapot_jenis_transaksi #sambung_kembali #jml_rpbp').html(data.jml_rpbp);
-            $('#dapot_jenis_transaksi #sambung_kembali #jml_rprab').html(data.jml_rprab);
-            $('div#sambung_kembali').unblock();
-        });
-
-        $('div#non_ge').block({ message: 'Mengambil data...' });
-        $.getJSON('../controller/getDashboardPotensi.php?klp_plg=NON_GE&unitap='+unitap, function(data){
-            $('#dapot #non_ge #jml_agenda').html(data.jml_agenda);
-            $('#dapot #non_ge #jml_daya').html(data.jml_daya);
-            $('#dapot #non_ge #jml_rpbp').html(data.jml_rpbp);
-            $('#dapot #non_ge #jml_rprab').html(data.jml_rprab);
-            $('div#non_ge').unblock();
-        });
-        $('div#ge').block({ message: 'Mengambil data...' });
-        $.getJSON('../controller/getDashboardPotensi.php?klp_plg=GE&unitap='+unitap, function(data){
-            $('#dapot #ge #jml_agenda').html(data.jml_agenda);
-            $('#dapot #ge #jml_daya').html(data.jml_daya);
-            $('#dapot #ge #jml_rpbp').html(data.jml_rpbp);
-            $('#dapot #ge #jml_rprab').html(data.jml_rprab);
-            $('div#ge').unblock();
-        });
-        $('div#tm').block({ message: 'Mengambil data...' });
-        $.getJSON('../controller/getDashboardPotensi.php?klp_plg=TM&unitap='+unitap, function(data){
-            $('#dapot #tm #jml_agenda').html(data.jml_agenda);
-            $('#dapot #tm #jml_daya').html(data.jml_daya);
-            $('#dapot #tm #jml_rpbp').html(data.jml_rpbp);
-            $('#dapot #tm #jml_rprab').html(data.jml_rprab);
-            $('div#tm').unblock();
-        });
-
-        $('div#dapot_daya').block({ message: 'Mengambil data...' });
-        $.getJSON('../controller/getDashboardPotensiDaya.php?unitap='+unitap, function(data){
-            
-            chart_dapot_daya.data.datasets[0].data = data.jml_daya;
-            chart_dapot_daya.data.labels = data.klp_plg;
-            chart_dapot_daya.update();
-            $('div#dapot_daya').unblock();
-
-        });
-
-        $('div#dapot_daya_unit').block({ message: 'Mengambil data...' });
-        $.getJSON('../controller/getDashboardPotensiDayaUnit.php?unitap='+unitap, function(data){
-            
-            chart_dapot_daya_unit.data.datasets[0].data = data.jml_daya_non_ge;
-            chart_dapot_daya_unit.data.datasets[1].data = data.jml_daya_ge;
-            chart_dapot_daya_unit.data.datasets[2].data = data.jml_daya_tm;
-            chart_dapot_daya_unit.data.labels = data.singkatan;
-            chart_dapot_daya_unit.update();
-            $('div#dapot_daya_unit').unblock();
-
-        });
-
-        $('div#dapot_bp').block({ message: 'Mengambil data...' });
-        $.getJSON('../controller/getDashboardPotensiBP.php?unitap='+unitap, function(data){
-            
-            chart_dapot_bp.data.datasets[0].data = data.jml_rpbp;
-            chart_dapot_bp.data.labels = data.klp_plg;
-            chart_dapot_bp.update();
-            $('div#dapot_bp').unblock();
-
-        });
-
-        $('div#dapot_bp_unit').block({ message: 'Mengambil data...' });
-        $.getJSON('../controller/getDashboardPotensiBPUnit.php?unitap='+unitap, function(data){
-
-            chart_dapot_bp_unit.data.datasets[0].data = data.jml_rpbp_non_ge;
-            chart_dapot_bp_unit.data.datasets[1].data = data.jml_rpbp_ge;
-            chart_dapot_bp_unit.data.datasets[2].data = data.jml_rpbp_tm;
-            chart_dapot_bp_unit.data.labels = data.singkatan;
-            chart_dapot_bp_unit.update();
-            $('div#dapot_bp_unit').unblock();
-
-        });
-
-        $('div#dapot_rab').block({ message: 'Mengambil data...' });
-        $.getJSON('../controller/getDashboardPotensiRAB.php?unitap='+unitap, function(data){
-            
-            chart_dapot_rab.data.datasets[0].data = data.jml_rprab;
-            chart_dapot_rab.data.labels = data.klp_plg;
-            chart_dapot_rab.update();
-            $('div#dapot_rab').unblock();
-
-        });
-
-        $('div#dapot_rab_unit').block({ message: 'Mengambil data...' });
-        $.getJSON('../controller/getDashboardPotensiRABUnit.php?unitap='+unitap, function(data){
-
-            chart_dapot_rab_unit.data.datasets[0].data = data.jml_rprab_non_ge;
-            chart_dapot_rab_unit.data.datasets[1].data = data.jml_rprab_ge;
-            chart_dapot_rab_unit.data.datasets[2].data = data.jml_rprab_tm;
-            chart_dapot_rab_unit.data.labels = data.singkatan;
-            chart_dapot_rab_unit.update();
-            $('div#dapot_rab_unit').unblock();
-
-        });
-
-        $('div#overview_daftung .card').block({ message: 'Mengambil data...' });
         $.getJSON('../controller/getDashboardPermohonan.php?unitap='+unitap, function(data){
+            $('div#card_permohonan').unblock();
             $('#total_agenda').html(data.total_agenda);
             $('#total_agenda_rab').html(data.total_agenda_rab);
-            $('#total_agenda_non_rab').html(data.total_agenda_non_rab);
             $('#total_proses').html(data.total_proses);
             $('#total_evaluasi').html(data.total_evaluasi);
-            $('#total_klasifikasi_rab_1').html(data.total_klasifikasi_rab_1);
-            $('#total_klasifikasi_rab_2').html(data.total_klasifikasi_rab_2);
-            $('#total_klasifikasi_rab_3').html(data.total_klasifikasi_rab_3);
-            $('#total_klasifikasi_rab_4').html(data.total_klasifikasi_rab_4);
-            $('#total_klasifikasi_rab_5').html(data.total_klasifikasi_rab_5);
-            $('#total_klasifikasi_rab_6').html(data.total_klasifikasi_rab_6);
-            $('#jam_upload_daftung').html('Jam upload: '+data.jam_upload_daftung);
-            $('div#overview_daftung .card').unblock();
+            chart_unit.data.labels = data.singkatan;
+            chart_unit.data.datasets[0].data = data.jml_proses;
+            chart_unit.data.datasets[1].data = data.jml_evaluasi;
+            chart_unit.data.datasets[2].data = data.jml_agenda_dalam_tmp;
+            chart_unit.data.datasets[3].data = data.jml_agenda_mendekati_tmp;
+            chart_unit.data.datasets[4].data = data.jml_agenda_melebihi_tmp;
+            chart_unit.update();
 
-        });
+            $.getJSON('../controller/getDashboardPermohonanTMP.php?unitap='+unitap, function(data){
+                $('div#card_permohonan_tmp').unblock();
+                chart_tmp.data.datasets[0].data = data.jml_permohonan;
+                chart_tmp.data.labels = data.status_tmp;
+                chart_tmp.update();
 
-        $('div#card_permohonan_cluster').block({ message: 'Mengambil data...' });
-        $.getJSON('../controller/getDashboardPermohonanCluster.php?unitap='+unitap, function(data){
+                $.getJSON('../controller/getDashboardPermohonanStatusProses.php?unitap='+unitap, function(data){
+                    $('div#card_permohonan_status_proses').unblock();
+                    chart_status_proses.data.datasets[0].data = data.jml_permohonan;
+                    chart_status_proses.data.labels = data.status_proses;
+                    chart_status_proses.update();
 
-            chart_cluster.data.datasets[0].data = data.rupiah;
-            chart_cluster.data.labels = data.jenis_rupiah;
-            chart_cluster.update();
-            $('div#card_permohonan_cluster').unblock();
+                    $.getJSON('../controller/getDashboardPermohonanAlasan.php?unitap='+unitap, function(data){
+                        $('div#card_permohonan_alasan').unblock();
+                        chart_alasan.data.datasets[0].data = data.jml_permohonan;
+                        chart_alasan.data.labels = data.alasan_kriteria_tmp;
+                        chart_alasan.update();
 
-        });
+                        $.getJSON('../controller/getDashboardPermohonanJenis.php?unitap='+unitap, function(data){
+                            $('div#card_permohonan_jenis').unblock();
+                            chart_ket_transaksi.data.datasets[0].data = data.jml_permohonan;
+                            chart_ket_transaksi.data.labels = data.ket_transaksi;
+                            chart_ket_transaksi.update();
 
-        $('div#card_permohonan_cluster_unit').block({ message: 'Mengambil data...' });
-        $.getJSON('../controller/getDashboardPermohonanClusterUnit.php?unitap='+unitap, function(data){
-
-            chart_cluster_unit.data.datasets[0].data = data.rp_bp;
-            chart_cluster_unit.data.datasets[1].data = data.kurang_bp;
-            chart_cluster_unit.data.datasets[2].data = data.lebih_bp;
-            chart_cluster_unit.data.labels = data.singkatan;
-            chart_cluster_unit.update();
-            $('div#card_permohonan_cluster_unit').unblock();
-
-        });
-
-        $('div#card_permohonan_jenis').block({ message: 'Mengambil data...' });
-        $.getJSON('../controller/getDashboardPermohonanJenis.php?unitap='+unitap, function(data){
-
-            chart_jenis.data.datasets[0].data = data.jml_permohonan;
-            chart_jenis.data.labels = data.ket_transaksi;
-            chart_jenis.update();
-            $('div#card_permohonan_jenis').unblock();
-
-        });
-
-        $('div#card_permohonan_jenis_unit').block({ message: 'Mengambil data...' });
-        $.getJSON('../controller/getDashboardPermohonanJenisUnit.php?unitap='+unitap, function(data){
-
-            chart_jenis_unit.data.datasets[0].data = data.jml_agenda_jenis_lain;
-            chart_jenis_unit.data.datasets[1].data = data.jml_agenda_jenis_migrasi_lpb;
-            chart_jenis_unit.data.datasets[2].data = data.jml_agenda_jenis_pasang_baru;
-            chart_jenis_unit.data.datasets[3].data = data.jml_agenda_jenis_tambah_daya;
-            chart_jenis_unit.data.labels = data.singkatan;
-            chart_jenis_unit.update();
-            $('div#card_permohonan_jenis_unit').unblock();
-
-        });
-
-        $('div#card_permohonan_tmp').block({ message: 'Mengambil data...' });
-        $.getJSON('../controller/getDashboardPermohonanTMP.php?unitap='+unitap, function(data){
-
-            chart_tmp.data.datasets[0].data = data.jml_permohonan;
-            chart_tmp.data.labels = data.status_tmp;
-            chart_tmp.update();
-            $('div#card_permohonan_tmp').unblock();
-
-        });
-
-        $('div#card_permohonan_tmp_unit').block({ message: 'Mengambil data...' });
-        $.getJSON('../controller/getDashboardPermohonanTMPUnit.php?unitap='+unitap, function(data){
-
-            chart_tmp_unit.data.datasets[0].data = data.jml_agenda_melebihi_tmp;
-            chart_tmp_unit.data.datasets[1].data = data.jml_agenda_mendekati_tmp;
-            chart_tmp_unit.data.datasets[2].data = data.jml_agenda_dalam_tmp;
-            chart_tmp_unit.data.labels = data.singkatan;
-            chart_tmp_unit.update();
-            $('div#card_permohonan_tmp_unit').unblock();
-
-        });
-
-        $('div#card_permohonan_alasan_kriteria').block({ message: 'Mengambil data...' });
-        $.getJSON('../controller/getDashboardPermohonanAlasan.php?unitap='+unitap, function(data){
-
-            chart_alasan.data.datasets[0].data = data.jml_permohonan;
-            chart_alasan.data.labels = data.alasan_kriteria_tmp;
-            chart_alasan.update();
-            $('div#card_permohonan_alasan_kriteria').unblock();
-
-        });
-
-        $('div#card_permohonan_alasan_kriteria_unit').block({ message: 'Mengambil data...' });
-        $.getJSON('../controller/getDashboardPermohonanAlasanUnit.php?unitap='+unitap, function(data){
-
-            chart_alasan_unit.data.datasets[0].data = data.jml_agenda_alasan_lain;
-            chart_alasan_unit.data.datasets[1].data = data.jml_agenda_alasan_perluasan_jtm;
-            chart_alasan_unit.data.datasets[2].data = data.jml_agenda_alasan_perluasan_jtr;
-            chart_alasan_unit.data.datasets[3].data = data.jml_agenda_alasan_tanpa_perluasan;
-            chart_alasan_unit.data.labels = data.singkatan;
-            chart_alasan_unit.update();
-            $('div#card_permohonan_alasan_kriteria_unit').unblock();
-
-        });
-
-        $('div#card_oldest_agenda_non_ge table tbody').empty();
-        $('div#card_oldest_agenda_non_ge').block({ message: 'Mengambil data...' });
-        $.getJSON('../controller/getDashboardPermohonanTerlama.php?klp_plg=NON_GE&unitap='+unitap, function(data){
-
-            var tr = '';
-            $.each(data.rows, function(k,v){
-                tr += '<tr data-noagenda="'+v.noagenda+'" >';
-                tr += '<td>'+v.noagenda+'</td>';
-                tr += '<td>'+v.tglmohon+'</td>';
-                tr += '<td>'+v.jenis_transaksi+'</td>';
-                // tr += '<td>'+v.tarif_daya_lama+'</td>';
-                tr += '<td>'+v.tarif_daya_baru+'</td>';
-                // tr += '<td>'+v.alasan_kriteria_tmp+'</td>';
-                // tr += '<td>'+v.rp_bp+'</td>';
-                // tr += '<td>'+v.rp_rab+'</td>';
-                // tr += '<td><span class="label '+v.label_status+'">'+v.status+'</span></td>';
-                tr += '</tr>';
+                            $.getJSON('../controller/getDashboardPermohonanTerbaru.php?unitap='+unitap, function(data){
+                                var tr = '';
+                                $.each(data.rows, function(k,v){
+                                    tr += '<tr>';
+                                    tr += '<td><a href="info-agenda.php?noagenda='+v.noagenda+'" target="_blank">'+v.noagenda+'</a></td>';
+                                    tr += '<td>'+v.tglmohon+'</td>';
+                                    tr += '<td>'+v.jenis_transaksi+'</td>';
+                                    tr += '<td>'+v.tarif_daya_lama+'</td>';
+                                    tr += '<td>'+v.tarif_daya_baru+'</td>';
+                                    // tr += '<td>'+v.alasan_kriteria_tmp+'</td>';
+                                    tr += '<td>'+v.rp_bp+'</td>';
+                                    tr += '<td>'+v.rp_rab+'</td>';
+                                    tr += '<td><span class="label '+v.label_status+'">'+v.status+'</span></td>';
+                                    tr += '</tr>';
+                                });
+                                $('div#card_latest_agenda table tbody').append(tr);
+                                $('div#card_latest_agenda').unblock();
+                            });
+                        });
+                    });
+                });
             });
-            $('div#card_oldest_agenda_non_ge table tbody').append(tr);
-            $('div#card_oldest_agenda_non_ge').unblock();
         });
-
-        $('div#card_oldest_agenda_ge table tbody').empty();
-        $('div#card_oldest_agenda_ge').block({ message: 'Mengambil data...' });
-        $.getJSON('../controller/getDashboardPermohonanTerlama.php?klp_plg=GE&unitap='+unitap, function(data){
-
-            var tr = '';
-            $.each(data.rows, function(k,v){
-                tr += '<tr data-noagenda="'+v.noagenda+'" >';
-                tr += '<td>'+v.noagenda+'</td>';
-                tr += '<td>'+v.tglmohon+'</td>';
-                tr += '<td>'+v.jenis_transaksi+'</td>';
-                // tr += '<td>'+v.tarif_daya_lama+'</td>';
-                tr += '<td>'+v.tarif_daya_baru+'</td>';
-                // tr += '<td>'+v.alasan_kriteria_tmp+'</td>';
-                // tr += '<td>'+v.rp_bp+'</td>';
-                // tr += '<td>'+v.rp_rab+'</td>';
-                // tr += '<td><span class="label '+v.label_status+'">'+v.status+'</span></td>';
-                tr += '</tr>';
-            });
-            $('div#card_oldest_agenda_ge table tbody').append(tr);
-            $('div#card_oldest_agenda_ge').unblock();
-        });
-
-        $('div#card_oldest_agenda_tm table tbody').empty();
-        $('div#card_oldest_agenda_tm').block({ message: 'Mengambil data...' });
-        $.getJSON('../controller/getDashboardPermohonanTerlama.php?klp_plg=TM&unitap='+unitap, function(data){
-
-            var tr = '';
-            $.each(data.rows, function(k,v){
-                tr += '<tr data-noagenda="'+v.noagenda+'" >';
-                tr += '<td>'+v.noagenda+'</td>';
-                tr += '<td>'+v.tglmohon+'</td>';
-                tr += '<td>'+v.jenis_transaksi+'</td>';
-                // tr += '<td>'+v.tarif_daya_lama+'</td>';
-                tr += '<td>'+v.tarif_daya_baru+'</td>';
-                // tr += '<td>'+v.alasan_kriteria_tmp+'</td>';
-                // tr += '<td>'+v.rp_bp+'</td>';
-                // tr += '<td>'+v.rp_rab+'</td>';
-                // tr += '<td><span class="label '+v.label_status+'">'+v.status+'</span></td>';
-                tr += '</tr>';
-            });
-            $('div#card_oldest_agenda_tm table tbody').append(tr);
-            $('div#card_oldest_agenda_tm').unblock();
-        });
-
-
-        // // Update Bar Chart per Unit
-        // $('div#card_permohonan').block({ message: 'Mengambil data...' });
-        // $('div#card_permohonan_tmp').block({ message: 'Mengambil data...' });
-        // $('div#card_permohonan_status_proses').block({ message: 'Mengambil data...' });
-        // $('div#card_permohonan_alasan').block({ message: 'Mengambil data...' });
-        // $('div#card_permohonan_jenis').block({ message: 'Mengambil data...' });
-        // $('div#card_latest_agenda').block({ message: 'Mengambil data...' });
-        // $('div#card_latest_agenda table tbody').empty();
-
-        // $.getJSON('../controller/getDashboardPermohonan.php?unitap='+unitap, function(data){
-        //     $('div#card_permohonan').unblock();
-        //     $('#total_agenda').html(data.total_agenda);
-        //     $('#total_agenda_rab').html(data.total_agenda_rab);
-        //     $('#total_proses').html(data.total_proses);
-        //     $('#total_evaluasi').html(data.total_evaluasi);
-        //     $('#total_klasifikasi_rab_1').html(data.total_klasifikasi_rab_1);
-        //     $('#total_klasifikasi_rab_2').html(data.total_klasifikasi_rab_2);
-        //     $('#total_klasifikasi_rab_3').html(data.total_klasifikasi_rab_3);
-        //     $('#total_klasifikasi_rab_4').html(data.total_klasifikasi_rab_4);
-        //     $('#total_klasifikasi_rab_5').html(data.total_klasifikasi_rab_5);
-        //     $('#total_klasifikasi_rab_6').html(data.total_klasifikasi_rab_6);
-        //     chart_jenis_unit.data.labels = data.singkatan;
-        //     chart_jenis_unit.data.datasets[0].data = data.jml_klasifikasi_rab_1;
-        //     chart_jenis_unit.data.datasets[1].data = data.jml_klasifikasi_rab_2;
-        //     chart_jenis_unit.data.datasets[2].data = data.jml_klasifikasi_rab_3;
-        //     chart_jenis_unit.data.datasets[3].data = data.jml_klasifikasi_rab_4;
-        //     chart_jenis_unit.data.datasets[4].data = data.jml_klasifikasi_rab_5;
-        //     chart_jenis_unit.data.datasets[5].data = data.jml_klasifikasi_rab_6;
-        //     chart_jenis_unit.data.datasets[6].data = data.jml_klasifikasi_rab_7;
-        //     chart_jenis_unit.data.datasets[7].data = data.jml_agenda_dalam_tmp;
-        //     chart_jenis_unit.data.datasets[8].data = data.jml_agenda_mendekati_tmp;
-        //     chart_jenis_unit.data.datasets[9].data = data.jml_agenda_melebihi_tmp;
-        //     chart_jenis_unit.update();
-
-        //     $.getJSON('../controller/getDashboardPermohonanTMP.php?unitap='+unitap, function(data){
-        //         $('div#card_permohonan_tmp').unblock();
-        //         chart_tmp.data.datasets[0].data = data.jml_permohonan;
-        //         chart_tmp.data.labels = data.status_tmp;
-        //         chart_tmp.update();
-
-        //         $.getJSON('../controller/getDashboardPermohonanStatusProses.php?unitap='+unitap, function(data){
-        //             $('div#card_permohonan_status_proses').unblock();
-        //             chart_status_proses.data.datasets[0].data = data.jml_permohonan;
-        //             chart_status_proses.data.labels = data.status_proses;
-        //             chart_status_proses.update();
-
-        //             $.getJSON('../controller/getDashboardPermohonanAlasan.php?unitap='+unitap, function(data){
-        //                 $('div#card_permohonan_alasan').unblock();
-        //                 chart_alasan.data.datasets[0].data = data.jml_permohonan;
-        //                 chart_alasan.data.labels = data.alasan_kriteria_tmp;
-        //                 chart_alasan.update();
-
-        //                 $.getJSON('../controller/getDashboardPermohonanJenis.php?unitap='+unitap, function(data){
-        //                     $('div#card_permohonan_jenis').unblock();
-        //                     chart_jenis.data.datasets[0].data = data.jml_permohonan;
-        //                     chart_jenis.data.labels = data.ket_transaksi;
-        //                     chart_jenis.update();
-
-        //                     $.getJSON('../controller/getDashboardPermohonanTerlama.php?unitap='+unitap, function(data){
-        //                         var tr = '';
-        //                         $.each(data.rows, function(k,v){
-        //                             tr += '<tr>';
-        //                             tr += '<td>'+v.noagenda+'</td>';
-        //                             tr += '<td>'+v.tglmohon+'</td>';
-        //                             tr += '<td>'+v.jenis_transaksi+'</td>';
-        //                             tr += '<td>'+v.tarif_daya_lama+'</td>';
-        //                             tr += '<td>'+v.tarif_daya_baru+'</td>';
-        //                             // tr += '<td>'+v.alasan_kriteria_tmp+'</td>';
-        //                             tr += '<td>'+v.rp_bp+'</td>';
-        //                             tr += '<td>'+v.rp_rab+'</td>';
-        //                             tr += '<td><span class="label '+v.label_status+'">'+v.status+'</span></td>';
-        //                             tr += '</tr>';
-        //                         });
-        //                         $('div#card_latest_agenda table tbody').append(tr);
-        //                         $('div#card_latest_agenda').unblock();
-        //                     });
-        //                 });
-        //             });
-        //         });
-        //     });
-        // });
     });
 
     // draw background
@@ -1805,49 +712,6 @@ $(function() {
         }
     });
 
-    $('#agenda_terlama table').on('click', 'tr', function (e) {
-
-        console.log('agenda click');
-        var noagenda = $(this).data('noagenda');
-
-        window.open('info-agenda.php?noagenda='+noagenda, '_blank');
-
-    });
-
-    $("#dapot_jenis_transaksi .card").click(function(){
-        console.log('jenis_transaksi', $(this));
-        var jenis_transaksi = $(this).data('jenis-transaksi');
-        var unit = $('#sel_unit').val();
-        var unitap;
-
-        window.open('mon-potensi.php?unitupi=53&unitap='+unit+'&unitup=00&klp_plg=00&jenis_transaksi='+jenis_transaksi, '_blank');
-
-    });
-
-    $("#dapot .card").click(function(){
-
-        var klp_plg = $(this).data('klp-plg');
-        var unit = $('#sel_unit').val();
-        var unitap;
-
-        window.open('mon-potensi.php?unitupi=53&unitap='+unit+'&unitup=00&klp_plg='+klp_plg+'&jenis_transaksi=00', '_blank');
-
-    });
-
-    $("#overview_daftung .card").click(function(){
-
-        var klp_plg = $(this).data('klp-plg');
-        var status_proses = $(this).data('status-proses');
-        var jenis_transaksi = $(this).data('jenis-transaksi');
-        var status_tmp = $(this).data('status-tmp');
-        var klasifikasi_rab = $(this).data('klasifikasi-rab');
-        var unit = $('#sel_unit').val();
-        var unitap;
-
-        window.open('mon-usulan-skai.php?unitupi=53&unitap='+unit+'&unitup=00&klp_plg='+klp_plg+'&jenis_transaksi='+jenis_transaksi+'&status_proses='+status_proses+'&status_tmp='+status_tmp+'&klasifikasi_rab='+klasifikasi_rab, '_blank');
-
-    });
-
     $(".btn-download").click(function(){
         console.log('download');
         var canvas = $(this).closest( ".card" ).children('.card-body').children('canvas');
@@ -1856,79 +720,5 @@ $(function() {
             saveAs(blob, "Chart.png");
         });
     });
-
-
-    document.getElementById("chart_dapot_daya").onclick = function(evt)
-    {   
-        var activePoints = chart_dapot_daya.getElementsAtEvent(evt);
-
-        if(activePoints.length > 0)
-        {
-            //get the internal index of slice in pie chart_dapot_daya
-            var clickedElementindex = activePoints[0]["_index"];
-
-            //get specific label by index 
-            var label = chart_dapot_daya.data.labels[clickedElementindex];
-
-            //get value by index      
-            var value = chart_dapot_daya.data.datasets[0].data[clickedElementindex];
-
-            var klp_plg = label;
-            var unit = $('#sel_unit').val();
-            var unitap;
-
-            window.open('mon-potensi.php?unitupi=53&unitap='+unit+'&unitup=00&klp_plg='+klp_plg+'&jenis_transaksi=00', '_blank');
-
-       }
-    }
-
-
-    document.getElementById("chart_dapot_bp").onclick = function(evt)
-    {   
-        var activePoints = chart_dapot_bp.getElementsAtEvent(evt);
-
-        if(activePoints.length > 0)
-        {
-            //get the internal index of slice in pie chart_dapot_bp
-            var clickedElementindex = activePoints[0]["_index"];
-
-            //get specific label by index 
-            var label = chart_dapot_bp.data.labels[clickedElementindex];
-
-            //get value by index      
-            var value = chart_dapot_bp.data.datasets[0].data[clickedElementindex];
-
-            var klp_plg = label;
-            var unit = $('#sel_unit').val();
-            var unitap;
-
-            window.open('mon-potensi.php?unitupi=53&unitap='+unit+'&unitup=00&klp_plg='+klp_plg+'&jenis_transaksi=00', '_blank');
-
-       }
-    }
-
-    document.getElementById("chart_dapot_rab").onclick = function(evt)
-    {   
-        var activePoints = chart_dapot_rab.getElementsAtEvent(evt);
-
-        if(activePoints.length > 0)
-        {
-            //get the internal index of slice in pie chart_dapot_rab
-            var clickedElementindex = activePoints[0]["_index"];
-
-            //get specific label by index 
-            var label = chart_dapot_rab.data.labels[clickedElementindex];
-
-            //get value by index      
-            var value = chart_dapot_rab.data.datasets[0].data[clickedElementindex];
-
-            var klp_plg = label;
-            var unit = $('#sel_unit').val();
-            var unitap;
-
-            window.open('mon-potensi.php?unitupi=53&unitap='+unit+'&unitup=00&klp_plg='+klp_plg+'&jenis_transaksi=00', '_blank');
-
-       }
-    }
 
 });

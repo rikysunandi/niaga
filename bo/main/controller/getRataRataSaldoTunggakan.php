@@ -41,6 +41,10 @@ if($stmt){
 		$response['rows'][$i]['target'] = number_format($row['TARGET'],0,'.',',');
 		$response['rows'][$i]['realisasi'] = number_format($row['REALISASI'],2,'.',',');
 		$response['rows'][$i]['kali_nihil'] = number_format($row['KALI_NIHIL'],0,'.',',');
+		$response['rows'][$i]['batas_saldo_bulan_depan'] = number_format($row['BATAS_SALDO_BULAN_DEPAN'],0,'.',',');
+		$response['rows'][$i]['max_realisasi_bulan_depan'] = number_format($row['MAX_REALISASI_BULAN_DEPAN'],2,'.',',');
+		$response['rows'][$i]['batas_saldo_bulan_sisa'] = number_format($row['BATAS_SALDO_BULAN_SISA'],0,'.',',');
+		$response['rows'][$i]['max_realisasi_bulan_sisa'] = number_format($row['MAX_REALISASI_BULAN_SISA'],2,'.',',');
 
 		$i++;
 	}
@@ -57,6 +61,10 @@ if($stmt){
 	$response['uid']['target'] = number_format($row['TARGET'],0,'.',',');
 	$response['uid']['realisasi'] = number_format($row['REALISASI'],2,'.',',');
 	$response['uid']['kali_nihil'] = number_format($row['KALI_NIHIL'],0,'.',',');
+	$response['uid']['batas_saldo_bulan_depan'] = number_format($row['BATAS_SALDO_BULAN_DEPAN'],0,'.',',');
+	$response['uid']['max_realisasi_bulan_depan'] = number_format($row['MAX_REALISASI_BULAN_DEPAN'],2,'.',',');
+	$response['uid']['batas_saldo_bulan_sisa'] = number_format($row['BATAS_SALDO_BULAN_SISA'],0,'.',',');
+	$response['uid']['max_realisasi_bulan_sisa'] = number_format($row['MAX_REALISASI_BULAN_SISA'],2,'.',',');
 
 
 	$response['success'] = true;
