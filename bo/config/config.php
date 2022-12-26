@@ -93,6 +93,8 @@ FUNCTION format_cash_long($cash) {
     RETURN NUMBER_FORMAT($cash);
 }
 
+$bulan = array('', 'Jan', 'Feb', 'Mar', 'Apr', 'Mei', 'Jun', 'Jul', 'Agt', 'Sep', 'Okt', 'Nov', 'Des');
+
 $unitups = array(
     array('unitup'=>'53551', 'unitap'=>'53BDG'),
     array('unitup'=>'53555', 'unitap'=>'53BDG'),
