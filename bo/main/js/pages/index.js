@@ -114,18 +114,26 @@ $(function() {
                 labels: data.blth,
                 datasets: [
                     {
+                      label: 'RP TARGET',
+                      data: data.target,
+                      borderColor: '#135440',
+                      backgroundColor: addAlpha('#135440', 0.1),
+                      fill: true,
+                      //hidden: true
+                    },
+                    {
                       label: 'RP SALDO',
                       data: data.pal_tagsus,
                       borderColor: '#F2C36B',
                       backgroundColor: addAlpha('#F2C36B', 0.1),
-                      fill: true
+                      fill: false
                     },
                     {
                       label: 'RP RATA2 SALDO',
                       data: data.rata2_saldo_tunggakan,
-                      borderColor: '#135440',
-                      backgroundColor: addAlpha('#135440', 0.1),
-                      fill: true,
+                      borderColor: '#EC5B43',
+                      backgroundColor: addAlpha('#EC5B43', 0.1),
+                      fill: false,
                       //hidden: true
                     },
                   ]
@@ -164,17 +172,18 @@ $(function() {
                     },
                     y: {
                         grid: {
-                            display: true,
-                            drawBorder: true,
+                            display: false,
+                            drawBorder: false,
                             drawOnChartArea: false,
-                            drawTicks: true,
+                            drawTicks: false,
                         },
-                        // ticks: {
-                        //     callback: function(val, index) {
-                        //         // console.log('val '+val);
-                        //         // return new Intl.NumberFormat('id-ID').format(val/1000000)+' Jt';
-                        //     }
-                        // },
+                        ticks: {
+                            display: false,
+                            // callback: function(val, index) {
+                            //     // console.log('val '+val);
+                            //     // return new Intl.NumberFormat('id-ID').format(val/1000000)+' Jt';
+                            // }
+                        },
                     }
                     
                 } 
@@ -251,6 +260,41 @@ $(function() {
               },
         });
 
+        var tr='';
+        $.each(data.blth, function(k,v){
+
+            if(data.realisasi[k]==null){
+                tr += '<tr class="tr-blank">';
+                tr += '<td class="text-center">'+v+'</td>';
+                tr += '<td class="text-right"></td>';
+                tr += '<td class="text-right"></td>';
+                tr += '<td class="text-right"></td>';
+                tr += '<td class="text-right"></td>';
+                tr += '</tr>';
+            }else{
+
+                if(data.realisasi[k]>=110){
+                    tr += '<tr class="tr-os">';
+                }else if(data.realisasi[k]>=100){
+                    tr += '<tr class="tr-mr">';
+                }else if(data.realisasi[k]>=80){
+                    tr += '<tr class="tr-ur">';
+                }else if(data.realisasi[k]>=0){
+                    tr += '<tr class="tr-ni">';
+                }
+                
+                tr += '<td class="text-center">'+v+'</td>';
+                tr += '<td class="text-right">'+new Intl.NumberFormat('id-ID').format(data.pal_tagsus[k])+'</td>';
+                tr += '<td class="text-right">'+new Intl.NumberFormat('id-ID').format(data.rata2_saldo_tunggakan[k])+'</td>';
+                tr += '<td class="text-right">'+new Intl.NumberFormat('id-ID').format(data.target[k])+'</td>';
+                tr += '<td class="text-right">'+new Intl.NumberFormat('id-ID').format(data.realisasi[k])+'%</td>';
+                tr += '</tr>';
+            }
+
+        });
+
+
+        $('div#trend_rata_rata_saldo_tunggakan table tbody').append(tr);
         $('div#trend_rata_rata_saldo_tunggakan').unblock();
 
     });
@@ -344,10 +388,48 @@ $(function() {
         $.getJSON('../controller/getDashboardTrendRataRataSaldoTunggakan.php?unitap='+unitap+'&kogol=X&pic=X&blth='+blth, function(data){
 
             chart_trend_rata_rata_saldo_tunggakan.data.labels= data.blth;
-            chart_trend_rata_rata_saldo_tunggakan.data.datasets[0].data = data.pal_tagsus;
-            chart_trend_rata_rata_saldo_tunggakan.data.datasets[1].data = data.rata2_saldo_tunggakan;
+            chart_trend_rata_rata_saldo_tunggakan.data.datasets[0].data = data.target;
+            chart_trend_rata_rata_saldo_tunggakan.data.datasets[1].data = data.pal_tagsus;
+            chart_trend_rata_rata_saldo_tunggakan.data.datasets[2].data = data.rata2_saldo_tunggakan;
             chart_trend_rata_rata_saldo_tunggakan.update();
 
+            $('div#trend_rata_rata_saldo_tunggakan table tbody').empty();
+
+            var tr='';
+            $.each(data.blth, function(k,v){
+
+                if(data.realisasi[k]==null){
+                    tr += '<tr class="tr-blank">';
+                    tr += '<td class="text-center">'+v+'</td>';
+                    tr += '<td class="text-right"></td>';
+                    tr += '<td class="text-right"></td>';
+                    tr += '<td class="text-right"></td>';
+                    tr += '<td class="text-right"></td>';
+                    tr += '</tr>';
+                }else{
+
+                    if(data.realisasi[k]>=110){
+                        tr += '<tr class="tr-os">';
+                    }else if(data.realisasi[k]>=100){
+                        tr += '<tr class="tr-mr">';
+                    }else if(data.realisasi[k]>=80){
+                        tr += '<tr class="tr-ur">';
+                    }else if(data.realisasi[k]>=0){
+                        tr += '<tr class="tr-ni">';
+                    }
+                    
+                    tr += '<td class="text-center">'+v+'</td>';
+                    tr += '<td class="text-right">'+new Intl.NumberFormat('id-ID').format(data.pal_tagsus[k])+'</td>';
+                    tr += '<td class="text-right">'+new Intl.NumberFormat('id-ID').format(data.rata2_saldo_tunggakan[k])+'</td>';
+                    tr += '<td class="text-right">'+new Intl.NumberFormat('id-ID').format(data.target[k])+'</td>';
+                    tr += '<td class="text-right">'+new Intl.NumberFormat('id-ID').format(data.realisasi[k])+'%</td>';
+                    tr += '</tr>';
+                }
+
+            });
+
+
+            $('div#trend_rata_rata_saldo_tunggakan table tbody').append(tr);
             $('div#trend_rata_rata_saldo_tunggakan').unblock();
 
         });

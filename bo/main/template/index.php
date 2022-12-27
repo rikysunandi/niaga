@@ -36,6 +36,7 @@
         .tr-mr{background: rgba(76, 175, 80, .2);}
         .tr-ur{background: rgba(255, 193, 7, .2);}
         .tr-ni{background: rgba(255, 87, 34, .2);}
+        .tr-blank{background: rgba(2, 2, 2, .2);}
     </style>
 </head>
 
@@ -346,6 +347,15 @@
                                     </div>
                                 </div>
                             </div>
+                            <div class="card-footer ">
+                                <div class="float-right">
+                                    <small><strong>Legenda: </strong></small>
+                                    <small class="tr-os mr-2">>=110%</small>
+                                    <small class="tr-mr mr-2">100-110%</small>
+                                    <small class="tr-ur mr-2">80-100%</small>
+                                    <small class="tr-ni mr-2"><80%</small>
+                                </div>
+                            </div>
                         </div>
                     </div>
                 </div>
@@ -357,8 +367,34 @@
                                 <h4 class="card-title">Trend Rata-Rata Saldo Tunggakan</h4>
                             </div>
                             <div class="card-body row">
-                                <div class="col-12">
+                                <div class="col-8">
                                     <canvas id="chart_trend_rata_rata_saldo_tunggakan"></canvas>
+                                </div>
+                                <div class="col-4">
+                                    <div class="table-responsive">
+                                        <table class="table table-sm table-xs">
+                                            <thead>
+                                                <tr>
+                                                    <th class="bg-primary-lighten-2 text-center"><div data-toggle="tooltip" data-placement="right" title="Kode Unit">BULAN</div></th>
+                                                    <th class="bg-primary-lighten-2 text-center"><div data-toggle="tooltip" data-placement="right" title="Rupiah Saldo bulan yang dipilih">SALDO</div></th>
+                                                    <th class="bg-primary-lighten-2 text-center"><div data-toggle="tooltip" data-placement="right" title="Nilai Rata-Rata Saldo Tunggakan">RATA2 SALDO</div></th>
+                                                    <th class="bg-primary-lighten-2 text-center"><div data-toggle="tooltip" data-placement="right" title="Target Rata-Rata Saldo Tunggakan">TARGET</div></th>
+                                                    <th class="bg-primary-lighten-2 text-center"><div data-toggle="tooltip" data-placement="right" title="Realisai Rata-Rata Saldo Tunggakan terhadap target">REALISASI</div></th>
+                                                </tr>
+                                            </thead>
+                                            <tbody></tbody>
+                                            <tfoot></tfoot>
+                                        </table>
+                                    </div>
+                                </div>
+                            </div>
+                            <div class="card-footer ">
+                                <div class="float-right">
+                                    <small><strong>Legenda: </strong></small>
+                                    <small class="tr-os mr-2">>=110%</small>
+                                    <small class="tr-mr mr-2">100-110%</small>
+                                    <small class="tr-ur mr-2">80-100%</small>
+                                    <small class="tr-ni mr-2"><80%</small>
                                 </div>
                             </div>
                         </div>
@@ -1225,6 +1261,6 @@
     <!-- <script src="https://cdn.jsdelivr.net/gh/emn178/chartjs-plugin-labels/src/chartjs-plugin-labels.js"></script> -->
     <script src="https://cdnjs.cloudflare.com/ajax/libs/FileSaver.js/1.3.3/FileSaver.min.js"></script>
     
-    <script src="../js/pages/index.js?time=12"></script>
+    <script src="../js/pages/index.js?time=15"></script>
 </body>
 </html>

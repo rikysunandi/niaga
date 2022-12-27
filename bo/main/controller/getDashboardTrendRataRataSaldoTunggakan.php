@@ -28,20 +28,29 @@ $response = array();
 
 // $stmt = sqlsrv_query($conn, "select * from vw_Create_Percepatan_Unit order by PERCEPATAN DESC");
 if($stmt){
+	if($row = sqlsrv_fetch_array( $stmt, SQLSRV_FETCH_ASSOC))
+		$target = $row['TARGET'];
+	else
+		$target = 0;
+
+	sqlsrv_next_result($stmt);
+
 	$i=0;
-	$jml_plg=0;
-	$jml_plg_n1=0;
-	$rpptl=0;
-	$rpptl_n1=0;
+	$rata2_saldo_tunggakan=0;
 	while( $row = sqlsrv_fetch_array( $stmt, SQLSRV_FETCH_ASSOC) ) {
 		$response['blth'][$i] = $bulan[intval(substr($row['MonthNumber'],-2))]; 
 
 		if($row['MonthNumber'] <= substr($blth,-2) && date('Ym')>substr($blth,0,4).$row['MonthNumber'] ){
+			$response['target'][$i]=$target;
 			$response['pal_tagsus'][$i]=($row['PAL_TAGSUS']<>'')? $row['PAL_TAGSUS']:0;
-			$response['rata2_saldo_tunggakan'][$i]=($row['RATA2_SALDO_TUNGGAKAN']<>'')? $row['RATA2_SALDO_TUNGGAKAN']:0;
+			$saldo_tunggakan += ($row['PAL_TAGSUS']<>'')? $row['PAL_TAGSUS']:0;
+			$response['rata2_saldo_tunggakan'][$i] = round($saldo_tunggakan/intval(substr($row['MonthNumber'],-2)));
+			$response['realisasi'][$i]=($row['REALISASI']<>'')? $row['REALISASI']:(2-($response['rata2_saldo_tunggakan'][$i]/$target))*100;
 		}else{
+			$response['target'][$i]=null;
 			$response['pal_tagsus'][$i]=null;
 			$response['rata2_saldo_tunggakan'][$i]=null;
+			$response['realisasi'][$i]=null;
 		}
 
 		$i++;

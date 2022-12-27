@@ -14,6 +14,8 @@ $rpp = $_GET['rpp'];
 //$tgl_pemeriksaan_to = $_GET['tgl_pemeriksaan_to'];
 $user = 'SYSTEM';
 
+$response = array();
+
 $params = array(
         array($user, SQLSRV_PARAM_IN),
         array($unitupi, SQLSRV_PARAM_IN),
@@ -61,7 +63,7 @@ if($stmt){
 		$i++;
 	}
 
-	//$response['success'] = true;
+	$response['success'] = true;
 	sqlsrv_free_stmt($stmt);
 
 
