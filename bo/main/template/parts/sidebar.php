@@ -162,8 +162,9 @@
                     <!-- <li><a href="rekap-rpp-up-final.php">Rekap RPP per ULP</a></li> -->
                 </ul>
             </li>
-            <li><a class="has-arrow" href="javascript:void()" aria-expanded="false"><i class="mdi mdi-file-document-box"></i> <span class="nav-text">Kompor Induksi</span></a>
+            <li><a class="has-arrow" href="javascript:void()" aria-expanded="false"><i class="mdi mdi-file-document-box"></i> <span class="nav-text">Pendukung</span></a>
                 <ul aria-expanded="false">
+                    <li><a href="verifikasi-foto-cater.php">Cek Foto Cater</a></li>
                     <li><a href="peta-kompor.php">Peta Pemilihan Target</a></li>
                     <li><a href="target-kompor.php">Target Kompor Induksi</a></li>
                     <li><a href="rpt-kompor.php">Progress Survey CKPM</a></li>
