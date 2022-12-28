@@ -279,7 +279,7 @@ $(function() {
                     tr += '<tr class="tr-mr">';
                 }else if(data.realisasi[k]>=80){
                     tr += '<tr class="tr-ur">';
-                }else if(data.realisasi[k]>=0){
+                }else{
                     tr += '<tr class="tr-ni">';
                 }
                 
@@ -414,7 +414,7 @@ $(function() {
                         tr += '<tr class="tr-mr">';
                     }else if(data.realisasi[k]>=80){
                         tr += '<tr class="tr-ur">';
-                    }else if(data.realisasi[k]>=0){
+                    }else{
                         tr += '<tr class="tr-ni">';
                     }
                     

@@ -41,11 +41,11 @@ if($stmt){
 		$response['blth'][$i] = $bulan[intval(substr($row['MonthNumber'],-2))]; 
 
 		if($row['MonthNumber'] <= substr($blth,-2) && date('Ym')>substr($blth,0,4).$row['MonthNumber'] ){
-			$response['target'][$i]=$target;
-			$response['pal_tagsus'][$i]=($row['PAL_TAGSUS']<>'')? $row['PAL_TAGSUS']:0;
-			$saldo_tunggakan += ($row['PAL_TAGSUS']<>'')? $row['PAL_TAGSUS']:0;
+			$response['target'][$i]=intval($target);
+			$response['pal_tagsus'][$i]=($row['PAL_TAGSUS']<>'')? intval($row['PAL_TAGSUS']):0;
+			$saldo_tunggakan += ($row['PAL_TAGSUS']<>'')? intval($row['PAL_TAGSUS']):0;
 			$response['rata2_saldo_tunggakan'][$i] = round($saldo_tunggakan/intval(substr($row['MonthNumber'],-2)));
-			$response['realisasi'][$i]=($row['REALISASI']<>'')? $row['REALISASI']:(2-($response['rata2_saldo_tunggakan'][$i]/$target))*100;
+			$response['realisasi'][$i]=($row['REALISASI']<>'')? floatval($row['REALISASI']):floatval((2-($response['rata2_saldo_tunggakan'][$i]/$target))*100);
 		}else{
 			$response['target'][$i]=null;
 			$response['pal_tagsus'][$i]=null;
