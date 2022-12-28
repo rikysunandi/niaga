@@ -6,17 +6,17 @@ require_once '../../bo/config/database.php';
 ini_set('max_execution_time', 60);
 set_time_limit(60);
 
-$id_device = $_POST['id_device'];
-$nohp = $_POST['nohp'];
-$tegangan = $_POST['tegangan'];
-$arus = $_POST['arus'];
-$power_factor = $_POST['power_factor'];
-$power = $_POST['power'];
-$energi = $_POST['energi'];
-$frekuensi = $_POST['frekuensi'];
-$indikator = $_POST['indikator'];
-$tgl_kirim_device = $_POST['tgl_kirim_device'];
-$key = $_POST['key2'];
+$id_device = $_REQUEST['id_device'];
+$nohp = $_REQUEST['nohp'];
+$tegangan = $_REQUEST['tegangan'];
+$arus = $_REQUEST['arus'];
+$power_factor = $_REQUEST['power_factor'];
+$power = $_REQUEST['power'];
+$energi = $_REQUEST['energi'];
+$frekuensi = $_REQUEST['frekuensi'];
+$indikator = $_REQUEST['indikator'];
+$tgl_kirim_device = $_REQUEST['tgl_kirim_device'];
+$key = $_REQUEST['key'];
 $user = 'SYSTEM';
 
 $response = array();
