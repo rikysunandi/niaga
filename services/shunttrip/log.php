@@ -16,7 +16,7 @@ $energi = $_POST['energi'];
 $frekuensi = $_POST['frekuensi'];
 $indikator = $_POST['indikator'];
 $tgl_kirim_device = $_POST['tgl_kirim_device'];
-$key = $_POST['key'];
+$key = $_POST['key2'];
 $user = 'SYSTEM';
 
 $response = array();
