@@ -34,7 +34,7 @@ if(!sqlsrv_execute($stmt)){
 $table = 'NIAGA.dbo.vw_Create_Sisa_WO_RPP_Onsite_'.$user;
  
 // Table's primary key
-$primaryKey = 'RPP_KDDK';
+$primaryKey = 'IDPEL';
  
 // Array of database columns which should be read and sent back to DataTables.
 // The `db` parameter represents the column name in the database, while the `dt`
@@ -76,3 +76,6 @@ require( '../ssp.class.php' );
 echo json_encode(
     SSP::simple( $_POST, $sql_details, $table, $primaryKey, $columns )
 );
+
+
+sqlsrv_free_stmt($stmt);

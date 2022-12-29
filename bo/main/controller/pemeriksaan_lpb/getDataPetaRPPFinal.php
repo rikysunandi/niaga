@@ -10,7 +10,7 @@ set_time_limit(900);
 $unitupi = $_GET['unitupi'];
 $unitap = $_GET['unitap'];
 $unitup = $_GET['unitup'];
-$petugas = '00'; // $_GET['petugas'];
+$petugas = $_GET['petugas'];
 //$tgl_pemeriksaan_from = $_GET['tgl_pemeriksaan_from'];
 //$tgl_pemeriksaan_to = $_GET['tgl_pemeriksaan_to'];
 $user = 'SYSTEM';
@@ -54,30 +54,30 @@ if($stmt){
 	}
 	sqlsrv_next_result($stmt);
 
-	$i=0;
-	while( $row = sqlsrv_fetch_array( $stmt, SQLSRV_FETCH_ASSOC) ) {
-		$response['gardu'][$i]['nama_gardu'] = $row['NAMA_GARDU']; 
-		$response['gardu'][$i]['kapasitas_trafo'] = $row['KAPASITAS_TRAFO']; 
-		// $response['gardu'][$i]['tarif'] = $row['TARIF']; 
-		// $response['gardu'][$i]['daya'] = intval($row['DAYA']);
-		$response['gardu'][$i]['latitude'] = ($row['LATITUDE']); 
-		$response['gardu'][$i]['longitude'] = ($row['LONGITUDE']); 
-		$response['gardu'][$i]['nomor_gardu'] = ($row['NOMOR_GARDU']); 
-		// $response['gardu'][$i]['foto'] = ($row['FOTO']); 
+	// $i=0;
+	// while( $row = sqlsrv_fetch_array( $stmt, SQLSRV_FETCH_ASSOC) ) {
+	// 	$response['gardu'][$i]['nama_gardu'] = $row['NAMA_GARDU']; 
+	// 	$response['gardu'][$i]['kapasitas_trafo'] = $row['KAPASITAS_TRAFO']; 
+	// 	// $response['gardu'][$i]['tarif'] = $row['TARIF']; 
+	// 	// $response['gardu'][$i]['daya'] = intval($row['DAYA']);
+	// 	$response['gardu'][$i]['latitude'] = ($row['LATITUDE']); 
+	// 	$response['gardu'][$i]['longitude'] = ($row['LONGITUDE']); 
+	// 	$response['gardu'][$i]['nomor_gardu'] = ($row['NOMOR_GARDU']); 
+	// 	// $response['gardu'][$i]['foto'] = ($row['FOTO']); 
 
-		$i++;
-	}
-	$response['gardu']=null;
+	// 	$i++;
+	// }
+	// $response['gardu']=null;
 
-	sqlsrv_next_result($stmt);
+	// sqlsrv_next_result($stmt);
 
-	$i=0;
-	while( $row = sqlsrv_fetch_array( $stmt, SQLSRV_FETCH_ASSOC) ) {
-		$response['wil'][$i]['kodepetugas'] = $row['KODEPETUGAS']; 
-		$response['wil'][$i]['rbm'] = $row['RBM']; 
+	// $i=0;
+	// while( $row = sqlsrv_fetch_array( $stmt, SQLSRV_FETCH_ASSOC) ) {
+	// 	$response['wil'][$i]['kodepetugas'] = $row['KODEPETUGAS']; 
+	// 	$response['wil'][$i]['rbm'] = $row['RBM']; 
 
-		$i++;
-	}
+	// 	$i++;
+	// }
 
 	//$response['success'] = true;
 	sqlsrv_free_stmt($stmt);

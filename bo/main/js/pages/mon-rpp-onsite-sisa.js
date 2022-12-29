@@ -422,11 +422,11 @@ $(document).ready(function () {
     });
 
     $('#btn_cari').click(function(btn){
-        console.log('Klikk');
-        $('#log').empty();
-        var container = $('#map').parent();
-        $('#map').remove();
-        container.append('<div id="map"></div>');
+        // console.log('Klikk');
+        // $('#log').empty();
+        // var container = $('#map').parent();
+        // $('#map').remove();
+        // container.append('<div id="map"></div>');
         table.ajax.url( '../controller/pemeriksaan_lpb/getSisaWORPPOnsite.php?unitupi='+$('#sel_unitupi').val()+'&unitap='+$('#sel_unitap').val()+'&unitup='+$('#sel_unitup').val()+'&petugas='+$('#sel_petugas').val()+'&rpp='+$('#sel_rpp').val() ).load();
     });
 
