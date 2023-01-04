@@ -1146,6 +1146,6 @@
     <script src="https://cdn.jsdelivr.net/gh/emn178/chartjs-plugin-labels/src/chartjs-plugin-labels.js"></script>
     <script src="https://cdnjs.cloudflare.com/ajax/libs/FileSaver.js/1.3.3/FileSaver.min.js"></script>
     
-    <script src="../js/pages/index-admaga.js"></script>
+    <script src="../js/pages/index-tsp2tl.js"></script>
 </body>
 </html>
