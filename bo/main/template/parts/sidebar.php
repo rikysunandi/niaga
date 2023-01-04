@@ -9,7 +9,7 @@
                 <ul aria-expanded="false">
                     <li><a href="index.php">Pemasaran</a></li>
                     <li><a href="index-mekaga.php">Mekanisme Niaga</a></li>
-                    <li><a href="index-admaga.php">Administrasi Niaga</a></li>
+                    <li><a href="index-tsp2tl.php">Administrasi Niaga</a></li>
                     <li><a href="index-pola-bayar.php">Pola Bayar</a></li>
                 </ul>
             </li>
