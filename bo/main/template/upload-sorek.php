@@ -59,10 +59,11 @@
                             <div class="card-body">
                                 <h4 class="card-title mb-4">Upload data (Semua Kogol)</h4>
                                 <div class="basic-form">
+                                    <p class="text-warning">Sebelum melakukan upload, pastikan semua pelunasan bulan sebelumnya sudah terupload semua!</p>
                                     <p>Langkah-langkah:
                                         <ul>
                                             <li>1. Download Detail Sorek dari Menu Monitoring Tagihan Listrik (OLAP) AP2T ke dalam format <b>xls</b></li>
-                                            <li>2. Browse/Drag satu atau beberapa File Sorek (tanpa diedit) ke Panel di bawah ini <span class="text-warning">(maks 5 File maks ukuran 25Mb per File)</span></li>
+                                            <li>2. Browse/Drag satu atau beberapa File Sorek (tanpa diedit) ke Panel di bawah ini <span class="text-warning">(maks 5 File maks ukuran 40Mb per File)</span></li>
                                             <li>3. Klik tombol Upload, tunggu sampai File berhasil diupload ke Server</li>
                                             <li>4. Silahkan tunggu Progress Update Data yang sedang berjalan sampai <span class="text-success">sukses (hijau)</span></li>
                                         </ul>
