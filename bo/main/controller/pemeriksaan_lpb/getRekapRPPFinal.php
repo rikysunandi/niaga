@@ -43,6 +43,7 @@ $columns = array(
     array( 'db' => 'RPP',  'dt' => 'RPP' ),
     array( 'db' => 'JML',  'dt' => 'JML' ),
     array( 'db' => 'JML_URUT',  'dt' => 'JML_URUT' ),
+    array( 'db' => 'JML_UPDATE',  'dt' => 'JML_UPDATE' ),
 );
  
 // SQL server connection information

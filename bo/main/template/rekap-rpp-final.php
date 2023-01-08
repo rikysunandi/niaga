@@ -142,11 +142,13 @@
                                             <th class="text-center bg-primary-lighten-2">RPP</th>
                                             <th class="text-center bg-primary-lighten-2">JML PLG</th>
                                             <th class="text-center bg-primary-lighten-2">JML URUTAN</th>
+                                            <th class="text-center bg-primary-lighten-2">JML UPDATE</th>
                                         </tr>
                                     </thead>
                                     <tfoot>
                                         <tr>
                                             <th class="bg-primary-lighten-2" colspan="5">TOTAL</th>
+                                            <th class="bg-primary-lighten-2"></th>
                                             <th class="bg-primary-lighten-2"></th>
                                             <th class="bg-primary-lighten-2"></th>
                                         </tr>
