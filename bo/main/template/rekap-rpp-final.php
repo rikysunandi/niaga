@@ -103,7 +103,7 @@
                                             </div>
                                             <div class="form-group mb-2 mr-4">
                                                 <label class="text-label d-block"><small>ULP</small></label>
-                                                <select id="sel_unitup" title="PILIH ULP" class="selectpicker show-tick" data-size="5" data-inc-semua="T" >
+                                                <select id="sel_unitup" title="PILIH ULP" class="selectpicker show-tick" data-size="5" data-inc-semua="Y" >
                                                     <option value="00" selected>SEMUA UNIT</option>
                                                 </select>
                                             </div>
