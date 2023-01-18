@@ -163,6 +163,7 @@ if ( isset($_POST['captcha']) && ($_POST['captcha']!="") ){
     }else{
         $response['success'] = false;
         $response['msg'] = 'Captcha yang diisikan tidak sesuai!';
+        $response['cpc'] = $_SESSION['captcha'];
     }
 }else{
     $response['success'] = false;
