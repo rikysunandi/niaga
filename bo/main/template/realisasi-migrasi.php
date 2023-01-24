@@ -136,6 +136,7 @@
                                             <th class="text-center bg-primary-lighten-2">DAYA</th>
                                             <th class="text-center bg-primary-lighten-2">KDDK</th>
                                             <th class="text-center bg-primary-lighten-2">NOAGENDA</th>
+                                            <th class="text-center bg-primary-lighten-2">TGL<br/>PEREMAJAAN</th>
                                             <th class="text-center bg-primary-lighten-2">TARIF<br>BARU</th>
                                             <th class="text-center bg-primary-lighten-2">DAYA<br>BARU</th>
                                             <th class="text-center bg-primary-lighten-2">12BLN<br/>BERTURUT2</th>

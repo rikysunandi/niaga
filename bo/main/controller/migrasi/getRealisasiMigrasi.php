@@ -52,6 +52,7 @@ $columns = array(
     array( 'db' => 'JML_MENUNGGAK',  'dt' => 'JML_MENUNGGAK' ),
     array( 'db' => 'BLTH_MENUNGGAK',  'dt' => 'BLTH_MENUNGGAK' ),
     array( 'db' => 'NOAGENDA',  'dt' => 'NOAGENDA' ),
+    array( 'db' => 'TGL_PEREMAJAAN',  'dt' => 'TGL_PEREMAJAAN' ),
     array( 'db' => 'TARIF_BARU',  'dt' => 'TARIF_BARU' ),
     array( 'db' => 'DAYA_BARU',  'dt' => 'DAYA_BARU' ),
 );

@@ -72,6 +72,10 @@ $(document).ready(function () {
             visible: true
           },
           {
+            data: "TGL_PEREMAJAAN",
+            visible: true
+          },
+          {
             data: "TARIF_BARU",
             visible: true
           },
@@ -123,7 +127,7 @@ $(document).ready(function () {
         "paging": true,
         lengthMenu: [[25, 100, -1], [25, 100, "All"]],
         pageLength: 100,
-        "order": [[11, 'desc'],[12, 'desc'],[13, 'desc'],[14, 'desc'],[1, 'asc'],[7, 'asc']],
+        "order": [[12, 'desc'],[13, 'desc'],[14, 'desc'],[15, 'desc'],[1, 'asc'],[7, 'asc']],
     });
 
 
