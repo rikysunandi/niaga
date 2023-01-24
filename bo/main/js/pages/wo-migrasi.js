@@ -93,6 +93,10 @@ $(document).ready(function () {
             data: "BLTH_MENUNGGAK",
             visible: true
           },
+          {
+            data: "NOAGENDA",
+            visible: true
+          },
         ],
         dom:
            // "<'row'<'col-sm-12 col-md-9 mb-2'B>>" +
