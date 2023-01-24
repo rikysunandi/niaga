@@ -1,0 +1,1354 @@
+$(document).ready(function () {
+
+    "use strict";
+
+    const queryString = window.location.search;
+    const urlParams = new URLSearchParams(queryString);
+
+    var weekpicker, start_date, end_date;
+
+    function pad(num, size) {
+        num = num.toString();
+        while (num.length < size) num = "0" + num;
+        return num;
+    }
+
+    function set_week_picker(date) {
+        start_date = new Date(date.getFullYear(), date.getMonth(), date.getDate() - date.getDay() + 1);
+        end_date = new Date(date.getFullYear(), date.getMonth(), date.getDate() - date.getDay() + 7);
+        weekpicker.datepicker('update', start_date);
+        weekpicker.val( pad(start_date.getDate(),2) + '/' + pad((start_date.getMonth() + 1),2) + '/' + start_date.getFullYear() + ' - ' + pad(end_date.getDate(),2) + '/' + pad((end_date.getMonth() + 1),2) + '/' + end_date.getFullYear());
+    }
+
+    weekpicker = $('.week-picker');
+    console.log(weekpicker);
+    weekpicker.datepicker({
+        autoclose: true,
+        forceParse: false,
+        weekStart: 1,
+        format: 'dd/mm/yyyy',
+        container: '#week-picker-wrapper',
+    }).on("changeDate", function(e) {
+        set_week_picker(e.date);
+    });
+    $('.week-prev').on('click', function() {
+        var prev = new Date(start_date.getTime());
+        prev.setDate(prev.getDate() - 1);
+        set_week_picker(prev);
+    });
+    $('.week-next').on('click', function() {
+        var next = new Date(end_date.getTime());
+        next.setDate(next.getDate() + 1);
+        set_week_picker(next);
+    });
+    set_week_picker(new Date);
+
+   
+    //$.blockUI({ message: '<h1 class="p-3">Mengambil data...</h1>' }); 
+    var table_up3 = $('#tbl_rekap_migrasi')
+      .on('preXhr.dt', function ( e, settings, data ) {
+        console.log('preXhr!');
+        $('div.content-body').block({ message: 'Mengambil data...' });
+      })
+      .on('xhr.dt', function ( e, settings, data ) {
+        console.log('xhr!');
+        $('div.content-body').unblock();
+      })
+      .DataTable( {
+        "processing": true,
+        "serverSide": true,
+        "deferLoading": 0,
+        "ajax": {
+            "url": '../controller/pemutusan/getRekapPemutusanUP3.php',
+            "type": "POST",
+            "timeout": 60000
+        },
+        //responsive: true,
+        columns: [
+          {
+            data: "UNITUPI",
+            visible: false
+          },
+          {
+            data: "UNITAP",
+            visible: true
+          },
+          {
+            data: "UP3",
+            // ariaTitle: 'NAMA UP3',
+            // title: 'TITLE UP3',
+            visible: true
+          },
+          {
+            data: "TARGET",
+            type: 'number',
+            visible: true,
+            "sClass" : "text-right" , render: $.fn.dataTable.render.number(".", ",", 0, '')
+          },
+          {
+            data: "CARRY_OVER",
+            ariaTitle: 'CARRY OVER',
+            type: 'number',
+            visible: true,
+            "sClass" : "text-right" , render: $.fn.dataTable.render.number(".", ",", 0, '')
+          },
+          {
+            data: "TARGET_TOTAL",
+            ariaTitle: 'CARRY OVER',
+            type: 'number',
+            visible: true,
+            "sClass" : "text-right" , render: $.fn.dataTable.render.number(".", ",", 0, '')
+          },
+          {
+            data: "REALISASI",
+            type: 'number',
+            visible: true,
+            "sClass" : "text-right" , render: $.fn.dataTable.render.number(".", ",", 0, '')
+          },
+          {
+            data: "PENCAPAIAN",
+            type: 'number',
+            visible: true,
+            "sClass" : "text-right" , 
+            render: function ( data, type, row ) {
+                var cls;
+                //console.log($(this));
+                if (data < 50) {
+                    cls='danger';
+                  }else if (data < 80) {
+                    cls='warning';
+                  }else {
+                    cls='success';
+                  }
+              return '<span class="text-'+cls+'">'+
+                $.fn.dataTable.render.number(".", ",", 2, '').display(data)+'%</span>';
+
+            },
+          },
+          {
+            data: "REALISASI_12",
+            type: 'number',
+            visible: true,
+            "sClass" : "text-right" , render: $.fn.dataTable.render.number(".", ",", 0, '')
+          },
+          {
+            data: "PENCAPAIAN_12",
+            type: 'number',
+            visible: true,
+            "sClass" : "text-right" , 
+            render: function ( data, type, row ) {
+                var cls;
+                //console.log($(this));
+                if (data < 50) {
+                    cls='danger';
+                  }else if (data < 80) {
+                    cls='warning';
+                  }else {
+                    cls='success';
+                  }
+              return '<span class="text-'+cls+'">'+
+                $.fn.dataTable.render.number(".", ",", 2, '').display(data)+'%</span>';
+
+            },
+          },
+        ],
+        dom:
+           // "<'row'<'col-sm-12 col-md-9 mb-2'B>>" +
+            "<'row'<'col-sm-12 col-md-6 mb-2'B><'col-sm-12 col-md-2 mb-2'l><'col-sm-12 col-md-4'f>>" +
+            "<'row'<'col-sm-12 mb-2'tr>>" +
+            "<'row'<'col-sm-12 col-md-5 mb-2'i><'col-sm-12 col-md-7'p>>",
+        buttons: [
+            { extend: 'colvis', text: 'Columns' },
+            { extend: 'csvHtml5', 
+              text: '<i class="fa fa-file-text-o"></i>&nbsp;&nbsp;CSV', 
+              titleAttr: 'Download ke CSV',
+              footer: true
+            },
+            { extend: 'excelHtml5', 
+              text: '<i class="fa fa-file-excel-o"></i>&nbsp;&nbsp;Excel', 
+              titleAttr: 'Download ke Excel',
+              footer: true,
+              exportOptions: {
+                  columns: ':visible',
+                  format: {
+                      header: function ( html, index, node ) {
+                        console.log('header', node);
+                        return index + ' [' + html +']';
+                      },
+                      body: function(data, row, column, node) {
+                        //console.log('body', data);
+                        data = $('<p>' + data + '</p>').text();
+                        return $.isNumeric(data.replace('.', '')) ? data.replace('.', '') : data;
+                      },
+                      footer: function(data, row, column, node) {
+                        //console.log('footer', data);
+                        data = $('<p>' + data + '</p>').text();
+                        return $.isNumeric(data.replace('.', '')) ? data.replace('.', '') : data;
+                      }
+                  }
+                },
+                filename: function(){
+                    return 'REKAP_MIGRASI_UP3_' +  moment().format('YYYYMMDDHHmmss');
+                },
+            },
+            // { extend: 'pdfHtml5', 
+            //   text: '<i class="fa fa-file-pdf-o"></i>&nbsp;&nbsp;PDF', 
+            //   titleAttr: 'Download ke PDF',
+            //   footer: true
+            // },
+        ],
+        //"scrollY": 370,
+        "scrollX": true,
+        "paging": false,
+        lengthMenu: [[25, 100, -1], [25, 100, "All"]],
+        pageLength: 100,
+        "order": [[7, 'desc']],
+        footerCallback: function ( row, data, start, end, display ) {
+          var api = this.api();
+          //console.log('footerCallback', api);
+          var nb_cols = api.columns().nodes().length;
+          var j = 3;
+          
+          var wo, eksekusi, eksekusi_2;
+          while(j < nb_cols){
+            if(j==7){
+
+                var persen;
+                persen = ((eksekusi/wo))*100;
+                var cls;
+
+                if (persen < 50) {
+                    cls='danger';
+                  }else if (persen < 80) {
+                    cls='warning';
+                  }else {
+                    cls='success';
+                  }
+
+                $( api.column( j ).footer() ).html('<span class="text-'+cls+'">'+$.fn.dataTable.render.number(".", ",", 2, '').display(persen)+'%</span>');
+            }else if(j==9){
+
+                var persen;
+                persen = ((eksekusi_2/wo))*100;
+                var cls;
+
+                if (persen < 50) {
+                    cls='danger';
+                  }else if (persen < 80) {
+                    cls='warning';
+                  }else {
+                    cls='success';
+                  }
+
+                $( api.column( j ).footer() ).html('<span class="text-'+cls+'">'+$.fn.dataTable.render.number(".", ",", 2, '').display(persen)+'%</span>');
+            }else{
+                var pageTotal = api
+                    .column( j, { page: 'current'} )
+                    .data()
+                    .reduce( function (a, b) {
+                        return Number(a) + Number(b);
+                    }, 0 );
+
+                if(j==5)
+                  wo=pageTotal;
+                if(j==6)
+                  eksekusi=pageTotal;
+                if(j==8)
+                  eksekusi_2=pageTotal;
+
+                $( api.column( j ).footer() ).html($.fn.dataTable.render.number(".", ",", 0, '').display(pageTotal));
+            }
+            
+            // var pageTotal = api
+            //       .column( j, { page: 'current'} )
+            //       .data()
+            //       .reduce( function (a, b) {
+            //           return Number(a) + Number(b);
+            //       }, 0 );
+            // // Update footer
+            // $( api.column( j ).footer() ).html($.fn.dataTable.render.number(".", ",", 0, '').display(pageTotal));
+            j++;
+          } 
+        }
+    });
+
+    // //$.blockUI({ message: '<h1 class="p-3">Mengambil data...</h1>' }); 
+    // var table = $('#tbl_rekap_pemutusan_ulp')
+    //   .on('preXhr.dt', function ( e, settings, data ) {
+    //     console.log('preXhr!');
+    //     $('div.content-body').block({ message: 'Mengambil data...' });
+    //   })
+    //   .on('xhr.dt', function ( e, settings, data ) {
+    //     console.log('xhr!');
+    //     $('div.content-body').unblock();
+    //   })
+    //   .DataTable( {
+    //     "processing": true,
+    //     "serverSide": true,
+    //     "deferLoading": 0,
+    //     "ajax": {
+    //         "url": '../controller/pemutusan/getRekapPemutusanULP.php',
+    //         "type": "POST",
+    //         "timeout": 60000
+    //     },
+    //     //responsive: true,
+    //     columns: [
+    //       {
+    //         data: "UNITAP",
+    //         visible: false
+    //       },
+    //       {
+    //         data: "UNITUP",
+    //         visible: true
+    //       },
+    //       {
+    //         data: "ULP",
+    //         visible: true
+    //       },
+    //       {
+    //         data: "JML_PETUGAS",
+    //         type: 'number',
+    //         visible: true,
+    //         "sClass" : "text-right" , render: $.fn.dataTable.render.number(".", ",", 0, '')
+    //       },
+    //       {
+    //         data: "WO_IRISAN",
+    //         type: 'number',
+    //         visible: true,
+    //         "sClass" : "text-right" , render: $.fn.dataTable.render.number(".", ",", 0, '')
+    //       },
+    //       {
+    //         data: "WO_BARU",
+    //         type: 'number',
+    //         visible: true,
+    //         "sClass" : "text-right" , render: $.fn.dataTable.render.number(".", ",", 0, '')
+    //       },
+    //       {
+    //         data: "WO_LANCAR",
+    //         type: 'number',
+    //         visible: true,
+    //         "sClass" : "text-right" , render: $.fn.dataTable.render.number(".", ",", 0, '')
+    //       },
+    //       {
+    //         data: "WO_TOTAL",
+    //         type: 'number',
+    //         visible: true,
+    //         "sClass" : "text-right" , render: $.fn.dataTable.render.number(".", ",", 0, '')
+    //       },
+    //       {
+    //         data: "LUNAS_BY_SYSTEM",
+    //         type: 'number',
+    //         visible: true,
+    //         "sClass" : "text-right" , render: $.fn.dataTable.render.number(".", ",", 0, '')
+    //       },
+    //       {
+    //         data: "LUNAS_MANDIRI_PUTUS",
+    //         type: 'number',
+    //         visible: true,
+    //         "sClass" : "text-right" , render: $.fn.dataTable.render.number(".", ",", 0, '')
+    //       },
+    //       {
+    //         data: "LUNAS_MANDIRI_LUNAS",
+    //         type: 'number',
+    //         visible: true,
+    //         "sClass" : "text-right" , render: $.fn.dataTable.render.number(".", ",", 0, '')
+    //       },
+    //       {
+    //         data: "LUNAS_DITEMPAT_PUTUS",
+    //         type: 'number',
+    //         visible: true,
+    //         "sClass" : "text-right" , render: $.fn.dataTable.render.number(".", ",", 0, '')
+    //       },
+    //       {
+    //         data: "LUNAS_DITEMPAT_LUNAS",
+    //         type: 'number',
+    //         visible: true,
+    //         "sClass" : "text-right" , render: $.fn.dataTable.render.number(".", ",", 0, '')
+    //       },
+    //       {
+    //         data: "SEGEL_MCB_PUTUS",
+    //         type: 'number',
+    //         visible: true,
+    //         "sClass" : "text-right" , render: $.fn.dataTable.render.number(".", ",", 0, '')
+    //       },
+    //       {
+    //         data: "SEGEL_MCB_LUNAS",
+    //         type: 'number',
+    //         visible: true,
+    //         "sClass" : "text-right" , render: $.fn.dataTable.render.number(".", ",", 0, '')
+    //       },
+    //       {
+    //         data: "CABUT_MCB_PUTUS",
+    //         type: 'number',
+    //         visible: true,
+    //         "sClass" : "text-right" , render: $.fn.dataTable.render.number(".", ",", 0, '')
+    //       },
+    //       {
+    //         data: "CABUT_MCB_LUNAS",
+    //         type: 'number',
+    //         visible: true,
+    //         "sClass" : "text-right" , render: $.fn.dataTable.render.number(".", ",", 0, '')
+    //       },
+    //       {
+    //         data: "CABUT_APP_PUTUS",
+    //         type: 'number',
+    //         visible: true,
+    //         "sClass" : "text-right" , render: $.fn.dataTable.render.number(".", ",", 0, '')
+    //       },
+    //       {
+    //         data: "CABUT_APP_LUNAS",
+    //         type: 'number',
+    //         visible: true,
+    //         "sClass" : "text-right" , render: $.fn.dataTable.render.number(".", ",", 0, '')
+    //       },
+    //       {
+    //         data: "RUMAH_KOSONG_PUTUS",
+    //         type: 'number',
+    //         visible: true,
+    //         "sClass" : "text-right" , render: $.fn.dataTable.render.number(".", ",", 0, '')
+    //       },
+    //       {
+    //         data: "RUMAH_KOSONG_LUNAS",
+    //         type: 'number',
+    //         visible: true,
+    //         "sClass" : "text-right" , render: $.fn.dataTable.render.number(".", ",", 0, '')
+    //       },
+    //       {
+    //         data: "TOTAL_EKSEKUSI",
+    //         type: 'number',
+    //         visible: true,
+    //         "sClass" : "text-right" , render: $.fn.dataTable.render.number(".", ",", 0, '')
+    //       },
+    //       {
+    //         data: "PERSEN_EKSEKUSI",
+    //         visible: true,
+    //         "sClass" : "text-right" , 
+    //         render: function ( data, type, row ) {
+    //             var cls;
+    //             //console.log($(this));
+    //             if (data < 50) {
+    //                 cls='danger';
+    //               }else if (data < 80) {
+    //                 cls='warning';
+    //               }else {
+    //                 cls='success';
+    //               }
+    //           return '<span class="text-'+cls+'">'+
+    //             $.fn.dataTable.render.number(".", ",", 2, '').display(data)+'%</span>';
+
+    //         },
+    //       },
+    //       {
+    //         data: "RATA_EKSEKUSI",
+    //         type: 'number',
+    //         visible: true,
+    //         "sClass" : "text-right" , render: $.fn.dataTable.render.number(".", ",", 0, '')
+    //       },
+    //       {
+    //         data: "TOTAL_PUTUS",
+    //         type: 'number',
+    //         visible: true,
+    //         "sClass" : "text-right" , render: $.fn.dataTable.render.number(".", ",", 0, '')
+    //       },
+    //       {
+    //         data: "PERSEN_PUTUS",
+    //         visible: true,
+    //         "sClass" : "text-right" , 
+    //         render: function ( data, type, row ) {
+    //             var cls;
+    //             //console.log($(this));
+    //             if (data < 50) {
+    //                 cls='danger';
+    //               }else if (data < 80) {
+    //                 cls='warning';
+    //               }else {
+    //                 cls='success';
+    //               }
+    //           return '<span class="text-'+cls+'">'+
+    //             $.fn.dataTable.render.number(".", ",", 2, '').display(data)+'%</span>';
+
+    //         },
+    //       },
+    //       {
+    //         data: "RATA_PUTUS",
+    //         type: 'number',
+    //         visible: true,
+    //         "sClass" : "text-right" , render: $.fn.dataTable.render.number(".", ",", 0, '')
+    //       },
+    //       {
+    //         data: "TOTAL_LUNAS",
+    //         type: 'number',
+    //         visible: true,
+    //         "sClass" : "text-right" , render: $.fn.dataTable.render.number(".", ",", 0, '')
+    //       },
+    //       {
+    //         data: "PERSEN_LUNAS",
+    //         visible: true,
+    //         "sClass" : "text-right" , 
+    //         render: function ( data, type, row ) {
+    //             var cls;
+    //             //console.log($(this));
+    //             if (data < 50) {
+    //                 cls='danger';
+    //               }else if (data < 80) {
+    //                 cls='warning';
+    //               }else {
+    //                 cls='success';
+    //               }
+    //           return '<span class="text-'+cls+'">'+
+    //             $.fn.dataTable.render.number(".", ",", 2, '').display(data)+'%</span>';
+
+    //         },
+    //       },
+    //       {
+    //         data: "RATA_LUNAS",
+    //         type: 'number',
+    //         visible: true,
+    //         "sClass" : "text-right" , render: $.fn.dataTable.render.number(".", ",", 0, '')
+    //       },
+    //       {
+    //         data: "TOTAL_LUNAS_EKSEKUSI",
+    //         type: 'number',
+    //         visible: true,
+    //         "sClass" : "text-right" , render: $.fn.dataTable.render.number(".", ",", 0, '')
+    //       },
+    //       {
+    //         data: "PERSEN_LUNAS_EKSEKUSI",
+    //         visible: true,
+    //         "sClass" : "text-right" , 
+    //         render: function ( data, type, row ) {
+    //             var cls;
+    //             //console.log($(this));
+    //             if (data < 50) {
+    //                 cls='danger';
+    //               }else if (data < 80) {
+    //                 cls='warning';
+    //               }else {
+    //                 cls='success';
+    //               }
+    //           return '<span class="text-'+cls+'">'+
+    //             $.fn.dataTable.render.number(".", ",", 2, '').display(data)+'%</span>';
+
+    //         },
+    //       },
+    //       {
+    //         data: "RATA_LUNAS_EKSEKUSI",
+    //         type: 'number',
+    //         visible: true,
+    //         "sClass" : "text-right" , render: $.fn.dataTable.render.number(".", ",", 0, '')
+    //       },
+    //       {
+    //         data: "JML_LUNAS_BY_SYSTEM_21",
+    //         type: 'number',
+    //         visible: true,
+    //         "sClass" : "text-right" , render: $.fn.dataTable.render.number(".", ",", 0, '')
+    //       },
+    //       {
+    //         data: "JML_LUNAS_MANDIRI_21",
+    //         type: 'number',
+    //         visible: true,
+    //         "sClass" : "text-right" , render: $.fn.dataTable.render.number(".", ",", 0, '')
+    //       },
+    //       {
+    //         data: "JML_LUNAS_DITEMPAT_21",
+    //         type: 'number',
+    //         visible: true,
+    //         "sClass" : "text-right" , render: $.fn.dataTable.render.number(".", ",", 0, '')
+    //       },
+    //       {
+    //         data: "JML_SEGEL_MCB_21",
+    //         type: 'number',
+    //         visible: true,
+    //         "sClass" : "text-right" , render: $.fn.dataTable.render.number(".", ",", 0, '')
+    //       },
+    //       {
+    //         data: "JML_CABUT_MCB_21",
+    //         type: 'number',
+    //         visible: true,
+    //         "sClass" : "text-right" , render: $.fn.dataTable.render.number(".", ",", 0, '')
+    //       },
+    //       {
+    //         data: "JML_CABUT_APP_21",
+    //         type: 'number',
+    //         visible: true,
+    //         "sClass" : "text-right" , render: $.fn.dataTable.render.number(".", ",", 0, '')
+    //       },
+    //       {
+    //         data: "JML_RUMAH_KOSONG_21",
+    //         type: 'number',
+    //         visible: true,
+    //         "sClass" : "text-right" , render: $.fn.dataTable.render.number(".", ",", 0, '')
+    //       },
+    //       {
+    //         data: "JML_PLG_21",
+    //         type: 'number',
+    //         visible: true,
+    //         "sClass" : "text-right" , render: $.fn.dataTable.render.number(".", ",", 0, '')
+    //       },
+    //       {
+    //         data: "JML_LUNAS_BY_SYSTEM_22",
+    //         type: 'number',
+    //         visible: true,
+    //         "sClass" : "text-right" , render: $.fn.dataTable.render.number(".", ",", 0, '')
+    //       },
+    //       {
+    //         data: "JML_LUNAS_MANDIRI_22",
+    //         type: 'number',
+    //         visible: true,
+    //         "sClass" : "text-right" , render: $.fn.dataTable.render.number(".", ",", 0, '')
+    //       },
+    //       {
+    //         data: "JML_LUNAS_DITEMPAT_22",
+    //         type: 'number',
+    //         visible: true,
+    //         "sClass" : "text-right" , render: $.fn.dataTable.render.number(".", ",", 0, '')
+    //       },
+    //       {
+    //         data: "JML_SEGEL_MCB_22",
+    //         type: 'number',
+    //         visible: true,
+    //         "sClass" : "text-right" , render: $.fn.dataTable.render.number(".", ",", 0, '')
+    //       },
+    //       {
+    //         data: "JML_CABUT_MCB_22",
+    //         type: 'number',
+    //         visible: true,
+    //         "sClass" : "text-right" , render: $.fn.dataTable.render.number(".", ",", 0, '')
+    //       },
+    //       {
+    //         data: "JML_CABUT_APP_22",
+    //         type: 'number',
+    //         visible: true,
+    //         "sClass" : "text-right" , render: $.fn.dataTable.render.number(".", ",", 0, '')
+    //       },
+    //       {
+    //         data: "JML_RUMAH_KOSONG_22",
+    //         type: 'number',
+    //         visible: true,
+    //         "sClass" : "text-right" , render: $.fn.dataTable.render.number(".", ",", 0, '')
+    //       },
+    //       {
+    //         data: "JML_PLG_22",
+    //         type: 'number',
+    //         visible: true,
+    //         "sClass" : "text-right" , render: $.fn.dataTable.render.number(".", ",", 0, '')
+    //       },
+    //       {
+    //         data: "JML_LUNAS_BY_SYSTEM_23",
+    //         type: 'number',
+    //         visible: true,
+    //         "sClass" : "text-right" , render: $.fn.dataTable.render.number(".", ",", 0, '')
+    //       },
+    //       {
+    //         data: "JML_LUNAS_MANDIRI_23",
+    //         type: 'number',
+    //         visible: true,
+    //         "sClass" : "text-right" , render: $.fn.dataTable.render.number(".", ",", 0, '')
+    //       },
+    //       {
+    //         data: "JML_LUNAS_DITEMPAT_23",
+    //         type: 'number',
+    //         visible: true,
+    //         "sClass" : "text-right" , render: $.fn.dataTable.render.number(".", ",", 0, '')
+    //       },
+    //       {
+    //         data: "JML_SEGEL_MCB_23",
+    //         type: 'number',
+    //         visible: true,
+    //         "sClass" : "text-right" , render: $.fn.dataTable.render.number(".", ",", 0, '')
+    //       },
+    //       {
+    //         data: "JML_CABUT_MCB_23",
+    //         type: 'number',
+    //         visible: true,
+    //         "sClass" : "text-right" , render: $.fn.dataTable.render.number(".", ",", 0, '')
+    //       },
+    //       {
+    //         data: "JML_CABUT_APP_23",
+    //         type: 'number',
+    //         visible: true,
+    //         "sClass" : "text-right" , render: $.fn.dataTable.render.number(".", ",", 0, '')
+    //       },
+    //       {
+    //         data: "JML_RUMAH_KOSONG_23",
+    //         type: 'number',
+    //         visible: true,
+    //         "sClass" : "text-right" , render: $.fn.dataTable.render.number(".", ",", 0, '')
+    //       },
+    //       {
+    //         data: "JML_PLG_23",
+    //         type: 'number',
+    //         visible: true,
+    //         "sClass" : "text-right" , render: $.fn.dataTable.render.number(".", ",", 0, '')
+    //       },
+    //       {
+    //         data: "JML_LUNAS_BY_SYSTEM_24",
+    //         type: 'number',
+    //         visible: true,
+    //         "sClass" : "text-right" , render: $.fn.dataTable.render.number(".", ",", 0, '')
+    //       },
+    //       {
+    //         data: "JML_LUNAS_MANDIRI_24",
+    //         type: 'number',
+    //         visible: true,
+    //         "sClass" : "text-right" , render: $.fn.dataTable.render.number(".", ",", 0, '')
+    //       },
+    //       {
+    //         data: "JML_LUNAS_DITEMPAT_24",
+    //         type: 'number',
+    //         visible: true,
+    //         "sClass" : "text-right" , render: $.fn.dataTable.render.number(".", ",", 0, '')
+    //       },
+    //       {
+    //         data: "JML_SEGEL_MCB_24",
+    //         type: 'number',
+    //         visible: true,
+    //         "sClass" : "text-right" , render: $.fn.dataTable.render.number(".", ",", 0, '')
+    //       },
+    //       {
+    //         data: "JML_CABUT_MCB_24",
+    //         type: 'number',
+    //         visible: true,
+    //         "sClass" : "text-right" , render: $.fn.dataTable.render.number(".", ",", 0, '')
+    //       },
+    //       {
+    //         data: "JML_CABUT_APP_24",
+    //         type: 'number',
+    //         visible: true,
+    //         "sClass" : "text-right" , render: $.fn.dataTable.render.number(".", ",", 0, '')
+    //       },
+    //       {
+    //         data: "JML_RUMAH_KOSONG_24",
+    //         type: 'number',
+    //         visible: true,
+    //         "sClass" : "text-right" , render: $.fn.dataTable.render.number(".", ",", 0, '')
+    //       },
+    //       {
+    //         data: "JML_PLG_24",
+    //         type: 'number',
+    //         visible: true,
+    //         "sClass" : "text-right" , render: $.fn.dataTable.render.number(".", ",", 0, '')
+    //       },
+    //       {
+    //         data: "JML_LUNAS_BY_SYSTEM_25",
+    //         type: 'number',
+    //         visible: true,
+    //         "sClass" : "text-right" , render: $.fn.dataTable.render.number(".", ",", 0, '')
+    //       },
+    //       {
+    //         data: "JML_LUNAS_MANDIRI_25",
+    //         type: 'number',
+    //         visible: true,
+    //         "sClass" : "text-right" , render: $.fn.dataTable.render.number(".", ",", 0, '')
+    //       },
+    //       {
+    //         data: "JML_LUNAS_DITEMPAT_25",
+    //         type: 'number',
+    //         visible: true,
+    //         "sClass" : "text-right" , render: $.fn.dataTable.render.number(".", ",", 0, '')
+    //       },
+    //       {
+    //         data: "JML_SEGEL_MCB_25",
+    //         type: 'number',
+    //         visible: true,
+    //         "sClass" : "text-right" , render: $.fn.dataTable.render.number(".", ",", 0, '')
+    //       },
+    //       {
+    //         data: "JML_CABUT_MCB_25",
+    //         type: 'number',
+    //         visible: true,
+    //         "sClass" : "text-right" , render: $.fn.dataTable.render.number(".", ",", 0, '')
+    //       },
+    //       {
+    //         data: "JML_CABUT_APP_25",
+    //         type: 'number',
+    //         visible: true,
+    //         "sClass" : "text-right" , render: $.fn.dataTable.render.number(".", ",", 0, '')
+    //       },
+    //       {
+    //         data: "JML_RUMAH_KOSONG_25",
+    //         type: 'number',
+    //         visible: true,
+    //         "sClass" : "text-right" , render: $.fn.dataTable.render.number(".", ",", 0, '')
+    //       },
+    //       {
+    //         data: "JML_PLG_25",
+    //         type: 'number',
+    //         visible: true,
+    //         "sClass" : "text-right" , render: $.fn.dataTable.render.number(".", ",", 0, '')
+    //       },
+    //       {
+    //         data: "JML_LUNAS_BY_SYSTEM_GT_25",
+    //         type: 'number',
+    //         visible: true,
+    //         "sClass" : "text-right" , render: $.fn.dataTable.render.number(".", ",", 0, '')
+    //       },
+    //       {
+    //         data: "JML_LUNAS_MANDIRI_GT_25",
+    //         type: 'number',
+    //         visible: true,
+    //         "sClass" : "text-right" , render: $.fn.dataTable.render.number(".", ",", 0, '')
+    //       },
+    //       {
+    //         data: "JML_LUNAS_DITEMPAT_GT_25",
+    //         type: 'number',
+    //         visible: true,
+    //         "sClass" : "text-right" , render: $.fn.dataTable.render.number(".", ",", 0, '')
+    //       },
+    //       {
+    //         data: "JML_SEGEL_MCB_GT_25",
+    //         type: 'number',
+    //         visible: true,
+    //         "sClass" : "text-right" , render: $.fn.dataTable.render.number(".", ",", 0, '')
+    //       },
+    //       {
+    //         data: "JML_CABUT_MCB_GT_25",
+    //         type: 'number',
+    //         visible: true,
+    //         "sClass" : "text-right" , render: $.fn.dataTable.render.number(".", ",", 0, '')
+    //       },
+    //       {
+    //         data: "JML_CABUT_APP_GT_25",
+    //         type: 'number',
+    //         visible: true,
+    //         "sClass" : "text-right" , render: $.fn.dataTable.render.number(".", ",", 0, '')
+    //       },
+    //       {
+    //         data: "JML_RUMAH_KOSONG_GT_25",
+    //         type: 'number',
+    //         visible: true,
+    //         "sClass" : "text-right" , render: $.fn.dataTable.render.number(".", ",", 0, '')
+    //       },
+    //       {
+    //         data: "JML_PLG_GT_25",
+    //         type: 'number',
+    //         visible: true,
+    //         "sClass" : "text-right" , render: $.fn.dataTable.render.number(".", ",", 0, '')
+    //       },
+    //     ],
+    //     dom:
+    //        // "<'row'<'col-sm-12 col-md-9 mb-2'B>>" +
+    //         "<'row'<'col-sm-12 col-md-6 mb-2'B><'col-sm-12 col-md-2 mb-2'l><'col-sm-12 col-md-4'f>>" +
+    //         "<'row'<'col-sm-12 mb-2'tr>>" +
+    //         "<'row'<'col-sm-12 col-md-5 mb-2'i><'col-sm-12 col-md-7'p>>",
+    //     buttons: [
+    //         { extend: 'colvis', text: 'Columns' },
+    //         { extend: 'csvHtml5', 
+    //           text: '<i class="fa fa-file-text-o"></i>&nbsp;&nbsp;CSV', 
+    //           titleAttr: 'Download ke CSV',
+    //           footer: true
+    //         },
+    //         { extend: 'excelHtml5', 
+    //           text: '<i class="fa fa-file-excel-o"></i>&nbsp;&nbsp;Excel', 
+    //           titleAttr: 'Download ke Excel',
+    //           footer: true,
+    //           exportOptions: {
+    //               columns: ':visible',
+    //               format: {
+    //                   header: function ( html, index, node ) {
+    //                     console.log('header', node);
+    //                     return index + ' [' + html +']';
+    //                   },
+    //                   body: function(data, row, column, node) {
+    //                     //console.log('body', data);
+    //                     data = $('<p>' + data + '</p>').text();
+    //                     return $.isNumeric(data.replace('.', '')) ? data.replace('.', '') : data;
+    //                   },
+    //                   footer: function(data, row, column, node) {
+    //                     //console.log('footer', data);
+    //                     data = $('<p>' + data + '</p>').text();
+    //                     return $.isNumeric(data.replace('.', '')) ? data.replace('.', '') : data;
+    //                   }
+    //               }
+    //             },
+    //             filename: function(){
+    //                 return 'REKAP_PEMUTUSAN_UP3_' +  moment().format('YYYYMMDDHHmmss');
+    //             },
+    //         },
+    //         // { extend: 'pdfHtml5', 
+    //         //   text: '<i class="fa fa-file-pdf-o"></i>&nbsp;&nbsp;PDF', 
+    //         //   titleAttr: 'Download ke PDF',
+    //         //   footer: true
+    //         // },
+    //     ],
+    //     "scrollY": 260,
+    //     "scrollX": true,
+    //     "paging": false,
+    //     lengthMenu: [[25, 100, -1], [25, 100, "All"]],
+    //     pageLength: 100,
+    //     "order": [[31, 'desc']],
+        
+    //     footerCallback: function ( row, data, start, end, display ) {
+    //       var api = this.api();
+    //       //console.log('footerCallback', api);
+    //       var nb_cols = api.columns().nodes().length;
+    //       var j = 3;
+          
+    //       var wo, petugas, eksekusi, putus, lunas, lunas_eksekusi;
+    //       while(j < nb_cols){
+    //         if(j==22){
+
+    //             var persen;
+    //             persen = ((eksekusi/wo))*100;
+    //             var cls;
+
+    //             if (persen < 50) {
+    //                 cls='danger';
+    //               }else if (persen < 80) {
+    //                 cls='warning';
+    //               }else {
+    //                 cls='success';
+    //               }
+
+    //             $( api.column( j ).footer() ).html('<span class="text-'+cls+'">'+$.fn.dataTable.render.number(".", ",", 2, '').display(persen)+'%</span>');
+    //         }else if(j==25){
+
+    //             var persen;
+    //             persen = ((putus/wo))*100;
+    //             var cls;
+
+    //             if (persen < 50) {
+    //                 cls='danger';
+    //               }else if (persen < 80) {
+    //                 cls='warning';
+    //               }else {
+    //                 cls='success';
+    //               }
+
+    //             $( api.column( j ).footer() ).html('<span class="text-'+cls+'">'+$.fn.dataTable.render.number(".", ",", 2, '').display(persen)+'%</span>');
+    //         }else if(j==28){
+
+    //             var persen;
+    //             persen = ((lunas/wo))*100;
+    //             var cls;
+
+    //             if (persen < 50) {
+    //                 cls='danger';
+    //               }else if (persen < 80) {
+    //                 cls='warning';
+    //               }else {
+    //                 cls='success';
+    //               }
+
+    //             $( api.column( j ).footer() ).html('<span class="text-'+cls+'">'+$.fn.dataTable.render.number(".", ",", 2, '').display(persen)+'%</span>');
+    //         }else if(j==31){
+
+    //             var persen;
+    //             persen = ((lunas_eksekusi/wo))*100;
+    //             var cls;
+
+    //             if (persen < 50) {
+    //                 cls='danger';
+    //               }else if (persen < 80) {
+    //                 cls='warning';
+    //               }else {
+    //                 cls='success';
+    //               }
+
+    //             $( api.column( j ).footer() ).html('<span class="text-'+cls+'">'+$.fn.dataTable.render.number(".", ",", 2, '').display(persen)+'%</span>');
+    //         }else{
+    //             var pageTotal = api
+    //                 .column( j, { page: 'current'} )
+    //                 .data()
+    //                 .reduce( function (a, b) {
+    //                     return Number(a) + Number(b);
+    //                 }, 0 );
+
+    //             if(j==3)
+    //               petugas=pageTotal;
+    //             if(j==7)
+    //               wo=pageTotal;
+    //             if(j==21)
+    //               eksekusi=pageTotal;
+    //             if(j==24)
+    //               putus=pageTotal;
+    //             if(j==27)
+    //               lunas=pageTotal;
+    //             if(j==30)
+    //               lunas_eksekusi=pageTotal;
+    //             // Update footer
+                
+    //             if(j==23)
+    //               $( api.column( j ).footer() ).html($.fn.dataTable.render.number(".", ",", 0, '').display(Math.round(eksekusi/petugas)));
+    //             else if(j==26)
+    //               $( api.column( j ).footer() ).html($.fn.dataTable.render.number(".", ",", 0, '').display(Math.round(putus/petugas)));
+    //             else if(j==29)
+    //               $( api.column( j ).footer() ).html($.fn.dataTable.render.number(".", ",", 0, '').display(Math.round(lunas/petugas)));
+    //             else if(j==32)
+    //               $( api.column( j ).footer() ).html($.fn.dataTable.render.number(".", ",", 0, '').display(Math.round(lunas_eksekusi/petugas)));
+    //             else
+    //               $( api.column( j ).footer() ).html($.fn.dataTable.render.number(".", ",", 0, '').display(pageTotal));
+    //         }
+            
+    //         // var pageTotal = api
+    //         //       .column( j, { page: 'current'} )
+    //         //       .data()
+    //         //       .reduce( function (a, b) {
+    //         //           return Number(a) + Number(b);
+    //         //       }, 0 );
+    //         // // Update footer
+    //         // $( api.column( j ).footer() ).html($.fn.dataTable.render.number(".", ",", 0, '').display(pageTotal));
+    //         j++;
+    //       } 
+    //     }
+
+    //     // fixedColumns:   {
+    //     //     leftColumns: 3
+    //     // },
+        
+    //     // rowGroup: {
+    //     //     startRender: null,
+    //     //     endRender: function ( rows, group ) {
+
+    //     //         var SUM_JML_LUNAS_21 = rows
+    //     //             .data()
+    //     //             .pluck('JML_LUNAS_21')
+    //     //             .reduce( function (a, b) {
+    //     //                 return a + b*1;
+    //     //             }, 0);
+    //     //         SUM_JML_LUNAS_21 = $.fn.dataTable.render.number('.', ',', 0, '').display( SUM_JML_LUNAS_21 );
+
+    //     //         var SUM_JML_PUTUS_21 = rows
+    //     //             .data()
+    //     //             .pluck('JML_PUTUS_21')
+    //     //             .reduce( function (a, b) {
+    //     //                 return a + b*1;
+    //     //             }, 0);
+    //     //         SUM_JML_PUTUS_21 = $.fn.dataTable.render.number('.', ',', 0, '').display( SUM_JML_PUTUS_21 );
+
+    //     //         var SUM_JML_PLG_21 = rows
+    //     //             .data()
+    //     //             .pluck('JML_PLG_21')
+    //     //             .reduce( function (a, b) {
+    //     //                 return a + b*1;
+    //     //             }, 0);
+    //     //         SUM_JML_PLG_21 = $.fn.dataTable.render.number('.', ',', 0, '').display( SUM_JML_PLG_21 );
+
+
+    //     //         var SUM_JML_LUNAS_22 = rows
+    //     //             .data()
+    //     //             .pluck('JML_LUNAS_22')
+    //     //             .reduce( function (a, b) {
+    //     //                 return a + b*1;
+    //     //             }, 0);
+    //     //         SUM_JML_LUNAS_22 = $.fn.dataTable.render.number('.', ',', 0, '').display( SUM_JML_LUNAS_22 );
+
+    //     //         var SUM_JML_PUTUS_22 = rows
+    //     //             .data()
+    //     //             .pluck('JML_PUTUS_22')
+    //     //             .reduce( function (a, b) {
+    //     //                 return a + b*1;
+    //     //             }, 0);
+    //     //         SUM_JML_PUTUS_22 = $.fn.dataTable.render.number('.', ',', 0, '').display( SUM_JML_PUTUS_22 );
+
+    //     //         var SUM_JML_PLG_22 = rows
+    //     //             .data()
+    //     //             .pluck('JML_PLG_22')
+    //     //             .reduce( function (a, b) {
+    //     //                 return a + b*1;
+    //     //             }, 0);
+    //     //         SUM_JML_PLG_22 = $.fn.dataTable.render.number('.', ',', 0, '').display( SUM_JML_PLG_22 );
+
+
+    //     //         var SUM_JML_LUNAS_23 = rows
+    //     //             .data()
+    //     //             .pluck('JML_LUNAS_23')
+    //     //             .reduce( function (a, b) {
+    //     //                 return a + b*1;
+    //     //             }, 0);
+    //     //         SUM_JML_LUNAS_23 = $.fn.dataTable.render.number('.', ',', 0, '').display( SUM_JML_LUNAS_23 );
+
+    //     //         var SUM_JML_PUTUS_23 = rows
+    //     //             .data()
+    //     //             .pluck('JML_PUTUS_23')
+    //     //             .reduce( function (a, b) {
+    //     //                 return a + b*1;
+    //     //             }, 0);
+    //     //         SUM_JML_PUTUS_23 = $.fn.dataTable.render.number('.', ',', 0, '').display( SUM_JML_PUTUS_23 );
+
+    //     //         var SUM_JML_PLG_23 = rows
+    //     //             .data()
+    //     //             .pluck('JML_PLG_23')
+    //     //             .reduce( function (a, b) {
+    //     //                 return a + b*1;
+    //     //             }, 0);
+    //     //         SUM_JML_PLG_23 = $.fn.dataTable.render.number('.', ',', 0, '').display( SUM_JML_PLG_23 );
+
+
+    //     //         var SUM_JML_LUNAS_24 = rows
+    //     //             .data()
+    //     //             .pluck('JML_LUNAS_24')
+    //     //             .reduce( function (a, b) {
+    //     //                 return a + b*1;
+    //     //             }, 0);
+    //     //         SUM_JML_LUNAS_24 = $.fn.dataTable.render.number('.', ',', 0, '').display( SUM_JML_LUNAS_24 );
+
+    //     //         var SUM_JML_PUTUS_24 = rows
+    //     //             .data()
+    //     //             .pluck('JML_PUTUS_24')
+    //     //             .reduce( function (a, b) {
+    //     //                 return a + b*1;
+    //     //             }, 0);
+    //     //         SUM_JML_PUTUS_24 = $.fn.dataTable.render.number('.', ',', 0, '').display( SUM_JML_PUTUS_24 );
+
+    //     //         var SUM_JML_PLG_24 = rows
+    //     //             .data()
+    //     //             .pluck('JML_PLG_24')
+    //     //             .reduce( function (a, b) {
+    //     //                 return a + b*1;
+    //     //             }, 0);
+    //     //         SUM_JML_PLG_24 = $.fn.dataTable.render.number('.', ',', 0, '').display( SUM_JML_PLG_24 );
+
+
+    //     //         var SUM_JML_LUNAS_25 = rows
+    //     //             .data()
+    //     //             .pluck('JML_LUNAS_25')
+    //     //             .reduce( function (a, b) {
+    //     //                 return a + b*1;
+    //     //             }, 0);
+    //     //         SUM_JML_LUNAS_25 = $.fn.dataTable.render.number('.', ',', 0, '').display( SUM_JML_LUNAS_25 );
+
+    //     //         var SUM_JML_PUTUS_25 = rows
+    //     //             .data()
+    //     //             .pluck('JML_PUTUS_25')
+    //     //             .reduce( function (a, b) {
+    //     //                 return a + b*1;
+    //     //             }, 0);
+    //     //         SUM_JML_PUTUS_25 = $.fn.dataTable.render.number('.', ',', 0, '').display( SUM_JML_PUTUS_25 );
+
+    //     //         var SUM_JML_PLG_25 = rows
+    //     //             .data()
+    //     //             .pluck('JML_PLG_25')
+    //     //             .reduce( function (a, b) {
+    //     //                 return a + b*1;
+    //     //             }, 0);
+    //     //         SUM_JML_PLG_25 = $.fn.dataTable.render.number('.', ',', 0, '').display( SUM_JML_PLG_25 );
+
+
+    //     //         var SUM_JML_LUNAS_26 = rows
+    //     //             .data()
+    //     //             .pluck('JML_LUNAS_26')
+    //     //             .reduce( function (a, b) {
+    //     //                 return a + b*1;
+    //     //             }, 0);
+    //     //         SUM_JML_LUNAS_26 = $.fn.dataTable.render.number('.', ',', 0, '').display( SUM_JML_LUNAS_26 );
+
+    //     //         var SUM_JML_PUTUS_26 = rows
+    //     //             .data()
+    //     //             .pluck('JML_PUTUS_26')
+    //     //             .reduce( function (a, b) {
+    //     //                 return a + b*1;
+    //     //             }, 0);
+    //     //         SUM_JML_PUTUS_26 = $.fn.dataTable.render.number('.', ',', 0, '').display( SUM_JML_PUTUS_26 );
+
+    //     //         var SUM_JML_PLG_26 = rows
+    //     //             .data()
+    //     //             .pluck('JML_PLG_26')
+    //     //             .reduce( function (a, b) {
+    //     //                 return a + b*1;
+    //     //             }, 0);
+    //     //         SUM_JML_PLG_26 = $.fn.dataTable.render.number('.', ',', 0, '').display( SUM_JML_PLG_26 );
+
+
+    //     //         var SUM_JML_LUNAS_27 = rows
+    //     //             .data()
+    //     //             .pluck('JML_LUNAS_27')
+    //     //             .reduce( function (a, b) {
+    //     //                 return a + b*1;
+    //     //             }, 0);
+    //     //         SUM_JML_LUNAS_27 = $.fn.dataTable.render.number('.', ',', 0, '').display( SUM_JML_LUNAS_27 );
+
+    //     //         var SUM_JML_PUTUS_27 = rows
+    //     //             .data()
+    //     //             .pluck('JML_PUTUS_27')
+    //     //             .reduce( function (a, b) {
+    //     //                 return a + b*1;
+    //     //             }, 0);
+    //     //         SUM_JML_PUTUS_27 = $.fn.dataTable.render.number('.', ',', 0, '').display( SUM_JML_PUTUS_27 );
+
+    //     //         var SUM_JML_PLG_27 = rows
+    //     //             .data()
+    //     //             .pluck('JML_PLG_27')
+    //     //             .reduce( function (a, b) {
+    //     //                 return a + b*1;
+    //     //             }, 0);
+    //     //         SUM_JML_PLG_27 = $.fn.dataTable.render.number('.', ',', 0, '').display( SUM_JML_PLG_27 );
+
+
+    //     //         var SUM_JML_LUNAS_28 = rows
+    //     //             .data()
+    //     //             .pluck('JML_LUNAS_28')
+    //     //             .reduce( function (a, b) {
+    //     //                 return a + b*1;
+    //     //             }, 0);
+    //     //         SUM_JML_LUNAS_28 = $.fn.dataTable.render.number('.', ',', 0, '').display( SUM_JML_LUNAS_28 );
+
+    //     //         var SUM_JML_PUTUS_28 = rows
+    //     //             .data()
+    //     //             .pluck('JML_PUTUS_28')
+    //     //             .reduce( function (a, b) {
+    //     //                 return a + b*1;
+    //     //             }, 0);
+    //     //         SUM_JML_PUTUS_28 = $.fn.dataTable.render.number('.', ',', 0, '').display( SUM_JML_PUTUS_28 );
+
+    //     //         var SUM_JML_PLG_28 = rows
+    //     //             .data()
+    //     //             .pluck('JML_PLG_28')
+    //     //             .reduce( function (a, b) {
+    //     //                 return a + b*1;
+    //     //             }, 0);
+    //     //         SUM_JML_PLG_28 = $.fn.dataTable.render.number('.', ',', 0, '').display( SUM_JML_PLG_28 );
+
+
+    //     //         var SUM_JML_LUNAS_29 = rows
+    //     //             .data()
+    //     //             .pluck('JML_LUNAS_29')
+    //     //             .reduce( function (a, b) {
+    //     //                 return a + b*1;
+    //     //             }, 0);
+    //     //         SUM_JML_LUNAS_29 = $.fn.dataTable.render.number('.', ',', 0, '').display( SUM_JML_LUNAS_29 );
+
+    //     //         var SUM_JML_PUTUS_29 = rows
+    //     //             .data()
+    //     //             .pluck('JML_PUTUS_29')
+    //     //             .reduce( function (a, b) {
+    //     //                 return a + b*1;
+    //     //             }, 0);
+    //     //         SUM_JML_PUTUS_29 = $.fn.dataTable.render.number('.', ',', 0, '').display( SUM_JML_PUTUS_29 );
+
+    //     //         var SUM_JML_PLG_29 = rows
+    //     //             .data()
+    //     //             .pluck('JML_PLG_29')
+    //     //             .reduce( function (a, b) {
+    //     //                 return a + b*1;
+    //     //             }, 0);
+    //     //         SUM_JML_PLG_29 = $.fn.dataTable.render.number('.', ',', 0, '').display( SUM_JML_PLG_29 );
+
+
+    //     //         var SUM_JML_LUNAS_30 = rows
+    //     //             .data()
+    //     //             .pluck('JML_LUNAS_30')
+    //     //             .reduce( function (a, b) {
+    //     //                 return a + b*1;
+    //     //             }, 0);
+    //     //         SUM_JML_LUNAS_30 = $.fn.dataTable.render.number('.', ',', 0, '').display( SUM_JML_LUNAS_30 );
+
+    //     //         var SUM_JML_PUTUS_30 = rows
+    //     //             .data()
+    //     //             .pluck('JML_PUTUS_30')
+    //     //             .reduce( function (a, b) {
+    //     //                 return a + b*1;
+    //     //             }, 0);
+    //     //         SUM_JML_PUTUS_30 = $.fn.dataTable.render.number('.', ',', 0, '').display( SUM_JML_PUTUS_30 );
+
+    //     //         var SUM_JML_PLG_30 = rows
+    //     //             .data()
+    //     //             .pluck('JML_PLG_30')
+    //     //             .reduce( function (a, b) {
+    //     //                 return a + b*1;
+    //     //             }, 0);
+    //     //         SUM_JML_PLG_30 = $.fn.dataTable.render.number('.', ',', 0, '').display( SUM_JML_PLG_30 );
+
+
+    //     //         var SUM_JML_LUNAS_31 = rows
+    //     //             .data()
+    //     //             .pluck('JML_LUNAS_31')
+    //     //             .reduce( function (a, b) {
+    //     //                 return a + b*1;
+    //     //             }, 0);
+    //     //         SUM_JML_LUNAS_31 = $.fn.dataTable.render.number('.', ',', 0, '').display( SUM_JML_LUNAS_31 );
+
+    //     //         var SUM_JML_PUTUS_31 = rows
+    //     //             .data()
+    //     //             .pluck('JML_PUTUS_31')
+    //     //             .reduce( function (a, b) {
+    //     //                 return a + b*1;
+    //     //             }, 0);
+    //     //         SUM_JML_PUTUS_31 = $.fn.dataTable.render.number('.', ',', 0, '').display( SUM_JML_PUTUS_31 );
+
+    //     //         var SUM_JML_PLG_31 = rows
+    //     //             .data()
+    //     //             .pluck('JML_PLG_31')
+    //     //             .reduce( function (a, b) {
+    //     //                 return a + b*1;
+    //     //             }, 0);
+    //     //         SUM_JML_PLG_31 = $.fn.dataTable.render.number('.', ',', 0, '').display( SUM_JML_PLG_31 );
+
+    //     //         var SUM_JML_LUNAS = rows
+    //     //             .data()
+    //     //             .pluck('JML_LUNAS')
+    //     //             .reduce( function (a, b) {
+    //     //                 return a + b*1;
+    //     //             }, 0);
+    //     //         SUM_JML_LUNAS = $.fn.dataTable.render.number('.', ',', 0, '').display( SUM_JML_LUNAS );
+
+    //     //         var SUM_JML_PUTUS = rows
+    //     //             .data()
+    //     //             .pluck('JML_PUTUS')
+    //     //             .reduce( function (a, b) {
+    //     //                 return a + b*1;
+    //     //             }, 0);
+    //     //         SUM_JML_PUTUS = $.fn.dataTable.render.number('.', ',', 0, '').display( SUM_JML_PUTUS );
+
+    //     //         var SUM_JML_PLG = rows
+    //     //             .data()
+    //     //             .pluck('JML_PLG')
+    //     //             .reduce( function (a, b) {
+    //     //                 return a + b*1;
+    //     //             }, 0);
+    //     //         SUM_JML_PLG = $.fn.dataTable.render.number('.', ',', 0, '').display( SUM_JML_PLG );
+
+    //     //         if( !( group == 'T' || group == 'C' || group == 'L' ))
+    //     //         return $('<tr/>')
+    //     //             .append( '<td colspan="3">Jumlah '+group+'</td>' )
+    //     //             .append( '<td class="text-right">'+SUM_JML_LUNAS_21+'</td>' )
+    //     //             .append( '<td class="text-right">'+SUM_JML_PUTUS_21+'</td>' )
+    //     //             .append( '<td class="text-right">'+SUM_JML_PLG_21+'</td>' )
+    //     //             .append( '<td class="text-right">'+SUM_JML_LUNAS_22+'</td>' )
+    //     //             .append( '<td class="text-right">'+SUM_JML_PUTUS_22+'</td>' )
+    //     //             .append( '<td class="text-right">'+SUM_JML_PLG_22+'</td>' )
+    //     //             .append( '<td class="text-right">'+SUM_JML_LUNAS_23+'</td>' )
+    //     //             .append( '<td class="text-right">'+SUM_JML_PUTUS_23+'</td>' )
+    //     //             .append( '<td class="text-right">'+SUM_JML_PLG_23+'</td>' )
+    //     //             .append( '<td class="text-right">'+SUM_JML_LUNAS_24+'</td>' )
+    //     //             .append( '<td class="text-right">'+SUM_JML_PUTUS_24+'</td>' )
+    //     //             .append( '<td class="text-right">'+SUM_JML_PLG_24+'</td>' )
+    //     //             .append( '<td class="text-right">'+SUM_JML_LUNAS_25+'</td>' )
+    //     //             .append( '<td class="text-right">'+SUM_JML_PUTUS_25+'</td>' )
+    //     //             .append( '<td class="text-right">'+SUM_JML_PLG_25+'</td>' )
+    //     //             .append( '<td class="text-right">'+SUM_JML_LUNAS_26+'</td>' )
+    //     //             .append( '<td class="text-right">'+SUM_JML_PUTUS_26+'</td>' )
+    //     //             .append( '<td class="text-right">'+SUM_JML_PLG_26+'</td>' )
+    //     //             .append( '<td class="text-right">'+SUM_JML_LUNAS_27+'</td>' )
+    //     //             .append( '<td class="text-right">'+SUM_JML_PUTUS_27+'</td>' )
+    //     //             .append( '<td class="text-right">'+SUM_JML_PLG_27+'</td>' )
+    //     //             .append( '<td class="text-right">'+SUM_JML_LUNAS_28+'</td>' )
+    //     //             .append( '<td class="text-right">'+SUM_JML_PUTUS_28+'</td>' )
+    //     //             .append( '<td class="text-right">'+SUM_JML_PLG_28+'</td>' )
+    //     //             .append( '<td class="text-right">'+SUM_JML_LUNAS_29+'</td>' )
+    //     //             .append( '<td class="text-right">'+SUM_JML_PUTUS_29+'</td>' )
+    //     //             .append( '<td class="text-right">'+SUM_JML_PLG_29+'</td>' )
+    //     //             .append( '<td class="text-right">'+SUM_JML_LUNAS_30+'</td>' )
+    //     //             .append( '<td class="text-right">'+SUM_JML_PUTUS_30+'</td>' )
+    //     //             .append( '<td class="text-right">'+SUM_JML_PLG_30+'</td>' )
+    //     //             .append( '<td class="text-right">'+SUM_JML_LUNAS_31+'</td>' )
+    //     //             .append( '<td class="text-right">'+SUM_JML_PUTUS_31+'</td>' )
+    //     //             .append( '<td class="text-right">'+SUM_JML_PLG_31+'</td>' )
+    //     //             .append( '<td class="text-right">'+SUM_JML_LUNAS+'</td>' )
+    //     //             .append( '<td class="text-right">'+SUM_JML_PUTUS+'</td>' )
+    //     //             .append( '<td class="text-right">'+SUM_JML_PLG+'</td>' );
+    //     //     },
+    //     //     dataSrc: 'UNITAP'
+
+    //     // },
+    // });
+
+
+    $( 'body' ).on( 'click', '#btn_cari', function(btn) {
+        console.log('Klikk');
+        table_up3.ajax.url( '../controller/migrasi/getRekapMigrasiUP3.php?unitupi='+$('#sel_unitupi').val()+'&unitap='+$('#sel_unitap').val()+'&unitup='+$('#sel_unitup').val()+'&periode='+$('#periode_range').val() ).load();
+        //table.ajax.url( '../controller/pemutusan/getRekapPemutusanULP.php?unitupi='+$('#sel_unitupi').val()+'&unitap='+$('#sel_unitap').val()+'&unitup='+$('#sel_unitup').val()+'&blth='+$('#sel_blth').val() ).load();
+    });
+
+
+});

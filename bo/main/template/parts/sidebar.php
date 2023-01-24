@@ -85,6 +85,15 @@
                     <!-- <li><a href="input-va.php">Input Virtual Account</a></li> -->
                 </ul>
             </li>
+            <li class="mega-menu mega-menu-md"><a class="has-arrow" href="javascript:void()" aria-expanded="false"><i class="mdi mdi-shuffle"></i><span class="nav-text">Migrasi LPB </span> </a>
+                <ul aria-expanded="false">
+                    <!-- <li><a href="update-pelunasan.php">Update Pelunasan</a>
+                            </li> -->
+                    <li><a href="wo-migrasi.php">WO Migrasi LPB</a></li>
+                    <li><a href="realisasi-migrasi.php">Realisasi Migrasi LPB</a></li>
+                    <li><a href="rekap-migrasi.php">Rekap Migrasi LPB</a></li>
+                </ul>
+            </li>
             <li><a class="has-arrow" href="javascript:void()" aria-expanded="false"><i class="mdi mdi-tag-multiple"></i> <span class="nav-text">TS P2TL</span></a>
                 <ul aria-expanded="false">
                     <li><a href="index-tsp2tl.php">Dashboard TS P2TL LPB Anomali</a></li>
