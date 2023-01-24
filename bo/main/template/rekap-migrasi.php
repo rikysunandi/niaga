@@ -104,7 +104,7 @@
                                                     <option disabled>Pilih UP3</option>
                                                 </select>
                                             </div>
-                                            <div class="form-group mb-2 mr-4">
+                                            <div class="form-group mb-2 mr-4 d-none">
                                                 <label class="text-label d-block">ULP</label>
                                                 <select id="sel_unitup" class="selectpicker show-tick" data-size="5" >
                                                     <option disabled>Pilih ULP</option>
