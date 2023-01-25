@@ -51,6 +51,7 @@ $columns = array(
     array( 'db' => 'MENUNGGAK_12BLN_BERTURUT2', 'dt' => 'MENUNGGAK_12BLN_BERTURUT2' ),
     array( 'db' => 'JML_MENUNGGAK',  'dt' => 'JML_MENUNGGAK' ),
     array( 'db' => 'BLTH_MENUNGGAK',  'dt' => 'BLTH_MENUNGGAK' ),
+    array( 'db' => 'TGLBAYAR_RATA2',  'dt' => 'TGLBAYAR_RATA2' ),
     array( 'db' => 'NOAGENDA',  'dt' => 'NOAGENDA' ),
 );
  

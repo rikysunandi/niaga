@@ -94,6 +94,10 @@ $(document).ready(function () {
             visible: true
           },
           {
+            data: "TGLBAYAR_RATA2",
+            visible: true
+          },
+          {
             data: "NOAGENDA",
             visible: true
           },
@@ -123,7 +127,7 @@ $(document).ready(function () {
         "paging": true,
         lengthMenu: [[25, 100, -1], [25, 100, "All"]],
         pageLength: 100,
-        "order": [[8, 'desc'],[9, 'desc'],[10, 'desc'],[11, 'desc'],[1, 'asc'],[7, 'asc']],
+        "order": [[8, 'desc'],[9, 'desc'],[10, 'desc'],[11, 'desc'],[14, 'desc'],[1, 'asc'],[7, 'asc']],
     });
 
 

@@ -141,6 +141,7 @@
                                             <th class="text-center bg-primary-lighten-2">3BLN<br/>BERTURUT2</th>
                                             <th class="text-center bg-primary-lighten-2">JML<br/>MENUNGGAK</th>
                                             <th class="text-center bg-primary-lighten-2">BLTH<br/>MENUNGGAK</th>
+                                            <th class="text-center bg-primary-lighten-2">TGLBAYAR<br/>RATA2</th>
                                             <th class="text-center bg-primary-lighten-2">NOAGENDA<br/>MIGRASI</th>
                                         </tr>
                                     </thead>
@@ -225,6 +226,6 @@
     <script src="../../assets/plugins/block-ui/jquery.blockUI.js"></script>
 
     <script src="../js/pages/apps.js?time=5"></script>
-    <script src="../js/pages/wo-migrasi.js?time=4"></script>
+    <script src="../js/pages/wo-migrasi.js?time=5"></script>
 </body>
 </html>
