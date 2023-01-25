@@ -5,7 +5,7 @@ $(document).ready(function () {
     const queryString = window.location.search;
     const urlParams = new URLSearchParams(queryString);
 
-    var unitupi, unitap, unitup, petugas, blth, rbm, status;
+    var unitupi, unitap, unitup, petugas, blth, rbm, status, status_migrasi;
 
     if(urlParams.has('blth')){
       $('#sel_blth').val(urlParams.get('blth'));
@@ -68,6 +68,10 @@ $(document).ready(function () {
             visible: true
           },
           {
+            data: "KODEPETUGAS",
+            visible: true
+          },
+          {
             data: "MENUNGGAK_12BLN_BERTURUT2",
             visible: true
           },
@@ -118,7 +122,7 @@ $(document).ready(function () {
                   // //this.disable(); // disable button
                   // console.log('dt', dt);
                   // console.log('node', node);
-                  window.open('../controller/migrasi/expCSVWOMigrasi.php?unitupi='+unitupi+'&unitap='+unitap+'&unitup='+unitup+'&status='+status );
+                  window.open('../controller/migrasi/expCSVWOMigrasi.php?unitupi='+unitupi+'&unitap='+unitap+'&unitup='+unitup+'&status='+status+'&status_migrasi='+status_migrasi );
               }
             },
         ],
@@ -127,7 +131,7 @@ $(document).ready(function () {
         "paging": true,
         lengthMenu: [[25, 100, -1], [25, 100, "All"]],
         pageLength: 100,
-        "order": [[8, 'desc'],[9, 'desc'],[10, 'desc'],[11, 'desc'],[14, 'desc'],[1, 'asc'],[7, 'asc']],
+        "order": [[9, 'desc'],[10, 'desc'],[11, 'desc'],[12, 'desc'],[15, 'desc'],[1, 'asc'],[7, 'asc']],
     });
 
 
@@ -136,6 +140,7 @@ $(document).ready(function () {
         unitap = $('#sel_unitap').val();
         unitup = $('#sel_unitup').val();
         status = $('#sel_status').val();
+        status_migrasi = $('#sel_status_migrasi').val();
         // tgl_pemutusan_from = $('#tgl_pemutusan_range')
         //                         .data('daterangepicker')
         //                         .startDate.format('YYYY-MM-DD');
@@ -149,7 +154,7 @@ $(document).ready(function () {
         // $('#map').remove();
         // container.append('<div id="map"></div>');
 
-        table.ajax.url( '../controller/migrasi/getWOMigrasi.php?unitupi='+unitupi+'&unitap='+unitap+'&unitup='+unitup+'&status='+status ).load();
+        table.ajax.url( '../controller/migrasi/getWOMigrasi.php?unitupi='+unitupi+'&unitap='+unitap+'&unitup='+unitup+'&status='+status+'&status_migrasi='+status_migrasi ).load();
         //table.ajax.url( '../controller/pemutusan/getDatapemutusan.php?unitupi='+$('#sel_unitupi').val()+'&unitap='+$('#sel_unitap').val()+'&unitup='+$('#sel_unitup').val()+'&blth='+$('#sel_blth').val() ).load();
     });
 

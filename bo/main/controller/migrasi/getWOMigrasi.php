@@ -8,6 +8,7 @@ $unitupi = $_REQUEST['unitupi'];
 $unitap = $_REQUEST['unitap'];
 $unitup = $_REQUEST['unitup'];
 $status = $_REQUEST['status'];
+$status_migrasi = $_REQUEST['status_migrasi'];
 $user = rand(0,5);
 
 $params = array(
@@ -16,9 +17,10 @@ $params = array(
         array($unitap, SQLSRV_PARAM_IN),
         array($unitup, SQLSRV_PARAM_IN),
         array($status, SQLSRV_PARAM_IN),
+        array($status_migrasi, SQLSRV_PARAM_IN),
     );
 
-$sql = "EXEC sp_vw_Create_WO_Migrasi @UserID = ?, @Unitupi = ?, @Unitap = ?, @Unitup = ?, @Status = ? ";
+$sql = "EXEC sp_vw_Create_WO_Migrasi @UserID = ?, @Unitupi = ?, @Unitap = ?, @Unitup = ?, @Status = ?, @Status_Migrasi = ? ";
 $stmt = sqlsrv_prepare($conn, $sql, $params);
 
 //sqlsrv_execute($stmt);
@@ -52,6 +54,7 @@ $columns = array(
     array( 'db' => 'JML_MENUNGGAK',  'dt' => 'JML_MENUNGGAK' ),
     array( 'db' => 'BLTH_MENUNGGAK',  'dt' => 'BLTH_MENUNGGAK' ),
     array( 'db' => 'TGLBAYAR_RATA2',  'dt' => 'TGLBAYAR_RATA2' ),
+    array( 'db' => 'KODEPETUGAS',  'dt' => 'KODEPETUGAS' ),
     array( 'db' => 'NOAGENDA',  'dt' => 'NOAGENDA' ),
 );
  

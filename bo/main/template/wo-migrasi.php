@@ -101,6 +101,14 @@
                                                     <option value="3BLN_BERTURUT2">3BLN BERTURUT2</option>
                                                 </select>
                                             </div>
+                                            <div class="form-group col-3">
+                                                <label class="text-label d-block"><small>STATUS MIGRASI</label></small>
+                                                <select id="sel_status_migrasi" title="STATUS MIGRASI" class="selectpicker show-tick" data-size="5" >
+                                                    <option value="00">SEMUA DATA</option>
+                                                    <option value="BELUM">BELUM MIGRASI</option>
+                                                    <option value="SUDAH">SUDAH MIGRASI</option>
+                                                </select>
+                                            </div>
                                         </div>
                                     </form>
                                 </div>
@@ -135,6 +143,7 @@
                                             <th class="text-center bg-primary-lighten-2">TARIF</th>
                                             <th class="text-center bg-primary-lighten-2">DAYA</th>
                                             <th class="text-center bg-primary-lighten-2">KDDK</th>
+                                            <th class="text-center bg-primary-lighten-2">PETUGAS</th>
                                             <th class="text-center bg-primary-lighten-2">12BLN<br/>BERTURUT2</th>
                                             <th class="text-center bg-primary-lighten-2">9BLN<br/>BERTURUT2</th>
                                             <th class="text-center bg-primary-lighten-2">6BLN<br/>BERTURUT2</th>
@@ -226,6 +235,6 @@
     <script src="../../assets/plugins/block-ui/jquery.blockUI.js"></script>
 
     <script src="../js/pages/apps.js?time=5"></script>
-    <script src="../js/pages/wo-migrasi.js?time=5"></script>
+    <script src="../js/pages/wo-migrasi.js?time=7"></script>
 </body>
 </html>
