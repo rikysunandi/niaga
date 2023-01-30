@@ -91,13 +91,12 @@
 
                                 <div class="form-group mb-0 mr-2">
                                     <select id="sel_blth" class="selectpicker select-sm show-tick" data-size="5" data-width="fit">
-                                        <option value="<?php echo date('Ym', strtotime("-29 days")) ?>" selected="selected"><?php echo date('Ym', strtotime("-29 days")) ?></option>
+                                        <option selected="selected" value='<?php echo date('Ym', strtotime("last day of previous month")) ?>'><?php echo date('Ym', strtotime("last day of previous month")) ?></option>
                                         <option data-divider="true"></option>
-                                        <option value='<?php echo date('Ym', strtotime("5 days")) ?>'><?php echo date('Ym', strtotime("5 days")) ?></option>
-                                        <option value='<?php echo date('Ym', strtotime("-65 days")) ?>'><?php echo date('Ym', strtotime("-65 days")) ?></option>
-                                        <option value='<?php echo date('Ym', strtotime("-95 days")) ?>'><?php echo date('Ym', strtotime("-95 days")) ?></option>
-                                        <option value='<?php echo date('Ym', strtotime("-125 days")) ?>'><?php echo date('Ym', strtotime("-125 days")) ?></option>
-                                        <option value='<?php echo date('Ym', strtotime("-155 days")) ?>'><?php echo date('Ym', strtotime("-155 days")) ?></option>
+                                        <option value='<?php echo date('Ym', strtotime("-2 month")) ?>'><?php echo date('Ym', strtotime("-2 month")) ?></option>
+                                        <option value='<?php echo date('Ym', strtotime("-3 month")) ?>'><?php echo date('Ym', strtotime("-3 month")) ?></option>
+                                        <option value='<?php echo date('Ym', strtotime("-4 month")) ?>'><?php echo date('Ym', strtotime("-4 month")) ?></option>
+                                        <option value='<?php echo date('Ym', strtotime("-5 month")) ?>'><?php echo date('Ym', strtotime("-5 month")) ?></option>
                                     </select>
                                 </div>
                                 <div class="form-group mb-0 clearfix">
@@ -350,9 +349,9 @@
                             <div class="card-footer ">
                                 <div class="float-right">
                                     <small><strong>Legenda: </strong></small>
-                                    <small class="tr-os mr-2">>=110%</small>
+                                    <small class="tr-os mr-2">>110%</small>
                                     <small class="tr-mr mr-2">100-110%</small>
-                                    <small class="tr-ur mr-2">80-100%</small>
+                                    <small class="tr-ur mr-2">80-99%</small>
                                     <small class="tr-ni mr-2"><80%</small>
                                 </div>
                             </div>
@@ -391,9 +390,9 @@
                             <div class="card-footer ">
                                 <div class="float-right">
                                     <small><strong>Legenda: </strong></small>
-                                    <small class="tr-os mr-2">>=110%</small>
+                                    <small class="tr-os mr-2">>110%</small>
                                     <small class="tr-mr mr-2">100-110%</small>
-                                    <small class="tr-ur mr-2">80-100%</small>
+                                    <small class="tr-ur mr-2">80-99%</small>
                                     <small class="tr-ni mr-2"><80%</small>
                                 </div>
                             </div>
