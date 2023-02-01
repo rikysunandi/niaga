@@ -32,10 +32,12 @@
         .mr{fill:#4caf50;}
         .ur{fill:#ffc107;}
         .ni{fill:#ff5722;}
+        .minus{fill:#441405;}
         .tr-os{background: rgba(0, 131, 143, .2);}
         .tr-mr{background: rgba(76, 175, 80, .2);}
         .tr-ur{background: rgba(255, 193, 7, .2);}
         .tr-ni{background: rgba(255, 87, 34, .2);}
+        .tr-minus{background: rgba(68, 20, 5, .2);}
         .tr-blank{background: rgba(2, 2, 2, .2);}
     </style>
 </head>
@@ -347,12 +349,16 @@
                                 </div>
                             </div>
                             <div class="card-footer ">
-                                <div class="float-right">
+                                <div class="float-right mr-4">
+                                    <small>*Angka fixed menunggu hasil closing laporan</small>
+                                </div>
+                                <div class="float-right mr-4">
                                     <small><strong>Legenda: </strong></small>
                                     <small class="tr-os mr-2">>110%</small>
                                     <small class="tr-mr mr-2">100-110%</small>
                                     <small class="tr-ur mr-2">80-99%</small>
-                                    <small class="tr-ni mr-2"><80%</small>
+                                    <small class="tr-ni mr-2">0-80%</small>
+                                    <small class="tr-minus mr-2"><0%</small>
                                 </div>
                             </div>
                         </div>
@@ -388,12 +394,16 @@
                                 </div>
                             </div>
                             <div class="card-footer ">
-                                <div class="float-right">
+                                <div class="float-right mr-4">
+                                    <small>*Angka fixed menunggu hasil closing laporan</small>
+                                </div>
+                                <div class="float-right mr-4">
                                     <small><strong>Legenda: </strong></small>
                                     <small class="tr-os mr-2">>110%</small>
                                     <small class="tr-mr mr-2">100-110%</small>
                                     <small class="tr-ur mr-2">80-99%</small>
-                                    <small class="tr-ni mr-2"><80%</small>
+                                    <small class="tr-ni mr-2">0-80%</small>
+                                    <small class="tr-minus mr-2"><0%</small>
                                 </div>
                             </div>
                         </div>
@@ -1260,6 +1270,6 @@
     <!-- <script src="https://cdn.jsdelivr.net/gh/emn178/chartjs-plugin-labels/src/chartjs-plugin-labels.js"></script> -->
     <script src="https://cdnjs.cloudflare.com/ajax/libs/FileSaver.js/1.3.3/FileSaver.min.js"></script>
     
-    <script src="../js/pages/index.js?time=15"></script>
+    <script src="../js/pages/index.js?time=18"></script>
 </body>
 </html>

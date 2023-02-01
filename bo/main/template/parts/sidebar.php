@@ -7,9 +7,9 @@
                     <i class="mdi mdi-chart-bar"></i><span class="nav-text">Dashboard</span>
                 </a>
                 <ul aria-expanded="false">
-                    <li><a href="index.php">Pemasaran</a></li>
+                    <li><a href="index-sar.php">Pemasaran</a></li>
                     <li><a href="index-mekaga.php">Mekanisme Niaga</a></li>
-                    <li><a href="index-tsp2tl.php">Administrasi Niaga</a></li>
+                    <li><a href="index.php">Administrasi Niaga</a></li>
                     <li><a href="index-pola-bayar.php">Pola Bayar</a></li>
                 </ul>
             </li>
@@ -36,6 +36,7 @@
                     <li class="d-none"><a href="upload-sorek.php">Upload Sorek OLAP AP2T <span class="badge badge-warning">Development</span></a></li>
                     <li><a href="upload-sorek.php">Upload Sorek OLAP AP2T</a></li>
                     <li><a href="update-pelunasan.php">Upload Pelunasan AP2T</a></li>
+                    <li><a href="update-peremajaan.php">Upload Peremajaan AP2T</a></li>
                     <!-- <li><a href="job-update-data.php">Monitoring Job Update Data</a></li> -->
                     <li><a href="mon-upload-sorek.php">Monitoring Upload Sorek</a>
                     <li><a href="mon-upload-pelunasan.php">Monitoring Upload Pelunasan</a></li>

@@ -38,7 +38,7 @@ $(function() {
         $.each(data.rows, function(k,v){
 
             $('#'+v.unitap+' path').removeClass('default');
-            if(v.realisasi>=110){
+            if(v.realisasi>110){
                 $('#'+v.unitap+' path').addClass('os');
                 tr += '<tr class="tr-os">';
             }else if(v.realisasi>=100){
@@ -50,6 +50,9 @@ $(function() {
             }else if(v.realisasi>=0){
                 $('#'+v.unitap+' path').addClass('ni');
                 tr += '<tr class="tr-ni">';
+            }else{
+                $('#'+v.unitap+' path').addClass('minus');
+                tr += '<tr class="tr-minus">';
             }
             $('#'+v.unitap+' path').attr('title', v.nama+' ('+v.realisasi+'%)')
                                     .attr('data-original-title', v.nama+' ('+v.realisasi+'%)')
@@ -70,7 +73,7 @@ $(function() {
         });
 
         var tfoot = '';
-        if(data.uid.realisasi>=110){
+        if(data.uid.realisasi>110){
             tfoot += '<tr class="tr-os">';
         }else if(data.uid.realisasi>=100){
             tfoot += '<tr class="tr-mr">';
@@ -78,6 +81,8 @@ $(function() {
             tfoot += '<tr class="tr-ur">';
         }else if(data.uid.realisasi>=0){
             tfoot += '<tr class="tr-ni">';
+        }else{
+            tfoot += '<tr class="tr-minus">';
         }
 
         tfoot += '<td class="text-center">TOTAL</td>';
@@ -273,14 +278,16 @@ $(function() {
                 tr += '</tr>';
             }else{
 
-                if(data.realisasi[k]>=110){
+                if(data.realisasi[k]>110){
                     tr += '<tr class="tr-os">';
                 }else if(data.realisasi[k]>=100){
                     tr += '<tr class="tr-mr">';
                 }else if(data.realisasi[k]>=80){
                     tr += '<tr class="tr-ur">';
-                }else{
+                }else if(data.realisasi[k]>=0){
                     tr += '<tr class="tr-ni">';
+                }else{
+                    tr += '<tr class="tr-minus">';
                 }
                 
                 tr += '<td class="text-center">'+v+'</td>';
@@ -322,7 +329,12 @@ $(function() {
             $.each(data.rows, function(k,v){
 
                 $('#'+v.unitap+' path').removeClass('default');
-                if(v.realisasi>=110){
+                $('#'+v.unitap+' path').removeClass('os');
+                $('#'+v.unitap+' path').removeClass('mr');
+                $('#'+v.unitap+' path').removeClass('ur');
+                $('#'+v.unitap+' path').removeClass('ni');
+                $('#'+v.unitap+' path').removeClass('minus');
+                if(v.realisasi>110){
                     $('#'+v.unitap+' path').addClass('os');
                     tr += '<tr class="tr-os">';
                 }else if(v.realisasi>=100){
@@ -334,6 +346,9 @@ $(function() {
                 }else if(v.realisasi>=0){
                     $('#'+v.unitap+' path').addClass('ni');
                     tr += '<tr class="tr-ni">';
+                }else{
+                    $('#'+v.unitap+' path').addClass('minus');
+                    tr += '<tr class="tr-minus">';
                 }
                 $('#'+v.unitap+' path').attr('title', v.nama+' ('+v.realisasi+'%)')
                                         .attr('data-original-title', v.nama+' ('+v.realisasi+'%)')
@@ -354,7 +369,7 @@ $(function() {
             });
 
             var tfoot = '';
-            if(data.uid.realisasi>=110){
+            if(data.uid.realisasi>110){
                 tfoot += '<tr class="tr-os">';
             }else if(data.uid.realisasi>=100){
                 tfoot += '<tr class="tr-mr">';
@@ -362,6 +377,8 @@ $(function() {
                 tfoot += '<tr class="tr-ur">';
             }else if(data.uid.realisasi>=0){
                 tfoot += '<tr class="tr-ni">';
+            }else{
+                tfoot += '<tr class="tr-minus">';
             }
 
             tfoot += '<td class="text-center">TOTAL</td>';
@@ -408,14 +425,16 @@ $(function() {
                     tr += '</tr>';
                 }else{
 
-                    if(data.realisasi[k]>=110){
+                    if(data.realisasi[k]>110){
                         tr += '<tr class="tr-os">';
                     }else if(data.realisasi[k]>=100){
                         tr += '<tr class="tr-mr">';
                     }else if(data.realisasi[k]>=80){
                         tr += '<tr class="tr-ur">';
+                    }else if(data.realisasi[k]>=0){
+                        tfoot += '<tr class="tr-ni">';
                     }else{
-                        tr += '<tr class="tr-ni">';
+                        tfoot += '<tr class="tr-minus">';
                     }
                     
                     tr += '<td class="text-center">'+v+'</td>';
