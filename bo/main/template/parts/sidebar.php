@@ -139,7 +139,7 @@
                     <li><a href="mon-foto-rumah.php">Detail Data Foto Rumah</a></li>
                 </ul>
             </li>
-            <li><a class="has-arrow" href="javascript:void()" aria-expanded="false"><i class="mdi mdi-map"></i> <span class="nav-text">RPP On Desk</span></a>
+            <!-- <li><a class="has-arrow" href="javascript:void()" aria-expanded="false"><i class="mdi mdi-map"></i> <span class="nav-text">RPP On Desk</span></a>
                 <ul aria-expanded="false">
                     <li><a href="pembentukan-rpp.php">Peta Pembentukan RPP</a></li>
                     <li><a href="urut-langkah-rpp.php">Pembentukan Urut Langkah RPP</a></li>
@@ -148,7 +148,7 @@
                     <li><a href="daftar-rpp.php">Daftar RPP On Desk</a></li>
                     <li><a href="rekomendasi-rpp.php">Rekomendasi RPP</a></li>
                 </ul>
-            </li>
+            </li> -->
             <li><a class="has-arrow" href="javascript:void()" aria-expanded="false"><i class="mdi mdi-map"></i> <span class="nav-text">RPP On Site</span></a>
                 <ul aria-expanded="false">
                     <li><a href="pelaksanaan-rpp-onsite.php">Review RPP On Site</a></li>
@@ -166,7 +166,7 @@
                 <ul aria-expanded="false">
                     <li><a href="rekap-rpp-final.php">Rekap RPP Final</a></li>
                     <li><a href="urut-langkah-rpp-final.php">Pembentukan Urut Langkah RPP</a></li>
-                    <li><a href="peta-rpp-final.php">Pembentukan RPP Final</a></li>
+                    <!-- <li><a href="peta-rpp-final.php">Pembentukan RPP Final</a></li> -->
                     <li><a href="pembentukan-rpp-final.php">Peta Pembentukan RPP</a></li>
                     <li><a href="peta-rpp-petugas.php">Peta RPP Petugas</a></li>
                     <!-- <li><a href="rekap-rpp-up-final.php">Rekap RPP per ULP</a></li> -->
