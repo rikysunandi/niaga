@@ -6,7 +6,8 @@ require_once '../../config/config.php';
 require_once '../../config/database.php';
 require_once 'ap3t_login.php';
 
-echo '<span class="text-success">Job Saldo PRR Prabayar '.date('Y-m-d H:i:s').'</span><br/>';
+$tgl_job = date('Y-m-d H:i:s');
+echo '<span class="text-success">Job Saldo PRR Prabayar '.$tgl_job.'</span><br/>';
 echo '<span class="text-success">Berhasil Login AP3T..</span><br/>';
 
 $authorization = $token;
@@ -16,14 +17,6 @@ $context = stream_context_create(array(
         'header' => "Authorization: " . $authorization,
     ),
 ));
-$stmt = sqlsrv_query($conn, "TRUNCATE TABLE AP3T_SALDO_PRR ");
-if(!$stmt){
-	echo '<span class="text-warning">Gagal mereset Saldo PRR di ROC..</span><br/>'; die();
-}
-
-sqlsrv_free_stmt($stmt);
-
-echo '<span class="text-success">Berhasil mereset Saldo PRR di ROC..</span><br/>';
 
 $stmt = sqlsrv_query($conn, "select UNITUPI, UNITAP, UNITUP, NAMA from m_unitup order by UNITAP, UNITUP ");
 
@@ -81,9 +74,10 @@ if($stmt){
 							array($row->ketStatuspenetapan, SQLSRV_PARAM_IN),
 							array($unit['UNITUPI'], SQLSRV_PARAM_IN),
 							array($unit['UNITAP'], SQLSRV_PARAM_IN),
+							array($tgl_job, SQLSRV_PARAM_IN),
 					    );
 
-					$sql_insert = "EXEC SP_AP3T_SALDO_PRR_SIMPAN @noagenda=?, @noregister=?, @idpel=?, @nama=?, @jenisPiutang=?, @rptagPrr=?, @tglmasukPrr=?, @tgkoreksi=?, @kdgerakmasukPrr=?, @unitUp=?, @tarif=?, @daya=?, @rpptlPrr=?, @rpbptrafoPrr=?, @rpsewatrafoPrr=?, @rpsewakapPrr=?, @rpangsuranbpPrr=?, @rpangsuranp2tlPrr=?, @rpangsurankwhPrr=?, @rpangsuranprrPrr=?, @rpangsuranprrhapusPrr=?, @rpbkPrr=?, @rpadministrasiPrr=?, @rpmaterialPrr=?, @rpsegelPrr=?, @rpsambungPrr=?, @ketStatuspenetapan=?, @unitupi=?, @unitap=? ";
+					$sql_insert = "EXEC SP_AP3T_SALDO_PRR_SIMPAN @noagenda=?, @noregister=?, @idpel=?, @nama=?, @jenisPiutang=?, @rptagPrr=?, @tglmasukPrr=?, @tgkoreksi=?, @kdgerakmasukPrr=?, @unitUp=?, @tarif=?, @daya=?, @rpptlPrr=?, @rpbptrafoPrr=?, @rpsewatrafoPrr=?, @rpsewakapPrr=?, @rpangsuranbpPrr=?, @rpangsuranp2tlPrr=?, @rpangsurankwhPrr=?, @rpangsuranprrPrr=?, @rpangsuranprrhapusPrr=?, @rpbkPrr=?, @rpadministrasiPrr=?, @rpmaterialPrr=?, @rpsegelPrr=?, @rpsambungPrr=?, @ketStatuspenetapan=?, @unitupi=?, @unitap=?, @tgl_job=? ";
 
 					$stmt_insert = sqlsrv_prepare($conn, $sql_insert, $params);
 
@@ -106,10 +100,19 @@ if($stmt){
 		    $j++;
 		}while($j<ceil($data->rows/50));
 
+
+		echo '<span class="text-success">Selesai mengambil Saldo ULP '.$unit['NAMA'].'..</span><br/>';
+
 		$i++;
 	}
 
 
+	$stmt = sqlsrv_query($conn, "DELETE AP3T_SALDO_PRR WHERE tgl_job < '".$tgl_job."'");
+	if($stmt){
+		echo '<span class="text-success">Berhasil mereset Saldo PRR sebelumnya di ROC..</span><br/>';
+	}else{
+		echo '<span class="text-warning">Gagal mereset Saldo PRR di ROC..</span><br/>';
+	}
 
 }else{
 	echo '<span class="text-warning">Gagal melakukan Query ke Database..</span>';
