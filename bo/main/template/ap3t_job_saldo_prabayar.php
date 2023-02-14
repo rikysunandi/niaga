@@ -4,7 +4,7 @@
 set_time_limit(-1);
 require_once '../../config/config.php';
 require_once '../../config/database.php';
-require_once 'ap3t_login.php';
+require 'ap3t_login.php';
 
 $tgl_job = date('Y-m-d H:i:s');
 echo '<span class="text-success">Job Saldo Piutang Prabayar '.$tgl_job.'</span><br/>';
@@ -50,6 +50,7 @@ if($stmt){
 
 	while( $unit = sqlsrv_fetch_array( $stmt, SQLSRV_FETCH_ASSOC) ) {
 		
+
 		echo '<hr/>';
 		echo '<span class="text-success">Mengambil Saldo ULP '.$unit['NAMA'].'..</span><br/>';
 

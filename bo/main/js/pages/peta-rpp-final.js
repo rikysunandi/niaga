@@ -84,7 +84,7 @@ $(document).ready(function () {
         $('#map').remove();
         container.append('<div id="map"></div>');
 
-        $.getJSON( "../controller/pemeriksaan_lpb/getDataPembentukanRPPFinal.php", 
+        $.getJSON( "../controller/pemeriksaan_lpb/getDataPetaRPPFinal.php", 
         { 
             unitupi: $('#sel_unitupi').val(),
             unitap: $('#sel_unitap').val(),

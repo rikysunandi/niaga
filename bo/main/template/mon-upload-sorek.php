@@ -242,6 +242,6 @@
     <script src="../../assets/plugins/block-ui/jquery.blockUI.js"></script>
 
     <script src="../js/pages/apps.js?time=5"></script>
-    <script src="../js/pages/mon-upload-sorek.js?time=23"></script>
+    <script src="../js/pages/mon-upload-sorek.js?time=25"></script>
 </body>
 </html>

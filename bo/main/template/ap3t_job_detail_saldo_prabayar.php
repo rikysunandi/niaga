@@ -28,6 +28,16 @@ if($stmt){
 
 	while( $unit = sqlsrv_fetch_array( $stmt, SQLSRV_FETCH_ASSOC) ) {
 
+		require 'ap3t_login.php';
+
+		$authorization = $token;
+
+		$context = stream_context_create(array(
+		    'http' => array(
+		        'header' => "Authorization: " . $authorization,
+		    ),
+		));
+		
 		echo '<hr/>';
 		echo '<span class="text-success">Mengambil Saldo ULP '.$unit['NAMA'].'..</span><br/>';
 		$j=0;
