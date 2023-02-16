@@ -439,7 +439,7 @@ $(document).ready(function () {
                                                                     }
                                                                 },function(){
                                                                     
-                                                                    dialog.modal('hide');
+                                                                     dialog.modal('hide');
                                                                     populateList(selected);
 
                                                                     bootbox.confirm({
