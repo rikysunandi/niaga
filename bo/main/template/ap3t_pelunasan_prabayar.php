@@ -56,7 +56,7 @@ if($stmt){
 
 		$j=0;
 		do{
-			$api_url = 'http://10.68.35.105:8081/monitoring-pelunasan/get-detil-lunas-piutang-pss?unit-upi=53&unit-ap='.$unit['UNITAP'].'&unit-up='.$unit['UNITUP'].'&skema-bayar=NO+REGISTER&kd-gerak-keluar=SEMUA&tgl-awal=11%2F02%2F2023&tgl-akhir=13%2F02%2F2023&sort-by=idPel&sort-dir=asc&page='.($j+1).'&limit=50&id-user=8810496Z';
+			$api_url = 'http://10.68.35.105:8081/monitoring-pelunasan/get-detil-lunas-piutang-pss?unit-upi=53&unit-ap='.$unit['UNITAP'].'&unit-up='.$unit['UNITUP'].'&skema-bayar=NO+REGISTER&kd-gerak-keluar=SEMUA&tgl-awal=14%2F02%2F2023&tgl-akhir=16%2F02%2F2023&sort-by=idPel&sort-dir=asc&page='.($j+1).'&limit=50&id-user=8810496Z';
 			//echo $api_url;
 			$result = file_get_contents($api_url, false, $context);
 			//echo $result;die();
