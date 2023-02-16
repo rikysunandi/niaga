@@ -438,8 +438,7 @@ $(document).ready(function () {
                                                                         $('#total_plg').html(markers.filter(function(e) { return e.idpel!="X" }).length);
                                                                     }
                                                                 },function(){
-                                                                    
-                                                                     dialog.modal('hide');
+
                                                                     populateList(selected);
 
                                                                     bootbox.confirm({
@@ -464,6 +463,8 @@ $(document).ready(function () {
 
                                                                                 window.open("urut-langkah-rpp-final.php?unitupi="+unitupi+"&unitap="+unitap+"&unitup="+unitup+"&petugas="+petugas_dipilih+"&rpp="+rpp, "_blank");
                                                                             }
+
+                                                                            dialog.modal('hide');
                                                                         }
                                                                     });
 
