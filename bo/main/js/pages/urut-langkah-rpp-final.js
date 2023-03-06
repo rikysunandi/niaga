@@ -986,7 +986,7 @@ $(document).ready(function () {
                                     asyncForEach(markers, function(marker) {
 
                                         if(marker.getPosition()){
-                                            if (bnds.contains(marker.getPosition())) {
+                                            if (bnds.contains(marker.getPosition()) && marker.getMap()) {
                                                 ////console.log('marker dalam pilihan', marker);
                                                 
                                                 //if(!marker.selected){

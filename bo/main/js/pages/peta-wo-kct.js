@@ -63,7 +63,7 @@ $(document).ready(function () {
         $('#map').remove();
         container.append('<div id="map"></div>');
 
-        $.getJSON( "../controller/pemeriksaan_lpb/getDataPembentukanRPP.php", 
+        $.getJSON( "../controller/kct/getDataWOKCT.php", 
         { 
             unitupi: $('#sel_unitupi').val(),
             unitap: $('#sel_unitap').val(),
@@ -137,47 +137,47 @@ $(document).ready(function () {
                 scrollwheel: true,
                 streetViewControl: true
               })
-              //.marker(gardu_markers)
-              .cluster({
-                //radius: 10,
-                //size: 300,
-                markers: markers,
-                cb: function (markers) {
-                  markers_obj = markers;
+              .marker(markers)
+              // .cluster({
+              //   //radius: 10,
+              //   //size: 300,
+              //   markers: markers,
+              //   cb: function (markers) {
+              //     markers_obj = markers;
 
-                  var jml_plg = $.grep(markers, function(e) { return e.idpel!="X" }).length;
+              //     var jml_plg = $.grep(markers, function(e) { return e.idpel!="X" }).length;
 
-                  if (jml_plg > 400) { // 1 marker stay unchanged (because cb returns nothing)
-                    if (jml_plg > 10000) {
-                      return {
-                        content: "<div class='cluster cluster-3'>" + jml_plg + "</div>",
-                        x: -26,
-                        y: -26,
-                      };
-                    }
-                    else if (jml_plg > 1000) {
-                      return {
-                        content: "<div class='cluster cluster-2'>" + jml_plg + "</div>",
-                        x: -26,
-                        y: -26,
-                      };
-                    }else{
-                      return {
-                        content: "<div class='cluster cluster-1'>" + jml_plg + "</div>",
-                        x: -26,
-                        y: -26,
-                      };
-                    }
-                  }
-                }
-              })
-              .then(function (cluster) {
+              //     if (jml_plg > 400) { // 1 marker stay unchanged (because cb returns nothing)
+              //       if (jml_plg > 10000) {
+              //         return {
+              //           content: "<div class='cluster cluster-3'>" + jml_plg + "</div>",
+              //           x: -26,
+              //           y: -26,
+              //         };
+              //       }
+              //       else if (jml_plg > 1000) {
+              //         return {
+              //           content: "<div class='cluster cluster-2'>" + jml_plg + "</div>",
+              //           x: -26,
+              //           y: -26,
+              //         };
+              //       }else{
+              //         return {
+              //           content: "<div class='cluster cluster-1'>" + jml_plg + "</div>",
+              //           x: -26,
+              //           y: -26,
+              //         };
+              //       }
+              //     }
+              //   }
+              // })
+              .then(function (markers) {
 
                     var map = this.get()[0];
                     //console.log('map', map);
                     //console.log("cluster", cluster);
 
-                    $('#total_plg').html(cluster.markers().filter(function(e) { return e.idpel!="X" }).length);
+                    $('#total_plg').html(markers.filter(function(e) { return e.idpel!="X" }).length);
                     $('#plg_dipilih').html('0');
                       
                     map.enableKeyDragZoom({
@@ -211,7 +211,7 @@ $(document).ready(function () {
                         if(zoom>=10){
 
                             $('div.content-body').block({ message: 'Memilih koordinat...' });
-                            asyncForEach(cluster.markers(), function(marker) {
+                            asyncForEach(markers, function(marker) {
                                 var petugas = new Array(); 
                                 var gardu = new Array(); 
 
@@ -224,7 +224,7 @@ $(document).ready(function () {
                                     if (bnds.contains(marker.getPosition()) && marker.getMap()) {
                                         ////console.log('marker dalam pilihan', marker);
                                         
-                                        //console.log('select', marker.idpel+": "+marker.getPosition().lat()+","+marker.getPosition().lng());
+                                        //console.log('select', marker.idpel+": "+marker.rbm_paska);
                                         //if(!marker.selected){
                                         if(marker.idpel!="X" && !marker.selected){
                                             marker.setIcon(blue_house);
@@ -273,7 +273,7 @@ $(document).ready(function () {
                                 var petugas_list = groupBy(selected, 'petugas');
                                 var petugas_sort = [];
                                 for (var petugas in petugas_list) {
-                                    if(petugas!='DIL' && petugas!='')
+                                    if(petugas!='KOSONG' && petugas!='')
                                         petugas_sort.push([petugas, petugas_list[petugas].length]);
                                 }
 
@@ -286,7 +286,7 @@ $(document).ready(function () {
                                     petugas_init = petugas_sort[0][0];
                                 }
 
-                                // if($('ul#petugas-selected li.list-group-item:first span').html()=='DIL')
+                                // if($('ul#petugas-selected li.list-group-item:first span').html()=='KOSONG')
                                 //     var petugas =  $('ul#petugas-selected li.list-group-item:first').next().children('span').html();
                                 // else
                                 //     var petugas =  $('ul#petugas-selected li.list-group-item:first span').html();
@@ -296,7 +296,7 @@ $(document).ready(function () {
 
                                 bootbox.prompt({
                                     title: "Pilih Petugas",
-                                    message: "Silahkan pilih petugas untuk RPP yang akan dibentuk", 
+                                    message: "Silahkan pilih petugas untuk WO KCT yang akan dibentuk", 
                                     required: true,
                                     inputType: 'select',
                                     inputOptions: opsi_petugas,
@@ -304,190 +304,69 @@ $(document).ready(function () {
                                     callback: function (result) {
                                         if(result){
                                             var petugas_dipilih = result;
-                                            //console.log('wilker', wilker);
+                                            console.log('wilker', wilker);
                                             var wil = $.grep(wilker, function(e) { return e.kodepetugas==petugas_dipilih });
-                                            //console.log(wil);
+                                            console.log(wil);
                                             var rbm_prefill='';
                                             if(wil.length>0)
                                                 rbm_prefill=wil[0].rbm;
-                                            
-                                            bootbox.prompt({
-                                                title: "Nama RPP",
-                                                message: "Tentukan Nama RPP untuk Petugas "+petugas_dipilih+" yang akan dibentuk (7 karakter)", 
-                                                required: true,
-                                                value: rbm_prefill,
-                                                maxlength: 7,
-                                                callback: function (result) {
-                                                    if(result){
-                                                        var rpp = result;
-                                                        //console.log('petugas', petugas_dipilih);
-                                                        //console.log('rpp', rpp);
 
-                                                        if(rpp.length != 7){
-                                                            bootbox.alert("Silahkan masukan nama RPP sebanyak 7 karakter!");
-                                                            return false;
+                                            $('div.content-body').block({ message: 'Menyimpan data WO KCT...' });
+
+                                            var idpels='';
+                                            asyncForEach(selected, function(marker) {
+                                                idpels += marker.idpel+',';
+                                            },function(){
+                                                idpels = idpels.replace(/,\s*$/, "");
+                                            });
+
+                                            $.post('../controller/kct/batchSimpanWOKCT.php', 
+                                            { petugas: petugas_dipilih, idpels:idpels }, 
+                                            function(res){
+                                                
+                                                $('div.content-body').unblock();
+                                                console.log('idpels',res.idpels);
+                                                if(res.success=='true' || res.success){
+
+                                                    console.log('cek', markers);
+                                                    asyncForEach(selected, function(marker) {
+                                                        if(res.idpels.includes(marker.idpel)){
+                                                            marker.setIcon(red_house);
+                                                            marker.selected = false;
+                                                            marker.setMap(null);
+                                                            //console.log('hapus', marker);
+                                                            //cluster.remove(marker);
+                                                            selected = $.grep(selected, function(e) { return e.idpel!=marker.idpel });
+                                                            $('#plg_dipilih').html(selected.length);
+                                                            $('#total_plg').html(markers.filter(function(e) { return e.idpel!="X" }).length);
                                                         }
+                                                    },function(){
 
-                                                        // function simpanRPP(datas, i, progress, petugas, rpp, berhasil){
+                                                        populateList(selected);
 
-                                                        //     if(i<datas.length){
 
-                                                        //         var valeur = parseInt((i / datas.length)*100);
-                                                        //         var marker = datas[i];
-
-                                                        //         $($(progress).find('.progress-bar')[0]).css('width', valeur+'%').attr('aria-valuenow', valeur);
-                                                        //         $($(progress).find('.msg')[0]).html('Menyimpan idpel '+marker.idpel+' ke RPP <span class="text-success">'+rpp+'</span> milik petugas <span class="text-success">'+petugas+'</span> ('+(i+1)+'/'+datas.length+')...');
-
-                                                        //         $.post('../controller/pemeriksaan_lpb/simpanRPP.php', 
-                                                        //         { petugas: petugas, rpp: rpp, urutan:0, idpel:marker.idpel }, 
-                                                        //         function(res){
-                                                        //             //console.log('res',res);
-                                                        //             if(res.success=='true' || res.success){
-                                                        //                 berhasil.push(marker.idpel);
-                                                        //                 marker.setIcon(red_house);
-                                                        //                 marker.selected = false;
-                                                        //                 marker.setMap(null);
-                                                        //                 cluster.remove(marker);
-                                                        //                 selected = $.grep(selected, function(e) { return e.idpel!=marker.idpel });
-                                                        //                 $('#plg_dipilih').html(selected.length);
-                                                        //                 $('#total_plg').html(cluster.markers().filter(function(e) { return e.idpel!="X" }).length);
-                                                        //             }
-                                                        //             simpanRPP(datas, i+1, dialog, petugas, rpp, berhasil);
-
-                                                        //         }).fail(function() { 
-                                                        //             simpanRPP(datas, i+1, dialog, petugas, rpp, berhasil);
-                                                        //         });
-
-                                                        //     }else{
-
-                                                        //         $($(progress).find('.progress-bar')[0]).css('width', '100%').attr('aria-valuenow', 100);
-                                                        //         populateList(selected);
-                                                        //         if(selected.length>0){
-                                                        //             $('#btn_reset').prop('disabled', false);
-                                                        //             $('#btn_remove').prop('disabled', false);
-                                                        //             $('#btn_create').prop('disabled', false);
-                                                        //         }
-                                                        //         progress.modal('hide');
-
-                                                        //         bootbox.confirm({
-                                                        //             title: "Proses Selesai",
-                                                        //             message: "Sebanyak "+berhasil.length+" pelanggan berhasil disimpan, apakah anda akan melanjutkan ke proses pemberian urut langkah? (klik allow/izinkan, jika muncul popup di browser anda)", 
-                                                        //             buttons: {
-                                                        //                 cancel: {
-                                                        //                     className: 'btn-light',
-                                                        //                     label: '<i class="fa fa-times"></i> Tidak'
-                                                        //                 },
-                                                        //                 confirm: {
-                                                        //                     className: 'btn-primary',
-                                                        //                     label: '<i class="fa fa-check"></i> Ya, Lanjutkan'
-                                                        //                 }
-                                                        //             },
-                                                        //             callback: function (result) {
-                                                        //                 if(result){
-
-                                                        //                     var unitupi= $('#sel_unitupi').val();
-                                                        //                     var unitap= $('#sel_unitap').val();
-                                                        //                     var unitup= $('#sel_unitup').val();
-
-                                                        //                     window.open("urut-langkah-rpp.php?unitupi="+unitupi+"&unitap="+unitap+"&unitup="+unitup+"&petugas="+petugas+"&rpp="+rpp, "_blank");
-                                                        //                 }
-                                                        //             }
-                                                        //         });
-
-                                                        //     }
-
-                                                        // }
-
-                                                        // var dialog = bootbox.dialog({ 
-                                                        //     message: '<div id="proses" class="card"><div class="card-body"><div class="d-flex justify-content-between progress-label mb-2"><span class="msg">Menyimpan RPP...</span></div><div class="progress progress--medium"><div class="progress-bar progress-bar-striped progress-bar-animated bg-success" role="progressbar" aria-valuenow="0" aria-valuemin="0" aria-valuemax="100" style="width: 0%"></div></div></div></div>', 
-                                                        //     closeButton: false 
-                                                        // });
-
-                                                        // //console.log('dialog', dialog);
-                                                        // var berhasil = new Array();
-
-                                                        // simpanRPP(selected, 0, dialog, petugas_dipilih, rpp, berhasil);
-
-                                                        var dialog = bootbox.dialog({ 
-                                                            message: '<div class="text-center"><i class="fa fa-spin fa-spinner"></i> Menyimpan data RPP...</div>', 
-                                                            closeButton: false 
+                                                        bootbox.alert({
+                                                            message: "Sebanyak "+res.idpels.length+" pelanggan berhasil dimasukan ke WO Petugas "+petugas_dipilih,
+                                                            backdrop: true
                                                         });
 
-                                                        var idpels='';
-                                                        asyncForEach(selected, function(marker) {
-                                                            idpels += marker.idpel+',';
-                                                        },function(){
-                                                            idpels = idpels.replace(/,\s*$/, "");
-                                                        });
+                                                    });
 
-                                                        $.post('../controller/pemeriksaan_lpb/batchSimpanRPP.php', 
-                                                        { petugas: petugas_dipilih, rpp: rpp, idpels:idpels }, 
-                                                        function(res){
-                                                            dialog.modal('hide');
-                                                            console.log('idpels',res.idpels);
-                                                            if(res.success=='true' || res.success){
-
-                                                                asyncForEach(selected, function(marker) {
-                                                                    if(res.idpels.includes(marker.idpel)){
-                                                                        marker.setIcon(red_house);
-                                                                        marker.selected = false;
-                                                                        marker.setMap(null);
-                                                                        cluster.remove(marker);
-                                                                        selected = $.grep(selected, function(e) { return e.idpel!=marker.idpel });
-                                                                        $('#plg_dipilih').html(selected.length);
-                                                                        $('#total_plg').html(cluster.markers().filter(function(e) { return e.idpel!="X" }).length);
-                                                                    }
-                                                                },function(){
-
-                                                                    populateList(selected);
-
-                                                                    bootbox.confirm({
-                                                                        title: "Proses Selesai",
-                                                                        message: "Sebanyak "+res.idpels.length+" pelanggan berhasil disimpan, apakah anda akan melanjutkan ke proses pemberian urut langkah? (klik allow/izinkan, jika muncul popup di browser anda)", 
-                                                                        buttons: {
-                                                                            cancel: {
-                                                                                className: 'btn-light',
-                                                                                label: '<i class="fa fa-times"></i> Tidak'
-                                                                            },
-                                                                            confirm: {
-                                                                                className: 'btn-primary',
-                                                                                label: '<i class="fa fa-check"></i> Ya, Lanjutkan'
-                                                                            }
-                                                                        },
-                                                                        callback: function (result) {
-                                                                            if(result){
-
-                                                                                var unitupi= $('#sel_unitupi').val();
-                                                                                var unitap= $('#sel_unitap').val();
-                                                                                var unitup= $('#sel_unitup').val();
-
-                                                                                window.open("urut-langkah-rpp.php?unitupi="+unitupi+"&unitap="+unitap+"&unitup="+unitup+"&petugas="+petugas_dipilih+"&rpp="+rpp, "_blank");
-                                                                            }
-                                                                        }
-                                                                    });
-
-                                                                });
-
-                                                            }else{
-                                                                bootbox.alert({
-                                                                    message: res.msg,
-                                                                    backdrop: true
-                                                                });
-                                                            }
-
-                                                            
-
-                                                        }).fail(function() { 
-                                                            dialog.modal('hide');
-                                                            bootbox.alert({
-                                                                message: "Gagal menyimpan data!",
-                                                                backdrop: true
-                                                            });
-                                                        });
-
-                                                            
-                                                    }
+                                                }else{
+                                                    bootbox.alert({
+                                                        message: res.msg,
+                                                        backdrop: true
+                                                    });
                                                 }
+                                                
+
+                                            }).fail(function() { 
+                                                
+                                                $('div.content-body').unblock();
+                                                bootbox.alert({
+                                                    message: "Gagal menyimpan data!",
+                                                    backdrop: true
+                                                });
                                             });
                                         }
                                     }
@@ -495,7 +374,7 @@ $(document).ready(function () {
 
                             }else{
                                 bootbox.alert({
-                                    message: "Silahkan pilih koordinat yang akan dibentuk RPP!",
+                                    message: "Silahkan pilih koordinat yang akan dibentuk WO!",
                                     backdrop: true
                                 });
                             }
@@ -576,11 +455,11 @@ $(document).ready(function () {
                                                     marker.setIcon(red_house);
                                                     marker.selected = false;
                                                     marker.setMap(null);
-                                                    cluster.remove(marker);
+                                                    //cluster.remove(marker);
                                                     //selected = $.grep(selected, function(e) { return e.idpel!=marker.idpel });
                                                     selected = $.grep(selected, function(e) { return e.idpel!=marker.idpel });
                                                     $('#plg_dipilih').html(selected.length);
-                                                    $('#total_plg').html(cluster.markers().filter(function(e) { return e.idpel!="X" }).length);
+                                                    $('#total_plg').html(markers.filter(function(e) { return e.idpel!="X" }).length);
                                                 }
                                             },function() {
                                                 populateList(selected);

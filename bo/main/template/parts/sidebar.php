@@ -139,7 +139,7 @@
                     <li><a href="mon-foto-rumah.php">Detail Data Foto Rumah</a></li>
                 </ul>
             </li>
-            <!-- <li><a class="has-arrow" href="javascript:void()" aria-expanded="false"><i class="mdi mdi-map"></i> <span class="nav-text">RPP On Desk</span></a>
+            <li><a class="has-arrow" href="javascript:void()" aria-expanded="false"><i class="mdi mdi-map"></i> <span class="nav-text">RPP On Desk</span></a>
                 <ul aria-expanded="false">
                     <li><a href="pembentukan-rpp.php">Peta Pembentukan RPP</a></li>
                     <li><a href="urut-langkah-rpp.php">Pembentukan Urut Langkah RPP</a></li>
@@ -148,7 +148,7 @@
                     <li><a href="daftar-rpp.php">Daftar RPP On Desk</a></li>
                     <li><a href="rekomendasi-rpp.php">Rekomendasi RPP</a></li>
                 </ul>
-            </li> -->
+            </li>
             <li><a class="has-arrow" href="javascript:void()" aria-expanded="false"><i class="mdi mdi-map"></i> <span class="nav-text">RPP On Site</span></a>
                 <ul aria-expanded="false">
                     <li><a href="pelaksanaan-rpp-onsite.php">Review RPP On Site</a></li>
@@ -172,12 +172,20 @@
                     <!-- <li><a href="rekap-rpp-up-final.php">Rekap RPP per ULP</a></li> -->
                 </ul>
             </li>
+            <!-- <li><a class="has-arrow" href="javascript:void()" aria-expanded="false"><i class="mdi mdi-file-document-box"></i> <span class="nav-text">WO KCT</span></a>
+                <ul aria-expanded="false">
+                    <li><a href="peta-wo-kct.php">Peta Pembentukan WO</a></li>
+                    <li><a href="realisasi-kct.php">Peta Pembentukan WO</a></li>
+                </ul>
+            </li> -->
             <li><a class="has-arrow" href="javascript:void()" aria-expanded="false"><i class="mdi mdi-file-document-box"></i> <span class="nav-text">Pendukung</span></a>
                 <ul aria-expanded="false">
                     <li><a href="verifikasi-foto-cater.php">Cek Foto Cater</a></li>
                     <li><a href="peta-kompor.php">Peta Pemilihan Target</a></li>
                     <li><a href="target-kompor.php">Target Kompor Induksi</a></li>
                     <li><a href="rpt-kompor.php">Progress Survey CKPM</a></li>
+                    <li><a href="peta-wo-kct.php">Peta Pembentukan WO KCT</a></li>
+                    <li><a href="rekap-wo-kct.php">Rekap WO KCT</a></li>
                 </ul>
             </li>
             <li class="nav-label">Pemasaran</li>

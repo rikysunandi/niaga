@@ -221,7 +221,7 @@ $(document).ready(function () {
                                 // }
 
                                 if(marker.getPosition()){
-                                    if (bnds.contains(marker.getPosition())) {
+                                    if (bnds.contains(marker.getPosition()) && marker.getMap()) {
                                         ////console.log('marker dalam pilihan', marker);
                                         
                                         //console.log('select', marker.idpel+": "+marker.getPosition().lat()+","+marker.getPosition().lng());
