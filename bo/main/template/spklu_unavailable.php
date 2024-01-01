@@ -92,6 +92,28 @@ $data =  json_decode($result);
 		    echo (sqlsrv_execute($stmt))?'Data berhasil disimpan</td>':'Data gagal disimpan</td>';
             echo "</tr>";
 
+            // $userkey = 'd405db91fb71';
+			// $passkey = 'ab16be0dad1eaab68a718564';
+			// $telepon = '082186777723';
+			// $message = 'Monitoring SPKLU Unavailable. '.$row->spkluName.' - Charger: '.$row->charger.' - Status:'.$row->statusName.' - Kapasitas'.$row->kapasitas.' - Waktu: '.$row->statusDateSecondAgo;
+			// $url = 'https://console.zenziva.net/wareguler/api/sendWA/';
+			// $curlHandle = curl_init();
+			// curl_setopt($curlHandle, CURLOPT_URL, $url);
+			// curl_setopt($curlHandle, CURLOPT_HEADER, 0);
+			// curl_setopt($curlHandle, CURLOPT_RETURNTRANSFER, 1);
+			// curl_setopt($curlHandle, CURLOPT_SSL_VERIFYHOST, 2);
+			// curl_setopt($curlHandle, CURLOPT_SSL_VERIFYPEER, 0);
+			// curl_setopt($curlHandle, CURLOPT_TIMEOUT,30);
+			// curl_setopt($curlHandle, CURLOPT_POST, 1);
+			// curl_setopt($curlHandle, CURLOPT_POSTFIELDS, array(
+			//     'userkey' => $userkey,
+			//     'passkey' => $passkey,
+			//     'to' => $telepon,
+			//     'message' => $message
+			// ));
+			// $results = json_decode(curl_exec($curlHandle), true);
+			// curl_close($curlHandle);
+
 			sqlsrv_free_stmt($stmt);
 
         }
@@ -102,6 +124,7 @@ $data =  json_decode($result);
 sqlsrv_close($conn);
 
 
+            
 ?>
 
 </body>
