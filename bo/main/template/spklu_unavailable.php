@@ -120,6 +120,12 @@ $data =  json_decode($result);
 
     }
 
+	$params = array(
+	        array(strtotime($data->time), SQLSRV_PARAM_IN)
+	    );
+
+	$sql = "EXEC SP_UPDATE_OK_SPKLU_UNAVAILABLE @timestamp_csms = ? ";
+	$stmt = sqlsrv_prepare($conn, $sql, $params);
 
 sqlsrv_close($conn);
 
