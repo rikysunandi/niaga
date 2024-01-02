@@ -127,6 +127,9 @@ $data =  json_decode($result);
 	$sql = "EXEC SP_UPDATE_OK_SPKLU_UNAVAILABLE @timestamp_csms = ? ";
 	$stmt = sqlsrv_prepare($conn, $sql, $params);
 
+    echo (sqlsrv_execute($stmt))?'Status OK berhasil diupdate</td>':'Status OK gagal diupdate</td>';
+	sqlsrv_free_stmt($stmt);
+
 sqlsrv_close($conn);
 
 
