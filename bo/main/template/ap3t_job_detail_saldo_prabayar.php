@@ -18,7 +18,7 @@ $context = stream_context_create(array(
     ),
 ));
 
-$stmt = sqlsrv_query($conn, "select UNITUPI, UNITAP, UNITUP, NAMA from m_unitup order by UNITAP, UNITUP ");
+$stmt = sqlsrv_query($conn, "select UNITUPI, UNITAP, UNITUP, NAMA from m_unitup WHERE UNITAP IN ('53BKS','53CKG') order by UNITAP, UNITUP ");
 
 if($stmt){
 
