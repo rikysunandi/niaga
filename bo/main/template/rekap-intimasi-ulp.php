@@ -88,6 +88,11 @@
                                                     <option value='<?php echo date('Ym', strtotime("last day of previous month")) ?>'><?php echo date('Ym', strtotime("last day of previous month")) ?></option>
                                                     <option value='<?php echo date('Ym', strtotime("-2 month")) ?>'><?php echo date('Ym', strtotime("-2 month")) ?></option>
                                                     <option value='<?php echo date('Ym', strtotime("-3 month")) ?>'><?php echo date('Ym', strtotime("-3 month")) ?></option>
+                                                    <option value='<?php echo date('Ym', strtotime("-4 month")) ?>'><?php echo date('Ym', strtotime("-4 month")) ?></option>
+                                                    <option value='<?php echo date('Ym', strtotime("-5 month")) ?>'><?php echo date('Ym', strtotime("-5 month")) ?></option>
+                                                    <option value='<?php echo date('Ym', strtotime("-6 month")) ?>'><?php echo date('Ym', strtotime("-6 month")) ?></option>
+                                                    <option value='<?php echo date('Ym', strtotime("-7 month")) ?>'><?php echo date('Ym', strtotime("-7 month")) ?></option>
+                                                    <option value='<?php echo date('Ym', strtotime("-8 month")) ?>'><?php echo date('Ym', strtotime("-8 month")) ?></option>
                                                 </select>
                                             </div>
                                             <div class="form-group mb-2  col-3">
