@@ -8,7 +8,7 @@ require_once '../../config/database.php';
 $url = "http://10.68.35.105:8081/auth/do-login";
 $data = array(
   'username'      => '8810496Z',
-  'password'      => 'P@ssw0rd202301'
+  'password'      => 'P@ssw0rd202311'
 );
 
 $options = array(
@@ -28,6 +28,8 @@ $response = json_decode( $result );
 // echo $response->data->keterangaDepartemen;
 // echo '<br/>';
 $token =  $response->data->token;
+
+//echo $token;
 // echo '<br/>';
 
 ?>

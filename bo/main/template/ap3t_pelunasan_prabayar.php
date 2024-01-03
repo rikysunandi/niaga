@@ -14,7 +14,7 @@ $context = stream_context_create(array(
     ),
 ));
 
-$stmt = sqlsrv_query($conn, "select UNITAP, UNITUP from m_unitup order by UNITAP, UNITUP ");
+$stmt = sqlsrv_query($conn, "select UNITAP, UNITUP from m_unitup WHERE UNITAP IN ('53GPI','53GRT','53IDM','53KRW','53MJA','53PWK','53SKI','53SMD','53TSK') order by UNITAP, UNITUP ");
 
 if($stmt){
 
@@ -56,7 +56,7 @@ if($stmt){
 
 		$j=0;
 		do{
-			$api_url = 'http://10.68.35.105:8081/monitoring-pelunasan/get-detil-lunas-piutang-pss?unit-upi=53&unit-ap='.$unit['UNITAP'].'&unit-up='.$unit['UNITUP'].'&skema-bayar=NO+REGISTER&kd-gerak-keluar=SEMUA&tgl-awal=14%2F02%2F2023&tgl-akhir=16%2F02%2F2023&sort-by=idPel&sort-dir=asc&page='.($j+1).'&limit=50&id-user=8810496Z';
+			$api_url = 'http://10.68.35.105:8081/monitoring-pelunasan/get-detil-lunas-piutang-pss?unit-upi=53&unit-ap='.$unit['UNITAP'].'&unit-up='.$unit['UNITUP'].'&skema-bayar=NO+REGISTER&kd-gerak-keluar=SEMUA&tgl-awal=01%2F01%2F2023&tgl-akhir=03%2F01%2F2024&sort-by=idPel&sort-dir=asc&page='.($j+1).'&limit=50&id-user=8810496Z';
 			//echo $api_url;
 			$result = file_get_contents($api_url, false, $context);
 			//echo $result;die();
