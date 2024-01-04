@@ -390,7 +390,7 @@ function time_string($datetime, $full = false) {
     }
 
     if (!$full) $string = array_slice($string, 0, 1);
-    return $string ; //? implode(', ', $string) . ' yang lalu' : 'saat ini';
+    return implode(', ', $string) ; //? implode(', ', $string) . ' yang lalu' : 'saat ini';
     //return $string ? implode(', ', $string) . ' ago' : 'just now';
 }
 
