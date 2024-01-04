@@ -235,7 +235,8 @@ function generate_notif_unavailable($data, $row){
 	$txt .= '* Durasi : *'.time_elapsed_string('@'.(strtotime($data->time) - intval($row['statusDateSecondAgo'])), true).'*'.$break;
 	$txt .= '* Kategori Penyebab Gangguan : '.$kategori.$break;
 	$txt .= '* Gangguan : '.$gangguan.$break;
-	$txt .= '* Keterangan Penyebab Gangguan : '.$row['statusName'].$break.$break;
+	$txt .= '* Keterangan Penyebab Gangguan : '.$row['errorDesc'].$break;
+	$txt .= '* Saran tindaklanjut : '.$row['action_all'].$break;
 	$txt .= 'Ini adalah pesan satu arah, mohon untuk tidak membalas. ';
 
 	return $txt;
