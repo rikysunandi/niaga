@@ -1,7 +1,7 @@
 <?php
 
-$response = send_wa_message('test','6282186777723');
-print_r($response);
+$response = send_wa_message('test 123','6282186777723');
+var_dump($response);
 
 function send_wa_message($text, $nohp){
 
