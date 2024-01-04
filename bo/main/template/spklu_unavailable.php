@@ -236,7 +236,7 @@ function generate_notif_unavailable($data, $row){
 	$txt .= '* Kategori Penyebab Gangguan : '.$kategori.$break;
 	$txt .= '* Gangguan : '.$gangguan.$break;
 	$txt .= '* Keterangan Penyebab Gangguan : '.$row['statusName'].$break.$break;
-	$txt .= 'Ini adalah pesan satu arah, mohon untuk tidak membalasnya. ';
+	$txt .= 'Ini adalah pesan satu arah, mohon untuk tidak membalas. ';
 
 	return $txt;
 }
@@ -248,9 +248,9 @@ function generate_notif_ok($data, $row){
 	$txt = '*'.$row['spkluName'].' sudah kembali Normal*.'.$break.$break;
 	$txt .= '* Waktu Notifikasi : '.str_replace('T',' ',substr($data->time,0,strlen($data->time)-10)).$break;
 	$txt .= '* Charger : '.$row['charger'].$break;
-	$txt .= '* Durasi : *'.time_elapsed_string('@'.(intval($row['timestamp_insert'])+1), true).'*'.$break.$break;
+	$txt .= '* Durasi Gangguan : *'.time_string('@'.(intval($row['timestamp_insert'])+1), true).'*'.$break.$break;
 	$txt .= 'Terima kasih atas perhatian dan kerjasamanya.'.$break.$break;
-	$txt .= 'Ini adalah pesan satu arah, mohon untuk tidak membalasnya. ';
+	$txt .= 'Ini adalah pesan satu arah, mohon untuk tidak membalas. ';
 
 	return $txt;
 }
@@ -351,7 +351,49 @@ function time_elapsed_string($datetime, $full = false) {
     return $string ? implode(', ', $string) . ' yang lalu' : 'saat ini';
     //return $string ? implode(', ', $string) . ' ago' : 'just now';
 }
-            
+     
+
+function time_string($datetime, $full = false) {
+    $now = new DateTime;
+    $ago = new DateTime($datetime);
+    $diff = $now->diff($ago);
+
+    $diff->w = floor($diff->d / 7);
+    $diff->d -= $diff->w * 7;
+
+    $string = array(
+        'y' => 'tahun',
+        'm' => 'bulan',
+        'w' => 'minggu',
+        'd' => 'hari',
+        'h' => 'jam',
+        'i' => 'menit',
+        's' => 'detik',
+    );
+    /*
+    $string = array(
+        'y' => 'year',
+        'm' => 'month',
+        'w' => 'week',
+        'd' => 'day',
+        'h' => 'hour',
+        'i' => 'minute',
+        's' => 'second',
+    );
+    */
+    foreach ($string as $k => &$v) {
+        if ($diff->$k) {
+            $v = $diff->$k . ' ' . $v . ($diff->$k > 1 ? '' : '');
+        } else {
+            unset($string[$k]);
+        }
+    }
+
+    if (!$full) $string = array_slice($string, 0, 1);
+    return $string ; //? implode(', ', $string) . ' yang lalu' : 'saat ini';
+    //return $string ? implode(', ', $string) . ' ago' : 'just now';
+}
+
 ?>
 
 </body>
