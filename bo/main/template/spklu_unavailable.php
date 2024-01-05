@@ -236,7 +236,7 @@ function generate_notif_unavailable($data, $row){
 	$txt .= '* Kategori Penyebab Gangguan : '.$kategori.$break;
 	$txt .= '* Gangguan : '.$gangguan.$break;
 	$txt .= '* Keterangan Penyebab Gangguan : '.$row['errorDesc'].$break;
-	$txt .= '* Saran tindaklanjut : '.$break.$row['action_all'].$break.$break;
+	$txt .= '* Penanganan Gangguan : '.$break.$row['action_all'].$break.$break;
 	$txt .= 'Ini adalah pesan satu arah, mohon untuk tidak membalas. ';
 
 	return $txt;
@@ -251,7 +251,7 @@ function generate_notif_ok($data, $row){
 	$txt .= '* Charger : '.$row['charger'].$break;
 	$txt .= '* Durasi Gangguan : *'.time_string('@'.(intval($row['timestamp_insert'])+1), true).'*'.$break.$break;
 	$txt .= 'Terima kasih atas perhatian dan kerjasamanya.'.$break.$break;
-	$txt .= 'Ini adalah pesan satu arah, mohon untuk tidak membalas. ';
+	//$txt .= 'Ini adalah pesan satu arah, mohon untuk tidak membalas. ';
 
 	return $txt;
 }
