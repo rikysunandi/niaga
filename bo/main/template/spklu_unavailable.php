@@ -245,12 +245,14 @@ function generate_notif_unavailable($data, $row){
 
 function generate_notif_ok($data, $row){
 
+    $kategori = ($row['statusName']=='DISCONNECTED')?'Media Komunikasi':'SPKLU';
 	$break = "\n\r";
 
 	$txt = '*'.$row['spkluName'].' sudah kembali Normal*.'.$break.$break;
 	$txt .= '* Waktu Notifikasi : '.str_replace('T',' ',substr($data->time,0,strlen($data->time)-10)).$break;
 	$txt .= '* Charger : '.$row['charger'].$break;
 	$txt .= '* Durasi Gangguan : *'.time_string('@'.(intval($row['timestamp_insert'])+1), true).'*'.$break.$break;
+	$txt .= '* Kategori Penyebab Gangguan : '.$kategori.$break;
 	$txt .= 'Terima kasih atas perhatian dan kerjasamanya.'.$break.$break;
 	//$txt .= 'Ini adalah pesan satu arah, mohon untuk tidak membalas. ';
 
