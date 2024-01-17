@@ -125,6 +125,7 @@ if($data->message=='success'){
 			else
 				echo "Gagal kirim notif OK<br/>";
 
+			$response = send_wa_group_message($txt, '120363195657916590@g.us');
 			$i++;
 		}
 
