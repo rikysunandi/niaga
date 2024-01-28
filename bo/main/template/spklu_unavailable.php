@@ -238,8 +238,8 @@ function generate_notif_unavailable($data, $row){
 	$txt .= '* Gangguan : '.$gangguan.$break;
 	$txt .= '* Keterangan Penyebab Gangguan : '.$row['errorDesc'].$break;
 	$txt .= '* Penanganan Gangguan : '.$break;
-	$txt .= '** Action 1: '.$row['action_1'].$break;
-	$txt .= '** Action 2: '.$row['action_2'].$break.$break;
+	$txt .= '** Action: '.$row['action_1'].$break;
+	$txt .= '** Action Lanjutan: '.$row['action_2'].$break.$break;
 	$txt .= 'Ini adalah pesan satu arah, mohon untuk tidak membalas. ';
 
 	return $txt;
