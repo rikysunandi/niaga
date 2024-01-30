@@ -186,8 +186,9 @@ if($data->message=='success'){
 		if($stmt){
 			$i=0;
 			$break = "\n\r";
-			$txt_group = '*Monitoring SPKLU Unavailable*.'.$break.$break;
-			$txt_group .= '* Waktu Notifikasi : '.$waktu_notifikasi.$break;
+			$txt_group = '*Monitoring SPKLU Unavailable*.'.$break;
+			$txt_group .= 'Waktu Notifikasi : '.$waktu_notifikasi.$break;
+			$txt_group .= '------------------------- '.$break.$break;
 
 			while( $row = sqlsrv_fetch_array( $stmt, SQLSRV_FETCH_ASSOC) ) {
 				$txt_group .= generate_notif_unavailable($data, $row);
