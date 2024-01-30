@@ -142,6 +142,7 @@ if($data->message=='success'){
 
 	if($stmt){
 		$i=0;
+		$break = "\n\r";
 		while( $row = sqlsrv_fetch_array( $stmt, SQLSRV_FETCH_ASSOC) ) {
 
 			$txt = '*Monitoring SPKLU Unavailable*.'.$break.$break;
@@ -155,8 +156,8 @@ if($data->message=='success'){
 			else
 				echo "Gagal kirim notif WA<br/>";
 
-
-			$response = send_wa_group_message($txt, '120363195657916590@g.us');
+			if($row['statusNotif']==0)
+				$response = send_wa_group_message($txt, '120363195657916590@g.us');
 
 			$i++;
 		}
