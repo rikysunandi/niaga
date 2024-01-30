@@ -9,11 +9,10 @@
 <body>
 
 <?php
-
+session_start();
 set_time_limit(-1);
 require_once '../../config/config.php';
 require_once '../../config/database.php';
-//require_once 'ap3t_login.php';
 
 $authorization = "Bearer eyJ0eXAiOiJKV1QiLCJhbGciOiJIUzI1NiJ9.eyJzdWIiOiIyNzIiLCJpYXQiOjE3MDYzNjY4MDB9.oL7QwVuPj4s5ZXbx1CU_XyR5oI0rjQba_PlcSPs4HoA";
 
@@ -36,6 +35,7 @@ $api_url = 'https://dashspkluapi.pln.co.id/dashboardSpklu/detail-unavailable?q=j
 $result = file_get_contents($api_url, false, $context);
 
 $data =  json_decode($result);
+$waktu_notifikasi = str_replace('T',' ',substr($data->time,0,strlen($data->time)-10));
 //print_r($data);
 
 if($data->message=='success'){
@@ -135,7 +135,6 @@ if($data->message=='success'){
 	}
 
 
-
 	$sql = "EXEC SP_UPDATE_NOTIF_SPKLU_UNAVAILABLE @timestamp_csms = ? ";
 	$stmt = sqlsrv_prepare($conn, $sql, $params);
 
@@ -143,14 +142,10 @@ if($data->message=='success'){
 
 	if($stmt){
 		$i=0;
-		$break = "\n\r";
-		$txt_group = '*Monitoring SPKLU Unavailable*.'.$break.$break;
-		$txt_group .= '* Waktu Notifikasi : '.str_replace('T',' ',substr($data->time,0,strlen($data->time)-10)).$break;
-
 		while( $row = sqlsrv_fetch_array( $stmt, SQLSRV_FETCH_ASSOC) ) {
 
 			$txt = '*Monitoring SPKLU Unavailable*.'.$break.$break;
-			$txt .= '* Waktu Notifikasi : '.str_replace('T',' ',substr($data->time,0,strlen($data->time)-10)).$break;
+			$txt .= '* Waktu Notifikasi : '.$waktu_notifikasi.$break;
 			$txt .= generate_notif_unavailable($data, $row);
 			$txt .= 'Ini adalah pesan satu arah, mohon untuk tidak membalas. ';
 
@@ -161,14 +156,9 @@ if($data->message=='success'){
 				echo "Gagal kirim notif WA<br/>";
 
 
-			$txt_group .= generate_notif_unavailable($data, $row);
+			$response = send_wa_group_message($txt, '120363195657916590@g.us');
 
 			$i++;
-		}
-
-		if($i>0){
-			$txt_group .= 'Ini adalah pesan satu arah, mohon untuk tidak membalas. ';
-			$response = send_wa_group_message($txt_group, '120363195657916590@g.us');
 		}
 
 
@@ -178,6 +168,49 @@ if($data->message=='success'){
 
 
 	sqlsrv_free_stmt($stmt);
+
+	$tgl_jam=substr($waktu_notifikasi,0,13);
+	$jam=substr(substr($waktu_notifikasi, -8),0,2);
+	$waktu_notifikasi_group = array('12', '13','14','15''16','20','22');
+
+	if( in_array($jam, $waktu_notifikasi_group ) && $_SESSION['notif_group']<>$tgl_jam ){
+
+		$_SESSION['notif_group'] = $tgl_jam;
+
+		$sql = "EXEC SP_UPDATE_GROUP_NOTIF_SPKLU_UNAVAILABLE @timestamp_csms = ? ";
+		$stmt = sqlsrv_prepare($conn, $sql, $params);
+
+	    echo (sqlsrv_execute($stmt))?'Status Group Notif berhasil diupdate<br/>':'Status Group Notif gagal diupdate<br/>';
+
+		if($stmt){
+			$i=0;
+			$break = "\n\r";
+			$txt_group = '*Monitoring SPKLU Unavailable*.'.$break.$break;
+			$txt_group .= '* Waktu Notifikasi : '.$waktu_notifikasi.$break;
+
+			while( $row = sqlsrv_fetch_array( $stmt, SQLSRV_FETCH_ASSOC) ) {
+				$txt_group .= generate_notif_unavailable($data, $row);
+
+				$i++;
+			}
+
+			if($i>0){
+				$txt_group .= 'Semua SPKLU Available (Online). '.$break.$break;
+			}
+
+			$txt_group .= 'Ini adalah pesan satu arah, mohon untuk tidak membalas. ';
+			$response = send_wa_group_message($txt_group, '120363195657916590@g.us');
+
+
+		}else{
+			echo 'Gagal melakukan Query SP_UPDATE_GROUP_NOTIF_SPKLU_UNAVAILABLE ke Database';
+		}
+
+
+		sqlsrv_free_stmt($stmt);
+
+	}
+
 	/*
 	curl_setopt_array($curl, array(
 	  CURLOPT_URL => 'https://api.watzap.id/v1/send_message',
@@ -263,7 +296,7 @@ function generate_notif_ok($data, $row){
 	$break = "\n\r";
 
 	$txt = '*'.$row['spkluName'].' sudah kembali Normal*.'.$break.$break;
-	$txt .= '* Waktu Notifikasi : '.str_replace('T',' ',substr($data->time,0,strlen($data->time)-10)).$break;
+	$txt .= '* Waktu Notifikasi : '.$waktu_notifikasi.$break;
 	$txt .= '* Charger : '.$row['charger'].$break;
 	$txt .= '* Durasi Gangguan : *'.time_string('@'.(intval($row['timestamp_insert'])+1), true).'*'.$break;
 	$txt .= '* Kategori Penyebab Gangguan : '.$kategori.$break.$break;
