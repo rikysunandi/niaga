@@ -143,19 +143,31 @@ if($data->message=='success'){
 
 	if($stmt){
 		$i=0;
+		$break = "\n\r";
+		$txt_group = '*Monitoring SPKLU Unavailable*.'.$break.$break;
+		$txt_group .= '* Waktu Notifikasi : '.str_replace('T',' ',substr($data->time,0,strlen($data->time)-10)).$break;
+
 		while( $row = sqlsrv_fetch_array( $stmt, SQLSRV_FETCH_ASSOC) ) {
-			
-			$txt = generate_notif_unavailable($data, $row);
+
+			$txt = '*Monitoring SPKLU Unavailable*.'.$break.$break;
+			$txt .= '* Waktu Notifikasi : '.str_replace('T',' ',substr($data->time,0,strlen($data->time)-10)).$break;
+			$txt .= generate_notif_unavailable($data, $row);
+			$txt .= 'Ini adalah pesan satu arah, mohon untuk tidak membalas. ';
+
             $response = send_wa_message($txt, '6282186777723');
 			if($response['message']="Successfully")
 				echo "Berhasil kirim notif WA<br/>";
 			else
 				echo "Gagal kirim notif WA<br/>";
-			
-			$response = send_wa_group_message($txt, '120363195657916590@g.us');
+
+
+			$txt_group .= generate_notif_unavailable($data, $row);
 
 			$i++;
 		}
+
+		$txt_group .= 'Ini adalah pesan satu arah, mohon untuk tidak membalas. ';
+		$response = send_wa_group_message($txt_group, '120363195657916590@g.us');
 
 
 	}else{
@@ -228,8 +240,7 @@ function generate_notif_unavailable($data, $row){
 	$penyebab = ($row['statusName']=='DISCONNECTED')?'Jaringan Tidak Stabil':$row['statusName'];
 	$break = "\n\r";
 
-	$txt = '*Monitoring SPKLU Unavailable*.'.$break.$break;
-	$txt .= '* Waktu Notifikasi : '.str_replace('T',' ',substr($data->time,0,strlen($data->time)-10)).$break;
+	$txt = '';
 	$txt .= '* Lokasi : '.$row['spkluName'].$break;
 	$txt .= '* Charger : '.$row['charger'].$break;
 	$txt .= '* Status : '.$row['statusName'].$break;
@@ -240,7 +251,6 @@ function generate_notif_unavailable($data, $row){
 	$txt .= '* Penanganan Gangguan : '.$break;
 	$txt .= '** Action: '.$row['action_1'].$break;
 	$txt .= '** Action Lanjutan: '.$row['action_2'].$break.$break;
-	$txt .= 'Ini adalah pesan satu arah, mohon untuk tidak membalas. ';
 
 	return $txt;
 }
