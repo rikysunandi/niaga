@@ -194,7 +194,7 @@ if($data->message=='success'){
 				$i++;
 			}
 
-			if($i>0){
+			if($i==0){
 				$txt_group .= 'Semua SPKLU Available (Online). '.$break.$break;
 			}
 
