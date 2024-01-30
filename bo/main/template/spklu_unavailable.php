@@ -166,8 +166,10 @@ if($data->message=='success'){
 			$i++;
 		}
 
-		$txt_group .= 'Ini adalah pesan satu arah, mohon untuk tidak membalas. ';
-		$response = send_wa_group_message($txt_group, '120363195657916590@g.us');
+		if($i>0){
+			$txt_group .= 'Ini adalah pesan satu arah, mohon untuk tidak membalas. ';
+			$response = send_wa_group_message($txt_group, '120363195657916590@g.us');
+		}
 
 
 	}else{
