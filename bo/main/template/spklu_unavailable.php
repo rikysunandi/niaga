@@ -191,7 +191,7 @@ if($data->message=='success'){
 			$txt_group .= '------------------------- '.$break.$break;
 
 			while( $row = sqlsrv_fetch_array( $stmt, SQLSRV_FETCH_ASSOC) ) {
-				$txt_group .= ($i+1).generate_notif_unavailable($data, $row);
+				$txt_group .= 'No.'.($i+1).$break.generate_notif_unavailable($data, $row);
 
 				$i++;
 			}
