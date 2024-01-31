@@ -211,6 +211,8 @@ if($data->message=='success'){
 
 		sqlsrv_free_stmt($stmt);
 
+	}else{
+		echo 'Status Group Notif pada periode terakhir sudah dikirim sebelumnya<br/>';
 	}
 
 	/*
