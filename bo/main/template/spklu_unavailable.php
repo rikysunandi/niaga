@@ -296,6 +296,7 @@ function generate_notif_unavailable($data, $row){
 
 function generate_notif_ok($data, $row){
 
+	$waktu_notifikasi=str_replace('T',' ',substr($data->time,0,strlen($data->time)-10));
     $kategori = ($row['statusName']=='DISCONNECTED')?'Media Komunikasi':'SPKLU';
 	$break = "\n\r";
 
