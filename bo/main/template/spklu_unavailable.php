@@ -4,7 +4,7 @@
 <head>
 	<meta charset="utf-8">
 	<meta name="viewport" content="width=device-width, initial-scale=1">
-	<meta http-equiv="refresh" content="90" />
+	<meta http-equiv="refresh" content="120" />
 	<title>Update SPKLU Unavailable</title>
 </head>
 <body>
@@ -119,11 +119,11 @@ if($data->message=='success'){
 			
             $txt = generate_notif_ok($data, $row);
             $response = send_wa_message($txt, $row['TL_TE_WA']);
-            sleep(rand(1,3));
+            //sleep(rand(1,3));
             $response = send_wa_message($txt, $row['MULP_WA']);
             sleep(rand(1,3));
             $response = send_wa_message($txt, $row['CC_WA1']);
-            sleep(rand(1,3));
+            //sleep(rand(1,3));
             $response = send_wa_message($txt, $row['CC_WA2']);
 
 			if($response['message']="Successfully")
@@ -157,11 +157,11 @@ if($data->message=='success'){
 			$txt .= 'Ini adalah pesan satu arah, mohon untuk tidak membalas. ';
             
             $response = send_wa_message($txt, $row['TL_TE_WA']);
-            sleep(rand(1,3));
+            //sleep(rand(1,3));
             $response = send_wa_message($txt, $row['MULP_WA']);
             sleep(rand(1,3));
             $response = send_wa_message($txt, $row['CC_WA1']);
-            sleep(rand(1,3));
+            //sleep(rand(1,3));
             $response = send_wa_message($txt, $row['CC_WA2']);
 			if($response['message']="Successfully")
 				echo "Berhasil kirim notif WA<br/>";
