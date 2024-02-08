@@ -119,8 +119,11 @@ if($data->message=='success'){
 			
             $txt = generate_notif_ok($data, $row);
             $response = send_wa_message($txt, $row['TL_TE_WA']);
+            sleep(rand(10,20));
             $response = send_wa_message($txt, $row['MULP_WA']);
+            sleep(rand(10,20));
             $response = send_wa_message($txt, $row['CC_WA1']);
+            sleep(rand(10,20));
             $response = send_wa_message($txt, $row['CC_WA2']);
 
 			if($response['message']="Successfully")
@@ -154,8 +157,11 @@ if($data->message=='success'){
 			$txt .= 'Ini adalah pesan satu arah, mohon untuk tidak membalas. ';
             
             $response = send_wa_message($txt, $row['TL_TE_WA']);
+            sleep(rand(10,20));
             $response = send_wa_message($txt, $row['MULP_WA']);
+            sleep(rand(10,20));
             $response = send_wa_message($txt, $row['CC_WA1']);
+            sleep(rand(10,20));
             $response = send_wa_message($txt, $row['CC_WA2']);
 			if($response['message']="Successfully")
 				echo "Berhasil kirim notif WA<br/>";
