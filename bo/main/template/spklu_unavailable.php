@@ -118,13 +118,13 @@ if($data->message=='success'){
 		while( $row = sqlsrv_fetch_array( $stmt, SQLSRV_FETCH_ASSOC) ) {
 			
             $txt = generate_notif_ok($data, $row);
-            $response = send_wa_message($txt, '6282186777723');
+            $response = send_wa_message($txt, $row['TEST_WA']);
 
 			if($response['message']="Successfully")
 				echo "Berhasil kirim notif OK<br/>";
 			else
 				echo "Gagal kirim notif OK<br/>";
-
+			//120363045309946688@g.us SPKLU Jabar?  120363045309946688@g.us
 			$response = send_wa_group_message($txt, '120363195657916590@g.us');
 			$i++;
 		}
@@ -150,7 +150,7 @@ if($data->message=='success'){
 			$txt .= generate_notif_unavailable($data, $row);
 			$txt .= 'Ini adalah pesan satu arah, mohon untuk tidak membalas. ';
 
-            $response = send_wa_message($txt, '6282186777723');
+            $response = send_wa_message($txt, $row['TEST_WA']);
 			if($response['message']="Successfully")
 				echo "Berhasil kirim notif WA<br/>";
 			else
@@ -172,7 +172,7 @@ if($data->message=='success'){
 
 	$tgl_jam=substr($waktu_notifikasi,0,13);
 	$jam=substr(substr($waktu_notifikasi, -8),0,2);
-	$waktu_notifikasi_group = array('09','10','11','12','13','14','15','16','20','22');
+	$waktu_notifikasi_group = array('08','12','16','18','20','00');
 
 	if( in_array($jam, $waktu_notifikasi_group ) && $_SESSION['notif_group']<>$tgl_jam ){
 
