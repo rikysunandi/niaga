@@ -152,9 +152,11 @@ if($data->message=='success'){
 			$txt .= '* Waktu Notifikasi : '.$waktu_notifikasi.$break;
 			$txt .= generate_notif_unavailable($data, $row);
 			$txt .= 'Ini adalah pesan satu arah, mohon untuk tidak membalas. ';
-
-            $response = send_wa_message($txt, $row['TEST_WA']);
-            $response = send_wa_message($txt, $row['TEST_WA']);
+            
+            $response = send_wa_message($txt, $row['CC_WA1']);
+            $response = send_wa_message($txt, $row['CC_WA2']);
+            $response = send_wa_message($txt, $row['TL_TE_WA']);
+            $response = send_wa_message($txt, $row['MULP_WA']);
 			if($response['message']="Successfully")
 				echo "Berhasil kirim notif WA<br/>";
 			else
