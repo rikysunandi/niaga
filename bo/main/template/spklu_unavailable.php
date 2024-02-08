@@ -299,9 +299,9 @@ function generate_notif_unavailable($data, $row){
 	$txt .= '* Kategori Penyebab Gangguan : '.$kategori.$break;
 	$txt .= '* Gangguan : '.$gangguan.$break;
 	$txt .= '* Keterangan Penyebab Gangguan : '.$row['errorDesc'].$break;
-	$txt .= '* Penanganan Gangguan : '.$break;
-	$txt .= '** Action: '.$row['action_1'].$break;
-	$txt .= '** Action Lanjutan: '.$row['action_2'].$break.$break;
+	$txt .= '* Penanganan Gangguan : '.$row['action_1'].$break;
+	//$txt .= '** Action: '.$row['action_1'].$break;
+	$txt .= '* Penanganan Lanjutan: '.$row['action_2'].$break.$break;
 
 	return $txt;
 }
