@@ -118,17 +118,17 @@ if($data->message=='success'){
 		while( $row = sqlsrv_fetch_array( $stmt, SQLSRV_FETCH_ASSOC) ) {
 			
             $txt = generate_notif_ok($data, $row);
-            $response = send_wa_message($txt, $row['CC_WA1']);
-            $response = send_wa_message($txt, $row['CC_WA2']);
             $response = send_wa_message($txt, $row['TL_TE_WA']);
             $response = send_wa_message($txt, $row['MULP_WA']);
+            $response = send_wa_message($txt, $row['CC_WA1']);
+            $response = send_wa_message($txt, $row['CC_WA2']);
 
 			if($response['message']="Successfully")
 				echo "Berhasil kirim notif OK<br/>";
 			else
 				echo "Gagal kirim notif OK<br/>";
 			//120363045309946688@g.us SPKLU Jabar?  120363045309946688@g.us
-			$response = send_wa_group_message($txt, '120363195657916590@g.us');
+			$response = send_wa_group_message($txt, '120363045309946688@g.us');
 			$i++;
 		}
 
@@ -153,17 +153,17 @@ if($data->message=='success'){
 			$txt .= generate_notif_unavailable($data, $row);
 			$txt .= 'Ini adalah pesan satu arah, mohon untuk tidak membalas. ';
             
-            $response = send_wa_message($txt, $row['CC_WA1']);
-            $response = send_wa_message($txt, $row['CC_WA2']);
             $response = send_wa_message($txt, $row['TL_TE_WA']);
             $response = send_wa_message($txt, $row['MULP_WA']);
+            $response = send_wa_message($txt, $row['CC_WA1']);
+            $response = send_wa_message($txt, $row['CC_WA2']);
 			if($response['message']="Successfully")
 				echo "Berhasil kirim notif WA<br/>";
 			else
 				echo "Gagal kirim notif WA<br/>";
 
 			if($row['statusNotif']==0)
-				$response = send_wa_group_message($txt, '120363195657916590@g.us');
+				$response = send_wa_group_message($txt, '120363045309946688@g.us');
 
 			$i++;
 		}
@@ -178,7 +178,7 @@ if($data->message=='success'){
 
 	$tgl_jam=substr($waktu_notifikasi,0,13);
 	$jam=substr(substr($waktu_notifikasi, -8),0,2);
-	$waktu_notifikasi_group = array('08','12','16','18','20','00');
+	$waktu_notifikasi_group = array('08','12','16','20','22');
 
 	if( in_array($jam, $waktu_notifikasi_group ) && $_SESSION['notif_group']<>$tgl_jam ){
 
@@ -207,7 +207,7 @@ if($data->message=='success'){
 			}
 
 			$txt_group .= 'Ini adalah pesan satu arah, mohon untuk tidak membalas. ';
-			$response = send_wa_group_message($txt_group, '120363195657916590@g.us');
+			$response = send_wa_group_message($txt_group, '120363045309946688@g.us');
 
 
 		}else{
