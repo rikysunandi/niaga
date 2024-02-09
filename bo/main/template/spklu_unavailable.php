@@ -131,7 +131,7 @@ if($data->message=='success'){
 			else
 				echo "Gagal kirim notif OK<br/>";
 			//120363195657916590@g.us SPKLU Jabar?  120363045309946688@g.us
-			$response = send_wa_group_message($txt, '120363195657916590@g.us');
+			$response = send_wa_group_message($txt, '120363045309946688@g.us');
 			$i++;
 		}
 
@@ -174,7 +174,7 @@ if($data->message=='success'){
 
 			if($row['statusNotif']==0){
 				$txt = str_replace('Ini adalah pesan satu arah, mohon untuk tidak membalas. ', '', $txt);
-				$response = send_wa_group_message($txt, '120363195657916590@g.us');
+				$response = send_wa_group_message($txt, '120363045309946688@g.us');
 			}
 
 			$i++;
@@ -190,7 +190,7 @@ if($data->message=='success'){
 
 	$tgl_jam=substr($waktu_notifikasi,0,13);
 	$jam=substr(substr($waktu_notifikasi, -8),0,2);
-	$waktu_notifikasi_group = array('08','12','14','16','20','23');
+	$waktu_notifikasi_group = array('08','12','16','20','23');
 
 	if( in_array($jam, $waktu_notifikasi_group ) && $_SESSION['notif_group']<>$tgl_jam ){
 
@@ -219,7 +219,7 @@ if($data->message=='success'){
 			}
 
 			//$txt_group .= 'Ini adalah pesan satu arah, mohon untuk tidak membalas. ';
-			$response = send_wa_group_message($txt_group, '120363195657916590@g.us');
+			$response = send_wa_group_message($txt_group, '120363045309946688@g.us');
 
 
 		}else{
