@@ -168,8 +168,10 @@ if($data->message=='success'){
 			else
 				echo "Gagal kirim notif WA<br/>";
 
-			if($row['statusNotif']==0)
+			if($row['statusNotif']==0){
+				$txt = str_replace('Ini adalah pesan satu arah, mohon untuk tidak membalas. ', '', $txt);
 				$response = send_wa_group_message($txt, '120363195657916590@g.us');
+			}
 
 			$i++;
 		}
@@ -212,7 +214,7 @@ if($data->message=='success'){
 				$txt_group .= 'Semua SPKLU Available (Online). '.$break.$break;
 			}
 
-			$txt_group .= 'Ini adalah pesan satu arah, mohon untuk tidak membalas. ';
+			//$txt_group .= 'Ini adalah pesan satu arah, mohon untuk tidak membalas. ';
 			$response = send_wa_group_message($txt_group, '120363195657916590@g.us');
 
 
@@ -301,7 +303,11 @@ function generate_notif_unavailable($data, $row){
 	$txt .= '* Keterangan Penyebab Gangguan : '.$row['errorDesc'].$break;
 	$txt .= '* Penanganan Gangguan : '.$row['action_1'].$break;
 	//$txt .= '** Action: '.$row['action_1'].$break;
-	$txt .= '* Penanganan Lanjutan: '.$row['action_2'].$break.$break;
+	$txt .= '* Penanganan Lanjutan: '.$row['action_2'].$break;
+	if(strlen($row['KETERANGAN'])>0)
+		$txt .= '* Keterangan: '.$row['KETERANGAN'].$break;
+		
+	$txt .=$break;
 
 	return $txt;
 }
