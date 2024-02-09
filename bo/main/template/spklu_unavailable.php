@@ -163,6 +163,10 @@ if($data->message=='success'){
             $response = send_wa_message($txt, $row['CC_WA1']);
             //sleep(rand(1,3));
             $response = send_wa_message($txt, $row['CC_WA2']);
+			// if($row['statusNotif']>3){
+            // 	$response = send_wa_message($txt, $row['ASMAN_UP3_WA']);
+			// }
+
 			if($response['message']="Successfully")
 				echo "Berhasil kirim notif WA<br/>";
 			else
@@ -186,7 +190,7 @@ if($data->message=='success'){
 
 	$tgl_jam=substr($waktu_notifikasi,0,13);
 	$jam=substr(substr($waktu_notifikasi, -8),0,2);
-	$waktu_notifikasi_group = array('08','12','16','20','22');
+	$waktu_notifikasi_group = array('08','12','14','16','20','23');
 
 	if( in_array($jam, $waktu_notifikasi_group ) && $_SESSION['notif_group']<>$tgl_jam ){
 
