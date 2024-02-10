@@ -192,9 +192,9 @@ if($data->message=='success'){
 	$jam=substr(substr($waktu_notifikasi, -8),0,2);
 	$waktu_notifikasi_group = array('08','12','16','20','23');
 
-	if( in_array($jam, $waktu_notifikasi_group ) && $_SESSION['notif_group']<>$tgl_jam ){
+	if( in_array($jam, $waktu_notifikasi_group ) && $_SESSION['notif_group']<>$jam ){
 
-		$_SESSION['notif_group'] = $tgl_jam;
+		$_SESSION['notif_group'] = $jam;
 
 		$sql = "EXEC SP_UPDATE_GROUP_NOTIF_SPKLU_UNAVAILABLE @timestamp_csms = ? ";
 		$stmt = sqlsrv_prepare($conn, $sql, $params);
