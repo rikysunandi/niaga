@@ -215,7 +215,8 @@ if($data->message=='success'){
 			}
 
 			if($i==0){
-				$txt_group .= 'Semua SPKLU Available (Online). '.$break.$break;
+				$txt_group .= 'Semua Charger SPKLU Available (Online). '.$break.$break;
+				$txt_group .= 'Terima kasih atas perhatian dan kerjasamanya.'.$break.$break;
 			}
 
 			//$txt_group .= 'Ini adalah pesan satu arah, mohon untuk tidak membalas. ';
