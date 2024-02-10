@@ -131,6 +131,7 @@ if($data->message=='success'){
 			else
 				echo "Gagal kirim notif OK<br/>";
 			//120363195657916590@g.us SPKLU Jabar?  120363045309946688@g.us
+            sleep(rand(1,3));
 			$response = send_wa_group_message($txt, '120363045309946688@g.us');
 			$i++;
 		}
@@ -174,6 +175,7 @@ if($data->message=='success'){
 
 			if($row['statusNotif']==0){
 				$txt = str_replace('Ini adalah pesan satu arah, mohon untuk tidak membalas. ', '', $txt);
+				sleep(rand(1,3));
 				$response = send_wa_group_message($txt, '120363045309946688@g.us');
 			}
 
@@ -204,7 +206,7 @@ if($data->message=='success'){
 		if($stmt){
 			$i=0;
 			$break = "\n\r";
-			$txt_group = '*Monitoring SPKLU Unavailable*.'.$break;
+			$txt_group = '*Rekap Monitoring SPKLU Unavailable*.'.$break;
 			$txt_group .= 'Waktu Notifikasi : '.$waktu_notifikasi.$break;
 			$txt_group .= '-------------------------------------- '.$break.$break;
 
@@ -215,11 +217,13 @@ if($data->message=='success'){
 			}
 
 			if($i==0){
-				$txt_group .= 'Semua Charger SPKLU Available (Online). '.$break.$break;
-				$txt_group .= 'Terima kasih atas perhatian dan kerjasamanya.'.$break.$break;
+				$txt_group .= 'Semua Charger SPKLU Available (Online). '.$break;
 			}
 
+			$txt_group .= $break.'Terima kasih atas perhatian dan kerjasamanya.'.$break.$break;
+
 			//$txt_group .= 'Ini adalah pesan satu arah, mohon untuk tidak membalas. ';
+			sleep(rand(1,3));
 			$response = send_wa_group_message($txt_group, '120363045309946688@g.us');
 
 
