@@ -1,3 +1,13 @@
+<!DOCTYPE html>
+<html>
+<head>
+	<meta charset="utf-8">
+	<meta name="viewport" content="width=device-width, initial-scale=1">
+	<meta http-equiv="refresh" content="250" />
+	<title>Update SPKLU Unavailable</title>
+</head>
+<body>
+
 <?php
 ini_set('MAX_EXECUTION_TIME', '-1');
 set_time_limit(-1);
