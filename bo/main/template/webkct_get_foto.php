@@ -1,5 +1,9 @@
 <?php
 
+set_time_limit(-1);
+require_once '../../config/config.php';
+require_once '../../config/database.php';
+
 $params = array();
 //SELECT * FROM m_kct_suspect_foto
 $sql = "EXEC SP_GET_KCT_SUSPECT ";
