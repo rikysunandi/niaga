@@ -17,6 +17,7 @@ if($stmt){
 		
 	  $idpel = $row['IDPEL'];
 		$fotourl = getWebKCTFoto($idpel);
+		echo $fotourl;
 
 		if($fotourl<>''){
 
