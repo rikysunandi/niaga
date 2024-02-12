@@ -17,7 +17,7 @@ if($stmt){
 		
 	  $idpel = $row['IDPEL'];
 		$fotourl = getWebKCTFoto($idpel);
-		echo $fotourl;
+		//echo $fotourl;
 
 		if($fotourl<>''){
 
@@ -70,7 +70,7 @@ function getWebKCTFoto($idpel){
 	curl_close($curl);
 
 	if(sizeof($res)>=45)
-		return $res['45'];
+		return str_replace('"', '', $res['45']);
 	else 
 		return '';
 }
