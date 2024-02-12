@@ -21,14 +21,14 @@ if($stmt){
 
 		if($fotourl<>''){
 
-			$params = array(
+			$params2 = array(
 		        array($idpel, SQLSRV_PARAM_IN),
 		        array($fotourl, SQLSRV_PARAM_IN),
 		    );
-			$sql = "EXEC SP_UPDATE_KCT_SUSPECT_FOTO @IDPEL = ?, @FOTOURL = ? ";
-			$stmt = sqlsrv_prepare($conn, $sql, $params);
+			$sql2 = "EXEC SP_UPDATE_KCT_SUSPECT_FOTO @IDPEL = ?, @FOTOURL = ? ";
+			$stmt2 = sqlsrv_prepare($conn, $sql2, $params2);
 
-			if(!sqlsrv_execute($stmt)){
+			if(!sqlsrv_execute($stmt2)){
 				echo 'Gagal '.$idpel.'<br/>';
 			}
 		}
