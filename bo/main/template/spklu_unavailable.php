@@ -192,7 +192,7 @@ if($data->message=='success'){
 
 	$tgl_jam=substr($waktu_notifikasi,0,13);
 	$jam=substr(substr($waktu_notifikasi, -8),0,2);
-	$waktu_notifikasi_group = array('08','12','16','20','23');
+	$waktu_notifikasi_group = array('08','12','16','20');
 
 	if( in_array($jam, $waktu_notifikasi_group ) && $_SESSION['notif_group']<>$jam ){
 
