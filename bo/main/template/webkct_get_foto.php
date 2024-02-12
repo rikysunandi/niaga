@@ -1,5 +1,5 @@
 <?php
-
+ini_set('MAX_EXECUTION_TIME', '-1');
 set_time_limit(-1);
 require_once '../../config/config.php';
 require_once '../../config/database.php';
