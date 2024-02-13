@@ -36,6 +36,14 @@ if($stmt){
 		$i++;
 	}
 
+	if( sqlsrv_next_result($stmt) ) {
+	    $row = sqlsrv_fetch_array( $stmt, SQLSRV_FETCH_ASSOC);
+	    $response['jml_suspect'] = $row['JML_SUSPECT']; 
+	    $response['foto_tidak_ada'] = $row['FOTO_TIDAK_ADA']; 
+	    $response['foto_sesuai'] = $row['FOTO_SESUAI']; 
+	    $response['foto_tidak_sesuai'] = $row['FOTO_TIDAK_SESUAI']; 
+	} 
+
 	$response['success'] = true;
 	sqlsrv_free_stmt($stmt);
 

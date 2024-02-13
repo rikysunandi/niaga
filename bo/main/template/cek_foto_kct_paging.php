@@ -187,7 +187,7 @@
 <hr/>
 <div class="stats-widget">
     <div class="stat-item">
-        <div id="suspect" class="stat-value">XX</div>
+        <div id="jml_suspect" class="stat-value">XX</div>
         <div class="stat-label">Total Suspect</div>
     </div>
     <div class="stat-item">
@@ -444,6 +444,10 @@
     	$('table').block({ message: 'Mengambil data...' });
 	    $.getJSON('../controller/getFotoKCT.php?unitup='+$('#sel_unit').val(), function(res){
 
+	    	$('#jml_suspect').html(res.jml_suspect);
+	    	$('#foto_tidak_ada').html(res.foto_tidak_ada);
+	    	$('#foto_sesuai').html(res.foto_sesuai);
+	    	$('#foto_tidak_sesuai').html(res.foto_tidak_sesuai);
 	    	data = res.rows;
 	    	totalPages = Math.ceil(data.length / pageSize);
             createPagination(totalPages);
