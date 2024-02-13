@@ -375,7 +375,7 @@
     	$(selectElement).parent().block({ message: 'Menyimpan...' });
         $.post('../controller/kct/updateSTFotoKCT.php', {idpel: data[index].idpel, st_foto: $(selectElement).val() }, function(data){
             console.log(data);
-
+            updateJmlFoto();
             $(selectElement).parent().unblock();
         }, 'json' );
     }
@@ -456,6 +456,20 @@
 
 	    });
     }    
+
+    function updateJmlFoto(){
+    	var foto_sesuai=0;
+    	var foto_tidak_sesuai=0;
+    	$.each(data, function(i,v){
+    		if(v.st_foto==='Foto Sesuai')
+    			foto_sesuai++;
+    		else
+    			foto_tidak_sesuai++;
+    	});
+
+    	$('#foto_sesuai').html(foto_sesuai);
+    	$('#foto_tidak_sesuai').html(foto_tidak_sesuai);
+    }
 
     // Memuat data saat halaman dimuat
     $(document).ready(function() {
