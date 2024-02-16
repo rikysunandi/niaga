@@ -137,7 +137,7 @@ $(document).ready(function () {
           {
             data: "LUNAS_LANCAR",
             type: 'number',
-            visible: true,
+            visible: false,
             "sClass" : "text-right" , render: $.fn.dataTable.render.number(".", ",", 0, '')
           },
           {
