@@ -31,7 +31,7 @@ if($stmt){
 		$response['rows'][$i]['petugasbaca'] = $row['PETUGASBACA']; 
 		$response['rows'][$i]['tglstatus'] = $row['TGLSTATUS']; 
 		$response['rows'][$i]['fotourl'] = $row['FOTOURL']; 
-		$response['rows'][$i]['st_foto'] = ($row['ST_FOTO']=='')?'Foto Jelas':$row['ST_FOTO']; 
+		$response['rows'][$i]['st_foto'] = ($row['ST_FOTO']=='')?'':$row['ST_FOTO']; 
 		$response['rows'][$i]['rotation'] = 0; 
 		$i++;
 	}
@@ -40,6 +40,7 @@ if($stmt){
 	    $row = sqlsrv_fetch_array( $stmt, SQLSRV_FETCH_ASSOC);
 	    $response['jml_suspect'] = $row['JML_SUSPECT']; 
 	    $response['foto_tidak_ada'] = $row['FOTO_TIDAK_ADA']; 
+	    $response['belum_verifikasi_foto'] = $row['BELUM_VERIFIKASI_FOTO']; 
 	    $response['foto_sesuai'] = $row['FOTO_SESUAI']; 
 	    $response['foto_tidak_sesuai'] = $row['FOTO_TIDAK_SESUAI']; 
 	} 

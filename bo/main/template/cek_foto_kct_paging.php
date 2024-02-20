@@ -59,12 +59,12 @@
 
     .stats-widget {
         display: grid;
-        grid-template-columns: repeat(4, 1fr);
+        grid-template-columns: repeat(5, 1fr);
         gap: 10px;
         border: 1px solid #ccc;
         border-radius: 5px;
         padding: 10px;
-        width: 600px;
+        width: 800px;
         text-align: center;
         margin: 10px 0px;
     }
@@ -195,6 +195,10 @@
         <div class="stat-label">Tidak Ada Foto</div>
     </div>
     <div class="stat-item">
+        <div id="belum_verifikasi_foto" class="stat-value">XX</div>
+        <div class="stat-label">Belum Verifikasi Foto</div>
+    </div>
+    <div class="stat-item">
         <div id="foto_sesuai" class="stat-value">XX</div>
         <div class="stat-label">Foto Sesuai</div>
     </div>
@@ -310,7 +314,7 @@
                 '</td>' +
                 '<td>' +
                 '<select onchange="updateAction(this, ' + i + ')">' +
-                '<option value=""' + (data[i].st_foto === '' ? ' selected' : '') + '>Mohon diisi</option>' +
+                '<option value=""' + (data[i].st_foto === '' ? ' selected' : '') + 'disabled hidden>Mohon diisi</option>' +
                 '<option value="Foto Tidak Sesuai"' + (data[i].st_foto === 'Foto Tidak Sesuai' ? ' selected' : '') + '>Foto Tidak Sesuai</option>' +
                 '<option value="Foto Sesuai"' + (data[i].st_foto === 'Foto Sesuai' ? ' selected' : '') + '>Foto Sesuai</option>' +
                 '</select>' +
@@ -447,7 +451,8 @@
 
 	    	$('#jml_suspect').html(res.jml_suspect);
 	    	$('#foto_tidak_ada').html(res.foto_tidak_ada);
-	    	$('#foto_sesuai').html(res.foto_sesuai);
+	    	$('#belum_verifikasi_foto').html(res.belum_verifikasi_foto);
+            $('#foto_sesuai').html(res.foto_sesuai);
 	    	$('#foto_tidak_sesuai').html(res.foto_tidak_sesuai);
 	    	data = res.rows;
 	    	totalPages = Math.ceil(data.length / pageSize);
@@ -461,13 +466,18 @@
     function updateJmlFoto(){
     	var foto_sesuai=0;
     	var foto_tidak_sesuai=0;
+        var belum_verifikasi_foto=parseInt($('#belum_verifikasi_foto').html());
+        console.log('belum_verifikasi_foto', belum_verifikasi_foto);
     	$.each(data, function(i,v){
-    		if(v.st_foto==='Foto Sesuai')
+    		if(v.st_foto==='Foto Sesuai'){
     			foto_sesuai++;
-    		else if(v.st_foto==='Foto Tidak Sesuai')
-    			foto_tidak_sesuai++;
+            }
+    		else if(v.st_foto==='Foto Tidak Sesuai'){
+    			foto_tidak_sesuai++;                
+            }
     	});
 
+        $('#belum_verifikasi_foto').html((belum_verifikasi_foto+parseInt($('#foto_sesuai').html())+parseInt($('#foto_tidak_sesuai').html()))-foto_sesuai-foto_tidak_sesuai);
     	$('#foto_sesuai').html(foto_sesuai);
     	$('#foto_tidak_sesuai').html(foto_tidak_sesuai);
     }
