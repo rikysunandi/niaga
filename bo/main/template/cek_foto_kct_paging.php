@@ -310,6 +310,7 @@
                 '</td>' +
                 '<td>' +
                 '<select onchange="updateAction(this, ' + i + ')">' +
+                '<option value=""' + (data[i].st_foto === '' ? ' selected' : '') + '>Mohon diisi</option>' +
                 '<option value="Foto Tidak Sesuai"' + (data[i].st_foto === 'Foto Tidak Sesuai' ? ' selected' : '') + '>Foto Tidak Sesuai</option>' +
                 '<option value="Foto Sesuai"' + (data[i].st_foto === 'Foto Sesuai' ? ' selected' : '') + '>Foto Sesuai</option>' +
                 '</select>' +
@@ -463,7 +464,7 @@
     	$.each(data, function(i,v){
     		if(v.st_foto==='Foto Sesuai')
     			foto_sesuai++;
-    		else
+    		else if(v.st_foto==='Foto Tidak Sesuai')
     			foto_tidak_sesuai++;
     	});
 
