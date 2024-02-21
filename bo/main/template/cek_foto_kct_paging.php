@@ -380,8 +380,8 @@
         $.post('../controller/kct/updateSTFotoKCT.php', {idpel: data[index].idpel, st_foto: $(selectElement).val() }, function(res){
             console.log(res);
             if(res.success){
-                updateJmlFoto();
                 data[index].st_foto = selectElement.value;
+                updateJmlFoto();
             }
             $(selectElement).parent().unblock();
         }, 'json' );
