@@ -382,6 +382,8 @@
             if(res.success){
                 data[index].st_foto = selectElement.value;
                 updateJmlFoto();
+            }else{
+                alert('Gagal menyimpan data');
             }
             $(selectElement).parent().unblock();
         }, 'json' );
