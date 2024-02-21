@@ -375,12 +375,14 @@
     function updateAction(selectElement, index) {
     	console.log(index, selectElement);
     	console.log(index, $(selectElement).val());
-        data[index].st_foto = selectElement.value;
 
     	$(selectElement).parent().block({ message: 'Menyimpan...' });
         $.post('../controller/kct/updateSTFotoKCT.php', {idpel: data[index].idpel, st_foto: $(selectElement).val() }, function(data){
             console.log(data);
-            updateJmlFoto();
+            if(data.success){
+                updateJmlFoto();
+                data[index].st_foto = selectElement.value;
+            }
             $(selectElement).parent().unblock();
         }, 'json' );
     }
