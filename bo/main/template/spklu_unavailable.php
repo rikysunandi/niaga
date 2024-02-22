@@ -87,7 +87,7 @@ if($data->message=='success'){
 			        array($row->merek, SQLSRV_PARAM_IN),
 			    );
 
-			$sql = "EXEC SP_JOB_SPKLU_UNAVAILABLE @timestamp_csms = ?, @waktu_csms = ?, @unit = ?, @charger = ?, @statusDateSecondAgo = ?, @statusName = ?, @kapasitas = ?, @spkluName = ?, @merek = ? ";
+			$sql = "EXEC SP_JOB_SPKLU_UNAVAILABLE ".strtotime($data->time).", ".($data->time).", ".$row->unit.", ".$row->charger.", ".$row->statusDateSecondAgo.", ".$row->statusName.", ".$row->kapasitas.", ".$row->spkluName.", ".$row->merek." ";
 			$stmt = sqlsrv_prepare($conn, $sql, $params);
 
 		    if (sqlsrv_execute($stmt))
