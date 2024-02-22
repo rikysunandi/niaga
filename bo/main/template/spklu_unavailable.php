@@ -85,14 +85,16 @@ if($data->message=='success'){
 			        array($row->kapasitas, SQLSRV_PARAM_IN),
 			        array($row->spkluName, SQLSRV_PARAM_IN),
 			        array($row->merek, SQLSRV_PARAM_IN),
-			        array($row->unit, SQLSRV_PARAM_IN),
-			        array($row->unit, SQLSRV_PARAM_IN),
 			    );
 
 			$sql = "EXEC SP_JOB_SPKLU_UNAVAILABLE @timestamp_csms = ?, @waktu_csms = ?, @unit = ?, @charger = ?, @statusDateSecondAgo = ?, @statusName = ?, @kapasitas = ?, @spkluName = ?, @merek = ? ";
 			$stmt = sqlsrv_prepare($conn, $sql, $params);
 
-		    echo (sqlsrv_execute($stmt))?'Data berhasil disimpan</td>':'Data gagal disimpan</td>';
+		    if (sqlsrv_execute($stmt))
+		    	echo 'Data berhasil disimpan</td>'
+		    else{
+		    	echo 'Data gagal disimpan' .$sql.'</td>';
+		    }
             echo "</tr>";
 
             sqlsrv_free_stmt($stmt);

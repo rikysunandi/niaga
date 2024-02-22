@@ -1,6 +1,6 @@
 <?php
 
-$response = send_wa_message('test 123','6282186777723');
+$response = send_wa_message('test 123 dari php','6282186777723');
 var_dump($response);
 
 function send_wa_message($text, $nohp){
@@ -10,7 +10,7 @@ function send_wa_message($text, $nohp){
 	*/
 	$dataSending = Array();
 	$dataSending["api_key"] = "DXULXKRCGZLFWQOJ";
-	$dataSending["number_key"] = "0K98swNjuQbsgyTK";
+	$dataSending["number_key"] = "PZzhqp9JXYwMA3Ta";
 	$dataSending["phone_no"] = $nohp;
 
 	$dataSending["message"] = $text;
