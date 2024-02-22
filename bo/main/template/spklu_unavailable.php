@@ -91,9 +91,9 @@ if($data->message=='success'){
 			$stmt = sqlsrv_prepare($conn, $sql, $params);
 
 		    if (sqlsrv_execute($stmt))
-		    	echo 'Data berhasil disimpan</td>'
+		    	echo 'Data berhasil disimpan</td>';
 		    else{
-		    	echo 'Data gagal disimpan' .$sql.'</td>';
+		    	echo 'Data gagal disimpan: ' .$sql.'</td>';
 		    }
             echo "</tr>";
 
