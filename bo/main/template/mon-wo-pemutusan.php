@@ -114,6 +114,7 @@
                                                     <option value='<?php echo date('Ym', strtotime("-10 month")) ?>'><?php echo date('Ym', strtotime("-10 month")) ?></option>
                                                     <option value='<?php echo date('Ym', strtotime("-11 month")) ?>'><?php echo date('Ym', strtotime("-11 month")) ?></option>
                                                     <option value='<?php echo date('Ym', strtotime("-12 month")) ?>'><?php echo date('Ym', strtotime("-12 month")) ?></option>
+                                                    <option value='<?php echo date('Ym', strtotime("-13 month")) ?>'><?php echo date('Ym', strtotime("-13 month")) ?></option>
                                                 </select>
                                             </div>
                                             <div class="form-group col-3">
