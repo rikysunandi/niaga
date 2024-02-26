@@ -90,6 +90,15 @@
                                                     <option value='<?php echo date('Ym', strtotime("last day of previous month")) ?>'><?php echo date('Ym', strtotime("last day of previous month")) ?></option>
                                                     <option value='<?php echo date('Ym', strtotime("-2 month")) ?>'><?php echo date('Ym', strtotime("-2 month")) ?></option>
                                                     <option value='<?php echo date('Ym', strtotime("-3 month")) ?>'><?php echo date('Ym', strtotime("-3 month")) ?></option>
+                                                    <option value='<?php echo date('Ym', strtotime("-4 month")) ?>'><?php echo date('Ym', strtotime("-4 month")) ?></option>
+                                                    <option value='<?php echo date('Ym', strtotime("-5 month")) ?>'><?php echo date('Ym', strtotime("-5 month")) ?></option>
+                                                    <option value='<?php echo date('Ym', strtotime("-6 month")) ?>'><?php echo date('Ym', strtotime("-6 month")) ?></option>
+                                                    <option value='<?php echo date('Ym', strtotime("-7 month")) ?>'><?php echo date('Ym', strtotime("-7 month")) ?></option>
+                                                    <option value='<?php echo date('Ym', strtotime("-8 month")) ?>'><?php echo date('Ym', strtotime("-8 month")) ?></option>
+                                                    <option value='<?php echo date('Ym', strtotime("-9 month")) ?>'><?php echo date('Ym', strtotime("-9 month")) ?></option>
+                                                    <option value='<?php echo date('Ym', strtotime("-10 month")) ?>'><?php echo date('Ym', strtotime("-10 month")) ?></option>
+                                                    <option value='<?php echo date('Ym', strtotime("-11 month")) ?>'><?php echo date('Ym', strtotime("-11 month")) ?></option>
+                                                    <option value='<?php echo date('Ym', strtotime("-12 month")) ?>'><?php echo date('Ym', strtotime("-12 month")) ?></option>
                                                 </select>
                                             </div>
                                             <div class="form-group col-3">
