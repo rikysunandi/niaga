@@ -128,14 +128,14 @@ if($data->message=='success'){
             //sleep(rand(1,3));
             $response = send_wa_message($txt, $row['CC_WA2']);
 
-			if($response['message']="Successfully")
+			if($response['ack']=="successfully")
 				echo "Berhasil kirim notif OK<br/>";
 			else
 				echo "Gagal kirim notif OK<br/>";
 			//120363195657916590@g.us SPKLU Jabar?  120363045309946688@g.us
             sleep(rand(1,3));
 			$response2 = send_wa_group_message($txt, '120363195657916590@g.us');			
-			if($response2['message']="Successfully")
+			if($response2['ack']=="successfully")
 				echo "Berhasil kirim notif OK WA Group<br/>";
 			else
 				echo "Gagal kirim notif OK WA Group<br/>";
@@ -174,16 +174,16 @@ if($data->message=='success'){
             // 	$response = send_wa_message($txt, $row['ASMAN_UP3_WA']);
 			// }
 
-			if($response['message']="Successfully")
+			if($response['ack']=="successfully")
 				echo "Berhasil kirim notif WA<br/>";
 			else
 				echo "Gagal kirim notif WA<br/>";
 
-			if($row['statusNotif']>=0){
+			if($row['statusNotif']==0){
 				$txt = str_replace('Ini adalah pesan satu arah, mohon untuk tidak membalas. ', '', $txt);
 				sleep(rand(1,3));
 				$response2 = send_wa_group_message($txt, '120363195657916590@g.us');				
-				if($response2['message']="Successfully")
+				if($response2['ack']=="successfully")
 					echo "Berhasil kirim notif WA Group<br/>";
 				else
 					echo "Gagal kirim notif WA Group<br/>";
@@ -235,7 +235,7 @@ if($data->message=='success'){
 			//$txt_group .= 'Ini adalah pesan satu arah, mohon untuk tidak membalas. ';
 			sleep(rand(1,3));
 			$response = send_wa_group_message($txt_group, '120363195657916590@g.us');				
-			if($response['message']="Successfully")
+			if($response['ack']=="successfully")
 				echo "Berhasil kirim Rekap notif WA Group<br/>";
 			else
 				echo "Gagal kirim Rekap notif WA Group<br/>";
@@ -280,7 +280,7 @@ if($data->message=='success'){
     print_r($result);
 	$dataSending = Array();
 	$dataSending["api_key"] = "DXULXKRCGZLFWQOJ";
-	$dataSending["number_key"] = "PZzhqp9JXYwMA3Ta";
+	$dataSending["number_key"] = "qMr51iAQwjCjaqZc";
 	$dataSending["phone_no"] = "6282186777723";
 
 	$kategori = ($row->statusName=='DISCONNECTED')?'Media Komunikasi':'SPKLU';
@@ -359,7 +359,7 @@ function send_wa_message($text, $nohp){
 	*/
 	$dataSending = Array();
 	$dataSending["api_key"] = "DXULXKRCGZLFWQOJ";
-	$dataSending["number_key"] = "PZzhqp9JXYwMA3Ta";
+	$dataSending["number_key"] = "qMr51iAQwjCjaqZc";
 	$dataSending["phone_no"] = $nohp;
 
 	$dataSending["message"] = $text;
@@ -387,7 +387,7 @@ function send_wa_group_message($text, $group_id){
 	*/
 	$dataSending = Array();
 	$dataSending["api_key"] = "DXULXKRCGZLFWQOJ";
-	$dataSending["number_key"] = "PZzhqp9JXYwMA3Ta";
+	$dataSending["number_key"] = "qMr51iAQwjCjaqZc";
 	$dataSending["group_id"] = $group_id;
 
 	$dataSending["message"] = $text;
