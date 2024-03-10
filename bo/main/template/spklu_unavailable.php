@@ -14,7 +14,7 @@ set_time_limit(-1);
 require_once '../../config/config.php';
 require_once '../../config/database.php';
 
-$authorization = "Bearer eyJ0eXAiOiJKV1QiLCJhbGciOiJIUzI1NiJ9.eyJzdWIiOiIyNzIiLCJpYXQiOjE3MDYzNjY4MDB9.oL7QwVuPj4s5ZXbx1CU_XyR5oI0rjQba_PlcSPs4HoA";
+$authorization = "Bearer eyJ0eXAiOiJKV1QiLCJhbGciOiJIUzI1NiJ9.eyJzdWIiOiIyNzIiLCJpYXQiOjE3MTAwNDM2NTN9.UqnuQfn5qiDViiLTH4Tb39uWAIv4x--9OIBG_5UOqCk";
 
 $context = stream_context_create(array(
     'http' => array(
