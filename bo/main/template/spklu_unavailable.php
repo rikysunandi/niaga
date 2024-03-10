@@ -133,7 +133,7 @@ if($data->message=='success'){
 			else
 				echo "Gagal kirim notif OK<br/>";
 			//120363195657916590@g.us SPKLU Jabar?  120363045309946688@g.us
-			if($row['statusNotif']==1){
+			if($row['statusNotif']>=1){
 	            sleep(rand(1,3));
 				$response2 = send_wa_group_message($txt, '120363045309946688@g.us');			
 				if($response2['ack']=="successfully")
