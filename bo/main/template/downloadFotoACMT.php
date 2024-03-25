@@ -23,9 +23,9 @@ $sql = "SELECT UNITAP, UNITUP, IDPEL FROM WO_FOTO_DTKS WHERE STATUS_DIL='AKTIF' 
 $sql = "EXEC SP_GET_FOTO_RUMAH_DTKS ";
 $stmt = sqlsrv_prepare($conn, $sql, $params);
 
-echo (sqlsrv_execute($stmt))?'Status get berhasil<br/>':'Status get gagal<br/>';
+//echo (sqlsrv_execute($stmt))?'Status get berhasil<br/>':'Status get gagal<br/>';
 
-if($stmt){
+if(sqlsrv_execute($stmt)){
 	$i=0;
 	while( $row = sqlsrv_fetch_array( $stmt, SQLSRV_FETCH_ASSOC) ) {
 		
