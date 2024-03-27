@@ -3,17 +3,17 @@
 <head>
 	<meta charset="utf-8">
 	<meta name="viewport" content="width=device-width, initial-scale=1">
-	<meta http-equiv="refresh" content="180" />
+	<!-- <meta http-equiv="refresh" content="250" /> -->
 	<title>Download Foto ACMT</title>
 </head>
 <body>
 
 <?php
-ini_set('MAX_EXECUTION_TIME', '-1');
-set_time_limit(-1);
 require_once '../../config/config.php';
 require_once '../../config/database.php';
 require_once '../../config/router.php';
+ini_set('MAX_EXECUTION_TIME', '-1');
+set_time_limit(-1);
 
 
 $params = array();
@@ -26,21 +26,28 @@ $stmt = sqlsrv_prepare($conn, $sql, $params);
 //echo (sqlsrv_execute($stmt))?'Status get berhasil<br/>':'Status get gagal<br/>';
 
 if(sqlsrv_execute($stmt)){
+	//echo '1';
 	$i=0;
 	while( $row = sqlsrv_fetch_array( $stmt, SQLSRV_FETCH_ASSOC) ) {
 		
+	//echo '2';
+		if($unitap<>$row['UNITAP'])
+	  		echo $unitap.'<br/>';
+
 	  	$idpel = $row['IDPEL'];
 	  	$unitap = $row['UNITAP'];
 	  	$unitup = $row['UNITUP'];
 
+
 		$folder = '../../assets/uploads/foto_rumah/'.$unitap.'/';
 	    $file_name = $idpel.'.jpeg'; 
 	    $file_name2 = $idpel.'_2.jpeg'; 
-		$success = downloadFile($folder, $file_name, 'https://portalapp.iconpln.co.id/acmt/DisplayBlobServlet2?idpel='.$idpel.'&blth=202403');
-		$success2 = downloadFile($folder, $file_name2, 'https://portalapp.iconpln.co.id/acmt/DisplayBlobServlet3?idpel='.$idpel.'&blth=202403');
+		$success = downloadFile($folder, $file_name, 'https://portalapp.iconpln.co.id/acmt/DisplayBlobServlet2?idpel='.$idpel.'&blth=202404');
+		$success2 = downloadFile($folder, $file_name2, 'https://portalapp.iconpln.co.id/acmt/DisplayBlobServlet3?idpel='.$idpel.'&blth=202404');
 
 		if($success){
 
+	//echo '3';
 			$params2 = array(
 		        array($idpel, SQLSRV_PARAM_IN),
 		        array($success, SQLSRV_PARAM_IN),
@@ -69,14 +76,15 @@ function downloadFile($folder, $filename, $url){
     // Use file_get_contents() function to get the file 
     // from url and use file_put_contents() function to 
     // save the file by using base name 
-    if (file_put_contents($folder.$file_name, file_get_contents($url))) 
-    { 
-        return 1; 
-    } 
-    else
-    { 
-        return 0; 
-    } 
+    //echo $filename.': '.file_get_contents($url);
+    if (strlen(file_get_contents($url))>0){
+	    if (file_put_contents($folder.'/'.$filename, file_get_contents($url))) 
+		    return 1;
+		else
+			return 0;
+	}else{
+		return 0;
+	}
 }
 
 function getWebKCTFoto($idpel){
