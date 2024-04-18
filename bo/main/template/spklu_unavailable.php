@@ -14,7 +14,7 @@ set_time_limit(-1);
 require_once '../../config/config.php';
 require_once '../../config/database.php';
 
-$authorization = "Bearer eyJ0eXAiOiJKV1QiLCJhbGciOiJIUzI1NiJ9.eyJzdWIiOiIyNzIiLCJpYXQiOjE3MTAwNDM2NTN9.UqnuQfn5qiDViiLTH4Tb39uWAIv4x--9OIBG_5UOqCk";
+$authorization = "Bearer eyJ0eXAiOiJKV1QiLCJhbGciOiJIUzI1NiJ9.eyJzdWIiOiIyNzIiLCJpYXQiOjE3MTMzNzU5NTF9.ATtS85qoUSxELOHz7aii1Saf_9jrYAJw3HmHGynEEOU";
 
 $context = stream_context_create(array(
     'http' => array(
@@ -202,7 +202,7 @@ if($data->message=='success'){
 
 	$tgl_jam=substr($waktu_notifikasi,0,13);
 	$jam=substr(substr($waktu_notifikasi, -8),0,2);
-	$waktu_notifikasi_group = array('08','12','16','20');
+	$waktu_notifikasi_group = array('08','12','16','20','23');
 
 	if( in_array($jam, $waktu_notifikasi_group ) && $_SESSION['notif_group']<>$jam ){
 
