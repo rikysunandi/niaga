@@ -34,7 +34,7 @@ if(sqlsrv_execute($stmt)){
 	  	$idpel = $row['IDPEL'];
 
 
-		$folder = '../../assets/uploads/foto_rumah_acmt/';
+		$folder = '../../assets/uploads/foto_rumah_acmt24/';
 	    $file_name = $idpel.'.jpeg'; 
 		$success = downloadFile($folder, $file_name, 'https://portalapp.iconpln.co.id/acmt/DisplayBlobServlet7?idpel='.$idpel.'&blth=');
 
