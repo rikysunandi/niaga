@@ -13,23 +13,43 @@
 set_time_limit(-1);
 require_once '../../config/config.php';
 // require_once '../../config/database.php';
-$ch = curl_init();
+$curl = curl_init();
 
-curl_setopt($ch, CURLOPT_URL, 'https://10.1.88.236/api/outage/table');
-curl_setopt($ch, CURLOPT_RETURNTRANSFER, 1);
-curl_setopt($ch, CURLOPT_POST, 1);
+curl_setopt_array($curl, array(
+  CURLOPT_URL => 'https://10.1.88.236/api/outage/table',
+  CURLOPT_RETURNTRANSFER => true,
+  //CURLOPT_ENCODING => '',
+  CURLOPT_MAXREDIRS => 10,
+  CURLOPT_TIMEOUT => 0,
+  CURLOPT_FOLLOWLOCATION => true,
+  CURLOPT_HTTP_VERSION => CURL_HTTP_VERSION_1_1,
+  //CURLOPT_SSL_VERIFYPEER => true,
+  CURLOPT_POST => true,
+  CURLOPT_CUSTOMREQUEST => 'POST',
+	//CURLOPT_SSL_VERIFYHOST => 0,
+	CURLOPT_SSL_VERIFYPEER => false,
+  CURLOPT_POSTFIELDS => array('start' => '0','length' => '100','id_unit' => '0','id_area' => '0','id_induk' => '53','id_pusat' => '','type' => 'kl','data' => 'y','tab' => 'keluhan','token' => 'Ph0ATGW9cejVIQ2DtokvFaQasaTSGmCXhs90PfSO4wTeINpCOchUMlKO2wzn'),
+  CURLOPT_HTTPHEADER => array(
+    'Cookie: f5avraaaaaaaaaaaaaaaa_session_=JEHFGEKMMBFFGNAFDIFDCCGHECMBGADBIONNJOKAKBLFBOCCNPILKMLAKNKNMAIHLHIDNFIDGKAAOLNJNFNAFEDCEPIACCDADAKNCPININELHMBJLINCBELCGBKHPEPA; f5avraaaaaaaaaaaaaaaa_session_=ILKKLOCOIPJANJNNKEKPIJPJPGGGFIKIOCBIOJBKGHELGDBPJGKEOEEHJEJDKPGOECDDFNNCONAGEJKAKMHADLEDLPJLFPJMILMDAGGGOGMPINHECGCHCPBIBFBPFACJ; XSRF-TOKEN=eyJpdiI6Ino0VjdLWjRwUzRjY1htZFVuVnFkOFE9PSIsInZhbHVlIjoiOVVjVnVIcXpva2FoMkdaelZDb0FyUTFIdnBwdzVXSlN2RVFJU1JCTDBodkkzVGVha1BlYllDY3JKS3RnT1RrdEZjTTJDK3hhZmdsclhudkh6eHovRTVGOXFlYnZ…VlIjoiZWxJVzdkUUlRRVM5c2Q1eVUzOTJBUmh3WlcvQlUrcVljY29PbEZFV3Q5SXpicGVncVhTVEFQZFdrL0JmRWtZNDN2dDd1YjJKVnFJOVBjTm5UMFhGemQvdmh2UitKYXQ1ZVM0a2hkUnBrT0Juam1Ecmxhbng0NGF2cnBlWVpjQXNReS9iZFZFblZMNHlDSFc1OVZOL1dWTWxBVDVKdGxGVE00dGR1QndWWlY3cnJKV2g1cnRvM2pjZzUzSm5jTEl2dmtLR2tQN01CYUlDM0FDLzRobU9PN0s4Y1NjVWlCakpVb1djVVZ3VnBPZz0iLCJtYWMiOiJlNDc0NDBkMzI5MDNjZjliZDAzMTlhZDliMGJjNjVkNTgzNTI5YWNlZWZjODkxOGY5MTJmN2IyYzc1ZDYzZTU1In0%3D; _ga_929N09011N=GS1.1.1714026528.2.1.1714028060.0.0.0; _ga=GA1.1.1098061170.1713869875',
+   'Content-Type: application/x-www-form-urlencoded; charset=UTF-8',
+   'User-Agent: Mozilla/5.0 (Windows NT 10.0; Win64; x64; rv:125.0) Gecko/20100101 Firefox/125.0',
+	'Accept-Language:en-US,en;q=0.5',
+	'Host:10.1.88.236',
+	'Origin:https://10.1.88.236',
+	'Referer:https://10.1.88.236/outage?type=kl&data=y&tab=keluhan',
+	'X-Requested-With:XMLHttpRequest',
+	'Sec-Fetch-Dest:empty',
+	'Sec-Fetch-Mode:cors',
+	'Sec-Fetch-Site:same-origin'
+  ),
+));
 
-$headers = array();
-$headers[] = 'Cookie: f5avraaaaaaaaaaaaaaaa_session_=KOEDABAGAEFFAGOOPPICBMDJEHCHLFIHCGFNHJIFPCGCGNJOPCMDDKHBGHBAHPPEGJCDIKBJLHMLGMHGHCJAMCAECBLGNHIHPCELCMNJLHHMMPLHPKAIMKPEIBOIGCGN; TS016413c5=01a622669ea54a30a402bed9e69914d2fb10121945524c3c875e417585b31449a52c910943fb59e951518bd52ae4d3971bf6e34bc5bcf6e6439e40a11b3036938795239d3a';
-$headers[] = 'Content-Type: application/x-www-form-urlencoded';
-curl_setopt($ch, CURLOPT_HTTPHEADER, $headers);
-
-$result = curl_exec($ch);
-if (curl_errno($ch)) {
-    echo 'Error:' . curl_error($ch);
-}
-curl_close($ch);
-var_dump($result);
+$response = curl_exec($curl);
+$status = curl_getinfo($curl);
+echo json_encode($status, JSON_PRETTY_PRINT);
+curl_close($curl);
+echo $response;
+var_dump($response);
 
 die();
 
