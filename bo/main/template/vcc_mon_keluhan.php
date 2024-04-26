@@ -385,7 +385,7 @@ function generate_notif_keluhan($waktu_notifikasi, $row){
 	$txt = '';
 	$txt .= '* No : '.$row['reportnumber'].$break;
 	$txt .= '* Idpel : '.$row['customernumber'].$break;
-	$txt .= '* Unit : '.$row['unit'].$break;
+	$txt .= '* Unit : '.$row['nama_unit'].$break;
 	$txt .= '* Create Date : '.$row['createdate']->format('Y-m-d H:i:s').$break;
 	$txt .= '* Create By : '.$row['create_by'].$break;
 	$txt .= '* Durasi : *'.time_elapsed_string('@'.(strtotime($row['createdate']->format('Y-m-d H:i:s'))), true).'*'.$break;
