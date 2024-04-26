@@ -225,7 +225,7 @@ if($data->recordsTotal>0){
 				$txt .= '* Waktu Notifikasi : '.$waktu_notifikasi.$break;
 				$txt .= generate_notif_keluhan($waktu_notifikasi, $row);
 			}else{
-				$txt .= 'Laporan No '.$row['reportnumber'].' masih belum ditindaklanjuti sejak '.time_elapsed_string('@'.(strtotime($row['createdate']->format('Y-m-d H:i:s'))), true).'. Mohon bantuan untuk segera melakukan tindaklanjut.';
+				$txt .= 'Laporan No '.$row['reportnumber'].' masih belum ditindaklanjuti sejak '.time_elapsed_string('@'.(strtotime($row['createdate']->format('Y-m-d H:i:s'))), true).'. Mohon bantuan untuk segera melakukan tindaklanjut.'.$break.$break;
 			}
 			$txt .= 'Ini adalah pesan satu arah, mohon untuk tidak membalas. ';
             
