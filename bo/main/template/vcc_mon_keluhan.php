@@ -183,7 +183,7 @@ if($data->recordsTotal>0){
 			}else{
 				$txt .= 'Laporan No '.$row['reportnumber'].' masih belum ditindaklanjuti sejak *'.time_elapsed_string('@'.(strtotime($row['createdate']->format('Y-m-d H:i:s'))), true).'*. Mohon bantuan untuk segera melakukan tindaklanjut.'.$break.$break;
 			}
-            //sleep(rand(1,3));
+            sleep(rand(1,3));
             $response = send_wa_message($txt, $row['MULP_WA']);
 
 			if($row['statusNotif']>=1){
@@ -200,8 +200,8 @@ if($data->recordsTotal>0){
 
 	            sleep(rand(1,3));
 	            $response = send_wa_message($txt, $row['ASMAN_UP3_WA']);
-	            sleep(rand(1,2));
-	            $response = send_wa_message($txt, $row['CC_WA1']);
+	            // sleep(rand(1,2));
+	            // $response = send_wa_message($txt, $row['CC_WA1']);
 			}
             
             // $response = send_wa_message($txt, $row['TL_TE_WA']);
@@ -256,13 +256,13 @@ if($data->recordsTotal>0){
 			
             $txt = generate_notif_ok($waktu_notifikasi, $row);
             // $response = send_wa_message($txt, $row['TL_TE_WA']);
-            // sleep(rand(1,3));
+            sleep(rand(1,3));
             $response = send_wa_message($txt, $row['MULP_WA']);
 			if($row['statusNotif']>=1){
 	            sleep(rand(1,3));
 	            $response = send_wa_message($txt, $row['ASMAN_UP3_WA']);
-	            sleep(rand(1,2));
-	            $response = send_wa_message($txt, $row['CC_WA1']);
+	            // sleep(rand(1,2));
+	            // $response = send_wa_message($txt, $row['CC_WA1']);
 	        }
             //echo 'response: '.$response;
             //sleep(rand(1,3));
