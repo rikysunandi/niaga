@@ -43,7 +43,7 @@ curl_setopt_array($curl, array(
   CURLOPT_CUSTOMREQUEST => 'POST',
 	CURLOPT_SSL_VERIFYHOST => 0,
 	CURLOPT_SSL_VERIFYPEER => false,
-  CURLOPT_POSTFIELDS => array('order[0][column]' => '7', 'order[0][dir]' => 'asc', 'start' => '0','length' => '100','id_unit' => '0','id_area' => '0','id_induk' => '53','id_pusat' => '','type' => 'kl','data' => 'y','tab' => 'keluhan','token' => 'Ph0ATGW9cejVIQ2DtokvFaQasaTSGmCXhs90PfSO4wTeINpCOchUMlKO2wzn'),
+  CURLOPT_POSTFIELDS => array('order[0][column]' => '7', 'order[0][dir]' => 'asc', 'start' => '0','length' => '100','id_unit' => '0','id_area' => '0','id_induk' => '53','id_pusat' => '','type' => 'kl','data' => 'y','tab' => 'keluhan','token' => 'iQkXZ5Iox46K64bDTnxbOtBJZmNJDa3g5PVnwcOLeFKsijycECodFbNdHwYY'),
   // CURLOPT_HTTPHEADER => array(
   //   'Cookie: f5avraaaaaaaaaaaaaaaa_session_=JEHFGEKMMBFFGNAFDIFDCCGHECMBGADBIONNJOKAKBLFBOCCNPILKMLAKNKNMAIHLHIDNFIDGKAAOLNJNFNAFEDCEPIACCDADAKNCPININELHMBJLINCBELCGBKHPEPA; f5avraaaaaaaaaaaaaaaa_session_=ILKKLOCOIPJANJNNKEKPIJPJPGGGFIKIOCBIOJBKGHELGDBPJGKEOEEHJEJDKPGOECDDFNNCONAGEJKAKMHADLEDLPJLFPJMILMDAGGGOGMPINHECGCHCPBIBFBPFACJ; XSRF-TOKEN=eyJpdiI6Ino0VjdLWjRwUzRjY1htZFVuVnFkOFE9PSIsInZhbHVlIjoiOVVjVnVIcXpva2FoMkdaelZDb0FyUTFIdnBwdzVXSlN2RVFJU1JCTDBodkkzVGVha1BlYllDY3JKS3RnT1RrdEZjTTJDK3hhZmdsclhudkh6eHovRTVGOXFlYnZ…VlIjoiZWxJVzdkUUlRRVM5c2Q1eVUzOTJBUmh3WlcvQlUrcVljY29PbEZFV3Q5SXpicGVncVhTVEFQZFdrL0JmRWtZNDN2dDd1YjJKVnFJOVBjTm5UMFhGemQvdmh2UitKYXQ1ZVM0a2hkUnBrT0Juam1Ecmxhbng0NGF2cnBlWVpjQXNReS9iZFZFblZMNHlDSFc1OVZOL1dWTWxBVDVKdGxGVE00dGR1QndWWlY3cnJKV2g1cnRvM2pjZzUzSm5jTEl2dmtLR2tQN01CYUlDM0FDLzRobU9PN0s4Y1NjVWlCakpVb1djVVZ3VnBPZz0iLCJtYWMiOiJlNDc0NDBkMzI5MDNjZjliZDAzMTlhZDliMGJjNjVkNTgzNTI5YWNlZWZjODkxOGY5MTJmN2IyYzc1ZDYzZTU1In0%3D; _ga_929N09011N=GS1.1.1714026528.2.1.1714028060.0.0.0; _ga=GA1.1.1098061170.1713869875',
   //  'Content-Type: application/x-www-form-urlencoded; charset=UTF-8',
@@ -165,50 +165,6 @@ if($data->recordsTotal>0){
     echo "</table>";
 
 
-	$params = array(
-	        array($reportnumbers, SQLSRV_PARAM_IN)
-	    );
-
-	$sql = "EXEC SP_UPDATE_OK_KELUHAN_APKT '".$reportnumbers."' ";
-	$stmt = sqlsrv_prepare($conn, $sql, $params);
-
-    echo (sqlsrv_execute($stmt))?'Status OK berhasil diupdate<br/>':'Status OK gagal diupdate<br/>';
-
-	if($stmt){
-		$i=0;
-
-		while( $row = sqlsrv_fetch_array( $stmt, SQLSRV_FETCH_ASSOC) ) {
-			
-            $txt = generate_notif_ok($waktu_notifikasi, $row);
-            // $response = send_wa_message($txt, $row['TL_TE_WA']);
-            // sleep(rand(1,3));
-            // $response = send_wa_message($txt, $row['MULP_WA']);
-            sleep(rand(1,3));
-            //echo $row['reportnumber'].'<br/>';
-            $response = send_wa_message($txt, $row['CC_WA1']);
-            //echo 'response: '.$response;
-            //sleep(rand(1,3));
-            //$response = send_wa_message($txt, $row['CC_WA2']);
-
-			if($response['ack']=="successfully")
-				echo "Berhasil kirim notif OK<br/>";
-			else
-				echo "Gagal kirim notif OK<br/>";
-			//120363195657916590@g.us SPKLU Jabar?  120363045309946688@g.us
-            // sleep(rand(1,3));
-			// $response2 = send_wa_group_message($txt, '120363045309946688@g.us');			
-			// if($response2['ack']=="successfully")
-			// 	echo "Berhasil kirim notif OK WA Group<br/>";
-			// else
-			// 	echo "Gagal kirim notif OK WA Group<br/>";
-			$i++;
-		}
-
-
-	}else{
-		echo 'Gagal melakukan Query SP_UPDATE_OK_SPKLU_UNAVAILABLE ke Database';
-	}
-
 
 	$sql = "EXEC SP_UPDATE_NOTIF_KELUHAN_APKT  ";
 	$stmt = sqlsrv_prepare($conn, $sql, $params);
@@ -227,13 +183,30 @@ if($data->recordsTotal>0){
 			}else{
 				$txt .= 'Laporan No '.$row['reportnumber'].' masih belum ditindaklanjuti sejak *'.time_elapsed_string('@'.(strtotime($row['createdate']->format('Y-m-d H:i:s'))), true).'*. Mohon bantuan untuk segera melakukan tindaklanjut.'.$break.$break;
 			}
-			$txt .= 'Ini adalah pesan satu arah, mohon untuk tidak membalas. ';
+            //sleep(rand(1,3));
+            $response = send_wa_message($txt, $row['MULP_WA']);
+
+			if($row['statusNotif']>=1){
+				$txt = '*Notifikasi Keluhan belum ditindaklanjuti*.'.$break.$break;
+
+				if($row['statusNotif']==1){
+					$txt .= '* Waktu Notifikasi : '.$waktu_notifikasi.$break;
+					$txt .= generate_notif_keluhan($waktu_notifikasi, $row);
+				}else{
+					$txt .= 'Laporan No '.$row['reportnumber'].' masih belum ditindaklanjuti sejak *'.time_elapsed_string('@'.(strtotime($row['createdate']->format('Y-m-d H:i:s'))), true).'*. Mohon bantuan untuk segera melakukan tindaklanjut.'.$break.$break;
+				}
+
+				$txt .= 'Ini adalah pesan satu arah, mohon untuk tidak membalas. ';
+
+	            sleep(rand(1,3));
+	            $response = send_wa_message($txt, $row['ASMAN_UP3_WA']);
+	            sleep(rand(1,2));
+	            $response = send_wa_message($txt, $row['CC_WA1']);
+			}
             
             // $response = send_wa_message($txt, $row['TL_TE_WA']);
             // sleep(rand(1,3));
             // $response = send_wa_message($txt, $row['MULP_WA']);
-            // sleep(rand(1,3));
-            $response = send_wa_message($txt, $row['CC_WA1']);
             //echo 'response: '.$response;
             //sleep(rand(1,3));
             //$response = send_wa_message($txt, $row['CC_WA2']);
@@ -265,6 +238,54 @@ if($data->recordsTotal>0){
 	}
 
 	sqlsrv_free_stmt($stmt);
+
+
+	$params = array(
+	        array($reportnumbers, SQLSRV_PARAM_IN)
+	    );
+
+	$sql = "EXEC SP_UPDATE_OK_KELUHAN_APKT '".$reportnumbers."' ";
+	$stmt = sqlsrv_prepare($conn, $sql, $params);
+
+    echo (sqlsrv_execute($stmt))?'Status OK berhasil diupdate<br/>':'Status OK gagal diupdate<br/>';
+
+	if($stmt){
+		$i=0;
+
+		while( $row = sqlsrv_fetch_array( $stmt, SQLSRV_FETCH_ASSOC) ) {
+			
+            $txt = generate_notif_ok($waktu_notifikasi, $row);
+            // $response = send_wa_message($txt, $row['TL_TE_WA']);
+            // sleep(rand(1,3));
+            $response = send_wa_message($txt, $row['MULP_WA']);
+			if($row['statusNotif']>=1){
+	            sleep(rand(1,3));
+	            $response = send_wa_message($txt, $row['ASMAN_UP3_WA']);
+	            sleep(rand(1,2));
+	            $response = send_wa_message($txt, $row['CC_WA1']);
+	        }
+            //echo 'response: '.$response;
+            //sleep(rand(1,3));
+            //$response = send_wa_message($txt, $row['CC_WA2']);
+
+			if($response['ack']=="successfully")
+				echo "Berhasil kirim notif OK<br/>";
+			else
+				echo "Gagal kirim notif OK<br/>";
+			//120363195657916590@g.us SPKLU Jabar?  120363045309946688@g.us
+            // sleep(rand(1,3));
+			// $response2 = send_wa_group_message($txt, '120363045309946688@g.us');			
+			// if($response2['ack']=="successfully")
+			// 	echo "Berhasil kirim notif OK WA Group<br/>";
+			// else
+			// 	echo "Gagal kirim notif OK WA Group<br/>";
+			$i++;
+		}
+
+
+	}else{
+		echo 'Gagal melakukan Query SP_UPDATE_OK_SPKLU_UNAVAILABLE ke Database';
+	}
 
 die();
 
@@ -349,7 +370,7 @@ die();
     print_r($result);
 	$dataSending = Array();
 	$dataSending["api_key"] = "DXULXKRCGZLFWQOJ";
-	$dataSending["number_key"] = "0QKgttxVnYrygenO";
+	$dataSending["number_key"] = "PfGCpsUg3041T3Tz";
 	$dataSending["phone_no"] = "6282186777723";
 
 	$kategori = ($row->statusName=='DISCONNECTED')?'Media Komunikasi':'SPKLU';
@@ -421,7 +442,7 @@ function send_wa_message($text, $nohp){
 	*/
 	$dataSending = Array();
 	$dataSending["api_key"] = "DXULXKRCGZLFWQOJ";
-	$dataSending["number_key"] = "0QKgttxVnYrygenO";
+	$dataSending["number_key"] = "PfGCpsUg3041T3Tz";
 	$dataSending["phone_no"] = $nohp;
 
 	$dataSending["message"] = $text;
@@ -449,7 +470,7 @@ function send_wa_group_message($text, $group_id){
 	*/
 	$dataSending = Array();
 	$dataSending["api_key"] = "DXULXKRCGZLFWQOJ";
-	$dataSending["number_key"] = "0QKgttxVnYrygenO";
+	$dataSending["number_key"] = "PfGCpsUg3041T3Tz";
 	$dataSending["group_id"] = $group_id;
 
 	$dataSending["message"] = $text;
