@@ -280,7 +280,7 @@ if($data->message=='success'){
     print_r($result);
 	$dataSending = Array();
 	$dataSending["api_key"] = "DXULXKRCGZLFWQOJ";
-	$dataSending["number_key"] = "qMr51iAQwjCjaqZc";
+	$dataSending["number_key"] = "0QKgttxVnYrygenO";
 	$dataSending["phone_no"] = "6282186777723";
 
 	$kategori = ($row->statusName=='DISCONNECTED')?'Media Komunikasi':'SPKLU';
@@ -359,7 +359,7 @@ function send_wa_message($text, $nohp){
 	*/
 	$dataSending = Array();
 	$dataSending["api_key"] = "DXULXKRCGZLFWQOJ";
-	$dataSending["number_key"] = "qMr51iAQwjCjaqZc";
+	$dataSending["number_key"] = "0QKgttxVnYrygenO";
 	$dataSending["phone_no"] = $nohp;
 
 	$dataSending["message"] = $text;
@@ -387,7 +387,7 @@ function send_wa_group_message($text, $group_id){
 	*/
 	$dataSending = Array();
 	$dataSending["api_key"] = "DXULXKRCGZLFWQOJ";
-	$dataSending["number_key"] = "qMr51iAQwjCjaqZc";
+	$dataSending["number_key"] = "0QKgttxVnYrygenO";
 	$dataSending["group_id"] = $group_id;
 
 	$dataSending["message"] = $text;

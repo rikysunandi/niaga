@@ -39,11 +39,11 @@ if(sqlsrv_execute($stmt)){
 	  	$unitup = $row['UNITUP'];
 
 
-		$folder = '../../assets/uploads/foto_rumah/'.$unitap.'/';
+		$folder = '../../assets/uploads/foto_rumah05/'.$unitap.'/';
 	    $file_name = $idpel.'.jpeg'; 
 	    $file_name2 = $idpel.'_2.jpeg'; 
-		$success = downloadFile($folder, $file_name, 'https://portalapp.iconpln.co.id/acmt/DisplayBlobServlet2?idpel='.$idpel.'&blth=202404');
-		$success2 = downloadFile($folder, $file_name2, 'https://portalapp.iconpln.co.id/acmt/DisplayBlobServlet3?idpel='.$idpel.'&blth=202404');
+		$success = downloadFile($folder, $file_name, 'https://portalapp.iconpln.co.id/acmt/DisplayBlobServlet2?idpel='.$idpel.'&blth=202405');
+		$success2 = downloadFile($folder, $file_name2, 'https://portalapp.iconpln.co.id/acmt/DisplayBlobServlet3?idpel='.$idpel.'&blth=202405');
 
 		if($success){
 
