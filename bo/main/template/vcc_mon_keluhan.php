@@ -181,7 +181,7 @@ if($data->recordsTotal>0){
 				$txt .= '* Waktu Notifikasi : '.$waktu_notifikasi.$break;
 				$txt .= generate_notif_keluhan($waktu_notifikasi, $row);
 			}else{
-				$txt .= 'Laporan '.$row['nama_unit'].' No '.$row['reportnumber'].' masih belum ditindaklanjuti sejak *'.time_elapsed_string('@'.(strtotime($row['createdate']->format('Y-m-d H:i:s'))), true).'*. Mohon bantuan untuk segera melakukan tindaklanjut.'.$break.$break;
+				$txt .= '🎗 Laporan Keluhan di '.$row['nama_unit'].' No '.$row['reportnumber'].' masih belum ditindaklanjuti sejak *'.time_elapsed_string('@'.(strtotime($row['createdate']->format('Y-m-d H:i:s'))), true).'*. Mohon bantuan untuk segera melakukan tindaklanjut.'.$break.$break;
 			}
 			
 			$txt .= 'Ini adalah pesan satu arah, mohon untuk tidak membalas. ';
@@ -196,7 +196,7 @@ if($data->recordsTotal>0){
 					$txt .= '* Waktu Notifikasi : '.$waktu_notifikasi.$break;
 					$txt .= generate_notif_keluhan($waktu_notifikasi, $row);
 				}else{
-					$txt .= 'Laporan '.$row['nama_unit'].' No '.$row['reportnumber'].' masih belum ditindaklanjuti sejak *'.time_elapsed_string('@'.(strtotime($row['createdate']->format('Y-m-d H:i:s'))), true).'*. Mohon bantuan untuk segera melakukan tindaklanjut.'.$break.$break;
+					$txt .= '🎗 Laporan Keluhan di '.$row['nama_unit'].' No '.$row['reportnumber'].' masih belum ditindaklanjuti sejak *'.time_elapsed_string('@'.(strtotime($row['createdate']->format('Y-m-d H:i:s'))), true).'*. Mohon bantuan untuk segera melakukan tindaklanjut.'.$break.$break;
 				}
 
 				$txt .= 'Ini adalah pesan satu arah, mohon untuk tidak membalas. ';
@@ -429,7 +429,7 @@ function generate_notif_ok($waktu_notifikasi, $row){
 	//$waktu_notifikasi=str_replace('T',' ',substr($data->time,0,strlen($data->time)-10));
 	$break = "\n\r";
 
-	$txt = '*Laporan No '.$row['reportnumber'].' sudah ditindaklanjuti ✅*.'.$break.$break;
+	$txt = '*Laporan No '.$row['reportnumber'].' sudah ditindaklanjuti * ✅'.$break.$break;
 	$txt .= '* Idpel : '.$row['customernumber'].$break;
 	$txt .= '* Unit : '.$row['nama_unit'].$break;
 	$txt .= '* Reporter : '.$row['reportername'].$break;
