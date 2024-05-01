@@ -181,7 +181,7 @@ if($data->recordsTotal>0){
 				$txt .= '* Waktu Notifikasi : '.$waktu_notifikasi.$break;
 				$txt .= generate_notif_keluhan($waktu_notifikasi, $row);
 			}else{
-				$txt .= 'Laporan No '.$row['reportnumber'].' masih belum ditindaklanjuti sejak *'.time_elapsed_string('@'.(strtotime($row['createdate']->format('Y-m-d H:i:s'))), true).'*. Mohon bantuan untuk segera melakukan tindaklanjut.'.$break.$break;
+				$txt .= 'Laporan '.$row['nama_unit'].' No '.$row['reportnumber'].' masih belum ditindaklanjuti sejak *'.time_elapsed_string('@'.(strtotime($row['createdate']->format('Y-m-d H:i:s'))), true).'*. Mohon bantuan untuk segera melakukan tindaklanjut.'.$break.$break;
 			}
             sleep(rand(1,3));
             $response = send_wa_message($txt, $row['MULP_WA']);
@@ -193,7 +193,7 @@ if($data->recordsTotal>0){
 					$txt .= '* Waktu Notifikasi : '.$waktu_notifikasi.$break;
 					$txt .= generate_notif_keluhan($waktu_notifikasi, $row);
 				}else{
-					$txt .= 'Laporan No '.$row['reportnumber'].' masih belum ditindaklanjuti sejak *'.time_elapsed_string('@'.(strtotime($row['createdate']->format('Y-m-d H:i:s'))), true).'*. Mohon bantuan untuk segera melakukan tindaklanjut.'.$break.$break;
+					$txt .= 'Laporan '.$row['nama_unit'].' No '.$row['reportnumber'].' masih belum ditindaklanjuti sejak *'.time_elapsed_string('@'.(strtotime($row['createdate']->format('Y-m-d H:i:s'))), true).'*. Mohon bantuan untuk segera melakukan tindaklanjut.'.$break.$break;
 				}
 
 				$txt .= 'Ini adalah pesan satu arah, mohon untuk tidak membalas. ';
