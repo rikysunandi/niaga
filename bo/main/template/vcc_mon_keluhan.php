@@ -178,7 +178,7 @@ if($data->recordsTotal>0){
 
 			$txt = '*Notifikasi Keluhan*.'.$break.$break;
 			if($row['statusNotif']==0){
-				$txt .= '* Waktu Notifikasi : '.$waktu_notifikasi.$break;
+				$txt .= '- Waktu Notifikasi : '.$waktu_notifikasi.$break;
 				$txt .= generate_notif_keluhan($waktu_notifikasi, $row);
 			}else{
 				$txt .= 'Laporan Keluhan di '.$row['nama_unit'].' No '.$row['reportnumber'].' masih belum ditindaklanjuti sejak *'.time_elapsed_string('@'.(strtotime($row['createdate']->format('Y-m-d H:i:s'))), true).'*. Mohon bantuan untuk segera melakukan tindaklanjut.'.$break.$break;
@@ -193,7 +193,7 @@ if($data->recordsTotal>0){
 				$txt = '*Notifikasi Keluhan belum ditindaklanjuti*.'.$break.$break;
 
 				if($row['statusNotif']==1){
-					$txt .= '* Waktu Notifikasi : '.$waktu_notifikasi.$break;
+					$txt .= '- Waktu Notifikasi : '.$waktu_notifikasi.$break;
 					$txt .= generate_notif_keluhan($waktu_notifikasi, $row);
 				}else{
 					$txt .= 'Laporan Keluhan di '.$row['nama_unit'].' No '.$row['reportnumber'].' masih belum ditindaklanjuti sejak *'.time_elapsed_string('@'.(strtotime($row['createdate']->format('Y-m-d H:i:s'))), true).'*. Mohon bantuan untuk segera melakukan tindaklanjut.'.$break.$break;
@@ -408,16 +408,16 @@ function generate_notif_keluhan($waktu_notifikasi, $row){
 	$break = "\n\r";
 
 	$txt = '';
-	$txt .= '* No : '.$row['reportnumber'].$break;
-	$txt .= '* Idpel : '.$row['customernumber'].$break;
-	$txt .= '* Unit : '.$row['nama_unit'].$break;
-	$txt .= '* Create Date : '.$row['createdate']->format('Y-m-d H:i:s').$break;
-	$txt .= '* Create By : '.$row['create_by'].$break;
-	$txt .= '* Durasi : *'.time_elapsed_string('@'.(strtotime($row['createdate']->format('Y-m-d H:i:s'))), true).'*'.$break;
-	$txt .= '* Reporter : '.$row['reportername'].$break;
-	$txt .= '* Phone : '.$row['reporterphone'].$break;
-	$txt .= '* Summary : '.$row['summary'].$break;
-	$txt .= '* Alamat : '.$row['reporteraddress'].$break;
+	$txt .= '- No : '.$row['reportnumber'].$break;
+	$txt .= '- Idpel : '.$row['customernumber'].$break;
+	$txt .= '- Unit : '.$row['nama_unit'].$break;
+	$txt .= '- Create Date : '.$row['createdate']->format('Y-m-d H:i:s').$break;
+	$txt .= '- Create By : '.$row['create_by'].$break;
+	$txt .= '- Durasi : *'.time_elapsed_string('@'.(strtotime($row['createdate']->format('Y-m-d H:i:s'))), true).'*'.$break;
+	$txt .= '- Reporter : '.$row['reportername'].$break;
+	$txt .= '- Phone : '.$row['reporterphone'].$break;
+	$txt .= '- Summary : '.$row['summary'].$break;
+	$txt .= '- Alamat : '.$row['reporteraddress'].$break;
 		
 	$txt .=$break;
 
