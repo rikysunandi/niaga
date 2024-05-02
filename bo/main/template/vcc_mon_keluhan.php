@@ -430,10 +430,10 @@ function generate_notif_ok($waktu_notifikasi, $row){
 	$break = "\n\r";
 
 	$txt = '*Laporan No '.$row['reportnumber'].' sudah ditindaklanjuti* ✅'.$break.$break;
-	$txt .= '* Idpel : '.$row['customernumber'].$break;
-	$txt .= '* Unit : '.$row['nama_unit'].$break;
-	$txt .= '* Reporter : '.$row['reportername'].$break;
-	$txt .= '* Durasi : *'.time_elapsed_string('@'.(strtotime($row['createdate']->format('Y-m-d H:i:s'))), true).'*'.$break;
+	$txt .= '- Idpel : '.$row['customernumber'].$break;
+	$txt .= '- Unit : '.$row['nama_unit'].$break;
+	$txt .= '- Reporter : '.$row['reportername'].$break;
+	$txt .= '- Durasi : *'.time_elapsed_string('@'.(strtotime($row['createdate']->format('Y-m-d H:i:s'))), true).'*'.$break;
 	$txt .= 'Terima kasih atas perhatian dan kerjasamanya.'.$break.$break;
 	//$txt .= 'Ini adalah pesan satu arah, mohon untuk tidak membalas. ';
 
