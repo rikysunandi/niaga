@@ -430,6 +430,7 @@ function generate_notif_ok($waktu_notifikasi, $row){
 	$break = "\n\r";
 
 	$txt = '*Laporan No '.$row['reportnumber'].' sudah ditindaklanjuti* ✅'.$break.$break;
+	$txt .= '- Waktu Notifikasi : '.$waktu_notifikasi.$break;
 	$txt .= '- Idpel : '.$row['customernumber'].$break;
 	$txt .= '- Unit : '.$row['nama_unit'].$break;
 	$txt .= '- Reporter : '.$row['reportername'].$break;
