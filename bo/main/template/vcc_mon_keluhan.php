@@ -184,7 +184,7 @@ if($data->recordsTotal>0){
 				$txt .= 'Laporan Keluhan di '.$row['nama_unit'].' No '.$row['reportnumber'].' masih belum ditindaklanjuti sejak *'.time_elapsed_string('@'.(strtotime($waktu_notifikasi)), '@'.(strtotime($row['createdate']->format('Y-m-d H:i:s'))), true).'*. Mohon bantuan untuk segera melakukan tindaklanjut.'.$break.$break;
 			}
 			
-			$txt .= 'Ini adalah pesan satu arah, mohon untuk tidak membalas. ';
+			$txt .= '_Ini adalah pesan satu arah, mohon untuk tidak membalas._';
 
             sleep(rand(1,3));
             $response = send_wa_message($txt, $row['MULP_WA']);
@@ -199,7 +199,7 @@ if($data->recordsTotal>0){
 					$txt .= 'Laporan Keluhan di '.$row['nama_unit'].' No '.$row['reportnumber'].' masih belum ditindaklanjuti sejak *'.time_elapsed_string('@'.(strtotime($waktu_notifikasi)), '@'.(strtotime($row['createdate']->format('Y-m-d H:i:s'))), true).'*. Mohon bantuan untuk segera melakukan tindaklanjut.'.$break.$break;
 				}
 
-				$txt .= 'Ini adalah pesan satu arah, mohon untuk tidak membalas. ';
+				$txt .= '_Ini adalah pesan satu arah, mohon untuk tidak membalas._';
 
 	            sleep(rand(1,3));
 	            $response = send_wa_message($txt, $row['ASMAN_UP3_WA']);
@@ -259,7 +259,7 @@ if($data->recordsTotal>0){
 			
             $txt = generate_notif_ok($waktu_notifikasi, $row);
             // $response = send_wa_message($txt, $row['TL_TE_WA']);
-            $txt .= 'Ini adalah pesan satu arah, mohon untuk tidak membalas. ';
+            $txt .= '_Ini adalah pesan satu arah, mohon untuk tidak membalas._';
             sleep(rand(1,3));
             $response = send_wa_message($txt, $row['MULP_WA']);
 			if($row['statusNotif']>=1){

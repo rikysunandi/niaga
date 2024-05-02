@@ -119,7 +119,7 @@ if($data->message=='success'){
 		$i=0;
 		while( $row = sqlsrv_fetch_array( $stmt, SQLSRV_FETCH_ASSOC) ) {
 			
-            $txt = generate_notif_ok($data, $row);
+            $txt = generate_notif_ok($waktu_notifikasi, $data, $row);
             $response = send_wa_message($txt, $row['TL_TE_WA']);
             sleep(rand(1,3));
             $response = send_wa_message($txt, $row['MULP_WA']);
@@ -160,8 +160,8 @@ if($data->message=='success'){
 
 			$txt = '*Monitoring SPKLU Unavailable*.'.$break.$break;
 			$txt .= '* Waktu Notifikasi : '.$waktu_notifikasi.$break;
-			$txt .= generate_notif_unavailable($data, $row);
-			$txt .= 'Ini adalah pesan satu arah, mohon untuk tidak membalas. ';
+			$txt .= generate_notif_unavailable($waktu_notifikasi, $data, $row);
+			$txt .= '_Ini adalah pesan satu arah, mohon untuk tidak membalas._';
             
             $response = send_wa_message($txt, $row['TL_TE_WA']);
             sleep(rand(1,3));
@@ -180,7 +180,7 @@ if($data->message=='success'){
 				echo "Gagal kirim notif WA<br/>";
 
 			if($row['statusNotif']==0){
-				$txt = str_replace('Ini adalah pesan satu arah, mohon untuk tidak membalas. ', '', $txt);
+				$txt = str_replace('_Ini adalah pesan satu arah, mohon untuk tidak membalas._', '', $txt);
 				sleep(rand(1,3));
 				$response2 = send_wa_group_message($txt, '120363045309946688@g.us');				
 				if($response2['ack']=="successfully")
@@ -221,7 +221,7 @@ if($data->message=='success'){
 			$txt_group .= '-------------------------------------- '.$break.$break;
 
 			while( $row = sqlsrv_fetch_array( $stmt, SQLSRV_FETCH_ASSOC) ) {
-				$txt_group .= 'No.'.($i+1).$break.generate_notif_unavailable($data, $row);
+				$txt_group .= 'No.'.($i+1).$break.generate_notif_unavailable($waktu_notifikasi, $data, $row);
 
 				$i++;
 			}
@@ -309,7 +309,7 @@ if($data->message=='success'){
 
 sqlsrv_close($conn);
 
-function generate_notif_unavailable($data, $row){
+function generate_notif_unavailable($waktu_notifikasi, $data, $row){
 
     $kategori = ($row['statusName']=='DISCONNECTED')?'Media Komunikasi':'SPKLU';
 	$gangguan = ($row['statusName']=='DISCONNECTED')?'Jaringan':'SPKLU';
@@ -317,16 +317,16 @@ function generate_notif_unavailable($data, $row){
 	$break = "\n\r";
 
 	$txt = '';
-	$txt .= '* Lokasi : '.$row['spkluName'].$break;
-	$txt .= '* Charger : '.$row['charger'].$break;
-	$txt .= '* Status : '.$row['statusName'].$break;
-	$txt .= '* Durasi : *'.time_elapsed_string('@'.(strtotime($data->time) - intval($row['statusDateSecondAgo'])), true).'*'.$break;
-	$txt .= '* Kategori Penyebab Gangguan : '.$kategori.$break;
-	$txt .= '* Gangguan : '.$gangguan.$break;
-	$txt .= '* Keterangan Penyebab Gangguan : '.$row['errorDesc'].$break;
-	$txt .= '* Penanganan Gangguan : '.$row['action_1'].$break;
+	$txt .= '- Lokasi : '.$row['spkluName'].$break;
+	$txt .= '- Charger : '.$row['charger'].$break;
+	$txt .= '- Status : '.$row['statusName'].$break;
+	$txt .= '- Durasi : *'.time_string('@'.(strtotime($waktu_notifikasi)), '@'.(strtotime($data->time) - intval($row['statusDateSecondAgo'])), true).'*'.$break;
+	$txt .= '- Kategori Penyebab Gangguan : '.$kategori.$break;
+	$txt .= '- Gangguan : '.$gangguan.$break;
+	$txt .= '- Keterangan Penyebab Gangguan : '.$row['errorDesc'].$break;
+	$txt .= '- Penanganan Gangguan : '.$row['action_1'].$break;
 	//$txt .= '** Action: '.$row['action_1'].$break;
-	$txt .= '* Penanganan Lanjutan: '.$row['action_2'].$break;
+	$txt .= '- Penanganan Lanjutan: '.$row['action_2'].$break;
 	if(strlen($row['KETERANGAN'])>0)
 		$txt .= '* Keterangan: '.$row['KETERANGAN'].$break;
 		
@@ -335,19 +335,19 @@ function generate_notif_unavailable($data, $row){
 	return $txt;
 }
 
-function generate_notif_ok($data, $row){
+function generate_notif_ok($waktu_notifikasi, $data, $row){
 
 	$waktu_notifikasi=str_replace('T',' ',substr($data->time,0,strlen($data->time)-10));
     $kategori = ($row['statusName']=='DISCONNECTED')?'Media Komunikasi':'SPKLU';
 	$break = "\n\r";
 
 	$txt = '*'.$row['spkluName'].' sudah kembali Normal*.'.$break.$break;
-	$txt .= '* Waktu Notifikasi : '.$waktu_notifikasi.$break;
-	$txt .= '* Charger : '.$row['charger'].$break;
-	$txt .= '* Durasi Gangguan : *'.time_string('@'.(intval($row['timestamp_insert'])+1), true).'*'.$break;
-	$txt .= '* Kategori Penyebab Gangguan : '.$kategori.$break.$break;
+	$txt .= '- Waktu Notifikasi : '.$waktu_notifikasi.$break;
+	$txt .= '- Charger : '.$row['charger'].$break;
+	$txt .= '- Durasi Gangguan : *'.time_string('@'.(strtotime($waktu_notifikasi)), '@'.(intval($row['timestamp_insert'])+1), true).'*'.$break;
+	$txt .= '- Kategori Penyebab Gangguan : '.$kategori.$break.$break;
 	$txt .= 'Terima kasih atas perhatian dan kerjasamanya.'.$break.$break;
-	//$txt .= 'Ini adalah pesan satu arah, mohon untuk tidak membalas. ';
+	$txt .= '_Ini adalah pesan satu arah, mohon untuk tidak membalas._';
 
 	return $txt;
 }
@@ -408,8 +408,9 @@ function send_wa_group_message($text, $group_id){
 	return $response;
 }
 
-function time_elapsed_string($datetime, $full = false) {
-    $now = new DateTime;
+function time_elapsed_string($waktu, $datetime, $full = false) {
+    $now = new DateTime($waktu);
+    //$now = $now->createFromFormat('Y-m-d H:i:s', $waktu_notifikasi);
     $ago = new DateTime($datetime);
     $diff = $now->diff($ago);
 
@@ -450,8 +451,9 @@ function time_elapsed_string($datetime, $full = false) {
 }
      
 
-function time_string($datetime, $full = false) {
-    $now = new DateTime;
+function time_string($waktu, $datetime, $full = false) {
+    $now = new DateTime($waktu);
+    //$now = $now->createFromFormat('Y-m-d H:i:s', $waktu_notifikasi);
     $ago = new DateTime($datetime);
     $diff = $now->diff($ago);
 
