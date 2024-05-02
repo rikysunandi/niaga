@@ -227,7 +227,7 @@ if($data->message=='success'){
 			}
 
 			if($i==0){
-				$txt_group .= 'Semua Charger SPKLU Available (Online). '.$break;
+				$txt_group .= 'Semua Charger SPKLU Available (Online). ✅'.$break;
 			}
 
 			$txt_group .= $break.'Terima kasih atas perhatian dan kerjasamanya.'.$break.$break;
@@ -341,7 +341,7 @@ function generate_notif_ok($waktu_notifikasi, $data, $row){
     $kategori = ($row['statusName']=='DISCONNECTED')?'Media Komunikasi':'SPKLU';
 	$break = "\n\r";
 
-	$txt = '*'.$row['spkluName'].' sudah kembali Normal*.'.$break.$break;
+	$txt = '*'.$row['spkluName'].' sudah kembali Normal* ✅'.$break.$break;
 	$txt .= '- Waktu Notifikasi : '.$waktu_notifikasi.$break;
 	$txt .= '- Charger : '.$row['charger'].$break;
 	$txt .= '- Durasi Gangguan : *'.time_string('@'.(strtotime($waktu_notifikasi)), '@'.(intval($row['timestamp_insert'])+1), true).'*'.$break;
