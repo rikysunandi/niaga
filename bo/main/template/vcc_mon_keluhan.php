@@ -181,7 +181,7 @@ if($data->recordsTotal>0){
 				$txt .= '- Waktu Notifikasi : '.$waktu_notifikasi.$break;
 				$txt .= generate_notif_keluhan($waktu_notifikasi, $row);
 			}else{
-				$txt .= 'Laporan Keluhan di '.$row['nama_unit'].' No '.$row['reportnumber'].' masih belum ditindaklanjuti sejak *'.time_elapsed_string('@'.(strtotime($row['createdate']->format('Y-m-d H:i:s'))), true).'*. Mohon bantuan untuk segera melakukan tindaklanjut.'.$break.$break;
+				$txt .= 'Laporan Keluhan di '.$row['nama_unit'].' No '.$row['reportnumber'].' masih belum ditindaklanjuti sejak *'.time_elapsed_string('@'.(strtotime($waktu_notifikasi)), '@'.(strtotime($row['createdate']->format('Y-m-d H:i:s'))), true).'*. Mohon bantuan untuk segera melakukan tindaklanjut.'.$break.$break;
 			}
 			
 			$txt .= 'Ini adalah pesan satu arah, mohon untuk tidak membalas. ';
@@ -196,7 +196,7 @@ if($data->recordsTotal>0){
 					$txt .= '- Waktu Notifikasi : '.$waktu_notifikasi.$break;
 					$txt .= generate_notif_keluhan($waktu_notifikasi, $row);
 				}else{
-					$txt .= 'Laporan Keluhan di '.$row['nama_unit'].' No '.$row['reportnumber'].' masih belum ditindaklanjuti sejak *'.time_elapsed_string('@'.(strtotime($row['createdate']->format('Y-m-d H:i:s'))), true).'*. Mohon bantuan untuk segera melakukan tindaklanjut.'.$break.$break;
+					$txt .= 'Laporan Keluhan di '.$row['nama_unit'].' No '.$row['reportnumber'].' masih belum ditindaklanjuti sejak *'.time_elapsed_string('@'.(strtotime($waktu_notifikasi)), '@'.(strtotime($row['createdate']->format('Y-m-d H:i:s'))), true).'*. Mohon bantuan untuk segera melakukan tindaklanjut.'.$break.$break;
 				}
 
 				$txt .= 'Ini adalah pesan satu arah, mohon untuk tidak membalas. ';
@@ -413,7 +413,7 @@ function generate_notif_keluhan($waktu_notifikasi, $row){
 	$txt .= '- Unit : '.$row['nama_unit'].$break;
 	$txt .= '- Create Date : '.$row['createdate']->format('Y-m-d H:i:s').$break;
 	$txt .= '- Create By : '.$row['create_by'].$break;
-	$txt .= '- Durasi : *'.time_string('@'.(strtotime($row['createdate']->format('Y-m-d H:i:s'))), true).'*'.$break;
+	$txt .= '- Durasi : *'.time_string('@'.(strtotime($waktu_notifikasi)), '@'.(strtotime($row['createdate']->format('Y-m-d H:i:s'))), true).'*'.$break;
 	$txt .= '- Reporter : '.$row['reportername'].$break;
 	$txt .= '- Phone : '.$row['reporterphone'].$break;
 	$txt .= '- Summary : '.$row['summary'].$break;
@@ -434,7 +434,7 @@ function generate_notif_ok($waktu_notifikasi, $row){
 	$txt .= '- Idpel : '.$row['customernumber'].$break;
 	$txt .= '- Unit : '.$row['nama_unit'].$break;
 	$txt .= '- Reporter : '.$row['reportername'].$break;
-	$txt .= '- Durasi : *'.time_string('@'.(strtotime($row['createdate']->format('Y-m-d H:i:s'))), true).'*'.$break;
+	$txt .= '- Durasi : *'.time_string('@'.(strtotime($waktu_notifikasi)), '@'.(strtotime($row['createdate']->format('Y-m-d H:i:s'))), true).'*'.$break;
 	$txt .= 'Terima kasih atas perhatian dan kerjasamanya.'.$break.$break;
 	//$txt .= 'Ini adalah pesan satu arah, mohon untuk tidak membalas. ';
 
@@ -497,8 +497,8 @@ function send_wa_group_message($text, $group_id){
 	return $response;
 }
 
-function time_elapsed_string($datetime, $full = false) {
-    $now = new DateTime($waktu_notifikasi);
+function time_elapsed_string($waktu, $datetime, $full = false) {
+    $now = new DateTime($waktu);
     //$now = $now->createFromFormat('Y-m-d H:i:s', $waktu_notifikasi);
     $ago = new DateTime($datetime);
     $diff = $now->diff($ago);
@@ -540,8 +540,8 @@ function time_elapsed_string($datetime, $full = false) {
 }
      
 
-function time_string($datetime, $full = false) {
-    $now = new DateTime($waktu_notifikasi);
+function time_string($waktu, $datetime, $full = false) {
+    $now = new DateTime($waktu);
     //$now = $now->createFromFormat('Y-m-d H:i:s', $waktu_notifikasi);
     $ago = new DateTime($datetime);
     $diff = $now->diff($ago);
