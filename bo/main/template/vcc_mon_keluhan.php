@@ -497,8 +497,8 @@ function send_wa_group_message($text, $group_id){
 }
 
 function time_elapsed_string($datetime, $full = false) {
-    $now = new DateTime();
-    $now = $now->createFromFormat('Y-m-d H:i:s', $waktu_notifikasi);
+    $now = new DateTime($waktu_notifikasi);
+    //$now = $now->createFromFormat('Y-m-d H:i:s', $waktu_notifikasi);
     $ago = new DateTime($datetime);
     $diff = $now->diff($ago);
 
@@ -540,8 +540,8 @@ function time_elapsed_string($datetime, $full = false) {
      
 
 function time_string($datetime, $full = false) {
-    $now = new DateTime();
-    $now = $now->createFromFormat('Y-m-d H:i:s', $waktu_notifikasi);
+    $now = new DateTime($waktu_notifikasi);
+    //$now = $now->createFromFormat('Y-m-d H:i:s', $waktu_notifikasi);
     $ago = new DateTime($datetime);
     $diff = $now->diff($ago);
 
