@@ -68,7 +68,7 @@ if($data->message=='success'){
             echo "<tr>";
             echo "<td>$row->unit</td>";
             echo "<td>$row->charger</td>";
-            echo "<td>".time_elapsed_string('@'.(strtotime($data->time) - $row->statusDateSecondAgo), true)."</td>";
+            echo "<td>".time_string('@'.(strtotime($waktu_notifikasi)), '@'.(strtotime($data->time) - $row->statusDateSecondAgo), true)."</td>";
             echo "<td>$row->statusName</td>";
             echo "<td>$row->kapasitas</td>";
             echo "<td>$row->spkluName</td>";
