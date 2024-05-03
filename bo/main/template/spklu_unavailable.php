@@ -233,6 +233,7 @@ if($data->message=='success'){
 
 			$txt_group .= $break.'Terima kasih atas perhatian dan kerjasamanya.'.$break.$break;
 
+			//$txt_group .= '_Ini adalah pesan satu arah, mohon untuk tidak membalas._';
 			//$txt_group .= 'Ini adalah pesan satu arah, mohon untuk tidak membalas. ';
 			sleep(rand(1,3));
 			$response = send_wa_group_message($txt_group, '120363045309946688@g.us');				
