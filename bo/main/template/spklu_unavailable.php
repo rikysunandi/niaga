@@ -133,6 +133,7 @@ if($data->message=='success'){
 			else
 				echo "Gagal kirim notif OK<br/>";
 			//120363195657916590@g.us SPKLU Jabar?  120363045309946688@g.us
+			$txt = str_replace('_Ini adalah pesan satu arah, mohon untuk tidak membalas._', '', $txt);
             sleep(rand(1,3));
 			$response2 = send_wa_group_message($txt, '120363045309946688@g.us');			
 			if($response2['ack']=="successfully")
@@ -159,7 +160,7 @@ if($data->message=='success'){
 		while( $row = sqlsrv_fetch_array( $stmt, SQLSRV_FETCH_ASSOC) ) {
 
 			$txt = '*Monitoring SPKLU Unavailable*.'.$break.$break;
-			$txt .= '* Waktu Notifikasi : '.$waktu_notifikasi.$break;
+			$txt .= '- Waktu Notifikasi : '.$waktu_notifikasi.$break;
 			$txt .= generate_notif_unavailable($waktu_notifikasi, $data, $row);
 			$txt .= '_Ini adalah pesan satu arah, mohon untuk tidak membalas._';
             
