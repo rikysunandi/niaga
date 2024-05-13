@@ -60,7 +60,10 @@
                 <ul aria-expanded="false">
                     <!-- <li><a href="update-pelunasan.php">Update Pelunasan</a>
                             </li> -->
+                <!-- Minimal UP3 dan PLN -->
+                <?php if(strlen($_SESSION['unitup'])==0 && substr($_SESSION['username'],0,2)<>'53' ): ?>
                     <li><a href="wo-intimasi.php">Penetapan WO Intimasi</a></li>
+                <?php endif; ?>
                     <li><a href="mon-intimasi.php">Monitoring Detail Intimasi</a></li>
                     <li><a href="rekap-intimasi-keterangan.php">Rekap Intimasi per Keterangan</a>
                     <li><a href="efektivitas-intimasi.php">Efektivitas Intimasi</a></li>
