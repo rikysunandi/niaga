@@ -4,7 +4,7 @@
 <head>
 	<meta charset="utf-8">
 	<meta name="viewport" content="width=device-width, initial-scale=1">
-	<meta http-equiv="refresh" content="120" />
+	<meta http-equiv="refresh" content="12000" />
 	<title>VCC Mon Transaksi</title>
 </head>
 <body>
@@ -43,7 +43,7 @@ curl_setopt_array($curl, array(
   CURLOPT_CUSTOMREQUEST => 'POST',
 	CURLOPT_SSL_VERIFYHOST => 0,
 	CURLOPT_SSL_VERIFYPEER => false,
-  CURLOPT_POSTFIELDS => array('order[0][column]' => '9', 'order[0][dir]' => 'desc', 'start' => '0','length' => '1000','unit_code' => '53461','status' => 'paid','date_start' => '01+May+2024','date_end' => '15+May+2024','token' => 'ulMU4xndYO2p2fcB2qWwOtyRu3KwpnNPImMSkpM5SvshXFu0mPx5S47YjTKD'),
+  CURLOPT_POSTFIELDS => array('start' => '0','length' => '1000','unit_code' => '53461','status' => 'paid','date_start' => '01 May 2024','date_end' => '01 May 2024','token' => 'ulMU4xndYO2p2fcB2qWwOtyRu3KwpnNPImMSkpM5SvshXFu0mPx5S47YjTKD'),
   // CURLOPT_HTTPHEADER => array(
   //   'Cookie: f5avraaaaaaaaaaaaaaaa_session_=JEHFGEKMMBFFGNAFDIFDCCGHECMBGADBIONNJOKAKBLFBOCCNPILKMLAKNKNMAIHLHIDNFIDGKAAOLNJNFNAFEDCEPIACCDADAKNCPININELHMBJLINCBELCGBKHPEPA; f5avraaaaaaaaaaaaaaaa_session_=ILKKLOCOIPJANJNNKEKPIJPJPGGGFIKIOCBIOJBKGHELGDBPJGKEOEEHJEJDKPGOECDDFNNCONAGEJKAKMHADLEDLPJLFPJMILMDAGGGOGMPINHECGCHCPBIBFBPFACJ; XSRF-TOKEN=eyJpdiI6Ino0VjdLWjRwUzRjY1htZFVuVnFkOFE9PSIsInZhbHVlIjoiOVVjVnVIcXpva2FoMkdaelZDb0FyUTFIdnBwdzVXSlN2RVFJU1JCTDBodkkzVGVha1BlYllDY3JKS3RnT1RrdEZjTTJDK3hhZmdsclhudkh6eHovRTVGOXFlYnZ…VlIjoiZWxJVzdkUUlRRVM5c2Q1eVUzOTJBUmh3WlcvQlUrcVljY29PbEZFV3Q5SXpicGVncVhTVEFQZFdrL0JmRWtZNDN2dDd1YjJKVnFJOVBjTm5UMFhGemQvdmh2UitKYXQ1ZVM0a2hkUnBrT0Juam1Ecmxhbng0NGF2cnBlWVpjQXNReS9iZFZFblZMNHlDSFc1OVZOL1dWTWxBVDVKdGxGVE00dGR1QndWWlY3cnJKV2g1cnRvM2pjZzUzSm5jTEl2dmtLR2tQN01CYUlDM0FDLzRobU9PN0s4Y1NjVWlCakpVb1djVVZ3VnBPZz0iLCJtYWMiOiJlNDc0NDBkMzI5MDNjZjliZDAzMTlhZDliMGJjNjVkNTgzNTI5YWNlZWZjODkxOGY5MTJmN2IyYzc1ZDYzZTU1In0%3D; _ga_929N09011N=GS1.1.1714026528.2.1.1714028060.0.0.0; _ga=GA1.1.1098061170.1713869875',
   //  'Content-Type: application/x-www-form-urlencoded; charset=UTF-8',
@@ -64,7 +64,7 @@ $data = json_decode(curl_exec($curl));
 // echo json_encode($status, JSON_PRETTY_PRINT);
 curl_close($curl);
 // echo $data->recordsTotal;
-var_dump($data); die();
+//var_dump($data); die();
 if($data->recordsTotal>0){
 	echo 'recordsTotal: '.$data->recordsTotal." - tgl update: ".date('Y-m-d H:i:s');
 	echo "<hr/>";
@@ -96,9 +96,9 @@ if($data->recordsTotal>0){
 
 	echo "<tbody>";
 
-	$reportnumbers='';
+	$ids='';
     foreach ($data->data as $idx => $row) {
-    	$reportnumbers .= $row->reportnumber.',';
+    	$ids .= $row->id.',';
         // Output a row
         echo "<tr>";
 		echo "<td>$row->DT_RowIndex</td>";
