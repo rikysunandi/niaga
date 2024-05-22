@@ -14,49 +14,65 @@ set_time_limit(-1);
 require_once '../../config/config.php';
 require_once '../../config/database.php';
 
+
+// $conn2 = sqlsrv_connect($serverName, $connectionOptions);
+// if ($conn2 === false) {
+//     die(print_r(sqlsrv_errors()));
+// }
+
 $params = array();
 //SELECT * FROM m_kct_suspect_foto
 $sql = "EXEC SP_GET_KCT_SUSPECT ";
 $stmt = sqlsrv_prepare($conn, $sql, $params);
 
 echo (sqlsrv_execute($stmt))?'Status get berhasil<br/>':'Status get gagal<br/>';
+$idpels = array();
 
 if($stmt){
 	$i=0;
 	while( $row = sqlsrv_fetch_array( $stmt, SQLSRV_FETCH_ASSOC) ) {
-		
-		sleep(rand(3,5));
-	  $idpel = $row['IDPEL'];
-		$fotourl = getWebKCTFoto($idpel);
-		//echo $fotourl;
-
-		if($fotourl<>''){
-
-			$params2 = array(
-		        array($idpel, SQLSRV_PARAM_IN),
-		        array($fotourl, SQLSRV_PARAM_IN)
-		    );
-			$sql2 = "EXEC SP_UPDATE_KCT_SUSPECT_FOTO '".($idpel)."', '".($fotourl)."' ";
-			$stmt2 = sqlsrv_prepare($conn, $sql2, $params2);
-
-			if(!sqlsrv_execute($stmt2)){
-				echo 'Gagal '.$idpel.'<br/>'.$sql2;
-
-				$folder = '../../assets/uploads/foto_kct/';
-		    $file_name = $idpel.'.jpeg'; 
-				$success = downloadFile($folder, $file_name, $fotourl);
-			}
-
-		}
-		//die();
-		sqlsrv_free_stmt($stmt2);
-		$i++;
+		array_push($idpels, $row['IDPEL']);
 	}
 }else{
 	echo 'Gagal melakukan Query SP_GET_KCT_SUSPECT ke Database';
 }
 
 sqlsrv_free_stmt($stmt);
+
+foreach($idpels as $idpel){
+		sleep(rand(3,5));
+	  //$idpel = $row['IDPEL'];
+		$fotourl = getWebKCTFoto($idpel);
+		//echo $fotourl;
+
+		if($fotourl<>''){
+
+			$params = array(
+		        array($idpel, SQLSRV_PARAM_IN),
+		        array($fotourl, SQLSRV_PARAM_IN)
+		    );
+			$sql = "EXEC SP_UPDATE_KCT_SUSPECT_FOTO '".($idpel)."', '".($fotourl)."' ";
+			$stmt = sqlsrv_prepare($conn, $sql, $params);
+
+			if(!sqlsrv_execute($stmt)){
+				echo 'Gagal '.$idpel.'<br/>'.$sql;
+
+			}else{
+
+				$folder = '../../assets/uploads/foto_kct/';
+		    $file_name = $idpel.'.jpeg'; 
+				$success = downloadFile($folder, $file_name, $fotourl);
+
+			}
+
+			sqlsrv_free_stmt($stmt);
+		}
+		
+	}
+
+
+
+
 function downloadFile($folder, $filename, $url){
 
 	if (!file_exists($folder)) {
