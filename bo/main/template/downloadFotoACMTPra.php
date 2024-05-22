@@ -20,7 +20,7 @@ $params = array();
 //SELECT * FROM m_kct_suspect_foto
 $sql = "SELECT UNITAP, UNITUP, IDPEL FROM WO_FOTO_DTKS WHERE STATUS_DIL='AKTIF' ";
 
-$sql = "EXEC SP_GET_FOTO_RUMAH_DTKS_PRA ";
+$sql = "EXEC SP_GET_KCT_SUSPECT ";
 $stmt = sqlsrv_prepare($conn, $sql, $params);
 
 //echo (sqlsrv_execute($stmt))?'Status get berhasil<br/>':'Status get gagal<br/>';
@@ -31,36 +31,36 @@ if(sqlsrv_execute($stmt)){
 	while( $row = sqlsrv_fetch_array( $stmt, SQLSRV_FETCH_ASSOC) ) {
 		
 	//echo '2';
-		if($unitap<>$row['UNITAP'])
-	  		echo $unitap.'<br/>';
+		// if($unitap<>$row['UNITAP'])
+	  	// 	echo $unitap.'<br/>';
 
 	  	$idpel = $row['IDPEL'];
-	  	$unitap = $row['UNITAP'];
-	  	$unitup = $row['UNITUP'];
+	  	// $unitap = $row['UNITAP'];
+	  	// $unitup = $row['UNITUP'];
 	  	$nomormeter = $row['NOMORMETER'];
 
 
-		$folder = '../../assets/uploads/foto_rumah_pra/'.$unitap.'/';
+		$folder = '../../assets/uploads/foto_acmt_pra/'; //.$unitap.'/';
 	    $file_name = $idpel.'.jpeg'; 
 	    $file_name2 = $idpel.'_2.jpeg'; 
-		$success = downloadFile($folder, $file_name, 'https://portalapp.iconpln.co.id/acmt/DisplayBlobServlet5?idpel='.$idpel.'&nomor_meter='.$nomormeter.'&blth=202405');
-		$success2 = downloadFile($folder, $file_name2, 'https://portalapp.iconpln.co.id/acmt/DisplayBlobServlet6?idpel='.$idpel.'&nomor_meter='.$nomormeter.'&blth=202405');
+		$success = downloadFile($folder, $file_name, 'https://portalapp.iconpln.co.id/acmt/DisplayBlobServlet4?idpel='.$idpel.'&nomor_meter='.$nomormeter.'&blth=202405');
+		// $success2 = downloadFile($folder, $file_name2, 'https://portalapp.iconpln.co.id/acmt/DisplayBlobServlet5?idpel='.$idpel.'&nomor_meter='.$nomormeter.'&blth=202405');
 
-		if($success){
+	// 	if($success){
 
-	//echo '3';
-			$params2 = array(
-		        array($idpel, SQLSRV_PARAM_IN),
-		        array($success, SQLSRV_PARAM_IN),
-		        array($success2, SQLSRV_PARAM_IN),
-		    );
-			$sql2 = "EXEC SP_UPDATE_DOWNLOAD_FOTO_RUMAH_DTKS @IDPEL = ?, @FOTO_ACMT = ?, @FOTO_ACMT2 = ? ";
-			$stmt2 = sqlsrv_prepare($conn, $sql2, $params2);
+	// //echo '3';
+	// 		$params2 = array(
+	// 	        array($idpel, SQLSRV_PARAM_IN),
+	// 	        array($success, SQLSRV_PARAM_IN),
+	// 	        array($success2, SQLSRV_PARAM_IN),
+	// 	    );
+	// 		$sql2 = "EXEC SP_UPDATE_DOWNLOAD_FOTO_RUMAH_DTKS @IDPEL = ?, @FOTO_ACMT = ?, @FOTO_ACMT2 = ? ";
+	// 		$stmt2 = sqlsrv_prepare($conn, $sql2, $params2);
 
-			if(!sqlsrv_execute($stmt2)){
-				echo 'Gagal '.$idpel.'<br/>';
-			}
-		}
+	// 		if(!sqlsrv_execute($stmt2)){
+	// 			echo 'Gagal '.$idpel.'<br/>';
+	// 		}
+	// 	}
 
 		$i++;
 	}
