@@ -41,7 +41,7 @@ if($stmt){
 sqlsrv_free_stmt($stmt);
 
 foreach($idpels as $idpel){
-		sleep(rand(3,5));
+		sleep(rand(1,5));
 	  //$idpel = $row['IDPEL'];
 		$fotourl = getWebKCTFoto($idpel);
 		//echo $fotourl;
