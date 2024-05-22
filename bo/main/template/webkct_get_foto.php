@@ -3,15 +3,16 @@
 <head>
 	<meta charset="utf-8">
 	<meta name="viewport" content="width=device-width, initial-scale=1">
-	<meta http-equiv="refresh" content="18000" />
+	<meta http-equiv="refresh" content="900" />
 	<title>WEBKCT</title>
 </head>
 <body>
 
 <?php
 ini_set('MAX_EXECUTION_TIME', '-1');
+
 set_time_limit(-1);
-require_once '../../config/config.php';
+//require_once '../../config/config.php';
 require_once '../../config/database.php';
 
 
@@ -67,7 +68,7 @@ foreach($idpels as $idpel){
 
 			sqlsrv_free_stmt($stmt);
 		}
-		
+
 	}
 
 
