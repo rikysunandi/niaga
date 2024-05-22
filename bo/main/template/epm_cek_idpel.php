@@ -4,8 +4,8 @@
 <head>
 	<meta charset="utf-8">
 	<meta name="viewport" content="width=device-width, initial-scale=1">
-	<meta http-equiv="refresh" content="12000" />
-	<title>VCC Mon Transaksi</title>
+	<meta http-equiv="refresh" content="120" />
+	<title>VCC Mon Keluhan</title>
 </head>
 <body>
 
@@ -31,7 +31,7 @@ function parseTanggal($tanggal){
 $curl = curl_init();
 
 curl_setopt_array($curl, array(
-  CURLOPT_URL => 'https://vcc.pln.co.id/api/rekap/transaksi/table',
+  CURLOPT_URL => 'https://vcc.pln.co.id/api/outage/table',
   CURLOPT_RETURNTRANSFER => true,
   //CURLOPT_ENCODING => '',
   CURLOPT_MAXREDIRS => 10,
@@ -43,7 +43,7 @@ curl_setopt_array($curl, array(
   CURLOPT_CUSTOMREQUEST => 'POST',
 	CURLOPT_SSL_VERIFYHOST => 0,
 	CURLOPT_SSL_VERIFYPEER => false,
-  CURLOPT_POSTFIELDS => array('start' => '0','length' => '1000','unit_code' => '53461','status' => 'paid','date_start' => '11 May 2024','date_end' => '14 May 2024','token' => 'ulMU4xndYO2p2fcB2qWwOtyRu3KwpnNPImMSkpM5SvshXFu0mPx5S47YjTKD'),
+  CURLOPT_POSTFIELDS => array('order[0][column]' => '7', 'order[0][dir]' => 'asc', 'start' => '0','length' => '100','id_unit' => '0','id_area' => '0','id_induk' => '53','id_pusat' => '','type' => 'kl','data' => 'y','tab' => 'keluhan','token' => 'ulMU4xndYO2p2fcB2qWwOtyRu3KwpnNPImMSkpM5SvshXFu0mPx5S47YjTKD'),
   // CURLOPT_HTTPHEADER => array(
   //   'Cookie: f5avraaaaaaaaaaaaaaaa_session_=JEHFGEKMMBFFGNAFDIFDCCGHECMBGADBIONNJOKAKBLFBOCCNPILKMLAKNKNMAIHLHIDNFIDGKAAOLNJNFNAFEDCEPIACCDADAKNCPININELHMBJLINCBELCGBKHPEPA; f5avraaaaaaaaaaaaaaaa_session_=ILKKLOCOIPJANJNNKEKPIJPJPGGGFIKIOCBIOJBKGHELGDBPJGKEOEEHJEJDKPGOECDDFNNCONAGEJKAKMHADLEDLPJLFPJMILMDAGGGOGMPINHECGCHCPBIBFBPFACJ; XSRF-TOKEN=eyJpdiI6Ino0VjdLWjRwUzRjY1htZFVuVnFkOFE9PSIsInZhbHVlIjoiOVVjVnVIcXpva2FoMkdaelZDb0FyUTFIdnBwdzVXSlN2RVFJU1JCTDBodkkzVGVha1BlYllDY3JKS3RnT1RrdEZjTTJDK3hhZmdsclhudkh6eHovRTVGOXFlYnZ…VlIjoiZWxJVzdkUUlRRVM5c2Q1eVUzOTJBUmh3WlcvQlUrcVljY29PbEZFV3Q5SXpicGVncVhTVEFQZFdrL0JmRWtZNDN2dDd1YjJKVnFJOVBjTm5UMFhGemQvdmh2UitKYXQ1ZVM0a2hkUnBrT0Juam1Ecmxhbng0NGF2cnBlWVpjQXNReS9iZFZFblZMNHlDSFc1OVZOL1dWTWxBVDVKdGxGVE00dGR1QndWWlY3cnJKV2g1cnRvM2pjZzUzSm5jTEl2dmtLR2tQN01CYUlDM0FDLzRobU9PN0s4Y1NjVWlCakpVb1djVVZ3VnBPZz0iLCJtYWMiOiJlNDc0NDBkMzI5MDNjZjliZDAzMTlhZDliMGJjNjVkNTgzNTI5YWNlZWZjODkxOGY5MTJmN2IyYzc1ZDYzZTU1In0%3D; _ga_929N09011N=GS1.1.1714026528.2.1.1714028060.0.0.0; _ga=GA1.1.1098061170.1713869875',
   //  'Content-Type: application/x-www-form-urlencoded; charset=UTF-8',
@@ -64,7 +64,7 @@ $data = json_decode(curl_exec($curl));
 // echo json_encode($status, JSON_PRETTY_PRINT);
 curl_close($curl);
 // echo $data->recordsTotal;
-//var_dump($data); die();
+// var_dump($data); die();
 if($data->recordsTotal>0){
 	echo 'recordsTotal: '.$data->recordsTotal." - tgl update: ".date('Y-m-d H:i:s');
 	echo "<hr/>";
@@ -73,75 +73,81 @@ if($data->recordsTotal>0){
 	echo "<thead>";
 		echo "<tr>";
 			echo "<td>No</td>";
-			echo "<td>id</td>";
-			echo "<td>type</td>";
-			echo "<td>title</td>";
-			echo "<td>amount</td>";
-			echo "<td>status_code</td>";
-			echo "<td>name</td>";
-			echo "<td>consumer_name</td>";
-			echo "<td>meter_id</td>";
-			echo "<td>payment_gateway</td>";
-			echo "<td>unit_up</td>";
-			echo "<td>unit_ap</td>";
-			echo "<td>unit_upi</td>";
-			echo "<td>created_at</td>";
-			echo "<td>user_id</td>";
-			echo "<td>meter_account_id</td>";
-			echo "<td>token</td>";
-			echo "<td>id_pel</td>";
+			echo "<td>summary</td>";
+			echo "<td>customernumber</td>";
+			echo "<td>nama_unit</td>";
+			echo "<td>reportnumber</td>";
+			echo "<td>createdate</td>";
+			echo "<td>petugas</td>";
+			echo "<td>create_by</td>";
+			echo "<td>unit</td>";
+			echo "<td>jenis</td>";
+			echo "<td>reporteraddress</td>";
+			echo "<td>laststatus</td>";
+			echo "<td>reportername</td>";
+			echo "<td>subjenis</td>";
+			echo "<td>reporterphone</td>";
+			echo "<td>mobilenumberpetugas</td>";
+			echo "<td>walink</td>";
+			echo "<td>walink_petugas</td>";
+			echo "<td>tglcatat</td>";
+			echo "<td>tgl_padam</td>";
 			echo "<td>Keterangan</td>";
 		echo "</tr>";
 	echo "</thead>";
 
 	echo "<tbody>";
 
-	$ids='';
+	$reportnumbers='';
     foreach ($data->data as $idx => $row) {
-    	$ids .= $row->id.',';
+    	$reportnumbers .= $row->reportnumber.',';
         // Output a row
         echo "<tr>";
 		echo "<td>$row->DT_RowIndex</td>";
-			echo "<td>$row->id</td>";
-			echo "<td>$row->type</td>";
-			echo "<td>$row->title</td>";
-			echo "<td>$row->amount</td>";
-			echo "<td>$row->status_code</td>";
-			echo "<td>$row->name</td>";
-			echo "<td>$row->consumer_name</td>";
-			echo "<td>$row->meter_id</td>";
-			echo "<td>$row->payment_gateway</td>";
-			echo "<td>$row->unit_up</td>";
-			echo "<td>$row->unit_ap</td>";
-			echo "<td>$row->unit_upi</td>";
-			echo "<td>$row->created_at</td>";
-			echo "<td>$row->user_id</td>";
-			echo "<td>$row->meter_account_id</td>";
-			echo "<td>$row->token</td>";
-			echo "<td>$row->id_pel</td>";
+        echo "<td>$row->summary</td>";
+		echo "<td>$row->customernumber</td>";
+		echo "<td>$row->nama_unit</td>";
+		echo "<td>$row->reportnumber</td>";
+		echo "<td>".parseTanggal($row->createdate)."</td>";
+		echo "<td>$row->petugas</td>";
+		echo "<td>$row->create_by</td>";
+		echo "<td>$row->unit</td>";
+		echo "<td>$row->jenis</td>";
+		echo "<td>$row->reporteraddress</td>";
+		echo "<td>$row->laststatus</td>";
+		echo "<td>$row->reportername</td>";
+		echo "<td>$row->subjenis</td>";
+		echo "<td>$row->reporterphone</td>";
+		echo "<td>$row->mobilenumberpetugas</td>";
+		echo "<td>$row->walink</td>";
+		echo "<td>$row->walink_petugas</td>";
+		echo "<td>".parseTanggal($row->tglcatat)."</td>";
+		echo "<td>".parseTanggal($row->tgl_padam)."</td>";
         echo "<td>";
 
 		$params = array(
-				array($row->id, SQLSRV_PARAM_IN),
-				array($row->type, SQLSRV_PARAM_IN),
-				array($row->title, SQLSRV_PARAM_IN),
-				array($row->amount, SQLSRV_PARAM_IN),
-				array($row->status_code, SQLSRV_PARAM_IN),
-				array($row->name, SQLSRV_PARAM_IN),
-				array($row->consumer_name, SQLSRV_PARAM_IN),
-				array($row->meter_id, SQLSRV_PARAM_IN),
-				array($row->payment_gateway, SQLSRV_PARAM_IN),
-				array($row->unit_up, SQLSRV_PARAM_IN),
-				array($row->unit_ap, SQLSRV_PARAM_IN),
-				array($row->unit_upi, SQLSRV_PARAM_IN),
-				array($row->created_at, SQLSRV_PARAM_IN),
-				array($row->user_id, SQLSRV_PARAM_IN),
-				array($row->meter_account_id, SQLSRV_PARAM_IN),
-				array($row->token, SQLSRV_PARAM_IN),
-				array($row->id_pel, SQLSRV_PARAM_IN),				
+				array($row->summary, SQLSRV_PARAM_IN),
+				array($row->customernumber, SQLSRV_PARAM_IN),
+				array($row->nama_unit, SQLSRV_PARAM_IN),
+				array($row->reportnumber, SQLSRV_PARAM_IN),
+				array(parseTanggal($row->createdate), SQLSRV_PARAM_IN),
+				array($row->petugas, SQLSRV_PARAM_IN),
+				array($row->create_by, SQLSRV_PARAM_IN),
+				array($row->unit, SQLSRV_PARAM_IN),
+				array($row->jenis, SQLSRV_PARAM_IN),
+				array($row->reporteraddress, SQLSRV_PARAM_IN),
+				array($row->laststatus, SQLSRV_PARAM_IN),
+				array($row->reportername, SQLSRV_PARAM_IN),
+				array($row->subjenis, SQLSRV_PARAM_IN),
+				array($row->reporterphone, SQLSRV_PARAM_IN),
+				array($row->mobilenumberpetugas, SQLSRV_PARAM_IN),
+				array($row->walink, SQLSRV_PARAM_IN),
+				array($row->walink_petugas, SQLSRV_PARAM_IN),
+				array(parseTanggal($row->tglcatat), SQLSRV_PARAM_IN),
+				array(parseTanggal($row->tgl_padam), SQLSRV_PARAM_IN),
 		    );
 
-		$sql = "EXEC SP_JOB_TRANSAKSI_PLNMOBILE  '".($row->id)."', '".($row->type)."', '".($row->title)."', '".($row->amount)."', '".($row->status_code)."', '".($row->name)."', '".($row->consumer_name)."', '".($row->meter_id)."', '".($row->payment_gateway)."', '".($row->unit_up)."', '".($row->unit_ap)."', '".($row->unit_upi)."', '".($row->created_at)."', '".($row->user_id)."', '".($row->meter_account_id)."', '".($row->token)."', '".($row->id_pel)."' ";
+		$sql = "EXEC SP_JOB_KELUHAN_APKT '".($row->summary)."', '".($row->customernumber)."', '".$row->nama_unit."', '".$row->reportnumber."', '".parseTanggal($row->createdate)."', '".$row->petugas."', '".$row->create_by."', '".$row->unit."', '".$row->jenis."', '".$row->reporteraddress."', '".$row->laststatus."', '".$row->reportername."', '".$row->subjenis."', '".$row->reporterphone."', '".$row->mobilenumberpetugas."', '".$row->walink."', '".$row->walink_petugas."', '".parseTanggal($row->tglcatat)."', '".parseTanggal($row->tgl_padam)."' ";
 		$stmt = sqlsrv_prepare($conn, $sql, $params);
 
 	    if (sqlsrv_execute($stmt))
@@ -149,7 +155,7 @@ if($data->recordsTotal>0){
 	    else{
 	    	echo 'Data gagal disimpan: ' .$sql.'</td>';
 	    }
-        echo "</td></tr>";
+        echo "</tr>";
 
         sqlsrv_free_stmt($stmt);
 
@@ -157,7 +163,7 @@ if($data->recordsTotal>0){
 
     echo "</tbody>";
     echo "</table>";
-    die();
+
 
 
 	$sql = "EXEC SP_UPDATE_NOTIF_KELUHAN_APKT  ";
@@ -368,7 +374,7 @@ die();
     print_r($result);
 	$dataSending = Array();
 	$dataSending["api_key"] = "DXULXKRCGZLFWQOJ";
-	$dataSending["number_key"] = "pmFcRbd9UVVXa24l";
+	$dataSending["number_key"] = "xNaXz2ROjrrbT7xq";
 	$dataSending["phone_no"] = "6282186777723";
 
 	$kategori = ($row->statusName=='DISCONNECTED')?'Media Komunikasi':'SPKLU';
@@ -442,7 +448,7 @@ function send_wa_message($text, $nohp){
 	*/
 	$dataSending = Array();
 	$dataSending["api_key"] = "DXULXKRCGZLFWQOJ";
-	$dataSending["number_key"] = "pmFcRbd9UVVXa24l";
+	$dataSending["number_key"] = "xNaXz2ROjrrbT7xq";
 	$dataSending["phone_no"] = $nohp;
 
 	$dataSending["message"] = $text;
@@ -470,7 +476,7 @@ function send_wa_group_message($text, $group_id){
 	*/
 	$dataSending = Array();
 	$dataSending["api_key"] = "DXULXKRCGZLFWQOJ";
-	$dataSending["number_key"] = "pmFcRbd9UVVXa24l";
+	$dataSending["number_key"] = "xNaXz2ROjrrbT7xq";
 	$dataSending["group_id"] = $group_id;
 
 	$dataSending["message"] = $text;

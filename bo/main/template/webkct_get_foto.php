@@ -3,7 +3,7 @@
 <head>
 	<meta charset="utf-8">
 	<meta name="viewport" content="width=device-width, initial-scale=1">
-	<meta http-equiv="refresh" content="180" />
+	<meta http-equiv="refresh" content="18000" />
 	<title>WEBKCT</title>
 </head>
 <body>
@@ -25,6 +25,7 @@ if($stmt){
 	$i=0;
 	while( $row = sqlsrv_fetch_array( $stmt, SQLSRV_FETCH_ASSOC) ) {
 		
+		sleep(rand(3,5));
 	  $idpel = $row['IDPEL'];
 		$fotourl = getWebKCTFoto($idpel);
 		//echo $fotourl;
@@ -33,22 +34,48 @@ if($stmt){
 
 			$params2 = array(
 		        array($idpel, SQLSRV_PARAM_IN),
-		        array($fotourl, SQLSRV_PARAM_IN),
+		        array($fotourl, SQLSRV_PARAM_IN)
 		    );
-			$sql2 = "EXEC SP_UPDATE_KCT_SUSPECT_FOTO @IDPEL = ?, @FOTOURL = ? ";
+			$sql2 = "EXEC SP_UPDATE_KCT_SUSPECT_FOTO '".($idpel)."', '".($fotourl)."' ";
 			$stmt2 = sqlsrv_prepare($conn, $sql2, $params2);
 
 			if(!sqlsrv_execute($stmt2)){
-				echo 'Gagal '.$idpel.'<br/>';
-			}
-		}
+				echo 'Gagal '.$idpel.'<br/>'.$sql2;
 
+				$folder = '../../assets/uploads/foto_kct/';
+		    $file_name = $idpel.'.jpeg'; 
+				$success = downloadFile($folder, $file_name, $fotourl);
+			}
+
+		}
+		//die();
+		sqlsrv_free_stmt($stmt2);
 		$i++;
 	}
 }else{
 	echo 'Gagal melakukan Query SP_GET_KCT_SUSPECT ke Database';
 }
 
+sqlsrv_free_stmt($stmt);
+function downloadFile($folder, $filename, $url){
+
+	if (!file_exists($folder)) {
+	    mkdir($folder, 0777, true);
+	}
+      
+    // Use file_get_contents() function to get the file 
+    // from url and use file_put_contents() function to 
+    // save the file by using base name 
+    //echo $filename.': '.file_get_contents($url);
+    if (strlen(file_get_contents($url))>0){
+	    if (file_put_contents($folder.'/'.$filename, file_get_contents($url))) 
+		    return 1;
+		else
+			return 0;
+	}else{
+		return 0;
+	}
+}
 
 function getWebKCTFoto($idpel){
 
