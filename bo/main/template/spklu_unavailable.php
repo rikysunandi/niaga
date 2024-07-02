@@ -14,7 +14,7 @@ set_time_limit(-1);
 require_once '../../config/config.php';
 require_once '../../config/database.php';
 
-$authorization = "Bearer eyJ0eXAiOiJKV1QiLCJhbGciOiJIUzI1NiJ9.eyJzdWIiOiIyNzIiLCJpYXQiOjE3MTQ5ODIyNTZ9.eOdb5hYGsr4PTtJN97Dgyb-OKt4m5qWqiWElAkK6Z9s";
+$authorization = "Bearer eyJ0eXAiOiJKV1QiLCJhbGciOiJIUzI1NiJ9.eyJzdWIiOiIyNzIiLCJpYXQiOjE3MTkzNjU0Mjl9.J6xCmh5u0IBqDAIcEBT5e-R9KbVcbuXMtO6mU1JjsAE";
 
 $context = stream_context_create(array(
     'http' => array(
@@ -282,7 +282,7 @@ if($data->message=='success'){
     print_r($result);
 	$dataSending = Array();
 	$dataSending["api_key"] = "DXULXKRCGZLFWQOJ";
-	$dataSending["number_key"] = "0QKgttxVnYrygenO";
+	$dataSending["number_key"] = "1LGTNReGgPlgrIlf";
 	$dataSending["phone_no"] = "6282186777723";
 
 	$kategori = ($row->statusName=='DISCONNECTED')?'Media Komunikasi':'SPKLU';
@@ -361,7 +361,7 @@ function send_wa_message($text, $nohp){
 	*/
 	$dataSending = Array();
 	$dataSending["api_key"] = "DXULXKRCGZLFWQOJ";
-	$dataSending["number_key"] = "0QKgttxVnYrygenO";
+	$dataSending["number_key"] = "1LGTNReGgPlgrIlf";
 	$dataSending["phone_no"] = $nohp;
 
 	$dataSending["message"] = $text;
@@ -389,7 +389,7 @@ function send_wa_group_message($text, $group_id){
 	*/
 	$dataSending = Array();
 	$dataSending["api_key"] = "DXULXKRCGZLFWQOJ";
-	$dataSending["number_key"] = "0QKgttxVnYrygenO";
+	$dataSending["number_key"] = "1LGTNReGgPlgrIlf";
 	$dataSending["group_id"] = $group_id;
 
 	$dataSending["message"] = $text;

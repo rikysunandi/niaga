@@ -189,7 +189,7 @@ if($data->recordsTotal>0){
             sleep(rand(1,3));
             $response = send_wa_message($txt, $row['MULP_WA']);
 
-			if($row['statusNotif']>=1){
+			if($row['statusNotif']>=1 && $row['UNITAP']<>'53BDG'){
 				$txt = '*Notifikasi Keluhan belum ditindaklanjuti*.'.$break.$break;
 
 				if($row['statusNotif']==1){
@@ -262,7 +262,7 @@ if($data->recordsTotal>0){
             $txt .= '_Ini adalah pesan satu arah, mohon untuk tidak membalas._';
             sleep(rand(1,3));
             $response = send_wa_message($txt, $row['MULP_WA']);
-			if($row['statusNotif']>=1){
+			if($row['statusNotif']>=1 && $row['UNITAP']<>'53BDG'){
 	            sleep(rand(1,3));
 	            $response = send_wa_message($txt, $row['ASMAN_UP3_WA']);
 	            // sleep(rand(1,2));
