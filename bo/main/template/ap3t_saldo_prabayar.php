@@ -1,22 +1,22 @@
 <?php
 
-header('Content-Type: text/csv');
-header('Content-Disposition: attachment; filename="piutang_prabayar.csv"');
+// header('Content-Type: text/csv');
+// header('Content-Disposition: attachment; filename="piutang_prabayar.csv"');
 
 set_time_limit(-1);
-require_once '../../config/config.php';
+//require_once '../../config/config.php';
 require_once '../../config/database.php';
 require_once 'ap3t_login.php';
 
 $authorization = $token;
-
+//echo $authorization;
 $context = stream_context_create(array(
     'http' => array(
         'header' => "Authorization: " . $authorization,
     ),
 ));
 
-$stmt = sqlsrv_query($conn, "select UNITAP, UNITUP from m_unitup WHERE UNITAP<='53CJR' order by UNITAP, UNITUP ");
+$stmt = sqlsrv_query($conn, "select UNITAP, UNITUP from m_unitup WHERE UNITAP='53SMD' order by UNITAP, UNITUP ");
 
 if($stmt){
 	$fp = fopen('php://output', 'wb');
@@ -68,7 +68,7 @@ if($stmt){
 
 	while( $unit = sqlsrv_fetch_array( $stmt, SQLSRV_FETCH_ASSOC) ) {
 
-		$api_url = 'http://10.68.35.105:8081/piutang/get-piutang-data-pss?sort-dir=ASC&sort-by=IDPEL&unit-ap='.$unit['UNITAP'].'&unit-up='.$unit['UNITUP'].'&unit-upi=53&tgl-awal=01/01/2000&tgl-akhir=22/05/2024&limit=50&page=1';
+		$api_url = 'http://10.68.35.105:8081/piutang/get-piutang-data-pss?sort-dir=ASC&sort-by=IDPEL&unit-ap='.$unit['UNITAP'].'&unit-up='.$unit['UNITUP'].'&unit-upi=53&tgl-awal=01/01/2000&tgl-akhir=28/06/2024&limit=50&page=1';
 		//echo $api_url;
 		$result = file_get_contents($api_url, false, $context);
 

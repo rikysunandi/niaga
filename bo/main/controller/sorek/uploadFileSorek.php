@@ -45,7 +45,7 @@ else {
 	if ( $ext =='xls')  {  
 		if ( $xls = new Spreadsheet_Excel_Reader($_FILES['file']['tmp_name'],false) ) {
 			
-			if(substr(preg_replace("/[^a-zA-Z0-9]+/", "", $xls->val(1,1,0)),0,3)=='THB' && $xls->colcount($sheet_index=0)==73){
+			if(substr(preg_replace("/[^a-zA-Z0-9]+/", "", $xls->val(1,1,0)),0,3)=='THB' && $xls->colcount($sheet_index=0)==89){
 
 				$xls_blth = $xls->val(2,1,0);
 				$xls_unitupi = substr($xls->val(2,15,0),0,2);
