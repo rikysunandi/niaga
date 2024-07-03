@@ -86,7 +86,7 @@ if($stmtunit){
 		  CURLOPT_SSL_VERIFYHOST => 0,
 		  CURLOPT_SSL_VERIFYPEER => false,
 		  CURLOPT_HTTPHEADER => array(
-		    'Cookie: 7A9AB9450AE05975F4C14422E59C7160; BIGipServerap2t.etmp.web.prod=993198346.37151.0000',
+		    'Cookie: JSESSIONID=E2F3076850AA003D7FBF8E35C30E0223; BIGipServerap2t.etmp.web.prod=993198346.37151.0000',
 		    'Host: 10.68.35.108:8081',
 		    'Origin: http://10.68.35.108:8081',
 		    'Referer: http://10.68.35.108:8081/e-tmp/laporan-detail/laporan-detail-gangguan',
