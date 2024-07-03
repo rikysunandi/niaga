@@ -255,8 +255,8 @@ if($stmtunit){
 									($row->status)."', '".
 									($row->di_input_oleh)."', '".
 									($row->id_pelanggan)."', '".
-									($row->nama_pelapor)."', '".
-									($row->alamat_pelapor)."', '".
+									strclean($row->nama_pelapor)."', '".
+									strclean($row->alamat_pelapor)."', '".
 									($row->no_telp_pelapor)."', '".
 									($row->tgl_lapor)."', '".
 									($row->tgl_nyala)."', '".
