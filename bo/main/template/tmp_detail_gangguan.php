@@ -86,7 +86,7 @@ if($stmtunit){
 		  CURLOPT_SSL_VERIFYHOST => 0,
 		  CURLOPT_SSL_VERIFYPEER => false,
 		  CURLOPT_HTTPHEADER => array(
-		    'Cookie: JSESSIONID=E2F3076850AA003D7FBF8E35C30E0223; BIGipServerap2t.etmp.web.prod=993198346.37151.0000',
+		    'Cookie: JSESSIONID=10C9EB380E940D1EBE883CC3CDC7A57B; BIGipServerap2t.etmp.web.prod=993198346.37151.0000',
 		    'Host: 10.68.35.108:8081',
 		    'Origin: http://10.68.35.108:8081',
 		    'Referer: http://10.68.35.108:8081/e-tmp/laporan-detail/laporan-detail-gangguan',
@@ -208,7 +208,7 @@ if($stmtunit){
 								array($row->unitupi_dil, SQLSRV_PARAM_IN),
 								array($row->unitap_dil, SQLSRV_PARAM_IN),
 								array($row->unitup_dil, SQLSRV_PARAM_IN),
-								array($row->nama_dil, SQLSRV_PARAM_IN),
+								array(strclean($row->nama_dil), SQLSRV_PARAM_IN),
 								array($row->tarif_dil, SQLSRV_PARAM_IN),
 								array($row->daya_dil, SQLSRV_PARAM_IN),
 								array($row->no_laporan, SQLSRV_PARAM_IN),
@@ -231,10 +231,10 @@ if($stmtunit){
 								array($row->penyebab, SQLSRV_PARAM_IN),
 								array($row->kelompok_penyebab, SQLSRV_PARAM_IN),
 								array($row->cuaca, SQLSRV_PARAM_IN),
-								array($row->keterangan_pelapor, SQLSRV_PARAM_IN),
-								array($row->keterangan, SQLSRV_PARAM_IN),
-								array($row->penyebab_padam, SQLSRV_PARAM_IN),
-								array($row->tindakan, SQLSRV_PARAM_IN),
+								array(strclean($row->keterangan_pelapor), SQLSRV_PARAM_IN),
+								array(strclean($row->keterangan), SQLSRV_PARAM_IN),
+								array(strclean($row->penyebab_padam), SQLSRV_PARAM_IN),
+								array(strclean($row->tindakan), SQLSRV_PARAM_IN),
 								array($row->kode_asset, SQLSRV_PARAM_IN),
 								array($row->kode_indikator, SQLSRV_PARAM_IN),
 								array($row->kode_gangguan, SQLSRV_PARAM_IN),
@@ -248,7 +248,7 @@ if($stmtunit){
 									($row->unitupi_dil)."', '".
 									($row->unitap_dil)."', '".
 									($row->unitup_dil)."', '".
-									clean($row->nama_dil)."', '".
+									strclean($row->nama_dil)."', '".
 									($row->tarif_dil)."', '".
 									($row->daya_dil)."', '".
 									($row->no_laporan)."', '".
@@ -271,10 +271,10 @@ if($stmtunit){
 									($row->penyebab)."', '".
 									($row->kelompok_penyebab)."', '".
 									($row->cuaca)."', '".
-									clean($row->keterangan_pelapor)."', '".
-									clean($row->keterangan)."', '".
-									clean($row->penyebab_padam)."', '".
-									clean($row->tindakan)."', '".
+									strclean($row->keterangan_pelapor)."', '".
+									strclean($row->keterangan)."', '".
+									strclean($row->penyebab_padam)."', '".
+									strclean($row->tindakan)."', '".
 									($row->kode_asset)."', '".
 									($row->kode_indikator)."', '".
 									($row->kode_gangguan)."' ";
@@ -316,7 +316,7 @@ if($stmtunit){
 sqlsrv_free_stmt($stmtunit);
 sqlsrv_close($conn);
 
-function clean($str){
+function strclean($str){
 	return preg_match('/[a-zA-Z0-9. ]/', $str);
 }
 ?>
