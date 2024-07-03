@@ -317,6 +317,6 @@ sqlsrv_free_stmt($stmtunit);
 sqlsrv_close($conn);
 
 function clean($str){
-	return preg_match('/^[a-z0-9 .\-]+$/i', $str)
+	return preg_match('/^[a-z0-9 .\-]+$/i', $str);
 }
 ?>
