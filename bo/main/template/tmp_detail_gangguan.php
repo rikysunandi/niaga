@@ -3,9 +3,9 @@
 // header('Content-Type: text/csv');
 // header('Content-Disposition: attachment; filename="piutang_prabayar.csv"');
 
-set_time_limit(-1);
 require_once '../../config/config.php';
 require_once '../../config/database.php';
+set_time_limit(-1);
 //require_once 'ap3t_login.php';
 
 //$authorization = $token;
