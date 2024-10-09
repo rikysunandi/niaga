@@ -1,9 +1,9 @@
 <?php
 
-ini_set('memory_limit', '512M');
+ini_set('memory_limit', '-1');
 ini_set('date.timezone', 'Asia/Jakarta');
 ini_set('max_execution_time', 600);
-set_time_limit(600);
+set_time_limit(1200);
 ini_set('upload_max_filesize', '15M');
 ini_set('post_max_size', '15M');
 ini_set('allow_call_time_pass_reference', 'On');

@@ -43,7 +43,7 @@ curl_setopt_array($curl, array(
   CURLOPT_CUSTOMREQUEST => 'POST',
 	CURLOPT_SSL_VERIFYHOST => 0,
 	CURLOPT_SSL_VERIFYPEER => false,
-  CURLOPT_POSTFIELDS => array('order[0][column]' => '7', 'order[0][dir]' => 'asc', 'start' => '0','length' => '100','id_unit' => '0','id_area' => '0','id_induk' => '53','id_pusat' => '','type' => 'kl','data' => 'y','tab' => 'keluhan','token' => '9F9b20tFdyiLXtsLAV59wCOWuB8qFectP7sXt54J0GcM056H2lkybCWMHrF1'),
+  CURLOPT_POSTFIELDS => array('order[0][column]' => '7', 'order[0][dir]' => 'asc', 'start' => '0','length' => '100','id_unit' => '0','id_area' => '0','id_induk' => '53','id_pusat' => '','type' => 'kl','data' => 'y','tab' => 'keluhan','token' => 'GvMU02gNsParenmR9TlHSSfC3033PlA6iDJAhQhW29WbymICpU7Dn0u1p1wy'),
   // CURLOPT_HTTPHEADER => array(
   //   'Cookie: f5avraaaaaaaaaaaaaaaa_session_=JEHFGEKMMBFFGNAFDIFDCCGHECMBGADBIONNJOKAKBLFBOCCNPILKMLAKNKNMAIHLHIDNFIDGKAAOLNJNFNAFEDCEPIACCDADAKNCPININELHMBJLINCBELCGBKHPEPA; f5avraaaaaaaaaaaaaaaa_session_=ILKKLOCOIPJANJNNKEKPIJPJPGGGFIKIOCBIOJBKGHELGDBPJGKEOEEHJEJDKPGOECDDFNNCONAGEJKAKMHADLEDLPJLFPJMILMDAGGGOGMPINHECGCHCPBIBFBPFACJ; XSRF-TOKEN=eyJpdiI6Ino0VjdLWjRwUzRjY1htZFVuVnFkOFE9PSIsInZhbHVlIjoiOVVjVnVIcXpva2FoMkdaelZDb0FyUTFIdnBwdzVXSlN2RVFJU1JCTDBodkkzVGVha1BlYllDY3JKS3RnT1RrdEZjTTJDK3hhZmdsclhudkh6eHovRTVGOXFlYnZ…VlIjoiZWxJVzdkUUlRRVM5c2Q1eVUzOTJBUmh3WlcvQlUrcVljY29PbEZFV3Q5SXpicGVncVhTVEFQZFdrL0JmRWtZNDN2dDd1YjJKVnFJOVBjTm5UMFhGemQvdmh2UitKYXQ1ZVM0a2hkUnBrT0Juam1Ecmxhbng0NGF2cnBlWVpjQXNReS9iZFZFblZMNHlDSFc1OVZOL1dWTWxBVDVKdGxGVE00dGR1QndWWlY3cnJKV2g1cnRvM2pjZzUzSm5jTEl2dmtLR2tQN01CYUlDM0FDLzRobU9PN0s4Y1NjVWlCakpVb1djVVZ3VnBPZz0iLCJtYWMiOiJlNDc0NDBkMzI5MDNjZjliZDAzMTlhZDliMGJjNjVkNTgzNTI5YWNlZWZjODkxOGY5MTJmN2IyYzc1ZDYzZTU1In0%3D; _ga_929N09011N=GS1.1.1714026528.2.1.1714028060.0.0.0; _ga=GA1.1.1098061170.1713869875',
   //  'Content-Type: application/x-www-form-urlencoded; charset=UTF-8',
@@ -64,7 +64,38 @@ $data = json_decode(curl_exec($curl));
 // echo json_encode($status, JSON_PRETTY_PRINT);
 curl_close($curl);
 // echo $data->recordsTotal;
-// var_dump($data); die();
+//var_dump($data); die();
+
+if(!isset($data)){
+
+	$dataSending = Array();
+	$dataSending["api_key"] = "DXULXKRCGZLFWQOJ";
+	$dataSending["number_key"] = "cGn8PlhgsbpNcIka";
+	$dataSending["phone_no"] = "6282186777723";
+
+	$break = "\n\r";
+
+	$txt = '*Status Monitoring Keluhan*.'.$break.$break;
+	$txt .= 'Mohon lakukan pengecekan job Monitoring Keluhan...'.$break.$break.date('Y-m-d h:i:s');
+
+	$dataSending["message"] = $txt;
+	$url = 'https://api.watzap.id/v1/send_message';
+	$curl = curl_init();
+	curl_setopt($curl, CURLOPT_URL, $url);
+	curl_setopt($curl, CURLOPT_HEADER, 0);
+	curl_setopt($curl, CURLOPT_RETURNTRANSFER, 1);
+	curl_setopt($curl, CURLOPT_SSL_VERIFYHOST, 2);
+	curl_setopt($curl, CURLOPT_SSL_VERIFYPEER, 0);
+	curl_setopt($curl, CURLOPT_TIMEOUT,30);
+	curl_setopt($curl, CURLOPT_POST, 1);
+	curl_setopt($curl, CURLOPT_CUSTOMREQUEST, 'POST');
+	curl_setopt($curl, CURLOPT_POSTFIELDS, json_encode($dataSending));
+	$response = json_decode(curl_exec($curl), true);
+	curl_close($curl);
+
+	die();
+}
+
 if($data->recordsTotal>0){
 	echo 'recordsTotal: '.$data->recordsTotal." - tgl update: ".date('Y-m-d H:i:s');
 	echo "<hr/>";
@@ -217,6 +248,7 @@ if($data->recordsTotal>0){
             // 	$response = send_wa_message($txt, $row['ASMAN_UP3_WA']);
 			// }
 
+			//var_dump($response);
 			if($response['ack']=="successfully")
 				echo "Berhasil kirim notif WA<br/>";
 			else
@@ -272,6 +304,7 @@ if($data->recordsTotal>0){
             //sleep(rand(1,3));
             //$response = send_wa_message($txt, $row['CC_WA2']);
 
+			//var_dump($response);
 			if($response['ack']=="successfully")
 				echo "Berhasil kirim notif OK<br/>";
 			else
@@ -371,33 +404,9 @@ die();
     /*
     	PENGIRIMAN NOTIF WHATSAPP
 	*/
-    print_r($result);
-	$dataSending = Array();
-	$dataSending["api_key"] = "DXULXKRCGZLFWQOJ";
-	$dataSending["number_key"] = "xNaXz2ROjrrbT7xq";
-	$dataSending["phone_no"] = "6282186777723";
-
-	$kategori = ($row->statusName=='DISCONNECTED')?'Media Komunikasi':'SPKLU';
-	$gangguan = ($row->statusName=='DISCONNECTED')?'Jaringan':'SPKLU';
-	$break = "\n\r";
-
-	$txt = '*Status Monitoring SPKLU Unavailable*.'.$break.$break;
-	$txt .= 'Mohon lakukan pengecekan job Monitoring SPKLU Unavailable';
-
-	$dataSending["message"] = $txt;
-	$url = 'https://api.watzap.id/v1/send_message';
-	$curl = curl_init();
-	curl_setopt($curl, CURLOPT_URL, $url);
-	curl_setopt($curl, CURLOPT_HEADER, 0);
-	curl_setopt($curl, CURLOPT_RETURNTRANSFER, 1);
-	curl_setopt($curl, CURLOPT_SSL_VERIFYHOST, 2);
-	curl_setopt($curl, CURLOPT_SSL_VERIFYPEER, 0);
-	curl_setopt($curl, CURLOPT_TIMEOUT,30);
-	curl_setopt($curl, CURLOPT_POST, 1);
-	curl_setopt($curl, CURLOPT_CUSTOMREQUEST, 'POST');
-	curl_setopt($curl, CURLOPT_POSTFIELDS, json_encode($dataSending));
-	$response = json_decode(curl_exec($curl), true);
-	curl_close($curl);
+    //print_r($result);
+	
+	sleep(rand(600,900));
 }
 
 
@@ -448,7 +457,7 @@ function send_wa_message($text, $nohp){
 	*/
 	$dataSending = Array();
 	$dataSending["api_key"] = "DXULXKRCGZLFWQOJ";
-	$dataSending["number_key"] = "xNaXz2ROjrrbT7xq";
+	$dataSending["number_key"] = "cGn8PlhgsbpNcIka";
 	$dataSending["phone_no"] = $nohp;
 
 	$dataSending["message"] = $text;
@@ -476,7 +485,7 @@ function send_wa_group_message($text, $group_id){
 	*/
 	$dataSending = Array();
 	$dataSending["api_key"] = "DXULXKRCGZLFWQOJ";
-	$dataSending["number_key"] = "xNaXz2ROjrrbT7xq";
+	$dataSending["number_key"] = "cGn8PlhgsbpNcIka";
 	$dataSending["group_id"] = $group_id;
 
 	$dataSending["message"] = $text;

@@ -14,7 +14,7 @@ set_time_limit(-1);
 require_once '../../config/config.php';
 require_once '../../config/database.php';
 
-$authorization = "Bearer eyJ0eXAiOiJKV1QiLCJhbGciOiJIUzI1NiJ9.eyJzdWIiOiIyNzIiLCJpYXQiOjE3MTk5NjkzNjZ9.6BEuasDVbBEumGvehuomJ0Cp2yBciaUdJ4bijwUw5rw";
+$authorization = "Bearer eyJ0eXAiOiJKV1QiLCJhbGciOiJIUzI1NiJ9.eyJzdWIiOiIyNzIiLCJpYXQiOjE3MjgyNzk3MTB9.PRrhfzMwtO1Hf0sD3wV_EuLc-6MmFr0bX1Z-Ginsxz8";
 
 $context = stream_context_create(array(
     'http' => array(
@@ -130,9 +130,12 @@ if($data->message=='success'){
 
 			if($response['ack']=="successfully")
 				echo "Berhasil kirim notif OK<br/>";
-			else
+			else{
 				echo "Gagal kirim notif OK<br/>";
+				var_dump($response2);	
+			}
 			//120363195657916590@g.us SPKLU Jabar?  120363045309946688@g.us
+					
 			$txt = str_replace('_Ini adalah pesan satu arah, mohon untuk tidak membalas._', '', $txt);
             sleep(rand(1,3));
 			$response2 = send_wa_group_message($txt, '120363045309946688@g.us');			
@@ -177,8 +180,10 @@ if($data->message=='success'){
 
 			if($response['ack']=="successfully")
 				echo "Berhasil kirim notif WA<br/>";
-			else
+			else{
 				echo "Gagal kirim notif WA<br/>";
+				var_dump($response);
+			}		
 
 			if($row['statusNotif']==0){
 				$txt = str_replace('_Ini adalah pesan satu arah, mohon untuk tidak membalas._', '', $txt);
@@ -282,7 +287,7 @@ if($data->message=='success'){
     print_r($result);
 	$dataSending = Array();
 	$dataSending["api_key"] = "DXULXKRCGZLFWQOJ";
-	$dataSending["number_key"] = "1LGTNReGgPlgrIlf";
+	$dataSending["number_key"] = "Anlp4u40MdaSSVPK";
 	$dataSending["phone_no"] = "6282186777723";
 
 	$kategori = ($row->statusName=='DISCONNECTED')?'Media Komunikasi':'SPKLU';
@@ -361,7 +366,7 @@ function send_wa_message($text, $nohp){
 	*/
 	$dataSending = Array();
 	$dataSending["api_key"] = "DXULXKRCGZLFWQOJ";
-	$dataSending["number_key"] = "1LGTNReGgPlgrIlf";
+	$dataSending["number_key"] = "Anlp4u40MdaSSVPK";
 	$dataSending["phone_no"] = $nohp;
 
 	$dataSending["message"] = $text;
@@ -389,7 +394,7 @@ function send_wa_group_message($text, $group_id){
 	*/
 	$dataSending = Array();
 	$dataSending["api_key"] = "DXULXKRCGZLFWQOJ";
-	$dataSending["number_key"] = "1LGTNReGgPlgrIlf";
+	$dataSending["number_key"] = "Anlp4u40MdaSSVPK";
 	$dataSending["group_id"] = $group_id;
 
 	$dataSending["message"] = $text;

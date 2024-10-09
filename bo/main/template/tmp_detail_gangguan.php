@@ -16,10 +16,10 @@ set_time_limit(-1);
 //     ),
 // ));
 
-$blth='202401';
-$blths = array('202401','202402','202403');
+$blth='202406';
+$blths = array('202406');
 foreach($blths as $blth){
-	$stmtunit = sqlsrv_query($conn, "select UNITAP, UNITUP, NAMA from m_unitup order by UNITAP, UNITUP ");
+	$stmtunit = sqlsrv_query($conn, "select UNITAP, UNITUP, NAMA from m_unitup WHERE UNITAP<='53GPI' order by UNITAP, UNITUP ");
 
 	if($stmtunit){
 		// $fp = fopen('php://output', 'wb');
@@ -71,31 +71,31 @@ foreach($blths as $blth){
 		echo "Periode: ".$blth."<hr/>";
 		echo "<ul>";
 		while( $unit = sqlsrv_fetch_array( $stmtunit, SQLSRV_FETCH_ASSOC) ) {
-			// echo 'http://10.68.35.108:8081/e-tmp/laporan-detail/load-laporan-detail-gangguan?start=0&length=10000&thbllap='.$blth.'&unitupi=53&unitap='.$unit['UNITAP'].'&unitup='.$unit['UNITUP'].' ';
+
 			$curl = curl_init();
 
-			curl_setopt_array($curl, array(
-			  CURLOPT_URL => 'http://10.68.35.108:8081/e-tmp/laporan-detail/load-laporan-detail-gangguan?start=0&length=100000&thbllap='.$blth.'&unitupi=53&unitap='.$unit['UNITAP'].'&unitup='.$unit['UNITUP'].' ',
-			  CURLOPT_RETURNTRANSFER => true,
-			  //CURLOPT_ENCODING => '',
-			  CURLOPT_MAXREDIRS => 10,
-			  CURLOPT_TIMEOUT => 0,
-			  CURLOPT_FOLLOWLOCATION => true,
-			  CURLOPT_HTTP_VERSION => CURL_HTTP_VERSION_1_1,
-			  //CURLOPT_SSL_VERIFYPEER => true,
-			  CURLOPT_POST => true,
-			  CURLOPT_CUSTOMREQUEST => 'POST',
-			  CURLOPT_SSL_VERIFYHOST => 0,
-			  CURLOPT_SSL_VERIFYPEER => false,
-			  CURLOPT_HTTPHEADER => array(
-			    'Cookie: JSESSIONID=10C9EB380E940D1EBE883CC3CDC7A57B; BIGipServerap2t.etmp.web.prod=993198346.37151.0000',
-			    'Host: 10.68.35.108:8081',
-			    'Origin: http://10.68.35.108:8081',
-			    'Referer: http://10.68.35.108:8081/e-tmp/laporan-detail/laporan-detail-gangguan',
-			    'X-Requested-With: XMLHttpRequest'
-			  ),
-			  // CURLOPT_POSTFIELDS => array('order[0][column]' => '7', 'order[0][dir]' => 'asc', 'start' => '0','length' => '100','id_unit' => '0','id_area' => '0','id_induk' => '53','id_pusat' => '','type' => 'kl','data' => 'y','tab' => 'keluhan','token' => 'ulMU4xndYO2p2fcB2qWwOtyRu3KwpnNPImMSkpM5SvshXFu0mPx5S47YjTKD'),
-			));
+		curl_setopt_array($curl, array(
+		  CURLOPT_URL => 'http://10.68.35.108:8081/e-tmp/laporan-detail/load-laporan-detail-gangguan?start=0&length=100000&thbllap='.$blth.'&unitupi=53&unitap='.$unit['UNITAP'].'&unitup='.$unit['UNITUP'].' ',
+		  CURLOPT_RETURNTRANSFER => true,
+		  //CURLOPT_ENCODING => '',
+		  CURLOPT_MAXREDIRS => 10,
+		  CURLOPT_TIMEOUT => 0,
+		  CURLOPT_FOLLOWLOCATION => true,
+		  CURLOPT_HTTP_VERSION => CURL_HTTP_VERSION_1_1,
+		  //CURLOPT_SSL_VERIFYPEER => true,
+		  CURLOPT_POST => true,
+		  CURLOPT_CUSTOMREQUEST => 'POST',
+		  CURLOPT_SSL_VERIFYHOST => 0,
+		  CURLOPT_SSL_VERIFYPEER => false,
+		  CURLOPT_HTTPHEADER => array(
+		    'Cookie: JSESSIONID=4AA260F8BECB9E429F11CB97E6DCD1A7; BIGipServerap2t.etmp.web.prod=993198346.37151.00',
+		    'Host: 10.68.35.108:8081',
+		    'Origin: http://10.68.35.108:8081',
+		    'Referer: http://10.68.35.108:8081/e-tmp/laporan-detail/laporan-detail-gangguan',
+		    'X-Requested-With: XMLHttpRequest'
+		  ),
+		  // CURLOPT_POSTFIELDS => array('order[0][column]' => '7', 'order[0][dir]' => 'asc', 'start' => '0','length' => '100','id_unit' => '0','id_area' => '0','id_induk' => '53','id_pusat' => '','type' => 'kl','data' => 'y','tab' => 'keluhan','token' => 'ulMU4xndYO2p2fcB2qWwOtyRu3KwpnNPImMSkpM5SvshXFu0mPx5S47YjTKD'),
+		));
 
 			
 			$data = json_decode(curl_exec($curl));
@@ -104,13 +104,14 @@ foreach($blths as $blth){
 			curl_close($curl);
 			// echo $data->recordsTotal;
 			//var_dump($data); die();
+			echo "<li>".$unit['UNITAP']." - ".$unit['NAMA'].': ';
 			if(isset($data->recordsTotal)){
 
 				if($data->recordsTotal>0){
 					// echo 'recordsTotal: '.$data->recordsTotal." - tgl update: ".date('Y-m-d H:i:s');
 					// echo "<hr/>";
 					$sukses=0;
-					echo "<li>".$unit['UNITAP']." - ".$unit['NAMA'].': '.$data->recordsTotal.': ';
+					echo $data->recordsTotal.': ';
 
 					// echo "<table border='1'>";
 					// echo "<thead>";
@@ -308,6 +309,7 @@ foreach($blths as $blth){
 	    // Close the table
 	    //echo "</table>";
 	    // fclose($fp);
+		sqlsrv_free_stmt($stmtunit);
 
 
 	}else{
@@ -315,9 +317,9 @@ foreach($blths as $blth){
 	}
 
 
-	sqlsrv_free_stmt($stmtunit);
-	sqlsrv_close($conn);
 }
+
+sqlsrv_close($conn);
 
 function strclean($str){
 	return preg_match('/[a-zA-Z0-9. ]/', $str);
